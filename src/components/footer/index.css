@@ -1,0 +1,73 @@
+.main {
+  background-color: #e5e5e5;
+}
+.main .top-part {
+  border-bottom: 2px solid #abafc7;
+  padding-bottom: 30px;
+}
+.main .top-part .row {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.main .top-part .row .col {
+  text-align: left;
+}
+.main .top-part .row .col .logo {
+  width: 66px;
+}
+.main .top-part .row .col .browse {
+  width: 60%;
+  text-align: left;
+}
+.main .top-part .row .col .browse h3 {
+  font-family: "Nunito";
+  font-weight: 700;
+  color: #000;
+  line-height: 30px;
+}
+.main .top-part .row .col .browse ul {
+  height: 110px;
+  flex-direction: column !important;
+  padding-left: 0;
+}
+.main .top-part .row .col .browse ul li {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-size: 16px;
+  line-height: 25px;
+  color: #70798b;
+}
+.main .top-part .row .col p {
+  font-size: 16px;
+  color: #70798b;
+  line-height: 30px;
+}
+.main .top-part .row .col .image img {
+  margin-right: 10px;
+}
+.main .top-part .row .download {
+  justify-content: right;
+}
+.main .bottom-part .row {
+  width: 100%;
+}
+.main .bottom-part .row .col {
+  text-align: left;
+  margin: 10px 0;
+}
+.main .bottom-part .row .col p {
+  font-family: 'Quicksand';
+  color: #70798B;
+  padding: 0 20px;
+}
+.main .bottom-part .row .col ul {
+  padding-left: 0;
+}
+.main .bottom-part .row .col ul li {
+  padding: 0 20px;
+  font-family: 'Quicksand';
+  color: #70798B;
+}
+.main .bottom-part .row .col ul li:first-child {
+  border-right: 1px solid #ABAFC7;
+}

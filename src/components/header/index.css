@@ -1,0 +1,94 @@
+.main {
+  background: #255534;
+}
+.main .navbar {
+  max-width: 1920px;
+  height: 80px;
+  left: 0px;
+  top: 0px;
+  mix-blend-mode: normal;
+  padding: 0;
+  margin: 0 auto;
+  align-items: inherit;
+  justify-content: space-between;
+}
+.main .navbar .container-fluid {
+  align-items: inherit;
+}
+.main .navbar .navbar-brand {
+  padding: 0;
+  margin-left: 20px;
+}
+.main .navbar .navbar-collapse {
+  margin-left: auto;
+  justify-content: space-between;
+}
+.main .navbar > .show {
+  background-color: #fff;
+  margin-top: -33px;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0px 10px 30px rgba(83, 88, 93, 0.4);
+}
+.main .navbar > .show ul li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 30px;
+}
+.main .navbar > .show ul li a {
+  color: #066ac9 !important;
+}
+.main .navbar > .show ul li a span {
+  color: #066ac9 !important;
+}
+.main .navbar > .show ul .icon-lingdang {
+  color: #255534 !important;
+}
+.main .navbar > .show .btn {
+  padding: 10px 0;
+}
+.main .navbar .navbar-toggler {
+  margin-top: 15px;
+  margin-right: 20px;
+  height: 50px;
+}
+.main .navbar .me-auto {
+  margin-right: 0!important;
+}
+.main .navbar .me-auto .lang {
+  width: 80px;
+  height: 35px;
+  background: #f0ce5f;
+  border-radius: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .navbar .me-auto .lang span {
+  font-size: 14px;
+  line-height: 35px;
+}
+.main .navbar .me-auto .lang i {
+  width: 2px;
+  height: 20px;
+  background-color: #252525;
+  margin: 0px 5px 0;
+}
+.main .navbar .me-auto .line {
+  background-color: #abafc7;
+  height: 30px;
+  width: 1px;
+  margin: 0 30px;
+}
+.main .navbar .me-auto .login {
+  width: 100px;
+  height: 35px;
+  background: #8fbc25;
+  border-radius: 150px;
+  border: 0;
+  font-size: 16px;
+  color: #fff;
+  margin-right: 30px;
+}
+.main .navbar .me-auto .icon-lingdang {
+  font-size: 25px;
+}

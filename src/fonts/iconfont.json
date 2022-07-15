@@ -1,0 +1,86 @@
+{
+  "id": "3497057",
+  "name": "fairviewpark",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "607132",
+      "name": "中心环境",
+      "font_class": "zhongxinhuanjing",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "788028",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "789130",
+      "name": "客户服务  客服",
+      "font_class": "kehufuwukefu",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "2767650",
+      "name": "资讯",
+      "font_class": "zixun",
+      "unicode": "e730",
+      "unicode_decimal": 59184
+    },
+    {
+      "icon_id": "8732323",
+      "name": "人力资源",
+      "font_class": "renliziyuan",
+      "unicode": "e8b7",
+      "unicode_decimal": 59575
+    },
+    {
+      "icon_id": "11435446",
+      "name": "维修",
+      "font_class": "weixiu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "16999037",
+      "name": "保安",
+      "font_class": "baoan",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "17619208",
+      "name": "财务会计",
+      "font_class": "tubiaozhizuomoban-48",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "21815758",
+      "name": "行政",
+      "font_class": "tuandui",
+      "unicode": "f5a0",
+      "unicode_decimal": 62880
+    },
+    {
+      "icon_id": "6498426",
+      "name": "喇叭",
+      "font_class": "laba",
+      "unicode": "e76c",
+      "unicode_decimal": 59244
+    },
+    {
+      "icon_id": "6192595",
+      "name": "铃铛",
+      "font_class": "lingdang",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    }
+  ]
+}
