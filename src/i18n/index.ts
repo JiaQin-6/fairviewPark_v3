@@ -9,14 +9,15 @@
 import { createI18n } from 'vue-i18n';
 import zh from './zh_tw';
 import en from './en_us';
+
 const i18n = createI18n({
-    legacy: false,
-    // globalInjection: true,// 全局注册 $t方法
-    locale: localStorage.getItem('language') || 'en_us',
-    messages: {
-        'zh_tw': zh,
-        'en_us': en,
-    }
+  legacy: false,
+  // globalInjection: true,// 全局注册 $t方法
+  locale: localStorage.getItem('language') || 'en_us',
+  messages: {
+    'zh_tw': zh,
+    'en_us': en,
+  }
 });
+
 export default i18n;
-//# sourceMappingURL=index.js.map

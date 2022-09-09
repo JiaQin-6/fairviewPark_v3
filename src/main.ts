@@ -6,18 +6,18 @@
  * @FilePath: /fairviewpark/Users/david/Desktop/vue3.0/fairviewPark/src/main.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import { createApp } from 'vue';
-import App from './App';
+import { createApp } from 'vue'
+import App from './App'
+
 // import './style.css'
-import router from './router';
-import store from './store';
+import router from './router'
+import store from './store'
 //导入公共样式
 import './assets/css/defaultCss.css';
 import './assets/css/commonClass.css';
-import './fonts/iconfont.css'; //引入字体图标
+import './fonts/iconfont.css';//引入字体图标
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
+import 'bootstrap'
 import i18n from "./i18n/index.js";
-createApp(App).use(i18n).use(router).use(store).mount('#app');
-//# sourceMappingURL=main.js.map
+createApp(App).use(i18n).use(router).use(store).mount('#app')
