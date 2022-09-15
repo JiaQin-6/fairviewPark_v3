@@ -14,4 +14,3 @@ export default createStore({
     actions: {},
     modules: {}
 });
-//# sourceMappingURL=index.js.map

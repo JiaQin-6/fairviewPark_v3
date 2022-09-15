@@ -9,4 +9,3 @@
 export default {
     i18n: 'i18n_中文'
 };
-//# sourceMappingURL=zh_tw.js.map

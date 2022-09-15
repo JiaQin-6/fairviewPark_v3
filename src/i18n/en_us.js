@@ -9,4 +9,3 @@
 export default {
     i18n: 'i18n_english'
 };
-//# sourceMappingURL=en_us.js.map

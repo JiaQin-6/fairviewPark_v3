@@ -19,4 +19,3 @@ const i18n = createI18n({
     }
 });
 export default i18n;
-//# sourceMappingURL=index.js.map
