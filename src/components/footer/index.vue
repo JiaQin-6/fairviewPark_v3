@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:38
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-15 23:24:12
+ * @LastEditTime: 2022-09-23 23:47:50
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/footer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -15,15 +15,15 @@
         <div class="col col-12 col-lg-8 col-sm-12 flex-row space-between">
           <img class="logo" :src="logo" alt="" />
           <div class="browse">
-            <h3 class="fs-16 mt-20">瀏覽網頁</h3>
+            <h3 class="fs-16 mt-20">{{$t('Browse the web')}}</h3>
             <ul class="link fs-16 flex-row flex-wrap">
-              <li>關於我們</li>
-              <li>新買家須知</li>
-              <li>屋邨資料</li>
-              <li>專巴時間表</li>
-              <li>商場資訊</li>
-              <li>常用電話及連接</li>
-              <li>屋邨通告須知</li>
+              <li><a href="#/about-us">{{$t('About us')}}</a></li>
+              <li><a href="#/prospective-buyer">{{$t('Prospective Buyer')}}</a></li>
+              <li><a href="#/estate-facilities">{{$t('Estate Facilities')}}</a></li>
+              <li><a href="#/home">{{$t('Coach Service')}}</a></li>
+              <li><a href="#/shopping-information">{{$t('Shops Directory')}}</a></li>
+              <li><a href="#/useful-link">{{$t('Useful Telephone Nos.')}}</a></li>
+              <li><a href="#/estate-notice">{{$t('Estate Notice')}}</a></li>
             </ul>
           </div>
         </div>
@@ -31,8 +31,8 @@
         <div
           class="col col-12 col-lg-4 col-sm-12 flex-row flex-column download"
         >
-          <h3 class="fs-16 black mt-20">手機應用程序</h3>
-          <p>下載 iOS & Android 錦綉花園 APP</p>
+          <h3 class="fs-16 black mt-20">{{$t('Mobile App')}}</h3>
+          <p>{{$t('Download')}} iOS & Android {{$t('fairview part')}} APP</p>
           <div class="image">
             <img :src="app_store_icon" alt="" />
             <img :src="google_play_icon" alt="" />
@@ -45,13 +45,13 @@
       <div class="row">
         <!-- 左部份 -->
         <div class="col col-12 col-xl-8 col-md-6">
-          <p class="fs-16">© 2022 Fairview Park . All Rights Reserved</p>
+          <p class="fs-16">© {{new Date().getFullYear()}} {{$t('All Rights Reserved')}}</p>
         </div>
         <!-- 右部份 -->
         <div class="col col-12 col-xl-4 col-md-6">
           <ul class="flex-row">
-            <li class="fs-16">Term And Conditions</li>
-            <li class="fs-16">Privacy Policy</li>
+            <li class="fs-16">{{$t('Term And Conditions')}}</li>
+            <li class="fs-16">{{$t('Privacy Policy')}}</li>
           </ul>
         </div>
       </div>
@@ -112,7 +112,11 @@ export default {
               font-style: normal;
               font-size: 16px;
               line-height: 25px;
-              color: #70798b;
+              a{
+                cursor: pointer;
+                text-decoration: none;
+                color: #70798b;
+              }
             }
           }
         }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-15 23:17:55
+ * @LastEditTime: 2022-09-24 23:51:33
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,16 +10,56 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="img1" alt="" />
-      <p>關於<b>我們</b></p>
+      <img :src="banner" alt="" />
+      <p>
+        {{ fairview_park_lang === "en_us" ? "About" : "關於" }}
+        <b>{{ fairview_park_lang === "en_us" ? "us" : "我們" }}</b>
+      </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div class="col-12 col-lg-2 aside">
+        <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row">
             <li
-              v-for="(item, index) in nav_list"
+              v-for="(item, index) in [
+                {
+                  icon: 'icon-zhuye',
+                  text: $t('Introduction'),
+                },
+                {
+                  icon: 'icon-kehufuwukefu',
+                  text: $t('Customer Service'),
+                },
+                {
+                  icon: 'icon-zhongxinhuanjing',
+                  text: $t('Environmental Service'),
+                },
+                {
+                  icon: 'icon-baoan',
+                  text: $t('Security'),
+                },
+                {
+                  icon: 'icon-weixiu',
+                  text: $t('Maintenance'),
+                },
+                {
+                  icon: 'icon-tuandui',
+                  text: $t('Administration'),
+                },
+                {
+                  icon: 'icon-renliziyuan',
+                  text: $t('Human Resources'),
+                },
+                {
+                  icon: 'icon-tubiaozhizuomoban-48',
+                  text: $t('Accounts'),
+                },
+                {
+                  icon: 'icon-zixun',
+                  text: $t('Information Technology'),
+                },
+              ]"
               :key="index"
               class="col-4 col-lg-12"
               :class="nav_index === index ? 'active' : ''"
@@ -30,99 +70,70 @@
               "
             >
               <i class="iconfont" :class="item.icon"></i>
-              <span>{{item.text}}</span>
+              <span>{{ item.text }}</span>
             </li>
           </ul>
         </div>
-        <div class="col-12 col-lg-10 nav-content">
-          <!--  關於我們 -->
-          <div class="about-us">
-            <div class="container">
-              <div class="row">
-                <div class="col col-12 col-lg-6 col-sm-12">
-                  <div class="jianjie">
-                    <p>
-                      歡迎進入錦綉花園物業管理有限公司網站，業戶可透過由我們自行設計之網站與我們聯繫，我們希望為業戶提供以下增值服務：
-                    </p>
-                    <ul>
-                      <li>
-                        業戶可以瀏覽屋邨最新資訊、屋邨簡介、屋邨設施以及各屋型的結構平面圖；
-                      </li>
-                      <li>
-                        新買家可從網站得到有關錦綉花園的訊息和常遇之問題和答案；
-                      </li>
-                      <li>業戶可自行下載各類所需表格，節省業戶的寶貴時間；</li>
-                      <li>
-                        業戶可查閱自2001年成立的錦綉花園管理諮詢委員會的規章制度及本屆委員名單；
-                      </li>
-                      <li>
-                        附載常用公共機構和政府部門的網址，業戶可輕易連結到相關網頁。
-                      </li>
-                    </ul>
-                    <p>我們會不時更新網頁，將最新資訊帶給業戶。</p>
-                  </div>
-                </div>
-                <div class="col col-12 col-lg-6 col-sm-12">
-                  <div class="img">
-                    <img :src="img2" alt="" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Introduction v-show="nav_index === 0"></Introduction>
+        <CustomerService v-show="nav_index === 1"></CustomerService>
+        <EnvironmentalService v-show="nav_index === 2"></EnvironmentalService>
+        <Security v-show="nav_index === 3"></Security>
+        <Maintenance v-show="nav_index === 4"></Maintenance>
+        <Administration v-show="nav_index === 5"></Administration>
+        <HumanResources v-show="nav_index === 6"></HumanResources>
+        <Accounts v-show="nav_index === 7"></Accounts>
+        <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import Introduction from "./components/introduction.vue";
+import CustomerService from "./components/customerService.vue";
+import EnvironmentalService from "./components/environmentalService.vue";
+import Security from "./components/security.vue";
+import Maintenance from "./components/maintenance.vue";
+import Administration from "./components/administration.vue";
+import HumanResources from "./components/humanResources.vue";
+import Accounts from "./components/accounts.vue";
+import InformationTechnology from "./components/informationTechnology.vue";
 export default {
+  components: {
+    Introduction,
+    CustomerService,
+    EnvironmentalService,
+    Security,
+    Maintenance,
+    Administration,
+    HumanResources,
+    Accounts,
+    InformationTechnology,
+  },
   data() {
     return {
-      img1: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
+      structure: new URL(
+        "../../assets/image/aboutUs/handbook_chart.jpeg",
+        import.meta.url
+      ).href,
+      landmark: new URL("../../assets/image/aboutUs/placeholder.png", import.meta.url)
         .href,
-      img2: new URL("../../assets/image/home/snazzy-image.png", import.meta.url)
-        .href,
-      nav_list: [
-        {
-          icon: "icon-zhuye",
-          text: "簡介",
-        },
-        {
-          icon: "icon-kehufuwukefu",
-          text: "客戶服務部",
-        },
-        {
-          icon: "icon-zhongxinhuanjing",
-          text: "環境服務部",
-        },
-        {
-          icon: "icon-baoan",
-          text: "保安部",
-        },
-        {
-          icon: "icon-weixiu",
-          text: "維修部",
-        },
-        {
-          icon: "icon-tuandui",
-          text: "行政部",
-        },
-        {
-          icon: "icon-renliziyuan",
-          text: "人力資源部",
-        },
-        {
-          icon: "icon-tubiaozhizuomoban-48",
-          text: "會計部",
-        },
-        {
-          icon: "icon-zixun",
-          text: "資訊科技部",
-        },
-      ],
+      phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
+      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
       nav_index: 0,
+    };
+  },
+  setup() {
+    let data = reactive({
+      fairview_park_lang: "",
+    });
+    data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+
+    return {
+      ...toRefs(data),
     };
   },
 };
@@ -151,6 +162,7 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
+  background-color: #e5e5e5;
   .row {
     .aside {
       ul {
@@ -159,12 +171,14 @@ export default {
         width: 100%;
         box-sizing: border-box;
         margin: 0;
+        background-color: #fff;
+        padding: 10px;
         li {
           text-align: left;
           margin-bottom: 5px;
-          padding: 5px;
+          padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: #ccc;
+          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 16px;
@@ -173,7 +187,7 @@ export default {
             color: #000;
           }
           span {
-            font-size: 16px;
+            font-size: 15px;
             color: #000;
           }
         }
@@ -193,7 +207,10 @@ export default {
       .about-us {
         margin-bottom: 20px;
         .container {
+          background-color: #e6eae5;
+
           .row {
+            padding: 20px 0;
             .col {
               text-align: left;
               .jianjie {
@@ -202,7 +219,7 @@ export default {
                   font-size: 16px;
                   font-family: "Quicksand";
                   font-weight: 700;
-                  color: #70798b;
+                  color: #3a6547;
                   margin-bottom: 40px;
                 }
                 ul {
@@ -212,7 +229,7 @@ export default {
                     list-style-type: disc;
                     font-family: "Quicksand";
                     font-weight: 700;
-                    color: #70798b;
+                    color: #3a6547;
                     margin-bottom: 30px;
                   }
                 }
@@ -230,6 +247,58 @@ export default {
                   position: absolute;
                   right: 0;
                   top: 0;
+                }
+              }
+              .contact-us {
+                h3 {
+                  border-bottom: 5px solid #f0be64;
+                  display: inline-block;
+                }
+                ul {
+                  margin-bottom: 40px;
+                  li {
+                    font-family: "Quicksand";
+                    color: #3a6547;
+                    font-weight: 700;
+                    font-size: 16px;
+                    line-height: 20px;
+                    margin-bottom: 10px;
+                  }
+                }
+                img {
+                  width: 100%;
+                  max-width: 688px;
+                }
+              }
+              .contant-mode {
+                ul {
+                  li {
+                    .contant-mode-img {
+                      background-color: #fff;
+                      width: 50px;
+                      height: 50px;
+                      border-radius: 10px;
+                      text-align: center;
+                      position: relative;
+                      img {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                      }
+                    }
+
+                    strong {
+                      font-size: 18px;
+                      line-height: 40px;
+                    }
+                    p {
+                      font-size: 16px;
+                      line-height: 20px;
+                      color: #3a6547;
+                      margin-bottom: 5px;
+                    }
+                  }
                 }
               }
             }
