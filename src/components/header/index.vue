@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-28 00:14:25
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-08 00:19:57
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -68,7 +68,7 @@
                 },
                 {
                   type: 'default',
-                  text:  $t('Estate Facilities'),
+                  text: $t('Estate Facilities'),
                   href: '#/estate-facilities',
                 },
                 {
@@ -107,7 +107,7 @@
                 },
               ]"
               :key="index"
-              @click="route_url = item.href"
+              @click="changeRouter(item.href)"
             >
               <a
                 v-if="item.type === 'default'"
@@ -132,7 +132,9 @@
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" :href="item2.href">{{ item2.text }}</a>
+                  <a class="dropdown-item" :href="item2.href">{{
+                    item2.text
+                  }}</a>
                 </li>
               </ul>
             </li>
@@ -152,30 +154,43 @@
               >
             </div>
             <div class="line"></div>
-            <button class="login" data-bs-toggle="modal" data-bs-target="#login">{{$t('Owner login')}}</button>
+            <button
+              class="login"
+              data-bs-toggle="modal"
+              data-bs-target="#login"
+            >
+              {{ $t("Owner login") }}
+            </button>
             <i class="iconfont icon-lingdang white"></i>
           </ul>
         </div>
       </div>
     </nav>
-
-
   </div>
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 export default {
   data() {
     return {
-      logo: new URL("../../assets/image/home/fairview park logo.png", import.meta.url)
-        .href,
+      logo: new URL(
+        "../../assets/image/home/fairview park logo.png",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
     const { proxy, ctx } = getCurrentInstance();
-    const state = reactive({
+    const data = reactive({
       route_url: "",
       fairview_park_lang: "",
     });
@@ -185,21 +200,48 @@ export default {
     onMounted(() => {
       if (!sessionStorage.getItem("fairview_park_lang")) {
         sessionStorage.setItem("fairview_park_lang", "zh_tw");
-        state.fairview_park_lang = "zh_tw";
+        data.fairview_park_lang = "zh_tw";
       } else {
-        state.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+        data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
       }
-      state.route_url = location.hash;
     });
     const changeLang = (lang) => {
       sessionStorage.setItem("fairview_park_lang", lang);
-      state.fairview_park_lang = lang;
+      data.fairview_park_lang = lang;
       proxy.$i18n.locale = lang;
-      location.reload()
+      location.reload();
     };
+    const changeRouter = (href) => {
+      if (
+        location.hash === "#/buyer-server" ||
+        location.hash === "#/decoration" ||
+        location.hash === "#/wall-color-series"
+      ) {
+        data.route_url = "#/prospective-buyer";
+      } else {
+        data.route_url = href;
+      }
+    };
+    //监听器
+    watch(
+      () => route,
+      (value) => {
+        if (
+          location.hash === "#/buyer-server" ||
+          location.hash === "#/decoration" ||
+          location.hash === "#/wall-color-series"
+        ) {
+          data.route_url = "#/prospective-buyer";
+        } else {
+          data.route_url = location.hash;
+        }
+      },
+      { deep: true, immediate: true }
+    );
     return {
-      ...toRefs(state),
+      ...toRefs(data),
       changeLang,
+      changeRouter,
     };
   },
 };
@@ -272,9 +314,10 @@ export default {
       margin-right: 0 !important;
       text-align: center;
       align-items: center;
-      li{
+      li {
         font-size: 15px;
-        a{
+        margin-bottom: 10px;
+        a {
           padding: 0 5px;
         }
       }
@@ -314,7 +357,6 @@ export default {
       }
       .login {
         width: 100px;
-        height: 35px;
         background: #8fbc25;
         border-radius: 150px;
         border: 0;
@@ -329,4 +371,10 @@ export default {
     }
   }
 }
+@media (min-width: 992px){
+  .navbar-expand-lg .navbar-collapse ul li{
+    margin-bottom: 0!important;
+  }
+}
+
 </style>

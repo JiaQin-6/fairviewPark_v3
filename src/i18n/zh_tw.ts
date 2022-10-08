@@ -1,8 +1,8 @@
 /*
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-24 23:51:17
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-07 00:56:15
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -25,9 +25,9 @@ export default {
     'Browse the web':'瀏覽網頁',
     'Mobile App':'手機應用程序',
     'Download':'下載',
-    'All Rights Reserved':'錦綉花園.版权所有；保留一切权利',
-    'Term And Conditions':'条款和条件',
-    'Privacy Policy':'隐私政策',
+    'All Rights Reserved':'錦綉花園.版權所有；保留一切權利',
+    'Term And Conditions':'條款和條件',
+    'Privacy Policy':'隱私政策',
     'Introduction':'簡介',
     'Customer Service':'客戶服務部',
     'Environmental Service':'環境服務部',

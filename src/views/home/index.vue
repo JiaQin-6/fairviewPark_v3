@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-23 23:53:34
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-07 20:46:00
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -56,20 +56,27 @@
     <div class="marquee">
       <i class="iconfont icon-laba"></i>
       <marquee>
-        <a
-          v-for="(item, index) in new_notice_list"
-          :key="index"
-          :href="item.websiteUrl"
-          target="_blank"
-          style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
-          :style="{ color: item.bgColor }"
-          >{{ item.contentEnUs }}
-        </a></marquee
-      >
+        <span v-for="(item, index) in new_notice_list" :key="index">
+          <a
+            v-show="item.websiteUrl"
+            :href="item.websiteUrl"
+            target="_blank"
+            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            :style="{ color: item.bgColor }"
+            >{{ item.contentEnUs }}
+          </a>
+          <span
+            v-show="!item.websiteUrl"
+            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            :style="{ color: item.bgColor }"
+            >{{ item.contentEnUs }}</span
+          >
+        </span>
+      </marquee>
     </div>
     <!-- 歡迎瀏覽錦綉花園 -->
     <div class="liulan">
-      <h1 style="text-align: center">
+      <h1 style="text-align: center; margin-bottom: 45px">
         {{ $t("Welcome to browse") }} <a>{{ $t("fairview part") }}</a>
       </h1>
       <div class="container">
@@ -80,9 +87,18 @@
               {
                 text: $t('Resident information'),
                 img_url: resident_information,
+                route: '/',
               },
-              { text: $t('Shops Directory'), img_url: shop_information },
-              { text: $t('Coach Service'), img_url: bus_time_table },
+              {
+                text: $t('Shops Directory'),
+                img_url: shop_information,
+                route: '/shopping-information',
+              },
+              {
+                text: $t('Coach Service'),
+                img_url: bus_time_table,
+                route: '/',
+              },
             ]"
             :key="index"
           >
@@ -90,7 +106,9 @@
               class="bg h100"
               :style="{ 'background-image': 'url(' + item.img_url + ')' }"
             >
-              <button>{{ item.text }}</button>
+              <button>
+                <router-link :to="item.route">{{ item.text }}</router-link>
+              </button>
             </div>
           </div>
         </div>
@@ -173,8 +191,15 @@
           </div>
           <div class="col col-12 col-lg-6 col-sm-12">
             <div class="img">
-              <img :src="app_store" alt="" />
-              <img :src="google_play" alt="" />
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3686.7084291899987!2d114.0443692!3d22.4775886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1663690634070!5m2!1sen!2shk"
+                width="100%"
+                height="450"
+                style="border-radius: 10px"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -235,7 +260,9 @@ export default {
     //查看所有 banner 圖片
     const findWebsiteBannerList = async () => {
       try {
-        const res = await proxy.$http.findWebsiteBannerList();
+        const res = await proxy.$http.findWebsiteBannerList({
+          lang: sessionStorage.getItem("fairview_park_lang"),
+        });
         if (res.data.status === 200) {
           data.web_banner_list = res.data.data.records;
         }
@@ -281,10 +308,10 @@ export default {
   }
 }
 .liulan {
-  background-color: #e5e5e5;
   padding-top: 45px;
   h1 {
     margin-top: 60px;
+    font-size: 32px;
     a {
       color: #2fa94e;
     }
@@ -292,12 +319,14 @@ export default {
   .container {
     .row {
       .col {
-        width: 370px;
-        height: 355px;
+        width: 350px;
+        height: 350px;
         position: relative;
-        padding: 0 25px;
+        padding: 0;
+        margin: 0 21px;
         box-sizing: border-box;
         margin-bottom: 50px;
+        // max-width: 350px;
         .bg {
           background-size: cover;
           border-radius: 30px;
@@ -306,7 +335,7 @@ export default {
             bottom: 50px;
             left: 50%;
             transform: translateX(-50%);
-            width: 70%;
+            width: 80%;
             background: rgba(143, 188, 37, 0.9);
             border-radius: 20px;
             height: 70px;
@@ -314,6 +343,10 @@ export default {
             border: 0;
             font-size: 24px;
             color: #fff;
+            a {
+              color: #fff;
+              text-decoration: none;
+            }
           }
         }
       }
@@ -322,7 +355,6 @@ export default {
 }
 .about-us {
   padding-bottom: 20px;
-  background-color: #e5e5e5;
   .container {
     .row {
       .col {
@@ -368,24 +400,6 @@ export default {
           position: relative;
           text-align: center;
           height: 470px;
-          img:first-child {
-            width: 90%;
-            max-width: 440px;
-            max-height: 440px;
-            border-radius: 20px;
-            position: absolute;
-            right: 0;
-            top: 0;
-          }
-          img:last-child {
-            width: 90%;
-            max-width: 440px;
-            max-height: 440px;
-            border-radius: 20px;
-            position: absolute;
-            right: 30px;
-            top: 30px;
-          }
         }
       }
     }

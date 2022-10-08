@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-24 23:43:44
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-07 00:51:42
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,15 @@
   <div class="col-12 col-lg-10 nav-content">
     <div class="container">
       <div class="row">
-        <h3>{{$t('Customer Service')}}</h3>
+        <h3
+          style="
+            color: #000;
+            font-size: 32px;
+            margin-bottom: 60px;
+            font-weight: bold;
+          "
+          v-html="$t('Customer Service').replace('Customer', '<b>Customer</b>')"
+        ></h3>
         <ul>
           <li
             v-for="(item, index) in fairview_park_lang === 'en_us'
@@ -53,8 +61,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~'<<<';
 .nav-content {
- 
   .container {
     background-color: #e6eae5;
     padding: 20px;
@@ -62,6 +70,9 @@ export default {
       font-size: 20px;
       color: #3a6547;
       margin-bottom: 20px;
+      @{deep} b{
+        border-bottom:2px solid #F0BE64;
+      }
     }
     ul {
       padding: 0px 0 0px 35px;

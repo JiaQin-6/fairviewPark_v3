@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-25 00:01:36
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-07 00:23:31
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -71,7 +71,15 @@
             <!--  -->
             <div class="col col-12 col-lg-6 col-sm-12">
               <div class="img">
-                <img :src="map" alt="" />
+                 <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3686.7084291899987!2d114.0443692!3d22.4775886!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1663690634070!5m2!1sen!2shk"
+                width="100%"
+                height="450"
+                style="border-radius: 10px"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
               </div>
             </div>
             <!--  -->
@@ -183,7 +191,6 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      map: new URL("../../../assets/image/home/snazzy-image.png", import.meta.url).href,
       structure: new URL(
         "../../../assets/image/aboutUs/handbook_chart.jpeg",
         import.meta.url
@@ -247,15 +254,7 @@ export default {
             position: relative;
             text-align: center;
             height: 470px;
-            img {
-              width: 90%;
-              max-width: 440px;
-              max-height: 440px;
-              border-radius: 20px;
-              position: absolute;
-              right: 0;
-              top: 0;
-            }
+            
           }
           .contact-us {
             h3 {

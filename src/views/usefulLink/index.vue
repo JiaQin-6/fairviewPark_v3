@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-25 15:48:45
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-08 01:25:37
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,7 +11,10 @@
     <!-- banner -->
     <div class="banner">
       <img :src="banner" alt="" />
-      <p>{{fairview_park_lang==='en_us'?'Useful Telephone':'常用電話及'}} <b>{{fairview_park_lang==='en_us'?'Nos.':'連接'}}</b></p>
+      <p>
+        {{ fairview_park_lang === "en_us" ? "Useful Telephone" : "常用電話及"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Nos." : "連接" }}</b>
+      </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
@@ -34,10 +37,11 @@
             <table
               :id="
                 'telephone_link_' +
-                (telephone_link_list[index] && telephone_link_list[index].orderNo)
+                (telephone_link_list[index] &&
+                  telephone_link_list[index].orderNo)
               "
               style="margin-bottom: 20px"
-              width="645"
+             
               border="0"
               cellpadding="5"
               cellspacing="2"
@@ -48,7 +52,8 @@
                 <tr>
                   <td height="25" colspan="2" bgcolor="#A0D31E">
                     <span class="style9">{{
-                      telephone_link_list[index] && telephone_link_list[index].titleEnUs
+                      telephone_link_list[index] &&
+                      telephone_link_list[index].titleEnUs
                     }}</span>
                   </td>
                 </tr>
@@ -66,7 +71,7 @@
                     >
                   </td>
                   <td width="251" height="25" bgcolor="#FFFFCC">
-                    <span class="style12">{{ item2.tel }}</span>
+                    <a style="color:#000;text-decoration: none;" :href="'tel:'+item2.tel">{{item2.tel}}</a>
                   </td>
                 </tr>
               </tbody>
@@ -83,7 +88,8 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+        .href,
     };
   },
   setup() {
@@ -137,6 +143,7 @@ export default {
 @deep: ~">>>";
 .banner {
   position: relative;
+  overflow: hidden;
   img {
     opacity: 0.5;
     width: 100%;
@@ -150,6 +157,8 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
+        width: 80%;
+    text-align: center;
     b {
       color: #2fa94e;
     }
@@ -157,7 +166,6 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
-  background-color: #e5e5e5;
   .row {
     .aside {
       ul {
@@ -208,6 +216,15 @@ export default {
         max-width: 100%;
       }
     }
+  }
+}
+@media (max-width: 992px){
+  .banner{
+    img {
+    opacity: 0.5;
+    width:auto;
+    height:200px;
+  }
   }
 }
 </style>

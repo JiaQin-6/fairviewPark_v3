@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-25 15:46:34
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-08 01:26:05
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,7 +11,10 @@
     <!-- banner -->
     <div class="banner">
       <img :src="banner" alt="" />
-      <p>{{fairview_park_lang==='en_us'?'Estate':'屋邨'}} <b>{{fairview_park_lang==='en_us'?'Facilities':'資料'}}</b></p>
+      <p>
+        {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Facilities" : "資料" }}</b>
+      </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
@@ -26,7 +29,7 @@
               @click="
                 () => {
                   nav_index = index;
-                  findOneEstateFacilities(item.id)
+                  findOneEstateFacilities(item.id);
                 }
               "
             >
@@ -35,8 +38,7 @@
           </ul>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <div class="ql-editor" v-html="estate_facilities_content">
-          </div>
+          <div class="ql-editor" v-html="estate_facilities_content"></div>
         </div>
       </div>
     </div>
@@ -44,7 +46,7 @@
 </template>
 
 <script>
-  import { ref, reactive,getCurrentInstance,toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
@@ -53,53 +55,53 @@ export default {
       nav_index: 0,
     };
   },
-  setup(){
+  setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
-      estate_facilities_list:[],
-      estate_facilities_content:null,
+      estate_facilities_list: [],
+      estate_facilities_content: null,
       fairview_park_lang: "",
-    })
+    });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
     //查看所有 屋邨资料 列表
     const findEstateFacilitiesList = async () => {
-        try {
-            const res = await proxy.$http.findEstateFacilitiesList(
-              {lang:data.fairview_park_lang}
-            )
-            if(res.data.status===200){
-              console.log(res.data.data.records)
-              data.estate_facilities_list = res.data.data.records
-             
-            }
-        } catch (error) {
-            console.log(error)
+      try {
+        const res = await proxy.$http.findEstateFacilitiesList({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          console.log(res.data.data.records);
+          data.estate_facilities_list = res.data.data.records;
         }
+      } catch (error) {
+        console.log(error);
+      }
     };
     //根据 id 和 语言获取一条屋邨资料数据
     const findOneEstateFacilities = async (id) => {
-        try {
-            const res = await proxy.$http.findOneEstateFacilities(
-              {id:id,lang:data.fairview_park_lang}
-            )
-            if(res.data.status===200){
-              data.estate_facilities_content = res.data.data.htmlEnUs
-            }
-        } catch (error) {
-            console.log(error)
+      try {
+        const res = await proxy.$http.findOneEstateFacilities({
+          id: id,
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.estate_facilities_content = res.data.data.htmlEnUs;
         }
+      } catch (error) {
+        console.log(error);
+      }
     };
-    onMounted(async ()=>{
-      await findEstateFacilitiesList()
-      findOneEstateFacilities(data.estate_facilities_list[0].id)
-    })
+    onMounted(async () => {
+      await findEstateFacilitiesList();
+      findOneEstateFacilities(data.estate_facilities_list[0].id);
+    });
     return {
       ...toRefs(data),
-      findOneEstateFacilities
-    }
-  }
+      findOneEstateFacilities,
+    };
+  },
 };
 </script>
 
@@ -107,6 +109,7 @@ export default {
 @deep: ~">>>";
 .banner {
   position: relative;
+  overflow: hidden;
   img {
     opacity: 0.5;
     width: 100%;
@@ -120,6 +123,8 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
+        width: 80%;
+    text-align: center;
     b {
       color: #2fa94e;
     }
@@ -127,7 +132,6 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
-  background-color: #e5e5e5;
   .row {
     .aside {
       ul {
@@ -172,10 +176,19 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
-      img{
+      img {
         max-width: 100%;
       }
     }
+  }
+}
+@media (max-width: 992px){
+  .banner{
+    img {
+    opacity: 0.5;
+    width:auto;
+    height:200px;
+  }
   }
 }
 </style>

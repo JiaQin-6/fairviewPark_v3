@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-24 23:51:33
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-08 01:25:43
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,8 +12,8 @@
     <div class="banner">
       <img :src="banner" alt="" />
       <p>
-        {{ fairview_park_lang === "en_us" ? "About" : "關於" }}
-        <b>{{ fairview_park_lang === "en_us" ? "us" : "我們" }}</b>
+        {{ fairview_park_lang === "en_us" ? "About" : "關於"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;us" : "我們" }}</b>
       </p>
     </div>
     <!-- navs -->
@@ -113,16 +113,24 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
-      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+        .href,
+      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url)
+        .href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
         import.meta.url
       ).href,
-      landmark: new URL("../../assets/image/aboutUs/placeholder.png", import.meta.url)
+      landmark: new URL(
+        "../../assets/image/aboutUs/placeholder.png",
+        import.meta.url
+      ).href,
+      phone: new URL(
+        "../../assets/image/aboutUs/telephone.png",
+        import.meta.url
+      ).href,
+      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url)
         .href,
-      phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
-      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
       nav_index: 0,
     };
   },
@@ -142,9 +150,10 @@ export default {
 <style lang="less" scoped>
 .banner {
   position: relative;
+  overflow: hidden;
   img {
     opacity: 0.5;
-    width: 100%;
+    width:100%;
   }
   p {
     position: absolute;
@@ -155,6 +164,8 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
+        width: 80%;
+    text-align: center;
     b {
       color: #2fa94e;
     }
@@ -162,7 +173,6 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
-  background-color: #e5e5e5;
   .row {
     .aside {
       ul {
@@ -306,6 +316,15 @@ export default {
         }
       }
     }
+  }
+}
+@media (max-width: 992px){
+  .banner{
+    img {
+    opacity: 0.5;
+    width:auto;
+    height:200px;
+  }
   }
 }
 </style>

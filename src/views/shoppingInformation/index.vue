@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-25 15:47:46
+ * @LastEditors: 嘉嘉 1723470065@qq.com
+ * @LastEditTime: 2022-10-08 01:26:30
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,7 +11,10 @@
     <!-- banner -->
     <div class="banner">
       <img :src="banner" alt="" />
-      <p>{{fairview_park_lang==='en_us'?'Shopping':'商場'}} <b>{{fairview_park_lang==='en_us'?'information':'資訊'}}</b></p>
+      <p>
+        {{ fairview_park_lang === "en_us" ? "Shopping" : "商場"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;information" : "資訊" }}</b>
+      </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
@@ -34,22 +37,28 @@
             class="nav-content-list"
             :id="
               'shop_information_' +
-              (shop_information_list[index] && shop_information_list[index].orderNo)
+              (shop_information_list[index] &&
+                shop_information_list[index].orderNo)
             "
             v-for="(item, index) in shop_information_content"
             :key="index"
           >
             <div class="header">
               <span>{{
-                shop_information_list[index] && shop_information_list[index].titleEnUs
+                shop_information_list[index] &&
+                shop_information_list[index].titleEnUs
               }}</span>
               <img src="" alt="" />
             </div>
             <ul>
-              <li class="flex-row" v-for="(item2, index2) in item" :key="index2">
+              <li
+                class="flex-row"
+                v-for="(item2, index2) in item"
+                :key="index2"
+              >
                 <span class="col-5">{{ item2.shopNo }}</span>
-                <div class="img col-4" ><img  :src="item2.logUrl" alt="" /></div>
-                
+                <div class="img col-4"><img :src="item2.logUrl" alt="" /></div>
+
                 <span class="col-3">{{ item2.tel }}</span>
               </li>
             </ul>
@@ -65,7 +74,8 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+        .href,
     };
   },
   setup() {
@@ -104,7 +114,9 @@ export default {
       });
     });
     const jumpLink = (orderNo, index) => {
-      document.querySelector("#shop_information_" + orderNo).scrollIntoView(true);
+      document
+        .querySelector("#shop_information_" + orderNo)
+        .scrollIntoView(true);
       data.nav_index = index;
     };
     return {
@@ -120,6 +132,7 @@ export default {
 @deep: ~">>>";
 .banner {
   position: relative;
+  overflow: hidden;
   img {
     opacity: 0.5;
     width: 100%;
@@ -133,6 +146,8 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
+        width: 80%;
+    text-align: center;
     b {
       color: #2fa94e;
     }
@@ -140,7 +155,6 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
-  background-color: #e5e5e5;
 
   .row {
     .aside {
@@ -208,12 +222,12 @@ export default {
             padding: 10px 20px;
             span {
             }
-            .img{
+            .img {
               img {
-              width: 50px;
+                width: 50px;
+              }
             }
-            }
-            
+
             &:nth-child(2n) {
               background-color: #5cb89e;
             }
@@ -221,6 +235,15 @@ export default {
         }
       }
     }
+  }
+}
+@media (max-width: 992px){
+  .banner{
+    img {
+    opacity: 0.5;
+    width:auto;
+    height:200px;
+  }
   }
 }
 </style>
