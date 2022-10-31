@@ -1,0 +1,213 @@
+<!--
+ * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @Date: 2022-09-15 22:13:17
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-10-31 22:57:53
+ * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<template>
+  <div>
+    <!-- banner -->
+    <div class="banner">
+      <img :src="banner" alt="" />
+      <p>
+        {{ fairview_park_lang === "en_us" ? "Lottery system for" : "抽籤鎖車"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Impounding Action" : "機制" }}</b>
+      </p>
+    </div>
+    <!-- navs -->
+    <div class="nav-wrap">
+      <div class="row">
+        <div
+          style="margin: 0 auto"
+          class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow"
+        >
+          <div class="menu">
+            <el-menu
+              :default-active="activeIndex"
+              class="el-menu-demo"
+              mode="horizontal"
+              background-color="#fbfc9f"
+              text-color="#000"
+              active-text-color="#000"
+              @select="handleSelect"
+            >
+              <el-menu-item index="1">{{
+                fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度"
+              }}</el-menu-item>
+              <el-menu-item index="2">{{
+                fairview_park_lang === "en_us"
+                  ? "Sample of Candidate Form"
+                  : "候選人表格樣本"
+              }}</el-menu-item>
+              <el-menu-item index="3">{{
+                fairview_park_lang === "en_us"
+                  ? "Samlpe of Nomination Form"
+                  : "提名表格樣本"
+              }}</el-menu-item>
+              <el-sub-menu index="4">
+                <template #title>{{
+                  fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+                }}</template>
+                <el-menu-item index="4-1">{{
+                  fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+                }}</el-menu-item>
+                <el-menu-item index="4-2">
+                  <a
+                    style="color: #000"
+                    :href="
+                      fairview_park_lang === 'en_us'
+                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
+                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf'
+                    "
+                    target="_blank"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Election Activities Rules"
+                        : "選舉守則"
+                    }}
+                  </a>
+                </el-menu-item>
+                <el-menu-item index="4-3">
+                  <a
+                    style="color: #000"
+                    :href="
+                      fairview_park_lang === 'en_us'
+                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
+                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf'
+                    "
+                    target="_blank"
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Election Activities Rules Time Table"
+                        : "選舉守則時間表"
+                    }}
+                  </a></el-menu-item
+                >
+              </el-sub-menu>
+              <el-menu-item index="5">{{
+                fairview_park_lang === "en_us"
+                  ? "11th MAC Members"
+                  : "應屆管理諮詢委員會委員資料"
+              }}</el-menu-item>
+            </el-menu>
+          </div>
+          <div class="nav-content-wrap" style="padding: 20px 0">
+            <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
+            <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
+            <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
+            <ElectionProcedure v-if="activeIndex === '4-1'"></ElectionProcedure>
+            <MACMembers v-if="activeIndex === '5'"></MACMembers>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import RulesRegulations from "./rules-regulations/index.vue";
+import SampleOfCandidateForm from "./sample-of-candidate-form/index.vue";
+import SamlpeOfNominationForm from "./samlpe-of-nomination-form/index.vue";
+import ElectionProcedure from "./election-procedure/index.vue";
+import MACMembers from "./MAC-members/index.vue";
+export default {
+  components: {
+    RulesRegulations,
+    SampleOfCandidateForm,
+    SamlpeOfNominationForm,
+    ElectionProcedure,
+    MACMembers,
+  },
+  data() {
+    return {
+      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+    };
+  },
+  setup() {
+    //获取当前组件的实例、上下文来操作router和vuex等。相当于this
+    const { proxy, ctx } = getCurrentInstance();
+    const data = reactive({
+      lottery_system_for_mpound_content: [],
+      fairview_park_lang: "",
+      activeIndex: "1",
+    });
+    data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    //查看所有列表
+    const findLotterySystemForImpound = async () => {
+      try {
+        const res = await proxy.$http.findLotterySystemForImpound({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.lottery_system_for_mpound_content = res.data.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const handleSelect = (key, keyPath) => {
+      if (key !== "4-2" && key !== "4-3") {
+        data.activeIndex = key;
+      }
+    };
+    onMounted(async () => {
+      await findLotterySystemForImpound();
+    });
+    return {
+      ...toRefs(data),
+      findLotterySystemForImpound,
+      handleSelect,
+    };
+  },
+};
+</script>
+
+<style lang="less" scoped>
+@deep: ~">>>";
+.banner {
+  position: relative;
+  overflow: hidden;
+  img {
+    opacity: 0.5;
+    width: 100%;
+  }
+  p {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: bold;
+    width: 80%;
+    text-align: center;
+    b {
+      color: #2fa94e;
+    }
+  }
+}
+.nav-wrap {
+  padding: 20px;
+  .row {
+    @{deep} .nav-content {
+      background-color: #fff;
+      font-size: 13px;
+      padding: 12px 15px;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .banner {
+    img {
+      opacity: 0.5;
+      width: auto;
+      height: 200px;
+    }
+  }
+}
+</style>

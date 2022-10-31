@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-28 00:04:33
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-09-29 00:23:39
+ * @LastEditTime: 2022-10-10 23:44:56
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/login/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,6 +22,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button
+              id="close-login"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -90,6 +91,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button
+              id="close-signUp"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -220,6 +222,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button
+              id="close-forgetPasswor"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -246,18 +249,19 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
+import {useStore} from 'vuex'
 export default {
   data() {
     return {};
   },
-  setup(props) {
+  setup(props,{emit}) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
       loginForm: {
-        loginName: "",
-        password: "",
+        loginName: "david",
+        password: "david",
       },
       registerForm: {
         oname: null,
@@ -276,11 +280,13 @@ export default {
       },
       register_error_tip: {
         is_null: false,
-        is_email_correct:false,
+        is_email_correct: false,
         is_show: false,
         text: "",
       },
     });
+    
+    const store = useStore();
     //登陸
     const login = async () => {
       if (!data.loginForm.loginName || !data.loginForm.password) {
@@ -295,7 +301,9 @@ export default {
           password: data.loginForm.password,
         });
         if (res.data.status === 200) {
-          console.log(res);
+          document.getElementById("close-login").click();
+          localStorage.setItem("login-info", JSON.stringify(res.data.data));
+          store.commit('setLoginStatus',true)
         } else {
           data.login_error_tip.is_show = true;
           data.login_error_tip.text = res.data.msg;
@@ -314,11 +322,11 @@ export default {
         !data.registerForm.password ||
         !data.registerForm.nickname ||
         !data.registerForm.cnickname ||
-        !data.registerForm.email 
+        !data.registerForm.email
       ) {
         data.register_error_tip.is_null = true;
         return;
-      } else if(!reg.test(data.registerForm.email)){
+      } else if (!reg.test(data.registerForm.email)) {
         data.register_error_tip.is_email_correct = true;
         return;
       } else {
@@ -338,7 +346,10 @@ export default {
           lang: "",
         });
         if (res.data.status === 200) {
-          console.log(res);
+          document.getElementById("signUp").style.display = "none";
+          document.getElementById("login").style.display = "block";
+          data.register_error_tip.is_show = false;
+          data.register_error_tip.text = "";
         } else {
           data.register_error_tip.is_show = true;
           data.register_error_tip.text = res.data.msg;

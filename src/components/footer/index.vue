@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:38
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-08 00:11:58
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-10-16 02:09:38
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/footer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,26 +13,41 @@
       <!-- 左部份 -->
       <div class="row">
         <div class="col col-12 col-lg-8 col-sm-12 flex-row space-between">
-          <img class="logo" :src="logo" alt="" />
+          <div>
+            <img class="logo" :src="logo" alt="" />
+          </div>
+
           <div class="browse">
-            <h3 class="fs-16 mt-20">{{$t('Browse the web')}}</h3>
+            <h3 class="fs-16 mt-20">{{ $t("Browse the web") }}</h3>
             <ul class="link fs-16 flex-row flex-wrap">
-              <li><a href="#/about-us">{{$t('About us')}}</a></li>
-              <li><a href="#/prospective-buyer">{{$t('Prospective Buyer')}}</a></li>
-              <li><a href="#/estate-facilities">{{$t('Estate Facilities')}}</a></li>
-              <li><a href="#/home">{{$t('Coach Service')}}</a></li>
-              <li><a href="#/shopping-information">{{$t('Shops Directory')}}</a></li>
-              <li><a href="#/useful-link">{{$t('Useful Telephone Nos.')}}</a></li>
-              <li><a href="#/estate-notice">{{$t('Estate Notice')}}</a></li>
+              <li>
+                <a href="#/about-us">{{ $t("About us") }}</a>
+              </li>
+              <li>
+                <a href="#/prospective-buyer">{{ $t("Prospective Buyer") }}</a>
+              </li>
+              <li>
+                <a href="#/estate-facilities">{{ $t("Estate Facilities") }}</a>
+              </li>
+              <li>
+                <a href="#/home">{{ $t("Coach Service") }}</a>
+              </li>
+              <li>
+                <a href="#/shopping-information">{{ $t("Shops Directory") }}</a>
+              </li>
+              <li>
+                <a href="#/useful-link">{{ $t("Useful Telephone Nos.") }}</a>
+              </li>
+              <li>
+                <a href="#/estate-notice">{{ $t("Estate Notice") }}</a>
+              </li>
             </ul>
           </div>
         </div>
         <!-- 右部份 -->
-        <div
-          class="col col-12 col-lg-4 col-sm-12 flex-row flex-column download"
-        >
-          <h3 class="fs-16 black mt-20">{{$t('Mobile App')}}</h3>
-          <p>{{$t('Download')}} iOS & Android {{$t('fairview part')}} APP</p>
+        <div class="col col-12 col-lg-4 col-sm-12 flex-row flex-column download">
+          <h3 class="fs-16 black mt-20">{{ $t("Mobile App") }}</h3>
+          <p>{{ $t("Download") }} iOS & Android {{ $t("fairview part") }} APP</p>
           <div class="image">
             <img :src="app_store_icon" alt="" />
             <img :src="google_play_icon" alt="" />
@@ -45,13 +60,15 @@
       <div class="row">
         <!-- 左部份 -->
         <div class="col col-12 col-xl-8 col-md-6">
-          <p class="fs-16">© {{new Date().getFullYear()}} {{$t('All Rights Reserved')}}</p>
+          <p class="fs-16">
+            © {{ new Date().getFullYear() }} {{ $t("All Rights Reserved") }}
+          </p>
         </div>
         <!-- 右部份 -->
         <div class="col col-12 col-xl-4 col-md-6">
           <ul class="flex-row">
-            <li class="fs-16">{{$t('Term And Conditions')}}</li>
-            <li class="fs-16">{{$t('Privacy Policy')}}</li>
+            <li class="fs-16">{{ $t("Term And Conditions") }}</li>
+            <li class="fs-16">{{ $t("Privacy Policy") }}</li>
           </ul>
         </div>
       </div>
@@ -63,10 +80,8 @@
 export default {
   data() {
     return {
-      logo: new URL(
-        "../../assets/image/home/fairview park logo.png",
-        import.meta.url
-      ).href,
+      logo: new URL("../../assets/image/home/fairview park logo.png", import.meta.url)
+        .href,
       app_store_icon: new URL(
         "../../assets/image/home/App store icon.png",
         import.meta.url
@@ -93,10 +108,9 @@ export default {
         text-align: left;
         .logo {
           width: 66px;
-          
         }
         .browse {
-          width: 60%;
+          width: 68%;
           text-align: left;
           h3 {
             font-family: "Nunito";
@@ -106,14 +120,16 @@ export default {
           }
           ul {
             // height: 110px;
-            flex-direction: column !important;
+            // flex-direction: column !important;
             padding-left: 0;
             li {
               font-family: "Quicksand";
               font-style: normal;
               font-size: 16px;
               line-height: 25px;
-              a{
+              margin-right: 30px;
+              width: 180px;
+              a {
                 cursor: pointer;
                 text-decoration: none;
                 color: #70798b;
@@ -128,7 +144,7 @@ export default {
         }
         .image {
           img {
-            margin-right: 10px;
+            margin-right: 5px;
           }
         }
       }
@@ -149,9 +165,11 @@ export default {
           font-family: "Quicksand";
           color: #70798b;
           padding: 0 20px;
+          margin: 0;
         }
         ul {
           padding-left: 0;
+          margin: 0;
           li {
             padding: 0 20px;
             font-family: "Quicksand";

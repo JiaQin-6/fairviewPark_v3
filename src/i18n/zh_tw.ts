@@ -1,8 +1,8 @@
 /*
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-07 00:56:15
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-10-26 00:52:03
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -16,9 +16,11 @@ export default {
     'Estate Facilities':'屋邨資料',
     'Coach Service':'專巴時間表',
     'Shops Directory':'商場資訊',
+    'Carpark Parking Privilege Payment':'停車場泊車優惠收費表',
     'Useful Telephone Nos.':'常用電話及連接',
     'Estate Notice':'屋邨通告須知',
     'Owner login':'業主登入',
+    'Login out':'登出',
     'Welcome to browse':'歡迎瀏覽',
     'fairview part':'錦綉花園',
     'Resident information':'居民資訊',
@@ -37,4 +39,17 @@ export default {
     'Human Resources':'人力資源部',
     'Accounts':'會計部',
     'Information Technology':'資訊科技部',
+    "OWNERS's ZONE":'业主专区',
+    'FAQ from Residents':'居民常見問題',
+    'Estate Notices':'屋邨通告',
+    'Fairview Part News':'錦綉專訓',
+    'Demographic & Opinion Survey':'人口統計及意見調查',
+    'Estate Activities':'屋邨活動',
+    'News Update':'最新消息',
+    'Residents Handbook / Map':'業主手冊及屋邨地圖',
+    'Frequently Used Forms':'常用表格',
+    'MAC Column':'管理諮詢委員會專欄',
+    'Payment List':'收費表',
+    'Lottery System For Impounding Action':'抽簽鎖車機制',
+    'the Overhaul Project':'更換地下喉管及行車道路翻新工程（大維修）',
 }

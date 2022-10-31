@@ -16,7 +16,8 @@
     "sourceMap": false,//生成.map文件
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "element-plus/global",
     ],
     "paths": {
       "@/*": [

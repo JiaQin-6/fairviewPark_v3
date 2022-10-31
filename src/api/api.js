@@ -1,13 +1,14 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-09-28 23:37:57
+ * @LastEditTime: 2022-11-01 00:16:48
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
  */
 //导入axios
 import axios from "axios";
+import router from '../router';
 //创建多个基地址
 //创建一个axios实例
 let baseUrl = "";
@@ -72,11 +73,90 @@ http.findUsefulTelephoneNosList = (arr) => {
 http.findWebsiteBannerList = (arr) => {
     return http.post(`/houseweb/websiteBanner/findWebsiteBannerList`, arr);
 };
+//查询 FaqFromResidents 列表
+http.findFaqFromResidentsList = (arr) => {
+    return http.post(`/houseweb/faqFromResidents/findFaqFromResidentsList`, arr);
+};
+//查询 FaqFromResidents 一条数据
+http.findOneFaqFromResidents = (arr) => {
+    return http.post(`/houseweb/faqFromResidents/findOneFaqFromResidents`, arr);
+};
+//查询 錦綉專訓 列表
+http.findFairviewParkNewsList = (arr) => {
+    return http.post(`/houseweb/fairviewParkNews/findFairviewParkNewsList`, arr);
+};
+//查询 人口统计 列表
+http.findDemographicOpinionSurveyList = (arr) => {
+    return http.post(`/houseweb/demographicOpinionSurvey/findDemographicOpinionSurveyList`, arr);
+};
+//查询 最新消息 列表
+http.findNewUpdateList = (arr) => {
+    return http.post(`/houseweb/newUpdate/findNewUpdateList`, arr);
+};
+//查询 最新消息 單獨一条信息
+http.findOneNewUpdateById = (arr) => {
+    return http.post(`/houseweb/newUpdate/findOneNewUpdateById`, arr);
+};
+//查询 常用表格 列表
+http.findFrequentlyUsedFormsList = (arr) => {
+    return http.post(`/houseweb/frequentlyUsedForms/findFrequentlyUsedFormsList`, arr);
+};
+//查询 抽籤鎖車機制 列表
+http.findLotterySystemForImpound = (arr) => {
+    return http.post(`/houseweb/lotterySystemForImpound/findLotterySystemForImpound`, arr);
+};
+//查询 屋邨活动 列表
+http.findEstateActivitesList = (arr) => {
+    return http.post(`/houseweb/estateActivites/findEstateActivitesList`, arr);
+};
+//查询 屋邨活动 單獨一条信息
+http.findOneEstateActivitesById = (arr) => {
+    return http.post(`/houseweb/estateActivites/findOneEstateActivitesById`, arr);
+};
+//查询 业主手册及地图 
+http.findResidentsHandbookMap = (arr) => {
+    return http.post(`/houseweb/residentsHandbookMap/findResidentsHandbookMap`, arr);
+};
+//查询 時間表
+http.findCoachServiceList = (arr) => {
+    return http.post(`/houseweb/coachService/findCoachServiceList`, arr);
+};
+//查询 時間表 單獨一条信息
+http.findOneCoachService = (arr) => {
+    return http.post(`/houseweb/coachService/findOneCoachService`, arr);
+};
+//查询 價格表 
+http.findLineMoneyList = (arr) => {
+    return http.post(`/houseweb/coachService/findLineMoneyList`, arr);
+};
+//查看专车 pdf 链接
+http.findOneCoachServiceFile = (arr) => {
+    return http.post(`/houseweb/coachService/findOneCoachServiceFile`, arr);
+};
+//查看 大會議
+http.findMinutesOfMacMeetingsList = (arr) => {
+    return http.post(`/houseweb/coachService/findMinutesOfMacMeetingsList`, arr);
+};
+//查看 小會議
+http.findMinutesOfSubComMeetingsList = (arr) => {
+    return http.post(`/houseweb/coachService/findMinutesOfSubComMeetingsList`, arr);
+};
+//查看 周邊發展項目
+http.findNearbyProposedDevelopmentsLi = (arr) => {
+    return http.post(`/houseweb/coachService/findNearbyProposedDevelopmentsLi`, arr);
+};
+//查看 會議回顧 pdf
+http.findOneMacColumnFile = (arr) => {
+    return http.post(`/houseweb/coachService/findOneMacColumnFile`, arr);
+};
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
 /* 在发送给服务器的时候带token给服务器 */
 http.interceptors.request.use((config) => {
     //在发送之前做点什么
+    if (window.localStorage.getItem('login-info')) {
+        config.headers.Authorization = JSON.parse(window.localStorage.getItem('login-info') || '').jwt;
+    }
     return config;
 }, function (error) {
     // 对请求错误做些什么
@@ -85,8 +165,9 @@ http.interceptors.request.use((config) => {
 /* 响应拦截: 在服务器把响应报文发送给浏览器的途中执行 */
 /* 登录后让服务器带给浏览器token */
 http.interceptors.response.use(function (response) {
-    if (response.status != 200 && response.status != 201) {
-        console.log("錯誤了");
+    if (response.data.status === 104) {
+        localStorage.removeItem('login-info');
+        router.push('/home');
     }
     return response;
 }, function (error) {
