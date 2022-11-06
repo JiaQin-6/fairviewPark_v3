@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-31 00:04:21
+ * @LastEditTime: 2022-11-06 23:43:10
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -129,7 +129,9 @@
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" :href="item2.href">{{ item2.text }}</a>
+                  <a class="dropdown-item" :href="item2.href">{{
+                    item2.text
+                  }}</a>
                 </li>
               </ul>
             </li>
@@ -235,7 +237,26 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-            <i class="iconfont icon-lingdang white"></i>
+            <router-link
+              v-if="is_login"
+              style="text-decoration: none; position: relative"
+              to="/information-push"
+            >
+              <i class="iconfont icon-lingdang white"></i>
+              <span
+                v-if="pmLogHave === 'Y'"
+                style="
+                  position: absolute;
+                  top: 2px;
+                  right: 0px;
+                  width: 8px;
+                  height: 8px;
+                  display: inline-block;
+                  background-color: #f0ce5f;
+                  border-radius: 50%;
+                "
+              ></span
+            ></router-link>
           </ul>
         </div>
       </div>
@@ -244,7 +265,15 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+  inject,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -258,8 +287,10 @@ export default {
   },
   data() {
     return {
-      logo: new URL("../../assets/image/home/fairview park logo.png", import.meta.url)
-        .href,
+      logo: new URL(
+        "../../assets/image/home/fairview park logo.png",
+        import.meta.url
+      ).href,
     };
   },
   setup(props, ctx) {
@@ -269,9 +300,22 @@ export default {
       route_url: "",
       fairview_park_lang: "",
       is_login: false,
+      pmLogHave: null,
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
+    //判断url是否带有token参数
+    if (route.query.session) {
+    }
+    //判断url是否带有语言参数
+    if (
+      route.query.lang &&
+      (route.query.lang === "en_us" || route.query.lang === "zh_tw")
+    ) {
+      sessionStorage.setItem("fairview_park_lang", route.query.lang);
+      data.fairview_park_lang = route.query.lang;
+      proxy.$i18n.locale = route.query.lang;
+    }
     //如果有登陸信息就顯示登陸
     if (localStorage.getItem("login-info")) {
       data.is_login = true;
@@ -283,7 +327,9 @@ export default {
       } else {
         data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
       }
+      findPmLogHave();
     });
+    //切換語言
     const changeLang = (lang) => {
       if (!commonFunc.getIsPC()) {
         document.getElementById("navbar-button").click();
@@ -291,8 +337,10 @@ export default {
       sessionStorage.setItem("fairview_park_lang", lang);
       data.fairview_park_lang = lang;
       proxy.$i18n.locale = lang;
+      location.href = location.href.replace(route.query.lang, lang);
       location.reload();
     };
+    //切換路由
     const changeRouter = (href) => {
       if (!commonFunc.getIsPC()) {
         document.getElementById("navbar-button").click();
@@ -333,6 +381,19 @@ export default {
     const showOwnerIsZONE = (val) => {
       ctx.emit("showOwnerIsZONE", true);
     };
+    //查看当前登录用户是否已读
+    const findPmLogHave = async () => {
+      try {
+        const res = await proxy.$http.findPmLogHave({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.pmLogHave = res.data.data;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     //监听器
     watch(
       () => route,
@@ -345,8 +406,8 @@ export default {
           data.route_url = "#/prospective-buyer";
         } else if (location.hash === "#/carpark-parking-privilege-payment") {
           data.route_url = "#/shopping-information";
-        } else if(location.hash === "#/home"){
-          if(!localStorage.getItem("login-info")){
+        } else if (location.hash === "#/home") {
+          if (!localStorage.getItem("login-info")) {
             data.is_login = false;
             store.commit("setLoginStatus", false);
           }
@@ -370,6 +431,7 @@ export default {
       selectOwer,
       selectOwnersZone,
       showOwnerIsZONE,
+      findPmLogHave,
     };
   },
 };
@@ -392,6 +454,7 @@ export default {
     margin: 0 auto;
     align-items: inherit;
     justify-content: space-between;
+
     .container-fluid {
       align-items: inherit;
       background: #255534;
@@ -492,9 +555,10 @@ export default {
         border-radius: 150px;
         border: 0;
 
-        font-size: 16px;
+        font-size: 15px;
         color: #fff;
         margin-right: 30px;
+        padding: 6px 0;
       }
       .icon-lingdang {
         font-size: 25px;
@@ -506,7 +570,7 @@ export default {
           border-radius: 150px;
           border: 0;
 
-          font-size: 16px;
+          font-size: 15px;
           color: #fff;
           margin-right: 30px;
           .el-icon {

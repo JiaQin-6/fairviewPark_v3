@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-11-01 00:16:48
+ * @LastEditTime: 2022-11-06 23:27:44
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
@@ -127,7 +127,7 @@ http.findOneCoachService = (arr:any) => {
 };
 //查询 價格表 
 http.findLineMoneyList = (arr:any) => {
-  return http.post(`/houseweb/coachService/findLineMoneyList`,arr);
+  return http.post(`/houseweb/coachServiceMoney/findLineMoneyList`,arr);
 };
 //查看专车 pdf 链接
 http.findOneCoachServiceFile = (arr:any) => {
@@ -135,19 +135,35 @@ http.findOneCoachServiceFile = (arr:any) => {
 };
 //查看 大會議
 http.findMinutesOfMacMeetingsList = (arr:any) => {
-  return http.post(`/houseweb/coachService/findMinutesOfMacMeetingsList`,arr);
+  return http.post(`/houseweb/minutesOfMacMeetings/findMinutesOfMacMeetingsList`,arr);
 };
 //查看 小會議
 http.findMinutesOfSubComMeetingsList = (arr:any) => {
-  return http.post(`/houseweb/coachService/findMinutesOfSubComMeetingsList`,arr);
+  return http.post(`/houseweb/minutesOfSubComMeetings/findMinutesOfSubComMeetingsList`,arr);
 };
 //查看 周邊發展項目
-http.findNearbyProposedDevelopmentsLi = (arr:any) => {
-  return http.post(`/houseweb/coachService/findNearbyProposedDevelopmentsLi`,arr);
+http.findNearbyProposedDevelopmentsList = (arr:any) => {
+  return http.post(`/houseweb/nearbyProposedDevelopments/findNearbyProposedDevelopmentsList`,arr);
 };
 //查看 會議回顧 pdf
 http.findOneMacColumnFile = (arr:any) => {
   return http.post(`/houseweb/coachService/findOneMacColumnFile`,arr);
+};
+//查看 大维修会议记录 列表
+http.findTheOverhaulProjectList = (arr:any) => {
+  return http.post(`/houseweb/theOverhaulProject/findTheOverhaulProjectList`,arr);
+};
+//查看 锦绣花园 pdf
+http.findTohpByFpn = (arr:any) => {
+  return http.post(`/houseweb/theOverhaulProject/findTohpByFpn`,arr);
+};
+//查看当前登录用户是否已读
+http.findPmLogHave = (arr:any) => {
+  return http.post(`/houseweb/pmLogHave/findPmLogHave`,arr);
+};
+//查看推送消息
+http.findPmLogList = (arr:any) => {
+  return http.post(`/houseweb/pmLog/findPmLogList`,arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */

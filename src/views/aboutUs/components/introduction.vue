@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-07 00:23:31
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-11-03 00:14:55
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -231,7 +231,7 @@ export default {
           .jianjie {
             margin-bottom: 30px;
             p {
-              font-size: 16px;
+              font-size: 15px;
               font-family: "Quicksand";
               font-weight: 700;
               color: #3a6547;
@@ -240,7 +240,7 @@ export default {
             ul {
               padding: 0px 0 15px 35px;
               li {
-                font-size: 16px;
+                font-size: 15px;
                 list-style-type: disc;
                 font-family: "Quicksand";
                 font-weight: 700;
@@ -267,7 +267,7 @@ export default {
                 font-family: "Quicksand";
                 color: #3a6547;
                 font-weight: 700;
-                font-size: 16px;
+                font-size: 15px;
                 line-height: 20px;
                 margin-bottom: 10px;
               }
@@ -300,7 +300,7 @@ export default {
                   line-height: 40px;
                 }
                 p {
-                  font-size: 16px;
+                  font-size: 15px;
                   line-height: 20px;
                   color: #3a6547;
                   margin-bottom: 5px;

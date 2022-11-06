@@ -3,7 +3,7 @@
     <h5>
       {{ fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度" }}
     </h5>
-    <ul style="font-size: 16px; padding: 0">
+    <ul style="font-size: 15px; padding: 0">
       <li>
         <p>
           <span style="margin-right: 10px">1.</span

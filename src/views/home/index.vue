@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-07 20:46:00
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-11-03 23:17:04
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -61,13 +61,13 @@
             v-show="item.websiteUrl"
             :href="item.websiteUrl"
             target="_blank"
-            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            style="font-family: 'Nunito'; font-size: 15px; margin-right: 40px"
             :style="{ color: item.bgColor }"
             >{{ item.contentEnUs }}
           </a>
           <span
             v-show="!item.websiteUrl"
-            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            style="font-family: 'Nunito'; font-size: 15px; margin-right: 40px"
             :style="{ color: item.bgColor }"
             >{{ item.contentEnUs }}</span
           >
@@ -82,7 +82,7 @@
       <div class="container">
         <div class="row flex-center">
           <div
-            class="col col-12 col-lg-4 col-sm-12"
+            class="col col-12 col-md-4 col-lg-4 col-sm-12"
             v-for="(item, index) in [
               {
                 text: $t('Resident information'),
@@ -102,10 +102,8 @@
             ]"
             :key="index"
           >
-            <div
-              class="bg h100"
-              :style="{ 'background-image': 'url(' + item.img_url + ')' }"
-            >
+            <div class="bg h100">
+              <img style="width: 100%" :src="item.img_url" alt="" />
               <button>
                 <router-link :to="item.route">{{ item.text }}</router-link>
               </button>
@@ -285,8 +283,17 @@ export default {
 .carousel {
   .carousel-inner {
     .carousel-item {
-      max-height: 570px;
+      max-height: 450px;
       overflow: hidden;
+      display: flex;
+      align-items:center;
+      a{
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+      }
     }
   }
 }
@@ -319,29 +326,28 @@ export default {
   .container {
     .row {
       .col {
-        width: 350px;
-        height: 350px;
+        max-width: 350px;
         position: relative;
-        padding: 0;
-        margin: 0 21px;
+        padding: 0 15px;
         box-sizing: border-box;
         margin-bottom: 50px;
-        // max-width: 350px;
+        border-radius: 30px;
         .bg {
           background-size: cover;
-          border-radius: 30px;
+          border-radius: 20px;
+          overflow: hidden;
           button {
             position: absolute;
-            bottom: 50px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
             background: rgba(143, 188, 37, 0.9);
             border-radius: 20px;
-            height: 70px;
-            line-height: 70px;
+            padding: 10px 0;
+            // line-height: 70px;
             border: 0;
-            font-size: 24px;
+            font-size: 20px;
             color: #fff;
             a {
               color: #fff;
@@ -371,7 +377,7 @@ export default {
             }
           }
           p {
-            font-size: 16px;
+            font-size: 15px;
             font-family: "Quicksand";
             font-weight: 700;
             color: #70798b;
@@ -380,7 +386,7 @@ export default {
           ul {
             padding: 0px 0 15px 35px;
             li {
-              font-size: 16px;
+              font-size: 15px;
               list-style-type: disc;
               font-family: "Quicksand";
               font-weight: 700;

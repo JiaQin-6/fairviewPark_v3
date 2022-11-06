@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-26 00:33:23
+ * @LastEditTime: 2022-11-03 01:15:32
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -24,7 +24,7 @@
         <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row">
             <li
-              v-for="(item, index) in coach_service_list"
+              v-for="(item, index) in coach_service_content.coachServiceList"
               :key="index"
               class="col-4 col-lg-12"
               :class="nav_index === index ? 'active' : ''"
@@ -35,457 +35,643 @@
           </ul>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+          <!--  -->
           <div align="center">
+            <!-- pdf -->
+            <h5 class="fs-16 mb-20" style="text-align: left; cursor: pointer">
+              <a
+                :href="coach_service_content.coachServiceFile"
+                target="_blank"
+                style="text-decoration: none"
+              >
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "Estate Coach Service During Typhoon and Inclement Weather Condition"
+                    : "颱風及惡劣天氣時之專車服務"
+                }}
+              </a>
+            </h5>
             <!-- 时间表 -->
             <div
               v-if="
-                nav_index !== (coach_service_list.length - 1 &&
-                coach_service_list.length - 2)
+                nav_index !==
+                  coach_service_content.coachServiceList.length - 1 &&
+                nav_index !== coach_service_content.coachServiceList.length - 2
               "
             >
-              <table width="720" border="0" cellpadding="0" cellspacing="0">
+              <p
+                style="
+                  text-align: left;
+                  margin-bottom: 15px;
+                  font-size: 15px;
+                  color: #f56c6c;
+                "
+              >
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "Time Table Effect Day : " +coach_service_content&&
+                        coach_service_content.coachServiceList.length !==
+                        0 &&
+                      coach_service_content.coachServiceList[nav_index]
+                        .launchTime
+                    : "以下時間表生效時間 : " +coach_service_content&&
+                        coach_service_content.coachServiceList.length !==
+                        0 &&
+                      coach_service_content.coachServiceList[nav_index]
+                        .launchTime
+                }}
+              </p>
+              <table
+                width="100%"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                v-for="(item, index) in coach_service_content.coachServiceList
+                  .length !== 0 &&
+                coach_service_content.coachServiceList[nav_index].sectionList"
+                :key="index"
+                class="fs-16 mb-30"
+              >
                 <tbody>
-                  <tr>
+                  <tr v-if="index === 0">
                     <td height="30" colspan="3" bgcolor="#7CA628">
                       <div align="center">
-                        <img src="central.gif" width="168" height="28" />
+                        {{
+                          coach_service_content.coachServiceList[nav_index]
+                            .titleEnUs
+                        }}
                       </div>
                     </td>
                   </tr>
                   <tr>
                     <td height="30" colspan="3" bgcolor="#E7F4BB">
                       <div align="center">
-                        <span class="style8"
-                          >星期一至星期五（公眾假期除外）</span
-                        >
+                        <span class="style8">{{ item.titleEnUs }}</span>
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td width="240" height="30" bgcolor="#F9FCEF">
-                      <div align="center" class="style10">
-                        <strong>錦綉花園開出</strong>
-                      </div>
-                    </td>
-                    <td width="240" height="30" bgcolor="#FFFAE6">
-                      <div align="center">
-                        <span class="style8">告士打道六國中心開出</span>
-                      </div>
-                    </td>
-                    <td width="240" height="30" bgcolor="#FFFFE6">
-                      <div align="center" class="style10">
-                        <span class="style8">干諾道中8-10號遮打大廈開出</span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="240" valign="top" bgcolor="#F9FCEF">
-                      <p align="center" class="style34">
-                        7:00 a.m. - 7:20 a.m.
+                    <td
+                      width="240"
+                      valign="top"
+                      :bgcolor="
+                        index2 === 0
+                          ? '#F9FCEF'
+                          : index2 === 1
+                          ? '#FFFAE6'
+                          : '#FFFFE6'
+                      "
+                      v-for="(item2, index2) in item.fleidList"
+                      :key="index2"
+                    >
+                      <p
+                        :style="{
+                          'font-weight': index2 === 0 ? 'bold' : 'normal',
+                        }"
+                        align="center"
+                        class="style34"
+                        style="padding: 10px 0; margin: 0"
+                      >
+                        {{ item2.titleEnUs }}
                       </p>
-                      <p align="center" class="style34">(3班次)</p>
-                      <p align="center">&nbsp;</p>
-                      <p align="center" class="style34">
-                        7:20 a.m. - 7:40 a.m.
+                      <p
+                        align="center"
+                        class="style34"
+                        v-for="(item3, index3) in item2.columnList"
+                        :key="index3"
+                        style="padding: 10px 0; margin: 0"
+                      >
+                        {{ item3.text ? item3.text : "&nbsp;" }}
                       </p>
-                      <p align="center" class="style34">(3班次)</p>
-                      <p align="center">&nbsp;</p>
-                      <p align="center" class="style34">
-                        7:40 a.m. - 7:50 a.m.
-                      </p>
-                      <p align="center" class="style34">(5班次)</p>
-                      <p align="center">&nbsp;</p>
-                      <p align="center" class="style34">&nbsp;</p>
-                    </td>
-                    <td width="240" valign="top" bgcolor="#FFFAE6">
-                      <p align="center" class="style34">5:35 p.m.</p>
-                      <p align="center" class="style34">5:55 p.m.</p>
-                      <p align="center" class="style34">6:10 p.m.</p>
-                      <p align="center" class="style34">6:20 p.m.</p>
-                      <p align="center" class="style34">6:30 p.m.</p>
-                      <p align="center" class="style34">6:40 p.m.</p>
-                      <p align="center" class="style34">6:55 p.m.</p>
-                      <p align="center" class="style34">7:15 p.m.</p>
-                      <p align="center" class="style34">7:30 p.m.</p>
-                    </td>
-                    <td width="240" valign="top" bgcolor="#FFFFE6">
-                      <p align="center" class="style34">5:38 p.m.*</p>
-                      <p align="center" class="style34">5:58 p.m.*</p>
-                      <p align="center" class="style34">6:13 p.m.*</p>
-                      <p align="center" class="style34">6:23 p.m.*</p>
-                      <p align="center" class="style34">6:33 p.m.*</p>
-                      <p align="center" class="style34">6:43 p.m.*</p>
-                      <p align="center" class="style34">6:58 p.m.*</p>
-                      <p align="center" class="style34">7:18 p.m.*</p>
-                      <p align="center" class="style34">7:33 p.m.*</p>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <table width="720" border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                  <tr>
-                    <td height="30" colspan="3" bgcolor="#FFFFFF">
-                      <div align="center"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td height="30" colspan="3" bgcolor="#E7F4BB">
-                      <div align="center">
-                        <span class="style11">星期六（公眾假期除外）</span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td height="30" bgcolor="#F9FCEF">
-                      <div align="center" class="style10">
-                        <strong>錦綉花園開出</strong>
-                      </div>
-                    </td>
-                    <td height="30" bgcolor="#FFFAE6">
-                      <div align="center">
-                        <span class="style8">回程暫停服務</span>
-                      </div>
-                    </td>
-                    <td height="30" bgcolor="#FFFFE6">
-                      <div align="center" class="style10">
-                        <span class="style8"></span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="240" valign="top" bgcolor="#F9FCEF">
-                      <p align="center" class="style35">7:30 a.m.</p>
-                      <!--<p align="center" class="style35">7:20 a.m.</p>-->
-                      <!--<p align="center" class="style35">7:35 a.m.</p>-->
-                      <!--<p align="center" class="style35">7:40 a.m.</p>-->
-                    </td>
-                    <td width="240" valign="top" bgcolor="#FFFAE6"></td>
-                    <td width="240" valign="top" bgcolor="#FFFFE6"></td>
-                  </tr>
-                </tbody>
-              </table>
-              <table width="720" border="0" cellpadding="0" cellspacing="0">
-                <tbody>
-                  <tr>
-                    <td height="30" colspan="3" bgcolor="#FFFFFF">
-                      <div align="center"></div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td height="30" colspan="3" bgcolor="#E7F4BB">
-                      <div align="center">
-                        <span class="style8">星期日及公眾假期</span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td height="30" bgcolor="#F9FCEF">
-                      <div align="center" class="style10">
-                        <strong>錦綉花園開出</strong>
-                      </div>
-                    </td>
-                    <td height="30" bgcolor="#FFFAE6">
-                      <div align="center">
-                        <span class="style8">回程暫停服務</span>
-                      </div>
-                    </td>
-                    <td height="30" bgcolor="#FFFFE6">
-                      <div align="center" class="style10">
-                        <span class="style8"></span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="240" valign="top" bgcolor="#F9FCEF">
-                      <p align="center" class="style35">7:30 a.m.</p>
-                      <!--<p align="center" class="style35">7:20 a.m.</p>-->
-                      <!--<p align="center" class="style35">7:40 a.m.</p>-->
-                    </td>
-                    <td width="240" valign="top" bgcolor="#FFFAE6"></td>
-                    <td width="240" valign="top" bgcolor="#FFFFE6"></td>
-                  </tr>
-                </tbody>
-              </table>
-              <p><span class="style10">*預計抵達時間 </span></p>
-              <table width="700" border="0" cellpadding="0" cellspacing="0">
+
+              <p style="text-align: left; font-size: 15px">*預計抵達時間</p>
+              <table
+                width="100%"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                v-if="coach_service_content.coachServiceList.length!==0&&
+                  coach_service_content.coachServiceList[nav_index]
+                    .endModuleList.length !== 0
+                "
+              >
                 <tbody>
                   <tr>
                     <td>
                       <table
-                        width="700"
+                        width="100%"
                         border="0"
                         cellpadding="0"
                         cellspacing="0"
                       >
                         <tbody>
                           <tr>
-                            <td width="350" valign="top">
-                              <p>
-                                <span class="style20">去程落客站</span><br />
-                                <br />
-                                (1) 怡和大廈郵政總局
+                            <td
+                              valign="top"
+                              v-for="(item, index) in coach_service_content
+                                .coachServiceList[nav_index].endModuleList"
+                              :key="index"
+                              style="font-size: 15px"
+                            >
+                              <p class="style20" style="font-weight:bold">{{ item.titleEnUs }}</p>
+                              <p
+                                v-for="(item2, index2) in item.columnList"
+                                :key="index2"
+                              >
+                                {{ item2.text }}
                               </p>
-                              <p>(2) 龍匯道中信大廈對出上落客區</p>
-                              <p>(3) 港灣道海港中心對出</p>
-                              <p>(4) 百德新街53號</p>
-                              <p>(5) 告士打道近東亞銀行港灣中心</p>
-                            </td>
-                            <td width="350" valign="top">
-                              <p class="style20">回程上客站</p>
-                              <p>(1) 告士打道六國中心</p>
-                              <p>(2) 干諾道中8-10號遮打大廈</p>
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <p>&nbsp;</p>
-                      <p>
-                        以上資料只供參考，最新資料以專巴公司最新公佈為準，
-                        專巴服務查詢熱線2471 6348 。
-                      </p>
-                    </td>
-                  </tr>
                 </tbody>
               </table>
+              <p style="font-size: 15px;text-align:left;margin-top:50px">
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "The above information is for reference only. Please refer to the latest announcement made by the coach operator as the updated information. The coach service enquiry hotline is 2471 6348."
+                    : "以上資料只供參考，最新資料以專巴公司最新公佈為準， 專巴服務查詢熱線2471 6348 。"
+                }}
+              </p>
             </div>
             <!-- 专巴收费表 -->
-            <div v-if="nav_index === coach_service_list.length - 2">
-              <table
-                width="720"
-                border="1"
-                cellpadding="3"
-                cellspacing="0"
-                bordercolor="#FFFFFF"
-              >
-                <tbody>
-                  <tr>
-                    <td height="30" colspan="4" bgcolor="#7CA628">
-                      <div align="center">
-                        <img src="fare.gif" width="168" height="28" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#E7F4BB" rowspan="2">
-                      <p align="center" class="style8">路線</p>
-                    </td>
-                    <td width="160" bgcolor="#E7F4BB" rowspan="2">
-                      <p align="center" class="style8">非住戶或現金票價</p>
-                    </td>
-                    <td colspan="2" bgcolor="#E7F4BB">
-                      <p align="center" class="style8">八達通咭</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="200" bgcolor="#E7F4BB">
-                      <p align="center" class="style8">已登記住戶<br />票價</p>
-                    </td>
-                    <td width="200" bgcolor="#E7F4BB">
-                      <p align="center" class="style8">
-                        已登記住戶<br />(長者及小童)票價
-                      </p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">NR 93 (元朗墟線)</p>
-                    </td>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$ 9.80</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$ 7.30</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$ 3.70</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">NR 94 (上水線)</p>
-                    </td>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$12.50</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$10.00</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$ 5.00</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">NR 948 (青衣線)</p>
-                    </td>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$25.00</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$21.50</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$10.80</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">NR 91 (中環線)</p>
-                    </td>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$37.50</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$34.00</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style10">不適用</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">NR 92 (荃灣線)</p>
-                    </td>
-                    <td width="160" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$25.00</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">$21.50</p>
-                    </td>
-                    <td width="200" bgcolor="#FFFAE6">
-                      <p align="center" class="style10">不適用</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">NR 936 (紅磡線)</p>
-                    </td>
-                    <td width="160" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$29.50</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style15">$26.00</p>
-                    </td>
-                    <td width="200" bgcolor="#F9FCEF">
-                      <p align="center" class="style10">不適用</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <p><b>乘車優惠</b></p>
-              <p>
-                住戶如希望享有乘車優惠，<u>必須於管理公司作出登記</u>，生效日期為登記後三個工作天起計，
-                如在週五或週六登記，將會當下週一登記計算。早前已申請住戶智能咭並登記其合適八達通咭的住戶，則無需再次登記。
-              </p>
-              <p>
-                此外，已於「錦綉花園業主聯會」登記乘車優惠之60至64歲住戶亦<u>須重新登記其個人八達通</u>，方享有半價乘車優惠。
-              </p>
-              <table
-                width="720"
-                border="1"
-                cellpadding="3"
-                cellspacing="0"
-                bordercolor="#FFFFFF"
-              >
-                <tbody>
-                  <tr>
-                    <td
-                      height="30"
-                      colspan="5"
-                      bgcolor="#7CA628"
-                      align="center"
+            <div
+              class="fs-15"
+              v-if="
+                nav_index === coach_service_content.coachServiceList.length - 2
+              "
+            >
+              <div class="mb-30">
+                <div style="overflow: hidden; padding: 0">
+                  <h5
+                    style="
+                      background-color: #7da533;
+                      margin: 0;
+                      padding: 10px 0;
+                      color: #fff;
+                      font-size: 15px;
+                    "
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "COACH FARE TABLE"
+                        : "專巴時間表"
+                    }}
+                  </h5>
+                  <ul class="flex-row" style="padding: 0; margin: 0 0 2px 0">
+                    <li
+                      v-for="(item, index) in [
+                        {
+                          text:
+                            fairview_park_lang === 'en_us' ? 'Route' : '路線',
+                        },
+                        {
+                          text:
+                            fairview_park_lang === 'en_us'
+                              ? 'Fare (Non-Resident or by Cash)'
+                              : '非住戶或現金票價',
+                        },
+                      ]"
+                      :key="index"
+                      style="
+                        background-color: #e7f3be;
+                        font-size: 15px;
+                        align-items: center;
+                        text-align: center;
+                        margin-right: 2px;
+                      "
+                      class="col-3 flex-row"
                     >
-                      <font color="#FFFFFF" class="style15"
-                        >乘 車 優 惠 及 條 件</font
+                      <span style="margin: 0 auto">{{ item.text }}</span>
+                    </li>
+                    <li class="col-6">
+                      <div
+                        style="
+                          background-color: #e7f3be;
+                          font-size: 15px;
+                          align-items: center;
+                          text-align: center;
+                          padding: 20px;
+                          margin-bottom: 2px;
+                        "
+                        class="col-12 flex-row"
                       >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td rowspan="5" bgcolor="#E7F4BB" width="60">
-                      <p align="center" class="style8">住戶</p>
-                    </td>
-                    <td bgcolor="#E7F4BB" width="100">
-                      <p align="center" class="style8">年齡</p>
-                    </td>
-                    <td bgcolor="#E7F4BB" width="160">
-                      <p align="center" class="style8">條件</p>
-                    </td>
-                    <td bgcolor="#E7F4BB" width="160">
-                      <p align="center" class="style8">適用之八達通咭</p>
-                    </td>
-                    <td bgcolor="#E7F4BB" width="160">
-                      <p align="center" class="style8">享有優惠</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">4至＜13歲</p>
-                    </td>
-                    <td rowspan="4" bgcolor="#FFFAE6">
-                      <p align="center" class="style15">
-                        於管理公司<br />已申請住戶智能咭及<br />登記其合適八達通咭
-                      </p>
-                    </td>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">兒童八達通</p>
-                    </td>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">半價</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">13至＜60歲</p>
-                    </td>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">成人或個人八達通</p>
-                    </td>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">住戶優惠</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">60至＜65歲</p>
-                    </td>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">個人八達通</p>
-                    </td>
-                    <td bgcolor="#FFFAE6">
-                      <p align="center" class="style15">半價</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">65或以上</p>
-                    </td>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">長者或個人八達通</p>
-                    </td>
-                    <td bgcolor="#F9FCEF">
-                      <p align="center" class="style15">半價</p>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td bgcolor="#E7F4BB">
-                      <p align="center" class="style8">非住戶</p>
-                    </td>
-                    <td align="center" bgcolor="#FFFAE6" colspan="4">
-                      <p align="center" class="style15">無任何乘車優惠</p>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                        <span style="margin: 0 auto">{{
+                          fairview_park_lang === "en_us"
+                            ? "Octopus Card"
+                            : "八達通咭"
+                        }}</span>
+                      </div>
+                      <div class="flex-row col-12">
+                        <div
+                          v-for="(item, index) in [
+                            {
+                              text:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Fare of Registered Resident'
+                                  : '已登記住戶票價',
+                            },
+                            {
+                              text:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Fare of Registered Resident(Elderly and Children)'
+                                  : '已登記住戶 (長者及小童)票價',
+                            },
+                          ]"
+                          :key="index"
+                          style="
+                            background-color: #e7f3be;
+                            font-size: 15px;
+                            align-items: center;
+                            text-align: center;
+                            padding: 20px;
+                            margin-right: 2px;
+                          "
+                          class="col-6 flex-row"
+                        >
+                          <span style="margin: 0 auto">{{ item.text }}</span>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <ul
+                    v-for="(item, index) in coach_service_content.lineMoneyList"
+                    :key="index"
+                    class="flex-row"
+                    style="padding: 0; margin: 0 0 2px 0"
+                  >
+                    <li
+                      style="
+                        background-color: #fffae7;
+                        font-size: 15px;
+                        align-items: center;
+                        text-align: center;
+                        margin-right: 2px;
+                        padding: 20px;
+                      "
+                      class="col-3 flex-row"
+                    >
+                      <span style="margin: 0 auto">{{ item.title }}</span>
+                    </li>
+                    <li
+                      v-for="(item2, index2) in JSON.parse(item.moneyJson)"
+                      :key="index2"
+                      style="
+                        background-color: #fffae7;
+                        font-size: 15px;
+                        align-items: center;
+                        text-align: center;
+                        margin-right: 2px;
+                        padding: 20px;
+                      "
+                      class="col-3 flex-row"
+                    >
+                      <span style="margin: 0 auto">${{ item2.price }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p style="text-align: left">
+                <b>{{
+                  fairview_park_lang === "en_us"
+                    ? "Estate Coach Fare Discount"
+                    : "乘車優惠"
+                }}</b>
+              </p>
+              <p style="text-align: left">
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "Residents who would like to enjoy the concessionary fare for resident"
+                    : "住戶如希望享有乘車優惠，"
+                }}
+                <u>{{
+                  fairview_park_lang === "en_us"
+                    ? "must register with the Estate Management Office"
+                    : "必須於管理公司作出登記"
+                }}</u
+                >，
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "It will take 3 working days for processing after registration. Next Monday will be counted as the first working day if the registration is made on Friday or Saturday. Residents who have their “Residents Smart Card” and registered their suitable Octopus Cards do not need to submit the application again."
+                    : "生效日期為登記後三個工作天起計，如在週五或週六登記，將會當下週一登記計算。早前已申請住戶智能咭並登記其合適八達通咭的住戶，則無需再次登記。"
+                }}
+              </p>
+              <p
+                style="text-align: left"
+                v-html="
+                  fairview_park_lang === 'en_us'
+                    ? 'Besides, residents aged 60 to 64 who registered with the Owner’s Association of Fairview Park for enjoying the half fare concessions <u>need to register their Personalised Octopus Cards with the Estate Management Office again.</u>'
+                    : '此外，已於「錦綉花園業主聯會」登記乘車優惠之60至64歲住戶亦<u>須重新登記其個人八達通</u>，方享有半價乘車優惠。'
+                "
+              ></p>
+              <div class="mb-30" style="margin-top: 30px">
+                <div style="overflow: hidden; padding: 0">
+                  <h5
+                    style="
+                      background-color: #7da533;
+                      margin: 0;
+                      padding: 10px 0;
+                      color: #fff;
+                      font-size: 15px;
+                    "
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "The benefits and their requirements"
+                        : "乘車優惠及條件"
+                    }}
+                  </h5>
+                  <table style="width: 100%; text-align: center">
+                    <tr style="">
+                      <th
+                        rowspan="5"
+                        style="
+                          width: 10%;
+                          background-color: #e7f3be;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{ fairview_park_lang === "en_us" ? "Age" : "住戶" }}
+                      </th>
+                      <th
+                        style="
+                          width: 15%;
+                          background-color: #e7f3be;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us" ? "Resident" : "年齡"
+                        }}
+                      </th>
+                      <th
+                        style="
+                          width: 25%;
+                          background-color: #e7f3be;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Requirements"
+                            : "條件"
+                        }}
+                      </th>
+                      <th
+                        style="
+                          width: 25%;
+                          background-color: #e7f3be;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Type of Octopus Card"
+                            : "適用之八達通咭"
+                        }}
+                      </th>
+                      <th
+                        style="
+                          width: 25%;
+                          background-color: #e7f3be;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Benefit"
+                            : "享有優惠"
+                        }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "from 4 to＜13"
+                            : "4至＜13歲"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                        rowspan="4"
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Must apply for a Residents Smart Card and register a suitable Octopus Card at the Estate Management Office"
+                            : "於管理公司已申請住戶智能咭及登記其合適八達通咭"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Children"
+                            : "兒童八達通"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "from 13 to＜60"
+                            : "13至＜60歲"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Adult or Personalised"
+                            : "成人或個人八達通"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Resident Privilege"
+                            : "住戶優惠"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "from 60 to＜65"
+                            : "60至＜65歲"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Personalised"
+                            : "個人八達通"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "at or above 65"
+                            : "65或以上"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Elderly or Personalised"
+                            : "長者或個人八達通"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #f9fcf0;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
+                        }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "Non-Resident"
+                            : "非住戶"
+                        }}
+                      </td>
+                      <td
+                        style="
+                          background-color: #fffae7;
+                          padding: 15px;
+                          border: 2px solid #fff;
+                        "
+                        colspan="4"
+                      >
+                        {{
+                          fairview_park_lang === "en_us"
+                            ? "No Benefit"
+                            : "無任何乘車優惠"
+                        }}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <p style="font-size: 15px;text-align:left;margin-top:50px">
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "The above information is for reference only. Please refer to the latest announcement made by the coach operator as the updated information. The coach service enquiry hotline is 2471 6348."
+                    : "以上資料只供參考，最新資料以專巴公司最新公佈為準， 專巴服務查詢熱線2471 6348 。"
+                }}
+              </p>
             </div>
             <!-- 免费穿梭巴士 -->
             <div
               class="free-bus"
-              v-if="nav_index === coach_service_list.length - 1"
+              v-if="
+                nav_index === coach_service_content.coachServiceList.length - 1
+              "
             >
               <div class="table">
                 <h2>
@@ -604,16 +790,17 @@
                 </p>
                 <div
                   class="img"
-                  style="width: 500px; height: 500px; background-color: #ccc"
+                  style="width:100%;max-width: 500px; max-height: 500px; background-color: #ccc"
                 >
                   <img
                     style="width: 100%"
-                    src="../../assets/image/coach service/Routing_Blue.jpeg"
+                    :src="router2_blue"
                     alt=""
                   />
                 </div>
-                <div>
+                <div style="width:100%;">
                   <img
+                  style="width:100%;"
                     :src="fairview_park_lang === 'en_us' ? router1_en : router1"
                     alt=""
                   />
@@ -730,16 +917,16 @@
                 </p>
                 <div
                   class="img"
-                  style="width: 500px; height: 500px; background-color: #ccc"
+                  style="width:100%;max-width: 500px; max-height: 500px; background-color: #ccc"
                 >
                   <img
                     style="width: 100%"
-                    src="../../assets/image/coach service/Routing_Red.jpeg"
+                    :src="Routing_Red"
                     alt=""
                   />
                 </div>
-                <div>
-                  <img
+                <div style="width: 100%">
+                  <img style="width: 100%"
                     :src="fairview_park_lang === 'en_us' ? router2_en : router2"
                     alt=""
                   />
@@ -776,6 +963,14 @@ export default {
         "../../assets/image/coach service/route2_en.jpeg",
         import.meta.url
       ).href,
+      router2_blue: new URL(
+        "../../assets/image/coach service/Routing_Blue.jpeg",
+        import.meta.url
+      ).href,
+      Routing_Red: new URL(
+        "../../assets/image/coach service/Routing_Red.jpeg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -783,54 +978,78 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       nav_index: 0,
-      coach_service_list: [
-        {
-          id: 15,
-          orderNo: 3,
-          titleEnUs: "中环线",
-        },
-        {
-          id: 15,
-          orderNo: 3,
-          titleEnUs: "专巴收费表",
-        },
-        {
-          id: 15,
-          orderNo: 3,
-          titleEnUs: "邨免费巴士",
-        },
-      ],
-      coach_service_content: [],
+      coach_service_content: {
+        coachServiceList: [],
+        lineMoneyList: [],
+        coachServiceFile: null,
+      },
       fairview_park_lang: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-    //查看所有 屋邨资料 列表
-    const findUsefulTelephoneNosList = async (id) => {
+    //查看 價格表 列表
+    const findLineMoneyList = async (id) => {
       try {
-        const res = await proxy.$http.findUsefulTelephoneNosList({
+        const res = await proxy.$http.findLineMoneyList({
           lang: data.fairview_park_lang,
-          parentId: id,
         });
         if (res.data.status === 200) {
-          if (id) {
-            data.coach_service_content.push(res.data.data.records);
-          } else {
-            data.coach_service_list = res.data.data.records;
-          }
+          data.coach_service_content.lineMoneyList = res.data.data.records;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    //查看专车 pdf 链接
+    const findOneCoachServiceFile = async (id) => {
+      try {
+        const res = await proxy.$http.findOneCoachServiceFile({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.coach_service_content.coachServiceFile =
+            res.data.data.pdfUrlEnUs;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    //查看 時間表
+    const findCoachServiceList = async (id) => {
+      try {
+        const res = await proxy.$http.findCoachServiceList({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.coach_service_content.coachServiceList =
+            res.data.data.pageResult.records.concat([
+              {
+                titleEnUs:
+                  data.fairview_park_lang === "en_us"
+                    ? "Coach Fare Table"
+                    : "專巴收費表",
+              },
+              {
+                titleEnUs:
+                  data.fairview_park_lang === "en_us"
+                    ? "Free Shuttle Bus"
+                    : "邨内免費穿梭巴士",
+              },
+            ]);
         }
       } catch (error) {
         console.log(error);
       }
     };
     onMounted(async () => {
-      //   await findUsefulTelephoneNosList();
-      //   data.coach_service_list.map((item) => {
-      //     findUsefulTelephoneNosList(item.id);
-      //   });
+      findLineMoneyList();
+      findOneCoachServiceFile();
+      findCoachServiceList();
     });
     return {
       ...toRefs(data),
-      findUsefulTelephoneNosList,
+      findLineMoneyList,
+      findOneCoachServiceFile,
+      findCoachServiceList,
     };
   },
 };
@@ -868,7 +1087,6 @@ export default {
       ul {
         position: sticky;
         top: 10px;
-        // flex-wrap: nowrap;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -883,7 +1101,7 @@ export default {
           background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
-            font-size: 16px;
+            font-size: 15px;
             margin-right: 5px;
             display: none;
             color: #000;
@@ -928,13 +1146,13 @@ export default {
           p {
             background-color: #fef0ab;
             margin: 0;
-            font-size: 16px;
+            font-size: 15px;
             padding: 5px;
           }
           ul {
             padding: 0;
             li {
-              font-size: 16px;
+              font-size: 15px;
               background-color: #fffae7;
 
               span {
@@ -959,5 +1177,24 @@ export default {
       height: 200px;
     }
   }
+  .nav-wrap {
+    .row {
+     
+    .aside {
+      ul{
+        flex-wrap: nowrap; padding: 0;
+        li{
+          display: flex;
+          text-align: center;
+          align-items: center;
+          span{
+            margin:0 auto;
+          }
+        }
+      }
+    }
+  }
+  }
+  
 }
 </style>

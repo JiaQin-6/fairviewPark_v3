@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-06-13 15:08:30
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-26 00:54:25
+ * @LastEditTime: 2022-11-01 21:21:00
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\Fairview Park\fairviewpark\src\router\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -150,6 +150,12 @@ const routes = [
                 path: '/coach-service',
                 name: 'coach-service',
                 component: () => import('../views/coachService/index.vue'),
+            },
+            //30天信息推送﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+            {
+                path: '/information-push',
+                name: 'information-push',
+                component: () => import('../views/informationPush/index.vue'),
             },
         ]
     }

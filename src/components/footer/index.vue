@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:38
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-16 02:09:38
+ * @LastEditTime: 2022-11-03 00:16:45
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/footer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="main">
+  <div class="main" id="footer">
     <!-- 上部份 -->
     <div class="top-part">
       <!-- 左部份 -->
@@ -67,8 +67,8 @@
         <!-- 右部份 -->
         <div class="col col-12 col-xl-4 col-md-6">
           <ul class="flex-row">
-            <li class="fs-16">{{ $t("Term And Conditions") }}</li>
-            <li class="fs-16">{{ $t("Privacy Policy") }}</li>
+            <li class="fs-16">{{ $t("Disclaimer") }}</li>
+            <li class="fs-16">{{ $t("Privacy Policy and Personal Data Collection Statement") }}</li>
           </ul>
         </div>
       </div>
@@ -77,6 +77,17 @@
 </template>
 
 <script>
+import {
+  ref,
+  reactive,
+  nextTick,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+  inject,
+} from "vue";
+import { useRouter, useRoute } from "vue-router";
 export default {
   data() {
     return {
@@ -92,12 +103,50 @@ export default {
       ).href,
     };
   },
+  setup(props) {
+    const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
+    const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
+    const transferFooter = ()=>{
+      let height = document.getElementById("footer").getBoundingClientRect().height;
+      let top = document.getElementById("footer").getBoundingClientRect().top;
+      if (height + top < document.body.offsetHeight) {
+        document.getElementById("footer").style.position = "fixed";
+        document.getElementById("footer").style.bottom = "0px";
+      } else {
+        document.getElementById("footer").style.position = "";
+      }
+    }
+    onMounted(() => {
+      // transferFooter()
+      // window.addEventListener("resize", () => {
+      //   transferFooter()
+      // });
+      
+    });
+    //监听器
+    watch(
+      () => route,
+      (value) => {
+        // setTimeout(()=>{
+        //   nextTick(() => {
+        //   transferFooter()
+        // });
+        // },1000)
+       
+      },
+      { deep: true }
+    );
+    return {
+      transferFooter
+    };
+  },
 };
 </script>
 
 <style lang="less" scoped>
 .main {
   background-color: #e5e5e5;
+  width: 100%;
   .top-part {
     border-bottom: 2px solid #abafc7;
     padding-bottom: 30px;
@@ -125,7 +174,7 @@ export default {
             li {
               font-family: "Quicksand";
               font-style: normal;
-              font-size: 16px;
+              font-size: 15px;
               line-height: 25px;
               margin-right: 30px;
               width: 180px;
@@ -138,7 +187,7 @@ export default {
           }
         }
         p {
-          font-size: 16px;
+          font-size: 15px;
           color: #70798b;
           line-height: 30px;
         }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-31 22:57:53
+ * @LastEditTime: 2022-11-04 00:32:53
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,8 +12,10 @@
     <div class="banner">
       <img :src="banner" alt="" />
       <p>
-        {{ fairview_park_lang === "en_us" ? "Lottery system for" : "抽籤鎖車"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Impounding Action" : "機制" }}</b>
+        {{ fairview_park_lang === "en_us" ? "MAC" : "管理諮詢委員會"
+        }}<b>{{
+          fairview_park_lang === "en_us" ? "&nbsp;Column" : "專欄"
+        }}</b>
       </p>
     </div>
     <!-- navs -->
@@ -34,7 +36,9 @@
               @select="handleSelect"
             >
               <el-menu-item index="1">{{
-                fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度"
+                fairview_park_lang === "en_us"
+                  ? "Rules & Regulations"
+                  : "規章制度"
               }}</el-menu-item>
               <el-menu-item index="2">{{
                 fairview_park_lang === "en_us"
@@ -48,10 +52,14 @@
               }}</el-menu-item>
               <el-sub-menu index="4">
                 <template #title>{{
-                  fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+                  fairview_park_lang === "en_us"
+                    ? "Election Procedure"
+                    : "選舉程序"
                 }}</template>
                 <el-menu-item index="4-1">{{
-                  fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+                  fairview_park_lang === "en_us"
+                    ? "Election Procedure"
+                    : "選舉程序"
                 }}</el-menu-item>
                 <el-menu-item index="4-2">
                   <a
@@ -92,14 +100,56 @@
                   ? "11th MAC Members"
                   : "應屆管理諮詢委員會委員資料"
               }}</el-menu-item>
+              <el-sub-menu index="6">
+                <template #title>{{
+                  fairview_park_lang === "en_us"
+                    ? "Minutes of MAC Meetings"
+                    : "會議記錄"
+                }}</template>
+                <el-menu-item index="6-1">{{
+                  fairview_park_lang === "en_us"
+                    ? "Minutes of MAC Meetings"
+                    : "大會議記錄"
+                }}</el-menu-item>
+                <el-menu-item index="6-2">{{
+                  fairview_park_lang === "en_us"
+                    ? "Minutes of Sub-com. Meetings"
+                    : "小會議記錄"
+                }}</el-menu-item>
+                <el-menu-item index="6-3">
+                  <a
+                    style="color: #000"
+                    :href="MacColumnFile"
+                    target="_blank"
+                    >{{
+                      fairview_park_lang === "en_us" ? "Work Review" : "工作回顧"
+                    }}
+                  </a></el-menu-item>
+              </el-sub-menu>
+              <el-menu-item index="7">{{
+                fairview_park_lang === "en_us"
+                  ? "Nearby Proposed Development(s)"
+                  : "周邊發展項目"
+              }}</el-menu-item>
             </el-menu>
           </div>
           <div class="nav-content-wrap" style="padding: 20px 0">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
-            <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
-            <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
+            <SampleOfCandidateForm
+              v-if="activeIndex === '2'"
+            ></SampleOfCandidateForm>
+            <SamlpeOfNominationForm
+              v-if="activeIndex === '3'"
+            ></SamlpeOfNominationForm>
             <ElectionProcedure v-if="activeIndex === '4-1'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
+            <MinutesOfMacMeetings
+              v-if="activeIndex === '6-1'"
+            ></MinutesOfMacMeetings>
+            <MinutesOfSubComMeetings
+              v-if="activeIndex === '6-2'"
+            ></MinutesOfSubComMeetings>
+            <NearbyProposedDevelopment v-if="activeIndex === '7'"></NearbyProposedDevelopment>
           </div>
         </div>
       </div>
@@ -114,6 +164,9 @@ import SampleOfCandidateForm from "./sample-of-candidate-form/index.vue";
 import SamlpeOfNominationForm from "./samlpe-of-nomination-form/index.vue";
 import ElectionProcedure from "./election-procedure/index.vue";
 import MACMembers from "./MAC-members/index.vue";
+import MinutesOfMacMeetings from "./minutes-of-mac-meetings/minutesOfMacMeetings.vue";
+import MinutesOfSubComMeetings from "./minutes-of-mac-meetings/minutesOfSubComMeetings.vue";
+import NearbyProposedDevelopment from "./nearby-proposed-development/nearbyProposedDevelopment.vue";
 export default {
   components: {
     RulesRegulations,
@@ -121,10 +174,16 @@ export default {
     SamlpeOfNominationForm,
     ElectionProcedure,
     MACMembers,
+    MinutesOfMacMeetings,
+    MinutesOfSubComMeetings,
+    NearbyProposedDevelopment
   },
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/aboutUs/banner.png",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -134,6 +193,7 @@ export default {
       lottery_system_for_mpound_content: [],
       fairview_park_lang: "",
       activeIndex: "1",
+      MacColumnFile:"",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -149,17 +209,32 @@ export default {
         console.log(error);
       }
     };
+    //查看工作回顧pdf
+    const findOneMacColumnFile = async () => {
+      try {
+        const res = await proxy.$http.findOneMacColumnFile({
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          data.MacColumnFile = res.data.data.pdfUrlEnUs;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const handleSelect = (key, keyPath) => {
-      if (key !== "4-2" && key !== "4-3") {
+      if (key !== "4-2" && key !== "4-3"&& key !== "6-3") {
         data.activeIndex = key;
       }
     };
     onMounted(async () => {
-      await findLotterySystemForImpound();
+      findLotterySystemForImpound();
+      findOneMacColumnFile()
     });
     return {
       ...toRefs(data),
       findLotterySystemForImpound,
+      findOneMacColumnFile,
       handleSelect,
     };
   },

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-31 23:49:03
+ * @LastEditTime: 2022-11-03 00:15:58
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
   <div>
     <h5 style="text-align:center">{{fairview_park_lang==='en_us'?'Appendix 2: ELECTION PROCEDURES':'附錄一：選舉程序'}}</h5>
     <div
-    style="font-size:16px;"
+    style="font-size:15px;"
       v-for="(item, index) in [
         {
           title: fairview_park_lang==='en_us'?'Election Notice':'選舉通告',

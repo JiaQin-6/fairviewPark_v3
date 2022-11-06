@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-08 01:25:37
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-11-03 23:24:20
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -37,11 +37,9 @@
             <table
               :id="
                 'telephone_link_' +
-                (telephone_link_list[index] &&
-                  telephone_link_list[index].orderNo)
+                (telephone_link_list[index] && telephone_link_list[index].orderNo)
               "
               style="margin-bottom: 20px"
-             
               border="0"
               cellpadding="5"
               cellspacing="2"
@@ -52,8 +50,7 @@
                 <tr>
                   <td height="25" colspan="2" bgcolor="#A0D31E">
                     <span class="style9">{{
-                      telephone_link_list[index] &&
-                      telephone_link_list[index].titleEnUs
+                      telephone_link_list[index] && telephone_link_list[index].titleEnUs
                     }}</span>
                   </td>
                 </tr>
@@ -71,7 +68,14 @@
                     >
                   </td>
                   <td width="251" height="25" bgcolor="#FFFFCC">
-                    <a style="color:#000;text-decoration: none;" :href="'tel:'+item2.tel">{{item2.tel}}</a>
+                    <a
+                      v-for="(item, index) in item2.tel.split(',')"
+                      :key="index"
+                      style="color: #000; text-decoration: none"
+                      :href="'tel:' + item"
+                      >{{ item }}</a
+                    >
+                    
                   </td>
                 </tr>
               </tbody>
@@ -88,8 +92,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
-        .href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
     };
   },
   setup() {
@@ -127,7 +130,7 @@ export default {
       });
     });
     const jumpLink = (orderNo, index) => {
-      document.querySelector("#telephone_link_" + orderNo).scrollIntoView(true);
+      document.querySelector("#telephone_link_" + orderNo).scrollIntoView({block: "center"});
       data.nav_index = index;
     };
     return {
@@ -157,7 +160,7 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
-        width: 80%;
+    width: 80%;
     text-align: center;
     b {
       color: #2fa94e;
@@ -170,7 +173,7 @@ export default {
     .aside {
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         // flex-wrap: nowrap;
         overflow: auto;
         width: 100%;
@@ -186,7 +189,7 @@ export default {
           background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
-            font-size: 16px;
+            font-size: 15px;
             margin-right: 5px;
             display: none;
             color: #000;
@@ -212,18 +215,38 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
+      // height: 300px;
+      // overflow: auto;
       img {
         max-width: 100%;
       }
     }
   }
 }
-@media (max-width: 992px){
-  .banner{
+@media (max-width: 992px) {
+  .banner {
     img {
-    opacity: 0.5;
-    width:auto;
-    height:200px;
+      opacity: 0.5;
+      width: auto;
+      height: 200px;
+    }
+  }
+  .nav-wrap {
+    .row {
+     
+    .aside {
+      ul{
+        flex-wrap: nowrap; padding: 0;
+        li{
+          display: flex;
+          text-align: center;
+          align-items: center;
+          span{
+            margin:0 auto;
+          }
+        }
+      }
+    }
   }
   }
 }
