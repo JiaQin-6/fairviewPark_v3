@@ -2,11 +2,15 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-01 23:21:24
+ * @LastEditTime: 2022-11-09 23:50:12
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
+    'Please enter your registration contact email': '請輸入閣下之登記聯絡電郵',
+    'Please enter your login name': '请输入阁下之登陆名',
+    'Forgot password': '忘記密碼',
+    'Submit': '提交',
     'Home': '首頁',
     'About us': '關於我們',
     'Prospective Buyer': '買家須知',
@@ -54,4 +58,21 @@ export default {
     'Payment List': '收費表',
     'Lottery System For Impounding Action': '抽簽鎖車機制',
     'the Overhaul Project': '更換地下喉管及行車道路翻新工程（大維修）',
+    'This field is required.': '此欄位必填',
+    'Owner zone, please enter the name and password': '業主專區,請輸入名稱及密碼',
+    'Login name': '登入名称',
+    'Password': '密碼',
+    'Sign in': '登入',
+    'Online user registration': '網上用戶註冊',
+    'Owner Name (On Account Statement)': '登記業主名稱 (請參考月結單):',
+    'Account Number (On Account Statement)': '客戶號碼 (請參考月結單)',
+    'Login Name (Self Customize)': '網站登入名稱 (自訂)',
+    'Login Password (Self Customize)': '網站登入密碼 (自訂)',
+    'Nickname(Optional)': 'Nickname (自訂)',
+    'Email Address': '聯絡電郵 ',
+    'Contact Number(Optional)': '聯絡電話 (選填)',
+    'Sign up': '註冊',
+    'Please provide a valid email.': '請輸入正確格式的郵件',
+    'Please provide a valid login name.': '請輸入正確的登陸名',
+    'Please provide a valid password.': '請輸入正確的密碼',
 };

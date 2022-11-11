@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-06 23:43:10
+ * @LastEditTime: 2022-11-10 00:47:55
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -47,7 +47,7 @@
                 {
                   type: 'select',
                   text: $t('Prospective Buyer'),
-                  href: '#/prospective-buyer',
+                  href: '#/prospective-buyer-title',
                   children: [
                     {
                       text: $t('Prospective Buyer'),
@@ -80,7 +80,7 @@
                 {
                   type: 'select',
                   text: $t('Shops Directory'),
-                  href: '#/shopping-information',
+                  href: '#/shopping-information-title',
                   children: [
                     {
                       text: $t('Shops Directory'),
@@ -96,11 +96,6 @@
                   type: 'default',
                   text: $t('Useful Telephone Nos.'),
                   href: '#/useful-link',
-                },
-                {
-                  type: 'default',
-                  text: $t('Estate Notice'),
-                  href: '#/estate-notice',
                 },
               ]"
               :key="index"
@@ -129,9 +124,7 @@
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" :href="item2.href">{{
-                    item2.text
-                  }}</a>
+                  <a class="dropdown-item" :href="item2.href">{{ item2.text }}</a>
                 </li>
               </ul>
             </li>
@@ -265,15 +258,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  getCurrentInstance,
-  toRefs,
-  onMounted,
-  watch,
-  inject,
-} from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -287,10 +272,8 @@ export default {
   },
   data() {
     return {
-      logo: new URL(
-        "../../assets/image/home/fairview park logo.png",
-        import.meta.url
-      ).href,
+      logo: new URL("../../assets/image/home/fairview park logo.png", import.meta.url)
+        .href,
     };
   },
   setup(props, ctx) {
@@ -306,6 +289,13 @@ export default {
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
     //判断url是否带有token参数
     if (route.query.session) {
+      //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
+      localStorage.setItem(
+        "login-info",
+        JSON.stringify({
+          jwt: route.query.session,
+        })
+      );
     }
     //判断url是否带有语言参数
     if (
@@ -342,20 +332,24 @@ export default {
     };
     //切換路由
     const changeRouter = (href) => {
-      if (!commonFunc.getIsPC()) {
-        document.getElementById("navbar-button").click();
-      }
-
+      console.log(href);
       if (
         location.hash === "#/buyer-server" ||
         location.hash === "#/decoration" ||
         location.hash === "#/wall-color-series"
       ) {
-        data.route_url = "#/prospective-buyer";
+        data.route_url = "#/prospective-buyer-title";
       } else if (location.hash === "#/carpark-parking-privilege-payment") {
-        data.route_url = "#/shopping-information";
+        data.route_url = "#/shopping-information-title";
       } else {
         data.route_url = href;
+      }
+      if (
+        !commonFunc.getIsPC() &&
+        href !== "#/prospective-buyer-title" &&
+        href !== "#/shopping-information-title"
+      ) {
+        document.getElementById("navbar-button").click();
       }
     };
     //登出
@@ -403,7 +397,7 @@ export default {
           location.hash === "#/decoration" ||
           location.hash === "#/wall-color-series"
         ) {
-          data.route_url = "#/prospective-buyer";
+          data.route_url = "#/prospective-buyer-title";
         } else if (location.hash === "#/carpark-parking-privilege-payment") {
           data.route_url = "#/shopping-information";
         } else if (location.hash === "#/home") {

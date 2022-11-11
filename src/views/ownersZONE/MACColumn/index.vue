@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-04 00:32:53
+ * @LastEditTime: 2022-11-10 00:40:06
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,143 +13,121 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "MAC" : "管理諮詢委員會"
-        }}<b>{{
-          fairview_park_lang === "en_us" ? "&nbsp;Column" : "專欄"
-        }}</b>
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Column" : "專欄" }}</b>
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div
-          style="margin: 0 auto"
-          class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow"
-        >
-          <div class="menu">
-            <el-menu
-              :default-active="activeIndex"
-              class="el-menu-demo"
-              mode="horizontal"
-              background-color="#fbfc9f"
-              text-color="#000"
-              active-text-color="#000"
-              @select="handleSelect"
-            >
-              <el-menu-item index="1">{{
-                fairview_park_lang === "en_us"
-                  ? "Rules & Regulations"
-                  : "規章制度"
+        <div class="col-12 col-lg-2 menu">
+          <!--   mode="horizontal" -->
+          <el-menu
+            :default-active="activeIndex"
+            class="el-menu-demo"
+            :mode="isPC ? '' : 'horizontal'"
+            background-color="#ebe9e9"
+            text-color="#000"
+            active-text-color="#fff"
+            @select="handleSelect"
+          >
+            <el-menu-item index="1">{{
+              fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度"
+            }}</el-menu-item>
+            <el-menu-item index="2">{{
+              fairview_park_lang === "en_us"
+                ? "Sample of Candidate Form"
+                : "候選人表格樣本"
+            }}</el-menu-item>
+            <el-menu-item index="3">{{
+              fairview_park_lang === "en_us"
+                ? "Samlpe of Nomination Form"
+                : "提名表格樣本"
+            }}</el-menu-item>
+            <el-sub-menu index="4">
+              <template #title>{{
+                fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+              }}</template>
+              <el-menu-item index="4-1">{{
+                fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
               }}</el-menu-item>
-              <el-menu-item index="2">{{
-                fairview_park_lang === "en_us"
-                  ? "Sample of Candidate Form"
-                  : "候選人表格樣本"
-              }}</el-menu-item>
-              <el-menu-item index="3">{{
-                fairview_park_lang === "en_us"
-                  ? "Samlpe of Nomination Form"
-                  : "提名表格樣本"
-              }}</el-menu-item>
-              <el-sub-menu index="4">
-                <template #title>{{
-                  fairview_park_lang === "en_us"
-                    ? "Election Procedure"
-                    : "選舉程序"
-                }}</template>
-                <el-menu-item index="4-1">{{
-                  fairview_park_lang === "en_us"
-                    ? "Election Procedure"
-                    : "選舉程序"
-                }}</el-menu-item>
-                <el-menu-item index="4-2">
-                  <a
-                    style="color: #000"
-                    :href="
-                      fairview_park_lang === 'en_us'
-                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
-                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf'
-                    "
-                    target="_blank"
-                  >
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Election Activities Rules"
-                        : "選舉守則"
-                    }}
-                  </a>
-                </el-menu-item>
-                <el-menu-item index="4-3">
-                  <a
-                    style="color: #000"
-                    :href="
-                      fairview_park_lang === 'en_us'
-                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
-                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf'
-                    "
-                    target="_blank"
-                    >{{
-                      fairview_park_lang === "en_us"
-                        ? "Election Activities Rules Time Table"
-                        : "選舉守則時間表"
-                    }}
-                  </a></el-menu-item
+              <el-menu-item index="4-2">
+                <a
+                  style="color: #000"
+                  :href="
+                    fairview_park_lang === 'en_us'
+                      ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
+                      : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf'
+                  "
+                  target="_blank"
                 >
-              </el-sub-menu>
-              <el-menu-item index="5">{{
-                fairview_park_lang === "en_us"
-                  ? "11th MAC Members"
-                  : "應屆管理諮詢委員會委員資料"
+                  {{
+                    fairview_park_lang === "en_us"
+                      ? "Election Activities Rules"
+                      : "選舉守則"
+                  }}
+                </a>
+              </el-menu-item>
+              <el-menu-item index="4-3">
+                <a
+                  style="color: #000"
+                  :href="
+                    fairview_park_lang === 'en_us'
+                      ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
+                      : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf'
+                  "
+                  target="_blank"
+                  >{{
+                    fairview_park_lang === "en_us"
+                      ? "Election Activities Rules Time Table"
+                      : "選舉守則時間表"
+                  }}
+                </a></el-menu-item
+              >
+            </el-sub-menu>
+            <el-menu-item index="5">{{
+              fairview_park_lang === "en_us"
+                ? "11th MAC Members"
+                : "應屆管理諮詢委員會委員資料"
+            }}</el-menu-item>
+            <el-sub-menu index="6">
+              <template #title>{{
+                fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
+              }}</template>
+              <el-menu-item index="6-1">{{
+                fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "大會議記錄"
               }}</el-menu-item>
-              <el-sub-menu index="6">
-                <template #title>{{
-                  fairview_park_lang === "en_us"
-                    ? "Minutes of MAC Meetings"
-                    : "會議記錄"
-                }}</template>
-                <el-menu-item index="6-1">{{
-                  fairview_park_lang === "en_us"
-                    ? "Minutes of MAC Meetings"
-                    : "大會議記錄"
-                }}</el-menu-item>
-                <el-menu-item index="6-2">{{
-                  fairview_park_lang === "en_us"
-                    ? "Minutes of Sub-com. Meetings"
-                    : "小會議記錄"
-                }}</el-menu-item>
-                <el-menu-item index="6-3">
-                  <a
-                    style="color: #000"
-                    :href="MacColumnFile"
-                    target="_blank"
-                    >{{
-                      fairview_park_lang === "en_us" ? "Work Review" : "工作回顧"
-                    }}
-                  </a></el-menu-item>
-              </el-sub-menu>
-              <el-menu-item index="7">{{
+              <el-menu-item index="6-2">{{
                 fairview_park_lang === "en_us"
-                  ? "Nearby Proposed Development(s)"
-                  : "周邊發展項目"
+                  ? "Minutes of Sub-com. Meetings"
+                  : "小會議記錄"
               }}</el-menu-item>
-            </el-menu>
-          </div>
-          <div class="nav-content-wrap" style="padding: 20px 0">
+              <el-menu-item index="6-3">
+                <a style="color: #000" :href="MacColumnFile" target="_blank"
+                  >{{ fairview_park_lang === "en_us" ? "Work Review" : "工作回顧" }}
+                </a></el-menu-item
+              >
+            </el-sub-menu>
+            <el-menu-item index="7">{{
+              fairview_park_lang === "en_us"
+                ? "Nearby Proposed Development(s)"
+                : "周邊發展項目"
+            }}</el-menu-item>
+          </el-menu>
+        </div>
+        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow flex-row">
+          <div class="nav-content-wrap">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
-            <SampleOfCandidateForm
-              v-if="activeIndex === '2'"
-            ></SampleOfCandidateForm>
-            <SamlpeOfNominationForm
-              v-if="activeIndex === '3'"
-            ></SamlpeOfNominationForm>
+            <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
+            <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
             <ElectionProcedure v-if="activeIndex === '4-1'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
-            <MinutesOfMacMeetings
-              v-if="activeIndex === '6-1'"
-            ></MinutesOfMacMeetings>
+            <MinutesOfMacMeetings v-if="activeIndex === '6-1'"></MinutesOfMacMeetings>
             <MinutesOfSubComMeetings
               v-if="activeIndex === '6-2'"
             ></MinutesOfSubComMeetings>
-            <NearbyProposedDevelopment v-if="activeIndex === '7'"></NearbyProposedDevelopment>
+            <NearbyProposedDevelopment
+              v-if="activeIndex === '7'"
+            ></NearbyProposedDevelopment>
           </div>
         </div>
       </div>
@@ -167,6 +145,7 @@ import MACMembers from "./MAC-members/index.vue";
 import MinutesOfMacMeetings from "./minutes-of-mac-meetings/minutesOfMacMeetings.vue";
 import MinutesOfSubComMeetings from "./minutes-of-mac-meetings/minutesOfSubComMeetings.vue";
 import NearbyProposedDevelopment from "./nearby-proposed-development/nearbyProposedDevelopment.vue";
+import commonFunc from "../../../assets/js/commonFunc";
 export default {
   components: {
     RulesRegulations,
@@ -176,14 +155,11 @@ export default {
     MACMembers,
     MinutesOfMacMeetings,
     MinutesOfSubComMeetings,
-    NearbyProposedDevelopment
+    NearbyProposedDevelopment,
   },
   data() {
     return {
-      banner: new URL(
-        "../../../assets/image/aboutUs/banner.png",
-        import.meta.url
-      ).href,
+      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
     };
   },
   setup() {
@@ -193,7 +169,8 @@ export default {
       lottery_system_for_mpound_content: [],
       fairview_park_lang: "",
       activeIndex: "1",
-      MacColumnFile:"",
+      MacColumnFile: "",
+      isPC: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -223,13 +200,15 @@ export default {
       }
     };
     const handleSelect = (key, keyPath) => {
-      if (key !== "4-2" && key !== "4-3"&& key !== "6-3") {
+      if (key !== "4-2" && key !== "4-3" && key !== "6-3") {
         data.activeIndex = key;
       }
     };
+    //
+    data.isPC = commonFunc.getIsPC();
     onMounted(async () => {
       findLotterySystemForImpound();
-      findOneMacColumnFile()
+      findOneMacColumnFile();
     });
     return {
       ...toRefs(data),
@@ -269,6 +248,31 @@ export default {
 .nav-wrap {
   padding: 20px;
   .row {
+    @{deep} .el-menu {
+      background-color: #fff;
+      .el-menu-item {
+        padding: 6px 0 6px 10px;
+        height: auto;
+        line-height: inherit;
+        margin-bottom: 5px;
+        background-color: #ebe9e9;
+        white-space:inherit,
+      }
+      .el-sub-menu {
+        margin-bottom: 5px;
+        .el-sub-menu__title {
+          padding: 6px 0 6px 10px;
+          height: 40px;
+        }
+        .el-menu-item {
+          margin-bottom: 0px;
+        }
+      }
+      .is-active {
+        background-color: #5cb89e;
+      }
+    }
+
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
@@ -284,5 +288,41 @@ export default {
       height: 200px;
     }
   }
+  .nav-wrap {
+  padding: 20px;
+  .row {
+    .menu{
+      @{deep} .el-menu {
+      background-color: #fff;
+      display: flex;
+      .el-menu-item {
+        padding: 6px 10px 6px 10px;
+        // height: 40px;
+        margin-bottom: 0px;
+        background-color: #ebe9e9;
+      }
+      .el-sub-menu {
+        margin-bottom: 0px;
+        .el-sub-menu__title {
+          padding: 6px 10px 6px 10px;
+          height: 100%;
+        }
+        .el-menu-item {
+          margin-bottom: 0px;
+        }
+      }
+      .is-active {
+        background-color: #5cb89e;
+        border: none;
+        .el-sub-menu__title {
+          border: none;
+        }
+      }
+    }
+    }
+    
+  }
+}
+ 
 }
 </style>

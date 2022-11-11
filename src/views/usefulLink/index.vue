@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 23:24:20
+ * @LastEditTime: 2022-11-10 00:20:03
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -45,37 +45,38 @@
               cellspacing="2"
               v-for="(item, index) in telephone_link_content"
               :key="index"
+              width="100%"
             >
               <tbody>
                 <tr>
                   <td height="25" colspan="2" bgcolor="#A0D31E">
-                    <span class="style9">{{
+                    <span class="style9 fs-15">{{
                       telephone_link_list[index] && telephone_link_list[index].titleEnUs
                     }}</span>
                   </td>
                 </tr>
                 <tr v-for="(item2, index2) in item" :key="index2">
-                  <td width="368" height="25" bgcolor="#EAF7C1">
-                    <span v-if="!item2.websiteUrl" class="style9">{{
+                  <td style="width: 70%" height="25" bgcolor="#EAF7C1">
+                    <span v-if="!item2.websiteUrl" class="style9 fs-15">{{
                       item2.titleEnUs
                     }}</span>
                     <a
                       v-if="item2.websiteUrl"
                       target="_blank"
                       :href="item2.websiteUrl"
-                      class="style9"
+                      class="style9 fs-15"
                       >{{ item2.titleEnUs }}</a
                     >
                   </td>
-                  <td width="251" height="25" bgcolor="#FFFFCC">
+                  <td style="width: 30%" height="25" bgcolor="#FFFFCC">
                     <a
+                      class="fs-15"
                       v-for="(item, index) in item2.tel.split(',')"
                       :key="index"
                       style="color: #000; text-decoration: none"
                       :href="'tel:' + item"
                       >{{ item }}</a
                     >
-                    
                   </td>
                 </tr>
               </tbody>
@@ -130,7 +131,9 @@ export default {
       });
     });
     const jumpLink = (orderNo, index) => {
-      document.querySelector("#telephone_link_" + orderNo).scrollIntoView({block: "center"});
+      document
+        .querySelector("#telephone_link_" + orderNo)
+        .scrollIntoView({ block: "center" });
       data.nav_index = index;
     };
     return {
@@ -220,6 +223,11 @@ export default {
       img {
         max-width: 100%;
       }
+      a {
+        &:hover {
+          color: var(--bs-link-color)!important;
+        }
+      }
     }
   }
 }
@@ -233,21 +241,21 @@ export default {
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; padding: 0;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
         }
       }
     }
-  }
   }
 }
 </style>

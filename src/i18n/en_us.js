@@ -2,11 +2,15 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:43:52
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-01 23:21:26
+ * @LastEditTime: 2022-11-09 23:49:47
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\en_us.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
+    'Please enter your registration contact email': 'Please enter your registration contact email',
+    'Please enter your login name': 'Please enter your login name',
+    'Forgot password': 'Forgot password',
+    'Submit': 'Submit',
     'Home': 'Home',
     'About us': 'About us',
     'Prospective Buyer': 'Prospective Buyer',
@@ -54,4 +58,21 @@ export default {
     'Payment List': 'Payment List',
     'Lottery System For Impounding Action': 'Lottery System For Impounding Action',
     'the Overhaul Project': 'Project for Replacement of Underground Water Pipes and Refurbishment of Roads (The Overhaul Project)',
+    'This field is required.': 'This field is required.',
+    'Owner zone, please enter the name and password': 'Owner zone, please enter the name and password',
+    'Login name': 'Login name',
+    'Password': 'Password',
+    'Sign in': 'Sign in',
+    'Online user registration': 'Online user registration',
+    'Owner Name (On Account Statement)': 'Owner Name (On Account Statement)',
+    'Account Number (On Account Statement)': 'Account Number (On Account Statement)',
+    'Login Name (Self Customize)': 'Login Name (Self Customize)',
+    'Login Password (Self Customize)': 'Login Password (Self Customize)',
+    'Nickname(Optional)': 'Nickname(Optional)',
+    'Email Address': 'Email Address',
+    'Contact Number(Optional)': 'Contact Number(Optional)',
+    'Sign up': 'Sign up',
+    'Please provide a valid email.': 'Please provide a valid email.',
+    'Please provide a valid login name.': 'Please provide a valid login name.',
+    'Please provide a valid password.': 'Please provide a valid password.',
 };

@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-11-06 23:27:44
+ * @LastEditTime: 2022-11-09 23:58:27
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
@@ -40,6 +40,10 @@ http.login = (arr) => {
 //註冊
 http.register = (arr) => {
     return http.post(`/houseweb/member/register`, arr);
+};
+//忘记密码
+http.forgetPassword = (arr) => {
+    return http.post(`/houseweb/member/forgetPassword`, arr);
 };
 //申请智能卡
 http.applyRCard = (arr) => {
