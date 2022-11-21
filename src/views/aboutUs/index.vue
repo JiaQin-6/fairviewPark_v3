@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-10 00:41:52
+ * @LastEditTime: 2022-11-19 14:24:14
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,9 +18,9 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 aside mb-20">
-          <ul class="row">
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 aside mb-20">
+          <ul class="row menu-ul">
             <li
               v-for="(item, index) in [
                 {
@@ -73,6 +73,63 @@
               <span>{{ item.text }}</span>
             </li>
           </ul>
+          <el-select size="large" v-model="nav_index" class="m-2 menu-select" placeholder="Select">
+            <el-option
+              v-for="(item, index) in [
+                {
+                  icon: 'icon-zhuye',
+                  text: $t('Introduction'),
+                  value:0,
+                },
+                {
+                  icon: 'icon-kehufuwukefu',
+                  text: $t('Customer Service'),
+                  value:1,
+                },
+                {
+                  icon: 'icon-zhongxinhuanjing',
+                  text: $t('Environmental Service'),
+                  value:2,
+                },
+                {
+                  icon: 'icon-baoan',
+                  text: $t('Security'),
+                  value:3,
+                },
+                {
+                  icon: 'icon-weixiu',
+                  text: $t('Maintenance'),
+                  value:4,
+                },
+                {
+                  icon: 'icon-tuandui',
+                  text: $t('Administration'),
+                  value:5,
+                },
+                {
+                  icon: 'icon-renliziyuan',
+                  text: $t('Human Resources'),
+                  value:6,
+                },
+                {
+                  icon: 'icon-tubiaozhizuomoban-48',
+                  text: $t('Accounts'),
+                  value:7,
+                },
+                {
+                  icon: 'icon-zixun',
+                  text: $t('Information Technology'),
+                  value:8,
+                },
+              ]"
+              :key="index"
+              :label="item.text"
+              :value="item.value"
+            >
+              <i class="iconfont" :class="item.icon" style="margin-right:10px"></i>
+              <span>{{ item.text }}</span>
+            </el-option>
+          </el-select>
         </div>
         <Introduction v-show="nav_index === 0"></Introduction>
         <CustomerService v-show="nav_index === 1"></CustomerService>
@@ -137,9 +194,9 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      nav_index:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-
     return {
       ...toRefs(data),
     };
@@ -153,7 +210,7 @@ export default {
   overflow: hidden;
   img {
     opacity: 0.5;
-    width:100%;
+    width: 100%;
   }
   p {
     position: absolute;
@@ -164,60 +221,77 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
-        width: 80%;
+    width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1)
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
-        // flex-wrap: nowrap;
+        position: sticky;
+        top: 10px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
         margin: 0;
         background-color: #fff;
         padding: 10px;
+        display: block;
         li {
           text-align: left;
           margin-bottom: 5px;
           padding: 6px 6px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
             margin-right: 5px;
-            display: none;
-            color: #000;
+
+            color: var(--mainColor2);
           }
           span {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
+            // display: inline-block;
           }
           span {
             color: #fff;
           }
         }
       }
+      .menu-select{
+        display: none;
+      }
     }
     .nav-content {
       .about-us {
         margin-bottom: 20px;
         .container {
-          background-color: #e6eae5;
+          // background-color: #e6eae5;
 
           .row {
             padding: 20px 0;
@@ -318,32 +392,64 @@ export default {
     }
   }
 }
-@media (max-width: 992px){
-  .banner{
-    img {
-    opacity: 0.5;
-    width:auto;
-    height:200px;
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+    
   }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+   
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
+  }
+}
+@media (max-width: 992px) {
+  .banner {
+    img {
+      opacity: 0.5;
+      width: auto;
+      height: 200px;
+    }
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; padding: 0;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          width: auto;
-          span{
-            margin:0 auto;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
+          display: none;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            width: auto;
+            span {
+              margin: 0 auto;
+            }
           }
         }
+        .menu-select{
+        display: block;
       }
+      }
+      
     }
-  }
   }
 }
 </style>

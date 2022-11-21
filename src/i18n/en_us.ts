@@ -2,13 +2,14 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:43:52
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-09 23:49:47
+ * @LastEditTime: 2022-11-21 00:44:29
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\en_us.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
-    'Please enter your registration contact email':'Please enter your registration contact email',
-    'Please enter your login name':'Please enter your login name',
+    'Login timeout，Please login again！ ':'Login timeout，Please login again！',
+    'Please enter your registration contact email':'Please enter your registered e-mail',
+    'Please enter your login name':'Please enter your registered login name',
     'Forgot password':'Forgot password',
     'Submit':'Submit',
     'Home':'Home',
@@ -26,12 +27,11 @@ export default {
     'Owner login':'Owner login',
     'Login out':'Login out',
     'Welcome to browse':'Welcome to browse',
-    'fairview part':'fairview part',
+    'fairview park':'Fairview Park',
     'Resident information':'Resident information',
     'Browse the web':'Browse the web',
-    'Mobile App':'Mobile App',
     'Download':'Download',
-    'All Rights Reserved':'Fairview Park . All Rights Reserved',
+    'All Rights Reserved':'All Rights Reserved',
     'Term And Conditions':'Term And Conditions',
     'Privacy Policy':'Privacy Policy',
     'Disclaimer':'Disclaimer',
@@ -48,7 +48,7 @@ export default {
     "OWNERS's ZONE":"OWNERS's ZONE",
     'FAQ from Residents':'FAQ from Residents',
     'Estate Notices':'Estate Notices',
-    'Fairview Part News':'Fairview Part News',
+    'Fairview Park News':'Fairview Park News',
     'Demographic & Opinion Survey':'Demographic & Opinion Survey',
     'Estate Activities':'Estate Activities',
     'News Update':'News Update',
@@ -76,5 +76,6 @@ export default {
     'Please provide a valid email.':'Please provide a valid email.',
     'Please provide a valid login name.':'Please provide a valid login name.',
     'Please provide a valid password.':'Please provide a valid password.',
+    'Easy access to the information of fairview park':'Easy access to the information of fairview park',
 }
     

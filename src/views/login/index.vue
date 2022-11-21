@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-28 00:04:33
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-10 00:21:25
+ * @LastEditTime: 2022-11-16 22:18:28
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/login/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -47,7 +47,7 @@
                   >
                 </li>
                 <li>
-                  <input :placeholder="$t('Password')" v-model="loginForm.password" type="text" />
+                  <input :placeholder="$t('Password')" v-model="loginForm.password" type="password" />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="login_error_tip.is_null && !loginForm.password"
@@ -288,7 +288,7 @@ export default {
       fairview_park_lang: "",
       loginForm: {
         loginName: "",//david
-        password: "",//u5mn14olre
+        password: "",//kew12dMALS
       },
       registerForm: {
         oname: null,
@@ -336,6 +336,7 @@ export default {
         const res = await proxy.$http.login({
           loginName: data.loginForm.loginName,
           password: data.loginForm.password,
+          lang:data.fairview_park_lang
         });
         if (res.data.status === 200) {
           document.getElementById("close-login").click();
@@ -393,7 +394,7 @@ export default {
         console.log(error);
       }
     };
-    //登陸
+    //忘記密碼
     const forgetPassword = async () => {
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (!data.forgotPasswordForm.loginName || !data.forgotPasswordForm.email) {

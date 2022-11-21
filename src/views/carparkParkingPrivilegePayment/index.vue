@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-27 00:11:55
+ * @LastEditTime: 2022-11-19 14:22:39
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,13 +22,12 @@
       </p>
     </div>
     <!-- 內容 -->
-    <div class="content mt-20" style="max-width: 750px; margin: 20px auto">
+    <div class="content mt-20" style="margin: 20px auto;padding:20px;">
       <table
         align="center"
         border="1"
         cellpadding="0"
         cellspacing="0"
-        width="700"
         style=""
       >
         <tbody>
@@ -322,7 +321,6 @@
         border="1"
         cellpadding="0"
         cellspacing="0"
-        width="700"
         style=""
       >
         <tbody>
@@ -844,7 +842,7 @@ export default {
       width: 80%;
       text-align: center;
       b {
-        color: #2fa94e;
+      color: var(--mainColor1)
       }
     }
   }
@@ -853,6 +851,33 @@ export default {
        border-style: solid;
        border-width: 2px;
     }
+  }
+}
+@media (min-width: 576px) {
+  .content {
+    width: 540px;
+    
+  }
+}
+@media (min-width: 768px) {
+  .content {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .content {
+    width: 960px;
+   
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .content {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {

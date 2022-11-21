@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 00:16:17
+ * @LastEditTime: 2022-11-20 00:11:23
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,7 +19,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div style="margin: 0 auto" class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div style="margin: 0 auto" class="col-12 nav-content mb-20 ql-container ql-snow">
           <div>
             <el-select
             v-model="new_update_index"
@@ -125,12 +125,13 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1);
     }
   }
 }
 .nav-wrap {
   padding: 20px;
+  margin: 0 auto;
   .row {
     .aside {
       ul {
@@ -202,6 +203,31 @@ export default {
         }
       }
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {

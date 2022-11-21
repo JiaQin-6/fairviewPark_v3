@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 21:53:54
+ * @LastEditTime: 2022-11-20 00:02:42
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,16 +12,24 @@
     <div class="banner">
       <img :src="banner" alt="" />
       <p>
-        {{ fairview_park_lang === "en_us" ? "Fairview Part" : "錦綉"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;News" : "專訓" }}</b>
+        {{ fairview_park_lang === "en_us" ? "Fairview Park" : "錦綉"
+        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;News" : "專訊" }}</b>
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div style="margin:0 auto" class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <div style="text-align:right">
-            <el-select v-model="fairview_part_news_index" class="m-2" placeholder="Select" size="large">
+        <div
+          style="margin: 0 auto"
+          class="col-12 nav-content mb-20 ql-container ql-snow"
+        >
+          <div style="text-align: right">
+            <el-select
+              v-model="fairview_part_news_index"
+              class="m-2"
+              placeholder="Select"
+              size="large"
+            >
               <el-option
                 v-for="(item, index) in fairview_part_news_list"
                 :key="index"
@@ -32,11 +40,17 @@
             <iframe
               width="100%"
               height="700px;"
+              seamless
+              scrolling="yes"
               :src="
-              fairview_part_news_list.length !== 0 &&
+                fairview_part_news_list.length !== 0 &&
                 fairview_part_news_list[fairview_part_news_index].fileEnUs
               "
             ></iframe>
+            <!-- <VuePdfEmbed
+              :pdfUrl="'https://fairviewpark.hk/new_web/uat/pdf/Javascript1_7zhr.pdf'"
+            >
+            </VuePdfEmbed> -->
           </div>
         </div>
       </div>
@@ -46,10 +60,17 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import VuePdfEmbed from "../../../components/pdfJs/pdf.vue";
 export default {
+  components: {
+    VuePdfEmbed,
+  },
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/aboutUs/banner.png",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -106,12 +127,13 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1);
     }
   }
 }
 .nav-wrap {
   padding: 20px;
+  margin: 0 auto;
   .row {
     @{deep} .nav-content {
       background-color: #fff;
@@ -121,6 +143,31 @@ export default {
         max-width: 100%;
       }
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {

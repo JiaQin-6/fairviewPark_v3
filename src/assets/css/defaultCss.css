@@ -23,6 +23,7 @@ h5 {
   margin: 0;
   padding: 0;
   word-wrap: break-word;
+  font-family: 'Poppins-Regular', SourceHanSansCN-Regular, Arial;
 }
 a {
   text-decoration: none;

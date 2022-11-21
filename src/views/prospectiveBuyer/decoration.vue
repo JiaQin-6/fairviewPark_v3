@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 1723470065@qq.com
- * @LastEditTime: 2022-10-08 01:18:13
+ * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
+ * @LastEditTime: 2022-11-19 12:28:28
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,10 +20,10 @@
     <div class="content row">
       <!-- nar -->
       <div class="decoration-type mb-20 flex-row">
-        <span @click="type = 1">{{
+        <span :class="{ active: type === 1 }" @click="type = 1">{{
           fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築"
         }}</span>
-        <span @click="type = 2">{{
+        <span :class="{ active: type === 2 }" @click="type = 2">{{
           fairview_park_lang === "en_us" ? "Precast" : "預制組件"
         }}</span>
       </div>
@@ -32,10 +32,8 @@
         <div class="menu-oc row flex-row">
           <span class="col-12 col-md-2">{{
             type === 1
-              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") +
-                "（OC）"
-              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") +
-                "（OC）"
+              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OC）"
+              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OC）"
           }}</span>
           <ul class="flex-row">
             <li
@@ -57,10 +55,8 @@
         <div class="menu-op row flex-row">
           <span class="col-12 col-md-2">{{
             type === 1
-              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") +
-                "（OP）"
-              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") +
-                "（OP）"
+              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OP）"
+              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OP）"
           }}</span>
           <ul class="flex-row">
             <li
@@ -81,7 +77,7 @@
       </div>
       <!-- 圖片內容 -->
       <div class="decoration_content">
-        <img :src="selectedInfo.image" alt="" style="width:100%;max-width:976px"/>
+        <img :src="selectedInfo.image" alt="" style="width: 100%; max-width: 976px" />
       </div>
     </div>
   </div>
@@ -93,8 +89,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
-        .href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
     };
   },
   setup() {
@@ -581,7 +576,7 @@ export default {
 .decoration {
   .banner {
     position: relative;
-  overflow: hidden;
+    overflow: hidden;
     img {
       opacity: 0.5;
       width: 100%;
@@ -595,8 +590,8 @@ export default {
       font-family: "Nunito";
       font-style: normal;
       font-weight: bold;
-          width: 80%;
-    text-align: center;
+      width: 80%;
+      text-align: center;
       b {
         color: #2fa94e;
       }
@@ -605,44 +600,55 @@ export default {
   .content {
     margin: 0px auto;
     max-width: 1000px;
-    padding: 20px 0;
+    padding: 20px;
     .decoration-type {
-      background-color: #afd8fa;
-      padding: 5px 0;
+      padding: 0;
       text-align: center;
-
+      background-color: var(--mainColor1);
       span {
         width: 50%;
-        color: #000;
+        padding: 5px 0;
+        color: #fff;
         cursor: pointer;
+        border: 1px solid var(--mainColor1);
+
+        &:hover {
+          color: var(--mainColor2);
+        }
+        
       }
+      .active {
+          color: var(--mainColor2);
+        }
     }
     .menu {
+      padding: 0;
       .menu-oc,
       .menu-op {
         span {
           font-size: 15px;
-          color: #8fbc25;
+          color: var(--mainColor1);
         }
         ul {
           flex-wrap: wrap;
           flex: 1;
           li {
-            background-color: #edf6d9;
-            border: 1px solid #8fbc25;
-            color: #8fbc25;
-            padding: 0 15px;
+            background-color: #fff;
+            border: 1px solid var(--mainColor2);
+            color: var(--mainColor2);
+            padding: 2px 15px;
             margin: 0 10px 10px 0;
+            border-radius: 2px;
             cursor: pointer;
             font-size: 15px;
             &:hover {
               color: #fff;
-              background-color: #8fbc25;
+              background-color: var(--mainColor2);
             }
           }
           .selected {
             color: #fff;
-            background-color: #8fbc25;
+            background-color: var(--mainColor2);
           }
         }
       }
@@ -650,19 +656,45 @@ export default {
       }
     }
     .decoration_content {
+      padding: 0;
       text-align: center;
       img {
       }
     }
   }
 }
-@media (max-width: 992px){
-  .banner{
-    img {
-    opacity: 0.5;
-    width:auto;
-    height:200px;
+@media (min-width: 576px) {
+  .content {
+    width: 540px;
   }
+}
+@media (min-width: 768px) {
+  .content {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .content {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .content {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .content {
+    width: 1280px;
+  }
+}
+@media (max-width: 992px) {
+  .banner {
+    img {
+      opacity: 0.5;
+      width: auto;
+      height: 200px;
+    }
   }
 }
 </style>

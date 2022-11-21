@@ -1,11 +1,13 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-11-09 23:58:27
+ * @LastEditTime: 2022-11-20 00:00:45
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
  */
+import {ElMessage} from '../main.js'
+import i18n from '../i18n/index.js'
 //导入axios
 import axios from "axios";
 import router from '../router'
@@ -191,14 +193,18 @@ http.interceptors.request.use(
 /* 登录后让服务器带给浏览器token */
 http.interceptors.response.use(
   function (response: any) {
+    
     if (response.data.status === 104) {
       localStorage.removeItem('login-info')
+      ElMessage({
+        message: i18n.global.t('Login timeout，Please login again！'),
+        type: 'warning',
+      })
       router.push('/home')
     }
     return response;
   },
   function (error: any) {
-    // Vue.prototype.$message.error("request_error_title");
     // 对响应错误做点什么
     return Promise.reject(error);
   }

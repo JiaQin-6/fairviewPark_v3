@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-05 01:03:11
+ * @LastEditTime: 2022-11-20 12:12:29
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -25,8 +25,8 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 aside mb-20">
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 aside mb-20">
           <ul class="row">
             <li
               v-for="(item, index) in [
@@ -64,8 +64,45 @@
               <span>{{ item.title }}</span>
             </li>
           </ul>
+          <el-select size="large" v-model="nav_index" class="m-2 menu-select" placeholder="Select">
+            <el-option
+              v-for="(item, index) in [
+                {
+                  title:
+                    fairview_park_lang === 'en_us'
+                      ? 'The Overhaul Project'
+                      : '「大維修」',
+                  value:0,
+                },
+                {
+                  title:
+                    fairview_park_lang === 'en_us'
+                      ? 'SPAC Member List'
+                      : '特別工程諮詢委員會委員名單',
+                  value:1,
+                },
+                {
+                  title:
+                    fairview_park_lang === 'en_us'
+                      ? 'Minutes of SPAC Meetings'
+                      : '會議記錄',
+                      value:2,
+                },
+                {
+                  title: fairview_park_lang === 'en_us' ? 'FAQ' : '常見問題',
+                  value:3,
+                },
+              ]"
+              :key="index"
+              :label="item.title"
+              :value="item.value"
+            >
+              <i class="iconfont" :class="item.icon" style="margin-right:10px"></i>
+              <span>{{ item.title }}</span>
+            </el-option>
+          </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
           <TheOverhaulProject v-if="nav_index === 0"></TheOverhaulProject>
           <SPACMemberList v-if="nav_index === 1"></SPACMemberList>
           <MinutesOfSPACMeetings v-if="nav_index === 2"></MinutesOfSPACMeetings>
@@ -135,14 +172,16 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1)
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
         // flex-wrap: nowrap;
         overflow: auto;
@@ -156,7 +195,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
@@ -168,17 +206,31 @@ export default {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
+            // display: inline-block;
           }
           span {
             color: #fff;
           }
         }
+      }
+      .menu-select{
+        display: none;
       }
     }
     @{deep} .nav-content {
@@ -189,6 +241,33 @@ export default {
         max-width: 100%;
       }
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+    
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+   
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {
@@ -205,6 +284,7 @@ export default {
         ul {
           flex-wrap: nowrap;
           padding: 0;
+          display: none;
           li {
             display: flex;
             text-align: center;
@@ -214,6 +294,9 @@ export default {
             }
           }
         }
+        .menu-select{
+        display: block;
+      }
       }
     }
   }

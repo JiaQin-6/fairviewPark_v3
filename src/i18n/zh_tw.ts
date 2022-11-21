@@ -2,18 +2,19 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-09 23:50:12
+ * @LastEditTime: 2022-11-21 00:43:57
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
+    'Login timeout，Please login again！ ':'登陸超時，請從新登陸！',
     'Please enter your registration contact email':'請輸入閣下之登記聯絡電郵',
-    'Please enter your login name':'请输入阁下之登陆名',
+    'Please enter your login name':'請輸入閣下之登入名稱',
     'Forgot password':'忘記密碼',
     'Submit':'提交',
     'Home':'首頁',
     'About us':'關於我們',
-    'Prospective Buyer':'買家須知',
+    'Prospective Buyer':'新買家須知',
     'One Stop Service for New Owners':'新業主的一站式服務',
     'House Type Enquiry':'屋型圖查詢',
     'Master Colour Schedule':'外牆顏色系列',
@@ -26,12 +27,11 @@ export default {
     'Owner login':'業主登入',
     'Login out':'登出',
     'Welcome to browse':'歡迎瀏覽',
-    'fairview part':'錦綉花園',
+    'fairview park':'錦綉花園',
     'Resident information':'居民資訊',
     'Browse the web':'瀏覽網頁',
-    'Mobile App':'手機應用程序',
     'Download':'下載',
-    'All Rights Reserved':'錦綉花園.版權所有；保留一切權利',
+    'All Rights Reserved':'版權所有',
     'Term And Conditions':'條款和條件',
     'Privacy Policy':'隱私政策',
     'Disclaimer':'免責聲明',
@@ -45,10 +45,10 @@ export default {
     'Human Resources':'人力資源部',
     'Accounts':'會計部',
     'Information Technology':'資訊科技部',
-    "OWNERS's ZONE":'业主专区',
+    "OWNERS's ZONE":'業主專區',
     'FAQ from Residents':'居民常見問題',
     'Estate Notices':'屋邨通告',
-    'Fairview Part News':'錦綉專訓',
+    'Fairview Park News':'錦綉專訊',
     'Demographic & Opinion Survey':'人口統計及意見調查',
     'Estate Activities':'屋邨活動',
     'News Update':'最新消息',
@@ -60,7 +60,7 @@ export default {
     'the Overhaul Project':'更換地下喉管及行車道路翻新工程（大維修）',
     'This field is required.':'此欄位必填',
     'Owner zone, please enter the name and password':'業主專區,請輸入名稱及密碼',
-    'Login name':'登入名称',
+    'Login name':'登入名稱',
     'Password':'密碼',
     'Sign in':'登入',
     'Online user registration':'網上用戶註冊',
@@ -75,4 +75,5 @@ export default {
     'Please provide a valid email.':'請輸入正確格式的郵件',
     'Please provide a valid login name.':'請輸入正確的登陸名',
     'Please provide a valid password.':'請輸入正確的密碼',
+    'Easy access to the information of fairview park':'輕鬆獲取錦綉花園資訊',
 }

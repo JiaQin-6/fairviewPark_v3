@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-10 00:47:55
+ * @LastEditTime: 2022-11-20 21:16:57
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -11,8 +11,27 @@
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img :src="logo" alt="" />
+          <transition name="el-zoom-in-top">
+            <img v-show="!showLogin_m" :src="logo" alt="" />
+          </transition>
+
+          <transition name="el-fade-in-linear">
+            <img v-show="showLogin_m" :src="logo_m" style="margin-top: 20px" alt="" />
+          </transition>
         </a>
+        <div class="login-btn" style="position: relative; flex: 1; text-align: right">
+          <button
+            v-if="!is_login"
+            class="login-btn-1"
+            data-bs-toggle="modal"
+            data-bs-target="#login"
+          >
+            {{ $t("Owner login") }}
+          </button>
+          <button v-if="is_login" class="login-btn-2" @click="showOwnerIsZONE">
+            {{ $t("OWNERS's ZONE") }}
+          </button>
+        </div>
         <button
           id="navbar-button"
           class="navbar-toggler"
@@ -106,7 +125,7 @@
                 class="nav-link"
                 aria-current="page"
                 :href="item.href"
-                >{{ item.text }}</a
+                ><span>{{ item.text }}</span></a
               >
               <a
                 v-if="item.type === 'select'"
@@ -116,15 +135,18 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                {{ item.text }}
+                <span>{{ item.text }}</span>
               </a>
               <ul
                 v-if="item.type === 'select'"
                 class="dropdown-menu"
+                style="padding: 0; margin: 10px 0 0 -15px"
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" :href="item2.href">{{ item2.text }}</a>
+                  <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{
+                    item2.text
+                  }}</a>
                 </li>
               </ul>
             </li>
@@ -132,20 +154,18 @@
           <ul class="navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
             <div class="lang">
               <span
-                :class="{ active: fairview_park_lang == 'en_us' }"
+                v-if="fairview_park_lang == 'zh_tw'"
                 style="cursor: pointer"
                 @click="changeLang('en_us')"
-                >ENG</span
+                >EN</span
               >
-              <i></i>
               <span
-                :class="{ active: fairview_park_lang == 'zh_tw' }"
+                v-if="fairview_park_lang == 'en_us'"
                 style="cursor: pointer"
                 @click="changeLang('zh_tw')"
                 >中文</span
               >
             </div>
-            <div class="line"></div>
             <button
               v-if="!is_login"
               class="login"
@@ -154,35 +174,13 @@
             >
               {{ $t("Owner login") }}
             </button>
-            <button
-              v-if="is_login"
-              class="is-show-button"
-              style="
-                background-color: #8fbc25;
-                border-radius: 150px;
-                margin-right: 30px;
-                border: 0;
-                color: #fff;
-                padding: 5px 10px;
-              "
-              @click="showOwnerIsZONE"
-            >
-              {{ $t("OWNERS's ZONE") }}
-            </button>
+
             <el-dropdown
               class="is-show-dropdown"
               v-if="is_login"
               @command="selectOwnersZone"
             >
-              <el-button
-                type="primary"
-                style="
-                  background-color: #8fbc25;
-                  border-radius: 150px;
-                  margin-right: 30px;
-                  border: 0;
-                "
-              >
+              <el-button type="primary">
                 {{ $t("OWNERS's ZONE")
                 }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
               </el-button>
@@ -195,7 +193,7 @@
                     $t("Estate Notices")
                   }}</el-dropdown-item>
                   <el-dropdown-item command="/fairview-part-news">{{
-                    $t("Fairview Part News")
+                    $t("Fairview Park News")
                   }}</el-dropdown-item>
                   <el-dropdown-item command="/demographic-opinion-survey">{{
                     $t("Demographic & Opinion Survey")
@@ -230,10 +228,10 @@
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
-            <router-link
+            <div
               v-if="is_login"
-              style="text-decoration: none; position: relative"
-              to="/information-push"
+              style="text-decoration: none; position: relative; margin-left: 20px"
+              @click="toInformationPush"
             >
               <i class="iconfont icon-lingdang white"></i>
               <span
@@ -248,8 +246,8 @@
                   background-color: #f0ce5f;
                   border-radius: 50%;
                 "
-              ></span
-            ></router-link>
+              ></span>
+            </div>
           </ul>
         </div>
       </div>
@@ -272,8 +270,8 @@ export default {
   },
   data() {
     return {
-      logo: new URL("../../assets/image/home/fairview park logo.png", import.meta.url)
-        .href,
+      logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
   setup(props, ctx) {
@@ -284,6 +282,7 @@ export default {
       fairview_park_lang: "",
       is_login: false,
       pmLogHave: null,
+      showLogin_m: false,
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -311,17 +310,22 @@ export default {
       data.is_login = true;
     }
     onMounted(() => {
+      scrollPosition();
       if (!sessionStorage.getItem("fairview_park_lang")) {
         sessionStorage.setItem("fairview_park_lang", "zh_tw");
         data.fairview_park_lang = "zh_tw";
       } else {
         data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
       }
-      findPmLogHave();
     });
     //切換語言
     const changeLang = (lang) => {
-      if (!commonFunc.getIsPC()) {
+      if (
+        document.getElementById("navbar-button") &&
+        window
+          .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none"
+      ) {
         document.getElementById("navbar-button").click();
       }
       sessionStorage.setItem("fairview_park_lang", lang);
@@ -331,25 +335,27 @@ export default {
       location.reload();
     };
     //切換路由
-    const changeRouter = (href) => {
-      console.log(href);
+    const changeRouter = (href, children) => {
       if (
+        location.hash === "#/prospective-buyer" ||
         location.hash === "#/buyer-server" ||
         location.hash === "#/decoration" ||
         location.hash === "#/wall-color-series"
       ) {
         data.route_url = "#/prospective-buyer-title";
-      } else if (location.hash === "#/carpark-parking-privilege-payment") {
+      } else if (
+        location.hash === "#/shopping-information" ||
+        location.hash === "#/carpark-parking-privilege-payment"
+      ) {
         data.route_url = "#/shopping-information-title";
+      } else if (location.hash === "#/home") {
+        if (!localStorage.getItem("login-info")) {
+          data.is_login = false;
+          store.commit("setLoginStatus", false);
+        }
+        data.route_url = href;
       } else {
         data.route_url = href;
-      }
-      if (
-        !commonFunc.getIsPC() &&
-        href !== "#/prospective-buyer-title" &&
-        href !== "#/shopping-information-title"
-      ) {
-        document.getElementById("navbar-button").click();
       }
     };
     //登出
@@ -388,25 +394,63 @@ export default {
         console.log(error);
       }
     };
+    //跳轉到信息頁
+    const toInformationPush = () => {
+      document.getElementById("navbar-button").click();
+      router.push("/information-push");
+    };
+    //監聽滾動條的位置
+    const scrollPosition = () => {
+      document.addEventListener("scroll", () => {
+        var scrollTop =
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
+        if (scrollTop >= 100) {
+          data.showLogin_m = true;
+        } else {
+          data.showLogin_m = false;
+        }
+      });
+    };
     //监听器
     watch(
       () => route,
       (value) => {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        window.pageYOffset = 0;
         if (
+          location.hash === "#/prospective-buyer" ||
           location.hash === "#/buyer-server" ||
           location.hash === "#/decoration" ||
           location.hash === "#/wall-color-series"
         ) {
           data.route_url = "#/prospective-buyer-title";
-        } else if (location.hash === "#/carpark-parking-privilege-payment") {
-          data.route_url = "#/shopping-information";
+        } else if (
+          location.hash === "#/shopping-information" ||
+          location.hash === "#/carpark-parking-privilege-payment"
+        ) {
+          data.route_url = "#/shopping-information-title";
         } else if (location.hash === "#/home") {
           if (!localStorage.getItem("login-info")) {
             data.is_login = false;
             store.commit("setLoginStatus", false);
           }
+          data.route_url = location.hash;
         } else {
           data.route_url = location.hash;
+        }
+        if (
+          document.getElementById("navbar-button") &&
+          window
+            .getComputedStyle(document.getElementById("navbar-button"))
+            .getPropertyValue("display") !== "none" &&
+          window
+            .getComputedStyle(document.getElementById("navbarSupportedContent"))
+            .getPropertyValue("display") !== "none"
+        ) {
+          document.getElementById("navbar-button").click();
         }
       },
       { deep: true, immediate: true }
@@ -415,8 +459,12 @@ export default {
       () => store.state.loginStatus,
       (val) => {
         data.is_login = val;
+        if (data.is_login) {
+          findPmLogHave();
+        }
       }
     );
+
     return {
       ...toRefs(data),
       changeLang,
@@ -426,6 +474,8 @@ export default {
       selectOwnersZone,
       showOwnerIsZONE,
       findPmLogHave,
+      toInformationPush,
+      scrollPosition,
     };
   },
 };
@@ -436,11 +486,11 @@ export default {
 .main {
   position: sticky;
   top: 0;
-  z-index: 2;
-  background: #255534;
+  z-index: 20;
+  background: var(--mainColor1);
   .navbar {
     max-width: 1920px;
-    height: 80px;
+    height: 62px;
     left: 0px;
     top: 0px;
     mix-blend-mode: normal;
@@ -451,21 +501,100 @@ export default {
 
     .container-fluid {
       align-items: inherit;
-      background: #255534;
+      background: var(--mainColor1);
     }
     .navbar-brand {
       padding: 0;
       margin-left: 20px;
-      width: 47px;
+      width: 37px;
       position: relative;
       img {
         position: absolute;
         left: 0;
+        width: 100%;
+        width: 37px;
+      }
+    }
+    .login-btn {
+      button {
+        margin-top: 16px;
+        margin-right: 10px;
+        background: #fff;
+        border-radius: 50px;
+        border: 0;
+        font-size: 16px;
+        color: var(--mainColor2);
+        margin-left: 20px;
+        padding: 3px 15px;
+        border: 1px solid var(--mainColor2);
+        white-space: nowrap;
+        &:hover {
+          background: var(--mainColor2);
+          color: #fff;
+        }
       }
     }
     .navbar-collapse {
       margin-left: auto;
       justify-content: space-between;
+      .navbar-nav {
+        height: 100%;
+        .nav-item {
+          padding: 15px 6px;
+          .nav-link {
+            height: 100%;
+            color: #fff;
+            box-sizing: border-box;
+            border-bottom: 2px solid transparent;
+          }
+
+          .dropdown-menu {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            top: auto;
+            left: auto;
+            &:hover {
+              display: block;
+            }
+            li {
+              &:hover {
+                a {
+                  color: #fff;
+                  background-color: var(--mainColor2) !important;
+                }
+              }
+              a {
+                color: var(--el-text-color-regular);
+              }
+            }
+          }
+          &:hover {
+            .nav-link {
+              border-bottom: 2px solid var(--mainColor2);
+              span {
+                color: var(--mainColor2);
+              }
+            }
+          }
+        }
+        .dropdown {
+          &:hover {
+            .dropdown-menu {
+              display: block;
+              top: auto;
+            }
+          }
+        }
+        .active {
+          .nav-link {
+            border-bottom: 2px solid var(--mainColor2);
+            span {
+              color: var(--mainColor2);
+            }
+          }
+        }
+      }
     }
     > .show {
       background-color: #fff;
@@ -494,17 +623,19 @@ export default {
       }
     }
     .navbar-toggler {
-      margin-top: 15px;
+      margin-top: 10px;
       margin-right: 20px;
-      height: 50px;
+      height: 40px;
+      width: 44px;
+      padding: 5px;
+      border: 0;
     }
     .me-auto {
       margin-right: 0 !important;
       text-align: center;
       align-items: center;
       li {
-        font-size: 15px;
-        margin-bottom: 10px;
+        font-size: 16px;
         a {
           padding: 0 5px;
         }
@@ -515,58 +646,69 @@ export default {
         }
       }
       .lang {
-        width: 80px;
-        height: 35px;
-        background: #f0ce5f;
-        border-radius: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 0 10px;
         span {
-          font-size: 14px;
-          line-height: 35px;
+          display: inline-block;
+          font-size: 16px;
+          color: #fff;
+          width: 40px;
+          &:hover {
+            color: var(--mainColor2);
+          }
         }
-        i {
-          width: 2px;
-          height: 20px;
-          background-color: #252525;
-          margin: 0px 5px 0;
-        }
-        .active {
-          color: #255534;
-          font-weight: bold;
-        }
-      }
-      .line {
-        background-color: #abafc7;
-        height: 30px;
-        width: 1px;
-        margin: 0 30px;
       }
       .login {
-        width: 100px;
-        background: #8fbc25;
-        border-radius: 150px;
+        background: #fff;
+        border-radius: 50px;
         border: 0;
-
-        font-size: 15px;
-        color: #fff;
-        margin-right: 30px;
-        padding: 6px 0;
+        font-size: 16px;
+        color: var(--mainColor2);
+        margin-left: 20px;
+        padding: 3px 15px;
+        border: 1px solid var(--mainColor2);
+        white-space: nowrap;
+        &:hover {
+          background: var(--mainColor2);
+          color: #fff;
+        }
       }
       .icon-lingdang {
         font-size: 25px;
       }
       @{deep} .el-dropdown {
+        .el-button {
+          background: #fff;
+          border-radius: 50px;
+          border: 0;
+          font-size: 16px;
+          margin-left: 20px;
+          padding: 3px 15px;
+          border: 1px solid var(--mainColor2);
+          display: inline-block;
+          white-space: nowrap;
+          font-weight: normal;
+
+          span {
+            font-size: 16px;
+            color: var(--mainColor2);
+          }
+          &:hover {
+            background: var(--mainColor2);
+
+            span {
+              color: #fff;
+            }
+          }
+        }
         .el-dropdown-link {
           width: 100px;
           background: #8fbc25;
           border-radius: 150px;
           border: 0;
 
-          font-size: 15px;
+          font-size: 16px;
           color: #fff;
-          margin-right: 30px;
+          margin-right: 20px;
           .el-icon {
             color: #fff;
           }
@@ -575,22 +717,50 @@ export default {
     }
   }
 }
+@{deep} .el-popper {
+  .el-dropdown-menu__item {
+    font-size: 16px;
+  }
+}
 @media (min-width: 992px) {
   .navbar-expand-lg .navbar-collapse ul li {
     margin-bottom: 0 !important;
   }
-  .is-show-button {
-    display: none;
-  }
+
   .is-show-dropdown {
     display: block;
+  }
+  .login-btn-1,
+  .login-btn-2 {
+    display: none;
   }
 }
 @media (max-width: 991px) {
-  .is-show-button {
-    display: block;
-  }
   .is-show-dropdown {
+    display: none;
+  }
+  .main {
+    .navbar {
+      .navbar-collapse {
+        margin-left: auto;
+        justify-content: space-between;
+        .navbar-nav {
+          height: auto;
+          .nav-item {
+            height: auto;
+            padding: 0;
+            .nav-link {
+              padding: 25px 6px 0px;
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .line,
+  .login {
     display: none;
   }
 }

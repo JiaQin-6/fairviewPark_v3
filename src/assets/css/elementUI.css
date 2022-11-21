@@ -1,0 +1,7 @@
+.el-popper .el-dropdown-menu__item {
+  font-size: 16px;
+}
+.el-popper .el-dropdown-menu__item:hover {
+  background-color: #BA9859 !important;
+  color: #fff !important;
+}

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:11:53
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-23 00:47:15
+ * @LastEditTime: 2022-11-19 16:27:22
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/index/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -30,7 +30,7 @@
               },
               {
                 router: '/fairview-part-news',
-                text: $t('Fairview Part News'),
+                text: $t('Fairview Park News'),
               },
               {
                 router: '/demographic-opinion-survey',
@@ -69,7 +69,7 @@
                 text: $t('the Overhaul Project'),
               },
               {
-                router: 'loginOut',
+                router: '/loginOut',
                 text: $t('Login out'),
               },
             ]"
@@ -94,6 +94,7 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
 import { useRouter, useRoute } from "vue-router";
+import { useStore } from "vuex";
 import Header from "../../components/header/index.vue";
 import Footer from "../../components/footer/index.vue";
 import Login from "../login/index.vue";
@@ -105,6 +106,7 @@ export default {
     Login,
   },
   setup() {
+    const store = useStore();
     const data = reactive({
       is_show: "",
     });
@@ -120,7 +122,10 @@ export default {
     };
      //
      const selectOwnersZone = (val) => {
-      if(!commonFunc.getIsPC()){
+      if(document.getElementById("navbar-button") &&
+          window
+            .getComputedStyle(document.getElementById("navbar-button"))
+            .getPropertyValue("display") !== "none"){
         data.is_show = false;
         document.getElementById("navbar-button").click();
       }

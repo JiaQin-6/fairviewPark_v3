@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-10 00:40:06
+ * @LastEditTime: 2022-11-20 13:04:24
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,8 +18,8 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 menu">
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 menu">
           <!--   mode="horizontal" -->
           <el-menu
             :default-active="activeIndex"
@@ -113,8 +113,101 @@
                 : "周邊發展項目"
             }}</el-menu-item>
           </el-menu>
+          <el-tree-select
+            class="menu-select"
+            size="large"
+            v-model="activeIndex"
+            :data="[
+              {
+                label:
+                  fairview_park_lang === 'en_us' ? 'Rules & Regulations' : '規章制度',
+                value: '1',
+              },
+              {
+                label:
+                  fairview_park_lang === 'en_us'
+                    ? 'Sample of Candidate Form'
+                    : '候選人表格樣本',
+                value: '2',
+              },
+              {
+                label:
+                  fairview_park_lang === 'en_us'
+                    ? 'Samlpe of Nomination Form'
+                    : '提名表格樣本',
+                value: '3',
+              },
+              {
+                label: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                value: '4',
+                children: [
+                  {
+                    label:
+                      fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                    value: '4-1',
+                  },
+                  {
+                    label:
+                      fairview_park_lang === 'en_us'
+                        ? 'Election Activities Rules'
+                        : '選舉守則',
+                    value: '4-2',
+                  },
+                  {
+                    label:
+                      fairview_park_lang === 'en_us'
+                        ? 'Election Activities Rules Time Table'
+                        : '選舉守則時間表',
+                    value: '4-3',
+                  },
+                ],
+              },
+              {
+                label:
+                  fairview_park_lang === 'en_us'
+                    ? '11th MAC Members'
+                    : '應屆管理諮詢委員會委員資料',
+                value: '5',
+                children: [],
+              },
+              {
+                label: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                value: '6',
+                children: [
+                  {
+                    label:
+                      fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                    value: '6-1',
+                  },
+                  {
+                    label:
+                      fairview_park_lang === 'en_us'
+                        ? 'Election Activities Rules'
+                        : '選舉守則',
+                    value: '6-2',
+                  },
+                  {
+                    label:
+                      fairview_park_lang === 'en_us'
+                        ? 'Election Activities Rules Time Table'
+                        : '選舉守則時間表',
+                    value: '6-3',
+                  },
+                ],
+              },
+              {
+                label:
+                  fairview_park_lang === 'en_us'
+                    ? '11th MAC Members'
+                    : '應屆管理諮詢委員會委員資料',
+                value: '7',
+              },
+            ]"
+            :render-after-expand="false"
+            @change="changeMenu"
+          />
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow flex-row">
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow flex-row">
           <div class="nav-content-wrap">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
             <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
@@ -204,9 +297,47 @@ export default {
         data.activeIndex = key;
       }
     };
+    //監聽屏幕縮放
+    const screenChange = () => {
+      window.addEventListener("resize", () => {
+        getIsPC();
+      });
+    };
+    //獲取屏幕狀態
+    const getIsPC = () => {
+      if (
+        window
+          .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none"
+      ) {
+        data.isPC = false;
+      } else {
+        data.isPC = true;
+      }
+    };
     //
-    data.isPC = commonFunc.getIsPC();
+    const changeMenu = (val) => {
+        let a = document.createElement('a')
+        if(val === "4-2"){
+          a.href = data.fairview_park_lang === 'en_us'
+                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
+                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf';
+        }else if(val === "4-3"){
+          a.href = data.fairview_park_lang === 'en_us'
+                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
+                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf';
+        }else if(val === "6-3"){
+          a.href = data.MacColumnFile;
+        }
+       
+        a.target = '_blank';
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+    };
     onMounted(async () => {
+      screenChange();
+      getIsPC();
       findLotterySystemForImpound();
       findOneMacColumnFile();
     });
@@ -215,6 +346,9 @@ export default {
       findLotterySystemForImpound,
       findOneMacColumnFile,
       handleSelect,
+      screenChange,
+      getIsPC,
+      changeMenu,
     };
   },
 };
@@ -241,43 +375,79 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1);
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     @{deep} .el-menu {
       background-color: #fff;
+      border: none;
       .el-menu-item {
         padding: 6px 0 6px 10px;
         height: auto;
         line-height: inherit;
         margin-bottom: 5px;
-        background-color: #ebe9e9;
-        white-space:inherit,
+        white-space: inherit;
+        &:hover {
+          background-color: var(--mainColor2) !important;
+          color: #fff !important;
+          a {
+            color: #fff !important;
+          }
+        }
       }
       .el-sub-menu {
         margin-bottom: 5px;
         .el-sub-menu__title {
           padding: 6px 0 6px 10px;
           height: 40px;
+          background-color: #fff !important;
         }
         .el-menu-item {
           margin-bottom: 0px;
         }
       }
       .is-active {
-        background-color: #5cb89e;
+        background-color: var(--mainColor2);
       }
     }
-
+    .menu-select {
+      display: none;
+    }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {
@@ -289,40 +459,18 @@ export default {
     }
   }
   .nav-wrap {
-  padding: 20px;
-  .row {
-    .menu{
-      @{deep} .el-menu {
-      background-color: #fff;
-      display: flex;
-      .el-menu-item {
-        padding: 6px 10px 6px 10px;
-        // height: 40px;
-        margin-bottom: 0px;
-        background-color: #ebe9e9;
-      }
-      .el-sub-menu {
-        margin-bottom: 0px;
-        .el-sub-menu__title {
-          padding: 6px 10px 6px 10px;
-          height: 100%;
+    padding: 20px;
+    .row {
+      .menu {
+        @{deep} .el-menu {
+          background-color: #fff;
+          display: none;
         }
-        .el-menu-item {
-          margin-bottom: 0px;
-        }
-      }
-      .is-active {
-        background-color: #5cb89e;
-        border: none;
-        .el-sub-menu__title {
-          border: none;
+        .menu-select {
+          display: block;
         }
       }
     }
-    }
-    
   }
-}
- 
 }
 </style>

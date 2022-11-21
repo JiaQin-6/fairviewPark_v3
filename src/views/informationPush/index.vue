@@ -2,15 +2,15 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-06 23:34:40
+ * @LastEditTime: 2022-11-14 23:49:35
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="information-push">
-    <h3 class="mb-20">推送訊息記錄</h3>
+    <h3 class="mb-20">{{fairview_park_lang==='en_us'?'Push Up Message Record':'推送訊息記錄'}}</h3>
     <div class="information-push-wrap">
-      <ul class="col col-12 col-lg-8 col-sm-12">
+      <ul class="col col-12 col-lg-8 col-sm-12" style="padding:0 10px">
         <li
           class="flex-row mb-20"
           v-for="(item, index) in pmLogList"

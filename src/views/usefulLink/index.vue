@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-10 00:20:03
+ * @LastEditTime: 2022-11-19 14:26:49
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,8 +18,8 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 aside mb-20">
+      <div class="row nav-wrap-container ">
+        <div class="col-12 col-lg-3 aside mb-20">
           <ul class="row">
             <li
               v-for="(item, index) in telephone_link_list"
@@ -31,8 +31,23 @@
               <span>{{ item.titleEnUs }}</span>
             </li>
           </ul>
+          <el-select
+            size="large"
+            v-model="nav_index"
+            class="m-2 menu-select"
+            placeholder="Select"
+          >
+            <el-option
+              v-for="(item, index) in telephone_link_list"
+              :key="index"
+              :label="item.titleEnUs"
+              :value="item.index"
+            >
+              <span>{{ item.titleEnUs }}</span>
+            </el-option>
+          </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
           <div align="center">
             <table
               :id="
@@ -126,7 +141,8 @@ export default {
     };
     onMounted(async () => {
       await findUsefulTelephoneNosList();
-      data.telephone_link_list.map((item) => {
+      data.telephone_link_list.map((item,index) => {
+        item.index = index
         findUsefulTelephoneNosList(item.id);
       });
     });
@@ -166,18 +182,19 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1)
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
         position: sticky;
         top: 80px;
-        // flex-wrap: nowrap;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -189,7 +206,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
@@ -201,25 +217,36 @@ export default {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
           }
           span {
             color: #fff;
           }
         }
       }
+      .menu-select{
+        display: none;
+      }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 15px;
-      // height: 300px;
-      // overflow: auto;
+      padding: 12px 0px;
       img {
         max-width: 100%;
       }
@@ -229,6 +256,33 @@ export default {
         }
       }
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+    
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+   
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {
@@ -245,6 +299,7 @@ export default {
         ul {
           flex-wrap: nowrap;
           padding: 0;
+          display: none;
           li {
             display: flex;
             text-align: center;
@@ -254,6 +309,9 @@ export default {
             }
           }
         }
+        .menu-select{
+        display: block;
+      }
       }
     }
   }

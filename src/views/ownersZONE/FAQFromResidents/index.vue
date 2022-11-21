@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 00:40:33
+ * @LastEditTime: 2022-11-19 23:39:03
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,9 +18,9 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 aside mb-20">
-          <ul class="row">
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 aside mb-20">
+          <ul class="row menu-ul">
             <li
               v-for="(item, index) in FAQ_from_residents_list"
               :key="index"
@@ -36,8 +36,24 @@
               <span>{{ item.titleEnUs }}</span>
             </li>
           </ul>
+          <el-select
+            size="large"
+            v-model="nav_index"
+            class="m-2 menu-select"
+            placeholder="Select"
+            @change="changeMenu"
+          >
+            <el-option
+              v-for="(item, index) in FAQ_from_residents_list"
+              :key="index"
+              :label="item.titleEnUs"
+              :value="item.index"
+            >
+              <span>{{ item.titleEnUs }}</span>
+            </el-option>
+          </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
           <div class="nav-content-main">
             <div>
               <h5>
@@ -102,8 +118,10 @@ export default {
             data.FAQ_from_residents_sub_list.map((item) => {
               findOneFaqFromResidents(id, item.id);
             });
-            console.log(data.FAQ_from_residents_sub_content);
           } else {
+            res.data.data.records.map((item, index) => {
+              item.index = index;
+            });
             data.FAQ_from_residents_list = res.data.data.records;
           }
         }
@@ -126,6 +144,15 @@ export default {
         console.log(error);
       }
     };
+    //
+    const changeMenu = async (val) =>{
+      data.nav_index = val;
+      for (let i = 0; i < data.FAQ_from_residents_list.length; i++) {
+        if(data.FAQ_from_residents_list[i].index === val){
+          findFaqFromResidentsList(data.FAQ_from_residents_list[i].id);
+        }
+      }
+    };
     onMounted(async () => {
       await findFaqFromResidentsList();
       await findFaqFromResidentsList(data.FAQ_from_residents_list[0].id);
@@ -134,6 +161,7 @@ export default {
       ...toRefs(data),
       findFaqFromResidentsList,
       findOneFaqFromResidents,
+      changeMenu,
     };
   },
 };
@@ -160,20 +188,19 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1);
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
-        // box-shadow: 0 0 3px 3px rgba(143, 143, 143, 0.3);
-        // border-radius: 10px;
         position: sticky;
         top: 10px;
-        // flex-wrap: nowrap;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -185,7 +212,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
@@ -197,59 +223,95 @@ export default {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
+            // display: inline-block;
           }
           span {
             color: #fff;
           }
         }
       }
+      .menu-select {
+        display: none;
+      }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      .nav-content-main{
-        // box-shadow: 0 0 3px 3px rgba(143, 143, 143, 0.3);
-        // border-radius: 10px;
-      padding: 12px 15px;
+      .nav-content-main {
+        padding: 12px 15px;
         h5 {
-        background-color: #549632;
-        color: #fff;
-        padding: 5px 10px;
-        margin-bottom: 10px;
-      }
-      ul {
-        padding: 0;
-        li {
-          .sub-title {
-            background-color: #e6f2ba;
-            font-size: 15px;
-            margin-bottom: 10px;
-            span {
-              width: 30px;
-              height: 30px;
-              display: inline-block;
-              background-color: #549632;
-              text-align: center;
-              line-height: 30px;
-              color: #fff;
+          background-color: #549632;
+          color: #fff;
+          padding: 5px 10px;
+          margin-bottom: 10px;
+        }
+        ul {
+          padding: 0;
+          li {
+            .sub-title {
+              background-color: #e6f2ba;
               font-size: 15px;
-              margin-right: 5px;
+              margin-bottom: 10px;
+              span {
+                width: 30px;
+                height: 30px;
+                display: inline-block;
+                background-color: #549632;
+                text-align: center;
+                line-height: 30px;
+                color: #fff;
+                font-size: 15px;
+                margin-right: 5px;
+              }
             }
-          }
-          .content {
-            padding-left: 35px;
+            .content {
+              padding-left: 35px;
+            }
           }
         }
       }
-      }
-     
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {
@@ -262,21 +324,25 @@ export default {
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; padding: 0;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
+          display: none;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
+        }
+        .menu-select {
+          display: block;
         }
       }
     }
-  }
   }
 }
 </style>

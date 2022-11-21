@@ -735,3 +735,11 @@
 .vertical-middle{
   vertical-align: middle;
 }
+/* 超出2行顯示 */
+.line_clamp_2{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display:-webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	}

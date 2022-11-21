@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 00:38:31
+ * @LastEditTime: 2022-11-21 00:48:24
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -18,9 +18,9 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div class="col-12 col-lg-2 aside mb-20">
-          <ul class="row">
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 aside mb-20">
+          <ul class="row menu-ul">
             <li
               v-for="(item, index) in estate_facilities_list"
               :key="index"
@@ -36,8 +36,24 @@
               <span>{{ item.titleEnUs }}</span>
             </li>
           </ul>
+          <el-select
+            size="large"
+            v-model="nav_index"
+            class="m-2 menu-select"
+            placeholder="Select"
+            @change="changeMenu"
+          >
+            <el-option
+              v-for="(item, index) in estate_facilities_list"
+              :key="index"
+              :label="item.titleEnUs"
+              :value="item.index"
+            >
+              <span>{{ item.titleEnUs }}</span>
+            </el-option>
+          </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
           <div class="ql-editor" v-html="estate_facilities_content"></div>
         </div>
       </div>
@@ -50,9 +66,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
-        .href,
-      nav_index: 0,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
     };
   },
   setup() {
@@ -62,6 +76,7 @@ export default {
       estate_facilities_list: [],
       estate_facilities_content: null,
       fairview_park_lang: "",
+      nav_index: 0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
@@ -72,7 +87,9 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          console.log(res.data.data.records);
+          res.data.data.records.map((item, index) => {
+            item.index = index;
+          });
           data.estate_facilities_list = res.data.data.records;
         }
       } catch (error) {
@@ -93,6 +110,14 @@ export default {
         console.log(error);
       }
     };
+    const changeMenu = (val) => {
+      data.nav_index = val;
+      for (let i = 0; i < data.estate_facilities_list.length; i++) {
+        if (data.estate_facilities_list[i].index === val) {
+          findOneEstateFacilities(data.estate_facilities_list[i].id);
+        }
+      }
+    };
     onMounted(async () => {
       await findEstateFacilitiesList();
       findOneEstateFacilities(data.estate_facilities_list[0].id);
@@ -100,6 +125,7 @@ export default {
     return {
       ...toRefs(data),
       findOneEstateFacilities,
+      changeMenu,
     };
   },
 };
@@ -123,19 +149,21 @@ export default {
     font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
-        width: 80%;
+    width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1)
     }
   }
 }
 .nav-wrap {
   padding: 20px;
   .row {
+    margin: 0 auto;
     .aside {
       ul {
-        // flex-wrap: nowrap;
+        position: sticky;
+        top: 10px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -159,54 +187,100 @@ export default {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
+            // display: inline-block;
           }
           span {
             color: #fff;
           }
         }
       }
+      .menu-select{
+        display: none;
+      }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 15px;
+      padding: 12px 0px;
       img {
         max-width: 100%;
       }
     }
   }
 }
-@media (max-width: 992px){
-  .banner{
-    img {
-    opacity: 0.5;
-    width:auto;
-    height:200px;
+@media (min-width: 576px) {
+  .nav-wrap-container {
+    width: 540px;
+    
   }
+}
+@media (min-width: 768px) {
+  .nav-wrap-container {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-wrap-container {
+    width: 960px;
+   
+  }
+}
+@media (min-width: 1200px) {
+  .nav-wrap-container {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-wrap-container {
+    width: 1280px;
+  }
+}
+@media (max-width: 992px) {
+  .banner {
+    img {
+      opacity: 0.5;
+      width: auto;
+      height: 200px;
+    }
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; padding: 0;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+      .aside {
+      padding: 0;
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
+          display: none;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
         }
+        .menu-select{
+        display: block;
+      }
       }
     }
-  }
   }
 }
 </style>

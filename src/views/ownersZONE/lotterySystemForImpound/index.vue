@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-10-16 01:52:48
+ * @LastEditTime: 2022-11-20 12:09:22
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -21,7 +21,7 @@
       <div class="row">
         <div
           style="margin: 0 auto"
-          class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow"
+          class="col-12 nav-content mb-20 ql-container ql-snow"
         >
           <div v-html="lottery_system_for_mpound_content.htmlEnUs"></div>
         </div>
@@ -91,7 +91,7 @@ export default {
     width: 80%;
     text-align: center;
     b {
-      color: #2fa94e;
+      color: var(--mainColor1);
     }
   }
 }
@@ -103,6 +103,31 @@ export default {
       font-size: 13px;
       padding: 12px 15px;
     }
+  }
+}
+@media (min-width: 576px) {
+  .nav-content {
+    width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .nav-content {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .nav-content {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .nav-content {
+    width: 992px;
+  }
+}
+@media (min-width: 1400px) {
+  .nav-content {
+    width: 1280px;
   }
 }
 @media (max-width: 992px) {

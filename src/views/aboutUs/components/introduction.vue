@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-03 00:14:55
+ * @LastEditTime: 2022-11-19 01:59:45
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-    <div class="col-12 col-lg-10 nav-content">
+    <div class="col-12 col-lg-9 nav-content">
       <!--  關於我們 -->
       <div class="about-us">
         <div class="container">
@@ -222,30 +222,28 @@ export default {
   .about-us {
     margin-bottom: 20px;
     .container {
-      background-color: #e6eae5;
-
+        padding: 10px 0;
       .row {
-        padding: 20px 0;
+        padding: 0;
         .col {
           text-align: left;
           .jianjie {
             margin-bottom: 30px;
             p {
-              font-size: 15px;
+              font-size: 16px;
               font-family: "Quicksand";
               font-weight: 700;
-              color: #3a6547;
-              margin-bottom: 40px;
+              color: var(--el-text-color-primary);
+              margin-bottom: 20px;
             }
             ul {
-              padding: 0px 0 15px 35px;
+              padding: 0px 0 5px 35px;
               li {
-                font-size: 15px;
+                font-size: 16px;
                 list-style-type: disc;
                 font-family: "Quicksand";
-                font-weight: 700;
-                color: #3a6547;
-                margin-bottom: 20px;
+                color: var(--el-text-color-primary);
+                margin-bottom: 10px;
               }
             }
           }
