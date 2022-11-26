@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 14:15:15
+ * @LastEditTime: 2022-11-25 01:12:09
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,12 +10,16 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Coach" : "專巴"
-        }}<b>{{
+        }}{{
           fairview_park_lang === "en_us" ? "&nbsp;Service" : "時間表"
-        }}</b>
+        }}
       </p>
     </div>
     <!-- navs -->
@@ -164,7 +168,12 @@
                 </tbody>
               </table>
 
-              <p style="text-align: left; font-size: 15px">*預計抵達時間</p>
+              <p style="text-align: left; font-size: 15px">
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "*Expected arrival time"
+                    : "*預計抵達時間"
+                }}</p>
               <table
                 width="100%"
                 border="0"
@@ -1088,9 +1097,13 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+  height: 280px;
+
+  .img {
     opacity: 0.5;
     width: 100%;
+    height: 280px;
+    background-size: cover;
   }
   p {
     position: absolute;
@@ -1098,13 +1111,16 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
-    font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
     width: 80%;
     text-align: center;
+    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
+      color: #fff;
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
-      color: var(--mainColor1)
+      color: var(--mainColor1);
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     }
   }
 }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 12:28:28
+ * @LastEditTime: 2022-11-25 01:11:23
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,10 +10,14 @@
   <div class="decoration">
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "House Type" : "原型圖"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Enquiry" : "查詢" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Enquiry" : "查詢" }}
       </p>
     </div>
     <!-- 內容 -->
@@ -29,51 +33,82 @@
       </div>
       <!-- 選項 -->
       <div class="menu mt-20">
-        <div class="menu-oc row flex-row">
-          <span class="col-12 col-md-2">{{
-            type === 1
-              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OC）"
-              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OC）"
-          }}</span>
-          <ul class="flex-row">
-            <li
-              v-for="(item, index) in type === 1
-                ? fairview_park_lang === 'en_us'
-                  ? castInsituOc_en
-                  : castInsituOc_zh
-                : fairview_park_lang === 'en_us'
-                ? precastOc_en
-                : precastOc_zh"
-              :key="index"
-              @click="selectedInfo = item"
-              :class="{ selected: selectedInfo.title == item.title }"
-            >
-              {{ item.title }}
-            </li>
-          </ul>
-        </div>
-        <div class="menu-op row flex-row">
-          <span class="col-12 col-md-2">{{
-            type === 1
-              ? (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OP）"
-              : (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OP）"
-          }}</span>
-          <ul class="flex-row">
-            <li
-              v-for="(item, index) in type === 1
-                ? fairview_park_lang === 'en_us'
-                  ? castInsituOp_en
-                  : castInsituOp_zh
-                : fairview_park_lang === 'en_us'
-                ? precastOp_en
-                : precastOp_zh"
-              :key="index"
-              @click="selectedInfo = item"
-            >
-              {{ item.title }}
-            </li>
-          </ul>
-        </div>
+        <!-- <transition name="el-zoom-in-top"> -->
+          <div class="animate__animated animate__fadeInUp" v-show="type === 1">
+            <div class="menu-oc row flex-row">
+              <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OC）"
+              }}</span>
+              <ul class="flex-row">
+                <li
+                  v-for="(item, index) in fairview_park_lang === 'en_us'
+                    ? castInsituOc_en
+                    : castInsituOc_zh"
+                  :key="index"
+                  @click="selectedInfo = item"
+                  :class="{ selected: selectedInfo.title == item.title }"
+                >
+                  {{ item.title }}
+                </li>
+              </ul>
+            </div>
+            <div class="menu-op row flex-row">
+              <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OP）"
+              }}</span>
+              <ul class="flex-row">
+                <li
+                  v-for="(item, index) in fairview_park_lang === 'en_us'
+                    ? castInsituOp_en
+                    : castInsituOp_zh"
+                  :key="index"
+                  @click="selectedInfo = item"
+                >
+                  {{ item.title }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        <!-- </transition> -->
+
+        <!-- <transition name="el-zoom-in-top"> -->
+          <div class="animate__animated animate__fadeInUp" v-show="type === 2">
+            <div class="menu-oc row flex-row">
+              <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OC）"
+              }}</span>
+              <ul class="flex-row">
+                <li
+                  v-for="(item, index) in fairview_park_lang === 'en_us'
+                    ? precastOc_en
+                    : precastOc_zh"
+                  :key="index"
+                  @click="selectedInfo = item"
+                  :class="{ selected: selectedInfo.title == item.title }"
+                >
+                  {{ item.title }}
+                </li>
+              </ul>
+            </div>
+            <!--  -->
+            <div class="menu-op row flex-row" v-show="type === 2">
+              <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OP）"
+              }}</span>
+              <ul class="flex-row">
+                <li
+                  v-for="(item, index) in fairview_park_lang === 'en_us'
+                    ? precastOp_en
+                    : precastOp_zh"
+                  :key="index"
+                  @click="selectedInfo = item"
+                >
+                  {{ item.title }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        <!-- </transition> -->
       </div>
       <!-- 圖片內容 -->
       <div class="decoration_content">
@@ -577,23 +612,30 @@ export default {
   .banner {
     position: relative;
     overflow: hidden;
-    img {
-      opacity: 0.5;
-      width: 100%;
-    }
+    height: 280px;
+
+.img {
+  opacity: 0.5;
+  width: 100%;
+  height: 280px;
+  background-size: cover;
+}
     p {
       position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
       font-size: 30px;
-      font-family: "Nunito";
       font-style: normal;
       font-weight: bold;
       width: 80%;
       text-align: center;
+      font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+      color: #fff;
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
       b {
-        color: #2fa94e;
+        color: var(--mainColor1);
+        text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
       }
     }
   }
@@ -604,25 +646,27 @@ export default {
     .decoration-type {
       padding: 0;
       text-align: center;
-      background-color: var(--mainColor1);
       span {
         width: 50%;
         padding: 5px 0;
-        color: #fff;
+        color: var(--mainColor1);
         cursor: pointer;
         border: 1px solid var(--mainColor1);
+        background-color: #fff;
 
         &:hover {
-          color: var(--mainColor2);
+          color: #fff;
+          background-color: var(--mainColor1);
         }
-        
       }
       .active {
-          color: var(--mainColor2);
-        }
+        color: #fff;
+        background-color: var(--mainColor1);
+      }
     }
     .menu {
       padding: 0;
+      overflow: hidden;
       .menu-oc,
       .menu-op {
         span {

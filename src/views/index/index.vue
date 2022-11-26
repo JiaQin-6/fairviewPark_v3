@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:11:53
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 16:27:22
+ * @LastEditTime: 2022-11-24 00:29:35
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/index/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div :class="{'flex-row':is_show}">
+  <div :class="{ 'flex-row': is_show }">
     <div class="ownerIsZONE" v-if="is_show">
       <div class="ownerIsZONE-content">
         <div
@@ -75,7 +75,9 @@
             ]"
             :key="index"
             @click="selectOwnersZone(item.router)"
-          >{{item.text}}</li>
+          >
+            {{ item.text }}
+          </li>
         </ul>
       </div>
     </div>
@@ -87,6 +89,7 @@
       <router-view />
       <Footer></Footer>
       <Login></Login>
+      <div class="mask" @click="is_show = false"></div>
     </div>
   </div>
 </template>
@@ -120,15 +123,21 @@ export default {
       localStorage.removeItem("login-info");
       store.commit("setLoginStatus", false);
     };
-     //
-     const selectOwnersZone = (val) => {
-      if(document.getElementById("navbar-button") &&
-          window
-            .getComputedStyle(document.getElementById("navbar-button"))
-            .getPropertyValue("display") !== "none"){
-        data.is_show = false;
+    //
+    const selectOwnersZone = (val) => {
+      if (
+        document.getElementById("navbar-button") &&
+        window
+          .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none" &&
+        document.getElementsByClassName("collapse")[0] &&
+        window
+          .getComputedStyle(document.getElementsByClassName("collapse")[0])
+          .getPropertyValue("display") !== "none"
+      ) {
         document.getElementById("navbar-button").click();
-      }
+      } 
+      data.is_show = false;
       if (val === "/loginOut") {
         loginOut();
         router.push("/home");
@@ -151,10 +160,11 @@ export default {
   position: fixed;
   top: 0;
   height: 100vh;
+    width: 50vw;
   background-color: #ccc;
   .ownerIsZONE-content {
-    width: 50vw;
-    max-width: 200px;
+    width: 100%;
+    // max-width: 200px;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -178,10 +188,23 @@ export default {
 .main-content {
   position: relative;
   background-color: #fff;
+  .mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    z-index: 300;
+  }
 }
 .show {
   transform: translate(50vw);
   animation: show50vw 0.3s linear 1; //动画名  时长   匀速   1次
+  position: fixed;
+  .mask {
+    display: block;
+  }
 }
 .hide {
   transform: translate(0vw);

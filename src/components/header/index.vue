@@ -2,33 +2,45 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-20 21:16:57
+ * @LastEditTime: 2022-11-25 00:59:39
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div class="main">
+  <div
+    class="main"
+  >
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <transition name="el-zoom-in-top">
-            <img v-show="!showLogin_m" :src="logo" alt="" />
+          <transition name="el-fade-in-linear">
+            <img
+              class="navbar-brand-logo-mobile"
+              :src="logo_m"
+              style="margin-top: 12px;width:55px;"
+              alt=""
+            />
           </transition>
 
-          <transition name="el-fade-in-linear">
-            <img v-show="showLogin_m" :src="logo_m" style="margin-top: 20px" alt="" />
-          </transition>
+          <!-- <transition name="el-zoom-in-top">
+            <img class="navbar-brand-logo" v-show="!showLogin_m" :src="logo" alt="" />
+          </transition> -->
         </a>
-        <div class="login-btn" style="position: relative; flex: 1; text-align: right">
-          <button
-            v-if="!is_login"
-            class="login-btn-1"
-            data-bs-toggle="modal"
-            data-bs-target="#login"
-          >
+        <div
+          v-if="!is_login"
+          class="login-btn1"
+          style="position: relative; flex: 1; text-align: right"
+        >
+          <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
             {{ $t("Owner login") }}
           </button>
-          <button v-if="is_login" class="login-btn-2" @click="showOwnerIsZONE">
+        </div>
+        <div
+          v-if="is_login"
+          class="login-btn2"
+          style="position: relative; flex: 1; text-align: right"
+        >
+          <button class="login-btn-2" @click="showOwnerIsZONE">
             {{ $t("OWNERS's ZONE") }}
           </button>
         </div>
@@ -230,7 +242,12 @@
             </el-dropdown>
             <div
               v-if="is_login"
-              style="text-decoration: none; position: relative; margin-left: 20px"
+              style="
+                text-decoration: none;
+                position: relative;
+                cursor: pointer;
+                margin-left: 20px;
+              "
               @click="toInformationPush"
             >
               <i class="iconfont icon-lingdang white"></i>
@@ -310,7 +327,7 @@ export default {
       data.is_login = true;
     }
     onMounted(() => {
-      scrollPosition();
+      // scrollPosition();
       if (!sessionStorage.getItem("fairview_park_lang")) {
         sessionStorage.setItem("fairview_park_lang", "zh_tw");
         data.fairview_park_lang = "zh_tw";
@@ -396,23 +413,34 @@ export default {
     };
     //跳轉到信息頁
     const toInformationPush = () => {
-      document.getElementById("navbar-button").click();
+      if (
+        document.getElementById("navbar-button") &&
+        window
+          .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none"
+      ) {
+        document.getElementById("navbar-button").click();
+      }
       router.push("/information-push");
     };
     //監聽滾動條的位置
-    const scrollPosition = () => {
-      document.addEventListener("scroll", () => {
-        var scrollTop =
-          window.pageYOffset ||
-          document.documentElement.scrollTop ||
-          document.body.scrollTop;
-        if (scrollTop >= 100) {
-          data.showLogin_m = true;
-        } else {
-          data.showLogin_m = false;
-        }
-      });
-    };
+    // const scrollPosition = () => {
+    //   document.addEventListener("scroll", () => {
+    //     var scrollTop =
+    //       window.pageYOffset ||
+    //       document.documentElement.scrollTop ||
+    //       document.body.scrollTop;
+    //     if (scrollTop >= 100) {
+    //       if (!data.showLogin_m) {
+    //         data.showLogin_m = true;
+    //       }
+    //     } else {
+    //       if (data.showLogin_m) {
+    //         data.showLogin_m = false;
+    //       }
+    //     }
+    //   });
+    // };
     //监听器
     watch(
       () => route,
@@ -441,13 +469,15 @@ export default {
         } else {
           data.route_url = location.hash;
         }
+
         if (
           document.getElementById("navbar-button") &&
           window
             .getComputedStyle(document.getElementById("navbar-button"))
             .getPropertyValue("display") !== "none" &&
+          document.getElementsByClassName("collapse")[0] &&
           window
-            .getComputedStyle(document.getElementById("navbarSupportedContent"))
+            .getComputedStyle(document.getElementsByClassName("collapse")[0])
             .getPropertyValue("display") !== "none"
         ) {
           document.getElementById("navbar-button").click();
@@ -475,7 +505,6 @@ export default {
       showOwnerIsZONE,
       findPmLogHave,
       toInformationPush,
-      scrollPosition,
     };
   },
 };
@@ -487,25 +516,31 @@ export default {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: var(--mainColor1);
+  height: 62px;
   .navbar {
     max-width: 1920px;
-    height: 62px;
+    height: 100%;
     left: 0px;
     top: 0px;
     mix-blend-mode: normal;
     padding: 0;
     margin: 0 auto;
     align-items: inherit;
-    justify-content: space-between;
+    background: var(--mainColor1);
+    // justify-content: space-between;
+    text-align: center;
 
     .container-fluid {
       align-items: inherit;
       background: var(--mainColor1);
+      justify-content: flex-start;
+      margin: 0 auto;
+      text-align: center;
+      width: auto;
     }
     .navbar-brand {
       padding: 0;
-      margin-left: 20px;
+      margin-right: 30px;
       width: 37px;
       position: relative;
       img {
@@ -515,28 +550,29 @@ export default {
         width: 37px;
       }
     }
-    .login-btn {
+    .login-btn1,
+    .login-btn2 {
       button {
-        margin-top: 16px;
+        margin-top: 15px;
         margin-right: 10px;
-        background: #fff;
+        background: var(--mainColor2);
         border-radius: 50px;
         border: 0;
         font-size: 16px;
-        color: var(--mainColor2);
+        color: #fff;
         margin-left: 20px;
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;
         &:hover {
-          background: var(--mainColor2);
-          color: #fff;
+          background: #fff;
+          color: var(--mainColor2);
         }
       }
     }
     .navbar-collapse {
       margin-left: auto;
-      justify-content: space-between;
+      // justify-content: space-between;
       .navbar-nav {
         height: 100%;
         .nav-item {
@@ -547,6 +583,11 @@ export default {
             box-sizing: border-box;
             border-bottom: 2px solid transparent;
           }
+          .dropdown-toggle {
+            &::after {
+              display: none;
+            }
+          }
 
           .dropdown-menu {
             background-color: #fff;
@@ -554,6 +595,8 @@ export default {
             overflow: hidden;
             top: auto;
             left: auto;
+            box-shadow: 0 0 5px 3px rgba(107, 106, 106, 0.3);
+            border: 0;
             &:hover {
               display: block;
             }
@@ -658,18 +701,18 @@ export default {
         }
       }
       .login {
-        background: #fff;
+        background: var(--mainColor2);
         border-radius: 50px;
         border: 0;
         font-size: 16px;
-        color: var(--mainColor2);
+        color: #fff;
         margin-left: 20px;
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;
         &:hover {
-          background: var(--mainColor2);
-          color: #fff;
+          background: #fff;
+          color: var(--mainColor2);
         }
       }
       .icon-lingdang {
@@ -677,7 +720,7 @@ export default {
       }
       @{deep} .el-dropdown {
         .el-button {
-          background: #fff;
+          background: var(--mainColor2);
           border-radius: 50px;
           border: 0;
           font-size: 16px;
@@ -690,13 +733,13 @@ export default {
 
           span {
             font-size: 16px;
-            color: var(--mainColor2);
+            color: #fff;
           }
           &:hover {
-            background: var(--mainColor2);
+            background: #fff;
 
             span {
-              color: #fff;
+              color: var(--mainColor2);
             }
           }
         }
@@ -723,16 +766,19 @@ export default {
   }
 }
 @media (min-width: 992px) {
-  .navbar-expand-lg .navbar-collapse ul li {
-    margin-bottom: 0 !important;
+  .navbar-expand-lg {
+    .navbar-collapse ul li {
+      margin-bottom: 0 !important;
+    }
   }
 
   .is-show-dropdown {
     display: block;
   }
-  .login-btn-1,
-  .login-btn-2 {
+  .login-btn1,
+  .login-btn2 {
     display: none;
+    width: 0;
   }
 }
 @media (max-width: 991px) {
@@ -740,21 +786,31 @@ export default {
     display: none;
   }
   .main {
+    height: 62px;
     .navbar {
-      .navbar-collapse {
-        margin-left: auto;
+      justify-content: space-between;
+      .container-fluid {
         justify-content: space-between;
-        .navbar-nav {
-          height: auto;
-          .nav-item {
+        width: 100%;
+        .navbar-collapse {
+          margin-left: auto;
+          justify-content: space-between;
+          .navbar-nav {
             height: auto;
-            padding: 0;
-            .nav-link {
-              padding: 25px 6px 0px;
+            .nav-item {
               height: auto;
+              padding: 0;
+              .nav-link {
+                padding: 25px 6px 0px;
+                height: auto;
+              }
             }
           }
         }
+      }
+
+      .navbar-brand-logo {
+        display: none !important;
       }
     }
   }

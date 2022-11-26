@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:38
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 21:53:45
+ * @LastEditTime: 2022-11-25 00:28:34
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/footer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -42,9 +42,6 @@
               </li>
               <li>
                 <a href="#/useful-link">{{ $t("Useful Telephone Nos.") }}</a>
-              </li>
-              <li>
-                <a href="#/estate-notice">{{ $t("Estate Notice") }}</a>
               </li>
             </ul>
           </div>
@@ -180,7 +177,6 @@ export default {
           width: 68%;
           text-align: left;
           h3 {
-            font-family: "Nunito";
             font-weight: 700;
             color: #000;
             line-height: 30px;
@@ -190,7 +186,6 @@ export default {
             // flex-direction: column !important;
             padding-left: 0;
             li {
-              font-family: "Quicksand";
               font-style: normal;
               font-size: 16px;
               line-height: 25px;
@@ -231,7 +226,6 @@ export default {
         margin: 10px 0;
 
         p {
-          font-family: "Quicksand";
           color: #fff;
           padding: 0 20px;
           margin: 0;
@@ -242,7 +236,6 @@ export default {
           align-items: center;
           li {
             padding: 0 10px;
-            font-family: "Quicksand";
             color: #fff;
             display: inline-block;
             &:first-child {
@@ -265,12 +258,20 @@ export default {
   .bottom-part-wrap {
     width: 720px;
   }
+  
 }
 @media (min-width: 992px) {
   .top-part-wrap,
   .bottom-part-wrap {
     width: 960px;
   }
+  .bottom-right-part {
+      text-align: right;
+      ul {
+        display: block;
+        text-align: right;
+      }
+    }
 }
 @media (min-width: 1200px) {
   .top-part-wrap {
@@ -292,6 +293,7 @@ export default {
   .top-part-wrap,
   .bottom-part-wrap {
     width: 1280px;
+    
   }
 }
 @media (max-width: 767px) {

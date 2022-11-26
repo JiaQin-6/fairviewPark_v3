@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 14:24:14
+ * @LastEditTime: 2022-11-25 01:12:35
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,10 +10,14 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "About" : "關於"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;us" : "我們" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;us" : "我們" }}
       </p>
     </div>
     <!-- navs -->
@@ -73,60 +77,65 @@
               <span>{{ item.text }}</span>
             </li>
           </ul>
-          <el-select size="large" v-model="nav_index" class="m-2 menu-select" placeholder="Select">
+          <el-select
+            size="large"
+            v-model="nav_index"
+            class="m-2 menu-select"
+            placeholder="Select"
+          >
             <el-option
               v-for="(item, index) in [
                 {
                   icon: 'icon-zhuye',
                   text: $t('Introduction'),
-                  value:0,
+                  value: 0,
                 },
                 {
                   icon: 'icon-kehufuwukefu',
                   text: $t('Customer Service'),
-                  value:1,
+                  value: 1,
                 },
                 {
                   icon: 'icon-zhongxinhuanjing',
                   text: $t('Environmental Service'),
-                  value:2,
+                  value: 2,
                 },
                 {
                   icon: 'icon-baoan',
                   text: $t('Security'),
-                  value:3,
+                  value: 3,
                 },
                 {
                   icon: 'icon-weixiu',
                   text: $t('Maintenance'),
-                  value:4,
+                  value: 4,
                 },
                 {
                   icon: 'icon-tuandui',
                   text: $t('Administration'),
-                  value:5,
+                  value: 5,
                 },
                 {
                   icon: 'icon-renliziyuan',
                   text: $t('Human Resources'),
-                  value:6,
+                  value: 6,
                 },
                 {
                   icon: 'icon-tubiaozhizuomoban-48',
                   text: $t('Accounts'),
-                  value:7,
+                  value: 7,
                 },
                 {
                   icon: 'icon-zixun',
                   text: $t('Information Technology'),
-                  value:8,
+                  value: 8,
                 },
               ]"
               :key="index"
               :label="item.text"
               :value="item.value"
             >
-              <i class="iconfont" :class="item.icon" style="margin-right:10px"></i>
+              <i class="iconfont" :class="item.icon" style="margin-right: 10px"></i>
               <span>{{ item.text }}</span>
             </el-option>
           </el-select>
@@ -170,31 +179,23 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
-        .href,
-      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url)
-        .href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
         import.meta.url
       ).href,
-      landmark: new URL(
-        "../../assets/image/aboutUs/placeholder.png",
-        import.meta.url
-      ).href,
-      phone: new URL(
-        "../../assets/image/aboutUs/telephone.png",
-        import.meta.url
-      ).href,
-      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url)
+      landmark: new URL("../../assets/image/aboutUs/placeholder.png", import.meta.url)
         .href,
+      phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
+      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
       nav_index: 0,
     };
   },
   setup() {
     let data = reactive({
       fairview_park_lang: "",
-      nav_index:'',
+      nav_index: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     return {
@@ -208,9 +209,13 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+  height: 280px;
+
+  .img {
     opacity: 0.5;
     width: 100%;
+    height: 280px;
+    background-size: cover;
   }
   p {
     position: absolute;
@@ -218,13 +223,16 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
-    font-family: "Nunito";
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
     font-style: normal;
     font-weight: bold;
     width: 80%;
     text-align: center;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
-      color: var(--mainColor1)
+      color: var(--mainColor1);
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     }
   }
 }
@@ -283,7 +291,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -301,7 +309,6 @@ export default {
                 margin-bottom: 30px;
                 p {
                   font-size: 15px;
-                  font-family: "Quicksand";
                   font-weight: 700;
                   color: #3a6547;
                   margin-bottom: 40px;
@@ -311,7 +318,6 @@ export default {
                   li {
                     font-size: 15px;
                     list-style-type: disc;
-                    font-family: "Quicksand";
                     font-weight: 700;
                     color: #3a6547;
                     margin-bottom: 30px;
@@ -341,7 +347,6 @@ export default {
                 ul {
                   margin-bottom: 40px;
                   li {
-                    font-family: "Quicksand";
                     color: #3a6547;
                     font-weight: 700;
                     font-size: 15px;
@@ -395,7 +400,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -406,7 +410,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -444,11 +447,10 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
+        .menu-select {
+          display: block;
+        }
       }
-      }
-      
     }
   }
 }

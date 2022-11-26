@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-21 00:44:57
+ * @LastEditTime: 2022-11-25 01:13:41
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,8 +19,11 @@
       >
         <!-- web_banner_list -->
         <el-carousel-item v-for="(item, index) in web_banner_list" :key="index">
-          <a :href="item.webUrlEnUs" target="_blank">
-            <img :src="item.bannerEnUs" class="d-block w-100" :alt="item.remark" />
+          <a
+            :href="item.webUrlEnUs"
+            target="_blank"
+            :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
+          >
           </a>
         </el-carousel-item>
       </el-carousel>
@@ -30,6 +33,7 @@
       <div class="marquee-container">
         <img :src="icon_news" class="icon-laba" alt="" />
         <el-carousel
+          v-if="new_notice_list.length !== 0"
           indicator-position="none"
           height="45px"
           direction="vertical"
@@ -45,7 +49,6 @@
               :href="item.websiteUrl"
               target="_blank"
               style="
-                font-family: 'Nunito';
                 font-size: 16px;
                 margin-right: 40px;
                 color: #fff;
@@ -57,7 +60,6 @@
             <span
               v-show="!item.websiteUrl"
               style="
-                font-family: 'Nunito';
                 font-size: 16px;
                 margin-right: 40px;
                 color: #fff;
@@ -73,7 +75,7 @@
     <div class="container_wrap">
       <!-- 歡迎瀏覽錦綉花園 -->
       <div class="liulan">
-        <h1 style="text-align: center; margin-bottom: 45px">
+        <h1 style="text-align: center; margin-bottom: 45px;">
           {{ $t("Welcome to browse") }} <a>{{ $t("fairview park") }}</a>
         </h1>
         <div class="container">
@@ -82,15 +84,16 @@
               class="col col-12 col-md-4 col-lg-4 col-sm-12"
               v-for="(item, index) in [
                 {
-                  text: $t('Resident information'),
-                  img_url: resident_information,
-                  route: '/prospective-buyer',
-                },
-                {
                   text: $t('Shops Directory'),
                   img_url: shop_information,
                   route: '/shopping-information',
                 },
+                {
+                  text: $t('Resident information'),
+                  img_url: resident_information,
+                  route: '/prospective-buyer',
+                },
+               
                 {
                   text: $t('Coach Service'),
                   img_url: bus_time_table,
@@ -110,15 +113,16 @@
               <el-carousel-item
                 v-for="(item, index) in [
                   {
-                    text: $t('Resident information'),
-                    img_url: resident_information,
-                    route: '/prospective-buyer',
-                  },
-                  {
                     text: $t('Shops Directory'),
                     img_url: shop_information,
                     route: '/shopping-information',
                   },
+                  {
+                    text: $t('Resident information'),
+                    img_url: resident_information,
+                    route: '/prospective-buyer',
+                  },
+                  
                   {
                     text: $t('Coach Service'),
                     img_url: bus_time_table,
@@ -127,8 +131,10 @@
                 ]"
                 :key="index"
               >
-                <div class="bg h100">
-                  <img style="width: 100%" :src="item.img_url" alt="" />
+                <div
+                  class="bg h100"
+                  :style="{ 'background-image': 'url(' + item.img_url + ')' }"
+                >
                   <button>
                     <router-link :to="item.route">{{ item.text }}</router-link>
                   </button>
@@ -142,7 +148,9 @@
       <div class="about-us">
         <h1>
           {{ fairview_park_lang === "en_us" ? "About" : "關於"
-          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? "us" : "我們" }}</a>
+          }}<a href="#/about-us">{{
+            fairview_park_lang === "en_us" ? "us" : "我們"
+          }}</a>
           <p></p>
         </h1>
         <div class="container">
@@ -204,7 +212,7 @@
               <div class="img">
                 <iframe
                   v-if="fairview_park_lang === 'zh_tw'"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d295.7263026793377!2d114.04565169221846!3d22.4774682521715!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1668098910213!5m2!1szh-TW!2shk"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.7091679275286!2d114.04272728986919!3d22.47756085206866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1669042722648!5m2!1szh-TW!2shk"
                   width="100%"
                   height="450"
                   style="border-radius: 10px"
@@ -244,11 +252,18 @@ export default {
         "../../assets/image/home/pic_index02.jpg",
         import.meta.url
       ).href,
-      bus_time_table: new URL("../../assets/image/home/pic_index03.jpg", import.meta.url)
-        .href,
-      icon_news: new URL("../../assets/image/home/icon_news.png", import.meta.url).href,
-      img1: new URL("../../assets/image/home/aboutus_banner_2e4X.jpg", import.meta.url)
-        .href,
+      bus_time_table: new URL(
+        "../../assets/image/home/pic_index03.jpg",
+        import.meta.url
+      ).href,
+      icon_news: new URL(
+        "../../assets/image/home/icon_news.png",
+        import.meta.url
+      ).href,
+      img1: new URL(
+        "../../assets/image/home/aboutus_banner_2e4X.jpg",
+        import.meta.url
+      ).href,
       img2: new URL(
         "../../assets/image/home/Podcast-Hour-Design-Idea_XPel.jpg",
         import.meta.url
@@ -335,6 +350,21 @@ export default {
       }
     }
   }
+  .el-carousel__indicators {
+        .el-carousel__indicator {
+          .el-carousel__button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+          }
+        }
+        .is-active {
+          .el-carousel__button {
+            background-color: var(--mainColor2);
+            border: 2px solid #fff;
+          }
+        }
+      }
 }
 .marquee {
   background: var(--mainColor2);
@@ -352,13 +382,14 @@ export default {
       color: #fff;
       margin-right: 15px;
     }
-    .el-carousel {
+     .el-carousel {
       display: inline-block;
       width: 100%;
       .el-carousel__container {
         .el-carousel__item {
         }
       }
+     
     }
   }
 }
@@ -368,6 +399,8 @@ export default {
     h1 {
       margin-top: 60px;
       font-size: 32px;
+      font-weight: 800;
+      font-family: "微软雅黑";
       a {
         color: var(--mainColor1);
       }
@@ -388,6 +421,9 @@ export default {
             background-size: cover;
             border-radius: 20px;
             overflow: hidden;
+            &:hover {
+              box-shadow: 0 0 8px 3px rgba(10, 10, 10, 0.2);
+            }
             button {
               position: absolute;
               bottom: 20px;
@@ -410,7 +446,7 @@ export default {
             }
           }
         }
-        .el-carousel {
+        @{deep} .el-carousel {
           display: none;
           .el-carousel__container {
             .el-carousel__item {
@@ -418,6 +454,7 @@ export default {
                 background-size: cover;
                 border-radius: 20px;
                 overflow: hidden;
+                background-size: cover;
                 button {
                   position: absolute;
                   bottom: 20px;
@@ -441,6 +478,20 @@ export default {
               }
             }
           }
+          .el-carousel__indicators {
+            .el-carousel__indicator {
+              .el-carousel__button {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+              }
+            }
+            .is-active {
+              .el-carousel__button {
+                background-color: var(--mainColor1);
+              }
+            }
+          }
         }
       }
     }
@@ -451,6 +502,7 @@ export default {
       margin: 30px auto 30px;
       font-size: 32px;
       text-align: center;
+      font-weight: 800;
 
       a {
         color: var(--mainColor3);
@@ -479,7 +531,6 @@ export default {
             }
             p {
               font-size: 16px;
-              font-family: "Quicksand";
               font-weight: 700;
               color: var(--el-text-color-primary);
               margin-bottom: 20px;
@@ -489,25 +540,24 @@ export default {
               li {
                 font-size: 16px;
                 list-style-type: disc;
-                font-family: "Quicksand";
                 color: var(--el-text-color-primary);
                 margin-bottom: 10px;
               }
             }
             button {
-              background: #fff;
+              background: var(--mainColor2);
               padding: 7px 35px;
               border-radius: 25px;
               border: 2px solid var(--mainColor2);
-              color: var(--mainColor2);
+              color: #fff;
               a {
                 color: var(--mainColor2);
               }
               &:hover {
-                background: var(--mainColor2);
-                color: #fff;
+                background: #fff;
+                color: var(--mainColor2);
                 a {
-                  color: #fff;
+                  color: var(--mainColor2);
                 }
               }
             }

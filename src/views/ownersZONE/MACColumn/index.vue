@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-20 13:04:24
+ * @LastEditTime: 2022-11-22 22:47:06
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -369,13 +369,16 @@ export default {
     top: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
-    font-family: "Nunito";
     font-style: normal;
     font-weight: bold;
     width: 80%;
-    text-align: center;
+    text-align: center;  
+    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
+      color: #fff;
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
+      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     }
   }
 }
