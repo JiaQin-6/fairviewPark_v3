@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-06-13 15:08:30
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-19 15:02:23
+ * @LastEditTime: 2022-11-28 21:27:28
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\Fairview Park\fairviewpark\src\router\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -152,6 +152,12 @@ const routes = [
                 name: 'coach-service',
                 component: () => import('../views/coachService/index.vue'),
             },
+            //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+            {
+                path: '/apply-resident-smartcard',
+                name: 'apply-resident-smartcard',
+                component: () => import('../views/ownersZONE/applyRCard/index.vue'),
+            },
             //30天信息推送﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
             {
                 path: '/information-push',
@@ -182,7 +188,7 @@ router.beforeEach((to, from, next) => {
 });
 // 检查服务端是否已经更新，如果更新刷新页面
 async function checkAppNewVersion() {
-    const url = `/app/dist/version.json?t=${Date.now()}`;
+    const url = `${location.pathname.split('index.html')}version.json?t=${Date.now()}`;
     let res = null;
     try {
         res = await axios.get(url);

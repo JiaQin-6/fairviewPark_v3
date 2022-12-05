@@ -5,11 +5,14 @@
   "scripts": {
     "serve": "vite",
     "build": "vite build",
+    "test": "vite build --mode test",
     "postbuild": "node ./build/build.js",
+    "posttest": "node ./build/build.js",
     "preview": "vite preview"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
+    "@pdftron/pdfjs-express": "^8.7.0",
     "@popperjs/core": "^2.11.6",
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",

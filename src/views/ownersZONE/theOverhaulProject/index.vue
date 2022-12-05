@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:48:00
+ * @LastEditTime: 2022-11-26 23:33:04
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -16,11 +16,11 @@
           fairview_park_lang === "en_us"
             ? "Project for Replacement of Underground Water Pipes and Refurbishment of Roads"
             : "更換地下喉管及行車道路翻新工程"
-        }}<b>{{
+        }}{{
           fairview_park_lang === "en_us"
             ? "&nbsp;(The Overhaul Project)"
             : "（大維修）"
-        }}</b>
+        }}
       </p>
     </div>
     <!-- navs -->

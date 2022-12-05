@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:47:21
+ * @LastEditTime: 2022-11-26 23:35:53
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,17 +13,28 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "New" : "最新"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Update" : "消息" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Update" : "消息" }}
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
-        <div style="margin: 0 auto" class="col-12 nav-content mb-20 ql-container ql-snow">
-          <div>
+      <div class="row nav-wrap-container">
+        <div class="col-12 col-lg-3 aside mb-20">
+      
+            <ul class="row">
+            <li
+              v-for="(item, index) in new_update_list"
+              :key="index"
+              class="col-4 col-lg-12"
+              :class="new_update_index === item.id ? 'active' : ''"
+              @click="findOneNewUpdateById(item.id)"
+            >
+              <span>{{ item.titleEnUs }}</span>
+            </li>
+          </ul>
             <el-select
             v-model="new_update_index"
-            class="m-2"
+            class="m-2 menu-select"
             placeholder="Select"
             size="large"
             @change="()=>{findOneNewUpdateById(new_update_index)}"
@@ -35,11 +46,11 @@
               :value="item.id"
             />
           </el-select>
-          </div>
-          <div>
-            <div v-html="new_update_content.htmlEnUs"></div>
-          </div>
+         
         </div>
+        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
+            <div class="ql-editor" v-html="new_update_content.htmlEnUs"></div>
+          </div>
       </div>
     </div>
   </div>
@@ -136,11 +147,12 @@ export default {
   padding: 20px;
   margin: 0 auto;
   .row {
+    margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
         position: sticky;
         top: 10px;
-        // flex-wrap: nowrap;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -152,7 +164,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
@@ -164,23 +175,36 @@ export default {
             font-size: 15px;
             color: #000;
           }
+          &:hover {
+            background-color: var(--mainColor2);
+            color: #fff;
+            i {
+              color: #fff;
+            }
+            span {
+              color: #fff;
+            }
+          }
         }
         .active {
-          background-color: #5cb89e;
+          background-color: var(--mainColor2);
+          color: #fff;
           i {
             color: #fff;
-            display: inline-block;
           }
           span {
             color: #fff;
           }
         }
       }
+      .menu-select{
+        display: none;
+      }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 15px;
+      padding: 12px 0px;
       img {
         max-width: 100%;
       }
@@ -209,27 +233,29 @@ export default {
   }
 }
 @media (min-width: 576px) {
-  .nav-wrap {
+  .nav-wrap-container {
     width: 540px;
+    
   }
 }
 @media (min-width: 768px) {
-  .nav-wrap {
+  .nav-wrap-container {
     width: 720px;
   }
 }
 @media (min-width: 992px) {
-  .nav-wrap {
+  .nav-wrap-container {
     width: 960px;
+   
   }
 }
 @media (min-width: 1200px) {
-  .nav-wrap {
+  .nav-wrap-container {
     width: 992px;
   }
 }
 @media (min-width: 1400px) {
-  .nav-wrap {
+  .nav-wrap-container {
     width: 1280px;
   }
 }
@@ -239,6 +265,28 @@ export default {
       opacity: 0.5;
       width: auto;
       height: 200px;
+    }
+  }
+  .nav-wrap {
+    .row {
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
+          display: none;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
+          }
+        }
+        .menu-select{
+        display: block;
+      }
+      }
     }
   }
 }

@@ -2,31 +2,70 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-25 01:13:41
+ * @LastEditTime: 2022-11-28 20:56:03
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
     <!-- 轮播图 -->
-    <!-- <iframe src="/generic/web/viewer.html"></iframe> -->
     <div>
-      <el-carousel
-        v-if="web_banner_list.length !== 0"
-        class="banner"
-        :interval="5000"
-        arrow="always"
+      <div
+        id="carouselExampleFade"
+        class="carousel slide carousel-fade"
+        data-bs-interval="3000"
+        data-bs-ride="carousel"
       >
-        <!-- web_banner_list -->
-        <el-carousel-item v-for="(item, index) in web_banner_list" :key="index">
-          <a
-            :href="item.webUrlEnUs"
-            target="_blank"
-            :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
+        <div class="carousel-indicators">
+          <button
+            v-for="(item, index) in web_banner_list"
+            :key="index"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            :data-bs-slide-to="index"
+            :class="{ active: carouselValue === index }"
+            aria-current="true"
+            :aria-label="'Slide' + (index + 1)"
+          ></button>
+        </div>
+        <div style="height: 100%" class="carousel-inner">
+          <!-- web_banner_list -->
+          <div
+            style="height: 100%"
+            class="carousel-item"
+            :class="{ active: carouselValue === index }"
+            v-for="(item, index) in web_banner_list"
+            :key="index"
           >
-          </a>
-        </el-carousel-item>
-      </el-carousel>
+            <a
+              style="position: absolute; height: 100%; width: 100%"
+              :href="item.bannerEnUs"
+              target="_blank"
+              :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
+            >
+            </a>
+          </div>
+        </div>
+        <button
+          id="carousel-control-prev"
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
     <!-- 文字跑馬燈 -->
     <div class="marquee">
@@ -75,7 +114,7 @@
     <div class="container_wrap">
       <!-- 歡迎瀏覽錦綉花園 -->
       <div class="liulan">
-        <h1 style="text-align: center; margin-bottom: 45px;">
+        <h1 style="text-align: center; margin-bottom: 45px">
           {{ $t("Welcome to browse") }} <a>{{ $t("fairview park") }}</a>
         </h1>
         <div class="container">
@@ -93,7 +132,7 @@
                   img_url: resident_information,
                   route: '/prospective-buyer',
                 },
-               
+
                 {
                   text: $t('Coach Service'),
                   img_url: bus_time_table,
@@ -122,7 +161,7 @@
                     img_url: resident_information,
                     route: '/prospective-buyer',
                   },
-                  
+
                   {
                     text: $t('Coach Service'),
                     img_url: bus_time_table,
@@ -277,17 +316,9 @@ export default {
       new_notice_list: [],
       web_banner_list: [],
       fairview_park_lang: "",
+      carouselValue: 0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-    var blob = new Blob(
-      [
-        "http://43.154.184.138:8084/houseweb/web/downFile?filePath=https://fairviewpark.hk/new_web/uat/pdf/Javascript1_dAJg.pdf",
-      ],
-      { type: "application/pdf" }
-    );
-    var href = window.URL.createObjectURL(blob); //创建下载的链接
-    console.log(href);
-    // window.open("/generic/web/viewer.html?file=" + href);
     //查看所有 最新消息
     const findNewNoticeList = async () => {
       try {
@@ -318,6 +349,9 @@ export default {
     findWebsiteBannerList();
     onMounted(() => {
       findNewNoticeList();
+      setTimeout(() => {
+        document.getElementById("carousel-control-prev").click();
+      }, 3000);
     });
     return {
       ...toRefs(data),
@@ -329,42 +363,30 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
-@{deep} .banner {
+.carousel {
   height: 450px;
-  .el-carousel__container {
-    height: 450px;
-    .el-carousel__item {
-      overflow: hidden;
+  .carousel-indicators {
+    button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+    }
+    .active {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: var(--mainColor2);
+      border: 2px solid #fff;
+    }
+  }
+  .carousel-inner {
+    .carousel-item {
       a {
-        width: 100%;
-        height: 100%;
-        display: block;
-        position: relative;
         background-size: cover;
-        img {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-        }
       }
     }
   }
-  .el-carousel__indicators {
-        .el-carousel__indicator {
-          .el-carousel__button {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-          }
-        }
-        .is-active {
-          .el-carousel__button {
-            background-color: var(--mainColor2);
-            border: 2px solid #fff;
-          }
-        }
-      }
 }
 .marquee {
   background: var(--mainColor2);
@@ -382,14 +404,13 @@ export default {
       color: #fff;
       margin-right: 15px;
     }
-     .el-carousel {
+    .el-carousel {
       display: inline-block;
       width: 100%;
       .el-carousel__container {
         .el-carousel__item {
         }
       }
-     
     }
   }
 }
@@ -403,6 +424,7 @@ export default {
       font-family: "微软雅黑";
       a {
         color: var(--mainColor1);
+        font-family: "微软雅黑";
       }
     }
     .container {
@@ -606,21 +628,24 @@ export default {
 }
 
 @media (max-width: 991px) {
-  @{deep} .banner {
+  .carousel {
     height: calc(100vw / 2);
-    .el-carousel__container {
-      height: calc(100vw / 2);
-      .el-carousel__item {
-        overflow: hidden;
-        a {
-          img {
-            height: 100%;
-            width: auto;
-          }
-        }
-      }
-    }
   }
+  // @{deep} .banner {
+  //   height: calc(100vw / 2);
+  //   .el-carousel__container {
+  //     height: calc(100vw / 2);
+  //     .el-carousel__item {
+  //       overflow: hidden;
+  //       a {
+  //         img {
+  //           height: 100%;
+  //           width: auto;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 @media (max-width: 768px) {
   .container_wrap {

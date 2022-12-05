@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:43:52
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-21 00:44:29
+ * @LastEditTime: 2022-12-01 23:19:15
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\en_us.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
-    'Login timeout，Please login again！ ': 'Login timeout，Please login again！',
+    'Login timeout Please login again！ ': 'Login timeout，Please login again！',
     'Please enter your registration contact email': 'Please enter your registered e-mail',
     'Please enter your login name': 'Please enter your registered login name',
     'Forgot password': 'Forgot password',
@@ -63,7 +63,9 @@ export default {
     'Login name': 'Login name',
     'Password': 'Password',
     'Sign in': 'Sign in',
+    'Edit member information': 'Edit member information',
     'Online user registration': 'Online user registration',
+    'Apply Resident Smartcard': 'Apply Resident Smartcard',
     'Owner Name (On Account Statement)': 'Owner Name (On Account Statement)',
     'Account Number (On Account Statement)': 'Account Number (On Account Statement)',
     'Login Name (Self Customize)': 'Login Name (Self Customize)',
@@ -76,4 +78,5 @@ export default {
     'Please provide a valid login name.': 'Please provide a valid login name.',
     'Please provide a valid password.': 'Please provide a valid password.',
     'Easy access to the information of fairview park': 'Easy access to the information of fairview park',
+    'Confirm': 'Confirm',
 };

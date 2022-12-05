@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-25 01:10:50
+ * @LastEditTime: 2022-12-05 00:10:24
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -24,7 +24,7 @@
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
         <div class="col-12 col-lg-3 aside mb-20">
-          <ul class="row">
+          <ul class="row" id="shopping-information-menu">
             <li
               v-for="(item, index) in shop_information_list"
               :key="index"
@@ -58,27 +58,34 @@
               'shop_information_' +
               (shop_information_list[index] && shop_information_list[index].orderNo)
             "
-            v-for="(item, index) in shop_information_content"
+            v-for="(item, index) in shop_information_list"
             :key="index"
           >
             <div class="header">
-              <span>{{
-                shop_information_list[index] && shop_information_list[index].titleEnUs
-              }}</span>
+              <span>{{ item && item.titleEnUs }}</span>
               <img src="" alt="" />
             </div>
             <ul>
-              <li class="flex-row" v-for="(item2, index2) in item" :key="index2">
-                <div class="img col-4"><img :src="item2.logUrl" alt="" /><p>{{item2.titleEnUs}}</p></div>
+              <li
+                class="flex-row"
+                v-for="(item2, index2) in shop_information_list[index].children"
+                :key="index2"
+              >
+                <div class="img col-4">
+                  <img @click="openUrl(item2.websiteUrl)" :src="item2.logUrl" alt="" />
+                  <p>{{ item2.titleEnUs }}</p>
+                </div>
                 <span class="col-5">{{ item2.shopNo }}</span>
-                <span class="col-3">
+                <span class="col-3" v-if="item2.tel">
                   <a
                     class="fs-15"
-                    v-for="(item, index) in item2.tel.split(',')"
-                    :key="index"
+                    v-for="(item3, index3) in item2.tel.indexOf(',') !== -1
+                      ? item2.tel.split(',')
+                      : [item2.tel]"
+                    :key="index3"
                     style="color: #000; text-decoration: none"
-                    :href="'tel:' + item"
-                    >{{ item }}</a
+                    :href="'tel:' + item3"
+                    >{{ item3 }}</a
                   ></span
                 >
               </li>
@@ -109,7 +116,7 @@ export default {
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 屋邨资料 列表
-    const findShopsDirectoryList = async (id) => {
+    const findShopsDirectoryList = async (id, index) => {
       try {
         const res = await proxy.$http.findShopsDirectoryList({
           lang: data.fairview_park_lang,
@@ -118,7 +125,7 @@ export default {
         if (res.data.status === 200) {
           console.log(res.data.data.records);
           if (id) {
-            data.shop_information_content.push(res.data.data.records);
+            data.shop_information_list[index].children = res.data.data.records;
           } else {
             data.shop_information_list = res.data.data.records;
           }
@@ -129,18 +136,37 @@ export default {
     };
     onMounted(async () => {
       await findShopsDirectoryList();
-      data.shop_information_list.map((item) => {
-        findShopsDirectoryList(item.id);
+      data.shop_information_list.map((item, index) => {
+        findShopsDirectoryList(item.id, index);
       });
+      if (
+        document.getElementById("shopping-information-menu").getBoundingClientRect()
+          .height
+      ) {
+        document.getElementsByClassName("nav-content")[0].style.height =
+          document.getElementById("shopping-information-menu").getBoundingClientRect()
+            .height>500?document.getElementById("shopping-information-menu").getBoundingClientRect()
+            .height + "px":'500px';
+      }
     });
     const jumpLink = (orderNo, index) => {
       document.querySelector("#shop_information_" + orderNo).scrollIntoView(true);
       data.nav_index = index;
     };
+    const openUrl = (url) => {
+      if (url) {
+        const a = document.createElement("a");
+        (a.href = url), (a.target = "_blank");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }
+    };
     return {
       ...toRefs(data),
       findShopsDirectoryList,
       jumpLink,
+      openUrl,
     };
   },
 };
@@ -169,9 +195,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -187,7 +213,7 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -234,14 +260,13 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
     @{deep} .nav-content {
       background-color: #fff;
       padding: 12px 0px;
-      max-height: 500px;
       overflow: auto;
       .nav-content-list {
         .header {
@@ -260,7 +285,9 @@ export default {
           box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.05);
           li {
             padding: 10px 20px;
+            align-items: center;
             span {
+              text-align: center;
               a {
                 &:hover {
                   color: #0d6efd !important;
@@ -268,9 +295,15 @@ export default {
               }
             }
             .img {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
               img {
                 min-width: 50px;
                 max-width: 100px;
+                margin-bottom: 5px;
+              }
+              p {
               }
             }
 
@@ -286,7 +319,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -297,7 +329,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -334,9 +365,9 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
-      }
+        .menu-select {
+          display: block;
+        }
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:46:50
+ * @LastEditTime: 2022-11-26 23:32:12
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Lottery system for" : "抽籤鎖車"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Impounding Action" : "機制" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Impounding Action" : "機制" }}
       </p>
     </div>
     <!-- navs -->
@@ -23,7 +23,8 @@
           style="margin: 0 auto"
           class="col-12 nav-content mb-20 ql-container ql-snow"
         >
-          <div v-html="lottery_system_for_mpound_content.htmlEnUs"></div>
+          <div class="ql-editor" v-html="lottery_system_for_mpound_content.htmlEnUs"></div>
+        
         </div>
       </div>
     </div>

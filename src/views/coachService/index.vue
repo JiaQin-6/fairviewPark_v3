@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-25 01:12:09
+ * @LastEditTime: 2022-12-01 22:12:52
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,9 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Coach" : "專巴"
-        }}{{
-          fairview_park_lang === "en_us" ? "&nbsp;Service" : "時間表"
-        }}
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Service" : "時間表" }}
       </p>
     </div>
     <!-- navs -->
@@ -42,9 +40,11 @@
             v-model="nav_index"
             class="m-2 menu-select"
             placeholder="Select"
-            @change="(val)=>{
-              nav_index = val
-            }"
+            @change="
+              (val) => {
+                nav_index = val;
+              }
+            "
           >
             <el-option
               v-for="(item, index) in coach_service_content.coachServiceList"
@@ -58,7 +58,7 @@
         </div>
         <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
           <!--  -->
-          <div align="center" style="padding:0 10px;">
+          <div align="center" style="padding: 0 10px">
             <!-- pdf -->
             <h5 class="fs-16 mb-20" style="text-align: left; cursor: pointer">
               <a
@@ -114,7 +114,11 @@
               >
                 <tbody>
                   <tr v-if="index === 0">
-                    <td height="30" colspan="3" bgcolor="#7CA628">
+                    <td
+                      height="30"
+                      :colspan="item.fleidList.length"
+                      bgcolor="#7CA628"
+                    >
                       <div align="center">
                         {{
                           coach_service_content.coachServiceList[nav_index]
@@ -124,7 +128,11 @@
                     </td>
                   </tr>
                   <tr>
-                    <td height="30" colspan="3" bgcolor="#E7F4BB">
+                    <td
+                      height="30"
+                      :colspan="item.fleidList.length"
+                      bgcolor="#E7F4BB"
+                    >
                       <div align="center">
                         <span class="style8">{{ item.titleEnUs }}</span>
                       </div>
@@ -135,11 +143,11 @@
                       width="240"
                       valign="top"
                       :bgcolor="
-                        index2 === 0
-                          ? '#F9FCEF'
-                          : index2 === 1
-                          ? '#FFFAE6'
-                          : '#FFFFE6'
+                        index2 % 2 === 0
+                          ? '#fffde9'
+                          : index2 % 2 === 1
+                          ? '#f1fcdd'
+                          : ''
                       "
                       v-for="(item2, index2) in item.fleidList"
                       :key="index2"
@@ -173,7 +181,8 @@
                   fairview_park_lang === "en_us"
                     ? "*Expected arrival time"
                     : "*預計抵達時間"
-                }}</p>
+                }}
+              </p>
               <table
                 width="100%"
                 border="0"
@@ -1115,9 +1124,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -1178,7 +1187,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -1231,7 +1240,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -1242,7 +1250,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -1278,10 +1285,10 @@ export default {
               margin: 0 auto;
             }
           }
-        } 
-        .menu-select{
-        display: block;
-      }
+        }
+        .menu-select {
+          display: block;
+        }
       }
     }
   }

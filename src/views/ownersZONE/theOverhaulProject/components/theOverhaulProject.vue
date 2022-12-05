@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-11-04 23:34:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 20:13:51
+ * @LastEditTime: 2022-12-06 00:10:04
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/theOverhaulProject/components/theOverhaulProject.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -112,10 +112,11 @@
         }}
       </h5>
       <div style="text-align: center">
-        <iframe
-          style="width: 100%; height: 700px"
-          :src="tohpByFpn"
-        ></iframe>
+       
+        <div
+              id="viewer"
+              style="width: 100%; height: 600px; margin: 0 auto"
+            ></div>
       </div>
     </div>
     <!-- 2021年5月24日 宣傳單張 2021年4月12日 宣傳單張 -->
@@ -216,6 +217,7 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
@@ -244,7 +246,17 @@ export default {
       }
     };
     onMounted(async () => {
-      findTohpByFpn()
+      await findTohpByFpn()
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+          initialDoc:data.tohpByFpn,
+        },
+        document.getElementById("viewer")
+      ).then((instance) => {
+        // use APIs here
+      });
     });
     return {
       ...toRefs(data),

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:47:47
+ * @LastEditTime: 2022-12-06 00:09:58
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Residents Handbook /" : "業主手冊及"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Map" : "屋邨地圖" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Map" : "屋邨地圖" }}
       </p>
     </div>
     <!-- navs -->
@@ -68,15 +68,11 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
-         
-          <iframe
-          v-if="nav_index === 1"
-              width="100%"
-              height="700px;"
-              :src="
-              residents_handboo_map_content&&residents_handboo_map_content.fileUrlEnUs
-              "
-            ></iframe>
+          <div
+              v-if="nav_index === 1"
+              id="viewer"
+              style="width: 100%; height: 600px; margin: 0 auto"
+            ></div>
           <div
             v-if="nav_index === 2"
             class="ql-editor"
@@ -90,6 +86,7 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
@@ -121,6 +118,16 @@ export default {
     };
     onMounted(async () => {
       await findResidentsHandbookMap();
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+          initialDoc: data.residents_handboo_map_content&&data.residents_handboo_map_content.fileUrlEnUs, 
+        },
+        document.getElementById("viewer")
+      ).then((instance) => {
+        // use APIs here
+      });
     });
     return {
       ...toRefs(data),

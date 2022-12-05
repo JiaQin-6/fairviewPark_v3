@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-25 01:10:06
+ * @LastEditTime: 2022-12-05 00:19:54
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -22,9 +22,9 @@
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row nav-wrap-container ">
+      <div class="row nav-wrap-container">
         <div class="col-12 col-lg-3 aside mb-20">
-          <ul class="row">
+          <ul class="row" id="useful-menu">
             <li
               v-for="(item, index) in telephone_link_list"
               :key="index"
@@ -56,13 +56,14 @@
             <table
               :id="
                 'telephone_link_' +
-                (telephone_link_list[index] && telephone_link_list[index].orderNo)
+                (telephone_link_list[index] &&
+                  telephone_link_list[index].orderNo)
               "
               style="margin-bottom: 20px"
               border="0"
               cellpadding="5"
               cellspacing="2"
-              v-for="(item, index) in telephone_link_content"
+              v-for="(item, index) in telephone_link_list"
               :key="index"
               width="100%"
             >
@@ -70,11 +71,12 @@
                 <tr>
                   <td height="25" colspan="2" bgcolor="#A0D31E">
                     <span class="style9 fs-15">{{
-                      telephone_link_list[index] && telephone_link_list[index].titleEnUs
+                      telephone_link_list[index] &&
+                      telephone_link_list[index].titleEnUs
                     }}</span>
                   </td>
                 </tr>
-                <tr v-for="(item2, index2) in item" :key="index2">
+                <tr v-for="(item2, index2) in item.children" :key="index2">
                   <td style="width: 70%" height="25" bgcolor="#EAF7C1">
                     <span v-if="!item2.websiteUrl" class="style9 fs-15">{{
                       item2.titleEnUs
@@ -88,13 +90,23 @@
                     >
                   </td>
                   <td style="width: 30%" height="25" bgcolor="#FFFFCC">
+                    <el-icon
+                      color="#07522b"
+                      class="no-inherit"
+                      style="margin-right: 5px"
+                    >
+                      <Phone />
+                    </el-icon>
                     <a
                       class="fs-15"
                       v-for="(item, index) in item2.tel.split(',')"
                       :key="index"
                       style="color: #000; text-decoration: none"
                       :href="'tel:' + item"
-                      >{{ item }}</a
+                      >{{ item
+                      }}{{
+                        index === item2.tel.split(",").length - 1 ? "" : "，"
+                      }}</a
                     >
                   </td>
                 </tr>
@@ -112,7 +124,8 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+        .href,
     };
   },
   setup() {
@@ -121,7 +134,6 @@ export default {
     const data = reactive({
       nav_index: 0,
       telephone_link_list: [],
-      telephone_link_content: [],
       fairview_park_lang: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
@@ -134,7 +146,12 @@ export default {
         });
         if (res.data.status === 200) {
           if (id) {
-            data.telephone_link_content.push(res.data.data.records);
+            for (let i = 0; i < data.telephone_link_list.length; i++) {
+              if (data.telephone_link_list[i].id === id) {
+                data.telephone_link_list[i].children = res.data.data.records;
+              }
+            }
+            console.log(data.telephone_link_list);
           } else {
             data.telephone_link_list = res.data.data.records;
           }
@@ -145,10 +162,20 @@ export default {
     };
     onMounted(async () => {
       await findUsefulTelephoneNosList();
-      data.telephone_link_list.map((item,index) => {
-        item.index = index
-        findUsefulTelephoneNosList(item.id);
+      data.telephone_link_list.map(async (item, index) => {
+        item.index = index;
+        await findUsefulTelephoneNosList(item.id);
       });
+      if (
+        document.getElementById("useful-menu").getBoundingClientRect().height
+      ) {
+        document.getElementsByClassName("nav-content")[0].style.height =
+          document.getElementById("useful-menu").getBoundingClientRect()
+            .height > 500
+            ? document.getElementById("useful-menu").getBoundingClientRect()
+                .height + "px"
+            : "500px";
+      }
     });
     const jumpLink = (orderNo, index) => {
       document
@@ -188,9 +215,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -250,7 +277,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -258,12 +285,13 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 0px;
+      overflow: auto;
       img {
         max-width: 100%;
       }
       a {
         &:hover {
-          color: var(--bs-link-color)!important;
+          color: var(--bs-link-color) !important;
         }
       }
     }
@@ -272,7 +300,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -283,7 +310,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -320,9 +346,9 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
-      }
+        .menu-select {
+          display: block;
+        }
       }
     }
   }

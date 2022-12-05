@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:45:51
+ * @LastEditTime: 2022-12-01 22:52:13
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,12 +13,12 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;Activities" : "活動" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Activities" : "活動" }}
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
-      <div class="row">
+      <div class="row nav-wrap-container">
         <div class="col-12 col-lg-3 aside mb-20">
           <ul class="row">
             <li

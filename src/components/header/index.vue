@@ -2,14 +2,12 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-25 00:59:39
+ * @LastEditTime: 2022-12-04 23:28:32
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div
-    class="main"
-  >
+  <div class="main">
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -17,7 +15,7 @@
             <img
               class="navbar-brand-logo-mobile"
               :src="logo_m"
-              style="margin-top: 12px;width:55px;"
+              style="margin-top: 12px; width: 55px"
               alt=""
             />
           </transition>
@@ -31,7 +29,11 @@
           class="login-btn1"
           style="position: relative; flex: 1; text-align: right"
         >
-          <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
+          <button
+            class="login-btn-1"
+            data-bs-toggle="modal"
+            data-bs-target="#login"
+          >
             {{ $t("Owner login") }}
           </button>
         </div>
@@ -156,9 +158,12 @@
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{
-                    item2.text
-                  }}</a>
+                  <a
+                    class="dropdown-item"
+                    style="padding: 8px 15px"
+                    :href="item2.href"
+                    >{{ item2.text }}</a
+                  >
                 </li>
               </ul>
             </li>
@@ -186,60 +191,73 @@
             >
               {{ $t("Owner login") }}
             </button>
+            <div>
+              <el-dropdown
+                class="is-show-dropdown"
+                v-if="is_login"
+                @command="selectOwnersZone"
+              >
+                <el-button type="primary">
+                  {{ $t("OWNERS's ZONE")
+                  }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
+                </el-button>
+                <template #dropdown>
+                  <el-dropdown-menu>
+                    <el-dropdown-item
+                      class="yellow"
+                      command="/edit-member-information"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editMemberInformation"
+                      ><el-icon><EditPen /></el-icon>{{ $t("Edit member information") }}</el-dropdown-item
+                    >
+                    <el-dropdown-item command="/FAQ-from-residents">{{
+                      $t("FAQ from Residents")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/estate-notice">{{
+                      $t("Estate Notices")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/fairview-part-news">{{
+                      $t("Fairview Park News")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/demographic-opinion-survey">{{
+                      $t("Demographic & Opinion Survey")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/estate-activities">{{
+                      $t("Estate Activities")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/news-update">{{
+                      $t("News Update")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/residents-handbook-map">{{
+                      $t("Residents Handbook / Map")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/frequently-used-forms">{{
+                      $t("Frequently Used Forms")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/MAC-column">{{
+                      $t("MAC Column")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/payment-list">{{
+                      $t("Payment List")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/lottery-system-for-impound">{{
+                      $t("Lottery System For Impounding Action")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/the-overhaul-project">{{
+                      $t("the Overhaul Project")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/apply-resident-smartcard">{{
+                      $t("Apply Resident Smartcard")
+                    }}</el-dropdown-item>
 
-            <el-dropdown
-              class="is-show-dropdown"
-              v-if="is_login"
-              @command="selectOwnersZone"
-            >
-              <el-button type="primary">
-                {{ $t("OWNERS's ZONE")
-                }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
-              </el-button>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item command="/FAQ-from-residents">{{
-                    $t("FAQ from Residents")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/estate-notice">{{
-                    $t("Estate Notices")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/fairview-part-news">{{
-                    $t("Fairview Park News")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/demographic-opinion-survey">{{
-                    $t("Demographic & Opinion Survey")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/estate-activities">{{
-                    $t("Estate Activities")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/news-update">{{
-                    $t("News Update")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/residents-handbook-map">{{
-                    $t("Residents Handbook / Map")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/frequently-used-forms">{{
-                    $t("Frequently Used Forms")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/MAC-column">{{
-                    $t("MAC Column")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/payment-list">{{
-                    $t("Payment List")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/lottery-system-for-impound">{{
-                    $t("Lottery System For Impounding Action")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/the-overhaul-project">{{
-                    $t("the Overhaul Project")
-                  }}</el-dropdown-item>
-                  <el-dropdown-item command="/loginOut">
-                    {{ $t("Login out") }}</el-dropdown-item
-                  >
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
+                    <el-dropdown-item class="yellow" command="/loginOut">
+                      <el-icon><UserFilled /></el-icon> {{ $t("Login out") }}</el-dropdown-item
+                    >
+                  </el-dropdown-menu>
+                </template>
+              </el-dropdown>
+            </div>
+
             <div
               v-if="is_login"
               style="
@@ -273,7 +291,15 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+  inject,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -288,7 +314,8 @@ export default {
   data() {
     return {
       logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
-      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url)
+        .href,
     };
   },
   setup(props, ctx) {
@@ -306,12 +333,15 @@ export default {
     //判断url是否带有token参数
     if (route.query.session) {
       //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
-      localStorage.setItem(
-        "login-info",
-        JSON.stringify({
-          jwt: route.query.session,
-        })
+      // token变量传需要解析的jwt值
+      let strings = route.query.session.split("."); //截取token，获取载体
+      var userinfo = JSON.parse(
+        decodeURIComponent(
+          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+        )
       );
+      userinfo.jwt = route.query.session;
+      localStorage.setItem("login-info", JSON.stringify(userinfo));
     }
     //判断url是否带有语言参数
     if (
@@ -333,6 +363,16 @@ export default {
         data.fairview_park_lang = "zh_tw";
       } else {
         data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+      }
+      if (document.getElementsByClassName("el-popper")[0]) {
+        document.getElementsByClassName(
+          "el-popper"
+        )[0].parentNode.style.position = "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top =
+          "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style[
+          "z-index"
+        ] = "2000";
       }
     });
     //切換語言
@@ -390,6 +430,7 @@ export default {
       if (val === "/loginOut") {
         loginOut();
         router.push("/home");
+      } else if (val === "/edit-member-information") {
       } else {
         router.push(val);
       }

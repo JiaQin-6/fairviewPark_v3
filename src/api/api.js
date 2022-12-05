@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-11-20 00:00:45
+ * @LastEditTime: 2022-12-01 23:34:34
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
@@ -19,7 +19,7 @@ switch (process.env.NODE_ENV) {
         baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
         break;
     case "production":
-        baseUrl = "http://43.154.184.138:8084"; //生产环境url
+        baseUrl = "https://app.fairviewpark.hk"; //生产环境url
         break;
     default:
         baseUrl = "http://43.154.184.138:8084"; //这里是本地的请求url
@@ -46,6 +46,10 @@ http.register = (arr) => {
 //忘记密码
 http.forgetPassword = (arr) => {
     return http.post(`/houseweb/member/forgetPassword`, arr);
+};
+//更新用户信息
+http.editMemberInfo = (arr) => {
+    return http.post(`/houseweb/member/editMemberInfo`, arr);
 };
 //申请智能卡
 http.applyRCard = (arr) => {
@@ -171,6 +175,10 @@ http.findPmLogHave = (arr) => {
 http.findPmLogList = (arr) => {
     return http.post(`/houseweb/pmLog/findPmLogList`, arr);
 };
+//houseweb 文件上传接口
+http.uploadFtpFile = (arr) => {
+    return http.post(`/houseweb/file/uploadFtpFile`, arr);
+};
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
 /* 在发送给服务器的时候带token给服务器 */
@@ -190,7 +198,7 @@ http.interceptors.response.use(function (response) {
     if (response.data.status === 104) {
         localStorage.removeItem('login-info');
         ElMessage({
-            message: i18n.global.t('Login timeout，Please login again！'),
+            message: i18n.global.t('Login timeout Please login again！'),
             type: 'warning',
         });
         router.push('/home');

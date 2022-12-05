@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-22 22:45:36
+ * @LastEditTime: 2022-12-06 00:09:53
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,8 +12,9 @@
     <div class="banner">
       <img :src="banner" alt="" />
       <p>
-        {{ fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;survey" : "意見調查" }}</b>
+        {{
+          fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;survey" : "意見調查" }}
       </p>
     </div>
     <!-- navs -->
@@ -37,14 +38,10 @@
                 :value="index"
               />
             </el-select>
-            <iframe
-              width="100%"
-              height="700px;"
-              :src="
-                demographic_opinion_survey_list.length !== 0 &&
-                demographic_opinion_survey_list[demographic_opinion_survey_index].fileEnUs
-              "
-            ></iframe>
+            <div
+              id="viewer"
+              style="width: 100%; height: 600px; margin: 0 auto"
+            ></div>
           </div>
         </div>
       </div>
@@ -54,10 +51,14 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/aboutUs/banner.png",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -84,6 +85,20 @@ export default {
     };
     onMounted(async () => {
       await findDemographicOpinionSurveyList();
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+          initialDoc:
+            data.demographic_opinion_survey_list.length !== 0 &&
+            data.demographic_opinion_survey_list[
+              data.demographic_opinion_survey_index
+            ].fileEnUs, 
+        },
+        document.getElementById("viewer")
+      ).then((instance) => {
+        // use APIs here
+      });
     });
     return {
       ...toRefs(data),
@@ -111,10 +126,10 @@ export default {
     font-style: normal;
     font-weight: bold;
     width: 80%;
-    text-align: center;   
-     font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    text-align: center;
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);

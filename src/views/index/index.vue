@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:11:53
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-24 00:29:35
+ * @LastEditTime: 2022-12-04 23:19:15
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/index/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -12,14 +12,17 @@
       <div class="ownerIsZONE-content">
         <div
           class="flex-row space-between mb-10 pb-2"
-          style="border-bottom: 1px solid #9d9d9d"
         >
-          <span>選項</span>
+          <span></span>
           <el-icon @click="is_show = false"><Close /></el-icon>
         </div>
         <ul>
           <li
             v-for="(item, index) in [
+              {
+                router: '/edit-member-information',
+                text: $t('Edit member information'),
+              },
               {
                 router: '/FAQ-from-residents',
                 text: $t('FAQ from Residents'),
@@ -68,6 +71,11 @@
                 router: '/the-overhaul-project',
                 text: $t('the Overhaul Project'),
               },
+              {
+                router: '/apply-resident-smartcard',
+                text: $t('Apply Resident Smartcard'),
+              },
+             
               {
                 router: '/loginOut',
                 text: $t('Login out'),
@@ -141,6 +149,14 @@ export default {
       if (val === "/loginOut") {
         loginOut();
         router.push("/home");
+      } else if (val === "/edit-member-information") {
+        console.log(12)
+        const button = document.createElement('button');
+        button.setAttribute('data-bs-toggle','modal')
+        button.setAttribute('data-bs-target','#editMemberInformation')
+        document.body.appendChild(button)
+        button.click();
+        document.body.removeChild(button)
       } else {
         router.push(val);
       }
@@ -160,11 +176,10 @@ export default {
   position: fixed;
   top: 0;
   height: 100vh;
-    width: 50vw;
-  background-color: #ccc;
+  width: 50vw;
+  background-color: var(--mainColor2);
   .ownerIsZONE-content {
     width: 100%;
-    // max-width: 200px;
     height: 100%;
     padding: 10px;
     box-sizing: border-box;
@@ -172,14 +187,16 @@ export default {
     span {
     }
     i {
+      color: #fff;
+      font-size: 20px;
     }
     ul {
       padding: 0;
       li {
-        border-bottom: 1px solid #9d9d9d;
+        border-bottom: 1px solid #fff;
         padding: 10px 5px;
         font-size: 14px;
-        color: #000;
+        color: #fff;
         cursor: pointer;
       }
     }
@@ -207,7 +224,7 @@ export default {
   }
 }
 .hide {
-  transform: translate(0vw);
+  transform: inherit;
   animation: hide50vw 0.3s linear 1; //动画名  时长   匀速   1次
 }
 

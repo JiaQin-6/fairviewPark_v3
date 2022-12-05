@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-24 23:54:09
+ * @LastEditTime: 2022-12-06 00:09:51
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,16 +13,13 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Fairview Park" : "錦綉"
-        }}<b>{{ fairview_park_lang === "en_us" ? "&nbsp;News" : "專訊" }}</b>
+        }}{{ fairview_park_lang === "en_us" ? "&nbsp;News" : "專訊" }}
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div
-          style="margin: 0 auto"
-          class="col-12 nav-content mb-20 ql-container ql-snow"
-        >
+        <div style="margin: 0 auto" class="col-12 nav-content mb-20">
           <div style="text-align: right">
             <el-select
               v-model="fairview_part_news_index"
@@ -37,20 +34,8 @@
                 :value="index"
               />
             </el-select>
-            <iframe
-              width="100%"
-              height="700px;"
-              seamless
-              scrolling="yes"
-              :src="
-                fairview_part_news_list.length !== 0 &&
-                fairview_part_news_list[fairview_part_news_index].fileEnUs
-              "
-            ></iframe>
-            <!-- <VuePdfEmbed
-              :pdfUrl="'https://fairviewpark.hk/new_web/uat/pdf/Javascript1_7zhr.pdf'"
-            >
-            </VuePdfEmbed> -->
+            <div id="viewer" style="width: 100%; height: 600px; margin: 0 auto"></div>
+          
           </div>
         </div>
       </div>
@@ -60,17 +45,11 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import VuePdfEmbed from "../../../components/pdfJs/pdf.vue";
+import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
-  components: {
-    VuePdfEmbed,
-  },
   data() {
     return {
-      banner: new URL(
-        "../../../assets/image/aboutUs/banner.png",
-        import.meta.url
-      ).href,
+      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
     };
   },
   setup() {
@@ -97,6 +76,18 @@ export default {
     };
     onMounted(async () => {
       await findFairviewParkNewsList();
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+          initialDoc:
+            data.fairview_part_news_list.length !== 0 &&
+            data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs,
+        },
+        document.getElementById("viewer")
+      ).then((instance) => {
+        // use APIs here
+      });
     });
     return {
       ...toRefs(data),
@@ -125,9 +116,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);

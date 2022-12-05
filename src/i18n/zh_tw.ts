@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-21 00:43:57
+ * @LastEditTime: 2022-12-01 23:19:24
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
-    'Login timeout，Please login again！ ':'登陸超時，請從新登陸！',
+    'Login timeout Please login again！ ':'登陸超時，請從新登陸！',
     'Please enter your registration contact email':'請輸入閣下之登記聯絡電郵',
     'Please enter your login name':'請輸入閣下之登入名稱',
     'Forgot password':'忘記密碼',
@@ -63,6 +63,7 @@ export default {
     'Login name':'登入名稱',
     'Password':'密碼',
     'Sign in':'登入',
+    'Edit member information':'編輯賬號資料',
     'Online user registration':'網上用戶註冊',
     'Owner Name (On Account Statement)':'登記業主名稱 (請參考月結單):',
     'Account Number (On Account Statement)':'客戶號碼 (請參考月結單)',
@@ -76,4 +77,6 @@ export default {
     'Please provide a valid login name.':'請輸入正確的登陸名',
     'Please provide a valid password.':'請輸入正確的密碼',
     'Easy access to the information of fairview park':'輕鬆獲取錦綉花園資訊',
+    'Apply Resident Smartcard':'申請智能卡',
+    'Confirm':'確定',
 }

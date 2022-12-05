@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-04 00:12:53
+ * @LastEditTime: 2022-12-02 21:52:20
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -32,7 +32,7 @@
       <p >{{ item.titleEnUs }}</p>
       <ul>
         <li
-          v-for="(item, index) in minutes_of_mac_meetings_sub_list[index]"
+          v-for="(item, index) in item.children"
           :key="index"
           class="flex-row"
         >
@@ -56,7 +56,6 @@ export default {
       fairview_park_lang: "",
       select_index: 0,
       minutes_of_mac_meetings_list: [],
-      minutes_of_mac_meetings_sub_list: [],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -68,7 +67,12 @@ export default {
         });
         if (res.data.status === 200) {
           if (id) {
-            data.minutes_of_mac_meetings_sub_list.push(res.data.data.records) ;
+            for (let i = 0; i < data.minutes_of_mac_meetings_list.length; i++) {
+              if(data.minutes_of_mac_meetings_list[i].id===id){
+                data.minutes_of_mac_meetings_list[i].children = res.data.data.records
+              }
+            }
+            
           } else {
             data.minutes_of_mac_meetings_list = res.data.data.records;
           }
