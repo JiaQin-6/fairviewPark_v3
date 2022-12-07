@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-28 20:56:03
+ * @LastEditTime: 2022-12-07 21:36:32
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -77,6 +77,7 @@
           height="45px"
           direction="vertical"
           :autoplay="true"
+          class="pc"
         >
           <el-carousel-item
             style="display: flex; align-items: center"
@@ -108,6 +109,17 @@
             >
           </el-carousel-item>
         </el-carousel>
+        <marquee class="mobile" style="height:45px;line-height:45px">
+          <a
+            v-for="(item, index) in new_notice_list"
+            :key="index"
+            :href="item.websiteUrl"
+            target="_blank"
+            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            :style="{ color: item.bgColor }"
+            >{{ item.contentEnUs }}
+          </a></marquee
+        >
       </div>
     </div>
     <!-- 主要內容 -->
@@ -144,7 +156,10 @@
               <div class="bg h100">
                 <img style="width: 100%" :src="item.img_url" alt="" />
                 <button>
-                  <router-link :to="item.route">{{ item.text }}</router-link>
+                  <router-link
+                    :to="{ path: item.route, query: { lang: fairview_park_lang } }"
+                    >{{ item.text }}</router-link
+                  >
                 </button>
               </div>
             </div>
@@ -175,7 +190,10 @@
                   :style="{ 'background-image': 'url(' + item.img_url + ')' }"
                 >
                   <button>
-                    <router-link :to="item.route">{{ item.text }}</router-link>
+                    <router-link
+                      :to="{ path: item.route, query: { lang: fairview_park_lang } }"
+                      >{{ item.text }}</router-link
+                    >
                   </button>
                 </div>
               </el-carousel-item>
@@ -187,9 +205,7 @@
       <div class="about-us">
         <h1>
           {{ fairview_park_lang === "en_us" ? "About" : "關於"
-          }}<a href="#/about-us">{{
-            fairview_park_lang === "en_us" ? "us" : "我們"
-          }}</a>
+          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? "us" : "我們" }}</a>
           <p></p>
         </h1>
         <div class="container">
@@ -240,7 +256,15 @@
                     }}
                   </li>
                 </ul>
-                <router-link to="/about-us" style="text-decoration: none">
+                <router-link
+                  :to="{
+                    path: '/about-us',
+                    query: {
+                      lang: fairview_park_lang,
+                    },
+                  }"
+                  style="text-decoration: none"
+                >
                   <button class="fs-16">
                     {{ fairview_park_lang === "en_us" ? "More" : "了解更多" }}
                   </button>
@@ -291,18 +315,11 @@ export default {
         "../../assets/image/home/pic_index02.jpg",
         import.meta.url
       ).href,
-      bus_time_table: new URL(
-        "../../assets/image/home/pic_index03.jpg",
-        import.meta.url
-      ).href,
-      icon_news: new URL(
-        "../../assets/image/home/icon_news.png",
-        import.meta.url
-      ).href,
-      img1: new URL(
-        "../../assets/image/home/aboutus_banner_2e4X.jpg",
-        import.meta.url
-      ).href,
+      bus_time_table: new URL("../../assets/image/home/pic_index03.jpg", import.meta.url)
+        .href,
+      icon_news: new URL("../../assets/image/home/icon_news.png", import.meta.url).href,
+      img1: new URL("../../assets/image/home/aboutus_banner_2e4X.jpg", import.meta.url)
+        .href,
       img2: new URL(
         "../../assets/image/home/Podcast-Hour-Design-Idea_XPel.jpg",
         import.meta.url
@@ -412,6 +429,12 @@ export default {
         }
       }
     }
+    @{deep} .mobile {
+    display: block;
+  }
+  @{deep} .pc {
+    display: none;
+  }
   }
 }
 .container_wrap {
@@ -601,11 +624,23 @@ export default {
   .marquee-container {
     width: 540px;
   }
+  @{deep} .mobile {
+    display: block !important;
+  }
+  @{deep} .pc {
+    display: none !important;
+  }
 }
 @media (min-width: 768px) {
   .container_wrap,
   .marquee-container {
     width: 720px;
+  }
+  @{deep} .mobile {
+    display: block !important;
+  }
+  @{deep} .pc {
+    display: none !important;
   }
 }
 @media (min-width: 992px) {
@@ -613,17 +648,35 @@ export default {
   .marquee-container {
     width: 960px;
   }
+  @{deep} .mobile {
+    display: none !important;
+  }
+  @{deep} .pc {
+    display: block !important;
+  }
 }
 @media (min-width: 1200px) {
   .container_wrap,
   .marquee-container {
     width: 992px;
   }
+  @{deep} .mobile {
+    display: none !important;
+  }
+  @{deep} .pc {
+    display: block !important;
+  }
 }
 @media (min-width: 1400px) {
   .container_wrap,
   .marquee-container {
     width: 1280px;
+  }
+  @{deep} .mobile {
+    display: none !important;
+  }
+  @{deep} .pc {
+    display: block !important;
   }
 }
 

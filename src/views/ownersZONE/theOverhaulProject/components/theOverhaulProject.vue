@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-11-04 23:34:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-06 00:10:04
+ * @LastEditTime: 2022-12-07 21:56:41
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/theOverhaulProject/components/theOverhaulProject.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -100,7 +100,7 @@
       <div style="text-align: center">
         <iframe
           style="width: 560px; height: 315px"
-          src="https://www.youtube.com/embed/dCmLqpKy09A"
+          src="https://youtu.be/bjW8bxYGMC8"
         ></iframe>
       </div>
     </div>

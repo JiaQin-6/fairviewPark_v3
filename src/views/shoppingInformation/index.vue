@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-05 00:10:24
+ * @LastEditTime: 2022-12-07 01:21:45
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -38,7 +38,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
           >
             <el-option
@@ -268,6 +268,9 @@ export default {
       background-color: #fff;
       padding: 12px 0px;
       overflow: auto;
+      &::-webkit-scrollbar {
+                display: none;
+              }
       .nav-content-list {
         .header {
           background-color: #275535;

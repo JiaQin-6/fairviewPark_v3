@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-26 23:32:01
+ * @LastEditTime: 2022-12-07 22:07:40
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -27,7 +27,7 @@
             <h5 style="color:#549632">
               {{ fairview_park_lang === "en_us" ? "Frequently used forms" : "常用表格" }}
             </h5>
-            <p style="color:#549632;font-size:15px">住戶可到本處客戶服務索取任何有關申請表格</p>
+            <p style="color:#549632;font-size:15px">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
             <ul>
               <li
                 style="

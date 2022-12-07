@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-01 22:12:52
+ * @LastEditTime: 2022-12-07 01:11:14
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -369,7 +369,7 @@
                       "
                       class="col-3 flex-row"
                     >
-                      <span style="margin: 0 auto">${{ item2.price }}</span>
+                      <span style="margin: 0 auto">${{ item2.price?item2.price:(fairview_park_lang==='en_us'?'Not Applicable':'不適用') }}</span>
                     </li>
                   </ul>
                 </div>
@@ -985,7 +985,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
+      banner: new URL("../../assets/image/coach service/banner.jpg", import.meta.url)
         .href,
       router1: new URL(
         "../../assets/image/coach service/route1.gif",

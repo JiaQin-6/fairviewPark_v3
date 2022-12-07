@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-06 00:09:51
+ * @LastEditTime: 2022-12-06 23:51:29
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,6 +26,7 @@
               class="m-2"
               placeholder="Select"
               size="large"
+              @change="changeFairviewPartNews"
             >
               <el-option
                 v-for="(item, index) in fairview_part_news_list"
@@ -34,8 +35,12 @@
                 :value="index"
               />
             </el-select>
-            <div id="viewer" style="width: 100%; height: 600px; margin: 0 auto"></div>
-          
+            <div id="pdf-wrap">
+              <div
+                id="pdf-preview"
+                style="width: 100%; height: 600px; margin: 0 auto"
+              ></div>
+            </div>
           </div>
         </div>
       </div>
@@ -59,6 +64,7 @@ export default {
       fairview_part_news_list: [],
       fairview_part_news_index: 0,
       fairview_park_lang: "",
+      ramNumber: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -74,24 +80,67 @@ export default {
         console.log(error);
       }
     };
+    const changeFairviewPartNews = () => {
+      data.ramNumber = getRamNumber(6);
+      document
+        .getElementById("pdf-wrap")
+        .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
+      let div = document.createElement("div");
+      div.id = data.ramNumber;
+      div.style.height = "600px";
+      document.getElementById("pdf-wrap").appendChild(div);
+
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey:
+            process.env.NODE_ENV === "development"
+              ? "oCrqt6OMULAoS15T2J62"
+              : "ukZ2T6b500exNQH0GDJg",
+          initialDoc:
+            data.fairview_part_news_list.length !== 0 &&
+            data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs,
+        },
+        document.getElementById(data.ramNumber)
+      ).then((instance) => {
+        // use APIs here
+      });
+    };
+    //随机生成数值
+    const getRamNumber = (num) => {
+      var result = "";
+      for (var i = 0; i < num; i++) {
+        result += Math.floor(Math.random() * 36).toString(36); //获取0-9，a-b随机组合成的
+      }
+      //默认字母小写，手动转大写
+      return result.toUpperCase();
+    };
     onMounted(async () => {
       await findFairviewParkNewsList();
       PDFJSExpress(
         {
           path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+          licenseKey:
+            process.env.NODE_ENV === "development"
+              ? "oCrqt6OMULAoS15T2J62"
+              : "ukZ2T6b500exNQH0GDJg",
           initialDoc:
             data.fairview_part_news_list.length !== 0 &&
             data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs,
         },
-        document.getElementById("viewer")
+        document.getElementById('pdf-preview')
       ).then((instance) => {
         // use APIs here
+        // const { documentViewer, annotationManager } = instance.Core;
+        // call methods from instance, documentViewer and annotationManager as needed
+        // instance.UI.setTheme('dark');
       });
     });
     return {
       ...toRefs(data),
       findFairviewParkNewsList,
+      changeFairviewPartNews,
+      getRamNumber,
     };
   },
 };

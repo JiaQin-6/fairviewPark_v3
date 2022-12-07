@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-27 16:51:32
+ * @LastEditTime: 2022-12-07 01:27:33
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -75,8 +75,8 @@
                 v-for="(item, index) in estate_notice_content"
                 :key="index"
               >
-                <span class="fs-16">{{ item.titleEnUs }}</span>
-                <div class="more">
+                <span class="fs-16 pl-10 pr-16">{{(index+1)}}.&nbsp;{{ item.titleEnUs }}</span>
+                <div class="more" style="flex: 1 0 auto;">
                   <a :href="item.contentEnUs" target="_blank" class="fs-16">{{
                     fairview_park_lang === "en_us" ? "More" : "更多"
                   }}</a>
@@ -258,6 +258,7 @@ export default {
             justify-content: space-between;
             border-bottom: 1px solid #ccc;
             padding: 10px 0;
+            align-items: center;
             span {
             }
             .more {

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-04 23:28:32
+ * @LastEditTime: 2022-12-06 21:23:11
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
   <div class="main">
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" :href="('#/home?lang='+fairview_park_lang)">
           <transition name="el-fade-in-linear">
             <img
               class="navbar-brand-logo-mobile"
@@ -70,65 +70,65 @@
                 {
                   type: 'default',
                   text: $t('Home'),
-                  href: '#/home',
+                  href: '#/home?lang='+fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('About us'),
-                  href: '#/about-us',
+                  href: '#/about-us?lang='+fairview_park_lang,
                 },
                 {
                   type: 'select',
                   text: $t('Prospective Buyer'),
-                  href: '#/prospective-buyer-title',
+                  href: '#/prospective-buyer-title?lang='+fairview_park_lang,
                   children: [
                     {
                       text: $t('Prospective Buyer'),
-                      href: '#/prospective-buyer',
+                      href: '#/prospective-buyer?lang='+fairview_park_lang,
                     },
                     {
                       text: $t('One Stop Service for New Owners'),
-                      href: '#/buyer-server',
+                      href: '#/buyer-server?lang='+fairview_park_lang,
                     },
                     {
                       text: $t('House Type Enquiry'),
-                      href: '#/decoration',
+                      href: '#/decoration?lang='+fairview_park_lang,
                     },
                     {
                       text: $t('Master Colour Schedule'),
-                      href: '#/wall-color-series',
+                      href: '#/wall-color-series?lang='+fairview_park_lang,
                     },
                   ],
                 },
                 {
                   type: 'default',
                   text: $t('Estate Facilities'),
-                  href: '#/estate-facilities',
+                  href: '#/estate-facilities?lang='+fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Coach Service'),
-                  href: '#/coach-service',
+                  href: '#/coach-service?lang='+fairview_park_lang,
                 },
                 {
                   type: 'select',
                   text: $t('Shops Directory'),
-                  href: '#/shopping-information-title',
+                  href: '#/shopping-information-title?lang='+fairview_park_lang,
                   children: [
                     {
                       text: $t('Shops Directory'),
-                      href: '#/shopping-information',
+                      href: '#/shopping-information?lang='+fairview_park_lang,
                     },
                     {
                       text: $t('Carpark Parking Privilege Payment'),
-                      href: '#/carpark-parking-privilege-payment',
+                      href: '#/carpark-parking-privilege-payment?lang='+fairview_park_lang,
                     },
                   ],
                 },
                 {
                   type: 'default',
                   text: $t('Useful Telephone Nos.'),
-                  href: '#/useful-link',
+                  href: '#/useful-link?lang='+fairview_park_lang,
                 },
               ]"
               :key="index"
@@ -429,10 +429,20 @@ export default {
     const selectOwnersZone = (val) => {
       if (val === "/loginOut") {
         loginOut();
-        router.push("/home");
+        router.push({
+          path:'/home',
+          query:{
+            lang:data.fairview_park_lang
+          }
+        });
       } else if (val === "/edit-member-information") {
       } else {
-        router.push(val);
+        router.push({
+          path:val,
+          query:{
+            lang:data.fairview_park_lang
+          }
+        });
       }
     };
     //
@@ -462,7 +472,12 @@ export default {
       ) {
         document.getElementById("navbar-button").click();
       }
-      router.push("/information-push");
+      router.push({
+          path:'/information-push',
+          query:{
+            lang:data.fairview_park_lang
+          }
+        });
     };
     //監聽滾動條的位置
     // const scrollPosition = () => {
