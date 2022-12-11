@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-02 21:51:26
+ * @LastEditTime: 2022-12-11 23:38:48
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -19,7 +19,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-3 menu">
+        <div class="col-12 col-lg-2 menu">
           <!--   mode="horizontal" -->
           <el-menu
             :default-active="activeIndex"
@@ -207,7 +207,7 @@
             @change="changeMenu"
           />
         </div>
-        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow flex-row">
+        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow flex-row">
           <div class="nav-content-wrap" style="width:100%">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
             <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
@@ -360,15 +360,17 @@ export default {
   position: relative;
   overflow: hidden;
   img {
-    opacity: 0.5;
     width: 100%;
+    height: 280px;
+    background-size: cover;
+    background-position: bottom;
   }
   p {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 48px;
     font-style: normal;
     font-weight: bold;
     width: 80%;
@@ -395,6 +397,7 @@ export default {
         line-height: inherit;
         margin-bottom: 5px;
         white-space: inherit;
+        font-size: 18px;
         &:hover {
           background-color: var(--mainColor2) !important;
           color: #fff !important;
@@ -409,6 +412,7 @@ export default {
           padding: 6px 0 6px 10px;
           height: 40px;
           background-color: #fff !important;
+        font-size: 18px;
         }
         .el-menu-item {
           margin-bottom: 0px;
@@ -456,7 +460,6 @@ export default {
 @media (max-width: 992px) {
   .banner {
     img {
-      opacity: 0.5;
       width: auto;
       height: 200px;
     }

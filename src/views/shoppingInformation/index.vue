@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 01:21:45
+ * @LastEditTime: 2022-12-11 23:28:28
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-3 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row" id="shopping-information-menu">
             <li
               v-for="(item, index) in shop_information_list"
@@ -51,7 +51,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-9 nav-content mb-20">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <div
             class="nav-content-list"
             :id="
@@ -61,22 +61,23 @@
             v-for="(item, index) in shop_information_list"
             :key="index"
           >
-            <div class="header">
-              <span>{{ item && item.titleEnUs }}</span>
-              <img src="" alt="" />
-            </div>
-            <ul>
+              <span class="header">{{ item && item.titleEnUs }}</span>
+           
+            <ul  class="flex-row">
               <li
-                class="flex-row"
+                class="col-4"
                 v-for="(item2, index2) in shop_information_list[index].children"
                 :key="index2"
               >
                 <div class="img col-4">
-                  <img @click="openUrl(item2.websiteUrl)" :src="item2.logUrl" alt="" />
-                  <p>{{ item2.titleEnUs }}</p>
+                  <!-- item2.logUrl -->
+                  <img @click="openUrl(item2.websiteUrl)" src="https://img2.baidu.com/it/u=1003272215,1878948666&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1670864400&t=3baf2497c38a91412c0371a905b8dc8d" alt="" />
                 </div>
-                <span class="col-5">{{ item2.shopNo }}</span>
-                <span class="col-3" v-if="item2.tel">
+                <p>{{ item2.titleEnUs }}</p>
+                <span><el-icon><LocationFilled /></el-icon>{{ item2.shopNo }}</span>
+            
+                <span v-if="item2.tel">
+                  <el-icon><PhoneFilled /></el-icon>
                   <a
                     class="fs-15"
                     v-for="(item3, index3) in item2.tel.indexOf(',') !== -1
@@ -180,17 +181,17 @@ export default {
   height: 280px;
 
   .img {
-    opacity: 0.5;
     width: 100%;
     height: 280px;
     background-size: cover;
+    background-position: bottom;
   }
   p {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 48px;
     font-style: normal;
     font-weight: bold;
     width: 80%;
@@ -225,16 +226,15 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
-            font-size: 15px;
+            font-size: 18px;
             margin-right: 5px;
             display: none;
             color: #000;
           }
           span {
-            font-size: 15px;
+            font-size: 18px;
             color: #000;
           }
           &:hover {
@@ -265,29 +265,22 @@ export default {
       }
     }
     @{deep} .nav-content {
-      background-color: #fff;
-      padding: 12px 0px;
       overflow: auto;
       &::-webkit-scrollbar {
                 display: none;
               }
       .nav-content-list {
         .header {
-          background-color: #275535;
-          padding: 5px 20px;
-          border-radius: 15px 15px 0 0;
-          span {
-            color: #fff;
+            color: #9cc212;
+            font-size: 36px;
+            font-weight: bold;
           }
-          img {
-          }
-        }
+        
         ul {
-          justify-content: space-between;
           padding: 0;
-          box-shadow: 0px 12px 32px 4px rgba(0, 0, 0, 0.05);
+          flex-wrap: wrap;
           li {
-            padding: 10px 20px;
+            padding-right: 10px;
             align-items: center;
             span {
               text-align: center;
@@ -298,20 +291,33 @@ export default {
               }
             }
             .img {
+              width: 100%;
               display: flex;
               flex-direction: column;
               align-items: center;
+              border: 2px solid #f7f7f7;
+              text-align: center;
+              padding: 20px;
+              box-sizing: border-box;
               img {
-                min-width: 50px;
-                max-width: 100px;
-                margin-bottom: 5px;
-              }
-              p {
+                width: 100%;
+                max-width: 280px;
+                max-height: 150px;
               }
             }
-
-            &:nth-child(2n) {
-              background-color: #5cb89e;
+            p{
+              margin:10px 0 5px;
+              font-weight: bold;
+            }
+            span{
+              display: block;
+              text-align: left;
+              i{
+                color: var(--mainColor2);
+                vertical-align: text-bottom;
+                font-size: 18px;
+                margin-right: 5px;
+              }
             }
           }
         }
@@ -347,7 +353,6 @@ export default {
 @media (max-width: 992px) {
   .banner {
     img {
-      opacity: 0.5;
       width: auto;
       height: 200px;
     }

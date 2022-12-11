@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 01:09:33
+ * @LastEditTime: 2022-12-11 23:34:50
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-3 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row menu-ul">
             <li
               v-for="(item, index) in [
@@ -212,17 +212,17 @@ export default {
   height: 280px;
 
   .img {
-    opacity: 0.5;
     width: 100%;
     height: 280px;
     background-size: cover;
+    background-position: bottom;
   }
   p {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 48px;
     font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
     font-style: normal;
     font-weight: bold;
@@ -265,7 +265,7 @@ export default {
             color: var(--mainColor2);
           }
           span {
-            font-size: 15px;
+            font-size: 18px;
             color: #000;
           }
           &:hover {
@@ -284,7 +284,6 @@ export default {
           color: #fff;
           i {
             color: #fff;
-            // display: inline-block;
           }
           span {
             color: #fff;
@@ -425,7 +424,6 @@ export default {
 @media (max-width: 992px) {
   .banner {
     img {
-      opacity: 0.5;
       width: auto;
       height: 200px;
     }

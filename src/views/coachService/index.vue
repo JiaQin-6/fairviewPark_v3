@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 01:11:14
+ * @LastEditTime: 2022-12-12 00:22:49
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-3 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row">
             <li
               v-for="(item, index) in coach_service_content.coachServiceList"
@@ -56,15 +56,15 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-9 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
           <!--  -->
           <div align="center" style="padding: 0 10px">
             <!-- pdf -->
-            <h5 class="fs-16 mb-20" style="text-align: left; cursor: pointer">
+            <h5 class="title fs-16 mb-20 flex-row" style="text-align: left; cursor: pointer">
               <a
                 :href="coach_service_content.coachServiceFile"
                 target="_blank"
-                style="text-decoration: none"
+                style="text-decoration: none;"
               >
                 {{
                   fairview_park_lang === "en_us"
@@ -72,6 +72,20 @@
                     : "颱風及惡劣天氣時之專車服務"
                 }}
               </a>
+              <span v-if="coach_service_content &&
+                      coach_service_content.coachServiceList.length !== 0 &&
+                      coach_service_content.coachServiceList[nav_index]
+                        .launchTime">{{
+                  fairview_park_lang === "en_us"
+                    ? "Update date : " + (coach_service_content &&
+                      coach_service_content.coachServiceList.length !== 0 &&
+                      coach_service_content.coachServiceList[nav_index]
+                        .launchTime)
+                    : "更新日期 : " + (coach_service_content &&
+                      coach_service_content.coachServiceList.length !== 0 &&
+                      coach_service_content.coachServiceList[nav_index]
+                        .launchTime)
+                }}</span>
             </h5>
             <!-- 时间表 -->
             <div
@@ -81,26 +95,6 @@
                 nav_index !== coach_service_content.coachServiceList.length - 2
               "
             >
-              <p
-                style="
-                  text-align: left;
-                  margin-bottom: 15px;
-                  font-size: 15px;
-                  color: #f56c6c;
-                "
-              >
-                {{
-                  fairview_park_lang === "en_us"
-                    ? "Time Table Effect Day : " + coach_service_content &&
-                      coach_service_content.coachServiceList.length !== 0 &&
-                      coach_service_content.coachServiceList[nav_index]
-                        .launchTime
-                    : "以下時間表生效時間 : " + coach_service_content &&
-                      coach_service_content.coachServiceList.length !== 0 &&
-                      coach_service_content.coachServiceList[nav_index]
-                        .launchTime
-                }}
-              </p>
               <table
                 width="100%"
                 border="0"
@@ -113,34 +107,20 @@
                 class="fs-16 mb-30"
               >
                 <tbody>
-                  <tr v-if="index === 0">
+                  <tr style="width:100%;display:inline-block;margin-bottom:2px">
                     <td
-                      height="30"
+                      height="50"
                       :colspan="item.fleidList.length"
-                      bgcolor="#7CA628"
+                      bgcolor="#9cc212"
+                      style="width:100%;display:inline-block;"
                     >
-                      <div align="center">
-                        {{
-                          coach_service_content.coachServiceList[nav_index]
-                            .titleEnUs
-                        }}
+                      <div align="center" style="height:100%">
+                        <span style="font-size:24px;color:#fff;line-height:50px">{{ item.titleEnUs }}</span>
                       </div>
                     </td>
                   </tr>
-                  <tr>
+                  <tr class="flex-row">
                     <td
-                      height="30"
-                      :colspan="item.fleidList.length"
-                      bgcolor="#E7F4BB"
-                    >
-                      <div align="center">
-                        <span class="style8">{{ item.titleEnUs }}</span>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      width="240"
                       valign="top"
                       :bgcolor="
                         index2 % 2 === 0
@@ -151,6 +131,7 @@
                       "
                       v-for="(item2, index2) in item.fleidList"
                       :key="index2"
+                      style="width:100%;display:inline-block;margin-right:2px"
                     >
                       <p
                         :style="{
@@ -369,7 +350,7 @@
                       "
                       class="col-3 flex-row"
                     >
-                      <span style="margin: 0 auto">${{ item2.price?item2.price:(fairview_park_lang==='en_us'?'Not Applicable':'不適用') }}</span>
+                      <span style="margin: 0 auto">{{ item2.price?('$'+item2.price):(fairview_park_lang==='en_us'?'Not Applicable':'不適用') }}</span>
                     </li>
                   </ul>
                 </div>
@@ -1109,17 +1090,17 @@ export default {
   height: 280px;
 
   .img {
-    opacity: 0.5;
     width: 100%;
     height: 280px;
     background-size: cover;
+    background-position: bottom;
   }
   p {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-size: 30px;
+    font-size: 48px;
     font-style: normal;
     font-weight: bold;
     width: 80%;
@@ -1161,7 +1142,7 @@ export default {
             color: #000;
           }
           span {
-            font-size: 15px;
+            font-size: 18px;
             color: #000;
           }
           &:hover {
@@ -1195,6 +1176,17 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 0px;
+      .title{
+        align-items: center;
+        justify-content: space-between;
+        a{
+          color: var(--mainColor3);
+          font-size: 36px;
+        }
+        span{
+
+        }
+      }
       .free-bus {
         .table {
           h2 {
@@ -1265,7 +1257,6 @@ export default {
 @media (max-width: 992px) {
   .banner {
     img {
-      opacity: 0.5;
       width: auto;
       height: 200px;
     }

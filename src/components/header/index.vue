@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-06 21:23:11
+ * @LastEditTime: 2022-12-12 00:35:04
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -78,27 +78,10 @@
                   href: '#/about-us?lang='+fairview_park_lang,
                 },
                 {
-                  type: 'select',
+                  type: 'default',
                   text: $t('Prospective Buyer'),
-                  href: '#/prospective-buyer-title?lang='+fairview_park_lang,
-                  children: [
-                    {
-                      text: $t('Prospective Buyer'),
-                      href: '#/prospective-buyer?lang='+fairview_park_lang,
-                    },
-                    {
-                      text: $t('One Stop Service for New Owners'),
-                      href: '#/buyer-server?lang='+fairview_park_lang,
-                    },
-                    {
-                      text: $t('House Type Enquiry'),
-                      href: '#/decoration?lang='+fairview_park_lang,
-                    },
-                    {
-                      text: $t('Master Colour Schedule'),
-                      href: '#/wall-color-series?lang='+fairview_park_lang,
-                    },
-                  ],
+                  href: '#/prospective-buyer?lang='+fairview_park_lang,
+                 
                 },
                 {
                   type: 'default',
@@ -394,13 +377,6 @@ export default {
     //切換路由
     const changeRouter = (href, children) => {
       if (
-        location.hash === "#/prospective-buyer" ||
-        location.hash === "#/buyer-server" ||
-        location.hash === "#/decoration" ||
-        location.hash === "#/wall-color-series"
-      ) {
-        data.route_url = "#/prospective-buyer-title";
-      } else if (
         location.hash === "#/shopping-information" ||
         location.hash === "#/carpark-parking-privilege-payment"
       ) {
@@ -505,13 +481,6 @@ export default {
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
         if (
-          location.hash === "#/prospective-buyer" ||
-          location.hash === "#/buyer-server" ||
-          location.hash === "#/decoration" ||
-          location.hash === "#/wall-color-series"
-        ) {
-          data.route_url = "#/prospective-buyer-title";
-        } else if (
           location.hash === "#/shopping-information" ||
           location.hash === "#/carpark-parking-privilege-payment"
         ) {
