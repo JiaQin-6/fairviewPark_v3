@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:37:41
+ * @LastEditTime: 2022-12-14 00:22:16
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -56,9 +56,8 @@
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
           <div class="nav-content-main">
             <div>
-              <h5>
+              <h5 v-if="FAQ_from_residents_list.length !== 0">
                 {{
-                  FAQ_from_residents_list.length !== 0 &&
                   FAQ_from_residents_list[nav_index].titleEnUs
                 }}
               </h5>
@@ -145,10 +144,10 @@ export default {
       }
     };
     //
-    const changeMenu = async (val) =>{
+    const changeMenu = async (val) => {
       data.nav_index = val;
       for (let i = 0; i < data.FAQ_from_residents_list.length; i++) {
-        if(data.FAQ_from_residents_list[i].index === val){
+        if (data.FAQ_from_residents_list[i].index === val) {
           findFaqFromResidentsList(data.FAQ_from_residents_list[i].id);
         }
       }
@@ -188,9 +187,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -259,11 +258,12 @@ export default {
       background-color: #fff;
       font-size: 13px;
       .nav-content-main {
-        padding: 12px 15px;
+        padding: 2px 15px;
         h5 {
-          background-color: #549632;
-          color: #fff;
-          padding: 5px 10px;
+          font-size: 36px;
+          color: #9cc212;
+          font-weight: bold;
+
           margin-bottom: 10px;
         }
         ul {

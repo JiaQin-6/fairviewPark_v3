@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-12 00:35:04
+ * @LastEditTime: 2022-12-14 23:22:05
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -163,7 +163,7 @@
                 v-if="fairview_park_lang == 'en_us'"
                 style="cursor: pointer"
                 @click="changeLang('zh_tw')"
-                >中文</span
+                >中</span
               >
             </div>
             <button
@@ -193,46 +193,46 @@
                       data-bs-target="#editMemberInformation"
                       ><el-icon><EditPen /></el-icon>{{ $t("Edit member information") }}</el-dropdown-item
                     >
+                    <el-dropdown-item command="/news-update">{{
+                      $t("News Update")
+                    }}</el-dropdown-item>
                     <el-dropdown-item command="/FAQ-from-residents">{{
                       $t("FAQ from Residents")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/estate-notice">{{
                       $t("Estate Notices")
                     }}</el-dropdown-item>
-                    <el-dropdown-item command="/fairview-part-news">{{
-                      $t("Fairview Park News")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/demographic-opinion-survey">{{
-                      $t("Demographic & Opinion Survey")
-                    }}</el-dropdown-item>
                     <el-dropdown-item command="/estate-activities">{{
                       $t("Estate Activities")
                     }}</el-dropdown-item>
-                    <el-dropdown-item command="/news-update">{{
-                      $t("News Update")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/residents-handbook-map">{{
-                      $t("Residents Handbook / Map")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/frequently-used-forms">{{
-                      $t("Frequently Used Forms")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/MAC-column">{{
-                      $t("MAC Column")
+                    <el-dropdown-item command="/fairview-part-news">{{
+                      $t("Fairview Park News")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/payment-list">{{
                       $t("Payment List")
                     }}</el-dropdown-item>
-                    <el-dropdown-item command="/lottery-system-for-impound">{{
-                      $t("Lottery System For Impounding Action")
+                    <el-dropdown-item command="/apply-resident-smartcard">{{
+                      $t("Apply Resident Smartcard")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/MAC-column">{{
+                      $t("MAC Column")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/the-overhaul-project">{{
                       $t("the Overhaul Project")
                     }}</el-dropdown-item>
-                    <el-dropdown-item command="/apply-resident-smartcard">{{
-                      $t("Apply Resident Smartcard")
+                    <el-dropdown-item command="/lottery-system-for-impound">{{
+                      $t("Lottery System For Impounding Action")
                     }}</el-dropdown-item>
-
+                    <el-dropdown-item command="/frequently-used-forms">{{
+                      $t("Frequently Used Forms")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/residents-handbook-map">{{
+                      $t("Residents Handbook / Map")
+                    }}</el-dropdown-item>
+                    <el-dropdown-item command="/demographic-opinion-survey">{{
+                      $t("Demographic & Opinion Survey")
+                    }}</el-dropdown-item>
+                    
                     <el-dropdown-item class="yellow" command="/loginOut">
                       <el-icon><UserFilled /></el-icon> {{ $t("Login out") }}</el-dropdown-item
                     >
@@ -543,7 +543,6 @@ export default {
   z-index: 20;
   height: 62px;
   .navbar {
-    max-width: 1920px;
     height: 100%;
     left: 0px;
     top: 0px;
@@ -552,7 +551,6 @@ export default {
     margin: 0 auto;
     align-items: inherit;
     background: var(--mainColor1);
-    // justify-content: space-between;
     text-align: center;
 
     .container-fluid {
@@ -583,7 +581,7 @@ export default {
         background: var(--mainColor2);
         border-radius: 50px;
         border: 0;
-        font-size: 16px;
+        font-size: 18px;
         color: #fff;
         margin-left: 20px;
         padding: 3px 15px;
@@ -597,7 +595,7 @@ export default {
     }
     .navbar-collapse {
       margin-left: auto;
-      // justify-content: space-between;
+      justify-content: space-between;
       .navbar-nav {
         height: 100%;
         .nav-item {
@@ -703,7 +701,7 @@ export default {
       text-align: center;
       align-items: center;
       li {
-        font-size: 16px;
+        font-size: 18px;
         a {
           padding: 0 5px;
         }
@@ -717,7 +715,7 @@ export default {
         padding: 0 10px;
         span {
           display: inline-block;
-          font-size: 16px;
+          font-size: 18px;
           color: #fff;
           width: 40px;
           &:hover {
@@ -729,7 +727,7 @@ export default {
         background: var(--mainColor2);
         border-radius: 50px;
         border: 0;
-        font-size: 16px;
+        font-size: 18px;
         color: #fff;
         margin-left: 20px;
         padding: 3px 15px;
@@ -748,7 +746,7 @@ export default {
           background: var(--mainColor2);
           border-radius: 50px;
           border: 0;
-          font-size: 16px;
+          font-size: 18px;
           margin-left: 20px;
           padding: 3px 15px;
           border: 1px solid var(--mainColor2);
@@ -757,7 +755,7 @@ export default {
           font-weight: normal;
 
           span {
-            font-size: 16px;
+            font-size: 18px;
             color: #fff;
           }
           &:hover {
@@ -774,7 +772,7 @@ export default {
           border-radius: 150px;
           border: 0;
 
-          font-size: 16px;
+          font-size: 18px;
           color: #fff;
           margin-right: 20px;
           .el-icon {
@@ -787,7 +785,7 @@ export default {
 }
 @{deep} .el-popper {
   .el-dropdown-menu__item {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 @media (min-width: 992px) {
@@ -804,6 +802,11 @@ export default {
   .login-btn2 {
     display: none;
     width: 0;
+  }
+}
+@media (min-width: 1400px) {
+  .container-fluid{
+    width: 1280px!important;
   }
 }
 @media (max-width: 991px) {

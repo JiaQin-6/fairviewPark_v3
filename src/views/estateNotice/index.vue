@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:37:04
+ * @LastEditTime: 2022-12-14 00:25:34
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -55,6 +55,9 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
           <div class="estate-notice-content">
+            <p v-if="estate_notice_list.length!==0" style="font-size: 36px; color: #9cc212; font-weight: bold">
+              {{ estate_notice_list[nav_index].titleEnUs }}
+            </p>
             <div class="header flex-row mb-20">
               <span class="fs-16">{{
                 fairview_park_lang === "en_us" ? "Sort：" : "排序："
@@ -75,8 +78,10 @@
                 v-for="(item, index) in estate_notice_content"
                 :key="index"
               >
-                <span class="fs-16 pl-10 pr-16">{{(index+1)}}.&nbsp;{{ item.titleEnUs }}</span>
-                <div class="more" style="flex: 1 0 auto;">
+                <span class="fs-16 pl-10 pr-16"
+                  >{{ index + 1 }}.&nbsp;{{ item.titleEnUs }}</span
+                >
+                <div class="more" style="flex: 1 0 auto">
                   <a :href="item.contentEnUs" target="_blank" class="fs-16">{{
                     fairview_park_lang === "en_us" ? "More" : "更多"
                   }}</a>
@@ -95,8 +100,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url)
-        .href,
+      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
       nav_index: 0,
     };
   },
@@ -130,11 +134,11 @@ export default {
         console.log(error);
       }
     };
-     //
-     const changeMenu = async (val) =>{
+    //
+    const changeMenu = async (val) => {
       data.nav_index = val;
       for (let i = 0; i < data.estate_notice_list.length; i++) {
-        if(data.estate_notice_list[i].index === val){
+        if (data.estate_notice_list[i].index === val) {
           findEstateNoticeList(data.estate_notice_list[i].id);
         }
       }
@@ -146,7 +150,7 @@ export default {
     return {
       ...toRefs(data),
       findEstateNoticeList,
-      changeMenu
+      changeMenu,
     };
   },
 };
@@ -171,12 +175,12 @@ export default {
     font-size: 48px;
     font-style: normal;
     font-weight: bold;
-        width: 80%;
+    width: 80%;
     text-align: center;
 
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -244,7 +248,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 0px;
+      padding: 2px 0px 0 20px;
       .estate-notice-content {
         .header {
           align-items: center;
@@ -303,35 +307,34 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px){
-  .banner{
+@media (max-width: 992px) {
+  .banner {
     img {
-    width:auto;
-    height:200px;
-  }
+      width: auto;
+      height: 200px;
+    }
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; 
-        padding: 0;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
           display: none;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
         }
-      }
-      .menu-select {
+        .menu-select {
           display: block;
         }
+      }
     }
-  }
   }
 }
 </style>

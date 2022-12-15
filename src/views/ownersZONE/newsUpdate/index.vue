@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:40:30
+ * @LastEditTime: 2022-12-14 22:10:50
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -20,8 +20,7 @@
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
         <div class="col-12 col-lg-2 aside mb-20">
-      
-            <ul class="row">
+          <ul class="row">
             <li
               v-for="(item, index) in new_update_list"
               :key="index"
@@ -32,12 +31,16 @@
               <span>{{ item.titleEnUs }}</span>
             </li>
           </ul>
-            <el-select
+          <el-select
             v-model="new_update_index"
             class="m-2 menu-select"
             placeholder="Select"
             size="large"
-            @change="()=>{findOneNewUpdateById(new_update_index)}"
+            @change="
+              () => {
+                findOneNewUpdateById(new_update_index);
+              }
+            "
           >
             <el-option
               v-for="(item, index) in new_update_list"
@@ -46,11 +49,13 @@
               :value="item.id"
             />
           </el-select>
-         
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-            <div class="ql-editor" v-html="new_update_content.htmlEnUs"></div>
-          </div>
+          <p style="font-size: 36px; color: #9cc212; font-weight: bold" v-if="new_update_list.length!==0">
+            {{ new_update_list.filter(item=>{ return item.id === new_update_index})[0].titleEnUs }}
+          </p>
+          <div class="ql-editor" v-html="new_update_content.htmlEnUs"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -95,7 +100,7 @@ export default {
           id: id,
         });
         if (res.data.status === 200) {
-          data.new_update_content=res.data.data;
+          data.new_update_content = res.data.data;
           data.new_update_index = res.data.data.id;
         }
       } catch (error) {
@@ -136,9 +141,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -199,14 +204,14 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 0px;
+      padding: 2px 0px 0 20px;
       img {
         max-width: 100%;
       }
@@ -237,7 +242,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -248,7 +252,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -284,9 +287,9 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
-      }
+        .menu-select {
+          display: block;
+        }
       }
     }
   }

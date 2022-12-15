@@ -2,13 +2,13 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-12 00:48:57
+ * @LastEditTime: 2022-12-12 23:55:15
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="new-buyer-notice">
-    <div class="content mt-20" style="margin: 20px auto; padding: 0 20px">
+    <div class="content mt-20" style="margin: 0px auto; padding: 0 20px">
       <table border="0" cellpadding="0" cellspacing="0" align="center">
         <tbody>
           <tr>
@@ -22,7 +22,6 @@
                         cellspacing="0"
                         cellpadding="0"
                         style="
-                          border: 1px solid #275535;
                           border-radius: 8px;
                           border-collapse: separate;
                           border-spacing: 0px;
@@ -32,12 +31,24 @@
                         <tbody style="border: 1px solid #275535; border-radius: 5px">
                           <tr
                             style="
-                              background-color: #275535;
+                              box-sizing: border-box;
+                            "
+                          >
+                            <td style="font-size: 36px;color:#9cc212;font-weight:bold;">
+                              {{
+                                fairview_park_lang === "en_us"
+                                  ? "Prospective Buyers"
+                                  : "買家須知"
+                              }}
+                            </td>
+                          </tr>
+                          <tr
+                            style="
                               height: 50px;
                               box-sizing: border-box;
                             "
                           >
-                            <td style="padding-left: 15px; font-size: 20px; color: #fff">
+                            <td style="font-size: 24px;font-weight:bold;">
                               {{
                                 fairview_park_lang === "en_us"
                                   ? "To New Owners or Prospective Buyers"
@@ -51,8 +62,6 @@
                                 <tbody>
                                   <tr>
                                     <td valign="top">
-                                      <br />
-                                      <br />
                                       <table
                                         border="0"
                                         align="center"
@@ -61,7 +70,7 @@
                                       >
                                         <tbody>
                                           <tr>
-                                            <td class="style13" style="padding: 0 15px">
+                                            <td class="style13" style="">
                                               <p>
                                                 {{
                                                   fairview_park_lang === "en_us"
@@ -120,7 +129,7 @@
                                                 ]"
                                             :key="index"
                                           >
-                                            <td class="style13" style="padding: 0 15px">
+                                            <td class="style13" style="">
                                               <table
                                                 border="0"
                                                 cellspacing="0"
@@ -129,14 +138,14 @@
                                                 <tbody>
                                                   <tr>
                                                     <td>
-                                                      <p>
+                                                      <p style="margin-bottom:5px">
                                                         <strong>{{ item.title }}</strong>
                                                       </p>
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td>
-                                                      <p>
+                                                      <p style="margin-bottom:25px">
                                                         {{ item.des }}
                                                         <br />
                                                         <font
@@ -163,7 +172,7 @@
                         </tbody>
                       </table>
                       <br />
-                      <el-collapse v-model="activeNames" @change="handleChange">
+                      <el-collapse accordion v-model="activeNames" @change="handleChange">
                         <el-collapse-item
                           v-for="(item, index) in fairview_park_lang === 'en_us'
                             ? [
@@ -350,6 +359,10 @@
                           :title="index + 1 + '. ' + item.title"
                           :name="index + 1"
                         >
+                        <template #title>
+                          <span>{{index+1}}.</span>
+                          <span>{{item.title}}</span>
+                        </template>
                           <div>
                             <p style="font-size: 16px; padding: 5px 27px">
                               {{ item.des }}<br />
@@ -389,14 +402,53 @@ export default {
 <style lang="less" scoped>
 @deep:~ ">>>";
 .new-buyer-notice {
+  font-size: 18px;
+  color: #4a4a4a;
   @{deep} .el-collapse {
+    border: none;
     .el-collapse-item {
+      margin-bottom: 2px;
       .el-collapse-item__header {
-        font-size: 16px;
-        background-color: #fff0be;
-        padding-left: 10px;
-        border-bottom: 1px solid #ccc;
+        font-size: 18px;
+        background-color: #fffae7;
+        border: none;
+        &:hover{
+        background-color: #fff3c4;
+          span{
+            &:first-child{
+            background-color: #cee97b;
+          }
+          }
+        }
+        span{
+          color: #4a4a4a;
+          font-weight: normal;
+          &:first-child{
+            width: 50px;
+            background-color: #e7f3be;
+            text-align: center;
+          }
+          &:nth-child(2){
+            padding-left: 10px;
+          }
+        }
       }
+      .is-active{
+        background-color: #fff3c4;
+          span{
+          font-weight: bold;
+            &:first-child{
+            background-color: #cee97b;
+          }
+          }
+      }
+      .el-collapse-item__wrap{
+        border: none;
+        .el-collapse-item__content{
+        color: #4a4a4a;
+      }
+      }
+      
     }
   }
 }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-12 00:22:49
+ * @LastEditTime: 2022-12-14 23:07:41
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -60,17 +60,14 @@
           <!--  -->
           <div align="center" style="padding: 0 10px">
             <!-- pdf -->
-            <h5 class="title fs-16 mb-20 flex-row" style="text-align: left; cursor: pointer">
+            <h5 class="title fs-18 mb-20 flex-row" style="text-align: left; cursor: pointer">
               <a
                 :href="coach_service_content.coachServiceFile"
                 target="_blank"
                 style="text-decoration: none;"
+                v-if="coach_service_content.coachServiceList.length!==0"
               >
-                {{
-                  fairview_park_lang === "en_us"
-                    ? "Estate Coach Service During Typhoon and Inclement Weather Condition"
-                    : "颱風及惡劣天氣時之專車服務"
-                }}
+                {{ coach_service_content.coachServiceList[nav_index].titleEnUs }}
               </a>
               <span v-if="coach_service_content &&
                       coach_service_content.coachServiceList.length !== 0 &&
@@ -104,7 +101,7 @@
                   .length !== 0 &&
                 coach_service_content.coachServiceList[nav_index].sectionList"
                 :key="index"
-                class="fs-16 mb-30"
+                class="fs-18 mb-30"
               >
                 <tbody>
                   <tr style="width:100%;display:inline-block;margin-bottom:2px">
@@ -134,12 +131,9 @@
                       style="width:100%;display:inline-block;margin-right:2px"
                     >
                       <p
-                        :style="{
-                          'font-weight': index2 === 0 ? 'bold' : 'normal',
-                        }"
                         align="center"
                         class="style34"
-                        style="padding: 10px 0; margin: 0"
+                        style="padding: 10px 0; margin: 0;font-weight:bold"
                       >
                         {{ item2.titleEnUs }}
                       </p>
@@ -157,7 +151,7 @@
                 </tbody>
               </table>
 
-              <p style="text-align: left; font-size: 15px">
+              <p style="text-align: left; font-size: 18px">
                 {{
                   fairview_park_lang === "en_us"
                     ? "*Expected arrival time"
@@ -191,16 +185,16 @@
                               v-for="(item, index) in coach_service_content
                                 .coachServiceList[nav_index].endModuleList"
                               :key="index"
-                              style="font-size: 15px"
+                              style="font-size: 18px"
                             >
-                              <p class="style20" style="font-weight: bold">
+                              <p class="style20" style="font-weight: bold;color:rgb(156, 194, 18);">
                                 {{ item.titleEnUs }}
                               </p>
                               <p
                                 v-for="(item2, index2) in item.columnList"
                                 :key="index2"
                               >
-                                {{ item2.text }}
+                                {{ item2.text||item2.textEnUs }}
                               </p>
                             </td>
                           </tr>
@@ -210,7 +204,14 @@
                   </tr>
                 </tbody>
               </table>
-              <p style="font-size: 15px; text-align: left; margin-top: 50px">
+              <p style="font-size: 18px; text-align: left; margin-top: 30px;padding:5px 0;background-color:rgb(255, 253, 233);">
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "Estate Coach Service During Typhoon and Inclement Weather Condition"
+                    : "颱風及惡劣天氣時之專車服務"
+                }}
+              </p>
+              <p style="font-size: 18px; text-align: left; margin-top: 10px">
                 {{
                   fairview_park_lang === "en_us"
                     ? "The above information is for reference only. Please refer to the latest announcement made by the coach operator as the updated information. The coach service enquiry hotline is 2471 6348."
@@ -233,7 +234,7 @@
                       margin: 0;
                       padding: 10px 0;
                       color: #fff;
-                      font-size: 15px;
+                      font-size: 18px;
                     "
                   >
                     {{
@@ -259,7 +260,7 @@
                       :key="index"
                       style="
                         background-color: #e7f3be;
-                        font-size: 15px;
+                        font-size: 18px;
                         align-items: center;
                         text-align: center;
                         margin-right: 2px;
@@ -272,7 +273,7 @@
                       <div
                         style="
                           background-color: #e7f3be;
-                          font-size: 15px;
+                          font-size: 18px;
                           align-items: center;
                           text-align: center;
                           padding: 20px;
@@ -305,7 +306,7 @@
                           :key="index"
                           style="
                             background-color: #e7f3be;
-                            font-size: 15px;
+                            font-size: 18px;
                             align-items: center;
                             text-align: center;
                             padding: 20px;
@@ -327,7 +328,7 @@
                     <li
                       style="
                         background-color: #fffae7;
-                        font-size: 15px;
+                        font-size: 18px;
                         align-items: center;
                         text-align: center;
                         margin-right: 2px;
@@ -342,7 +343,7 @@
                       :key="index2"
                       style="
                         background-color: #fffae7;
-                        font-size: 15px;
+                        font-size: 18px;
                         align-items: center;
                         text-align: center;
                         margin-right: 2px;
@@ -396,7 +397,7 @@
                       margin: 0;
                       padding: 10px 0;
                       color: #fff;
-                      font-size: 15px;
+                      font-size: 18px;
                     "
                   >
                     {{
@@ -676,7 +677,7 @@
                   </table>
                 </div>
               </div>
-              <p style="font-size: 15px; text-align: left; margin-top: 50px">
+              <p style="font-size: 18px; text-align: left; margin-top: 50px">
                 {{
                   fairview_park_lang === "en_us"
                     ? "The above information is for reference only. Please refer to the latest announcement made by the coach operator as the updated information. The coach service enquiry hotline is 2471 6348."
@@ -799,7 +800,7 @@
               </div>
               <!-- 線路圖 -->
               <div>
-                <p style="text-align: left" class="fs-16">
+                <p style="text-align: left" class="fs-18">
                   {{
                     fairview_park_lang === "en_us"
                       ? "Shuttle Bus Routing:"
@@ -927,7 +928,7 @@
               </div>
               <!-- 線路圖 -->
               <div>
-                <p style="text-align: left" class="fs-16">
+                <p style="text-align: left" class="fs-18">
                   {{
                     fairview_park_lang === "en_us"
                       ? "Shuttle Bus Routing:"
@@ -1061,8 +1062,7 @@ export default {
                 index: res.data.data.pageResult.records.length + 1,
               },
             ]);
-          console.log(data.coach_service_content.coachServiceList);
-        }
+       }
       } catch (error) {
         console.log(error);
       }
@@ -1136,7 +1136,7 @@ export default {
           box-sizing: border-box;
           cursor: pointer;
           i {
-            font-size: 15px;
+            font-size: 18px;
             margin-right: 5px;
             display: none;
             color: #000;
@@ -1184,7 +1184,7 @@ export default {
           font-size: 36px;
         }
         span{
-
+          font-size: 18px;
         }
       }
       .free-bus {
@@ -1206,13 +1206,13 @@ export default {
           p {
             background-color: #fef0ab;
             margin: 0;
-            font-size: 15px;
+            font-size: 18px;
             padding: 5px;
           }
           ul {
             padding: 0;
             li {
-              font-size: 15px;
+              font-size: 18px;
               background-color: #fffae7;
 
               span {

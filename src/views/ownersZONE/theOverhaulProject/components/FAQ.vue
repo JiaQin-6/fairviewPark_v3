@@ -2,12 +2,17 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-11-04 23:34:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-05 13:25:11
+ * @LastEditTime: 2022-12-15 00:44:30
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/theOverhaulProject/components/theOverhaulProject.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
+    <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+      {{
+        fairview_park_lang === "en_us" ? "FAQ" : "常見問題"
+      }}
+    </p>
     <div
       class="mb-20"
       v-for="(item, index) in [
@@ -592,16 +597,16 @@
       ]"
       :key="index"
     >
-      <h5 style="background-color: #389818; color: #fff; font-size: 16px; padding: 5px">
+      <h5 style="background-color: #389818; color: #fff; font-size: 20px; padding: 5px">
         {{ item.title }}
       </h5>
       <div v-for="(item2, index2) in item.children" :key="index2">
-        <div class="flex-row" style="font-size:15px;">
+        <div class="flex-row" style="font-size:18px;">
           <i style="color:#fff;background-color:#72b652;text-align:center;width:30px;padding:5px;">{{ index2 + 1 }}.</i>
           <span style="background-color:#e3f3b3;flex:1;padding:5px;">{{ item2.title }}</span>
         </div>
         <p
-          style="font-size: 15px; padding: 10px 20px; margin: 0"
+          style="font-size: 18px; padding: 10px 20px; margin: 0"
           v-for="(item3, index3) in item2.children"
           :key="index3"
           v-html="item3.text"

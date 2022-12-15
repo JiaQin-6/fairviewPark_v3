@@ -2,100 +2,90 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-12 00:56:25
+ * @LastEditTime: 2022-12-13 00:14:22
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="decoration">
-   
     <div class="content row">
+      <p style="padding:0;font-size: 36px;color:#9cc212;font-weight:bold;">
+        {{
+            fairview_park_lang === "en_us"
+              ? "House Type Enquiry"
+              : "原型圖查詢"
+        }}
+      </p>
       <!-- nar -->
       <div class="decoration-type mb-20 flex-row">
         <span :class="{ active: type === 1 }" @click="type = 1">{{
-          fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築"
+            fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築"
         }}</span>
         <span :class="{ active: type === 2 }" @click="type = 2">{{
-          fairview_park_lang === "en_us" ? "Precast" : "預制組件"
+            fairview_park_lang === "en_us" ? "Precast" : "預制組件"
         }}</span>
       </div>
       <!-- 選項 -->
       <div class="menu mt-20">
         <!-- <transition name="el-zoom-in-top"> -->
-          <div class="animate__animated animate__fadeInUp" v-show="type === 1">
-            <div class="menu-oc row flex-row">
-              <span class="col-12 col-md-2">{{
+        <div class="animate__animated animate__fadeInUp" v-show="type === 1">
+          <div class="menu-oc row flex-row">
+            <span class="col-12 col-md-2">{{
                 (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OC）"
-              }}</span>
-              <ul class="flex-row">
-                <li
-                  v-for="(item, index) in fairview_park_lang === 'en_us'
-                    ? castInsituOc_en
-                    : castInsituOc_zh"
-                  :key="index"
-                  @click="selectedInfo = item"
-                  :class="{ selected: selectedInfo.title == item.title }"
-                >
-                  {{ item.title }}
-                </li>
-              </ul>
-            </div>
-            <div class="menu-op row flex-row">
-              <span class="col-12 col-md-2">{{
-                (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OP）"
-              }}</span>
-              <ul class="flex-row">
-                <li
-                  v-for="(item, index) in fairview_park_lang === 'en_us'
-                    ? castInsituOp_en
-                    : castInsituOp_zh"
-                  :key="index"
-                  @click="selectedInfo = item"
-                >
-                  {{ item.title }}
-                </li>
-              </ul>
-            </div>
+            }}</span>
+            <ul class="flex-row">
+              <li v-for="(item, index) in fairview_park_lang === 'en_us'
+              ? castInsituOc_en
+              : castInsituOc_zh" :key="index" @click="selectedInfo = item"
+                :class="{ selected: selectedInfo.title == item.title }">
+                {{ item.title }}
+              </li>
+            </ul>
           </div>
+          <div class="menu-op row flex-row">
+            <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Cast in Situ" : "原地建築") + "（OP）"
+            }}</span>
+            <ul class="flex-row">
+              <li v-for="(item, index) in fairview_park_lang === 'en_us'
+              ? castInsituOp_en
+              : castInsituOp_zh" :key="index" @click="selectedInfo = item">
+                {{ item.title }}
+              </li>
+            </ul>
+          </div>
+        </div>
         <!-- </transition> -->
 
         <!-- <transition name="el-zoom-in-top"> -->
-          <div class="animate__animated animate__fadeInUp" v-show="type === 2">
-            <div class="menu-oc row flex-row">
-              <span class="col-12 col-md-2">{{
+        <div class="animate__animated animate__fadeInUp" v-show="type === 2">
+          <div class="menu-oc row flex-row">
+            <span class="col-12 col-md-2">{{
                 (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OC）"
-              }}</span>
-              <ul class="flex-row">
-                <li
-                  v-for="(item, index) in fairview_park_lang === 'en_us'
-                    ? precastOc_en
-                    : precastOc_zh"
-                  :key="index"
-                  @click="selectedInfo = item"
-                  :class="{ selected: selectedInfo.title == item.title }"
-                >
-                  {{ item.title }}
-                </li>
-              </ul>
-            </div>
-            <!--  -->
-            <div class="menu-op row flex-row" v-show="type === 2">
-              <span class="col-12 col-md-2">{{
-                (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OP）"
-              }}</span>
-              <ul class="flex-row">
-                <li
-                  v-for="(item, index) in fairview_park_lang === 'en_us'
-                    ? precastOp_en
-                    : precastOp_zh"
-                  :key="index"
-                  @click="selectedInfo = item"
-                >
-                  {{ item.title }}
-                </li>
-              </ul>
-            </div>
+            }}</span>
+            <ul class="flex-row">
+              <li v-for="(item, index) in fairview_park_lang === 'en_us'
+              ? precastOc_en
+              : precastOc_zh" :key="index" @click="selectedInfo = item"
+                :class="{ selected: selectedInfo.title == item.title }">
+                {{ item.title }}
+              </li>
+            </ul>
           </div>
+          <!--  -->
+          <div class="menu-op row flex-row" v-show="type === 2">
+            <span class="col-12 col-md-2">{{
+                (fairview_park_lang === "en_us" ? "Precast" : "預制組件") + "（OP）"
+            }}</span>
+            <ul class="flex-row">
+              <li v-for="(item, index) in fairview_park_lang === 'en_us'
+              ? precastOp_en
+              : precastOp_zh" :key="index" @click="selectedInfo = item">
+                {{ item.title }}
+              </li>
+            </ul>
+          </div>
+        </div>
         <!-- </transition> -->
       </div>
       <!-- 圖片內容 -->
@@ -110,7 +100,7 @@
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 
 export default {
- 
+
   setup() {
     const data = reactive({
       castInsituOc_en: [
@@ -594,13 +584,16 @@ export default {
 <style lang="less" scoped>
 .decoration {
   width: 100%;
+
   .content {
     margin: 0px auto;
     max-width: 1000px;
-    padding: 20px;
+    padding: 0 20px;
+
     .decoration-type {
       padding: 0;
       text-align: center;
+
       span {
         width: 50%;
         padding: 5px 0;
@@ -614,23 +607,28 @@ export default {
           background-color: var(--mainColor1);
         }
       }
+
       .active {
         color: #fff;
         background-color: var(--mainColor1);
       }
     }
+
     .menu {
       padding: 0;
       overflow: hidden;
+
       .menu-oc,
       .menu-op {
         span {
           font-size: 15px;
           color: var(--mainColor1);
         }
+
         ul {
           flex-wrap: wrap;
           flex: 1;
+
           li {
             background-color: #fff;
             border: 1px solid var(--mainColor2);
@@ -640,28 +638,29 @@ export default {
             border-radius: 2px;
             cursor: pointer;
             font-size: 15px;
+
             &:hover {
               color: #fff;
               background-color: var(--mainColor2);
             }
           }
+
           .selected {
             color: #fff;
             background-color: var(--mainColor2);
           }
         }
       }
-      .menu-op {
-      }
+
+      .menu-op {}
     }
+
     .decoration_content {
       padding: 0;
       text-align: center;
-      img {
-      }
+
+      img {}
     }
   }
 }
-
-
 </style>

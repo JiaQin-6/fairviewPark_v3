@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:36:46
+ * @LastEditTime: 2022-12-14 22:07:42
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -58,6 +58,7 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+          <p class="title" v-if="estate_facilities_list.length!==0">{{estate_facilities_list[nav_index].titleEnUs}}</p>
           <div class="ql-editor" v-html="estate_facilities_content"></div>
         </div>
       </div>
@@ -228,9 +229,13 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 0px;
       img {
         max-width: 100%;
+      }
+      .title{
+        font-size: 36px;
+        color: var(--mainColor3);
+        font-weight: bold;
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:38
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 00:36:41
+ * @LastEditTime: 2022-12-14 22:50:20
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/footer/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -13,7 +13,7 @@
       <div class="row top-part-wrap">
         <!-- 左部份 -->
         <div
-          class="col col-12 col-xl-8 col-lg-6 col-md-6 col-sm-12 flex-row space-around"
+          class="col col-12 col-xl-7 col-lg-6 col-md-6 col-sm-12 flex-row space-around"
         >
           <div>
             <img class="logo" :src="logo" alt="" />
@@ -56,7 +56,7 @@
         </div>
         <!-- 右部份 -->
         <div
-          class="col col-12 col-xl-4 col-lg-6 col-md-6 col-sm-12 flex-row flex-column download"
+          class="col col-12 col-xl-5 col-lg-6 col-md-6 col-sm-12 flex-row flex-column download"
         >
           <p>{{ $t("Easy access to the information of fairview park") }}</p>
           <div class="image flex-row space-between">
@@ -72,15 +72,15 @@
       <div class="row bottom-part-wrap">
         <!-- 左部份 -->
         <div class="col col-12 col-xl-5 col-lg-5 col-md-5">
-          <p class="fs-16">
-            {{ $t("All Rights Reserved") }} © {{ new Date().getFullYear() }}
-            {{ $t("fairview park") }}
+          <p class="fs-18">
+            {{ $t("All Rights Reserved") }} {{ new Date().getFullYear() }}
+            {{ $t("Fairview Park Property Management Limited") }}
           </p>
         </div>
         <!-- 右部份 -->
         <div class="bottom-right-part col col-12 col-xl-7 col-lg-7 col-md-7">
           <ul class="flex-row">
-            <li class="fs-16">
+            <li class="fs-18">
               <a
                 target="_blank"
                 :href="
@@ -91,7 +91,7 @@
                 >{{ $t("Disclaimer") }}</a
               >
             </li>
-            <li class="fs-16">
+            <li class="fs-18">
               <a
                 target="_blank"
                 :href="
@@ -228,7 +228,7 @@ export default {
 
             li {
               font-style: normal;
-              font-size: 16px;
+              font-size: 18px;
               line-height: 25px;
               margin-right: 30px;
               width: 180px;
@@ -243,7 +243,7 @@ export default {
         }
 
         p {
-          font-size: 16px;
+          font-size: 18px;
           color: var(--el-text-color-primary);
           line-height: 20px;
           margin-bottom: 5px;
@@ -289,7 +289,7 @@ export default {
             padding: 0 10px;
             color: #fff;
             display: inline-block;
-            a{
+            a {
               text-decoration: none !important;
               color: #fff;
             }
@@ -338,17 +338,15 @@ export default {
     width: 992px;
   }
 
-  .bottom-part {
-    .bottom-part-wrap {
-      width: 992px;
-    }
+  .bottom-part-wrap {
+    width: 992px;
+  }
 
-    .bottom-right-part {
-      text-align: right;
+  .bottom-right-part {
+    text-align: right;
 
-      ul {
-        display: block;
-      }
+    ul {
+      display: block;
     }
   }
 }
@@ -393,8 +391,7 @@ export default {
 
         ul {
           justify-content: center;
-          li{
-            
+          li {
           }
         }
       }
@@ -432,13 +429,12 @@ export default {
     .bottom-part {
       .bottom-part-wrap {
         p {
-          font-size: 15px;
+          font-size: 18px;
         }
 
         ul {
           li {
-            font-size: 15px;
-            
+            font-size: 18px;
           }
         }
       }

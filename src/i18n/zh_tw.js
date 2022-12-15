@@ -2,12 +2,12 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-01 23:19:24
+ * @LastEditTime: 2022-12-15 00:26:54
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 export default {
-    'Login timeout Please login again！ ': '登陸超時，請從新登陸！',
+    'Login timeout Please login again': '登錄逾時，請重新登入! ',
     'Please enter your registration contact email': '請輸入閣下之登記聯絡電郵',
     'Please enter your login name': '請輸入閣下之登入名稱',
     'Forgot password': '忘記密碼',
@@ -31,7 +31,8 @@ export default {
     'Resident information': '居民資訊',
     'Browse the web': '瀏覽網頁',
     'Download': '下載',
-    'All Rights Reserved': '版權所有',
+    'All Rights Reserved': '版權所有 ©',
+    'Fairview Park Property Management Limited': '錦綉花園物業管理有限公司保留一切權利',
     'Term And Conditions': '條款和條件',
     'Privacy Policy': '隱私政策',
     'Disclaimer': '免責聲明',
@@ -57,7 +58,7 @@ export default {
     'MAC Column': '管理諮詢委員會專欄',
     'Payment List': '收費表',
     'Lottery System For Impounding Action': '抽簽鎖車機制',
-    'the Overhaul Project': '更換地下喉管及行車道路翻新工程（大維修）',
+    'the Overhaul Project': '大維修',
     'This field is required.': '此欄位必填',
     'Owner zone, please enter the name and password': '業主專區,請輸入名稱及密碼',
     'Login name': '登入名稱',

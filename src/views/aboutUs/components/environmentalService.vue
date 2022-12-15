@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:35:08
+ * @LastEditTime: 2022-12-14 22:05:23
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,20 +10,12 @@
   <div class="col-12 col-lg-10 nav-content">
     <div class="container">
       <div class="row">
-        <h3
-          style="color: #000; font-size: 32px; margin-bottom: 30px; font-weight: bold"
-          v-html="
-            $t('Environmental Service')
-              .replace(
-                'Environmental',
-                '<b style=border-bottom-width:4px;border-bottom-color:#f0be64;border-bottom-style:solid;>Environmental</b>'
-              )
-              .replace(
-                '環境',
-                '<b style=border-bottom-width:4px;border-bottom-color:#f0be64;border-bottom-style:solid;>環境</b>'
-              )
-          "
-        ></h3>
+       
+        <p style="font-size: 36px;color:#9cc212;font-weight:bold;">
+                              {{
+                                $t('Environmental Service')
+                              }}
+                            </p>
         <div>
           <li class="li">{{fairview_park_lang==='en_us'?'Cleaning':'清潔'}}</li>
           <ul>
@@ -99,26 +91,24 @@ export default {
 
 <style lang="less" scoped>
 .nav-content {
+  padding-left: 20px;
   .container {
     padding: 10px 0;
     h3 {
       font-size: 20px;
-      color: #3a6547;
       margin-bottom: 20px;
+      font-weight: normal;
     }
     .li{
         list-style: disc;
         margin-bottom: 20px;
-        color: #3a6547;
-        font-weight: bold;
+        font-size: 24px;
     }
     ul {
       padding: 0px 0 0px 0px;
       li {
-        font-size: 15px;
+        font-size: 18px;
         list-style-type: disc;
-        font-weight: 700;
-        color: #3a6547;
         margin-bottom: 20px;
         list-style:none;
       }

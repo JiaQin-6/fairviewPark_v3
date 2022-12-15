@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:40:47
+ * @LastEditTime: 2022-12-14 00:41:14
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -47,18 +47,27 @@
             v-model="nav_index"
             class="m-2 menu-select"
             placeholder="Select"
-            @change="(val)=>{
-              nav_index = val
-            }"
+            @change="
+              (val) => {
+                nav_index = val;
+              }
+            "
           >
             <el-option
-              v-for="(item, index) in [{
-                titleEnUs:fairview_park_lang === 'en_us' ? 'Residents Handbook' : '業主手冊',
-                index:1,
-              },{
-                titleEnUs:fairview_park_lang === 'en_us' ? 'House Floor Plan and Fairview Park Map Enquiry' : '屋宇平面圖及錦綉花園地圖查詢',
-                index:2,
-              }]"
+              v-for="(item, index) in [
+                {
+                  titleEnUs:
+                    fairview_park_lang === 'en_us' ? 'Residents Handbook' : '業主手冊',
+                  index: 1,
+                },
+                {
+                  titleEnUs:
+                    fairview_park_lang === 'en_us'
+                      ? 'House Floor Plan and Fairview Park Map Enquiry'
+                      : '屋宇平面圖及錦綉花園地圖查詢',
+                  index: 2,
+                },
+              ]"
               :key="index"
               :label="item.titleEnUs"
               :value="item.index"
@@ -68,15 +77,28 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+          <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+            {{
+              nav_index === 1
+                ? fairview_park_lang === "en_us"
+                  ? "Residents Handbook"
+                  : "業主手冊"
+                : fairview_park_lang === "en_us"
+                ? "House Floor Plan and Fairview Park Map Enquiry"
+                : "屋宇平面圖及錦綉花園地圖查詢"
+            }}
+          </p>
           <div
-              v-if="nav_index === 1"
-              id="viewer"
-              style="width: 100%; height: 600px; margin: 0 auto"
-            ></div>
+            v-if="nav_index === 1"
+            id="viewer"
+            style="width: 100%; height: 600px; margin: 0 auto"
+          ></div>
           <div
             v-if="nav_index === 2"
             class="ql-editor"
-            v-html="residents_handboo_map_content&&residents_handboo_map_content.htmlEnUs"
+            v-html="
+              residents_handboo_map_content && residents_handboo_map_content.htmlEnUs
+            "
           ></div>
         </div>
       </div>
@@ -121,8 +143,13 @@ export default {
       PDFJSExpress(
         {
           path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
-          initialDoc: data.residents_handboo_map_content&&data.residents_handboo_map_content.fileUrlEnUs, 
+          licenseKey:
+            process.env.NODE_ENV === "development"
+              ? "oCrqt6OMULAoS15T2J62"
+              : "ukZ2T6b500exNQH0GDJg",
+          initialDoc:
+            data.residents_handboo_map_content &&
+            data.residents_handboo_map_content.fileUrlEnUs,
         },
         document.getElementById("viewer")
       ).then((instance) => {
@@ -158,9 +185,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -221,14 +248,14 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 15px;
+      padding: 2px 15px;
       img {
         max-width: 100%;
       }
@@ -238,7 +265,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -249,7 +275,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -271,25 +296,25 @@ export default {
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; padding: 0;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
           display: none;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
         }
-      }
-      .menu-select{
-        display: block;
+        .menu-select {
+          display: block;
+        }
       }
     }
-  }
   }
 }
 </style>

@@ -2,13 +2,20 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-12 00:55:34
+ * @LastEditTime: 2022-12-13 00:13:11
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div class="wall-color-series">
-    <div class="content" style="margin:20px auto;padding:0 20px;">
+    <div class="content" style="margin:0px auto;padding:0 20px;">
+      <p style="padding:0;font-size: 36px;color:#9cc212;font-weight:bold;">
+        {{
+            fairview_park_lang === "en_us"
+              ? "Master Colour Schedule"
+              : "外牆顏色系列"
+        }}
+      </p>
       <table
         border="0"
         align="center"

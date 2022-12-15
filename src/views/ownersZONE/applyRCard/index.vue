@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:24:20
+ * @LastEditTime: 2022-12-14 00:32:45
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -650,7 +650,7 @@ export default {
           margin-bottom: 0;
         }
         p {
-          font-size: 16px;
+          font-size: 18px;
           padding: 10px;
           box-sizing: border-box;
         }
@@ -689,7 +689,7 @@ export default {
                       }
                       .el-icon {
                         color: #fff;
-                        font-size: 16px;
+                        font-size: 18px;
                       }
                     }
                   }
@@ -711,7 +711,7 @@ export default {
             font-weight: bold;
           }
           p {
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 20px;
           }
           .el-button {
@@ -725,6 +725,27 @@ export default {
               color: var(--mainColor2);
             }
             span {
+            }
+          }
+          @{deep} .el-checkbox{
+            .el-checkbox__input{
+            vertical-align: middle;
+              .el-checkbox__inner{
+              width: 20px;
+              height: 20px;
+              &:after{
+                top: 1px;
+                left: 5px;
+                height: 11px;
+                width: 6px;
+              }
+            }
+            }
+            
+            .el-checkbox__label{
+            font-size: 18px;
+            vertical-align: middle;
+
             }
           }
         }

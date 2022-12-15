@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:42:43
+ * @LastEditTime: 2022-12-14 00:12:14
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -30,7 +30,7 @@
               :key="index"
               class="col-4 col-lg-12"
               :class="nav_index === index ? 'active' : ''"
-              @click="jumpLink(item.orderNo, index)"
+              @click="jumpLink(index)"
             >
               <span>{{ item.titleEnUs }}</span>
             </li>
@@ -40,6 +40,11 @@
             v-model="nav_index"
             class="m-2 menu-select"
             placeholder="Select"
+            @change="
+              (index) => {
+                jumpLink(index);
+              }
+            "
           >
             <el-option
               v-for="(item, index) in telephone_link_list"
@@ -51,14 +56,10 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <div align="center">
+        <div id="nav-content" class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+          <!-- <div align="center"> -->
             <table
-              :id="
-                'telephone_link_' +
-                (telephone_link_list[index] &&
-                  telephone_link_list[index].orderNo)
-              "
+              :id="'telephone_link_'+ (index + 1)"
               style="margin-bottom: 20px"
               border="0"
               cellpadding="5"
@@ -70,7 +71,7 @@
               <tbody>
                 <tr>
                   <td height="25" colspan="2" bgcolor="#A0D31E">
-                    <span class="style9 fs-15">{{
+                    <span class="style9 fs-18">{{
                       telephone_link_list[index] &&
                       telephone_link_list[index].titleEnUs
                     }}</span>
@@ -78,14 +79,14 @@
                 </tr>
                 <tr v-for="(item2, index2) in item.children" :key="index2">
                   <td style="width: 70%" height="25" bgcolor="#EAF7C1">
-                    <span v-if="!item2.websiteUrl" class="style9 fs-15">{{
+                    <span v-if="!item2.websiteUrl" class="style9 fs-18">{{
                       item2.titleEnUs
                     }}</span>
                     <a
                       v-if="item2.websiteUrl"
                       target="_blank"
                       :href="item2.websiteUrl"
-                      class="style9 fs-15"
+                      class="style9 fs-18"
                       >{{ item2.titleEnUs }}</a
                     >
                   </td>
@@ -98,7 +99,7 @@
                       <Phone />
                     </el-icon>
                     <a
-                      class="fs-15"
+                      class="fs-18"
                       v-for="(item, index) in item2.tel.split(',')"
                       :key="index"
                       style="color: #000; text-decoration: none"
@@ -112,7 +113,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          <!-- </div> -->
         </div>
       </div>
     </div>
@@ -177,10 +178,13 @@ export default {
             : "500px";
       }
     });
-    const jumpLink = (orderNo, index) => {
-      document
-        .querySelector("#telephone_link_" + orderNo)
-        .scrollIntoView({ block: "center" });
+    const jumpLink = (index) => {
+      let top=0
+      for (let i = 0; i < index; i++) {
+        top += document.querySelector("#telephone_link_" + (i + 1)).scrollHeight
+      }
+      console.log(document.querySelector("#nav-content"))
+      document.querySelector("#nav-content").scrollTop = top
       data.nav_index = index;
     };
     return {
@@ -246,7 +250,7 @@ export default {
           box-sizing: border-box;
           cursor: pointer;
           i {
-            font-size: 15px;
+            font-size: 18px;
             margin-right: 5px;
             display: none;
             color: #000;
@@ -284,8 +288,12 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 0px;
+      padding-left: 20px;
+      padding-top: 12px;
       overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       img {
         max-width: 100%;
       }

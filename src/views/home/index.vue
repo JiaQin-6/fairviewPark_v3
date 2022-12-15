@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 21:36:32
+ * @LastEditTime: 2022-12-13 23:37:57
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -89,7 +89,7 @@
               :href="item.websiteUrl"
               target="_blank"
               style="
-                font-size: 16px;
+                font-size: 18px;
                 margin-right: 40px;
                 color: #fff;
                 text-decoration: none;
@@ -100,7 +100,7 @@
             <span
               v-show="!item.websiteUrl"
               style="
-                font-size: 16px;
+                font-size: 18px;
                 margin-right: 40px;
                 color: #fff;
                 text-decoration: none;
@@ -115,7 +115,7 @@
             :key="index"
             :href="item.websiteUrl"
             target="_blank"
-            style="font-family: 'Nunito'; font-size: 16px; margin-right: 40px"
+            style="font-family: 'Nunito'; font-size: 18px; margin-right: 40px"
             :style="{ color: item.bgColor }"
             >{{ item.contentEnUs }}
           </a></marquee
@@ -486,7 +486,7 @@ export default {
               a {
                 color: #fff;
                 text-decoration: none;
-                font-size: 16px;
+                font-size: 18px;
               }
             }
           }
@@ -517,7 +517,7 @@ export default {
                   a {
                     color: #fff;
                     text-decoration: none;
-                    font-size: 16px;
+                    font-size: 18px;
                   }
                 }
               }
@@ -575,7 +575,7 @@ export default {
               }
             }
             p {
-              font-size: 16px;
+              font-size: 18px;
               font-weight: 700;
               color: var(--el-text-color-primary);
               margin-bottom: 20px;
@@ -583,7 +583,7 @@ export default {
             ul {
               padding: 0px 0 5px 35px;
               li {
-                font-size: 16px;
+                font-size: 18px;
                 list-style-type: disc;
                 color: var(--el-text-color-primary);
                 margin-bottom: 10px;

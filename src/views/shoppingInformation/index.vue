@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:28:28
+ * @LastEditTime: 2022-12-14 21:59:48
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -30,7 +30,7 @@
               :key="index"
               class="col-4 col-lg-12"
               :class="nav_index === index ? 'active' : ''"
-              @click="jumpLink(item.orderNo, index)"
+              @click="jumpLink(index)"
             >
               <span>{{ item.titleEnUs }}</span>
             </li>
@@ -40,42 +40,46 @@
             v-model="nav_index"
             class="menu-select"
             placeholder="Select"
+            @change="
+              (index) => {
+                jumpLink(index);
+              }
+            "
           >
             <el-option
               v-for="(item, index) in shop_information_list"
               :key="index"
               :label="item.titleEnUs"
-              :value="item.index"
+              :value="index"
             >
               <span>{{ item.titleEnUs }}</span>
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20">
+        <div class="col-12 col-lg-10 nav-content mb-20" id="nav-content">
           <div
             class="nav-content-list"
-            :id="
-              'shop_information_' +
-              (shop_information_list[index] && shop_information_list[index].orderNo)
-            "
+            :id="'shop_information_' + (index + 1)"
             v-for="(item, index) in shop_information_list"
             :key="index"
+
           >
-              <span class="header">{{ item && item.titleEnUs }}</span>
-           
-            <ul  class="flex-row">
+            <span class="header">{{ item && item.titleEnUs }}</span>
+
+            <ul class="flex-row">
               <li
                 class="col-4"
                 v-for="(item2, index2) in shop_information_list[index].children"
                 :key="index2"
               >
                 <div class="img col-4">
-                  <!-- item2.logUrl -->
-                  <img @click="openUrl(item2.websiteUrl)" src="https://img2.baidu.com/it/u=1003272215,1878948666&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1670864400&t=3baf2497c38a91412c0371a905b8dc8d" alt="" />
+                  <img @click="openUrl(item2.websiteUrl)" :src="item2.logUrl" alt="" />
                 </div>
                 <p>{{ item2.titleEnUs }}</p>
-                <span><el-icon><LocationFilled /></el-icon>{{ item2.shopNo }}</span>
-            
+                <span
+                  ><el-icon><LocationFilled /></el-icon>{{ item2.shopNo }}</span
+                >
+
                 <span v-if="item2.tel">
                   <el-icon><PhoneFilled /></el-icon>
                   <a
@@ -146,12 +150,18 @@ export default {
       ) {
         document.getElementsByClassName("nav-content")[0].style.height =
           document.getElementById("shopping-information-menu").getBoundingClientRect()
-            .height>500?document.getElementById("shopping-information-menu").getBoundingClientRect()
-            .height + "px":'500px';
+            .height > 500
+            ? document.getElementById("shopping-information-menu").getBoundingClientRect()
+                .height + "px"
+            : "500px";
       }
     });
-    const jumpLink = (orderNo, index) => {
-      document.querySelector("#shop_information_" + orderNo).scrollIntoView(true);
+    const jumpLink = (index) => {
+      let top=0
+      for (let i = 0; i < index; i++) {
+        top += document.querySelector("#shop_information_" + (i + 1)).scrollHeight
+      }
+      document.querySelector("#nav-content").scrollTop = top
       data.nav_index = index;
     };
     const openUrl = (url) => {
@@ -266,16 +276,18 @@ export default {
     }
     @{deep} .nav-content {
       overflow: auto;
+      position: relative;
       &::-webkit-scrollbar {
-                display: none;
-              }
+        display: none;
+      }
       .nav-content-list {
+       position: relative;
         .header {
-            color: #9cc212;
-            font-size: 36px;
-            font-weight: bold;
-          }
-        
+          color: #9cc212;
+          font-size: 36px;
+          font-weight: bold;
+        }
+
         ul {
           padding: 0;
           flex-wrap: wrap;
@@ -305,14 +317,14 @@ export default {
                 max-height: 150px;
               }
             }
-            p{
-              margin:10px 0 5px;
+            p {
+              margin: 10px 0 5px;
               font-weight: bold;
             }
-            span{
+            span {
               display: block;
               text-align: left;
-              i{
+              i {
                 color: var(--mainColor2);
                 vertical-align: text-bottom;
                 font-size: 18px;

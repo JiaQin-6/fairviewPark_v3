@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:38:48
+ * @LastEditTime: 2022-12-15 00:04:53
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -43,53 +43,18 @@
                 ? "Samlpe of Nomination Form"
                 : "提名表格樣本"
             }}</el-menu-item>
-            <el-sub-menu index="4">
-              <template #title>{{
-                fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
-              }}</template>
-              <el-menu-item index="4-1">{{
-                fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
-              }}</el-menu-item>
-              <el-menu-item index="4-2">
-                <a
-                  style="color: #000"
-                  :href="
-                    fairview_park_lang === 'en_us'
-                      ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
-                      : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf'
-                  "
-                  target="_blank"
-                >
-                  {{
-                    fairview_park_lang === "en_us"
-                      ? "Election Activities Rules"
-                      : "選舉守則"
-                  }}
-                </a>
-              </el-menu-item>
-              <el-menu-item index="4-3">
-                <a
-                  style="color: #000"
-                  :href="
-                    fairview_park_lang === 'en_us'
-                      ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
-                      : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf'
-                  "
-                  target="_blank"
-                  >{{
-                    fairview_park_lang === "en_us"
-                      ? "Election Activities Rules Time Table"
-                      : "選舉守則時間表"
-                  }}
-                </a></el-menu-item
-              >
-            </el-sub-menu>
+            <el-menu-item index="4">{{
+              fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+            }}</el-menu-item>
             <el-menu-item index="5">{{
               fairview_park_lang === "en_us"
                 ? "11th MAC Members"
                 : "應屆管理諮詢委員會委員資料"
             }}</el-menu-item>
-            <el-sub-menu index="6">
+            <el-menu-item index="6">{{
+              fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
+            }}</el-menu-item>
+            <!-- <el-sub-menu index="6">
               <template #title>{{
                 fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
               }}</template>
@@ -106,7 +71,7 @@
                   >{{ fairview_park_lang === "en_us" ? "Work Review" : "工作回顧" }}
                 </a></el-menu-item
               >
-            </el-sub-menu>
+            </el-sub-menu> -->
             <el-menu-item index="7">{{
               fairview_park_lang === "en_us"
                 ? "Nearby Proposed Development(s)"
@@ -140,27 +105,6 @@
               {
                 label: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
                 value: '4',
-                children: [
-                  {
-                    label:
-                      fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
-                    value: '4-1',
-                  },
-                  {
-                    label:
-                      fairview_park_lang === 'en_us'
-                        ? 'Election Activities Rules'
-                        : '選舉守則',
-                    value: '4-2',
-                  },
-                  {
-                    label:
-                      fairview_park_lang === 'en_us'
-                        ? 'Election Activities Rules Time Table'
-                        : '選舉守則時間表',
-                    value: '4-3',
-                  },
-                ],
               },
               {
                 label:
@@ -171,29 +115,10 @@
                 children: [],
               },
               {
-                label: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                label:
+                  fairview_park_lang === 'en_us' ? 'Minutes of MAC Meetings' : '會議記錄',
                 value: '6',
-                children: [
-                  {
-                    label:
-                      fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
-                    value: '6-1',
-                  },
-                  {
-                    label:
-                      fairview_park_lang === 'en_us'
-                        ? 'Election Activities Rules'
-                        : '選舉守則',
-                    value: '6-2',
-                  },
-                  {
-                    label:
-                      fairview_park_lang === 'en_us'
-                        ? 'Election Activities Rules Time Table'
-                        : '選舉守則時間表',
-                    value: '6-3',
-                  },
-                ],
+                children: [],
               },
               {
                 label:
@@ -204,20 +129,17 @@
               },
             ]"
             :render-after-expand="false"
-            @change="changeMenu"
           />
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow flex-row">
-          <div class="nav-content-wrap" style="width:100%">
+          <div class="nav-content-wrap" style="width: 100%">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
             <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
             <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
-            <ElectionProcedure v-if="activeIndex === '4-1'"></ElectionProcedure>
+            <ElectionProcedure v-if="activeIndex === '4'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
-            <MinutesOfMacMeetings v-if="activeIndex === '6-1'"></MinutesOfMacMeetings>
-            <MinutesOfSubComMeetings
-              v-if="activeIndex === '6-2'"
-            ></MinutesOfSubComMeetings>
+            <MinutesOfMacMeetings v-if="activeIndex === '6'"></MinutesOfMacMeetings>
+
             <NearbyProposedDevelopment
               v-if="activeIndex === '7'"
             ></NearbyProposedDevelopment>
@@ -236,7 +158,6 @@ import SamlpeOfNominationForm from "./samlpe-of-nomination-form/index.vue";
 import ElectionProcedure from "./election-procedure/index.vue";
 import MACMembers from "./MAC-members/index.vue";
 import MinutesOfMacMeetings from "./minutes-of-mac-meetings/minutesOfMacMeetings.vue";
-import MinutesOfSubComMeetings from "./minutes-of-mac-meetings/minutesOfSubComMeetings.vue";
 import NearbyProposedDevelopment from "./nearby-proposed-development/nearbyProposedDevelopment.vue";
 import commonFunc from "../../../assets/js/commonFunc";
 export default {
@@ -247,7 +168,6 @@ export default {
     ElectionProcedure,
     MACMembers,
     MinutesOfMacMeetings,
-    MinutesOfSubComMeetings,
     NearbyProposedDevelopment,
   },
   data() {
@@ -268,34 +188,38 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
     const findLotterySystemForImpound = async () => {
-      try {
-        const res = await proxy.$http.findLotterySystemForImpound({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.lottery_system_for_mpound_content = res.data.data;
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await proxy.$http.findLotterySystemForImpound({
+            lang: data.fairview_park_lang,
+          });
+          if (res.data.status === 200) {
+            data.lottery_system_for_mpound_content = res.data.data;
+            resolve(true);
+          }
+        } catch (error) {
+          reject(false);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      });
     };
     //查看工作回顧pdf
     const findOneMacColumnFile = async () => {
-      try {
-        const res = await proxy.$http.findOneMacColumnFile({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.MacColumnFile = res.data.data.pdfUrlEnUs;
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await proxy.$http.findOneMacColumnFile({
+            lang: data.fairview_park_lang,
+          });
+          if (res.data.status === 200) {
+            data.MacColumnFile = res.data.data.pdfUrlEnUs;
+            resolve(true);
+          }
+        } catch (error) {
+          reject(false);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      });
     };
     const handleSelect = (key, keyPath) => {
-      if (key !== "4-2" && key !== "4-3" && key !== "6-3") {
-        data.activeIndex = key;
-      }
+      data.activeIndex = key;
     };
     //監聽屏幕縮放
     const screenChange = () => {
@@ -315,31 +239,12 @@ export default {
         data.isPC = true;
       }
     };
-    //
-    const changeMenu = (val) => {
-        let a = document.createElement('a')
-        if(val === "4-2"){
-          a.href = data.fairview_park_lang === 'en_us'
-                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf'
-                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf';
-        }else if(val === "4-3"){
-          a.href = data.fairview_park_lang === 'en_us'
-                        ? 'https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf'
-                        : 'https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf';
-        }else if(val === "6-3"){
-          a.href = data.MacColumnFile;
-        }
-       
-        a.target = '_blank';
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-    };
     onMounted(async () => {
       screenChange();
       getIsPC();
-      findLotterySystemForImpound();
-      findOneMacColumnFile();
+      Promise.all([findLotterySystemForImpound(), findOneMacColumnFile()])
+        .then((result) => {})
+        .catch((e) => console.log(e));
     });
     return {
       ...toRefs(data),
@@ -348,7 +253,6 @@ export default {
       handleSelect,
       screenChange,
       getIsPC,
-      changeMenu,
     };
   },
 };
@@ -374,10 +278,10 @@ export default {
     font-style: normal;
     font-weight: bold;
     width: 80%;
-    text-align: center;  
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    text-align: center;
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -412,7 +316,7 @@ export default {
           padding: 6px 0 6px 10px;
           height: 40px;
           background-color: #fff !important;
-        font-size: 18px;
+          font-size: 18px;
         }
         .el-menu-item {
           margin-bottom: 0px;
@@ -428,7 +332,6 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 12px 15px;
     }
   }
 }

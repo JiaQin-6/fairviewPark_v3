@@ -2,12 +2,17 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-11-04 23:34:14
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-07 21:56:41
+ * @LastEditTime: 2022-12-15 00:48:18
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/theOverhaulProject/components/theOverhaulProject.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
+    <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+          {{  fairview_park_lang === 'en_us'
+                      ? 'The Overhaul Project refers to the Project for Replacement of Underground Water Pipes and Refurbishment of Roads.'
+                      : '「大維修」即 更換地下喉管及行車道路翻新工程'}}
+        </p>
     <div
       class="mb-20"
       v-for="(item, index) in [
@@ -80,11 +85,11 @@
       ]"
       :key="index"
     >
-      <h5 style="background-color: #389818; color: #fff; font-size: 16px; padding: 5px">
+      <h5 style="background-color: #389818; color: #fff; font-size: 18px; padding: 5px">
         {{ item.title }}
       </h5>
       <p
-        style="font-size: 15px; padding: 10px 20px; margin: 0"
+        style="font-size: 18px; padding: 10px 20px; margin: 0"
         v-for="(item2, index2) in item.children"
         :key="index2"
         v-html="item2.text"

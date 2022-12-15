@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2019-09-03 08:49:48
- * @LastEditTime: 2022-12-01 23:34:34
+ * @LastEditTime: 2022-12-14 23:33:28
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
@@ -198,7 +198,7 @@ http.interceptors.response.use(function (response) {
     if (response.data.status === 104) {
         localStorage.removeItem('login-info');
         ElMessage({
-            message: i18n.global.t('Login timeout Please login again！'),
+            message: i18n.global.t('Login timeout Please login again'),
             type: 'warning',
         });
         router.push('/home');

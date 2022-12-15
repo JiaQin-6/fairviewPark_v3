@@ -2,14 +2,25 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-27 17:36:01
+ * @LastEditTime: 2022-12-14 00:35:31
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div style="text-align:center">
-    <img style="margin-bottom:20px;width:100%;" src="https://cn.fairviewpark.hk/images/mac-form.png" alt="" />
-    <img style="width:100%;" src="https://cn.fairviewpark.hk/images/mac-form-2.png" alt="" />
+  <div>
+    <h5>{{ fairview_park_lang === "en_us" ? "Sample of Candidate Form" : "候選人表格樣本" }}</h5>
+    <div style="text-align: center">
+      <img
+        style="margin-bottom: 20px; width: 100%"
+        src="https://cn.fairviewpark.hk/images/mac-form.png"
+        alt=""
+      />
+      <img
+        style="width: 100%"
+        src="https://cn.fairviewpark.hk/images/mac-form-2.png"
+        alt=""
+      />
+    </div>
   </div>
 </template>
 
@@ -32,4 +43,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+h5 {
+  font-size: 36px;
+  color: var(--mainColor3);
+  text-align: left;
+}</style>

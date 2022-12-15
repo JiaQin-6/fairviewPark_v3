@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-11 23:35:19
+ * @LastEditTime: 2022-12-13 23:53:08
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,10 +10,13 @@
   <div class="col-12 col-lg-10 nav-content">
     <!--  關於我們 -->
     <div class="about-us">
+      <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+        {{ fairview_park_lang === "en_us" ? "Introduction" : "簡介" }}
+      </p>
       <div class="container">
-        <div class="row">
+        <div class="row" style="margin:0">
           <!--  -->
-          <div class="col col-12 col-lg-6 col-sm-12">
+          <div class="col col-12" style="padding:0">
             <div class="jianjie">
               <p>
                 {{
@@ -69,57 +72,180 @@
             </div>
           </div>
           <!--  -->
-          <div class="col col-12 col-lg-6 col-sm-12">
-            <div class="img">
-              <iframe
-                v-if="fairview_park_lang === 'zh_tw'"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.7091679275286!2d114.04272728986919!3d22.47756085206866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1669042722648!5m2!1szh-TW!2shk"
-                width="100%"
-                height="450"
-                style="border-radius: 10px"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-              <iframe
-                v-if="fairview_park_lang === 'en_us'"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1082.7590476129535!2d114.04501169813709!3d22.477493702608907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1668099153161!5m2!1sen!2shk"
-                width="100%"
-                height="450"
-                style="border-radius: 10px"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          </div>
-          <!--  -->
-          <div class="col col-12 mb-20">
+          <div class="col col-12 mb-20" style="padding:0">
             <div class="contact-us">
-              <h3 class="mb-30">{{ $t("About us") }}</h3>
-              <ul>
-                <li
-                  v-for="(item, index) in fairview_park_lang === 'en_us'
-                    ? [
-                        'Address : Block G, Town Centre, Fairview Park, Yuen Long, N.T.',
-                        'Office Hours	:	General Office Mondays to Saturdays From 09:00 a.m. to 6:00 p.m.(Closed on all Public Holidays)',
-                        'Security Department Mondays to Sundays 24 Hours',
-                        'Customer Service Department Mondays to Sundays From 08:00 a.m. to 8:00 p.m.',
-                        'Fairview Park Property Management Limited consists of eight departments as follows:',
-                      ]
-                    : [
-                        '地址	:	新界元朗錦綉花園市中心G座',
-                        '辦公時間	:	管理處星期一至六 上午九時至六時 (公眾假期除外)',
-                        '保安部星期一至日 24 小時',
-                        '客戶服務部星期一至日上午八時至下午八時',
-                        '錦綉花園物業管理有限公司設有以下八個部門：',
-                      ]"
-                  :key="index"
-                >
-                  {{ item }}
-                </li>
-              </ul>
-              <div style="text-align: center">
+              <div class="row contact-us-content" style="margin:0">
+                <div class="col-12 col-xxl-7" style="padding: 15px 10px 0;box-sizing:border-box;">
+                  <h3 class="mb-20">{{ $t("About us") }}</h3>
+                  <div>
+                    <ul>
+                      <li
+                        class="flex-row"
+                        v-for="(item, index) in [
+                          {
+                            title: fairview_park_lang === 'en_us' ? 'Address' : '地址',
+                            content:
+                              fairview_park_lang === 'en_us'
+                                ? 'Block G, Town Centre, Fairview Park, Yuen Long, N.T.'
+                                : '新界元朗錦綉花園市中心G座',
+                          },
+                          {
+                            title: fairview_park_lang === 'en_us' ? 'Telephone' : '電話',
+                            content:
+                              fairview_park_lang === 'en_us'
+                                ? 'Estate Management 2471 1301 (24 hours) <br/> Emergency Hotline 2471 1999 (24 hours) <br/> (Conversations at these telephones may be recorded)'
+                                : '管理公司 2471 1301（24小時） <br/> 緊急熱線 2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被靜音)',
+                          },
+                        ]"
+                        :key="index"
+                      >
+                        <span
+                          style="
+                            display: inline-block;
+                            width: 110px;
+                            flex: 0 0 auto;
+                          "
+                          :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}"
+                          v-html="item.title"
+                        ></span>
+                        <i style="
+                            margin-right: 5px;
+                            display: inline-block;
+                          ">:</i>
+                        <span style="display: inline-block" v-html="item.content"></span>
+                      </li>
+                   
+                    </ul>
+                    <ul>
+                      <li
+                        class="flex-row"
+                        v-for="(item, index) in [
+                          {
+                            title: fairview_park_lang === 'en_us' ? 'Fax' : '傳真',
+                            content:
+                              fairview_park_lang === 'en_us'
+                                ? 'Estate Management 2471 8210'
+                                : '管理公司 2471 8210',
+                          },
+                          {
+                            title: fairview_park_lang === 'en_us' ? 'Email' : '電郵',
+                            content:
+                              fairview_park_lang === 'en_us'
+                                ? 'info@fairviewpark.hk'
+                                : 'info@fairviewpark.hk',
+                          },
+                          {
+                            title: fairview_park_lang === 'en_us' ? 'Website' : '網站',
+                            content:
+                              fairview_park_lang === 'en_us'
+                                ? 'www.fairviewpark.hk'
+                                : 'www.fairviewpark.hk',
+                          },
+                        ]"
+                        :key="index"
+                      >
+                        <span
+                          style="
+                            display: inline-block;
+                            width: 110px;
+                            flex: 0 0 auto;
+                          "
+                          :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}"
+                          v-html="item.title"
+                        ></span>
+                        <i style="
+                            margin-right: 5px;
+                            display: inline-block;
+                          ">:</i>
+                        <span style="display: inline-block" v-html="item.content"></span>
+                      </li>
+                    </ul>
+                    <ul class="flex-row" style="margin-bottom:0">
+                      <li style="margin-bottom:0">
+                        <span style="width: 110px; display: inline-block" :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}">{{
+                          fairview_park_lang === "en_us" ? "Office Hours" : "辦公時間"
+                        }}</span>
+                      </li>
+                      <li style="
+                            margin-right: 5px;
+                            margin-bottom:0;
+                            display: inline-block;
+                          ">
+                        :
+                      </li>
+                      <li style="margin-right: 20px;margin-bottom:0" >
+                        <div class="flex-row"  v-for="(item, index) in [
+                            {
+                              title:
+                                fairview_park_lang === 'en_us'
+                                  ? 'General Office'
+                                  : '管理處',
+                              content:fairview_park_lang === 'en_us'
+                                  ? 'Mondays to Saturdays From 09:00 a.m. to 6:00 p.m.(Closed on all Public Holidays)'
+                                  : '星期一至六上午九時至六時（公眾假期除外）',
+                            },
+                            {
+                              title:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Security Department'
+                                  : '保安部',
+                              content: fairview_park_lang === 'en_us'
+                                  ? 'Security Department Mondays to Sundays 24 Hours'
+                                  : '星期一至日24小時',
+                            },
+                            {
+                              title:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Customer Service Department'
+                                  : '客戶服務部',
+                              content:fairview_park_lang === 'en_us'
+                                  ? 'Mondays to Sundays From 08:00 a.m. to 8:00 p.m.'
+                                  : '星期一至日上午八時至下午八時',
+                            },
+                          ]"
+                          :key="index">
+                          <p style="min-width:100px">{{item.title}}</p>
+                          <p>{{item.content}}</p>
+                        </div>
+                       
+                      </li>
+                     
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-12 col-xxl-5" style="padding:0">
+                  <div class="img">
+                    <iframe
+                      v-if="fairview_park_lang === 'zh_tw'"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.7091679275286!2d114.04272728986919!3d22.47756085206866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1669042722648!5m2!1szh-TW!2shk"
+                      width="100%"
+                      height="450"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                    <iframe
+                      v-if="fairview_park_lang === 'en_us'"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1082.7590476129535!2d114.04501169813709!3d22.477493702608907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1668099153161!5m2!1sen!2shk"
+                      width="100%"
+                      height="450"
+                      allowfullscreen=""
+                      loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"
+                    ></iframe>
+                  </div>
+                </div>
+              </div>
+
+              <div style="text-align: center; margin-top: 20px">
+                <p style="text-align: left">
+                  {{
+                    fairview_park_lang === "en_us"
+                      ? "Fairview Park Property Management Limited consists of eight departments as follows:"
+                      : "錦綉花園物業管理有限公司設有以下八個部門："
+                  }}
+                </p>
                 <img class="pc-img" :src="dep_structure_web" alt="" />
                 <img class="mobile-img" :src="dep_structure_mobile" alt="" />
               </div>
@@ -231,6 +357,7 @@ export default {
 
 <style lang="less" scoped>
 .nav-content {
+  padding-left: 20px;
   .about-us {
     margin-bottom: 20px;
     .container {
@@ -242,15 +369,14 @@ export default {
           .jianjie {
             margin-bottom: 30px;
             p {
-              font-size: 16px;
-              font-weight: 700;
+              font-size: 18px;
               color: var(--el-text-color-primary);
               margin-bottom: 20px;
             }
             ul {
               padding: 0px 0 5px 35px;
               li {
-                font-size: 16px;
+                font-size: 18px;
                 list-style-type: disc;
                 color: var(--el-text-color-primary);
                 margin-bottom: 10px;
@@ -261,19 +387,21 @@ export default {
           .img {
             position: relative;
             text-align: center;
-            height: 470px;
+            height: 450px;
           }
           .contact-us {
+            .contact-us-content {
+              background-color: #faf6f2;
+              border-radius: 10px;
+            }
             h3 {
-              border-bottom: 5px solid #f0be64;
               display: inline-block;
+              font-size: 24px;
             }
             ul {
-              margin-bottom: 40px;
+              margin-bottom: 25px;
+              padding: 0;
               li {
-                color: #3a6547;
-                font-weight: 700;
-                font-size: 15px;
                 line-height: 20px;
                 margin-bottom: 10px;
               }
@@ -293,7 +421,6 @@ export default {
                   background-color: #fff;
                   width: 50px;
                   height: 50px;
-                  border-radius: 10px;
                   text-align: center;
                   position: relative;
                   img {
@@ -328,16 +455,18 @@ export default {
       .container {
         .row .col .contact-us {
           .mobile-img {
-              width: 100%;
-              max-width: 688px;
-              display: block;
-            }
-            .pc-img {
-              display: none;
-            }
+            width: 100%;
+            max-width: 688px;
+            display: block;
+          }
+          .pc-img {
+            display: none;
+          }
         }
       }
     }
   }
 }
 </style>
+
+

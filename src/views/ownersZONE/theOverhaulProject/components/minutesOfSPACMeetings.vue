@@ -2,19 +2,17 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-11-06 22:20:40
+ * @LastEditTime: 2022-12-15 00:43:40
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
   <div>
-    <h5>
+    <p style="font-size: 36px; color: #9cc212; font-weight: bold">
       {{
-        fairview_park_lang === "en_us"
-          ? "Minutes of SPAC Meetings"
-          : "大會會議記錄"
+        fairview_park_lang === "en_us" ? "Minutes of SPAC Meetings" : "會議記錄"
       }}
-    </h5>
+    </p>
     <div class="content">
       <ul>
         <li
@@ -76,13 +74,18 @@ h5 {
   ul {
     padding: 0;
     li {
-      font-size: 15px;
+      font-size: 18px;
       margin-bottom: 20px;
+      align-items: center;
+      background-color: #e3f3b3;
       i {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 40px;
-        line-height: 40px;
         text-align: center;
         background-color: #e3f3b3;
+        height: 100%;
       }
       span {
         line-height: 25px;

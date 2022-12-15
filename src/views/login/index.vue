@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-28 00:04:33
  * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-04 23:23:45
+ * @LastEditTime: 2022-12-15 00:17:39
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/login/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -80,8 +80,16 @@
               }}</a>
             </div>
             <div class="declaration flex-row">
-              <a href="">{{ $t("Disclaimer") }}</a>
-              <a href="">{{
+              <a target="_blank" :href="
+                  fairview_park_lang === 'en_us'
+                    ? 'https://fairviewpark.hk/file/disclaimerEN.html'
+                    : 'https://fairviewpark.hk/file/disclaimerTC.html'
+                ">{{ $t("Disclaimer") }}</a>
+              <a target="_blank" :href="
+                  fairview_park_lang === 'en_us'
+                    ? 'https://fairviewpark.hk/file/privacyEN.html'
+                    : 'https://fairviewpark.hk/file/privacyTC.html'
+                ">{{
                 $t("Privacy Policy and Personal Data Collection Statement")
               }}</a>
             </div>
