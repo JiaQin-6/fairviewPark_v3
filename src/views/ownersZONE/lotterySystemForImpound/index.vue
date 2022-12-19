@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Lottery system for" : "抽籤鎖車"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Impounding Action" : "機制" }}
+        }}{{ fairview_park_lang === "en_us" ? " Impounding Action" : "機制" }}
       </p>
     </div>
     <!-- navs -->

@@ -70,7 +70,7 @@ export default {
     'Account Number (On Account Statement)': '客戶號碼 (請參考月結單)',
     'Login Name (Self Customize)': '網站登入名稱 (自訂)',
     'Login Password (Self Customize)': '網站登入密碼 (自訂)',
-    'Nickname(Optional)': 'Nickname (自訂)',
+    'Nickname(Optional)': 'Nickname (選填)',
     'Email Address': '聯絡電郵 ',
     'Contact Number(Optional)': '聯絡電話 (選填)',
     'Sign up': '註冊',

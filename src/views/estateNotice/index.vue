@@ -12,8 +12,8 @@
     <div class="banner">
       <img :src="banner" alt="" />
       <p>
-        {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨通告"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Notice" : "須知" }}
+        {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
+        }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
       </p>
     </div>
     <!-- navs -->

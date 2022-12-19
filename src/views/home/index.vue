@@ -92,7 +92,7 @@
                 font-size: 18px;
                 margin-right: 40px;
                 color: #fff;
-                text-decoration: none;
+                text-decoration: underline;
               "
               class="line_clamp_2"
               >{{ item.contentEnUs }}
@@ -109,17 +109,26 @@
             >
           </el-carousel-item>
         </el-carousel>
-        <marquee class="mobile" style="height:45px;line-height:45px">
-          <a
-            v-for="(item, index) in new_notice_list"
-            :key="index"
+        <marquee class="mobile" style="height: 45px; line-height: 45px">
+          <div style="display:inline" v-for="(item, index) in new_notice_list"
+            :key="index">
+            <a
+            v-if="item.websiteUrl"
             :href="item.websiteUrl"
             target="_blank"
-            style="font-family: 'Nunito'; font-size: 18px; margin-right: 40px"
+            style="
+              text-decoration: underline;
+              font-family: 'Nunito';
+              font-size: 18px;
+              margin-right: 40px;
+            "
             :style="{ color: item.bgColor }"
             >{{ item.contentEnUs }}
-          </a></marquee
+          </a>
+          <span style="margin-right:20px;color:#fff" v-if="!item.websiteUrl">{{ item.contentEnUs }}</span
         >
+          </div>
+          </marquee>
       </div>
     </div>
     <!-- 主要內容 -->
@@ -430,11 +439,11 @@ export default {
       }
     }
     @{deep} .mobile {
-    display: block;
-  }
-  @{deep} .pc {
-    display: none;
-  }
+      display: block;
+    }
+    @{deep} .pc {
+      display: none;
+    }
   }
 }
 .container_wrap {

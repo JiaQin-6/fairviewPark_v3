@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Useful Telephone" : "常用電話及"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Nos." : "連接" }}
+        }}{{ fairview_park_lang === "en_us" ? " Nos." : "連接" }}
       </p>
     </div>
     <!-- navs -->
@@ -70,14 +70,14 @@
             >
               <tbody>
                 <tr>
-                  <td height="25" colspan="2" bgcolor="#A0D31E">
-                    <span class="style9 fs-18">{{
+                  <td colspan="2">
+                    <span class="style9 title">{{
                       telephone_link_list[index] &&
                       telephone_link_list[index].titleEnUs
                     }}</span>
                   </td>
                 </tr>
-                <tr v-for="(item2, index2) in item.children" :key="index2">
+                <tr v-for="(item2, index2) in item.secondList" :key="index2">
                   <td style="width: 70%" height="25" bgcolor="#EAF7C1">
                     <span v-if="!item2.websiteUrl" class="style9 fs-18">{{
                       item2.titleEnUs
@@ -139,34 +139,21 @@ export default {
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 屋邨资料 列表
-    const findUsefulTelephoneNosList = async (id) => {
+    const findUsefulTelephoneNosList2 = async (id) => {
       try {
-        const res = await proxy.$http.findUsefulTelephoneNosList({
+        const res = await proxy.$http.findUsefulTelephoneNosList2({
           lang: data.fairview_park_lang,
           parentId: id,
         });
         if (res.data.status === 200) {
-          if (id) {
-            for (let i = 0; i < data.telephone_link_list.length; i++) {
-              if (data.telephone_link_list[i].id === id) {
-                data.telephone_link_list[i].children = res.data.data.records;
-              }
-            }
-            console.log(data.telephone_link_list);
-          } else {
-            data.telephone_link_list = res.data.data.records;
-          }
+          data.telephone_link_list = res.data.data.records;
         }
       } catch (error) {
         console.log(error);
       }
     };
     onMounted(async () => {
-      await findUsefulTelephoneNosList();
-      data.telephone_link_list.map(async (item, index) => {
-        item.index = index;
-        await findUsefulTelephoneNosList(item.id);
-      });
+      await findUsefulTelephoneNosList2();
       if (
         document.getElementById("useful-menu").getBoundingClientRect().height
       ) {
@@ -189,7 +176,7 @@ export default {
     };
     return {
       ...toRefs(data),
-      findUsefulTelephoneNosList,
+      findUsefulTelephoneNosList2,
       jumpLink,
     };
   },
@@ -289,8 +276,12 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding-left: 20px;
-      padding-top: 12px;
       overflow: auto;
+      .title{
+        color: #9cc212;
+          font-size: 36px;
+          font-weight: bold;
+      }
       &::-webkit-scrollbar {
         display: none;
       }

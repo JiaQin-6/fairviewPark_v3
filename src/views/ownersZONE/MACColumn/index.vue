@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "MAC" : "管理諮詢委員會"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Column" : "專欄" }}
+        }}{{ fairview_park_lang === "en_us" ? " Column" : "專欄" }}
       </p>
     </div>
     <!-- navs -->
@@ -243,7 +243,7 @@ export default {
       screenChange();
       getIsPC();
       Promise.all([findLotterySystemForImpound(), findOneMacColumnFile()])
-        .then((result) => {})
+        .then((result) => {console.log(result)})
         .catch((e) => console.log(e));
     });
     return {
@@ -332,6 +332,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
+      padding: 0 20px;
     }
   }
 }

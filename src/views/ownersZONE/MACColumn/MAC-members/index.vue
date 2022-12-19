@@ -7,8 +7,11 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div style="text-align:center">
-    <img :src="fairview_park_lang === 'en_us'? MAC_member_en:MAC_member" alt="" />
+  <div style="text-align: center">
+    <h5>
+      {{ fairview_park_lang === "en_us" ? "11th MAC Members" : "應屆管理諮詢委員會委員資料" }}
+    </h5>
+    <img :src="fairview_park_lang === 'en_us' ? MAC_member_en : MAC_member" alt="" />
   </div>
 </template>
 
@@ -17,8 +20,14 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-        MAC_member: new URL("../../../../assets/image/MAC-column/11thMAC_member.jpeg", import.meta.url).href,
-        MAC_member_en: new URL("../../../../assets/image/MAC-column/11thMAC_member_en.jpeg", import.meta.url).href,
+      MAC_member: new URL(
+        "../../../../assets/image/MAC-column/11thMAC_member.jpeg",
+        import.meta.url
+      ).href,
+      MAC_member_en: new URL(
+        "../../../../assets/image/MAC-column/11thMAC_member_en.jpeg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -37,4 +46,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="less" scoped>
+h5 {
+  font-size: 36px;
+  color: var(--mainColor3);
+  text-align: left;
+  margin-bottom: 20px;
+}
+</style>

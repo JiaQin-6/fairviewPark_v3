@@ -75,7 +75,7 @@ export default {
     'Nickname(Optional)':'Nickname(Optional)',
     'Email Address':'Email Address',
     'Contact Number(Optional)':'Contact Number(Optional)',
-    'Sign up':'Sign up',
+    'Sign up':'Register',
     'Please provide a valid email.':'Please provide a valid email.',
     'Please provide a valid login name.':'Please provide a valid login name.',
     'Please provide a valid password.':'Please provide a valid password.',

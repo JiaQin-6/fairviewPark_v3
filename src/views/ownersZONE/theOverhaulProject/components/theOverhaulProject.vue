@@ -9,10 +9,19 @@
 <template>
   <div>
     <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-          {{  fairview_park_lang === 'en_us'
-                      ? 'The Overhaul Project refers to the Project for Replacement of Underground Water Pipes and Refurbishment of Roads.'
-                      : '「大維修」即 更換地下喉管及行車道路翻新工程'}}
-        </p>
+      {{
+        fairview_park_lang === "en_us"
+          ? "The Overhaul Project"
+          : "大維修"
+      }}
+    </p>
+    <p style="font-size:18px">
+      {{
+        fairview_park_lang === "en_us"
+          ? "The Overhaul Project refers to the Project for Replacement of Underground Water Pipes and Refurbishment of Roads."
+          : "「大維修」即 更換地下喉管及行車道路翻新工程"
+      }}
+    </p>
     <div
       class="mb-20"
       v-for="(item, index) in [
@@ -104,8 +113,13 @@
       </h5>
       <div style="text-align: center">
         <iframe
-          style="width: 560px; height: 315px"
-          src="https://youtu.be/bjW8bxYGMC8"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/bjW8bxYGMC8"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
         ></iframe>
       </div>
     </div>
@@ -117,11 +131,7 @@
         }}
       </h5>
       <div style="text-align: center">
-       
-        <div
-              id="viewer"
-              style="width: 100%; height: 600px; margin: 0 auto"
-            ></div>
+        <div id="viewer" style="width: 100%; height: 600px; margin: 0 auto"></div>
       </div>
     </div>
     <!-- 2021年5月24日 宣傳單張 2021年4月12日 宣傳單張 -->
@@ -234,7 +244,7 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       fairview_park_lang: "",
-      tohpByFpn:''
+      tohpByFpn: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
@@ -251,12 +261,15 @@ export default {
       }
     };
     onMounted(async () => {
-      await findTohpByFpn()
+      await findTohpByFpn();
       PDFJSExpress(
         {
           path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
-          initialDoc:data.tohpByFpn,
+          licenseKey:
+            process.env.NODE_ENV === "development"
+              ? "oCrqt6OMULAoS15T2J62"
+              : "ukZ2T6b500exNQH0GDJg",
+          initialDoc: data.tohpByFpn,
         },
         document.getElementById("viewer")
       ).then((instance) => {

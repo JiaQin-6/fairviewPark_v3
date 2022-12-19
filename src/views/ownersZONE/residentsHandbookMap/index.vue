@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Residents Handbook /" : "業主手冊及"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Map" : "屋邨地圖" }}
+        }}{{ fairview_park_lang === "en_us" ? " Map" : "屋邨地圖" }}
       </p>
     </div>
     <!-- navs -->
@@ -95,7 +95,7 @@
           ></div>
           <div
             v-if="nav_index === 2"
-            class="ql-editor"
+          
             v-html="
               residents_handboo_map_content && residents_handboo_map_content.htmlEnUs
             "
@@ -255,7 +255,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 2px 15px;
+      padding: 2px 20px;
       img {
         max-width: 100%;
       }

@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Prospective" : "新買家"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;buyer" : "須知" }}
+        }}{{ fairview_park_lang === "en_us" ? " buyer" : "須知" }}
       </p>
     </div>
     <!-- navs -->
@@ -230,6 +230,7 @@ export default {
       }
     }
     .nav-content {
+      padding: 0;
       .about-us {
         margin-bottom: 20px;
         .container {

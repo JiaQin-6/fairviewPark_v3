@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Facilities" : "資料" }}
+        }}{{ fairview_park_lang === "en_us" ? " Facilities" : "資料" }}
       </p>
     </div>
     <!-- navs -->
@@ -58,8 +58,10 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <p class="title" v-if="estate_facilities_list.length!==0">{{estate_facilities_list[nav_index].titleEnUs}}</p>
-          <div class="ql-editor" v-html="estate_facilities_content"></div>
+          <div style="padding:0 20px">
+            <p class="title" v-if="estate_facilities_list.length!==0">{{estate_facilities_list[nav_index].titleEnUs}}</p>
+            <div v-html="estate_facilities_content"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -173,6 +175,7 @@ export default {
   .row {
     margin: 0 auto;
     .aside {
+      padding: 0;
       ul {
         position: sticky;
         top: 10px;
@@ -229,6 +232,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
+      padding: 0;
       img {
         max-width: 100%;
       }

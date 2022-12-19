@@ -587,7 +587,6 @@ export default {
 
   .content {
     margin: 0px auto;
-    max-width: 1000px;
     padding: 0 20px;
 
     .decoration-type {

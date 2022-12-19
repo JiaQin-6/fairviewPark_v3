@@ -14,7 +14,7 @@
       <p>
         {{
           fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;survey" : "意見調查" }}
+        }}{{ fairview_park_lang === "en_us" ? " survey" : "意見調查" }}
       </p>
     </div>
     <!-- navs -->

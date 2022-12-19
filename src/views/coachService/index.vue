@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Coach" : "專巴"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Service" : "時間表" }}
+        }}{{ fairview_park_lang === "en_us" ? " Service" : "時間表" }}
       </p>
     </div>
     <!-- navs -->
@@ -58,37 +58,41 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
           <!--  -->
-          <div align="center" style="padding: 0 10px">
+          <div align="center" style="padding: 0 20px">
             <!-- pdf -->
-            <h5 class="title fs-18 mb-20 flex-row" style="text-align: left; cursor: pointer">
-              <a
-                :href="coach_service_content.coachServiceFile"
-                target="_blank"
-                style="text-decoration: none;"
-                v-if="coach_service_content.coachServiceList.length!==0"
+            <h5
+              class="title fs-18 mb-20 flex-row"
+              style="text-align: left; cursor: pointer"
+            >
+              <p
+                style="text-decoration: none"
+                v-if="coach_service_content.coachServiceList.length !== 0"
               >
                 {{ coach_service_content.coachServiceList[nav_index].titleEnUs }}
-              </a>
-              <span v-if="coach_service_content &&
-                      coach_service_content.coachServiceList.length !== 0 &&
-                      coach_service_content.coachServiceList[nav_index]
-                        .launchTime">{{
+              </p>
+              <span
+                v-if="
+                  coach_service_content &&
+                  coach_service_content.coachServiceList.length !== 0 &&
+                  coach_service_content.coachServiceList[nav_index].launchTime
+                "
+                >{{
                   fairview_park_lang === "en_us"
-                    ? "Update date : " + (coach_service_content &&
-                      coach_service_content.coachServiceList.length !== 0 &&
-                      coach_service_content.coachServiceList[nav_index]
-                        .launchTime)
-                    : "更新日期 : " + (coach_service_content &&
-                      coach_service_content.coachServiceList.length !== 0 &&
-                      coach_service_content.coachServiceList[nav_index]
-                        .launchTime)
-                }}</span>
+                    ? "Update at : " +
+                      (coach_service_content &&
+                        coach_service_content.coachServiceList.length !== 0 &&
+                        coach_service_content.coachServiceList[nav_index].launchTime)
+                    : "更新日期 : " +
+                      (coach_service_content &&
+                        coach_service_content.coachServiceList.length !== 0 &&
+                        coach_service_content.coachServiceList[nav_index].launchTime)
+                }}</span
+              >
             </h5>
             <!-- 时间表 -->
             <div
               v-if="
-                nav_index !==
-                  coach_service_content.coachServiceList.length - 1 &&
+                nav_index !== coach_service_content.coachServiceList.length - 1 &&
                 nav_index !== coach_service_content.coachServiceList.length - 2
               "
             >
@@ -97,22 +101,23 @@
                 border="0"
                 cellpadding="0"
                 cellspacing="0"
-                v-for="(item, index) in coach_service_content.coachServiceList
-                  .length !== 0 &&
-                coach_service_content.coachServiceList[nav_index].sectionList"
+                v-for="(item, index) in coach_service_content.coachServiceList.length !==
+                  0 && coach_service_content.coachServiceList[nav_index].sectionList"
                 :key="index"
                 class="fs-18 mb-30"
               >
                 <tbody>
-                  <tr style="width:100%;display:inline-block;margin-bottom:2px">
+                  <tr style="width: 100%; display: inline-block; margin-bottom: 2px">
                     <td
                       height="50"
                       :colspan="item.fleidList.length"
                       bgcolor="#9cc212"
-                      style="width:100%;display:inline-block;"
+                      style="width: 100%; display: inline-block"
                     >
-                      <div align="center" style="height:100%">
-                        <span style="font-size:24px;color:#fff;line-height:50px">{{ item.titleEnUs }}</span>
+                      <div align="center" style="height: 100%">
+                        <span style="font-size: 24px; color: #fff; line-height: 50px">{{
+                          item.titleEnUs
+                        }}</span>
                       </div>
                     </td>
                   </tr>
@@ -120,20 +125,16 @@
                     <td
                       valign="top"
                       :bgcolor="
-                        index2 % 2 === 0
-                          ? '#fffde9'
-                          : index2 % 2 === 1
-                          ? '#f1fcdd'
-                          : ''
+                        index2 % 2 === 0 ? '#fffde9' : index2 % 2 === 1 ? '#f1fcdd' : ''
                       "
                       v-for="(item2, index2) in item.fleidList"
                       :key="index2"
-                      style="width:100%;display:inline-block;margin-right:2px"
+                      style="width: 100%; display: inline-block; margin-right: 2px"
                     >
                       <p
                         align="center"
                         class="style34"
-                        style="padding: 10px 0; margin: 0;font-weight:bold"
+                        style="padding: 10px 0; margin: 0; font-weight: bold"
                       >
                         {{ item2.titleEnUs }}
                       </p>
@@ -165,19 +166,14 @@
                 cellspacing="0"
                 v-if="
                   coach_service_content.coachServiceList.length !== 0 &&
-                  coach_service_content.coachServiceList[nav_index]
-                    .endModuleList.length !== 0
+                  coach_service_content.coachServiceList[nav_index].endModuleList
+                    .length !== 0
                 "
               >
                 <tbody>
                   <tr>
                     <td>
-                      <table
-                        width="100%"
-                        border="0"
-                        cellpadding="0"
-                        cellspacing="0"
-                      >
+                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
                         <tbody>
                           <tr>
                             <td
@@ -187,14 +183,14 @@
                               :key="index"
                               style="font-size: 18px"
                             >
-                              <p class="style20" style="font-weight: bold;color:rgb(156, 194, 18);">
+                              <p
+                                class="style20"
+                                style="font-weight: bold; color: rgb(156, 194, 18)"
+                              >
                                 {{ item.titleEnUs }}
                               </p>
-                              <p
-                                v-for="(item2, index2) in item.columnList"
-                                :key="index2"
-                              >
-                                {{ item2.text||item2.textEnUs }}
+                              <p v-for="(item2, index2) in item.columnList" :key="index2">
+                                {{ item2.text || item2.textEnUs }}
                               </p>
                             </td>
                           </tr>
@@ -204,13 +200,26 @@
                   </tr>
                 </tbody>
               </table>
-              <p style="font-size: 18px; text-align: left; margin-top: 30px;padding:5px 0;background-color:rgb(255, 253, 233);">
+              <a
+                :href="coach_service_content.coachServiceFile"
+                target="_blank"
+                style="
+                  display:inline-block;
+                  width:100%;
+                  font-size: 18px;
+                  text-align: left;
+                  margin-top: 30px;
+                  padding: 5px 0;
+                  background-color: rgb(255, 253, 233);
+                  text-decoration: none;
+                "
+              >
                 {{
                   fairview_park_lang === "en_us"
                     ? "Estate Coach Service During Typhoon and Inclement Weather Condition"
                     : "颱風及惡劣天氣時之專車服務"
                 }}
-              </p>
+              </a>
               <p style="font-size: 18px; text-align: left; margin-top: 10px">
                 {{
                   fairview_park_lang === "en_us"
@@ -222,9 +231,7 @@
             <!-- 专巴收费表 -->
             <div
               class="fs-15"
-              v-if="
-                nav_index === coach_service_content.coachServiceList.length - 2
-              "
+              v-if="nav_index === coach_service_content.coachServiceList.length - 2"
             >
               <div class="mb-30">
                 <div style="overflow: hidden; padding: 0">
@@ -238,17 +245,14 @@
                     "
                   >
                     {{
-                      fairview_park_lang === "en_us"
-                        ? "COACH FARE TABLE"
-                        : "專巴時間表"
+                      fairview_park_lang === "en_us" ? "COACH FARE TABLE" : "專巴時間表"
                     }}
                   </h5>
                   <ul class="flex-row" style="padding: 0; margin: 0 0 2px 0">
                     <li
                       v-for="(item, index) in [
                         {
-                          text:
-                            fairview_park_lang === 'en_us' ? 'Route' : '路線',
+                          text: fairview_park_lang === 'en_us' ? 'Route' : '路線',
                         },
                         {
                           text:
@@ -282,9 +286,7 @@
                         class="col-12 flex-row"
                       >
                         <span style="margin: 0 auto">{{
-                          fairview_park_lang === "en_us"
-                            ? "Octopus Card"
-                            : "八達通咭"
+                          fairview_park_lang === "en_us" ? "Octopus Card" : "八達通咭"
                         }}</span>
                       </div>
                       <div class="flex-row col-12">
@@ -351,7 +353,13 @@
                       "
                       class="col-3 flex-row"
                     >
-                      <span style="margin: 0 auto">{{ item2.price?('$'+item2.price):(fairview_park_lang==='en_us'?'Not Applicable':'不適用') }}</span>
+                      <span style="margin: 0 auto">{{
+                        item2.price
+                          ? "$" + item2.price
+                          : fairview_park_lang === "en_us"
+                          ? "Not Applicable"
+                          : "不適用"
+                      }}</span>
                     </li>
                   </ul>
                 </div>
@@ -426,9 +434,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us" ? "Resident" : "年齡"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Resident" : "年齡" }}
                       </th>
                       <th
                         style="
@@ -438,11 +444,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us"
-                            ? "Requirements"
-                            : "條件"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Requirements" : "條件" }}
                       </th>
                       <th
                         style="
@@ -466,11 +468,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us"
-                            ? "Benefit"
-                            : "享有優惠"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Benefit" : "享有優惠" }}
                       </th>
                     </tr>
                     <tr>
@@ -482,9 +480,7 @@
                         "
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "from 4 to＜13"
-                            : "4至＜13歲"
+                          fairview_park_lang === "en_us" ? "from 4 to＜13" : "4至＜13歲"
                         }}
                       </td>
                       <td
@@ -508,11 +504,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us"
-                            ? "Children"
-                            : "兒童八達通"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Children" : "兒童八達通" }}
                       </td>
                       <td
                         style="
@@ -521,9 +513,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
                       </td>
                     </tr>
                     <tr>
@@ -535,9 +525,7 @@
                         "
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "from 13 to＜60"
-                            : "13至＜60歲"
+                          fairview_park_lang === "en_us" ? "from 13 to＜60" : "13至＜60歲"
                         }}
                       </td>
                       <td
@@ -576,9 +564,7 @@
                         "
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "from 60 to＜65"
-                            : "60至＜65歲"
+                          fairview_park_lang === "en_us" ? "from 60 to＜65" : "60至＜65歲"
                         }}
                       </td>
                       <td
@@ -589,9 +575,7 @@
                         "
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "Personalised"
-                            : "個人八達通"
+                          fairview_park_lang === "en_us" ? "Personalised" : "個人八達通"
                         }}
                       </td>
                       <td
@@ -601,9 +585,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
                       </td>
                     </tr>
                     <tr>
@@ -615,9 +597,7 @@
                         "
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "at or above 65"
-                            : "65或以上"
+                          fairview_park_lang === "en_us" ? "at or above 65" : "65或以上"
                         }}
                       </td>
                       <td
@@ -640,9 +620,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us" ? "Half Fare" : "半價"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
                       </td>
                     </tr>
                     <tr>
@@ -653,11 +631,7 @@
                           border: 2px solid #fff;
                         "
                       >
-                        {{
-                          fairview_park_lang === "en_us"
-                            ? "Non-Resident"
-                            : "非住戶"
-                        }}
+                        {{ fairview_park_lang === "en_us" ? "Non-Resident" : "非住戶" }}
                       </td>
                       <td
                         style="
@@ -668,9 +642,7 @@
                         colspan="4"
                       >
                         {{
-                          fairview_park_lang === "en_us"
-                            ? "No Benefit"
-                            : "無任何乘車優惠"
+                          fairview_park_lang === "en_us" ? "No Benefit" : "無任何乘車優惠"
                         }}
                       </td>
                     </tr>
@@ -688,9 +660,7 @@
             <!-- 免费穿梭巴士 -->
             <div
               class="free-bus"
-              v-if="
-                nav_index === coach_service_content.coachServiceList.length - 1
-              "
+              v-if="nav_index === coach_service_content.coachServiceList.length - 1"
             >
               <div class="table">
                 <h2>
@@ -709,9 +679,7 @@
                 </h5>
                 <p>
                   {{
-                    fairview_park_lang === "en_us"
-                      ? "From Bus Terminus"
-                      : "巴士總站開出"
+                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
                   }}
                 </p>
                 <ul>
@@ -776,9 +744,7 @@
                     class="flex-row"
                   >
                     <span style="text-align: center">
-                      <div
-                        style="width: 150px; text-align: left; margin: 0 auto"
-                      >
+                      <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index1
                         }}</i
@@ -786,9 +752,7 @@
                       </div></span
                     >
                     <span>
-                      <div
-                        style="width: 150px; text-align: left; margin: 0 auto"
-                      >
+                      <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index2
                         }}</i
@@ -837,9 +801,7 @@
                 </h5>
                 <p>
                   {{
-                    fairview_park_lang === "en_us"
-                      ? "From Bus Terminus"
-                      : "巴士總站開出"
+                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
                   }}
                 </p>
                 <ul>
@@ -904,9 +866,7 @@
                     class="flex-row"
                   >
                     <span style="text-align: center">
-                      <div
-                        style="width: 150px; text-align: left; margin: 0 auto"
-                      >
+                      <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index1
                         }}</i
@@ -914,9 +874,7 @@
                       </div></span
                     >
                     <span>
-                      <div
-                        style="width: 150px; text-align: left; margin: 0 auto"
-                      >
+                      <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index2
                         }}</i
@@ -969,18 +927,14 @@ export default {
     return {
       banner: new URL("../../assets/image/coach service/banner.jpg", import.meta.url)
         .href,
-      router1: new URL(
-        "../../assets/image/coach service/route1.gif",
-        import.meta.url
-      ).href,
+      router1: new URL("../../assets/image/coach service/route1.gif", import.meta.url)
+        .href,
       router1_en: new URL(
         "../../assets/image/coach service/route1_en.jpeg",
         import.meta.url
       ).href,
-      router2: new URL(
-        "../../assets/image/coach service/route2.gif",
-        import.meta.url
-      ).href,
+      router2: new URL("../../assets/image/coach service/route2.gif", import.meta.url)
+        .href,
       router2_en: new URL(
         "../../assets/image/coach service/route2_en.jpeg",
         import.meta.url
@@ -1028,8 +982,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.coach_service_content.coachServiceFile =
-            res.data.data.pdfUrlEnUs;
+          data.coach_service_content.coachServiceFile = res.data.data.pdfUrlEnUs;
         }
       } catch (error) {
         console.log(error);
@@ -1045,13 +998,11 @@ export default {
           res.data.data.pageResult.records.map((item, index) => {
             item.index = index;
           });
-          data.coach_service_content.coachServiceList =
-            res.data.data.pageResult.records.concat([
+          data.coach_service_content.coachServiceList = res.data.data.pageResult.records.concat(
+            [
               {
                 titleEnUs:
-                  data.fairview_park_lang === "en_us"
-                    ? "Coach Fare Table"
-                    : "專巴收費表",
+                  data.fairview_park_lang === "en_us" ? "Coach Fare Table" : "專巴收費表",
                 index: res.data.data.pageResult.records.length,
               },
               {
@@ -1061,8 +1012,9 @@ export default {
                     : "邨内免費穿梭巴士",
                 index: res.data.data.pageResult.records.length + 1,
               },
-            ]);
-       }
+            ]
+          );
+        }
       } catch (error) {
         console.log(error);
       }
@@ -1174,16 +1126,18 @@ export default {
     }
     @{deep} .nav-content {
       background-color: #fff;
-      font-size: 13px;
-      padding: 12px 0px;
-      .title{
+      font-size: 18px;
+      padding: 2px 0px;
+      .title {
         align-items: center;
         justify-content: space-between;
-        a{
+
+        p {
           color: var(--mainColor3);
           font-size: 36px;
+          font-weight: bold;
         }
-        span{
+        span {
           font-size: 18px;
         }
       }
@@ -1208,6 +1162,7 @@ export default {
             margin: 0;
             font-size: 18px;
             padding: 5px;
+            
           }
           ul {
             padding: 0;

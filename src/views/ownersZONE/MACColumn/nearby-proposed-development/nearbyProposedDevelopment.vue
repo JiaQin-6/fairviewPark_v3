@@ -29,7 +29,7 @@
           :key="index"
           class="col-6 col-md-4"
         >
-          <a :href="item.pdfUrlEnUs" style="width:100%">
+          <a :href="item.pdfUrlEnUs">
             <el-image :src="item.fileImage">
               <template #error>
                 <div class="image-slot">
@@ -95,12 +95,13 @@ h5 {
     li {
       font-size: 15px;
       margin-bottom: 10px;
+      padding: 20px;
+      text-align: center;
       a{
         display: inline-block;
-        padding: 20px;
+        width: 192px;
         img{
-            width: 100%;
-            
+          width: 100%;
         }
       }
       p{

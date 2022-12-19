@@ -13,7 +13,7 @@
         fairview_park_lang === "en_us" ? "SPAC Member List" : "特別工程諮詢委員會委員名單"
       }}
     </p>
-    <ul>
+    <ul style="padding:0">
       <li
         style="font-size: 18px"
         class="mb-16"

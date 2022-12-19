@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "About" : "關於"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;us" : "我們" }}
+        }}{{ fairview_park_lang === "en_us" ? " us" : "我們" }}
       </p>
     </div>
     <!-- navs -->
@@ -149,7 +149,6 @@
         <HumanResources v-show="nav_index === 6"></HumanResources>
         <Accounts v-show="nav_index === 7"></Accounts>
         <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
-        
       </div>
     </div>
   </div>

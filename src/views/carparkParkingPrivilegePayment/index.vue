@@ -21,7 +21,7 @@
             ? "Carpark Parking Privilege"
             : "停車場泊車優惠"
         }}{{
-          fairview_park_lang === "en_us" ? "&nbsp;Payment" : "收費表"
+          fairview_park_lang === "en_us" ? " Payment" : "收費表"
         }}
       </p>
     </div>

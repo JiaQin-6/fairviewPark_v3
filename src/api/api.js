@@ -75,9 +75,17 @@ http.findEstateNoticeList = (arr) => {
 http.findShopsDirectoryList = (arr) => {
     return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList`, arr);
 };
+//查询 商场资讯 列表
+http.findShopsDirectoryList2 = (arr) => {
+    return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList2`, arr);
+};
 //查询 用户电话 列表
 http.findUsefulTelephoneNosList = (arr) => {
     return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList`, arr);
+};
+//查询 用户电话 列表
+http.findUsefulTelephoneNosList2 = (arr) => {
+    return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList2`, arr);
 };
 //查询所有 banner 列表
 http.findWebsiteBannerList = (arr) => {
@@ -175,9 +183,9 @@ http.findPmLogHave = (arr) => {
 http.findPmLogList = (arr) => {
     return http.post(`/houseweb/pmLog/findPmLogList`, arr);
 };
-//houseweb 文件上传接口
-http.uploadFtpFile = (arr) => {
-    return http.post(`/houseweb/file/uploadFtpFile`, arr);
+//申请智能卡专用 文件上传接口
+http.uploadRcard = (arr) => {
+    return http.post(`/houseweb/file/uploadRcard`, arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
@@ -196,12 +204,15 @@ http.interceptors.request.use((config) => {
 /* 登录后让服务器带给浏览器token */
 http.interceptors.response.use(function (response) {
     if (response.data.status === 104) {
+        if (localStorage.getItem('login-info')) {
+            ElMessage({
+                message: i18n.global.t('Login timeout Please login again'),
+                type: 'warning',
+            });
+        }
         localStorage.removeItem('login-info');
-        ElMessage({
-            message: i18n.global.t('Login timeout Please login again'),
-            type: 'warning',
-        });
         router.push('/home');
+        return;
     }
     return response;
 }, function (error) {

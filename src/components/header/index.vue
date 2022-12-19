@@ -94,19 +94,9 @@
                   href: '#/coach-service?lang='+fairview_park_lang,
                 },
                 {
-                  type: 'select',
+                  type: 'default',
                   text: $t('Shops Directory'),
-                  href: '#/shopping-information-title?lang='+fairview_park_lang,
-                  children: [
-                    {
-                      text: $t('Shops Directory'),
-                      href: '#/shopping-information?lang='+fairview_park_lang,
-                    },
-                    {
-                      text: $t('Carpark Parking Privilege Payment'),
-                      href: '#/carpark-parking-privilege-payment?lang='+fairview_park_lang,
-                    },
-                  ],
+                  href: '#/shopping-information?lang='+fairview_park_lang,
                 },
                 {
                   type: 'default',
@@ -376,12 +366,7 @@ export default {
     };
     //切換路由
     const changeRouter = (href, children) => {
-      if (
-        location.hash === "#/shopping-information" ||
-        location.hash === "#/carpark-parking-privilege-payment"
-      ) {
-        data.route_url = "#/shopping-information-title";
-      } else if (location.hash === "#/home") {
+      if (location.hash === "#/home") {
         if (!localStorage.getItem("login-info")) {
           data.is_login = false;
           store.commit("setLoginStatus", false);
@@ -480,12 +465,7 @@ export default {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
-        if (
-          location.hash === "#/shopping-information" ||
-          location.hash === "#/carpark-parking-privilege-payment"
-        ) {
-          data.route_url = "#/shopping-information-title";
-        } else if (location.hash === "#/home") {
+        if (location.hash === "#/home") {
           if (!localStorage.getItem("login-info")) {
             data.is_login = false;
             store.commit("setLoginStatus", false);

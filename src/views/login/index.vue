@@ -80,18 +80,24 @@
               }}</a>
             </div>
             <div class="declaration flex-row">
-              <a target="_blank" :href="
+              <a
+                target="_blank"
+                :href="
                   fairview_park_lang === 'en_us'
                     ? 'https://fairviewpark.hk/file/disclaimerEN.html'
                     : 'https://fairviewpark.hk/file/disclaimerTC.html'
-                ">{{ $t("Disclaimer") }}</a>
-              <a target="_blank" :href="
+                "
+                >{{ $t("Disclaimer") }}</a
+              >
+              <a
+                target="_blank"
+                :href="
                   fairview_park_lang === 'en_us'
                     ? 'https://fairviewpark.hk/file/privacyEN.html'
                     : 'https://fairviewpark.hk/file/privacyTC.html'
-                ">{{
-                $t("Privacy Policy and Personal Data Collection Statement")
-              }}</a>
+                "
+                >{{ $t("Privacy Policy and Personal Data Collection Statement") }}</a
+              >
             </div>
           </div>
         </div>
@@ -118,6 +124,34 @@
           </div>
           <div class="modal-body">
             <h2>{{ $t("Online user registration") }}</h2>
+            <button
+              style="
+                background-color: var(--mainColor3);
+                color: #fff;
+                padding: 5px 30px;
+                margin-right: 20px;
+                cursor: pointer;
+                vertical-align: middle;
+                border: none;
+                border-radius: 50px;
+              "
+            >
+              <a
+                :href="
+                  fairview_park_lang === 'en_us'
+                    ? 'https://fairviewpark.hk/file/AccountCreateEN.html'
+                    : 'https://fairviewpark.hk/file/AccountCreateTC.html'
+                "
+                target="_blank"
+                style="text-decoration: none; color: #fff"
+              >
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "How to Create Account"
+                    : "網上註冊指引"
+                }}</a
+              >
+            </button>
             <div>
               <ul>
                 <li>
@@ -152,9 +186,7 @@
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="
-                      register_error_tip.is_null && !registerForm.loginName
-                    "
+                    v-show="register_error_tip.is_null && !registerForm.loginName"
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
@@ -166,9 +198,7 @@
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="
-                      register_error_tip.is_null && !registerForm.password
-                    "
+                    v-show="register_error_tip.is_null && !registerForm.password"
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
@@ -199,9 +229,7 @@
                   >
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="
-                      register_error_tip.is_email_correct && registerForm.email
-                    "
+                    v-show="register_error_tip.is_email_correct && registerForm.email"
                     >{{ $t("Please provide a valid email.") }}</i
                   >
                 </li>
@@ -256,8 +284,7 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null &&
-                      !forgotPasswordForm.loginName
+                      forgot_password_error_tip.is_null && !forgotPasswordForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -266,15 +293,12 @@
                   <input
                     v-model="forgotPasswordForm.email"
                     type="text"
-                    :placeholder="
-                      $t('Please enter your registration contact email')
-                    "
+                    :placeholder="$t('Please enter your registration contact email')"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null &&
-                      !forgotPasswordForm.email
+                      forgot_password_error_tip.is_null && !forgotPasswordForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -362,8 +386,7 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
-                      !editMemberInfoForm.loginName
+                      edit_member_info_error_tip.is_null && !editMemberInfoForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -377,8 +400,7 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
-                      !editMemberInfoForm.password
+                      edit_member_info_error_tip.is_null && !editMemberInfoForm.password
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -406,8 +428,7 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
-                      !editMemberInfoForm.email
+                      edit_member_info_error_tip.is_null && !editMemberInfoForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -430,13 +451,10 @@
               </ul>
             </div>
             <div class="button">
-              <p
-                style="color: #fc0d1b"
-                v-show="edit_member_info_error_tip.is_show"
-              >
+              <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
                 {{ edit_member_info_error_tip.text }}
               </p>
-              <button @click="editMemberInfo">{{ $t("Confirm") }}</button>
+              <button @click="editMemberInfo">{{ fairview_park_lang==='en_us'?'Update':'更新' }}</button>
             </div>
           </div>
         </div>
@@ -604,7 +622,7 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("close-forgetPasswor").click();
           ElMessageBox.alert(`${res.data.msg}`, "", {
-            confirmButtonText: $t('Confirm'),
+            confirmButtonText: $t("Confirm"),
           });
           document.getElementsByClassName("el-overlay")[0].style["background-color"] =
             "transparent";
@@ -616,8 +634,8 @@ export default {
         console.log(error);
       }
     };
-     //修改用戶信息
-     const editMemberInfo = async () => {
+    //修改用戶信息
+    const editMemberInfo = async () => {
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.loginName ||
@@ -644,7 +662,6 @@ export default {
           cnickname: data.editMemberInfoForm.cnickname,
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
-         
         });
         if (res.data.status === 200) {
           document.getElementById("editMemberInformation").style.display = "none";
@@ -659,15 +676,15 @@ export default {
       }
     };
     onMounted(() => {
-      var myModalEl = document.getElementById('editMemberInformation')
-        myModalEl.addEventListener('show.bs.modal', function (event) {
-          data.editMemberInfoForm.hcode=localStorage.getItem("login-info")
+      var myModalEl = document.getElementById("editMemberInformation");
+      myModalEl.addEventListener("show.bs.modal", function (event) {
+        data.editMemberInfoForm.hcode = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).topic3
           : "";
-          data.editMemberInfoForm.loginName=localStorage.getItem("login-info")
+        data.editMemberInfoForm.loginName = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).login
           : "";
-        })
+      });
     });
     return {
       ...toRefs(data),
@@ -690,9 +707,12 @@ export default {
       h2 {
         font-style: normal;
         color: #2fa94e;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         font-size: 38px;
         line-height: 65px;
+      }
+      button {
+        margin-bottom: 30px;
       }
       h4 {
         color: #8fbc25;
@@ -766,6 +786,7 @@ export default {
           text-decoration-line: underline;
           color: #ffa41b;
           cursor: pointer;
+          
         }
       }
       .declaration {

@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Activities" : "活動" }}
+        }}{{ fairview_park_lang === "en_us" ? " Activities" : "活動" }}
       </p>
     </div>
     <!-- navs -->
@@ -57,7 +57,7 @@
           <p v-if="estate_activites_list.length!==0" style="font-size: 36px; color: #9cc212; font-weight: bold">
               {{ estate_activites_list[nav_index].titleEnUs }}
             </p>
-          <div class="ql-editor" v-html="estate_activites_content"></div>
+          <div v-html="estate_activites_content"></div>
         </div>
       </div>
     </div>

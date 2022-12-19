@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Fairview Park" : "錦綉"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;News" : "專訊" }}
+        }}{{ fairview_park_lang === "en_us" ? " News" : "專訊" }}
       </p>
     </div>
     <!-- navs -->

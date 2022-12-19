@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "New" : "最新"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;Update" : "消息" }}
+        }}{{ fairview_park_lang === "en_us" ? " Update" : "消息" }}
       </p>
     </div>
     <!-- navs -->
@@ -54,7 +54,7 @@
           <p style="font-size: 36px; color: #9cc212; font-weight: bold" v-if="new_update_list.length!==0">
             {{ new_update_list.filter(item=>{ return item.id === new_update_index})[0].titleEnUs }}
           </p>
-          <div class="ql-editor" v-html="new_update_content.htmlEnUs"></div>
+          <div v-html="new_update_content.htmlEnUs"></div>
         </div>
       </div>
     </div>

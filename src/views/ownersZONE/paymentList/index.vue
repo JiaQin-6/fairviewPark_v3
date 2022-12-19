@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Payment" : "收費"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;List" : "表" }}
+        }}{{ fairview_park_lang === "en_us" ? " List" : "表" }}
       </p>
     </div>
     <!-- 內容 -->

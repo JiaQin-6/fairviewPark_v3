@@ -85,7 +85,7 @@ export default {
 .nav-content {
   padding-left: 20px;
   .container {
-    padding: 10px 0px;
+    padding: 0px 0px;
     h3 {
       font-size: 20px;
       color: #3a6547;

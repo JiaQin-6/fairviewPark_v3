@@ -13,7 +13,7 @@
       <img :src="banner" alt="" />
       <p>
         {{ fairview_park_lang === "en_us" ? "Frequently used" : "常用"
-        }}{{ fairview_park_lang === "en_us" ? "&nbsp;forms" : "表格" }}
+        }}{{ fairview_park_lang === "en_us" ? " forms" : "表格" }}
       </p>
     </div>
     <!-- navs -->
@@ -24,7 +24,7 @@
           class="col-12 nav-content mb-20 ql-container ql-snow"
         >
           <div>
-            <h5 style="color:#549632">
+            <h5>
               {{ fairview_park_lang === "en_us" ? "Frequently used forms" : "常用表格" }}
             </h5>
             <p style="color:#549632;font-size:15px">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
@@ -129,6 +129,11 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
+      h5{
+        color: #9cc212;
+          font-size: 36px;
+          font-weight: bold;
+      }
     }
   }
 }

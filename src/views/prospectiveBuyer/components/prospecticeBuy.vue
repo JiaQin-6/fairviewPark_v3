@@ -29,12 +29,10 @@
                         "
                       >
                         <tbody style="border: 1px solid #275535; border-radius: 5px">
-                          <tr
-                            style="
-                              box-sizing: border-box;
-                            "
-                          >
-                            <td style="font-size: 36px;color:#9cc212;font-weight:bold;">
+                          <tr style="box-sizing: border-box">
+                            <td
+                              style="font-size: 36px; color: #9cc212; font-weight: bold"
+                            >
                               {{
                                 fairview_park_lang === "en_us"
                                   ? "Prospective Buyers"
@@ -42,13 +40,8 @@
                               }}
                             </td>
                           </tr>
-                          <tr
-                            style="
-                              height: 50px;
-                              box-sizing: border-box;
-                            "
-                          >
-                            <td style="font-size: 24px;font-weight:bold;">
+                          <tr style="height: 50px; box-sizing: border-box">
+                            <td style="font-size: 24px; font-weight: bold">
                               {{
                                 fairview_park_lang === "en_us"
                                   ? "To New Owners or Prospective Buyers"
@@ -138,14 +131,14 @@
                                                 <tbody>
                                                   <tr>
                                                     <td>
-                                                      <p style="margin-bottom:5px">
+                                                      <p style="margin-bottom: 5px">
                                                         <strong>{{ item.title }}</strong>
                                                       </p>
                                                     </td>
                                                   </tr>
                                                   <tr>
                                                     <td>
-                                                      <p style="margin-bottom:25px">
+                                                      <p style="margin-bottom: 25px">
                                                         {{ item.des }}
                                                         <br />
                                                         <font
@@ -359,10 +352,10 @@
                           :title="index + 1 + '. ' + item.title"
                           :name="index + 1"
                         >
-                        <template #title>
-                          <span>{{index+1}}.</span>
-                          <span>{{item.title}}</span>
-                        </template>
+                          <template #title>
+                            <span class="title">{{ index + 1 }}.</span>
+                            <span>{{ item.title }}</span>
+                          </template>
                           <div>
                             <p style="font-size: 16px; padding: 5px 27px">
                               {{ item.des }}<br />
@@ -384,16 +377,37 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, onUnmounted } from "vue";
 export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-
+    const getHeight = () => {
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        document.getElementsByClassName("title")[i].style.height =
+          document
+            .getElementsByClassName("title")
+            [i].parentElement.getBoundingClientRect().height + "px";
+        document.getElementsByClassName("title")[i].style["line-height"] =
+          document
+            .getElementsByClassName("title")
+            [i].parentElement.getBoundingClientRect().height + "px";
+      }
+    };
+    onMounted(async () => {
+      window.addEventListener("resize", getHeight);
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        getHeight();
+      }
+    });
+    onUnmounted(() => {
+      window.removeEventListener("resize", getHeight);
+    });
     return {
       ...toRefs(data),
+      getHeight,
     };
   },
 };
@@ -410,45 +424,55 @@ export default {
       margin-bottom: 2px;
       .el-collapse-item__header {
         font-size: 18px;
+        align-items: center;
         background-color: #fffae7;
         border: none;
-        &:hover{
-        background-color: #fff3c4;
-          span{
-            &:first-child{
-            background-color: #cee97b;
-          }
+        height: auto;
+        padding: 0;
+        &:hover {
+          background-color: #fff3c4;
+          span {
+            &:first-child {
+              background-color: #cee97b;
+            }
           }
         }
-        span{
+        span {
           color: #4a4a4a;
           font-weight: normal;
-          &:first-child{
+          &:first-child {
             width: 50px;
             background-color: #e7f3be;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 25px;
           }
-          &:nth-child(2){
-            padding-left: 10px;
+          &:nth-child(2) {
+            padding: 7px 0 7px 10px;
+            flex: 1;
+            // background-color: #fffae7;
+            line-height: 25px;
+            box-sizing: border-box;
           }
         }
       }
-      .is-active{
+      .is-active {
         background-color: #fff3c4;
-          span{
+        span {
           font-weight: bold;
-            &:first-child{
+          &:first-child {
             background-color: #cee97b;
           }
-          }
+        }
       }
-      .el-collapse-item__wrap{
+      .el-collapse-item__wrap {
         border: none;
-        .el-collapse-item__content{
-        color: #4a4a4a;
+        .el-collapse-item__content {
+          color: #4a4a4a;
+        }
       }
-      }
-      
     }
   }
 }
