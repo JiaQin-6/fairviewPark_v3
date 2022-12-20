@@ -50,7 +50,7 @@
               v-for="(item, index) in telephone_link_list"
               :key="index"
               :label="item.titleEnUs"
-              :value="item.index"
+              :value="index"
             >
               <span>{{ item.titleEnUs }}</span>
             </el-option>
@@ -163,6 +163,8 @@ export default {
             ? document.getElementById("useful-menu").getBoundingClientRect()
                 .height + "px"
             : "500px";
+      }else{
+        document.getElementsByClassName("nav-content")[0].style.height ="500px";
       }
     });
     const jumpLink = (index) => {
@@ -170,7 +172,6 @@ export default {
       for (let i = 0; i < index; i++) {
         top += document.querySelector("#telephone_link_" + (i + 1)).scrollHeight
       }
-      console.log(document.querySelector("#nav-content"))
       document.querySelector("#nav-content").scrollTop = top
       data.nav_index = index;
     };

@@ -208,7 +208,7 @@ h5 {
     padding: 0;
 
     li {
-      font-size: 15px;
+      font-size: 18px;
       margin-bottom: 20px;
 
       i {

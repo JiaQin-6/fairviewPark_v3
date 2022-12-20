@@ -1308,6 +1308,8 @@ export default {
             ? document.getElementById("shopping-information-menu").getBoundingClientRect()
                 .height + "px"
             : "500px";
+      }else{
+        document.getElementsByClassName("nav-content")[0].style.height ="500px"
       }
     });
     const jumpLink = (index) => {
@@ -1315,8 +1317,11 @@ export default {
       } else {
         let top = 0;
         for (let i = 0; i < index; i++) {
+         
           top += document.querySelector("#shop_information_" + (i + 1)).scrollHeight;
         }
+        console.log(top)
+        console.log(document.querySelector("#nav-content"))
         document.querySelector("#nav-content").scrollTop = top;
       }
       data.nav_index = index;
@@ -1374,7 +1379,6 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
-
   .row {
     margin: 0 auto;
     .aside {
@@ -1461,18 +1465,20 @@ export default {
               }
             }
             .img {
-              width: 100%;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
               border: 2px solid #f7f7f7;
               text-align: center;
               padding: 20px;
               box-sizing: border-box;
+              width: 280px;
+              height: 150px;
+              position: relative;
               img {
-                width: 100%;
-                max-width: 280px;
-                max-height: 150px;
+                position: relative;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                max-width: 100%;
+                max-height: 100%;
               }
             }
             p {

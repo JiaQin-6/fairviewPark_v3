@@ -15,7 +15,7 @@
           : "大維修"
       }}
     </p>
-    <p style="font-size:18px">
+    <p style="font-size:24px;font-weight:bold">
       {{
         fairview_park_lang === "en_us"
           ? "The Overhaul Project refers to the Project for Replacement of Underground Water Pipes and Refurbishment of Roads."
@@ -113,7 +113,7 @@
       </h5>
       <div style="text-align: center">
         <iframe
-          width="560"
+          style="width:100%;max-width:560px"
           height="315"
           src="https://www.youtube.com/embed/bjW8bxYGMC8"
           title="YouTube video player"
@@ -146,26 +146,26 @@
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet2e_eng_1.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet2e_chi_1.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_eng_1_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_chi_1_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet2e_eng_2.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet2e_chi_2.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_eng_2_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_chi_2_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet2e_eng_3.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet2e_chi_3.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_eng_3_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_chi_3_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet2e_eng_4.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet2e_chi_4.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_eng_4_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210524leaflet/leaflet2e_chi_4_full.jpg',
             },
           ],
         },
@@ -178,26 +178,26 @@
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet_eng_1.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet_chi_1s.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_eng_1_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_chi_1_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet_eng_2.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet_chi_2s.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_eng_2_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_chi_2_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet_eng_3.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet_chi_3s.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_eng_3_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_chi_3_full.jpg',
             },
             {
               url:
                 fairview_park_lang === 'en_us'
-                  ? 'https://www.fairviewpark.hk/eng/overhaul/leaflet_eng_4.jpg'
-                  : 'https://www.fairviewpark.hk/cn/overhaul/leaflet_chi_4s.jpg',
+                  ? 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_eng_4_full.jpg'
+                  : 'https://fairviewpark.hk/file/overhaul_project/20210412leaflet/leaflet_chi_4_full.jpg',
             },
           ],
         },

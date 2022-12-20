@@ -71,14 +71,14 @@
     <div class="bottom-part">
       <div class="row bottom-part-wrap">
         <!-- 左部份 -->
-        <div class="col col-12 col-xl-5 col-lg-5 col-md-5">
-          <p class="fs-18">
+        <div style="padding:0" class="col col-12 col-xl-5 col-lg-5 col-md-5">
+          <p class="fs-18" style="padding:0">
             {{ $t("All Rights Reserved") }} {{ new Date().getFullYear() }}
             {{ $t("Fairview Park Property Management Limited") }}
           </p>
         </div>
         <!-- 右部份 -->
-        <div class="bottom-right-part col col-12 col-xl-7 col-lg-7 col-md-7">
+        <div class="bottom-right-part col col-12 col-xl-7 col-lg-7 col-md-7" style="padding:0">
           <ul class="flex-row">
             <li class="fs-18">
               <a
@@ -254,6 +254,9 @@ export default {
 
           img {
             margin-right: 5px;
+            &:last-child{
+              margin-right: 0;
+            }
           }
         }
       }

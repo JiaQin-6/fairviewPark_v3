@@ -214,7 +214,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;

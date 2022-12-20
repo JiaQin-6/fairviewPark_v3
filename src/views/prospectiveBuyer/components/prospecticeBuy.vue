@@ -354,7 +354,7 @@
                         >
                           <template #title>
                             <span class="title">{{ index + 1 }}.</span>
-                            <span>{{ item.title }}</span>
+                            <span class="item">{{ item.title }}</span>
                           </template>
                           <div>
                             <p style="font-size: 16px; padding: 5px 27px">
@@ -386,14 +386,12 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const getHeight = () => {
       for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height =
+        document.getElementsByClassName("title")[i].style.height = 
           document
-            .getElementsByClassName("title")
-            [i].parentElement.getBoundingClientRect().height + "px";
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
         document.getElementsByClassName("title")[i].style["line-height"] =
           document
-            .getElementsByClassName("title")
-            [i].parentElement.getBoundingClientRect().height + "px";
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
       }
     };
     onMounted(async () => {

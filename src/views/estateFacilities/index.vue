@@ -58,8 +58,10 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <div style="padding:0 20px">
-            <p class="title" v-if="estate_facilities_list.length!==0">{{estate_facilities_list[nav_index].titleEnUs}}</p>
+          <div style="padding: 0 20px">
+            <p class="title" v-if="estate_facilities_list.length !== 0">
+              {{ estate_facilities_list[nav_index].titleEnUs }}
+            </p>
             <div v-html="estate_facilities_content"></div>
           </div>
         </div>
@@ -73,7 +75,8 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/estate-facilities/banner.jpg", import.meta.url).href,
+      banner: new URL("../../assets/image/estate-facilities/banner.jpg", import.meta.url)
+        .href,
     };
   },
   setup() {
@@ -161,9 +164,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -190,7 +193,6 @@ export default {
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
-          background-color: rgb(235, 233, 233);
           cursor: pointer;
           i {
             font-size: 15px;
@@ -225,7 +227,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -236,7 +238,7 @@ export default {
       img {
         max-width: 100%;
       }
-      .title{
+      .title {
         font-size: 36px;
         color: var(--mainColor3);
         font-weight: bold;
@@ -247,7 +249,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -258,7 +259,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -281,7 +281,7 @@ export default {
   .nav-wrap {
     .row {
       .aside {
-      padding: 0;
+        padding: 0;
         ul {
           flex-wrap: nowrap;
           padding: 0;
@@ -295,9 +295,9 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
-      }
+        .menu-select {
+          display: block;
+        }
       }
     }
   }

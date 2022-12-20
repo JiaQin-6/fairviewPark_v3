@@ -123,8 +123,8 @@
               {
                 label:
                   fairview_park_lang === 'en_us'
-                    ? '11th MAC Members'
-                    : '應屆管理諮詢委員會委員資料',
+                    ? 'Nearby Proposed Development(s)'
+                    : '周邊發展項目',
                 value: '7',
               },
             ]"
