@@ -94,7 +94,7 @@
                             content:
                               fairview_park_lang === 'en_us'
                                 ? 'Estate Management 2471 1301 (24 hours) <br/> Emergency Hotline 2471 1999 (24 hours) <br/> (Conversations at these telephones may be recorded)'
-                                : '管理公司 2471 1301（24小時） <br/> 緊急熱線 2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被靜音)',
+                                : '管理公司 2471 1301（24小時） <br/> 緊急熱線 2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
                           },
                         ]"
                         :key="index"

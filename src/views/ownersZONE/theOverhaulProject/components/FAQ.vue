@@ -9,20 +9,20 @@
 <template>
   <div>
     <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-      {{
-        fairview_park_lang === "en_us" ? "FAQ" : "常見問題"
-      }}
+      {{ fairview_park_lang === "en_us" ? "FAQ" : "常見問題" }}
     </p>
     <div
       class="mb-20"
       v-for="(item, index) in [
         {
-          title: fairview_park_lang === 'en_us' ? 'Background Information' : '工程背景資料',
+          title:
+            fairview_park_lang === 'en_us' ? 'Background Information' : '工程背景資料',
           children: [
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Why should the Overhaul Project be carried out?'
-                      : '為何要進行「大維修」工程 ?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Why should the Overhaul Project be carried out?'
+                  : '為何要進行「大維修」工程 ?',
               children: [
                 {
                   text:
@@ -33,9 +33,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What are the consequences of not carrying out the Overhaul Project?'
-                      :'不進行「大維修」工程的後果如何?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What are the consequences of not carrying out the Overhaul Project?'
+                  : '不進行「大維修」工程的後果如何?',
               children: [
                 {
                   text:
@@ -58,9 +59,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What is the current situation of the water leakage? Did WSD demand improvement? What sort of actions would the Estate Management take in response to WSD’s demand? Have we found out the cause(s) of such water leakage?'
-                      : '現時本屋苑失水情況如何? 水務署是否有來信要求作出改善? 管理處接獲有關信件後有何跟進行動? 有否找出嚴重失水的原因?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What is the current situation of the water leakage? Did WSD demand improvement? What sort of actions would the Estate Management take in response to WSD’s demand? Have we found out the cause(s) of such water leakage?'
+                  : '現時本屋苑失水情況如何? 水務署是否有來信要求作出改善? 管理處接獲有關信件後有何跟進行動? 有否找出嚴重失水的原因?',
               children: [
                 {
                   text:
@@ -71,9 +73,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Are there any alternative solutions for the serious leakage problem?'
-                      :'是否有其他方案可以解決本屋苑嚴重失水問題?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Are there any alternative solutions for the serious leakage problem?'
+                  : '是否有其他方案可以解決本屋苑嚴重失水問題?',
               children: [
                 {
                   text:
@@ -84,9 +87,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Is the leakage problem caused by insufficient regular maintenance of the water pipes?'
-                      :'失水的原因是否因恆常的喉管維修保養不足引致?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Is the leakage problem caused by insufficient regular maintenance of the water pipes?'
+                  : '失水的原因是否因恆常的喉管維修保養不足引致?',
               children: [
                 {
                   text:
@@ -97,9 +101,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Some of the pipes were replaced in 2001 - 2005, what were the reasons for the Estate Management not to replace all the pipes then?'
-                      :'為何管理公司於2001 - 2005更換部分喉管時，並沒有一併更換所有喉管?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Some of the pipes were replaced in 2001 - 2005, what were the reasons for the Estate Management not to replace all the pipes then?'
+                  : '為何管理公司於2001 - 2005更換部分喉管時，並沒有一併更換所有喉管?',
               children: [
                 {
                   text:
@@ -110,9 +115,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'The Estate Management had proposed the Overhaul Project before in 2014, but why was it set aside?'
-                      :'管理公司曾大約在2014年提出大維修計劃，為何最終被擱置下來?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'The Estate Management had proposed the Overhaul Project before in 2014, but why was it set aside?'
+                  : '管理公司曾大約在2014年提出大維修計劃，為何最終被擱置下來?',
               children: [
                 {
                   text:
@@ -128,9 +134,10 @@
           title: fairview_park_lang === 'en_us' ? 'The Project' : '工程相關的問題',
           children: [
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Given that the Overhaul Project is an enormous engineering project, does the Estate Management have enough professionals in managing it? Will a consultancy firm be hired? What is the process of selecting the contractor and who is going to make the decision? How to prevent bid rigging?'
-                      : '大維修工程是一個龐大的土木工程，管理公司是否有足夠的專業人才管理? 會否聘用專業顧問公司? 決定聘用某工程承建商的流程是怎樣和由誰作出聘用的最後決定? 怎樣防止圍標?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Given that the Overhaul Project is an enormous engineering project, does the Estate Management have enough professionals in managing it? Will a consultancy firm be hired? What is the process of selecting the contractor and who is going to make the decision? How to prevent bid rigging?'
+                  : '大維修工程是一個龐大的土木工程，管理公司是否有足夠的專業人才管理? 會否聘用專業顧問公司? 決定聘用某工程承建商的流程是怎樣和由誰作出聘用的最後決定? 怎樣防止圍標?',
               children: [
                 {
                   text:
@@ -195,9 +202,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'From what governmental departments should we get approval for the Overhaul Project?'
-                      :'大維修工程需哪些政府部門審批？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'From what governmental departments should we get approval for the Overhaul Project?'
+                  : '大維修工程需哪些政府部門審批？',
               children: [
                 {
                   text:
@@ -208,9 +216,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Will the roads refurbishment works be carried out at the same time as the works for the replacement of underground water pipes?'
-                      : '有關工程是否除更換地下喉管外，連帶行車道路翻新工程一併進行?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Will the roads refurbishment works be carried out at the same time as the works for the replacement of underground water pipes?'
+                  : '有關工程是否除更換地下喉管外，連帶行車道路翻新工程一併進行?',
               children: [
                 {
                   text:
@@ -221,9 +230,10 @@
               ],
             },
             {
-              title:  fairview_park_lang === 'en_us'
-                      ? 'Will the proposed road refurbishment works cover 30% or 60% or 100% of the width of the roads?'
-                      :'建議路面重鋪的面積是多少？(30%？60%？或100%？)',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Will the proposed road refurbishment works cover 30% or 60% or 100% of the width of the roads?'
+                  : '建議路面重鋪的面積是多少？(30%？60%？或100%？)',
               children: [
                 {
                   text:
@@ -234,9 +244,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What is the estimated time for the Overhaul Project to complete?'
-                      :'整項工程預算完工時間是多少 ?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What is the estimated time for the Overhaul Project to complete?'
+                  : '整項工程預算完工時間是多少 ?',
               children: [
                 {
                   text:
@@ -247,9 +258,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What criterion do you have in relation to the sequence for pipes replacement?'
-                      :'以什麼做準則來決定各地段更換喉管的先後順序？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What criterion do you have in relation to the sequence for pipes replacement?'
+                  : '以什麼做準則來決定各地段更換喉管的先後順序？',
               children: [
                 {
                   text:
@@ -272,9 +284,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What material(s) are the to-be-replaced pipes made of? Will there be any difference(s) between the current and the proposed method on connecting the pipes?'
-                      :'新更換的喉管用什麼材料？接駁方法與現時有何不同？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What material(s) are the to-be-replaced pipes made of? Will there be any difference(s) between the current and the proposed method on connecting the pipes?'
+                  : '新更換的喉管用什麼材料？接駁方法與現時有何不同？',
               children: [
                 {
                   text:
@@ -285,9 +298,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What kind of public utility organizations will potentially share the use of the upgraded channels?'
-                      :'哪些公共機構有潛在可能共同參與充分利用坑道？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What kind of public utility organizations will potentially share the use of the upgraded channels?'
+                  : '哪些公共機構有潛在可能共同參與充分利用坑道？',
               children: [
                 {
                   text:
@@ -298,9 +312,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Upon completion of the comprehensive pipes replacement, how long do you expect the new water pipes system could last for?'
-                      :'當全面更換喉管工程完成後，預計新系統能維持多久的正常使用？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Upon completion of the comprehensive pipes replacement, how long do you expect the new water pipes system could last for?'
+                  : '當全面更換喉管工程完成後，預計新系統能維持多久的正常使用？',
               children: [
                 {
                   text:
@@ -311,9 +326,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Upon completion of the comprehensive roads refurbishment works, how long do you expect the repaved roads could be used for?'
-                      :'當全面重鋪路面工程完成後，預計可維持多久的正常使用？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Upon completion of the comprehensive roads refurbishment works, how long do you expect the repaved roads could be used for?'
+                  : '當全面重鋪路面工程完成後，預計可維持多久的正常使用？',
               children: [
                 {
                   text:
@@ -326,10 +342,16 @@
           ],
         },
         {
-          title: fairview_park_lang === 'en_us' ? 'Finance / Fundraising Issue' : '有關財務／集資問題',
+          title:
+            fairview_park_lang === 'en_us'
+              ? 'Finance / Fundraising Issue'
+              : '有關財務／集資問題',
           children: [
             {
-              title: fairview_park_lang === 'en_us' ? 'What are the estimated costs for the Overhaul Project? Do the owners of the commercial premises and Club House have to pay? How much does each household have to pay?' :'大維修工程費用估算為多少? 商場或會所需要支付嗎? 每戶須支付多少?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What are the estimated costs for the Overhaul Project? Do the owners of the commercial premises and Club House have to pay? How much does each household have to pay?'
+                  : '大維修工程費用估算為多少? 商場或會所需要支付嗎? 每戶須支付多少?',
               children: [
                 {
                   text:
@@ -343,13 +365,13 @@
                       ? 'Each household unit is expected to bear an average amount of approximately HK$100,000 and the owners of non-residential area are expected to bear approximately HK$16M. These figures are based on the initial costs’ estimation, we shall continue to work with HO TIN for details of the Overhaul Project as well as costs management.'
                       : '而按初步估算每個花園洋房單位業戶平均需支付約10萬元，而商業物業的業主需要支付約1,600萬元。現時仍是初步估算，管理公司會繼續與何田研究工程細節及作出成本控制。',
                 },
-              
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Why the Developer does not need to pay the costs for the Overhaul Project?'
-                      :'為何發展商不用支付大維修工程費用？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Why the Developer does not need to pay the costs for the Overhaul Project?'
+                  : '為何發展商不用支付大維修工程費用？',
               children: [
                 {
                   text:
@@ -378,9 +400,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Why is the reference to share for the costs of Overhaul Project not made in accordance with the size of the residential area and non-residential area?'
-                      :'為何不是按住宅與非住宅的佔地比率攤分工程費用?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Why is the reference to share for the costs of Overhaul Project not made in accordance with the size of the residential area and non-residential area?'
+                  : '為何不是按住宅與非住宅的佔地比率攤分工程費用?',
               children: [
                 {
                   text:
@@ -403,9 +426,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'What is the fundraising plan for the owners?'
-                      : '業戶支付工程費用方式是怎樣?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'What is the fundraising plan for the owners?'
+                  : '業戶支付工程費用方式是怎樣?',
               children: [
                 {
                   text:
@@ -416,9 +440,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Will there be a cost overrun for the Overhaul Project?'
-                      :'就有關工程估算，會否最後出現超支問題?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Will there be a cost overrun for the Overhaul Project?'
+                  : '就有關工程估算，會否最後出現超支問題?',
               children: [
                 {
                   text:
@@ -441,9 +466,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'How much on maintenance/repair could be saved per year upon completion of the whole Project?'
-                      :'當工程完成後，預計每年可節省多少維修費用？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'How much on maintenance/repair could be saved per year upon completion of the whole Project?'
+                  : '當工程完成後，預計每年可節省多少維修費用？',
               children: [
                 {
                   text:
@@ -454,9 +480,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Are there any measures by the Estate Management to assist the owners in paying the costs for Overhaul Project?'
-                      :'就支付工程費一事，管理公司是否有協助業戶的措施？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Are there any measures by the Estate Management to assist the owners in paying the costs for Overhaul Project?'
+                  : '就支付工程費一事，管理公司是否有協助業戶的措施？',
               children: [
                 {
                   text:
@@ -491,9 +518,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'Will the Estate Management use the sinking fund to pay for the Overhaul Project?'
-                      : '管理公司會否運用管理儲備支付大維修工程費用？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Will the Estate Management use the sinking fund to pay for the Overhaul Project?'
+                  : '管理公司會否運用管理儲備支付大維修工程費用？',
               children: [
                 {
                   text:
@@ -516,9 +544,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'How much will the Estate Management charge for the Manager’s Remuneration (MR)?'
-                      :'管理公司會收取多少經理人酬金 (MR)？',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'How much will the Estate Management charge for the Manager’s Remuneration (MR)?'
+                  : '管理公司會收取多少經理人酬金 (MR)？',
               children: [
                 {
                   text:
@@ -528,14 +557,16 @@
                 },
               ],
             },
-            
           ],
         },
         {
           title: fairview_park_lang === 'en_us' ? 'Other Issues' : '其他問題',
           children: [
             {
-              title: fairview_park_lang === 'en_us' ? 'Should the schools, the church and the fire station pay for the construction expenses?' :'大維修工程費用，學校、教會及消防局需要支付嗎?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'Should the schools, the church and the fire station pay for the construction expenses?'
+                  : '大維修工程費用，學校、教會及消防局需要支付嗎?',
               children: [
                 {
                   text:
@@ -564,9 +595,10 @@
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'How will the parking issue be dealt with during the Overhaul Project?'
-                      :'進行有關工程時，如何解決車輛停泊問題?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'How will the parking issue be dealt with during the Overhaul Project?'
+                  : '進行有關工程時，如何解決車輛停泊問題?',
               children: [
                 {
                   text:
@@ -574,13 +606,13 @@
                       ? 'We will study the parking arrangement with HO TIN and will give the affected residents sufficient notice.'
                       : '我們會與何田作進一步研究，並通知受影響地段的住戶有關應變安排。',
                 },
-               
               ],
             },
             {
-              title: fairview_park_lang === 'en_us'
-                      ? 'I am selling my property. Should the costs be borne by the Purchaser?'
-                      :'我的單位正進行買賣，工程費用是否由買家負責?',
+              title:
+                fairview_park_lang === 'en_us'
+                  ? 'I am selling my property. Should the costs be borne by the Purchaser?'
+                  : '我的單位正進行買賣，工程費用是否由買家負責?',
               children: [
                 {
                   text:
@@ -588,36 +620,43 @@
                       ? 'It is a matter of negotiation between the Vendor and the Purchaser. Should the costs be confirmed, we could inform the relevant parties if such information is so requested.'
                       : '費用問題應交由買賣雙方自行協議決定。倘若買賣雙方律師向管理公司查詢工程費用，我們會在回覆信件中列出有關費用。',
                 },
-               
               ],
             },
-          
           ],
         },
       ]"
       :key="index"
     >
-      <h5 style="background-color: #389818; color: #fff; font-size: 20px; padding: 5px">
+      <h5 style="font-size: 24px; padding: 5px; font-weight: bold">
         {{ item.title }}
       </h5>
-      <div v-for="(item2, index2) in item.children" :key="index2">
-        <div class="flex-row" style="font-size:18px;">
-          <i style="color:#fff;background-color:#72b652;text-align:center;width:30px;padding:5px;">{{ index2 + 1 }}.</i>
-          <span style="background-color:#e3f3b3;flex:1;padding:5px;">{{ item2.title }}</span>
-        </div>
-        <p
-          style="font-size: 18px; padding: 10px 20px; margin: 0"
-          v-for="(item3, index3) in item2.children"
-          :key="index3"
-          v-html="item3.text"
-        ></p>
-      </div>
+      <el-collapse accordion v-model="activeNames">
+        <el-collapse-item
+          v-for="(item2, index2) in item.children"
+          :key="index2"
+          :title="index2 + 1 + '. ' + item2.title"
+          :name="index2 + 1"
+        >
+          <template #title>
+            <span class="title">{{ index2 + 1 }}.</span>
+            <span class="item">{{ item2.title }}</span>
+          </template>
+          <div>
+            <p
+              style="font-size: 18px; padding: 10px 20px; margin: 0"
+              v-for="(item3, index3) in item2.children"
+              :key="index3"
+              v-html="item3.text"
+            ></p>
+          </div>
+        </el-collapse-item>
+      </el-collapse>
     </div>
   </div>
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted,onUnmounted } from "vue";
 export default {
   data() {
     return {
@@ -632,12 +671,90 @@ export default {
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
-    onMounted(async () => {});
+    const getHeight = () => {
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        document.getElementsByClassName("title")[i].style.height = 
+          document
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("title")[i].style["line-height"] =
+          document
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+      }
+    };
+    onMounted(async () => {
+      window.addEventListener("resize", getHeight);
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        getHeight();
+      }
+    });
+    onUnmounted(() => {
+      window.removeEventListener("resize", getHeight);
+    });
     return {
       ...toRefs(data),
+      getHeight,
     };
   },
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+@deep:~ ">>>";
+  @{deep} .el-collapse {
+    border: none;
+    .el-collapse-item {
+      margin-bottom: 2px;
+      .el-collapse-item__header {
+        font-size: 18px;
+        align-items: center;
+        background-color: #fffae7;
+        border: none;
+        height: auto;
+        padding: 0;
+        &:hover {
+          background-color: #fff3c4;
+          span {
+            &:first-child {
+              background-color: #cee97b;
+            }
+          }
+        }
+        span {
+          color: #4a4a4a;
+          font-weight: normal;
+          &:first-child {
+            width: 50px;
+            background-color: #e7f3be;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 25px;
+          }
+          &:nth-child(2) {
+            padding: 7px 0 7px 10px;
+            flex: 1;
+            // background-color: #fffae7;
+            line-height: 25px;
+            box-sizing: border-box;
+          }
+        }
+      }
+      .is-active {
+        background-color: #fff3c4;
+        span {
+          font-weight: bold;
+          &:first-child {
+            background-color: #cee97b;
+          }
+        }
+      }
+      .el-collapse-item__wrap {
+        border: none;
+        .el-collapse-item__content {
+          color: #4a4a4a;
+        }
+      }
+    }
+  }
+</style>

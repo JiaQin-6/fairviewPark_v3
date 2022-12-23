@@ -25,7 +25,7 @@ export default {
     'Useful Telephone Nos.':'Useful Telephone Nos.',
     'Estate Notice':'Estate Notice',
     'Owner login':'Owner login',
-    'Login out':'Login out',
+    'Login out':'Logout',
     'Welcome to browse':'Welcome to browse',
     'fairview park':'Fairview Park',
     'Resident information':'Resident information',

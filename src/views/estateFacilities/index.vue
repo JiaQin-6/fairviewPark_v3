@@ -67,6 +67,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -75,8 +76,9 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/estate-facilities/banner.jpg", import.meta.url)
+      banner: new URL("../../assets/image/common-banner/estate-facilities.jpg", import.meta.url)
         .href,
+     
     };
   },
   setup() {
@@ -273,9 +275,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

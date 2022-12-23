@@ -15,7 +15,11 @@
   >
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Apply Resident" : "申請住戶"
         }}{{ fairview_park_lang === "en_us" ? " Smartcard" : "智能卡" }}
@@ -76,6 +80,7 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
+          <!-- 申請智能卡 -->
           <div v-if="nav_index === 0">
             <div class="how-to-apply">
               <button style="border-radius: 50px; border: 0">
@@ -415,7 +420,120 @@
               </div>
             </div>
           </div>
-          <div v-if="nav_index === 1"></div>
+          <!-- 智能卡列表 -->
+          <div class="cardList" v-if="nav_index === 1">
+            <p style="font-size: 36px; font-weight: bold; color: #9cc212">
+              {{ fairview_park_lang === "en_us" ? "Apply Status" : "申請狀況" }}
+            </p>
+            <ul>
+              <li
+                v-for="(item, index) in rCardList"
+                :key="index"
+                style="margin-bottom: 20px"
+              >
+                <div class="flex-row" style="flex-wrap: wrap">
+                  <!-- 取證日期 -->
+                  <div class="col-12 col-lg-4 col-sm-12" style="margin-bottom: 10px">
+                    <h3
+                      v-if="item.rcAppStatus === 1"
+                      style="font-size: 24px; font-weight: bold;margin-bottom:20px"
+                    >
+                      {{
+                        fairview_park_lang === "en_us"
+                          ? "Waiting for approve"
+                          : "資料待審核"
+                      }}
+                    </h3>
+                    <h3
+                      v-if="item.rcAppStatus === 2"
+                      style="font-size: 24px; font-weight: bold;margin-bottom:20px"
+                    >
+                      {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
+                    </h3>
+                    <p style="font-size: 18px; font-weight: bold">
+                      {{
+                        fairview_park_lang === "en_us"
+                          ? "Date of receipt"
+                          : "預計取證日期："
+                      }}
+                    </p>
+                    <p style="font-size: 18px">{{ item.lastUpdate.slice(0, 10) }}</p>
+                  </div>
+                  <!-- 戶主信息 -->
+                  <div
+                    class="flex-row"
+                    style="flex: 1; justify-content: space-between; flex-wrap: wrap"
+                  >
+                    <div class="user-info" style="margin-bottom: 10px">
+                      <div>
+                        <h3 style="font-size: 24px; font-weight: bold;margin-bottom:20px">
+                          {{
+                            fairview_park_lang === "en_us"
+                              ? "Name of Card User"
+                              : "持卡人姓名："
+                          }}{{ item.rcname }}
+                        </h3>
+                      </div>
+                      <div>
+                        <strong style="margin-right: 5px">{{
+                          fairview_park_lang === "en_us" ? "Relation" : "與業主關係："
+                        }}</strong>
+                        <span>{{ item.rcrelation }}</span>
+                      </div>
+                      <div v-if="item.rcrelationOther">
+                        <strong style="margin-right: 5px">{{
+                          fairview_park_lang === "en_us"
+                            ? "Specify(Others) "
+                            : "證明(其他)："
+                        }}</strong>
+                        <span>{{ item.rcrelationOther }}</span>
+                      </div>
+                      <div v-if="item.rcrelationDoc">
+                        <strong style="margin-right: 5px">{{
+                          fairview_park_lang === "en_us"
+                            ? "Uploaded Document:"
+                            : "證明文件檔案名稱："
+                        }}</strong>
+                        <span style="display: block">{{
+                          item.rcrelationDoc.split("/").pop()
+                        }}</span>
+                      </div>
+                      <div>
+                        <strong style="margin-right: 5px">{{
+                          fairview_park_lang === "en_us"
+                            ? "Octopus Card Number:"
+                            : "八達通編號："
+                        }}</strong>
+                        <span>{{ item.rcOcto }}</span>
+                      </div>
+                    </div>
+                    <div class="user-info">
+                      <div
+                        class="user-img"
+                        v-if="item.rcAppStatus === 1"
+                      >
+                        <img
+                          style="max-width: 130px; max-height: 140px"
+                          :src="item.rcPhoto"
+                          alt=""
+                        />
+                      </div>
+                      <div v-if="item.rcAppStatus === 2">
+                        <strong style="margin-right: 5px">{{
+                          fairview_park_lang === "en_us"
+                            ? "Approved Image Record:"
+                            : "已審核圖片記錄編號 :"
+                        }}</strong>
+                        <span style="display: block">{{
+                          item.rcPhoto.split("/").pop()
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -430,7 +548,10 @@ import { UploadFilled } from "@element-plus/icons-vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
       imageUrl: "",
       svg: `
         <path class="path" d="
@@ -470,6 +591,7 @@ export default {
       isRequest: true,
       loading: false,
       address_t: "",
+      rCardList: [],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const handleRelationFileExceed = (files) => {
@@ -583,8 +705,9 @@ export default {
           rcrelation: data.form.relation,
           rcrelationOther: data.form.relation,
           rcrelationDoc: data.form.relationFile.url || "",
-          rcOcto: data.form.cardNumber1 + data.form.cardNumber2,
+          rcOcto: data.form.cardNumber1,
           rcPhoto: data.form.photoFile.url || "",
+          rcOctoBk: data.form.cardNumber2,
         });
         if (res.data.status === 200) {
           data.loading = false;
@@ -630,6 +753,26 @@ export default {
         console.log(error);
       }
     };
+    const findRcardList = async () => {
+      try {
+        const res = await proxy.$http.findRcardList({
+          lang: data.fairview_park_lang,
+          memberId: JSON.parse(localStorage.getItem("login-info")).id,
+        });
+        if (res.data.status === 200) {
+          console.log(res);
+          data.rCardList = res.data.data;
+        } else {
+          data.loading = false;
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     onMounted(() => {
       let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
       var userinfo = JSON.parse(
@@ -641,6 +784,7 @@ export default {
         data.fairview_park_lang === "en_us"
           ? `Fairview Park Session ${userinfo.section}, Street/Road ${userinfo.street}, No ${userinfo.number}`
           : `錦綉花園${userinfo.section}段${userinfo.street}街/路${userinfo.number}號`;
+      findRcardList();
     });
     return {
       ...toRefs(data),
@@ -650,6 +794,7 @@ export default {
       handleRelationFileChange,
       handlePhotoFileChange,
       uploadRcard,
+      findRcardList,
     };
   },
 };
@@ -661,7 +806,8 @@ export default {
   .banner {
     position: relative;
     overflow: hidden;
-    img {
+    height: 280px;
+    .img {
       width: 100%;
       height: 280px;
       background-size: cover;
@@ -835,16 +981,16 @@ export default {
                   .el-input__wrapper {
                     box-shadow: none;
                     padding: 0 2px;
-                   
-                    input{
+
+                    input {
                       text-align: center;
                       font-size: 18px;
                     }
                   }
                 }
-                @{deep} .el-input{
-                  .el-input__wrapper{
-                    .el-input__inner{
+                @{deep} .el-input {
+                  .el-input__wrapper {
+                    .el-input__inner {
                       font-size: 18px;
                     }
                   }
@@ -897,6 +1043,25 @@ export default {
             }
           }
         }
+        .cardList {
+          ul {
+            padding: 0;
+            li {
+              border: 2px solid #ccc;
+              padding: 25px;
+              h3 {
+                color: var(--mainColor2);
+                margin-bottom: 0;
+                &:last-child {
+                  color: var(--mainColor1);
+                }
+              }
+              p {
+                margin-bottom: 0px;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -930,11 +1095,11 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
+    height: 200px !important;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .aside {
@@ -961,6 +1126,9 @@ export default {
       button {
         flex: 0 auto !important;
       }
+    }
+    .user-img {
+      margin-top: 0 !important;
     }
   }
 }

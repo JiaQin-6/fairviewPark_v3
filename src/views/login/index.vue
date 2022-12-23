@@ -314,6 +314,9 @@
               </ul>
             </div>
             <div class="button">
+              <p style="color: #fc0d1b" v-show="forgot_password_error_tip.is_show">
+                {{ forgot_password_error_tip.text }}
+              </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
             </div>
           </div>
@@ -627,8 +630,8 @@ export default {
           document.getElementsByClassName("el-overlay")[0].style["background-color"] =
             "transparent";
         } else {
-          data.login_error_tip.is_show = true;
-          data.login_error_tip.text = res.data.msg;
+          data.forgot_password_error_tip.is_show = true;
+          data.forgot_password_error_tip.text = res.data.msg;
         }
       } catch (error) {
         console.log(error);
@@ -793,6 +796,7 @@ export default {
         max-width: 400px;
         justify-content: space-between;
         margin: 0 auto;
+        text-align: right;
         a {
           font-size: 15px;
           line-height: 21px;

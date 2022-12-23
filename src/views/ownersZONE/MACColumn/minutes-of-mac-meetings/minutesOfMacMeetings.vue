@@ -48,7 +48,7 @@
         >
           <i>{{ index + 1 }}.</i>
           <span
-            ><a :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+            ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
           >
         </li>
       </ul>
@@ -61,13 +61,19 @@
             >{{ item.titleEnUs }}</span
           >
         </div>
-        <div class="content" v-if="minutes_of_sub_mac_meetings_list.length!==0">
+        <div class="content" v-if="minutes_of_sub_mac_meetings_list.length !== 0">
           <p>{{ minutes_of_sub_mac_meetings_list[sub_mac_meetings_index].titleEnUs }}</p>
           <ul>
-            <li v-for="(item, index) in minutes_of_sub_mac_meetings_list[sub_mac_meetings_index].children" :key="index" class="flex-row">
+            <li
+              v-for="(item, index) in minutes_of_sub_mac_meetings_list[
+                sub_mac_meetings_index
+              ].children"
+              :key="index"
+              class="flex-row"
+            >
               <i>{{ index + 1 }}.</i>
               <span
-                ><a :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+                ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
               >
             </li>
           </ul>
@@ -94,7 +100,7 @@ export default {
       minutes_of_mac_meetings_list: [],
       menuActive: 1,
       minutes_of_sub_mac_meetings_list: [],
-      sub_mac_meetings_index:0,
+      sub_mac_meetings_index: 0,
       MacColumnFile: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
@@ -147,9 +153,11 @@ export default {
       }
     };
     //
-    const selectSubMacMeeting = async (index) =>{
+    const selectSubMacMeeting = async (index) => {
       data.sub_mac_meetings_index = index;
-      await findMinutesOfSubComMeetingsList(data.minutes_of_sub_mac_meetings_list[index].id);
+      await findMinutesOfSubComMeetingsList(
+        data.minutes_of_sub_mac_meetings_list[index].id
+      );
     };
     onMounted(async () => {
       findMinutesOfMacMeetingsList();
@@ -173,7 +181,7 @@ export default {
       findMinutesOfMacMeetingsList,
       findMinutesOfSubComMeetingsList,
       findOneMacColumnFile,
-      selectSubMacMeeting
+      selectSubMacMeeting,
     };
   },
 };
@@ -210,12 +218,17 @@ h5 {
     li {
       font-size: 18px;
       margin-bottom: 20px;
+      align-items: center;
+      background-color: #e3f3b3;
 
       i {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         width: 40px;
-        line-height: 40px;
         text-align: center;
         background-color: #e3f3b3;
+        height: 100%;
       }
 
       span {
@@ -226,6 +239,7 @@ h5 {
 
         a {
           text-decoration: none;
+          color: #4a4a4a;
         }
       }
     }
@@ -246,20 +260,26 @@ h5 {
   .content {
     margin-bottom: 30px;
     p {
-      background-color: #a1d134;
+      color: var(--mainColor3);
       margin: 0 0 5px 0;
-      padding: 5px 10px;
+      padding: 5px 0px;
       font-size: 18px;
+      font-weight: bold;
     }
     ul {
       padding: 0;
       li {
         font-size: 18px;
+        align-items: center;
+        background-color: #e3f3b3;
         i {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
           width: 40px;
-          line-height: 40px;
           text-align: center;
           background-color: #e3f3b3;
+          height: 100%;
         }
         span {
           line-height: 25px;
@@ -268,6 +288,7 @@ h5 {
           padding: 7px 0 7px 10px;
           a {
             text-decoration: none;
+            color: #4a4a4a;
           }
         }
       }

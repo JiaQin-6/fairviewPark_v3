@@ -96,6 +96,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -114,7 +115,7 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.jpg", import.meta.url).href,
+      banner: new URL("../../assets/image/common-banner/prospective-buyer.jpg", import.meta.url).href,
       map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
@@ -124,7 +125,7 @@ export default {
         .href,
       phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
       email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
-      
+     
     };
   },
   setup() {
@@ -359,9 +360,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

@@ -10,7 +10,11 @@
   <div class="buyer-server">
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Payment" : "收費"
         }}{{ fairview_park_lang === "en_us" ? " List" : "表" }}
@@ -784,7 +788,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
       title: new URL("../../../assets/image/privilege/dp.png", import.meta.url).href,
     };
   },
@@ -806,11 +810,12 @@ export default {
   .banner {
     position: relative;
     overflow: hidden;
-    img {
-      width: 100%;
     height: 280px;
-    background-size: cover;
-    background-position: bottom;
+    .img {
+      width: 100%;
+      height: 280px;
+      background-size: cover;
+      background-position: bottom;
     }
     p {
       position: absolute;
@@ -879,9 +884,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px!important;
     img {
       width: auto;
-      height: 200px;
     }
   }
 }

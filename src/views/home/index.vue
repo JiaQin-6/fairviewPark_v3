@@ -110,25 +110,30 @@
           </el-carousel-item>
         </el-carousel>
         <marquee class="mobile" style="height: 45px; line-height: 45px">
-          <div style="display:inline" v-for="(item, index) in new_notice_list"
-            :key="index">
+          <div
+            style="display: inline"
+            v-for="(item, index) in new_notice_list"
+            :key="index"
+          >
             <a
-            v-if="item.websiteUrl"
-            :href="item.websiteUrl"
-            target="_blank"
-            style="
-              text-decoration: underline;
-              font-family: 'Nunito';
-              font-size: 18px;
-              margin-right: 40px;
-            "
-            :style="{ color: item.bgColor }"
-            >{{ item.contentEnUs }}
-          </a>
-          <span style="margin-right:20px;color:#fff" v-if="!item.websiteUrl">{{ item.contentEnUs }}</span
-        >
+              v-if="item.websiteUrl"
+              :href="item.websiteUrl"
+              target="_blank"
+              style="
+                text-decoration: underline;
+                font-family: 'Nunito';
+                font-size: 18px;
+                margin-right: 40px;
+                color: #fff;
+              "
+              :style="{ color: item.bgColor }"
+              >{{ item.contentEnUs }}
+            </a>
+            <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
+              item.contentEnUs
+            }}</span>
           </div>
-          </marquee>
+        </marquee>
       </div>
     </div>
     <!-- 主要內容 -->

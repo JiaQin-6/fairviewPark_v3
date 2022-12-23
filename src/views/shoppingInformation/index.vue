@@ -1258,6 +1258,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -1266,7 +1267,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../assets/image/common-banner/shopping-information.jpg", import.meta.url).href,
     };
   },
   setup() {
@@ -1469,16 +1470,17 @@ export default {
               text-align: center;
               padding: 20px;
               box-sizing: border-box;
-              width: 280px;
+              width: 100%;
+              max-width: 280px;
               height: 150px;
               position: relative;
               img {
-                position: relative;
+                position: absolute;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%,-50%);
-                max-width: 100%;
-                max-height: 100%;
+                max-width: 90%;
+                max-height: 90%;
               }
             }
             p {
@@ -1536,9 +1538,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

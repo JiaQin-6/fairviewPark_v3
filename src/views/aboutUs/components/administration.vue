@@ -108,6 +108,7 @@ export default {
         font-size: 18px;
         list-style-type: disc;
         list-style: none;
+        
       }
     }
   }

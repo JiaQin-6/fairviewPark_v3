@@ -893,9 +893,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
 }

@@ -9,9 +9,7 @@
 <template>
   <div>
     <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-      {{
-        fairview_park_lang === "en_us" ? "Minutes of SPAC Meetings" : "會議記錄"
-      }}
+      {{ fairview_park_lang === "en_us" ? "Minutes of SPAC Meetings" : "會議記錄" }}
     </p>
     <div class="content">
       <ul>
@@ -94,6 +92,7 @@ h5 {
         padding: 7px 0 7px 10px;
         a {
           text-decoration: none;
+          color: #4a4a4a;
         }
       }
     }

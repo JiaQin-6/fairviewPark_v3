@@ -10,7 +10,11 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
         }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
@@ -78,20 +82,17 @@
                 v-for="(item, index) in estate_notice_content"
                 :key="index"
               >
-                <span class="fs-16 pl-10 pr-16"
-                  >{{ index + 1 }}.&nbsp;{{ item.titleEnUs }}</span
+                <i>{{ index + 1 }}.</i>
+                <span
+                  ><a target="_blank" :href="item.contentEnUs">{{ item.titleEnUs }}</a></span
                 >
-                <div class="more" style="flex: 1 0 auto">
-                  <a :href="item.contentEnUs" target="_blank" class="fs-16">{{
-                    fairview_park_lang === "en_us" ? "More" : "更多"
-                  }}</a>
-                </div>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
+   
   </div>
 </template>
 
@@ -100,7 +101,8 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
+      
       nav_index: 0,
     };
   },
@@ -161,7 +163,8 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+    height: 280px;
+  .img {
     width: 100%;
     height: 280px;
     background-size: cover;
@@ -261,21 +264,32 @@ export default {
         ul {
           padding: 0;
           li {
-            justify-content: space-between;
-            border-bottom: 1px solid #ccc;
-            padding: 10px 0;
-            align-items: center;
-            span {
-            }
-            .more {
-              cursor: pointer;
-              &:hover {
-                color: #2fa94e;
-              }
-              a {
-                text-decoration: none;
-              }
-            }
+            font-size: 18px;
+      margin-bottom: 20px;
+      align-items: center;
+      background-color: #e3f3b3;
+
+      i {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 40px;
+        text-align: center;
+        background-color: #e3f3b3;
+        height: 100%;
+      }
+
+      span {
+        line-height: 25px;
+        background-color: #fff0be;
+        flex: 1;
+        padding: 7px 0 7px 10px;
+
+        a {
+          text-decoration: none;
+          color: #4a4a4a;
+        }
+      }
           }
         }
       }
@@ -309,9 +323,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

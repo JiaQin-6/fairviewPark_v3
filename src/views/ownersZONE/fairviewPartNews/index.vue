@@ -10,7 +10,11 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "Fairview Park" : "錦綉"
         }}{{ fairview_park_lang === "en_us" ? " News" : "專訊" }}
@@ -54,7 +58,7 @@ import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
     };
   },
   setup() {
@@ -151,7 +155,8 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+    height: 280px;
+  .img {
     width: 100%;
     height: 280px;
     background-size: cover;
@@ -217,9 +222,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
 }

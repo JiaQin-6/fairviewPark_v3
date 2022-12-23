@@ -232,6 +232,7 @@ export default {
               line-height: 25px;
               margin-right: 30px;
               width: 180px;
+              
 
               a {
                 cursor: pointer;

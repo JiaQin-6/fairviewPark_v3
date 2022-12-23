@@ -165,7 +165,7 @@
                         </tbody>
                       </table>
                       <br />
-                      <el-collapse accordion v-model="activeNames" @change="handleChange">
+                      <el-collapse accordion v-model="activeNames">
                         <el-collapse-item
                           v-for="(item, index) in fairview_park_lang === 'en_us'
                             ? [
@@ -357,7 +357,7 @@
                             <span class="item">{{ item.title }}</span>
                           </template>
                           <div>
-                            <p style="font-size: 16px; padding: 5px 27px">
+                            <p style="font-size: 18px; padding: 5px 27px">
                               {{ item.des }}<br />
                               <font v-if="item.tip" color="#3399ff">{{ item.tip }}</font>
                             </p>

@@ -58,14 +58,14 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
           <!--  -->
-          <div align="center" style="padding: 0 20px">
+          <div align="center" style="padding: 5px 20px">
             <!-- pdf -->
             <h5
               class="title fs-18 mb-20 flex-row"
-              style="text-align: left; cursor: pointer"
+              style="text-align: left; cursor: pointer; flex-wrap: wrap"
             >
               <p
-                style="text-decoration: none"
+                style="text-decoration: none; margin: 0"
                 v-if="coach_service_content.coachServiceList.length !== 0"
               >
                 {{ coach_service_content.coachServiceList[nav_index].titleEnUs }}
@@ -109,7 +109,7 @@
                 <tbody>
                   <tr style="width: 100%; display: inline-block; margin-bottom: 2px">
                     <td
-                      height="50"
+                      height="auto"
                       :colspan="item.fleidList.length"
                       bgcolor="#9cc212"
                       style="width: 100%; display: inline-block"
@@ -138,14 +138,35 @@
                       >
                         {{ item2.titleEnUs }}
                       </p>
+                    </td>
+                  </tr>
+                  <tr
+                    v-for="(item2, index2) in item.fleidList[0].columnList.length"
+                    :key="index2"
+                    class="flex-row"
+                    
+                  >
+                    <td
+                    valign="top"
+                    :bgcolor="
+                        index3 % 2 === 0 ? '#fffde9' : index3 % 2 === 1 ? '#f1fcdd' : ''
+                      "
+                      style="width: 100%; display: inline-block; margin-right: 2px"
+                      v-for="(item3, index3) in item.fleidList.length"
+                      :key="index3"
+                    >
                       <p
                         align="center"
                         class="style34"
-                        v-for="(item3, index3) in item2.columnList"
-                        :key="index3"
                         style="padding: 10px 0; margin: 0"
                       >
-                        {{ item3.text ? item3.text : "&nbsp;" }}
+                        {{
+                          item.fleidList[index3] &&
+                          item.fleidList[index3].columnList[index2] &&
+                          item.fleidList[index3].columnList[index2].text
+                            ? item.fleidList[index3].columnList[index2].text
+                            : "&nbsp;"
+                        }}
                       </p>
                     </td>
                   </tr>
@@ -204,8 +225,8 @@
                 :href="coach_service_content.coachServiceFile"
                 target="_blank"
                 style="
-                  display:inline-block;
-                  width:100%;
+                  display: inline-block;
+                  width: 100%;
                   font-size: 18px;
                   text-align: left;
                   margin-top: 30px;
@@ -917,6 +938,7 @@
         </div>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -925,7 +947,7 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/coach service/banner.jpg", import.meta.url)
+      banner: new URL("../../assets/image/common-banner/coach-service.jpg", import.meta.url)
         .href,
       router1: new URL("../../assets/image/coach service/route1.gif", import.meta.url)
         .href,
@@ -947,6 +969,7 @@ export default {
         "../../assets/image/coach service/Routing_Red.jpeg",
         import.meta.url
       ).href,
+     
     };
   },
   setup() {
@@ -1162,7 +1185,6 @@ export default {
             margin: 0;
             font-size: 18px;
             padding: 5px;
-            
           }
           ul {
             padding: 0;
@@ -1211,9 +1233,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

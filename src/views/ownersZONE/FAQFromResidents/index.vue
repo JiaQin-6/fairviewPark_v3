@@ -10,7 +10,11 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <img :src="banner" alt="" />
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ fairview_park_lang === "en_us" ? "FAQ from" : "居民常見"
         }}{{ fairview_park_lang === "en_us" ? " Residents" : "問題" }}
@@ -57,24 +61,30 @@
           <div class="nav-content-main">
             <div>
               <h5 v-if="FAQ_from_residents_list.length !== 0">
-                {{
-                  FAQ_from_residents_list[nav_index].titleEnUs
-                }}
+                {{ FAQ_from_residents_list[nav_index].titleEnUs }}
               </h5>
-              <ul>
-                <li v-for="(item, index) in FAQ_from_residents_sub_list" :key="index">
-                  <div class="sub-title">
-                    <span>{{ index + 1 }}.</span>{{ item.titleEnUs }}
+              <el-collapse accordion v-model="activeNames" @change="handleChange">
+                <el-collapse-item
+                  v-for="(item, index) in FAQ_from_residents_sub_list"
+                  :key="index"
+                  :title="index + 1 + '. ' + item.titleEnUs"
+                  :name="index + 1"
+                >
+                  <template #title>
+                    <span class="title">{{ index + 1 }}.</span>
+                    <span class="item">{{ item.titleEnUs }}</span>
+                  </template>
+                  <div>
+                    <p
+                      style="font-size: 16px; padding: 5px 27px"
+                      v-html="
+                        FAQ_from_residents_sub_content.length !== 0 &&
+                        FAQ_from_residents_sub_content[index].htmlEnUs
+                      "
+                    ></p>
                   </div>
-                  <div
-                    class="content ql-editor"
-                    v-html="
-                      FAQ_from_residents_sub_content.length !== 0 &&
-                      FAQ_from_residents_sub_content[index].htmlEnUs
-                    "
-                  ></div>
-                </li>
-              </ul>
+                </el-collapse-item>
+              </el-collapse>
             </div>
           </div>
         </div>
@@ -84,11 +94,14 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted,onUnmounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/aboutUs/banner.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -152,15 +165,33 @@ export default {
         }
       }
     };
+    const getHeight = () => {
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        document.getElementsByClassName("title")[i].style.height = 
+          document
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("title")[i].style["line-height"] =
+          document
+            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+      }
+    };
     onMounted(async () => {
       await findFaqFromResidentsList();
       await findFaqFromResidentsList(data.FAQ_from_residents_list[0].id);
+      window.addEventListener("resize", getHeight);
+      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+        getHeight();
+      }
+    });
+    onUnmounted(() => {
+      window.removeEventListener("resize", getHeight);
     });
     return {
       ...toRefs(data),
       findFaqFromResidentsList,
       findOneFaqFromResidents,
       changeMenu,
+      getHeight,
     };
   },
 };
@@ -171,7 +202,8 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-  img {
+  height: 280px;
+  .img {
     width: 100%;
     height: 280px;
     background-size: cover;
@@ -290,6 +322,63 @@ export default {
             }
           }
         }
+        .el-collapse {
+          border: none;
+          .el-collapse-item {
+            margin-bottom: 2px;
+            .el-collapse-item__header {
+              font-size: 18px;
+              align-items: center;
+              background-color: #fffae7;
+              border: none;
+              height: auto;
+              padding: 0;
+              &:hover {
+                background-color: #fff3c4;
+                span {
+                  &:first-child {
+                    background-color: #cee97b;
+                  }
+                }
+              }
+              span {
+                color: #4a4a4a;
+                font-weight: normal;
+                &:first-child {
+                  width: 50px;
+                  background-color: #e7f3be;
+                  text-align: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  line-height: 25px;
+                }
+                &:nth-child(2) {
+                  padding: 7px 0 7px 10px;
+                  flex: 1;
+                  // background-color: #fffae7;
+                  line-height: 25px;
+                  box-sizing: border-box;
+                }
+              }
+            }
+            .is-active {
+              background-color: #fff3c4;
+              span {
+                font-weight: bold;
+                &:first-child {
+                  background-color: #cee97b;
+                }
+              }
+            }
+            .el-collapse-item__wrap {
+              border: none;
+              .el-collapse-item__content {
+                color: #4a4a4a;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -321,9 +410,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+    height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

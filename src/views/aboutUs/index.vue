@@ -151,6 +151,7 @@
         <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -179,7 +180,7 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../assets/image/aboutUs/banner.jpg", import.meta.url).href,
+      banner: new URL("../../assets/image/common-banner/about-us.jpg", import.meta.url).href,
       map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
@@ -423,9 +424,9 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
+      height: 200px;
     img {
       width: auto;
-      height: 200px;
     }
   }
   .nav-wrap {

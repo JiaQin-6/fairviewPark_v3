@@ -8,14 +8,9 @@
 -->
 <template>
   <div :class="{ 'flex-row': is_show }">
+    <transition name="el-zoom-in-top">
     <div class="ownerIsZONE" v-if="is_show">
       <div class="ownerIsZONE-content">
-        <div
-          class="flex-row space-between mb-10 pb-2"
-        >
-          <span></span>
-          <el-icon @click="is_show = false"><Close /></el-icon>
-        </div>
         <ul>
           <li
             v-for="(item, index) in [
@@ -89,21 +84,25 @@
         </ul>
       </div>
     </div>
+  </transition>
     <div
       class="main-content"
-      :class="{ show: is_show === true, hide: is_show === false }"
     >
-      <Header @showOwnerIsZONE="showOwnerIsZONE"></Header>
+      <Header :isShow="is_show" @showOwnerIsZONE="showOwnerIsZONE"></Header>
       <router-view />
       <Footer></Footer>
       <Login></Login>
       <div class="mask" @click="is_show = false"></div>
     </div>
+    <!-- 回到頂部按鈕 -->
+    <el-backtop>
+      <img style="width:60px" :src="arrowUpCircle" alt="" />
+    </el-backtop>
   </div>
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide,watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Header from "../../components/header/index.vue";
@@ -116,10 +115,18 @@ export default {
     Footer,
     Login,
   },
+  data(){
+    return {
+      arrowUpCircle: new URL(
+        "../../assets/image/home/arrow-up-circle.png",
+        import.meta.url
+      ).href,
+    }
+  },
   setup() {
     const store = useStore();
     const data = reactive({
-      is_show: "",
+      is_show: false,
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -170,6 +177,13 @@ export default {
         });
       }
     };
+    watch(
+      () => route,
+      (value) => {
+        data.is_show = false
+      },
+      { deep: true, immediate: true }
+    );
     return {
       ...toRefs(data),
       loginOut,
@@ -183,28 +197,25 @@ export default {
 <style lang="less" scoped>
 .ownerIsZONE {
   position: fixed;
-  top: 0;
-  height: 100vh;
-  width: 50vw;
+  top: 60px;
+  left: 0;
+  height: calc(100vh - 60px);
+  width: 100vw;
   background-color: var(--mainColor2);
+  z-index: 10;
   .ownerIsZONE-content {
     width: 100%;
     height: 100%;
-    padding: 10px;
     box-sizing: border-box;
     overflow: auto;
-    span {
-    }
-    i {
-      color: #fff;
-      font-size: 20px;
-    }
+    position: relative;
     ul {
       padding: 0;
       li {
-        border-bottom: 1px solid #fff;
-        padding: 10px 5px;
-        font-size: 14px;
+        border-bottom: 1px solid rgba(206, 204, 204, 0.3);
+        padding: 12px 10px;
+        font-size: 26px;
+        text-align: center;
         color: #fff;
         cursor: pointer;
       }
@@ -214,6 +225,7 @@ export default {
 .main-content {
   position: relative;
   background-color: #fff;
+    width: 100%;
   .mask {
     position: fixed;
     top: 0;
@@ -222,35 +234,6 @@ export default {
     width: 100vw;
     display: none;
     z-index: 300;
-  }
-}
-.show {
-  transform: translate(50vw);
-  animation: show50vw 0.3s linear 1; //动画名  时长   匀速   1次
-  position: fixed;
-  .mask {
-    display: block;
-  }
-}
-.hide {
-  transform: inherit;
-  animation: hide50vw 0.3s linear 1; //动画名  时长   匀速   1次
-}
-
-@keyframes show50vw {
-  from {
-    transform: translate(0vw);
-  }
-  to {
-    transform: translate(50vw);
-  }
-}
-@keyframes hide50vw {
-  from {
-    transform: translate(50vw);
-  }
-  to {
-    transform: translate(0vw);
   }
 }
 </style>

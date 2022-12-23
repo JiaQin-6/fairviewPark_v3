@@ -10,7 +10,7 @@
   <div class="main">
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
-        <a class="navbar-brand" :href="('#/home?lang='+fairview_park_lang)">
+        <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang">
           <transition name="el-fade-in-linear">
             <img
               class="navbar-brand-logo-mobile"
@@ -24,27 +24,67 @@
             <img class="navbar-brand-logo" v-show="!showLogin_m" :src="logo" alt="" />
           </transition> -->
         </a>
-        <div
-          v-if="!is_login"
-          class="login-btn1"
-          style="position: relative; flex: 1; text-align: right"
-        >
-          <button
-            class="login-btn-1"
-            data-bs-toggle="modal"
-            data-bs-target="#login"
+        <!-- 手機端顯示的按鈕 -->
+        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn"> 
+          <span
+            v-if="fairview_park_lang == 'zh_tw'"
+            style="cursor: pointer; color: #fff; vertical-align: middle"
+            @click="changeLang('en_us')"
+            >EN</span
           >
-            {{ $t("Owner login") }}
-          </button>
-        </div>
-        <div
-          v-if="is_login"
-          class="login-btn2"
-          style="position: relative; flex: 1; text-align: right"
-        >
-          <button class="login-btn-2" @click="showOwnerIsZONE">
-            {{ $t("OWNERS's ZONE") }}
-          </button>
+          <span
+            v-if="fairview_park_lang == 'en_us'"
+            style="cursor: pointer; color: #fff; vertical-align: middle"
+            @click="changeLang('zh_tw')"
+            >中</span
+          >
+          <div
+            v-if="!is_login"
+            class="login-btn1"
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
+          >
+            <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
+              {{ $t("Owner login") }}
+            </button>
+          </div>
+          <div
+            v-if="is_login"
+            class="login-btn2"
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
+            :class="{'show-owner-zone-list':showOwnerZONEList}"
+          >
+            <button class="login-btn-2" @click="showOwnerIsZONE">
+              {{ $t("OWNERS's ZONE") }}
+            </button>
+            <i v-if="showOwnerZONEList"></i>
+          </div>
+          <div
+            style="
+              text-decoration: none;
+              position: relative;
+              display: inline-block;
+              cursor: pointer;
+              margin-left: 5px;
+              margin-right: 5px;
+              vertical-align: middle;
+            "
+            @click="toInformationPush"
+          >
+            <i class="iconfont icon-lingdang white" style="font-size: 22px"></i>
+            <span
+              v-if="pmLogHave === 'Y'"
+              style="
+                position: absolute;
+                top: 2px;
+                right: 0px;
+                width: 8px;
+                height: 8px;
+                display: inline-block;
+                background-color: #f0ce5f;
+                border-radius: 50%;
+              "
+            ></span>
+          </div>
         </div>
         <button
           id="navbar-button"
@@ -55,9 +95,11 @@
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          @click="hideOwnerIsZONE"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+        <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li
@@ -70,38 +112,37 @@
                 {
                   type: 'default',
                   text: $t('Home'),
-                  href: '#/home?lang='+fairview_park_lang,
+                  href: '#/home?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('About us'),
-                  href: '#/about-us?lang='+fairview_park_lang,
+                  href: '#/about-us?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Prospective Buyer'),
-                  href: '#/prospective-buyer?lang='+fairview_park_lang,
-                 
+                  href: '#/prospective-buyer?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Estate Facilities'),
-                  href: '#/estate-facilities?lang='+fairview_park_lang,
+                  href: '#/estate-facilities?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Coach Service'),
-                  href: '#/coach-service?lang='+fairview_park_lang,
+                  href: '#/coach-service?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Shops Directory'),
-                  href: '#/shopping-information?lang='+fairview_park_lang,
+                  href: '#/shopping-information?lang=' + fairview_park_lang,
                 },
                 {
                   type: 'default',
                   text: $t('Useful Telephone Nos.'),
-                  href: '#/useful-link?lang='+fairview_park_lang,
+                  href: '#/useful-link?lang=' + fairview_park_lang,
                 },
               ]"
               :key="index"
@@ -131,17 +172,14 @@
                 :aria-labelledby="'navbarDropdown' + index"
               >
                 <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a
-                    class="dropdown-item"
-                    style="padding: 8px 15px"
-                    :href="item2.href"
-                    >{{ item2.text }}</a
-                  >
+                  <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{
+                    item2.text
+                  }}</a>
                 </li>
               </ul>
             </li>
           </ul>
-          <ul class="navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
+          <ul class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
             <div class="lang">
               <span
                 v-if="fairview_park_lang == 'zh_tw'"
@@ -181,7 +219,8 @@
                       command="/edit-member-information"
                       data-bs-toggle="modal"
                       data-bs-target="#editMemberInformation"
-                      ><el-icon><EditPen /></el-icon>{{ $t("Edit member information") }}</el-dropdown-item
+                      ><el-icon><EditPen /></el-icon
+                      >{{ $t("Edit member information") }}</el-dropdown-item
                     >
                     <el-dropdown-item command="/news-update">{{
                       $t("News Update")
@@ -222,9 +261,10 @@
                     <el-dropdown-item command="/demographic-opinion-survey">{{
                       $t("Demographic & Opinion Survey")
                     }}</el-dropdown-item>
-                    
+
                     <el-dropdown-item class="yellow" command="/loginOut">
-                      <el-icon><UserFilled /></el-icon> {{ $t("Login out") }}</el-dropdown-item
+                      <el-icon><UserFilled /></el-icon>
+                      {{ $t("Login out") }}</el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </template>
@@ -264,15 +304,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  getCurrentInstance,
-  toRefs,
-  onMounted,
-  watch,
-  inject,
-} from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -283,12 +315,12 @@ export default {
   },
   props: {
     loginStatus: Boolean,
+    isShow: Boolean,
   },
   data() {
     return {
       logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
-      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url)
-        .href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
   setup(props, ctx) {
@@ -300,6 +332,7 @@ export default {
       is_login: false,
       pmLogHave: null,
       showLogin_m: false,
+      showOwnerZONEList:false,
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -338,14 +371,11 @@ export default {
         data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
       }
       if (document.getElementsByClassName("el-popper")[0]) {
-        document.getElementsByClassName(
-          "el-popper"
-        )[0].parentNode.style.position = "fixed";
-        document.getElementsByClassName("el-popper")[0].parentNode.style.top =
-          "0";
-        document.getElementsByClassName("el-popper")[0].parentNode.style[
-          "z-index"
-        ] = "2000";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
+          "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
+          "2000";
       }
     });
     //切換語言
@@ -383,32 +413,40 @@ export default {
       store.commit("setLoginStatus", false);
     };
     //
-    const selectOwer = (val) => {
-      console.log(val);
-    };
-    //
     const selectOwnersZone = (val) => {
       if (val === "/loginOut") {
         loginOut();
         router.push({
-          path:'/home',
-          query:{
-            lang:data.fairview_park_lang
-          }
+          path: "/home",
+          query: {
+            lang: data.fairview_park_lang,
+          },
         });
       } else if (val === "/edit-member-information") {
       } else {
         router.push({
-          path:val,
-          query:{
-            lang:data.fairview_park_lang
-          }
+          path: val,
+          query: {
+            lang: data.fairview_park_lang,
+          },
         });
       }
     };
     //
     const showOwnerIsZONE = (val) => {
-      ctx.emit("showOwnerIsZONE", true);
+      if(!data.showOwnerZONEList){
+        data.showOwnerZONEList = true
+        ctx.emit("showOwnerIsZONE", true);
+      }else{
+        data.showOwnerZONEList = false
+        ctx.emit("showOwnerIsZONE", false);
+      }
+    };
+    const hideOwnerIsZONE=(val) => {
+      
+        data.showOwnerZONEList = false
+        ctx.emit("showOwnerIsZONE", false);
+      
     };
     //查看当前登录用户是否已读
     const findPmLogHave = async () => {
@@ -425,20 +463,20 @@ export default {
     };
     //跳轉到信息頁
     const toInformationPush = () => {
-      if (
-        document.getElementById("navbar-button") &&
-        window
-          .getComputedStyle(document.getElementById("navbar-button"))
-          .getPropertyValue("display") !== "none"
-      ) {
-        document.getElementById("navbar-button").click();
-      }
+      // if (
+      //   document.getElementById("navbar-button") &&
+      //   window
+      //     .getComputedStyle(document.getElementById("navbar-button"))
+      //     .getPropertyValue("display") !== "none"
+      // ) {
+      //   document.getElementById("navbar-button").click();
+      // }
       router.push({
-          path:'/information-push',
-          query:{
-            lang:data.fairview_park_lang
-          }
-        });
+        path: "/information-push",
+        query: {
+          lang: data.fairview_park_lang,
+        },
+      });
     };
     //監聽滾動條的位置
     // const scrollPosition = () => {
@@ -465,6 +503,7 @@ export default {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
+        data.showOwnerZONEList = false
         if (location.hash === "#/home") {
           if (!localStorage.getItem("login-info")) {
             data.is_login = false;
@@ -497,7 +536,13 @@ export default {
         if (data.is_login) {
           findPmLogHave();
         }
-      }
+      },
+    );
+    watch(
+      () => props.isShow,
+      (val) => {
+        data.showOwnerZONEList = val
+      },
     );
 
     return {
@@ -505,9 +550,9 @@ export default {
       changeLang,
       changeRouter,
       loginOut,
-      selectOwer,
       selectOwnersZone,
       showOwnerIsZONE,
+      hideOwnerIsZONE,
       findPmLogHave,
       toInformationPush,
     };
@@ -555,23 +600,39 @@ export default {
     }
     .login-btn1,
     .login-btn2 {
+      position: relative;
       button {
-        margin-top: 15px;
         margin-right: 10px;
         background: var(--mainColor2);
         border-radius: 50px;
         border: 0;
-        font-size: 18px;
+        font-size: 16px;
         color: #fff;
-        margin-left: 20px;
+        margin-left: 10px;
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;
-        &:hover {
-          background: #fff;
-          color: var(--mainColor2);
-        }
+        // &:hover {
+        //   background: #fff;
+        //   color: var(--mainColor2);
+        // }
       }
+      i{
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 14px;
+        border-color: transparent transparent var(--mainColor2) transparent;
+        border-style: solid;
+      }
+    }
+    .show-owner-zone-list{
+      button {
+        background: #fff;
+          color: var(--mainColor2);
+      }
+     
     }
     .navbar-collapse {
       margin-left: auto;
@@ -669,12 +730,16 @@ export default {
       }
     }
     .navbar-toggler {
-      margin-top: 10px;
-      margin-right: 20px;
+      margin-top: 11px;
+      margin-right: 0px;
       height: 40px;
       width: 44px;
       padding: 5px;
       border: 0;
+      box-shadow: none;
+      .navbar-toggler-icon {
+        width: 35px;
+      }
     }
     .me-auto {
       margin-right: 0 !important;
@@ -778,15 +843,14 @@ export default {
   .is-show-dropdown {
     display: block;
   }
-  .login-btn1,
-  .login-btn2 {
+  .mobile-btn {
     display: none;
     width: 0;
   }
 }
 @media (min-width: 1400px) {
-  .container-fluid{
-    width: 1280px!important;
+  .container-fluid {
+    width: 1280px !important;
   }
 }
 @media (max-width: 991px) {
@@ -808,9 +872,19 @@ export default {
             .nav-item {
               height: auto;
               padding: 0;
+              width:100%;
+              
               .nav-link {
-                padding: 25px 6px 0px;
+                padding: 20px 6px 20px;
                 height: auto;
+                border-bottom: 1px solid rgba(237, 235, 235,.2);
+                font-size: 26px;
+              }
+            }
+            .active{
+              
+              .nav-link {
+                border-bottom: 1px solid var(--mainColor2);
               }
             }
           }
@@ -825,6 +899,9 @@ export default {
 
   .line,
   .login {
+    display: none;
+  }
+  .lang-infomation{
     display: none;
   }
 }

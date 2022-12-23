@@ -10,9 +10,7 @@
   <div>
     <h5>
       {{
-        fairview_park_lang === "en_us"
-          ? "Nearby Proposed Development(s)"
-          : "周邊發展項目"
+        fairview_park_lang === "en_us" ? "Nearby Proposed Development(s)" : "周邊發展項目"
       }}
     </h5>
     <h6>
@@ -30,15 +28,12 @@
           class="col-6 col-md-4"
         >
           <a :href="item.pdfUrlEnUs">
-            <el-image :src="item.fileImage">
-              <template #error>
-                <div class="image-slot">
-                  <el-icon class="col-6"><icon-picture /></el-icon>
-                </div>
-              </template>
-            </el-image>
+            <img
+              :src="item.fileImage"
+              alt=""
+            />
           </a>
-          <p>{{item.titleEnUs}}</p>
+          <p>{{ item.titleEnUs }}</p>
         </li>
       </ul>
     </div>
@@ -70,7 +65,7 @@ export default {
       }
     };
     onMounted(async () => {
-        findNearbyProposedDevelopmentsList();
+      findNearbyProposedDevelopmentsList();
     });
     return {
       ...toRefs(data),
@@ -81,6 +76,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
 h5 {
   font-size: 36px;
   color: var(--mainColor3);
@@ -97,17 +93,24 @@ h5 {
       margin-bottom: 10px;
       padding: 20px;
       text-align: center;
-      a{
+
+      a {
         display: inline-block;
-        width: 192px;
-        img{
-          width: 100%;
+        max-width: 192px;
+        max-height: 272px;
+        height: 100%;
+        width: 100%;
+        img {
+          max-height: 100%;
+          max-width: 100%;
         }
       }
-      p{
+
+      p {
         font-size: 15px;
         text-align: center;
-        margin-bottom:10px;
+        margin-bottom: 10px;
+        margin-top: 10px;
       }
     }
   }

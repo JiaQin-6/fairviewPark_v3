@@ -187,6 +187,10 @@ http.findPmLogList = (arr:any) => {
 http.uploadRcard = (arr:any) => {
   return http.post(`/houseweb/file/uploadRcard`,arr);
 };
+//查看申请的所有智能卡
+http.findRcardList = (arr:any) => {
+  return http.post(`/houseweb/rcard/findRcardList`,arr);
+};
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
 /* 在发送给服务器的时候带token给服务器 */
