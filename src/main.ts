@@ -8,18 +8,10 @@
  */
 import { createApp } from 'vue'
 import App from './App.vue'
-const app:any = createApp(App)
+const app: any = createApp(App)
 // import './style.css'
 import router from './router/index'
 import store from './store/index'
-//导入公共样式
-import './assets/css/defaultCss.css';
-import './assets/css/commonClass.css';
-import './assets/css/quillEditor.css';
-import './assets/css/elementUI.css';
-import './assets/css/defaultCss.css';
-import './fonts/iconfont.css';
-//
 
 
 // console.log(commonFunc)
@@ -30,16 +22,23 @@ import { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component)
-  }
+  app.component(key, component)
+}
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap'
+//导入公共样式
+import './assets/css/defaultCss.css';
+import './assets/css/commonClass.css';
+import './assets/css/quillEditor.css';
+import './assets/css/elementUI.css';
+import './assets/css/defaultCss.css';
+import './fonts/iconfont.css';
 //国际化
 import i18n from "./i18n/index.js";
 //axios
 import http from './api/api'
 app.config.globalProperties.$http = http;
 app.use(i18n).use(router).use(store).use(ElementPlus).mount('#app')
-export {ElMessage}
+export { ElMessage }
 

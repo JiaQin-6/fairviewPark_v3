@@ -58,84 +58,70 @@
             <el-menu-item index="6">{{
               fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
             }}</el-menu-item>
-            <!-- <el-sub-menu index="6">
-              <template #title>{{
-                fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
-              }}</template>
-              <el-menu-item index="6-1">{{
-                fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "大會議記錄"
-              }}</el-menu-item>
-              <el-menu-item index="6-2">{{
-                fairview_park_lang === "en_us"
-                  ? "Minutes of Sub-com. Meetings"
-                  : "小會議記錄"
-              }}</el-menu-item>
-              <el-menu-item index="6-3">
-                <a style="color: #000" :href="MacColumnFile" target="_blank"
-                  >{{ fairview_park_lang === "en_us" ? "Work Review" : "工作回顧" }}
-                </a></el-menu-item
-              >
-            </el-sub-menu> -->
             <el-menu-item index="7">{{
               fairview_park_lang === "en_us"
                 ? "Nearby Proposed Development(s)"
                 : "周邊發展項目"
             }}</el-menu-item>
           </el-menu>
-          <el-tree-select
-            class="menu-select"
-            size="large"
-            v-model="activeIndex"
-            :data="[
-              {
-                label:
-                  fairview_park_lang === 'en_us' ? 'Rules & Regulations' : '規章制度',
-                value: '1',
-              },
-              {
-                label:
-                  fairview_park_lang === 'en_us'
-                    ? 'Sample of Candidate Form'
-                    : '候選人表格樣本',
-                value: '2',
-              },
-              {
-                label:
-                  fairview_park_lang === 'en_us'
-                    ? 'Samlpe of Nomination Form'
-                    : '提名表格樣本',
-                value: '3',
-              },
-              {
-                label: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
-                value: '4',
-              },
-              {
-                label:
-                  fairview_park_lang === 'en_us'
-                    ? '11th MAC Members'
-                    : '應屆管理諮詢委員會委員資料',
-                value: '5',
-                children: [],
-              },
-              {
-                label:
-                  fairview_park_lang === 'en_us' ? 'Minutes of MAC Meetings' : '會議記錄',
-                value: '6',
-                children: [],
-              },
-              {
-                label:
-                  fairview_park_lang === 'en_us'
-                    ? 'Nearby Proposed Development(s)'
-                    : '周邊發展項目',
-                value: '7',
-              },
-            ]"
-            :render-after-expand="false"
-          />
+          <el-select class="menu-select" size="large" v-model="activeIndex">
+            <el-option
+              v-for="(item, index) in [
+                {
+                  label:
+                    fairview_park_lang === 'en_us' ? 'Rules & Regulations' : '規章制度',
+                  value: '1',
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us'
+                      ? 'Sample of Candidate Form'
+                      : '候選人表格樣本',
+                  value: '2',
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us'
+                      ? 'Samlpe of Nomination Form'
+                      : '提名表格樣本',
+                  value: '3',
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                  value: '4',
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us'
+                      ? '11th MAC Members'
+                      : '應屆管理諮詢委員會委員資料',
+                  value: '5',
+                  children: [],
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us'
+                      ? 'Minutes of MAC Meetings'
+                      : '會議記錄',
+                  value: '6',
+                  children: [],
+                },
+                {
+                  label:
+                    fairview_park_lang === 'en_us'
+                      ? 'Nearby Proposed Development(s)'
+                      : '周邊發展項目',
+                  value: '7',
+                },
+              ]"
+              :key="index"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow flex-row">
+        <div class="col-12 col-lg-10 nav-content mb-20 flex-row">
           <div class="nav-content-wrap" style="width: 100%">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
             <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
@@ -143,7 +129,6 @@
             <ElectionProcedure v-if="activeIndex === '4'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
             <MinutesOfMacMeetings v-if="activeIndex === '6'"></MinutesOfMacMeetings>
-
             <NearbyProposedDevelopment
               v-if="activeIndex === '7'"
             ></NearbyProposedDevelopment>
@@ -176,7 +161,10 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -247,7 +235,9 @@ export default {
       screenChange();
       getIsPC();
       Promise.all([findLotterySystemForImpound(), findOneMacColumnFile()])
-        .then((result) => {console.log(result)})
+        .then((result) => {
+          console.log(result);
+        })
         .catch((e) => console.log(e));
     });
     return {
@@ -368,7 +358,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
@@ -377,14 +367,30 @@ export default {
     padding: 20px;
     .row {
       .menu {
+        padding: 0px;
         @{deep} .el-menu {
           background-color: #fff;
           display: none;
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color: #ccc;
+          margin-bottom: 20px;
+          .select-trigger {
+            .el-input {
+              font-size: 18px;
+              .el-input__wrapper {
+              }
+            }
+            .is-focus {
+              border-color: #ccc;
+            }
+          }
         }
       }
+      @{deep} .nav-content {
+      padding: 0px;
+    }
     }
   }
 }

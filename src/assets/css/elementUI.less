@@ -1,30 +1,86 @@
-
 @--mainColor2: #BA9859;
-.el-popper{
-    .el-dropdown-menu__item{
+
+.el-popper {
+    .el-dropdown-menu__item {
         font-size: 16px;
-        &:hover{
-            background-color: #BA9859!important;
-            color: #fff!important;
+
+        &:hover {
+            background-color: #BA9859 !important;
+            color           : #fff !important;
         }
     }
-    .yellow{
-        background-color: #BA9859!important;
-        color: #fff!important;
+
+    .yellow {
+        background-color: #BA9859 !important;
+        color           : #fff !important;
     }
 }
-.el-overlay{
-    .el-overlay-message-box{
-        .el-message-box{
-            .el-button{
-                background-color: #BA9859!important;
-        color: #fff!important;
-        border-color: #BA9859;
-        &:hover{
-            background-color: #fff!important;
-            color: #BA9859!important;
-        }
+
+.el-overlay {
+    .el-overlay-message-box {
+        .el-message-box {
+            .el-button {
+                background-color: #BA9859 !important;
+                color           : #fff !important;
+                border-color    : #BA9859;
+
+                &:hover {
+                    background-color: #fff !important;
+                    color           : #BA9859 !important;
+                }
             }
+        }
+    }
+}
+
+.el-popper {
+    background-color: #BA9859 !important;
+    margin-top: -10px!important;
+    
+    .el-select-dropdown {
+       
+        .el-select-dropdown__wrap {
+            overflow: auto;
+            max-height: 500px!important;
+            .el-scrollbar__view {
+                padding: 0 15px!important;
+                .el-select-dropdown__item {
+                    padding: 0;
+                    border-bottom   : 1px solid rgb(221, 220, 220)!important;
+                    background-color: #BA9859 !important;
+                    &:last-child{
+                        border-bottom: 0!important;
+                    }
+                    i,span {
+                        font-size: 18px;
+                        color    : #fff;
+                    }
+
+                    &:hover {
+                        background-color: #BA9859 !important;
+
+                        i,span {
+                            color: #4a4a4a !important;
+                        }
+                    }
+                }
+
+                .selected {
+                    background-color: #BA9859 !important;
+
+                    i,span {
+                        color: #4a4a4a !important;
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+    }
+
+    .el-popper__arrow {
+        display: none;
+        &::before {
+            border-color: #BA9859;
         }
     }
 }

@@ -11,7 +11,7 @@
     <h5>
       {{ fairview_park_lang === "en_us" ? "11th MAC Members" : "應屆管理諮詢委員會委員資料" }}
     </h5>
-    <img :src="fairview_park_lang === 'en_us' ? MAC_member_en : MAC_member" alt="" />
+    <img style="width:100%" :src="fairview_park_lang === 'en_us' ? MAC_member_en : MAC_member" alt="" />
   </div>
 </template>
 

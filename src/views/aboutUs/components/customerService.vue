@@ -67,10 +67,8 @@ export default {
       font-weight: normal;
     }
     ul {
-      padding: 0px 0 0px 35px;
       li {
         font-size: 18px;
-        list-style-type: disc;
         margin-bottom: 20px;
       }
     }

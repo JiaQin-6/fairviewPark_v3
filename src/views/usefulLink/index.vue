@@ -56,7 +56,7 @@
             </el-option>
           </el-select>
         </div>
-        <div id="nav-content" class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div id="nav-content" class="col-12 col-lg-10 nav-content mb-20">
           <!-- <div align="center"> -->
             <table
               :id="'telephone_link_'+ (index + 1)"
@@ -347,8 +347,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

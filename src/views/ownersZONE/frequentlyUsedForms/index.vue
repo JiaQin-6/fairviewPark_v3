@@ -25,27 +25,23 @@
       <div class="row">
         <div
           style="margin: 0 auto"
-          class="col-12 nav-content mb-20 ql-container ql-snow"
+          class="col-12 nav-content mb-20"
         >
           <div>
             <h5>
               {{ fairview_park_lang === "en_us" ? "Frequently used forms" : "常用表格" }}
             </h5>
-            <p style="color:#549632;font-size:15px">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
+            <p style="font-size:24px;font-weight:bold">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
             <ul>
               <li
-                style="
-                  font-size: 15px;
-                  padding: 10px 0;
-                  border-bottom: 1px solid rgb(143, 188, 37);
-                "
+                class="flex-row"
                 v-for="(item, index) in frequently_used_forms_list"
                 :key="index"
               >
-                <span style="color: #0d6efd; margin-right: 15px">{{ index + 1 }}.</span>
-                <a style="text-decoration: none" :href="item.fileEnUs" target="_blank">{{
-                  item.titleEnUs
-                }}</a>
+                <i>{{ index + 1 }}.</i>
+                <span
+                  ><a target="_blank" :href="item.fileEnUs">{{ item.titleEnUs }}</a></span
+                >
               </li>
             </ul>
           </div>
@@ -139,6 +135,37 @@ export default {
           font-size: 36px;
           font-weight: bold;
       }
+       ul {
+          padding: 0;
+          li {
+            font-size: 18px;
+            margin-bottom: 20px;
+            align-items: center;
+            background-color: #e3f3b3;
+
+            i {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 40px;
+              text-align: center;
+              background-color: #e3f3b3;
+              height: 100%;
+            }
+
+            span {
+              line-height: 25px;
+              background-color: #fff0be;
+              flex: 1;
+              padding: 7px 0 7px 10px;
+
+              a {
+                text-decoration: none;
+                color: #4a4a4a;
+              }
+            }
+          }
+        }
     }
   }
 }

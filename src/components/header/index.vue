@@ -25,7 +25,7 @@
           </transition> -->
         </a>
         <!-- 手機端顯示的按鈕 -->
-        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn"> 
+        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
           <span
             v-if="fairview_park_lang == 'zh_tw'"
             style="cursor: pointer; color: #fff; vertical-align: middle"
@@ -39,7 +39,7 @@
             >中</span
           >
           <div
-            v-if="!is_login"
+            v-if="!is_login&&isShowLoginButton"
             class="login-btn1"
             style="position: relative; display: inline-block; flex: 1; text-align: right"
           >
@@ -51,7 +51,7 @@
             v-if="is_login"
             class="login-btn2"
             style="position: relative; display: inline-block; flex: 1; text-align: right"
-            :class="{'show-owner-zone-list':showOwnerZONEList}"
+            :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
               {{ $t("OWNERS's ZONE") }}
@@ -101,85 +101,95 @@
         </button>
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li
-              class="nav-item"
-              :class="{
-                dropdown: item.type === 'select',
-                active: route_url === item.href,
-              }"
-              v-for="(item, index) in [
-                {
-                  type: 'default',
-                  text: $t('Home'),
-                  href: '#/home?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('About us'),
-                  href: '#/about-us?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('Prospective Buyer'),
-                  href: '#/prospective-buyer?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('Estate Facilities'),
-                  href: '#/estate-facilities?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('Coach Service'),
-                  href: '#/coach-service?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('Shops Directory'),
-                  href: '#/shopping-information?lang=' + fairview_park_lang,
-                },
-                {
-                  type: 'default',
-                  text: $t('Useful Telephone Nos.'),
-                  href: '#/useful-link?lang=' + fairview_park_lang,
-                },
-              ]"
-              :key="index"
-              @click="changeRouter(item.href)"
-            >
-              <a
-                v-if="item.type === 'default'"
-                class="nav-link"
-                aria-current="page"
-                :href="item.href"
-                ><span>{{ item.text }}</span></a
+          <div
+            style="display: flex; flex-direction: column; align-items: center; flex: 1"
+          >
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li
+                class="nav-item"
+                :class="{
+                  dropdown: item.type === 'select',
+                  active: route_url === item.href,
+                }"
+                v-for="(item, index) in [
+                  {
+                    type: 'default',
+                    text: $t('Home'),
+                    href: '#/home?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('About us'),
+                    href: '#/about-us?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('Prospective Buyer'),
+                    href: '#/prospective-buyer?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('Estate Facilities'),
+                    href: '#/estate-facilities?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('Coach Service'),
+                    href: '#/coach-service?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('Shops Directory'),
+                    href: '#/shopping-information?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('Useful Telephone Nos.'),
+                    href: '#/useful-link?lang=' + fairview_park_lang,
+                  },
+                ]"
+                :key="index"
+                @click="changeRouter(item.href)"
               >
-              <a
-                v-if="item.type === 'select'"
-                class="nav-link dropdown-toggle"
-                :id="'navbarDropdown' + index"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <span>{{ item.text }}</span>
-              </a>
-              <ul
-                v-if="item.type === 'select'"
-                class="dropdown-menu"
-                style="padding: 0; margin: 10px 0 0 -15px"
-                :aria-labelledby="'navbarDropdown' + index"
-              >
-                <li v-for="(item2, index2) in item.children" :key="index2">
-                  <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{
-                    item2.text
-                  }}</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
+                <a
+                  v-if="item.type === 'default'"
+                  class="nav-link"
+                  aria-current="page"
+                  :href="item.href"
+                  ><span>{{ item.text }}</span></a
+                >
+                <a
+                  v-if="item.type === 'select'"
+                  class="nav-link dropdown-toggle"
+                  :id="'navbarDropdown' + index"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span>{{ item.text }}</span>
+                </a>
+                <ul
+                  v-if="item.type === 'select'"
+                  class="dropdown-menu"
+                  style="padding: 0; margin: 10px 0 0 -15px"
+                  :aria-labelledby="'navbarDropdown' + index"
+                >
+                  <li v-for="(item2, index2) in item.children" :key="index2">
+                    <a
+                      class="dropdown-item"
+                      style="padding: 8px 15px"
+                      :href="item2.href"
+                      >{{ item2.text }}</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <ul
+            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
+          >
             <div class="lang">
               <span
                 v-if="fairview_park_lang == 'zh_tw'"
@@ -195,7 +205,7 @@
               >
             </div>
             <button
-              v-if="!is_login"
+              v-if="!is_login&&isShowLoginButton"
               class="login"
               data-bs-toggle="modal"
               data-bs-target="#login"
@@ -215,6 +225,7 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item
+                      v-if="isShowLoginOutButton"
                       class="yellow"
                       command="/edit-member-information"
                       data-bs-toggle="modal"
@@ -262,7 +273,7 @@
                       $t("Demographic & Opinion Survey")
                     }}</el-dropdown-item>
 
-                    <el-dropdown-item class="yellow" command="/loginOut">
+                    <el-dropdown-item class="yellow" command="/loginOut" v-if="isShowLoginOutButton">
                       <el-icon><UserFilled /></el-icon>
                       {{ $t("Login out") }}</el-dropdown-item
                     >
@@ -332,7 +343,9 @@ export default {
       is_login: false,
       pmLogHave: null,
       showLogin_m: false,
-      showOwnerZONEList:false,
+      showOwnerZONEList: false,
+      isShowLoginButton:true,//是否顯示登錄按鈕（app進來web判斷）
+      isShowLoginOutButton:true,//是否顯示登出按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -370,6 +383,13 @@ export default {
       } else {
         data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
       }
+      //如果是從app進來用戶未登錄，隱藏登錄button
+      if(sessionStorage.getItem('app-login-status')==='2'){
+        data.isShowLoginButton = false
+      }else if(sessionStorage.getItem('app-login-status')==='1'){
+        data.isShowLoginOutButton = false
+      }
+      
       if (document.getElementsByClassName("el-popper")[0]) {
         document.getElementsByClassName("el-popper")[0].parentNode.style.position =
           "fixed";
@@ -434,19 +454,17 @@ export default {
     };
     //
     const showOwnerIsZONE = (val) => {
-      if(!data.showOwnerZONEList){
-        data.showOwnerZONEList = true
+      if (!data.showOwnerZONEList) {
+        data.showOwnerZONEList = true;
         ctx.emit("showOwnerIsZONE", true);
-      }else{
-        data.showOwnerZONEList = false
+      } else {
+        data.showOwnerZONEList = false;
         ctx.emit("showOwnerIsZONE", false);
       }
     };
-    const hideOwnerIsZONE=(val) => {
-      
-        data.showOwnerZONEList = false
-        ctx.emit("showOwnerIsZONE", false);
-      
+    const hideOwnerIsZONE = (val) => {
+      data.showOwnerZONEList = false;
+      ctx.emit("showOwnerIsZONE", false);
     };
     //查看当前登录用户是否已读
     const findPmLogHave = async () => {
@@ -503,7 +521,7 @@ export default {
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
-        data.showOwnerZONEList = false
+        data.showOwnerZONEList = false;
         if (location.hash === "#/home") {
           if (!localStorage.getItem("login-info")) {
             data.is_login = false;
@@ -536,13 +554,13 @@ export default {
         if (data.is_login) {
           findPmLogHave();
         }
-      },
+      }
     );
     watch(
       () => props.isShow,
       (val) => {
-        data.showOwnerZONEList = val
-      },
+        data.showOwnerZONEList = val;
+      }
     );
 
     return {
@@ -617,7 +635,7 @@ export default {
         //   color: var(--mainColor2);
         // }
       }
-      i{
+      i {
         position: absolute;
         top: 20px;
         left: 50%;
@@ -627,12 +645,11 @@ export default {
         border-style: solid;
       }
     }
-    .show-owner-zone-list{
+    .show-owner-zone-list {
       button {
         background: #fff;
-          color: var(--mainColor2);
+        color: var(--mainColor2);
       }
-     
     }
     .navbar-collapse {
       margin-left: auto;
@@ -869,20 +886,20 @@ export default {
           justify-content: space-between;
           .navbar-nav {
             height: auto;
+            width: 100%;
             .nav-item {
               height: auto;
               padding: 0;
-              width:100%;
-              
+              width: 100%;
+
               .nav-link {
                 padding: 20px 6px 20px;
                 height: auto;
-                border-bottom: 1px solid rgba(237, 235, 235,.2);
+                border-bottom: 1px solid rgba(237, 235, 235, 0.2);
                 font-size: 26px;
               }
             }
-            .active{
-              
+            .active {
               .nav-link {
                 border-bottom: 1px solid var(--mainColor2);
               }
@@ -901,7 +918,7 @@ export default {
   .login {
     display: none;
   }
-  .lang-infomation{
+  .lang-infomation {
     display: none;
   }
 }

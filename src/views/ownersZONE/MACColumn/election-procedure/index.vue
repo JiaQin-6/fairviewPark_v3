@@ -8,6 +8,38 @@
 -->
 <template>
   <div>
+    <el-select
+      v-model="menuActive"
+      class="menu-select"
+      style="margin-bottom:20px"
+      placeholder="Select"
+      size="large"
+      @click="menuActive = item2.value"
+    >
+      <el-option
+        v-for="(item, index) in [
+          {
+            text: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+            value: 1,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us' ? 'Election Activities Rules' : '選舉守則',
+            value: 2,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us'
+                ? 'Election Activities Rules Time Table'
+                : '選舉守則時間表',
+            value: 3,
+          },
+        ]"
+        :key="index"
+        :label="item.text"
+        :value="item.value"
+      />
+    </el-select>
     <h5>{{ fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序" }}</h5>
     <div class="menu">
       <div
@@ -40,7 +72,7 @@
     <div>
       <div
         v-show="menuActive === 1"
-        style="font-size: 15px"
+        style="font-size: 18px"
         v-for="(item, index) in [
           {
             title: fairview_park_lang === 'en_us' ? 'Election Notice' : '選舉通告',
@@ -402,6 +434,28 @@ h5 {
   .active {
     background-color: var(--mainColor1);
     color: #fff;
+  }
+}
+@{deep} .menu-select {
+  display: none;
+  --el-select-input-focus-border-color: #ccc;
+  .select-trigger {
+    .el-input {
+      font-size: 18px;
+      .el-input__wrapper {
+      }
+    }
+    .is-focus {
+      border-color: #ccc;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .menu-select{
+    display: block;
+  }
+  .sub-menu{
+    display: none;
   }
 }
 </style>

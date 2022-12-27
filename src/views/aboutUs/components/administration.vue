@@ -94,13 +94,12 @@ export default {
     }
     p {
       font-size: 18px;
-      list-style-type: disc;
       margin-bottom: 30px;
       list-style: none;
     }
     .li {
-      list-style: disc;
       margin-bottom: 20px;
+      font-size: 24px;
     }
     ul {
       padding: 0px 0 15px 0px;

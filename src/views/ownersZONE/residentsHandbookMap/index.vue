@@ -80,7 +80,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <p style="font-size: 36px; color: #9cc212; font-weight: bold">
             {{
               nav_index === 1
@@ -99,7 +99,11 @@
           ></div>
           <div
             v-if="nav_index === 2"
-          
+            style="
+                font-size: 14px;
+                color: #6e6b7b;
+                font-family: Helvetica, Arial, sans-serif;
+              "
             v-html="
               residents_handboo_map_content && residents_handboo_map_content.htmlEnUs
             "
@@ -314,8 +318,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

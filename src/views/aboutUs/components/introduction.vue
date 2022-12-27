@@ -252,7 +252,7 @@
             </div>
           </div>
           <!--  -->
-          <div class="col col-12">
+          <!-- <div class="col col-12">
             <div class="contant-mode">
               <ul class="row">
                 <li class="col-12 col-lg-4 flex-row mb-20">
@@ -317,7 +317,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

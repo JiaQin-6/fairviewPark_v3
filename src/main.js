@@ -12,14 +12,6 @@ const app = createApp(App);
 // import './style.css'
 import router from './router/index';
 import store from './store/index';
-//导入公共样式
-import './assets/css/defaultCss.css';
-import './assets/css/commonClass.css';
-import './assets/css/quillEditor.css';
-import './assets/css/elementUI.css';
-import './assets/css/defaultCss.css';
-import './fonts/iconfont.css';
-//
 // console.log(commonFunc)
 // app.config.globalProperties.$commonFunc = commonFunc;
 //
@@ -33,6 +25,13 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
+//导入公共样式
+import './assets/css/defaultCss.css';
+import './assets/css/commonClass.css';
+import './assets/css/quillEditor.css';
+import './assets/css/elementUI.css';
+import './assets/css/defaultCss.css';
+import './fonts/iconfont.css';
 //国际化
 import i18n from "./i18n/index.js";
 //axios

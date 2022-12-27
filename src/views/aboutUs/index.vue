@@ -207,6 +207,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
 .banner {
   position: relative;
   overflow: hidden;
@@ -446,8 +447,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

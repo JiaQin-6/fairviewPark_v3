@@ -54,15 +54,25 @@
             />
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <p style="font-size: 36px; color: #9cc212; font-weight: bold" v-if="new_update_list.length!==0">
-            {{ new_update_list.filter(item=>{ return item.id === new_update_index})[0].titleEnUs }}
+        <div class="col-12 col-lg-10 nav-content mb-20">
+          <p
+            style="font-size: 36px; color: #9cc212; font-weight: bold"
+            v-if="new_update_list.length !== 0"
+          >
+            {{
+              new_update_list.filter((item) => {
+                return item.id === new_update_index;
+              })[0].titleEnUs
+            }}
           </p>
-          <div v-html="new_update_content.htmlEnUs"></div>
+          <div style="
+                font-size: 14px;
+                color: #6e6b7b;
+                font-family: Helvetica, Arial, sans-serif;
+              " v-html="new_update_content.htmlEnUs"></div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -71,8 +81,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
-      
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -273,7 +285,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
@@ -294,8 +306,19 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
+              font-size: 18px;
+              .el-input__wrapper {
+              }
+            }
+            .is-focus {
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

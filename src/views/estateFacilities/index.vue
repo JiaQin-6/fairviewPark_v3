@@ -57,17 +57,26 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <div style="padding: 0 20px">
             <p class="title" v-if="estate_facilities_list.length !== 0">
               {{ estate_facilities_list[nav_index].titleEnUs }}
             </p>
-            <div v-html="estate_facilities_content"></div>
+           
+                <div
+                id="t-mce"
+                  style="
+                    font-size: 14px;
+                    color: #6e6b7b;
+                    font-family: Helvetica, Arial, sans-serif;
+                  "
+                  v-html="estate_facilities_content"
+                ></div>
+             
           </div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -76,9 +85,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/common-banner/estate-facilities.jpg", import.meta.url)
-        .href,
-     
+      banner: new URL(
+        "../../assets/image/common-banner/estate-facilities.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -183,7 +193,7 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -245,6 +255,12 @@ export default {
         color: var(--mainColor3);
         font-weight: bold;
       }
+      #t-mce{
+        line-height: 1.5;
+        li{
+          list-style:auto;
+        }
+      }
     }
   }
 }
@@ -275,7 +291,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
@@ -297,8 +313,19 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
+              font-size: 18px;
+              .el-input__wrapper {
+              }
+            }
+            .is-focus {
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

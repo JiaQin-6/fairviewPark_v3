@@ -26,7 +26,7 @@
       <div class="row">
         <div
           style="margin: 0 auto"
-          class="col-12 nav-content mb-20 ql-container ql-snow"
+          class="col-12 nav-content mb-20"
         >
           <div style="text-align: right">
             <el-select
@@ -194,6 +194,19 @@ export default {
       padding: 12px 15px;
       img {
         max-width: 100%;
+      }
+      .el-select {
+        --el-select-input-focus-border-color: #ccc;
+        .select-trigger {
+          .el-input {
+            font-size: 18px;
+            .el-input__wrapper {
+            }
+          }
+          .is-focus {
+            border-color: #ccc;
+          }
+        }
       }
     }
   }

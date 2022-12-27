@@ -100,7 +100,6 @@ export default {
       font-weight: normal;
     }
     .li{
-        list-style: disc;
         margin-bottom: 20px;
         font-size: 24px;
     }

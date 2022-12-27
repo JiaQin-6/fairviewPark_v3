@@ -65,13 +65,13 @@
           >
             <span
               v-if="
-                nav_index !== shop_information_list.length - 1 &&
-                index !== shop_information_list.length - 1
+                nav_index !== 0 &&
+                index !== 0
               "
               class="header"
               >{{ item && item.titleEnUs }}</span
             >
-            <ul v-if="nav_index !== shop_information_list.length - 1" class="flex-row">
+            <ul v-if="nav_index !== 0" class="flex-row">
               <li
                 class="col-4"
                 v-for="(item2, index2) in shop_information_list[index].secondList"
@@ -102,7 +102,7 @@
             </ul>
           </div>
           <div class="nav-content-list2" v-if="
-                nav_index === shop_information_list.length - 1 
+                nav_index === 0
               ">
             <span
               class="header"
@@ -1289,7 +1289,7 @@ export default {
         });
         if (res.data.status === 200) {
           data.shop_information_list = res.data.data.records;
-          data.shop_information_list.push({
+          data.shop_information_list.unshift({
             titleEnUs: proxy.$t("Carpark Parking Privilege Payment"),
           });
         }
@@ -1314,7 +1314,7 @@ export default {
       }
     });
     const jumpLink = (index) => {
-      if (index === data.shop_information_list.length - 1) {
+      if (index === 0) {
       } else {
         let top = 0;
         for (let i = 0; i < index; i++) {
@@ -1559,8 +1559,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

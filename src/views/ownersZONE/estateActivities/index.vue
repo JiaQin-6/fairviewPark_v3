@@ -57,11 +57,15 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <p v-if="estate_activites_list.length!==0" style="font-size: 36px; color: #9cc212; font-weight: bold">
               {{ estate_activites_list[nav_index].titleEnUs }}
             </p>
-          <div v-html="estate_activites_content"></div>
+          <div style="
+                font-size: 14px;
+                color: #6e6b7b;
+                font-family: Helvetica, Arial, sans-serif;
+              " v-html="estate_activites_content"></div>
         </div>
       </div>
     </div>
@@ -292,9 +296,21 @@ export default {
           }
         }
       }
-      .menu-select{
-        display: block;
-      }
+      @{deep} .menu-select {
+          display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
+        }
     }
   }
   }

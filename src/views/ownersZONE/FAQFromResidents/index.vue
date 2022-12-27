@@ -57,7 +57,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <div class="nav-content-main">
             <div>
               <h5 v-if="FAQ_from_residents_list.length !== 0">
@@ -76,7 +76,12 @@
                   </template>
                   <div>
                     <p
-                      style="font-size: 16px; padding: 5px 27px"
+                      style="
+                font-size: 14px;
+                color: #6e6b7b;
+                padding: 5px 27px;
+                font-family: Helvetica, Arial, sans-serif;
+              "
                       v-html="
                         FAQ_from_residents_sub_content.length !== 0 &&
                         FAQ_from_residents_sub_content[index].htmlEnUs
@@ -431,8 +436,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

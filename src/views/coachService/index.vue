@@ -56,7 +56,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <!--  -->
           <div align="center" style="padding: 5px 20px">
             <!-- pdf -->
@@ -78,14 +78,14 @@
                 "
                 >{{
                   fairview_park_lang === "en_us"
-                    ? "Update at : " +
+                    ? "Effect Day : " +
                       (coach_service_content &&
                         coach_service_content.coachServiceList.length !== 0 &&
-                        coach_service_content.coachServiceList[nav_index].launchTime)
-                    : "更新日期 : " +
+                        coach_service_content.coachServiceList[nav_index].launchTime.slice(0,10))
+                    : "生效日期 : " +
                       (coach_service_content &&
                         coach_service_content.coachServiceList.length !== 0 &&
-                        coach_service_content.coachServiceList[nav_index].launchTime)
+                        coach_service_content.coachServiceList[nav_index].launchTime.slice(0,10))
                 }}</span
               >
             </h5>
@@ -141,14 +141,14 @@
                     </td>
                   </tr>
                   <tr
+                    v-if="item.fleidList.length !== 0"
                     v-for="(item2, index2) in item.fleidList[0].columnList.length"
                     :key="index2"
                     class="flex-row"
-                    
                   >
                     <td
-                    valign="top"
-                    :bgcolor="
+                      valign="top"
+                      :bgcolor="
                         index3 % 2 === 0 ? '#fffde9' : index3 % 2 === 1 ? '#f1fcdd' : ''
                       "
                       style="width: 100%; display: inline-block; margin-right: 2px"
@@ -255,7 +255,7 @@
               v-if="nav_index === coach_service_content.coachServiceList.length - 2"
             >
               <div class="mb-30">
-                <div style="overflow: hidden; padding: 0">
+                <div style="overflow: auto; padding: 0">
                   <h5
                     style="
                       background-color: #7da533;
@@ -263,6 +263,8 @@
                       padding: 10px 0;
                       color: #fff;
                       font-size: 18px;
+                      min-width: 400px;
+                        border-right: 2px solid #fff;
                     "
                   >
                     {{
@@ -288,7 +290,8 @@
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
-                        margin-right: 2px;
+                        border-right: 2px solid #fff;
+                        min-width: 100px;
                       "
                       class="col-3 flex-row"
                     >
@@ -302,7 +305,9 @@
                           align-items: center;
                           text-align: center;
                           padding: 20px;
-                          margin-bottom: 2px;
+                          border-bottom: 2px solid #fff;
+                        border-right: 2px solid #fff;
+                          min-width: 200px;
                         "
                         class="col-12 flex-row"
                       >
@@ -322,7 +327,7 @@
                             {
                               text:
                                 fairview_park_lang === 'en_us'
-                                  ? 'Fare of Registered Resident(Elderly and Children)'
+                                  ? 'Fare of Registered Resident (Elderly and Children)'
                                   : '已登記住戶 (長者及小童)票價',
                             },
                           ]"
@@ -332,8 +337,9 @@
                             font-size: 18px;
                             align-items: center;
                             text-align: center;
-                            padding: 20px;
-                            margin-right: 2px;
+                            padding: 20px 0;
+                            min-width: 100px;
+                            border-right: 2px solid #fff;
                           "
                           class="col-6 flex-row"
                         >
@@ -354,8 +360,10 @@
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
-                        margin-right: 2px;
+
+                        border-right: 2px solid #fff;
                         padding: 20px;
+                        min-width: 100px;
                       "
                       class="col-3 flex-row"
                     >
@@ -369,8 +377,9 @@
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
-                        margin-right: 2px;
+                        border-right: 2px solid #fff;
                         padding: 20px;
+                        min-width: 100px;
                       "
                       class="col-3 flex-row"
                     >
@@ -419,7 +428,7 @@
                 "
               ></p>
               <div class="mb-30" style="margin-top: 30px">
-                <div style="overflow: hidden; padding: 0">
+                <div style="overflow: auto; padding: 0">
                   <h5
                     style="
                       background-color: #7da533;
@@ -427,6 +436,8 @@
                       padding: 10px 0;
                       color: #fff;
                       font-size: 18px;
+                      border-right: 2px solid #fff;
+                          min-width:682px;
                     "
                   >
                     {{
@@ -443,9 +454,10 @@
                           width: 10%;
                           background-color: #e7f3be;
                           border: 2px solid #fff;
+                          min-width:90px;
                         "
                       >
-                        {{ fairview_park_lang === "en_us" ? "Age" : "住戶" }}
+                        {{ fairview_park_lang === "en_us" ? "Age" : "年齡" }}
                       </th>
                       <th
                         style="
@@ -453,9 +465,10 @@
                           background-color: #e7f3be;
                           padding: 15px;
                           border: 2px solid #fff;
+                          min-width:100px;
                         "
                       >
-                        {{ fairview_park_lang === "en_us" ? "Resident" : "年齡" }}
+                        {{ fairview_park_lang === "en_us" ? "Resident" : "住戶" }}
                       </th>
                       <th
                         style="
@@ -463,6 +476,7 @@
                           background-color: #e7f3be;
                           padding: 15px;
                           border: 2px solid #fff;
+                          min-width:165px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Requirements" : "條件" }}
@@ -473,6 +487,7 @@
                           background-color: #e7f3be;
                           padding: 15px;
                           border: 2px solid #fff;
+                          min-width:165px;
                         "
                       >
                         {{
@@ -487,6 +502,7 @@
                           background-color: #e7f3be;
                           padding: 15px;
                           border: 2px solid #fff;
+                          min-width:160px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Benefit" : "享有優惠" }}
@@ -708,57 +724,57 @@
                     v-for="(item, index) in [
                       {
                         index1: '1.',
-                        time1: '10:30a.m.',
+                        time1: '10:30',
                         index2: '10.',
-                        time2: '3:00p.m.',
+                        time2: '15:00',
                       },
                       {
                         index1: '2.',
-                        time1: '11:00a.m.',
+                        time1: '11:00',
                         index2: '11.',
-                        time2: '3:30p.m.',
+                        time2: '15:30',
                       },
                       {
                         index1: '3.',
-                        time1: '11:30a.m.',
+                        time1: '11:30',
                         index2: '12.',
-                        time2: '4:00p.m.',
+                        time2: '16:00',
                       },
                       {
                         index1: '4.',
-                        time1: '12:00noon',
+                        time1: '12:00',
                         index2: '13.',
-                        time2: '4:30p.m.',
+                        time2: '16:30',
                       },
                       {
                         index1: '5.',
-                        time1: '12:30p.m.',
+                        time1: '12:30',
                         index2: '14.',
-                        time2: '5:00p.m.',
+                        time2: '17:00',
                       },
                       {
                         index1: '6.',
-                        time1: '1:00p.m.',
+                        time1: '13:00',
                         index2: '15.',
-                        time2: '5:30p.m.',
+                        time2: '17:30',
                       },
                       {
                         index1: '7.',
-                        time1: '1:30p.m.',
+                        time1: '13:30',
                         index2: '16.',
-                        time2: '6:00p.m.',
+                        time2: '18:00',
                       },
                       {
                         index1: '8.',
-                        time1: '2:00p.m.',
+                        time1: '14:00',
                         index2: '17.',
-                        time2: '6:30p.m.',
+                        time2: '18:30',
                       },
                       {
                         index1: '9.',
-                        time1: '2:30p.m.',
+                        time1: '14:30',
                         index2: '18.',
-                        time2: '7:00p.m.',
+                        time2: '19:00',
                       },
                     ]"
                     :key="index"
@@ -830,57 +846,57 @@
                     v-for="(item, index) in [
                       {
                         index1: '1.',
-                        time1: '10:30a.m.',
+                        time1: '10:30',
                         index2: '10.',
-                        time2: '3:00p.m.',
+                        time2: '15:00',
                       },
                       {
                         index1: '2.',
-                        time1: '11:00a.m.',
+                        time1: '11:00',
                         index2: '11.',
-                        time2: '3:30p.m.',
+                        time2: '15:30',
                       },
                       {
                         index1: '3.',
-                        time1: '11:30a.m.',
+                        time1: '11:30',
                         index2: '12.',
-                        time2: '4:00p.m.',
+                        time2: '16:00',
                       },
                       {
                         index1: '4.',
-                        time1: '12:00noon',
+                        time1: '12:00',
                         index2: '13.',
-                        time2: '4:30p.m.',
+                        time2: '16:30',
                       },
                       {
                         index1: '5.',
-                        time1: '12:30p.m.',
+                        time1: '12:30',
                         index2: '14.',
-                        time2: '5:00p.m.',
+                        time2: '17:00',
                       },
                       {
                         index1: '6.',
-                        time1: '1:00p.m.',
+                        time1: '13:00',
                         index2: '15.',
-                        time2: '5:30p.m.',
+                        time2: '17:30',
                       },
                       {
                         index1: '7.',
-                        time1: '1:30p.m.',
+                        time1: '13:30',
                         index2: '16.',
-                        time2: '6:00p.m.',
+                        time2: '18:00',
                       },
                       {
                         index1: '8.',
-                        time1: '2:00p.m.',
+                        time1: '14:00',
                         index2: '17.',
-                        time2: '6:30p.m.',
+                        time2: '18:30',
                       },
                       {
                         index1: '9.',
-                        time1: '2:30p.m.',
+                        time1: '14:30',
                         index2: '18.',
-                        time2: '7:00p.m.',
+                        time2: '19:00',
                       },
                     ]"
                     :key="index"
@@ -938,7 +954,6 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -947,8 +962,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/common-banner/coach-service.jpg", import.meta.url)
-        .href,
+      banner: new URL(
+        "../../assets/image/common-banner/coach-service.jpg",
+        import.meta.url
+      ).href,
       router1: new URL("../../assets/image/coach service/route1.gif", import.meta.url)
         .href,
       router1_en: new URL(
@@ -969,7 +986,6 @@ export default {
         "../../assets/image/coach service/Routing_Red.jpeg",
         import.meta.url
       ).href,
-     
     };
   },
   setup() {
@@ -1233,7 +1249,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
@@ -1254,8 +1270,19 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
+              font-size: 18px;
+              .el-input__wrapper {
+              }
+            }
+            .is-focus {
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

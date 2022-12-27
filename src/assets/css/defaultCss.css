@@ -25,9 +25,17 @@ h5 {
   word-wrap: break-word;
   font-family: 'Poppins-Regular', SourceHanSansCN-Regular, Arial;
 }
+h1,
+h2,
+h3,
+h4,
+h5{
+  font-weight: bold;
+  line-height: 1.5!important;
+}
 a {
   text-decoration: none;
-  color: #000;
+  color: #4a4a4a;
   cursor: pointer;
 }
 
@@ -38,10 +46,6 @@ button {
 button:focus {
   border: 0 none;
   outline: none;
-}
-
-ol {
-  padding-left: 30px;
 }
 
 li {

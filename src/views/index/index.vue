@@ -13,7 +13,7 @@
       <div class="ownerIsZONE-content">
         <ul>
           <li
-            v-for="(item, index) in [
+            v-for="(item, index) in isShowLoginOutButton?[
               {
                 router: '/edit-member-information',
                 text: $t('Edit member information'),
@@ -75,6 +75,59 @@
                 router: '/loginOut',
                 text: $t('Login out'),
               },
+            ]:[
+              {
+                router: '/FAQ-from-residents',
+                text: $t('FAQ from Residents'),
+              },
+              {
+                router: '/estate-notice',
+                text: $t('Estate Notices'),
+              },
+              {
+                router: '/fairview-part-news',
+                text: $t('Fairview Park News'),
+              },
+              {
+                router: '/demographic-opinion-survey',
+                text: $t('Demographic & Opinion Survey'),
+              },
+              {
+                router: '/estate-activities',
+                text: $t('Estate Activities'),
+              },
+              {
+                router: '/news-update',
+                text: $t('News Update'),
+              },
+              {
+                router: '/residents-handbook-map',
+                text: $t('Residents Handbook / Map'),
+              },
+              {
+                router: '/frequently-used-forms',
+                text: $t('Frequently Used Forms'),
+              },
+              {
+                router: '/MAC-column',
+                text: $t('MAC Column'),
+              },
+              {
+                router: '/payment-list',
+                text: $t('Payment List'),
+              },
+              {
+                router: '/lottery-system-for-impound',
+                text: $t('Lottery System For Impounding Action'),
+              },
+              {
+                router: '/the-overhaul-project',
+                text: $t('the Overhaul Project'),
+              },
+              {
+                router: '/apply-resident-smartcard',
+                text: $t('Apply Resident Smartcard'),
+              },
             ]"
             :key="index"
             @click="selectOwnersZone(item.router)"
@@ -90,7 +143,7 @@
     >
       <Header :isShow="is_show" @showOwnerIsZONE="showOwnerIsZONE"></Header>
       <router-view />
-      <Footer></Footer>
+      <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
       <div class="mask" @click="is_show = false"></div>
     </div>
@@ -127,11 +180,47 @@ export default {
     const store = useStore();
     const data = reactive({
       is_show: false,
+      is_show_footer:true,
+      isShowLoginOutButton:true,//是否顯示登出按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
+
+    //判斷當從app進來的時候用戶是否登錄
+    if(route.query.source&&route.query.source==='app'&&!sessionStorage.getItem('app-login-status')){
+      if(route.query.session){
+        //在app已登錄
+        sessionStorage.setItem('app-login-status','1')
+        data.is_show_footer = false;
+        data.isShowLoginOutButton = false;
+      }else{
+        //在app未登錄
+        sessionStorage.setItem('app-login-status','2')
+        data.is_show_footer = false
+      }
+    }else if(sessionStorage.getItem('app-login-status')){
+      if(sessionStorage.getItem('app-login-status')==='1'){
+        data.is_show_footer = false
+        data.isShowLoginOutButton = false
+      }else if(sessionStorage.getItem('app-login-status')==='2'){
+        data.is_show_footer = false
+      }
+    }
     const showOwnerIsZONE = (val) => {
+      if (
+        document.getElementById("navbar-button") &&
+        window
+          .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none" &&
+        document.getElementsByClassName("collapse")[0] &&
+        window
+          .getComputedStyle(document.getElementsByClassName("collapse")[0])
+          .getPropertyValue("display") !== "none"
+      ) {
+        document.getElementById("navbar-button").click();
+      } 
       data.is_show = val;
+      
     };
     //登出
     const loginOut = () => {
@@ -201,7 +290,6 @@ export default {
   left: 0;
   height: calc(100vh - 60px);
   width: 100vw;
-  background-color: var(--mainColor2);
   z-index: 10;
   .ownerIsZONE-content {
     width: 100%;
@@ -211,6 +299,7 @@ export default {
     position: relative;
     ul {
       padding: 0;
+      background-color: var(--mainColor2);
       li {
         border-bottom: 1px solid rgba(206, 204, 204, 0.3);
         padding: 12px 10px;

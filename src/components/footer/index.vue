@@ -13,7 +13,8 @@
       <div class="row top-part-wrap">
         <!-- 左部份 -->
         <div
-          class="col col-12 col-xl-7 col-lg-6 col-md-6 col-sm-12 flex-row space-around"
+          class="col col-12 col-xl-7 col-lg-6 col-md-6 col-sm-12 flex-row space-between"
+          style="padding:0 10px 0 0"
         >
           <div>
             <img class="logo" :src="logo" alt="" />
@@ -411,6 +412,7 @@ export default {
           &:first-child {
             border-bottom: 1px solid #ccc;
             margin-bottom: 20px;
+            padding: 0 10px!important;
           }
 
           &:last-child {

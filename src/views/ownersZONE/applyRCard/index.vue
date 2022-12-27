@@ -232,7 +232,7 @@
                             : "該欄位為必填欄位"
                         }}</i
                       >
-                      <div class="form-wrap flex-row mb-10">
+                      <div class="form-wrap flex-row mb-10 flex-wrap">
                         <span class="yellow col-6 pl-20">{{
                           fairview_park_lang === "en_us"
                             ? "Upload Document"
@@ -269,6 +269,11 @@
                             ></el-button>
                           </template>
                         </el-upload>
+                        <i class="yellow pl-20" style="flex: 1; margin-top: 10px">{{
+                          fairview_park_lang === "en_us"
+                            ? "*Please upload file size below 2MB and file format must be(.jpg | .jpeg | .png | .pdf)."
+                            : " *請上傳檔案大小為 2MB 以下及檔案格式為(.jpg | .jpeg | .png | .pdf)"
+                        }}</i>
                       </div>
                       <i
                         v-if="!isRequest && !form.relationFile.file"
@@ -281,11 +286,6 @@
                         }}</i
                       >
                     </div>
-                    <i class="yellow">{{
-                      fairview_park_lang === "en_us"
-                        ? "*Please upload file size below 2MB and file format must be(.jpg | .jpeg | .png | .pdf)."
-                        : " *請上傳檔案大小為 2MB 以下及檔案格式為(.jpg | .jpeg | .png | .pdf)"
-                    }}</i>
                   </li>
                   <li>
                     <div class="form-wrap flex-row mb-10">
@@ -383,6 +383,11 @@
                           : "該欄位為必填欄位"
                       }}</i
                     >
+                    <i class="yellow" style="margin-top: 10px; display: block">{{
+                      fairview_park_lang === "en_us"
+                        ? "*Please upload file size below 5MB and file format must be (.jpg | .jpeg | .png | .pdf)"
+                        : "*請上傳檔案大小為 5MB 以下及檔案格式為 (.jpg | .jpeg | .png | .pdf)"
+                    }}</i>
                   </li>
                 </ul>
               </div>
@@ -395,13 +400,14 @@
                       : "丙. 承諾書 - 條款及條件"
                   }}
                 </h5>
-                <p style="margin-bottom: 30px">
-                  {{
-                    fairview_park_lang === "en_us"
-                      ? "I/We, being the registered house owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to apply to the Fairview Park Property Management Limited (”the Estate Management”) for Resident Smart Card(s) (“the Card”) for the persons with details listed in part B above. I/We declare that these persons all live in the Corresponding Premises and the information given in parts A, B and photographs supplied are true and correct. I/We fully understand and agree to accept and be bound by all the following terms and conditions:1. The Card is non-transferrable. In case the eligibility of this application ceases to exist, such as when the Owner is no longer the registered owner of the Corresponding Premises, all Cards issued under this application will be cancelled instantly.2. The New Owner(s) must inform the Estate Management whether the Card Users will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, all issued Cards will be cancelled instantly.3. The Card is the property of the Estate Management, please return it when your status is no longer valid.4. The Card should be shown to Estate Management staff upon request. Estate Management staff have the right to repossess the cancelled Card.5. The Estate Management reserves the absolute right to reject the application or cancel all the Cards issued under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.6. The Owner shall notify the Estate Management immediately for loss of any Card so as to enable the Estate Management to cancel the said Card.7. The Estate Management will charge HK$50 for each of the replacement of the Card by the request of the Owner due to whatsoever reasons.8. The Owner hereby declares that he and the Card Users consent to the collection and handling of personal data provided herewith in accordance with the Personal Data Statement below.7. The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice."
-                      : "我/我們為上述物業(以下簡稱「相關物業」)之業主，現向錦綉花園物業管理有限公司(以 下簡稱「管理公司」)申請住戶智能咭(以下簡稱住戶咭)予詳列於上述乙部的人士。我 們謹此聲明此等人士皆居住於相關物業以及在本申請表甲及乙部所提供的資料及相片，乃真 實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相 關物業的業主，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。2. 當相關物業業權出現變動時，新業主必須通知管理公司持咭人是否仍舊相同，否 則管理公司將即時取消已發出的所有住戶咭。3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理 公司。4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公 司職員有權收回該住戶咭。5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋邨守則 之業戶之申請或取消所有已發出予該單位的住戶咭。6. 住戶咭如有遺失，業主須立即通知管理公司，以便管理公司取消該住戶咭。7. 無論因任何原因，業主如須補領住戶咭，管理公司將收取港幣 50 元之手續費。8. 業主在此聲明業主及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提 供的個人資料。9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。"
-                  }}
-                </p>
+                <p
+                  style="margin-bottom: 30px"
+                  v-html="
+                    fairview_park_lang === 'en_us'
+                      ? 'I/We, being the registered house owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to apply to the Fairview Park Property Management Limited (”the Estate Management”) for Resident Smart Card(s) (“the Card”) for the persons with details listed in part B above. I/We declare that these persons all live in the Corresponding Premises and the information given in parts A, B and photographs supplied are true and correct. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/><p></p>1. The Card is non-transferrable. In case the eligibility of this application ceases to exist, such as when the Owner is no longer the registered owner of the Corresponding Premises, all Cards issued under this application will be cancelled instantly.<br/><p></p>2. The New Owner(s) must inform the Estate Management whether the Card Users will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, all issued Cards will be cancelled instantly.<br/><p></p>3. The Card is the property of the Estate Management, please return it when your status is no longer valid.<br/><p></p>4. The Card should be shown to Estate Management staff upon request. Estate Management staff have the right to repossess the cancelled Card.<br/><p></p>5. The Estate Management reserves the absolute right to reject the application or cancel all the Cards issued under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/><p></p>6. The Owner shall notify the Estate Management immediately for loss of any Card so as to enable the Estate Management to cancel the said Card.<br/><p></p>7. The Estate Management will charge HK$50 for each of the replacement of the Card by the request of the Owner due to whatsoever reasons.<br/><p></p>8. The Owner hereby declares that he and the Card Users consent to the collection and handling of personal data provided herewith in accordance with the Personal Data Statement below.<br/><p></p>9. The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.'
+                      : '我/我們為上述物業(以下簡稱「相關物業」)之業主，現向錦綉花園物業管理有限公司(以 下簡稱「管理公司」)申請住戶智能咭(以下簡稱住戶咭)予詳列於上述乙部的人士。我 們謹此聲明此等人士皆居住於相關物業以及在本申請表甲及乙部所提供的資料及相片，乃真 實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：<br/><p></p>1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相 關物業的業主，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。<br/><p></p>2. 當相關物業業權出現變動時，新業主必須通知管理公司持咭人是否仍舊相同，否 則管理公司將即時取消已發出的所有住戶咭。<br/><p></p>3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理 公司。<br/><p></p>4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公 司職員有權收回該住戶咭。<br/><p></p>5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋邨守則 之業戶之申請或取消所有已發出予該單位的住戶咭。<br/><p></p>6. 住戶咭如有遺失，業主須立即通知管理公司，以便管理公司取消該住戶咭。<br/><p></p>7. 無論因任何原因，業主如須補領住戶咭，管理公司將收取港幣 50 元之手續費。<br/><p></p>8. 業主在此聲明業主及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提 供的個人資料。<br/><p></p>9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。'
+                  "
+                ></p>
                 <div style="text-align: center">
                   <el-checkbox
                     v-model="form.checked"
@@ -433,10 +439,10 @@
               >
                 <div class="flex-row" style="flex-wrap: wrap">
                   <!-- 取證日期 -->
-                  <div class="col-12 col-lg-4 col-sm-12" style="margin-bottom: 10px">
+                  <div class="col-12 col-lg-3 col-sm-12" style="margin-bottom: 10px">
                     <h3
                       v-if="item.rcAppStatus === 1"
-                      style="font-size: 24px; font-weight: bold;margin-bottom:20px"
+                      style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
                     >
                       {{
                         fairview_park_lang === "en_us"
@@ -446,7 +452,7 @@
                     </h3>
                     <h3
                       v-if="item.rcAppStatus === 2"
-                      style="font-size: 24px; font-weight: bold;margin-bottom:20px"
+                      style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
                     >
                       {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
                     </h3>
@@ -461,12 +467,14 @@
                   </div>
                   <!-- 戶主信息 -->
                   <div
-                    class="flex-row"
-                    style="flex: 1; justify-content: space-between; flex-wrap: wrap"
+                    class="flex-row user-content"
+                    style="flex: 1; justify-content: space-between;"
                   >
-                    <div class="user-info" style="margin-bottom: 10px">
+                    <div class="user-info" style="margin-bottom: 10px;margin-right:10px">
                       <div>
-                        <h3 style="font-size: 24px; font-weight: bold;margin-bottom:20px">
+                        <h3
+                          style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                        >
                           {{
                             fairview_park_lang === "en_us"
                               ? "Name of Card User"
@@ -483,7 +491,7 @@
                       <div v-if="item.rcrelationOther">
                         <strong style="margin-right: 5px">{{
                           fairview_park_lang === "en_us"
-                            ? "Specify(Others) "
+                            ? "Specify(Others)"
                             : "證明(其他)："
                         }}</strong>
                         <span>{{ item.rcrelationOther }}</span>
@@ -508,10 +516,7 @@
                       </div>
                     </div>
                     <div class="user-info">
-                      <div
-                        class="user-img"
-                        v-if="item.rcAppStatus === 1"
-                      >
+                      <div class="user-img" v-if="item.rcAppStatus === 1">
                         <img
                           style="max-width: 130px; max-height: 140px"
                           :src="item.rcPhoto"
@@ -650,13 +655,13 @@ export default {
             : "上傳文件格式不正確!"
         );
         return false;
-      } else if (files.raw.size / 1024 / 1024 > 4) {
+      } else if (files.raw.size / 1024 / 1024 > 5) {
         ctx.$refs.photoFile.clearFiles();
         data.form["photoFile"].file = null;
         ElMessage.error(
           data.fairview_park_lang === "en_us"
-            ? "The file size cannot exceed 2MB!"
-            : "文件大小不能超過2MB!"
+            ? "The file size cannot exceed 5MB!"
+            : "文件大小不能超過5MB!"
         );
         return false;
       } else {
@@ -933,7 +938,7 @@ export default {
         }
         .application-form {
           box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-          padding: 20px;
+          padding:20px;
           margin-bottom: 50px;
           border-radius: 5px;
           h5 {
@@ -1052,6 +1057,7 @@ export default {
               h3 {
                 color: var(--mainColor2);
                 margin-bottom: 0;
+                line-height: 24px!important;
                 &:last-child {
                   color: var(--mainColor1);
                 }
@@ -1079,6 +1085,7 @@ export default {
   .nav-wrap-container {
     width: 720px;
   }
+  
 }
 @media (min-width: 992px) {
   .nav-wrap-container {
@@ -1116,8 +1123,19 @@ export default {
         }
       }
     }
-    .menu-select {
+    @{deep} .menu-select {
       display: block !important;
+      --el-select-input-focus-border-color: #ccc;
+      .select-trigger {
+        .el-input {
+          font-size: 18px;
+          .el-input__wrapper {
+          }
+        }
+        .is-focus {
+          border-color: #ccc;
+        }
+      }
     }
   }
   .nav-content {
@@ -1130,6 +1148,9 @@ export default {
     .user-img {
       margin-top: 0 !important;
     }
+    .user-content{
+    flex-wrap: wrap
+  }
   }
 }
 </style>

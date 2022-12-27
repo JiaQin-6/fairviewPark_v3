@@ -7,102 +7,119 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div>
-    <!-- banner -->
-    <div class="banner">
-      <div
-        class="img"
-        style="width: 100%; height: 100%"
-        :style="{ 'background-image': 'url(' + banner + ')' }"
-      ></div>
-      <p>
-        {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
-        }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
-      </p>
-    </div>
-    <!-- navs -->
-    <div class="nav-wrap">
-      <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
-          <ul class="row">
-            <li
-              v-for="(item, index) in estate_notice_list"
-              :key="index"
-              class="col-4 col-lg-12"
-              :class="nav_index === index ? 'active' : ''"
-              @click="
-                () => {
-                  nav_index = index;
-                  findEstateNoticeList(item.id);
-                }
-              "
-            >
-              <span>{{ item.titleEnUs }}</span>
-            </li>
-          </ul>
-          <el-select
-            size="large"
-            v-model="nav_index"
-            class="m-2 menu-select"
-            placeholder="Select"
-            @change="changeMenu"
-          >
-            <el-option
-              v-for="(item, index) in estate_notice_list"
-              :key="index"
-              :label="item.titleEnUs"
-              :value="item.index"
-            >
-              <span>{{ item.titleEnUs }}</span>
-            </el-option>
-          </el-select>
-        </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
-          <div class="estate-notice-content">
-            <p v-if="estate_notice_list.length!==0" style="font-size: 36px; color: #9cc212; font-weight: bold">
-              {{ estate_notice_list[nav_index].titleEnUs }}
-            </p>
-            <div class="header flex-row mb-20">
-              <span class="fs-16">{{
-                fairview_park_lang === "en_us" ? "Sort：" : "排序："
-              }}</span>
-              <select class="form-select" aria-label="Default select example">
-                <option selected>
-                  {{
-                    fairview_park_lang === "en_us"
-                      ? "Time from new to old"
-                      : "時間從新到舊"
-                  }}
-                </option>
-              </select>
-            </div>
-            <ul>
+  <el-config-provider :locale="local">
+    <div>
+      <!-- banner -->
+      <div class="banner">
+        <div
+          class="img"
+          style="width: 100%; height: 100%"
+          :style="{ 'background-image': 'url(' + banner + ')' }"
+        ></div>
+        <p>
+          {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
+          }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
+        </p>
+      </div>
+      <!-- navs -->
+      <div class="nav-wrap">
+        <div class="row nav-wrap-container">
+          <div class="col-12 col-lg-2 aside mb-20">
+            <ul class="row">
               <li
-                class="flex-row"
-                v-for="(item, index) in estate_notice_content"
+                v-for="(item, index) in estate_notice_list"
                 :key="index"
+                class="col-4 col-lg-12"
+                :class="nav_index === index ? 'active' : ''"
+                @click="
+                  () => {
+                    nav_index = index;
+                    currentPage = 1;
+                    pageSize = 5;
+                    findEstateNoticeList(item.id);
+                  }
+                "
               >
-                <i>{{ index + 1 }}.</i>
-                <span
-                  ><a target="_blank" :href="item.contentEnUs">{{ item.titleEnUs }}</a></span
-                >
+                <span>{{ item.titleEnUs }}</span>
               </li>
             </ul>
+            <el-select
+              size="large"
+              v-model="nav_index"
+              class="m-2 menu-select"
+              placeholder="Select"
+              @change="changeMenu"
+            >
+              <el-option
+                v-for="(item, index) in estate_notice_list"
+                :key="index"
+                :label="item.titleEnUs"
+                :value="item.index"
+              >
+                <span>{{ item.titleEnUs }}</span>
+              </el-option>
+            </el-select>
+          </div>
+          <div class="col-12 col-lg-10 nav-content mb-20">
+            <div class="estate-notice-content">
+              <p
+                v-if="estate_notice_list.length !== 0"
+                style="font-size: 36px; color: #9cc212; font-weight: bold"
+              >
+                {{ estate_notice_list[nav_index].titleEnUs }}
+              </p>
+              <ul>
+                <li
+                  class="flex-row item-list"
+                  v-for="(item, index) in estate_notice_show_content"
+                  :key="index"
+                >
+                  <i>{{ item.index + 1 }}.</i>
+                  <span
+                    ><a target="_blank" :href="item.contentEnUs">{{
+                      item.titleEnUs
+                    }}</a></span
+                  >
+                </li>
+              </ul>
+              <!-- 分頁 -->
+              <div style="display: flex; align-items: center" v-if="total !== 0">
+                <el-pagination
+                  style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
+                  v-model:current-page="currentPage"
+                  v-model:page-size="pageSize"
+                  :page-sizes="[5, 10, 15, 20]"
+                  :small="false"
+                  :disabled="false"
+                  :background="false"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="total"
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-   
-  </div>
+  </el-config-provider>
 </template>
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ElConfigProvider } from "element-plus";
+import zhTw from "element-plus/dist/locale/zh-tw.mjs";
+import en from "element-plus/dist/locale/en.mjs";
 export default {
+  components: {
+    ElConfigProvider,
+  },
   data() {
     return {
-      banner: new URL("../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
-      
+      banner: new URL("../../assets/image/common-banner/owner-zone.jpg", import.meta.url)
+        .href,
+
       nav_index: 0,
     };
   },
@@ -112,9 +129,15 @@ export default {
     const data = reactive({
       estate_notice_list: [],
       estate_notice_content: [],
+      estate_notice_show_content: [],
       fairview_park_lang: "",
+      currentPage: 1,
+      pageSize: 5,
+      total: 0,
+      local: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
     //查看所有 屋邨资料 列表
     const findEstateNoticeList = async (id) => {
       try {
@@ -124,7 +147,12 @@ export default {
         });
         if (res.data.status === 200) {
           if (id) {
+            res.data.data.records.map((item, index) => {
+              item.index = index;
+            });
             data.estate_notice_content = res.data.data.records;
+            data.total = data.estate_notice_content.length;
+            handleCurrentChange(1)
           } else {
             res.data.data.records.map((item, index) => {
               item.index = index;
@@ -145,14 +173,29 @@ export default {
         }
       }
     };
+    const handleSizeChange = (val) => {
+      data.estate_notice_show_content = data.estate_notice_content.slice(
+        (data.currentPage - 1) * val,
+        data.currentPage * val
+      );
+    };
+    const handleCurrentChange = (val) => {
+      data.estate_notice_show_content = data.estate_notice_content.slice(
+        (val - 1) * data.pageSize,
+        val * data.pageSize
+      );
+    };
     onMounted(async () => {
       await findEstateNoticeList();
-      findEstateNoticeList(data.estate_notice_list[0].id);
+      await findEstateNoticeList(data.estate_notice_list[0].id);
+      
     });
     return {
       ...toRefs(data),
       findEstateNoticeList,
       changeMenu,
+      handleSizeChange,
+      handleCurrentChange,
     };
   },
 };
@@ -163,7 +206,7 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-    height: 280px;
+  height: 280px;
   .img {
     width: 100%;
     height: 280px;
@@ -263,33 +306,59 @@ export default {
         }
         ul {
           padding: 0;
-          li {
+          .item-list {
             font-size: 18px;
-      margin-bottom: 20px;
-      align-items: center;
-      background-color: #e3f3b3;
+            margin-bottom: 20px;
+            align-items: center;
+            background-color: #e3f3b3;
 
-      i {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 40px;
-        text-align: center;
-        background-color: #e3f3b3;
-        height: 100%;
-      }
+            i {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              width: 40px;
+              text-align: center;
+              background-color: #e3f3b3;
+              height: 100%;
+            }
 
-      span {
-        line-height: 25px;
-        background-color: #fff0be;
-        flex: 1;
-        padding: 7px 0 7px 10px;
+            span {
+              line-height: 25px;
+              background-color: #fff0be;
+              flex: 1;
+              padding: 7px 0 7px 10px;
 
-        a {
-          text-decoration: none;
-          color: #4a4a4a;
+              a {
+                text-decoration: none;
+                color: #4a4a4a;
+              }
+            }
+          }
         }
-      }
+        .el-pagination {
+          .el-pagination__total {
+            font-size: 18px;
+          }
+
+          .el-input__inner {
+            font-size: 18px;
+          }
+          .el-icon {
+            font-size: 18px;
+          }
+          .el-pager {
+            li {
+              font-size: 18px;
+              &:hover {
+                color: var(--mainColor2);
+              }
+            }
+            .is-active {
+              color: var(--mainColor2);
+            }
+          }
+          .el-pagination__jump {
+            font-size: 18px;
           }
         }
       }
@@ -323,7 +392,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
@@ -344,8 +413,19 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
+              font-size: 18px;
+              .el-input__wrapper {
+              }
+            }
+            .is-focus {
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

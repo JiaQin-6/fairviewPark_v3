@@ -8,6 +8,54 @@
 -->
 <template>
   <div>
+    <el-select
+      v-model="menuActive"
+      class="menu-select"
+      style="margin-bottom: 20px"
+      placeholder="Select"
+      size="large"
+      @click="menuActive = item2.value"
+    >
+      <el-option
+        v-for="(item, index) in [
+          {
+            text:
+              fairview_park_lang === 'en_us' ? 'Minutes of MAC Meetings' : '大會議記錄',
+            value: 1,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us'
+                ? 'Minutes of Sub-com. Meetings'
+                : '分組會議記錄',
+            value: 2,
+          },
+          {
+            text: fairview_park_lang === 'en_us' ? 'Work Review' : '工作回顧',
+            value: 3,
+          },
+        ]"
+        :key="index"
+        :label="item.text"
+        :value="item.value"
+      />
+    </el-select>
+    <el-select
+      v-if="menuActive === 2"
+      v-model="sub_mac_meetings_index"
+      class="menu-select-sub-meetings"
+      style="margin-bottom: 20px"
+      placeholder="Select"
+      size="large"
+      @change="selectSubMacMeeting"
+    >
+      <el-option
+        v-for="(item, index) in minutes_of_sub_mac_meetings_list"
+        :key="index"
+        :label="item.titleEnUs"
+        :value="index"
+      />
+    </el-select>
     <h5>
       {{ fairview_park_lang === "en_us" ? "MAC Meetings" : "會議記錄" }}
     </h5>
@@ -42,15 +90,31 @@
     <div class="content">
       <ul v-show="menuActive === 1">
         <li
-          v-for="(item, index) in minutes_of_mac_meetings_list"
+          v-for="(item, index) in minutes_of_mac_meetings_show_list"
           :key="index"
           class="flex-row"
         >
-          <i>{{ index + 1 }}.</i>
+          <i>{{ item.index + 1 }}.</i>
           <span
             ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
           >
         </li>
+        <!-- 分頁 -->
+        <div style="display: flex; align-items: center" v-if="total !== 0">
+          <el-pagination
+            style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
+            v-model:current-page="currentPage1"
+            v-model:page-size="pageSize1"
+            :page-sizes="[5, 10, 15, 20]"
+            :small="false"
+            :disabled="false"
+            :background="false"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total1"
+            @size-change="handleSizeChange1"
+            @current-change="handleCurrentChange1"
+          />
+        </div>
       </ul>
       <div v-show="menuActive === 2">
         <div class="menu">
@@ -65,7 +129,7 @@
           <p>{{ minutes_of_sub_mac_meetings_list[sub_mac_meetings_index].titleEnUs }}</p>
           <ul>
             <li
-              v-for="(item, index) in minutes_of_sub_mac_meetings_list[
+              v-for="(item, index) in minutes_of_sub_mac_meetings_show_list[
                 sub_mac_meetings_index
               ].children"
               :key="index"
@@ -77,6 +141,22 @@
               >
             </li>
           </ul>
+        </div>
+        <!-- 分頁 -->
+        <div style="display: flex; align-items: center" v-if="total !== 0">
+          <el-pagination
+            style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
+            v-model:current-page="currentPage2"
+            v-model:page-size="pageSize2"
+            :page-sizes="[5, 10, 15, 20]"
+            :small="false"
+            :disabled="false"
+            :background="false"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total2"
+            @size-change="handleSizeChange2"
+            @current-change="handleCurrentChange2"
+          />
         </div>
       </div>
       <div v-show="menuActive === 3">
@@ -98,10 +178,18 @@ export default {
     const data = reactive({
       fairview_park_lang: "",
       minutes_of_mac_meetings_list: [],
+      minutes_of_mac_meetings_show_list: [],
       menuActive: 1,
       minutes_of_sub_mac_meetings_list: [],
+      minutes_of_sub_mac_meetings_show_list: [],
       sub_mac_meetings_index: 0,
       MacColumnFile: "",
+      currentPage1: 1,
+      pageSize1: 5,
+      total1: 0,
+      currentPage2: 1,
+      pageSize2: 5,
+      total2: 0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -111,7 +199,12 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          res.data.data.records.map((item, index) => {
+              item.index = index;
+            });
           data.minutes_of_mac_meetings_list = res.data.data.records;
+          data.total1 = data.minutes_of_mac_meetings_list.length
+          handleCurrentChange1(1)
         }
       } catch (error) {
         console.log(error);
@@ -128,10 +221,13 @@ export default {
             for (let i = 0; i < data.minutes_of_sub_mac_meetings_list.length; i++) {
               if (data.minutes_of_sub_mac_meetings_list[i].id === id) {
                 data.minutes_of_sub_mac_meetings_list[i].children = res.data.data.records;
+                data.total2 =  data.minutes_of_sub_mac_meetings_list[i].children .length
               }
             }
+            handleCurrentChange2(1)
           } else {
             data.minutes_of_sub_mac_meetings_list = res.data.data.records;
+            
           }
         }
       } catch (error) {
@@ -155,8 +251,34 @@ export default {
     //
     const selectSubMacMeeting = async (index) => {
       data.sub_mac_meetings_index = index;
+      data.currentPage2 =  1,
+      data.pageSize2 = 5,
       await findMinutesOfSubComMeetingsList(
         data.minutes_of_sub_mac_meetings_list[index].id
+      );
+    };
+    const handleSizeChange1 = (val) => {
+      data.minutes_of_mac_meetings_show_list = data.minutes_of_mac_meetings_list.slice(
+        (data.currentPage1 - 1) * val,
+        data.currentPage1 * val
+      );
+    };
+    const handleCurrentChange1 = (val) => {
+      data.minutes_of_mac_meetings_show_list = data.minutes_of_mac_meetings_list.slice(
+        (val - 1) * data.pageSize1,
+        val * data.pageSize1
+      );
+    };
+    const handleSizeChange2 = (val) => {
+      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list.slice(
+        (data.currentPage2 - 1) * val,
+        data.currentPage2 * val
+      );
+    };
+    const handleCurrentChange2 = (val) => {
+      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list.slice(
+        (val - 1) * data.pageSize2,
+        val * data.pageSize2
       );
     };
     onMounted(async () => {
@@ -182,12 +304,17 @@ export default {
       findMinutesOfSubComMeetingsList,
       findOneMacColumnFile,
       selectSubMacMeeting,
+      handleSizeChange1,
+      handleCurrentChange1,
+      handleSizeChange2,
+      handleCurrentChange2,
     };
   },
 };
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
 h5 {
   font-size: 36px;
   color: var(--mainColor3);
@@ -293,6 +420,72 @@ h5 {
         }
       }
     }
+  }
+  @{deep} .el-pagination {
+    .el-pagination__total {
+      font-size: 18px;
+    }
+
+    .el-input__inner {
+      font-size: 18px;
+    }
+    .el-icon {
+      font-size: 18px;
+    }
+    .el-pager {
+      li {
+        font-size: 18px;
+        &:hover {
+          color: var(--mainColor2);
+        }
+      }
+      .is-active {
+        color: var(--mainColor2);
+      }
+    }
+    .el-pagination__jump {
+      font-size: 18px;
+    }
+  }
+}
+@{deep} .menu-select {
+  display: none;
+  --el-select-input-focus-border-color: #ccc;
+  .select-trigger {
+    .el-input {
+      font-size: 18px;
+      .el-input__wrapper {
+      }
+    }
+    .is-focus {
+      border-color: #ccc;
+    }
+  }
+}
+@{deep} .menu-select-sub-meetings {
+  display: none;
+  --el-select-input-focus-border-color: #ccc;
+  .select-trigger {
+    .el-input {
+      font-size: 18px;
+      .el-input__wrapper {
+      }
+    }
+    .is-focus {
+      border-color: #ccc;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .menu-select {
+    display: block;
+  }
+  .menu-select-sub-meetings {
+    display: block;
+  }
+  .sub-menu,
+  .menu {
+    display: none;
   }
 }
 </style>

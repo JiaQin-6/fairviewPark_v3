@@ -23,12 +23,15 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div
-          style="margin: 0 auto"
-          class="col-12 nav-content mb-20 ql-container ql-snow"
-        >
-          <div class="ql-editor" v-html="lottery_system_for_mpound_content.htmlEnUs"></div>
-        
+        <div style="margin: 0 auto" class="col-12 nav-content mb-20">
+          <div
+            style="
+              font-size: 14px;
+              color: #6e6b7b;
+              font-family: Helvetica, Arial, sans-serif;
+            "
+            v-html="lottery_system_for_mpound_content.htmlEnUs"
+          ></div>
         </div>
       </div>
     </div>
@@ -40,7 +43,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -97,9 +103,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -143,7 +149,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }

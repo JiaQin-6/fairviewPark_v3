@@ -74,16 +74,30 @@
             <el-option
               v-for="(item, index) in [
                 {
-                  icon: 'icon-zhuye',
-                  text: $t('Introduction'),
+                  text:  fairview_park_lang === 'en_us' ? 'Prospective buyer' : '買家須知',
                   value: 0,
+                },
+                {
+                  text:  fairview_park_lang === 'en_us'
+                      ? 'One Stop Service for New Owners'
+                      : '新業主的一站式服務',
+                  value: 1,
+                },
+                {
+                  text:  fairview_park_lang === 'en_us' ? 'House Type Enquiry' : '原型圖查詢',
+                  value: 2,
+                },
+                {
+                  text:  fairview_park_lang === 'en_us'
+                      ? 'Master Colour Schedule'
+                      : '外牆顏色系列',
+                  value: 3,
                 },
               ]"
               :key="index"
               :label="item.text"
               :value="item.value"
             >
-              <i class="iconfont" :class="item.icon" style="margin-right: 10px"></i>
               <span>{{ item.text }}</span>
             </el-option>
           </el-select>
@@ -142,6 +156,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
 .banner {
   position: relative;
   overflow: hidden;
@@ -180,7 +195,7 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -382,8 +397,20 @@ export default {
             }
           }
         }
-        .menu-select {
+        @{deep} .menu-select {
           display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
         }
       }
     }

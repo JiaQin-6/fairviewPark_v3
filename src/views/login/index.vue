@@ -155,6 +155,7 @@
             <div>
               <ul>
                 <li>
+                  <p class="title">{{ $t('Owner Name (On Account Statement)') }}</p>
                   <input
                     v-model="registerForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
@@ -163,10 +164,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.oname"
-                    >{{ $t("This field is required.") }}</i
+                    >{{  fairview_park_lang === "en_us"
+                    ? "Owner Name Missing"
+                    : "業主名稱不能為空" }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Account Number (On Account Statement)') }}</p>
                   <input
                     v-model="registerForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
@@ -175,10 +179,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.hcode"
-                    >{{ $t("This field is required.") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                    ? "Account Number Missing"
+                    : "客戶號碼不能為空" }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Login Name (Self Customize)') }}</p>
                   <input
                     v-model="registerForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
@@ -187,10 +194,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.loginName"
-                    >{{ $t("This field is required.") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                    ? "Login ID Missing"
+                    : "登陸名稱不能為空" }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Login Password (Self Customize)') }}</p>
                   <input
                     v-model="registerForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
@@ -199,10 +209,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.password"
-                    >{{ $t("This field is required.") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                    ? "Password Missing"
+                    : "密碼不能為空" }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Nickname(Optional)') }}</p>
                   <input
                     v-model="registerForm.nickname"
                     :placeholder="$t('Nickname(Optional)')"
@@ -210,6 +223,7 @@
                   />
                 </li>
                 <li v-if="fairview_park_lang === 'zh_tw'">
+                  <p class="title">中文暱稱 (選填) :</p>
                   <input
                     v-model="registerForm.cnickname"
                     placeholder="中文暱稱 (選填) :"
@@ -217,6 +231,7 @@
                   />
                 </li>
                 <li>
+                  <p class="title">{{ $t('Email Address') }}</p>
                   <input
                     v-model="registerForm.email"
                     :placeholder="$t('Email Address')"
@@ -225,15 +240,20 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.email"
-                    >{{ $t("This field is required.") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                    ? "Email Address Missing"
+                    : "電郵不能為空或格式錯誤" }}</i
                   >
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_email_correct && registerForm.email"
-                    >{{ $t("Please provide a valid email.") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                    ? "Email Address Missing"
+                    : "電郵不能為空或格式錯誤" }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Contact Number(Optional)') }}</p>
                   <input
                     v-model="registerForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
@@ -276,6 +296,7 @@
             <div>
               <ul>
                 <li>
+                  <p class="title">{{ fairview_park_lang==='en_us'?'Login Name':'登陸名稱' }}</p>
                   <input
                     v-model="forgotPasswordForm.loginName"
                     type="text"
@@ -290,6 +311,7 @@
                   >
                 </li>
                 <li>
+                  <p class="title">{{ fairview_park_lang==='en_us'?'Contact Email':'聯繫電郵' }}</p>
                   <input
                     v-model="forgotPasswordForm.email"
                     type="text"
@@ -380,6 +402,7 @@
                   >
                 </li> -->
                 <li>
+                  <p class="title">{{ $t('Login Name (Self Customize)') }}</p>
                   <input
                     v-model="editMemberInfoForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
@@ -395,6 +418,7 @@
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Login Password (Self Customize)') }}</p>
                   <input
                     v-model="editMemberInfoForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
@@ -409,6 +433,7 @@
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Nickname(Optional)') }}</p>
                   <input
                     v-model="editMemberInfoForm.nickname"
                     :placeholder="$t('Nickname(Optional)')"
@@ -416,6 +441,7 @@
                   />
                 </li>
                 <li v-if="fairview_park_lang === 'zh_tw'">
+                  <p class="title">中文暱稱 (選填) :</p>
                   <input
                     v-model="editMemberInfoForm.cnickname"
                     placeholder="中文暱稱 (選填) :"
@@ -423,6 +449,7 @@
                   />
                 </li>
                 <li>
+                  <p class="title">{{ $t('Email Address') }}</p>
                   <input
                     v-model="editMemberInfoForm.email"
                     :placeholder="$t('Email Address')"
@@ -445,6 +472,7 @@
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t('Contact Number(Optional)') }}</p>
                   <input
                     v-model="editMemberInfoForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
@@ -588,7 +616,7 @@ export default {
           cnickname: data.registerForm.cnickname,
           email: data.registerForm.email,
           contactNo: data.registerForm.contactNo,
-          lang: "",
+          lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           document.getElementById("signUp").style.display = "none";
@@ -665,6 +693,7 @@ export default {
           cnickname: data.editMemberInfoForm.cnickname,
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
+          lang:data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           document.getElementById("editMemberInformation").style.display = "none";
@@ -732,7 +761,10 @@ export default {
           margin: 0 auto 30px;
           align-items: center;
           justify-content: space-between;
-
+          .title{
+            color: var(--mainColor1);
+            text-align: left;
+          }
           input {
             width: 100%;
             max-width: 400px;

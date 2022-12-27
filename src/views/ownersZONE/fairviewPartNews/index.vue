@@ -58,7 +58,10 @@ import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -132,7 +135,7 @@ export default {
             data.fairview_part_news_list.length !== 0 &&
             data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs,
         },
-        document.getElementById('pdf-preview')
+        document.getElementById("pdf-preview")
       ).then((instance) => {
         // use APIs here
         // const { documentViewer, annotationManager } = instance.Core;
@@ -155,7 +158,7 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-    height: 280px;
+  height: 280px;
   .img {
     width: 100%;
     height: 280px;
@@ -189,8 +192,22 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
+
       img {
         max-width: 100%;
+      }
+      .el-select {
+        --el-select-input-focus-border-color: #ccc;
+        .select-trigger {
+          .el-input {
+            font-size: 18px;
+            .el-input__wrapper {
+            }
+          }
+          .is-focus {
+            border-color: #ccc;
+          }
+        }
       }
     }
   }
@@ -222,7 +239,7 @@ export default {
 }
 @media (max-width: 992px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }

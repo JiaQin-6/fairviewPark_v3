@@ -102,7 +102,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20 ql-container ql-snow">
+        <div class="col-12 col-lg-10 nav-content mb-20">
           <TheOverhaulProject v-if="nav_index === 0"></TheOverhaulProject>
           <SPACMemberList v-if="nav_index === 1"></SPACMemberList>
           <MinutesOfSPACMeetings v-if="nav_index === 2"></MinutesOfSPACMeetings>
@@ -299,9 +299,21 @@ export default {
             }
           }
         }
-        .menu-select{
-        display: block;
-      }
+        @{deep} .menu-select {
+          display: block;
+          --el-select-input-focus-border-color:#ccc;
+          .select-trigger{
+            .el-input{
+              font-size: 18px;
+              .el-input__wrapper{
+                
+              }
+            }
+            .is-focus{
+              border-color: #ccc;
+            }
+          }
+        }
       }
     }
   }
