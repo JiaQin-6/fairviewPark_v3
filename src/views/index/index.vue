@@ -19,6 +19,10 @@
                 text: $t('Edit member information'),
               },
               {
+                router: '/news-update',
+                text: $t('News Update'),
+              },
+              {
                 router: '/FAQ-from-residents',
                 text: $t('FAQ from Residents'),
               },
@@ -27,56 +31,55 @@
                 text: $t('Estate Notices'),
               },
               {
-                router: '/fairview-part-news',
-                text: $t('Fairview Park News'),
-              },
-              {
-                router: '/demographic-opinion-survey',
-                text: $t('Demographic & Opinion Survey'),
-              },
-              {
                 router: '/estate-activities',
                 text: $t('Estate Activities'),
               },
               {
-                router: '/news-update',
-                text: $t('News Update'),
-              },
-              {
-                router: '/residents-handbook-map',
-                text: $t('Residents Handbook / Map'),
-              },
-              {
-                router: '/frequently-used-forms',
-                text: $t('Frequently Used Forms'),
-              },
-              {
-                router: '/MAC-column',
-                text: $t('MAC Column'),
+                router: '/fairview-part-news',
+                text: $t('Fairview Park News'),
               },
               {
                 router: '/payment-list',
                 text: $t('Payment List'),
               },
               {
-                router: '/lottery-system-for-impound',
-                text: $t('Lottery System For Impounding Action'),
+                router: '/apply-resident-smartcard',
+                text: $t('Apply Resident Smartcard'),
+              },
+              {
+                router: '/MAC-column',
+                text: $t('MAC Column'),
               },
               {
                 router: '/the-overhaul-project',
                 text: $t('the Overhaul Project'),
               },
               {
-                router: '/apply-resident-smartcard',
-                text: $t('Apply Resident Smartcard'),
+                router: '/lottery-system-for-impound',
+                text: $t('Lottery System For Impounding Action'),
               },
-             
+              {
+                router: '/frequently-used-forms',
+                text: $t('Frequently Used Forms'),
+              },
+              {
+                router: '/residents-handbook-map',
+                text: $t('Residents Handbook / Map'),
+              },
+              {
+                router: '/demographic-opinion-survey',
+                text: $t('Demographic & Opinion Survey'),
+              },
               {
                 router: '/loginOut',
                 text: $t('Login out'),
               },
             ]:[
               {
+                router: '/news-update',
+                text: $t('News Update'),
+              },
+              {
                 router: '/FAQ-from-residents',
                 text: $t('FAQ from Residents'),
               },
@@ -85,48 +88,44 @@
                 text: $t('Estate Notices'),
               },
               {
-                router: '/fairview-part-news',
-                text: $t('Fairview Park News'),
-              },
-              {
-                router: '/demographic-opinion-survey',
-                text: $t('Demographic & Opinion Survey'),
-              },
-              {
                 router: '/estate-activities',
                 text: $t('Estate Activities'),
               },
               {
-                router: '/news-update',
-                text: $t('News Update'),
-              },
-              {
-                router: '/residents-handbook-map',
-                text: $t('Residents Handbook / Map'),
-              },
-              {
-                router: '/frequently-used-forms',
-                text: $t('Frequently Used Forms'),
-              },
-              {
-                router: '/MAC-column',
-                text: $t('MAC Column'),
+                router: '/fairview-part-news',
+                text: $t('Fairview Park News'),
               },
               {
                 router: '/payment-list',
                 text: $t('Payment List'),
               },
               {
-                router: '/lottery-system-for-impound',
-                text: $t('Lottery System For Impounding Action'),
+                router: '/apply-resident-smartcard',
+                text: $t('Apply Resident Smartcard'),
+              },
+              {
+                router: '/MAC-column',
+                text: $t('MAC Column'),
               },
               {
                 router: '/the-overhaul-project',
                 text: $t('the Overhaul Project'),
               },
               {
-                router: '/apply-resident-smartcard',
-                text: $t('Apply Resident Smartcard'),
+                router: '/lottery-system-for-impound',
+                text: $t('Lottery System For Impounding Action'),
+              },
+              {
+                router: '/frequently-used-forms',
+                text: $t('Frequently Used Forms'),
+              },
+              {
+                router: '/residents-handbook-map',
+                text: $t('Residents Handbook / Map'),
+              },
+              {
+                router: '/demographic-opinion-survey',
+                text: $t('Demographic & Opinion Survey'),
               },
             ]"
             :key="index"
@@ -151,6 +150,7 @@
     <el-backtop>
       <img style="width:60px" :src="arrowUpCircle" alt="" />
     </el-backtop>
+
   </div>
 </template>
 

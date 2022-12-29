@@ -288,9 +288,12 @@ export default {
   .row {
     margin: 0 auto;
     @{deep} .el-menu {
+      position: sticky;
+        top: 80px;
       background-color: #fff;
       border: none;
       .el-menu-item {
+
         padding: 6px 0 6px 10px;
         height: auto;
         line-height: inherit;

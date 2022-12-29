@@ -189,7 +189,8 @@ export default {
     .aside {
       padding: 0;
       ul {
-        // flex-wrap: nowrap;
+        position: sticky;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;

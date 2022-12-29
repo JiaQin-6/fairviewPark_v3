@@ -241,7 +241,7 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
@@ -428,6 +428,51 @@ export default {
           }
         }
       }
+    }
+  }
+}
+@media (max-width:768px) {
+  .nav-wrap {
+    .row {
+      @{deep} .el-pagination {
+          .el-pagination__total {
+            font-size: 18px;
+            margin: 0;
+          }
+          .el-pagination__sizes{
+            flex-basis: 100%;
+            text-align: left;
+            position: relative;
+            width: 100%;
+            display: block;
+            .el-select{
+              position: relative;
+              left: 0;
+            }
+          }
+          .el-input__inner {
+            font-size: 18px;
+          }
+          .el-icon {
+            font-size: 18px;
+          }
+          .el-pager {
+            width: 79%;
+            li {
+              font-size: 18px;
+              &:hover {
+                color: var(--mainColor2);
+              }
+            }
+            .is-active {
+              color: var(--mainColor2);
+            }
+          }
+          .el-pagination__jump {
+            font-size: 18px;
+            margin: 0;
+          }
+        }
     }
   }
 }

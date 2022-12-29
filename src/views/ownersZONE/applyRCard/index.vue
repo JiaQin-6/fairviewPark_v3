@@ -120,7 +120,7 @@
                   fairview_park_lang === "en_us" ? "Application materials" : "申請資料"
                 }}
               </h5>
-              <li style="color: #07522b; margin-bottom: 10px; list-style: disc">
+              <li style="color: #07522b; margin-bottom: 10px;font-weight:bold;">
                 {{ address_t }}
               </li>
               <!-- 申請資料填寫 -->
@@ -477,7 +477,7 @@
                         >
                           {{
                             fairview_park_lang === "en_us"
-                              ? "Name of Card User"
+                              ? "Name of Card User: "
                               : "持卡人姓名："
                           }}{{ item.rcname }}
                         </h3>
@@ -728,7 +728,7 @@ export default {
           data.form.checked = false;
           ElMessage({
             message:
-              data.fairview_park_lang === "en_us" ? "Submit Successful" : "提供成功",
+              data.fairview_park_lang === "en_us" ? "Submit Successful" : "提交成功",
             type: "success",
           });
         } else {

@@ -62,7 +62,7 @@
             <!-- pdf -->
             <h5
               class="title fs-18 mb-20 flex-row"
-              style="text-align: left; cursor: pointer; flex-wrap: wrap"
+              style="text-align: left; flex-wrap: wrap"
             >
               <p
                 style="text-decoration: none; margin: 0"
@@ -81,11 +81,15 @@
                     ? "Effect Day : " +
                       (coach_service_content &&
                         coach_service_content.coachServiceList.length !== 0 &&
-                        coach_service_content.coachServiceList[nav_index].launchTime.slice(0,10))
+                        coach_service_content.coachServiceList[
+                          nav_index
+                        ].launchTime.slice(0, 10))
                     : "生效日期 : " +
                       (coach_service_content &&
                         coach_service_content.coachServiceList.length !== 0 &&
-                        coach_service_content.coachServiceList[nav_index].launchTime.slice(0,10))
+                        coach_service_content.coachServiceList[
+                          nav_index
+                        ].launchTime.slice(0, 10))
                 }}</span
               >
             </h5>
@@ -165,7 +169,7 @@
                           item.fleidList[index3].columnList[index2] &&
                           item.fleidList[index3].columnList[index2].text
                             ? item.fleidList[index3].columnList[index2].text
-                            : "&nbsp;"
+                            : item.fleidList[index3].columnList[index2].textEnUs
                         }}
                       </p>
                     </td>
@@ -258,17 +262,18 @@
                 <div style="overflow: auto; padding: 0">
                   <h5
                     style="
-                      background-color: #7da533;
+                      background-color: #9cc212;
                       margin: 0;
                       padding: 10px 0;
                       color: #fff;
-                      font-size: 18px;
+                      font-size: 24px;
                       min-width: 400px;
-                        border-right: 2px solid #fff;
+                      border-right: 2px solid #fff;
+                      font-weight: normal;
                     "
                   >
                     {{
-                      fairview_park_lang === "en_us" ? "COACH FARE TABLE" : "專巴時間表"
+                      fairview_park_lang === "en_us" ? "COACH FARE TABLE" : "專巴收費表"
                     }}
                   </h5>
                   <ul class="flex-row" style="padding: 0; margin: 0 0 2px 0">
@@ -286,12 +291,13 @@
                       ]"
                       :key="index"
                       style="
-                        background-color: #e7f3be;
+                        background-color: #f1fcdd;
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
                         border-right: 2px solid #fff;
                         min-width: 100px;
+                        font-weight: bold;
                       "
                       class="col-3 flex-row"
                     >
@@ -300,14 +306,15 @@
                     <li class="col-6">
                       <div
                         style="
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           font-size: 18px;
                           align-items: center;
                           text-align: center;
                           padding: 20px;
                           border-bottom: 2px solid #fff;
-                        border-right: 2px solid #fff;
+                          border-right: 2px solid #fff;
                           min-width: 200px;
+                          font-weight: bold;
                         "
                         class="col-12 flex-row"
                       >
@@ -333,13 +340,14 @@
                           ]"
                           :key="index"
                           style="
-                            background-color: #e7f3be;
+                            background-color: #f1fcdd;
                             font-size: 18px;
                             align-items: center;
                             text-align: center;
                             padding: 20px 0;
                             min-width: 100px;
                             border-right: 2px solid #fff;
+                            font-weight: bold;
                           "
                           class="col-6 flex-row"
                         >
@@ -356,7 +364,7 @@
                   >
                     <li
                       style="
-                        background-color: #fffae7;
+                        background-color: #fffde9;
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
@@ -373,7 +381,7 @@
                       v-for="(item2, index2) in JSON.parse(item.moneyJson)"
                       :key="index2"
                       style="
-                        background-color: #fffae7;
+                        background-color: #fffde9;
                         font-size: 18px;
                         align-items: center;
                         text-align: center;
@@ -394,14 +402,14 @@
                   </ul>
                 </div>
               </div>
-              <p style="text-align: left">
+              <p style="text-align: left; font-size: 18px">
                 <b>{{
                   fairview_park_lang === "en_us"
                     ? "Estate Coach Fare Discount"
                     : "乘車優惠"
                 }}</b>
               </p>
-              <p style="text-align: left">
+              <p style="text-align: left; font-size: 18px">
                 {{
                   fairview_park_lang === "en_us"
                     ? "Residents who would like to enjoy the concessionary fare for resident"
@@ -420,7 +428,7 @@
                 }}
               </p>
               <p
-                style="text-align: left"
+                style="text-align: left; font-size: 18px"
                 v-html="
                   fairview_park_lang === 'en_us'
                     ? 'Besides, residents aged 60 to 64 who registered with the Owner’s Association of Fairview Park for enjoying the half fare concessions <u>need to register their Personalised Octopus Cards with the Estate Management Office again.</u>'
@@ -431,13 +439,14 @@
                 <div style="overflow: auto; padding: 0">
                   <h5
                     style="
-                      background-color: #7da533;
+                      background-color: #9cc212;
                       margin: 0;
                       padding: 10px 0;
                       color: #fff;
-                      font-size: 18px;
+                      font-size: 24px;
                       border-right: 2px solid #fff;
-                          min-width:682px;
+                      min-width: 682px;
+                      font-weight: normal;
                     "
                   >
                     {{
@@ -452,9 +461,10 @@
                         rowspan="5"
                         style="
                           width: 10%;
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           border: 2px solid #fff;
-                          min-width:90px;
+                          min-width: 90px;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Age" : "年齡" }}
@@ -462,10 +472,12 @@
                       <th
                         style="
                           width: 15%;
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           padding: 15px;
                           border: 2px solid #fff;
-                          min-width:100px;
+                          min-width: 100px;
+                          font-weight: bold;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Resident" : "住戶" }}
@@ -473,10 +485,12 @@
                       <th
                         style="
                           width: 25%;
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           padding: 15px;
                           border: 2px solid #fff;
-                          min-width:165px;
+                          min-width: 165px;
+                          font-weight: bold;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Requirements" : "條件" }}
@@ -484,10 +498,11 @@
                       <th
                         style="
                           width: 25%;
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           padding: 15px;
                           border: 2px solid #fff;
-                          min-width:165px;
+                          min-width: 165px;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -499,10 +514,11 @@
                       <th
                         style="
                           width: 25%;
-                          background-color: #e7f3be;
+                          background-color: #f1fcdd;
                           padding: 15px;
                           border: 2px solid #fff;
-                          min-width:160px;
+                          min-width: 160px;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Benefit" : "享有優惠" }}
@@ -511,9 +527,10 @@
                     <tr>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -522,9 +539,10 @@
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                         rowspan="4"
                       >
@@ -536,18 +554,20 @@
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Children" : "兒童八達通" }}
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
@@ -559,6 +579,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -570,6 +591,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -583,6 +605,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -595,9 +618,10 @@
                     <tr>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -606,9 +630,10 @@
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -617,9 +642,10 @@
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
@@ -631,6 +657,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -642,6 +669,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{
@@ -655,6 +683,7 @@
                           background-color: #f9fcf0;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Half Fare" : "半價" }}
@@ -663,18 +692,20 @@
                     <tr>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                       >
                         {{ fairview_park_lang === "en_us" ? "Non-Resident" : "非住戶" }}
                       </td>
                       <td
                         style="
-                          background-color: #fffae7;
+                          background-color: #fffde9;
                           padding: 15px;
                           border: 2px solid #fff;
+                          font-size: 18px;
                         "
                         colspan="4"
                       >
@@ -700,13 +731,6 @@
               v-if="nav_index === coach_service_content.coachServiceList.length - 1"
             >
               <div class="table">
-                <h2>
-                  {{
-                    fairview_park_lang === "en_us"
-                      ? "FREE SHUTTLE BUS"
-                      : "邨内免費穿梭巴士"
-                  }}
-                </h2>
                 <h5>
                   {{
                     fairview_park_lang === "en_us"
@@ -714,11 +738,23 @@
                       : "一號藍線巴士"
                   }}
                 </h5>
-                <p>
-                  {{
-                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
-                  }}
-                </p>
+                <div style="display: flex;border: none;">
+                  <p style="width: 50%">
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "From Bus Terminus"
+                        : "巴士總站開出"
+                    }}
+                  </p>
+                  <p style="width: 50%">
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "From Bus Terminus"
+                        : "巴士總站開出"
+                    }}
+                  </p>
+                </div>
+
                 <ul>
                   <li
                     v-for="(item, index) in [
@@ -829,18 +865,25 @@
               </div>
               <!--  -->
               <div class="table mt-30">
-                <h5 style="background-color: #fd9697">
+                <h5>
                   {{
                     fairview_park_lang === "en_us"
                       ? "No.2 Red Route Shuttle Bus"
                       : "二號红線巴士"
                   }}
                 </h5>
-                <p>
-                  {{
+                <div style="display: flex;border: none;">
+                  <p style="width: 50%">
+                    {{
                     fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
                   }}
-                </p>
+                  </p>
+                  <p style="width: 50%">
+                    {{
+                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
+                  }}
+                  </p>
+                </div>
                 <ul>
                   <li
                     v-for="(item, index) in [
@@ -1113,13 +1156,14 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;
         margin: 0;
         background-color: #fff;
         padding: 10px;
+        display: block;
         li {
           text-align: left;
           margin-bottom: 5px;
@@ -1182,31 +1226,28 @@ export default {
       }
       .free-bus {
         .table {
-          h2 {
+          h5 {
             background-color: #7da533;
             margin: 0;
+            padding: 5px;
+            font-weight: normal;
             color: #fff;
-            font-size: 20px;
-            padding: 5px;
-            font-weight: normal;
-          }
-          h5 {
-            background-color: #7abcfd;
-            margin: 0;
-            padding: 5px;
-            font-weight: normal;
+            border: none;
+            font-size: 24px;
           }
           p {
-            background-color: #fef0ab;
+            background-color: #fffde9;
             margin: 0;
             font-size: 18px;
             padding: 5px;
+            border: none;
           }
           ul {
+            border: none;
             padding: 0;
             li {
               font-size: 18px;
-              background-color: #fffae7;
+              background-color: #fffde9;
 
               span {
                 width: 50%;

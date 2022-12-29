@@ -27,7 +27,7 @@
           :key="index"
           class="col-6 col-md-4"
         >
-          <a :href="item.pdfUrlEnUs">
+          <a :href="item.pdfUrlEnUs" style="border: 2px solid #f7f7f7;">
             <img
               :src="item.fileImage"
               alt=""

@@ -241,7 +241,7 @@ export default {
       padding: 0;
       ul {
         position: sticky;
-        top: 10px;
+        top: 80px;
         overflow: auto;
         width: 100%;
         box-sizing: border-box;

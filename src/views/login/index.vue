@@ -155,7 +155,7 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ $t('Owner Name (On Account Statement)') }}</p>
+                  <p class="title">{{ $t("Owner Name (On Account Statement)") }}</p>
                   <input
                     v-model="registerForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
@@ -164,28 +164,33 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.oname"
-                    >{{  fairview_park_lang === "en_us"
-                    ? "Owner Name Missing"
-                    : "業主名稱不能為空" }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Owner Name Missing"
+                        : "業主名稱不能為空"
+                    }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Account Number (On Account Statement)') }}</p>
+                  <p class="title">{{ $t("Account Number (On Account Statement)") }}</p>
                   <input
                     v-model="registerForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
                     type="text"
+                    @input="registerForm.hcode = registerForm.hcode.toUpperCase()"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.hcode"
-                    >{{ fairview_park_lang === "en_us"
-                    ? "Account Number Missing"
-                    : "客戶號碼不能為空" }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Account Number Missing"
+                        : "客戶號碼不能為空"
+                    }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Login Name (Self Customize)') }}</p>
+                  <p class="title">{{ $t("Login Name (Self Customize)") }}</p>
                   <input
                     v-model="registerForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
@@ -194,13 +199,15 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.loginName"
-                    >{{ fairview_park_lang === "en_us"
-                    ? "Login ID Missing"
-                    : "登陸名稱不能為空" }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Login ID Missing"
+                        : "登陸名稱不能為空"
+                    }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Login Password (Self Customize)') }}</p>
+                  <p class="title">{{ $t("Login Password (Self Customize)") }}</p>
                   <input
                     v-model="registerForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
@@ -209,13 +216,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.password"
-                    >{{ fairview_park_lang === "en_us"
-                    ? "Password Missing"
-                    : "密碼不能為空" }}</i
+                    >{{
+                      fairview_park_lang === "en_us" ? "Password Missing" : "密碼不能為空"
+                    }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Nickname(Optional)') }}</p>
+                  <p class="title">{{ $t("Nickname(Optional)") }}</p>
                   <input
                     v-model="registerForm.nickname"
                     :placeholder="$t('Nickname(Optional)')"
@@ -231,7 +238,7 @@
                   />
                 </li>
                 <li>
-                  <p class="title">{{ $t('Email Address') }}</p>
+                  <p class="title">{{ $t("Email Address") }}</p>
                   <input
                     v-model="registerForm.email"
                     :placeholder="$t('Email Address')"
@@ -240,20 +247,24 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_null && !registerForm.email"
-                    >{{ fairview_park_lang === "en_us"
-                    ? "Email Address Missing"
-                    : "電郵不能為空或格式錯誤" }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Email Address Missing"
+                        : "電郵不能為空或格式錯誤"
+                    }}</i
                   >
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="register_error_tip.is_email_correct && registerForm.email"
-                    >{{ fairview_park_lang === "en_us"
-                    ? "Email Address Missing"
-                    : "電郵不能為空或格式錯誤" }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Email Address Missing"
+                        : "電郵不能為空或格式錯誤"
+                    }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Contact Number(Optional)') }}</p>
+                  <p class="title">{{ $t("Contact Number(Optional)") }}</p>
                   <input
                     v-model="registerForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
@@ -296,7 +307,9 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ fairview_park_lang==='en_us'?'Login Name':'登陸名稱' }}</p>
+                  <p class="title">
+                    {{ fairview_park_lang === "en_us" ? "Login Name" : "登入名稱" }}
+                  </p>
                   <input
                     v-model="forgotPasswordForm.loginName"
                     type="text"
@@ -311,7 +324,9 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ fairview_park_lang==='en_us'?'Contact Email':'聯繫電郵' }}</p>
+                  <p class="title">
+                    {{ fairview_park_lang === "en_us" ? "Contact Email" : "聯絡電郵" }}
+                  </p>
                   <input
                     v-model="forgotPasswordForm.email"
                     type="text"
@@ -355,10 +370,34 @@
       tabindex="-1"
     >
       <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
+        <!-- 輸入密碼驗證 -->
+        <div class="verify" v-show="!showEditMemberModel">
+          <div class="verify-password">
+            <el-icon @click="closeModel"><CloseBold /></el-icon>
+            <p class="title">
+              {{
+                fairview_park_lang === "en_us" ? "Please enter password" : "請輸入密碼"
+              }}
+            </p>
+            <input type="password" v-model="editMemberInfoForm.verifyPassword" />
+            <i
+              style="display: block; color: #fc0d1b; text-align: left"
+              v-show="
+                edit_member_info_error_tip.is_verify_password_null &&
+                !editMemberInfoForm.verifyPassword
+              "
+              >{{ $t("This field is required.") }}</i
+            >
+            <el-button @click="showEditMemberModel=true">{{
+              fairview_park_lang === "en_us" ? "Confirm" : "確認"
+            }}</el-button>
+           
+          </div>
+        </div>
+        <div class="modal-content" v-show="showEditMemberModel">
           <div class="modal-header">
             <button
-              id="close-signUp"
+              id="close-edit-member"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -369,7 +408,8 @@
             <h2>{{ $t("Edit member information") }}</h2>
             <div>
               <ul>
-                <!-- <li>
+                <li>
+                  <p class="title">{{ $t("Owner Name (On Account Statement)") }}</p>
                   <input
                     v-model="editMemberInfoForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
@@ -379,13 +419,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
-                      !editMemberInfoForm.oname
+                      edit_member_info_error_tip.is_null && !editMemberInfoForm.oname
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
+                  <p class="title">{{ $t("Account Number (On Account Statement)") }}</p>
                   <input
                     v-model="editMemberInfoForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
@@ -395,14 +435,13 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
-                      !editMemberInfoForm.hcode
+                      edit_member_info_error_tip.is_null && !editMemberInfoForm.hcode
                     "
                     >{{ $t("This field is required.") }}</i
                   >
-                </li> -->
+                </li>
                 <li>
-                  <p class="title">{{ $t('Login Name (Self Customize)') }}</p>
+                  <p class="title">{{ $t("Login Name (Self Customize)") }}</p>
                   <input
                     v-model="editMemberInfoForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
@@ -418,7 +457,7 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Login Password (Self Customize)') }}</p>
+                  <p class="title">{{ $t("Login Password (Self Customize)") }}</p>
                   <input
                     v-model="editMemberInfoForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
@@ -433,7 +472,23 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Nickname(Optional)') }}</p>
+                  <p class="title">{{ $t("Confirm Password (Self Customize)") }}</p>
+                  <input
+                    v-model="editMemberInfoForm.confirmPassword"
+                    :placeholder="$t('Confirm Password (Self Customize)')"
+                    type="password"
+                  />
+                  <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.confirmPassword
+                    "
+                    >{{ $t("This field is required.") }}</i
+                  >
+                </li>
+                <li>
+                  <p class="title">{{ $t("Nickname(Optional)") }}</p>
                   <input
                     v-model="editMemberInfoForm.nickname"
                     :placeholder="$t('Nickname(Optional)')"
@@ -449,7 +504,7 @@
                   />
                 </li>
                 <li>
-                  <p class="title">{{ $t('Email Address') }}</p>
+                  <p class="title">{{ $t("Email Address") }}</p>
                   <input
                     v-model="editMemberInfoForm.email"
                     :placeholder="$t('Email Address')"
@@ -472,7 +527,7 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t('Contact Number(Optional)') }}</p>
+                  <p class="title">{{ $t("Contact Number(Optional)") }}</p>
                   <input
                     v-model="editMemberInfoForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
@@ -485,7 +540,9 @@
               <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
                 {{ edit_member_info_error_tip.text }}
               </p>
-              <button @click="editMemberInfo">{{ fairview_park_lang==='en_us'?'Update':'更新' }}</button>
+              <button @click="editMemberInfo">
+                {{ fairview_park_lang === "en_us" ? "Update" : "更新" }}
+              </button>
             </div>
           </div>
         </div>
@@ -526,10 +583,12 @@ export default {
         email: "",
       },
       editMemberInfoForm: {
+        verifyPassword: null,
         oname: null,
         hcode: null,
         loginName: null,
         password: null,
+        confirmPassword: null,
         nickname: null,
         cnickname: null,
         email: null,
@@ -553,11 +612,13 @@ export default {
         text: "",
       },
       edit_member_info_error_tip: {
+        is_verify_password_null: false,
         is_null: false,
         is_email_correct: false,
         is_show: false,
         text: "",
       },
+      showEditMemberModel:false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
@@ -669,6 +730,7 @@ export default {
     const editMemberInfo = async () => {
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
+        !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
         !data.editMemberInfoForm.password ||
         !data.editMemberInfoForm.email
@@ -693,7 +755,7 @@ export default {
           cnickname: data.editMemberInfoForm.cnickname,
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
-          lang:data.fairview_park_lang,
+          lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           document.getElementById("editMemberInformation").style.display = "none";
@@ -707,6 +769,11 @@ export default {
         console.log(error);
       }
     };
+    //
+    const closeModel = () => {
+      var button = document.getElementById("close-edit-member");
+      button.click()
+    };
     onMounted(() => {
       var myModalEl = document.getElementById("editMemberInformation");
       myModalEl.addEventListener("show.bs.modal", function (event) {
@@ -717,6 +784,9 @@ export default {
           ? JSON.parse(localStorage.getItem("login-info")).login
           : "";
       });
+      myModalEl.addEventListener('hidden.bs.modal', event => {
+        data.showEditMemberModel = false
+      })
     });
     return {
       ...toRefs(data),
@@ -724,6 +794,7 @@ export default {
       register,
       forgetPassword,
       editMemberInfo,
+      closeModel,
     };
   },
 };
@@ -733,6 +804,59 @@ export default {
 @deep: ~">>>";
 .modal {
   .modal-dialog {
+    .verify{
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 370px;
+      pointer-events: auto;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0,0,0,.2);
+      border-radius: 0.3rem;
+      outline: 0;
+      margin: 0 auto;
+      .verify-password {
+      position: relative;
+      padding: 30px 20px;
+      text-align: center;
+      .el-icon {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      p {
+        margin-bottom: 20px;
+        font-size: 18px;
+      }
+      input {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
+        border-radius: 10px;
+        height: 45px;
+        line-height: 45px;
+        padding-left: 10px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+      }
+      @{deep} .el-button {
+        background-color: var(--mainColor2);
+        margin-top: 20px;
+        height: 40px;
+        padding: 0 30px;
+        span {
+          color: #fff;
+          font-size: 18px;
+        }
+      }
+    }
+    }
+    
     .modal-body {
       text-align: center;
       padding: 0 20px 50px;
@@ -761,7 +885,7 @@ export default {
           margin: 0 auto 30px;
           align-items: center;
           justify-content: space-between;
-          .title{
+          .title {
             color: var(--mainColor1);
             text-align: left;
           }
@@ -821,7 +945,6 @@ export default {
           text-decoration-line: underline;
           color: #ffa41b;
           cursor: pointer;
-          
         }
       }
       .declaration {

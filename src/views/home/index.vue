@@ -126,7 +126,6 @@
                 margin-right: 40px;
                 color: #fff;
               "
-              :style="{ color: item.bgColor }"
               >{{ item.contentEnUs }}
             </a>
             <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
