@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-14 23:22:05
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2022-12-31 19:57:05
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -10,7 +10,7 @@
   <div class="main">
     <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
       <div class="container-fluid">
-        <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang">
+        <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang" style="width: 55px">
           <transition name="el-fade-in-linear">
             <img
               class="navbar-brand-logo-mobile"
