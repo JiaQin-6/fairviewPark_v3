@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="new-buyer-notice">
-    <div class="content mt-20" style="margin: 0px auto; padding: 0 20px">
+    <div class="content mt-20" style="margin: 0px auto;">
       <table border="0" cellpadding="0" cellspacing="0" align="center">
         <tbody>
           <tr>

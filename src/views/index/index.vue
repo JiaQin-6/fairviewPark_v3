@@ -147,8 +147,8 @@
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
-    <el-backtop>
-      <img style="width:60px" :src="arrowUpCircle" alt="" />
+    <el-backtop style="background-color:transparent">
+      <img style="width:100%" :src="arrowUpCircle" alt="" />
     </el-backtop>
 
   </div>
@@ -162,6 +162,7 @@ import Header from "../../components/header/index.vue";
 import Footer from "../../components/footer/index.vue";
 import Login from "../login/index.vue";
 import commonFunc from "../../assets/js/commonFunc";
+// import  "../../assets/js/rem";
 export default {
   components: {
     Header,

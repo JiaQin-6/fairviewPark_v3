@@ -414,7 +414,6 @@
                     v-model="editMemberInfoForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
                     type="text"
-                    disabled
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -446,7 +445,6 @@
                     v-model="editMemberInfoForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
                     type="text"
-                    disabled
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -782,6 +780,18 @@ export default {
           : "";
         data.editMemberInfoForm.loginName = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).login
+          : "";
+        data.editMemberInfoForm.nickname = localStorage.getItem("login-info")
+          ? JSON.parse(localStorage.getItem("login-info")).name
+          : "";
+        data.editMemberInfoForm.cnickname = localStorage.getItem("login-info")
+          ? JSON.parse(localStorage.getItem("login-info")).cname
+          : "";
+        data.editMemberInfoForm.email = localStorage.getItem("login-info")
+          ? JSON.parse(localStorage.getItem("login-info")).email
+          : "";
+        data.editMemberInfoForm.contactNo = localStorage.getItem("login-info")
+          ? JSON.parse(localStorage.getItem("login-info")).contactNo
           : "";
       });
       myModalEl.addEventListener('hidden.bs.modal', event => {

@@ -43,7 +43,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
             @change="changeMenu"
           >
@@ -77,11 +77,11 @@
                   <div>
                     <p
                       style="
-                font-size: 14px;
-                color: #6e6b7b;
-                padding: 5px 27px;
-                font-family: Helvetica, Arial, sans-serif;
-              "
+                        font-size: 14px;
+                        color: #6e6b7b;
+                        padding: 5px 27px;
+                        font-family: Helvetica, Arial, sans-serif;
+                      "
                       v-html="
                         FAQ_from_residents_sub_content.length !== 0 &&
                         FAQ_from_residents_sub_content[index].htmlEnUs
@@ -99,7 +99,15 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted,onUnmounted } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  onUnmounted,
+  nextTick,
+} from "vue";
 export default {
   data() {
     return {
@@ -135,6 +143,9 @@ export default {
             data.FAQ_from_residents_sub_list.map((item) => {
               findOneFaqFromResidents(id, item.id);
             });
+            nextTick(() => {
+              getHeight();
+            });
           } else {
             res.data.data.records.map((item, index) => {
               item.index = index;
@@ -166,27 +177,25 @@ export default {
       data.nav_index = val;
       for (let i = 0; i < data.FAQ_from_residents_list.length; i++) {
         if (data.FAQ_from_residents_list[i].index === val) {
-          findFaqFromResidentsList(data.FAQ_from_residents_list[i].id);
+          await findFaqFromResidentsList(data.FAQ_from_residents_list[i].id);
         }
       }
     };
     const getHeight = () => {
       for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height = 
-          document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("title")[i].style.height =
+          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+          "px";
         document.getElementsByClassName("title")[i].style["line-height"] =
-          document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+          "px";
       }
     };
     onMounted(async () => {
       await findFaqFromResidentsList();
       await findFaqFromResidentsList(data.FAQ_from_residents_list[0].id);
       window.addEventListener("resize", getHeight);
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        getHeight();
-      }
+      getHeight();
     });
     onUnmounted(() => {
       window.removeEventListener("resize", getHeight);
@@ -294,8 +303,8 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
+      padding: 2px 20px;
       .nav-content-main {
-        padding: 2px 15px;
         h5 {
           font-size: 36px;
           color: #9cc212;
@@ -438,19 +447,21 @@ export default {
         }
         @{deep} .menu-select {
           display: block;
-          --el-select-input-focus-border-color:#ccc;
-          .select-trigger{
-            .el-input{
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
               font-size: 18px;
-              .el-input__wrapper{
-                
+              .el-input__wrapper {
               }
             }
-            .is-focus{
+            .is-focus {
               border-color: #ccc;
             }
           }
         }
+      }
+      .nav-content {
+        padding: 0;
       }
     }
   }

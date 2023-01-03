@@ -43,7 +43,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
             @change="changeMenu"
           >
@@ -58,7 +58,7 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
-          <div style="padding: 0 20px">
+          <div>
             <p class="title" v-if="estate_facilities_list.length !== 0">
               {{ estate_facilities_list[nav_index].titleEnUs }}
             </p>
@@ -246,7 +246,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 0;
+      padding: 0 20px;
       img {
         max-width: 100%;
       }
@@ -327,6 +327,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding: 0px;
       }
     }
   }
