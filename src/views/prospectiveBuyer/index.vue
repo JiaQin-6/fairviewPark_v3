@@ -68,7 +68,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
           >
             <el-option
@@ -246,7 +246,7 @@ export default {
       }
     }
     .nav-content {
-      padding: 0;
+      padding: 0 20px;
       .about-us {
         margin-bottom: 20px;
         .container {
@@ -412,6 +412,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding:0;
       }
     }
   }

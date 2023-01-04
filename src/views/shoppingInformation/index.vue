@@ -1521,6 +1521,9 @@ export default {
           }
         }
       }
+      .nav-content{
+        padding:0;
+      }
     }
   }
 }

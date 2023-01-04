@@ -80,7 +80,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
           >
             <el-option
@@ -462,6 +462,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding: 0px
       }
     }
   }

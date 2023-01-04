@@ -38,7 +38,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
             @change="
               (index) => {
@@ -265,7 +265,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding-left: 20px;
+      padding: 0 20px;
       overflow: auto;
       .title {
         color: #9cc212;
@@ -348,6 +348,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding:0;
       }
     }
   }

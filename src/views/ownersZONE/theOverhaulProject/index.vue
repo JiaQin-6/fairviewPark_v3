@@ -64,7 +64,7 @@
               <span>{{ item.title }}</span>
             </li>
           </ul>
-          <el-select size="large" v-model="nav_index" class="m-2 menu-select" placeholder="Select">
+          <el-select size="large" v-model="nav_index" class="menu-select" placeholder="Select">
             <el-option
               v-for="(item, index) in [
                 {
@@ -243,7 +243,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 2px 0px 0 20px;
+      padding: 2px 20px 0 20px;
       img {
         max-width: 100%;
       }
@@ -315,6 +315,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding: 0;
       }
     }
   }

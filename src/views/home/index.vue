@@ -417,6 +417,18 @@ export default {
       }
     }
   }
+  #carousel-control-prev{
+    .carousel-control-prev-icon{
+      height: 60px;
+      width: 60px;
+    }
+  }
+  .carousel-control-next{
+    .carousel-control-next-icon{
+      height: 60px;
+      width: 60px;
+    }
+  }
 }
 .marquee {
   background: var(--mainColor2);

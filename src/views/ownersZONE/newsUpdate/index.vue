@@ -37,7 +37,7 @@
           </ul>
           <el-select
             v-model="new_update_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
             size="large"
             @change="
@@ -230,7 +230,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 2px 0px 0 20px;
+      padding: 0px 20px 0 20px;
       img {
         max-width: 100%;
       }
@@ -320,6 +320,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding:0;
       }
     }
   }

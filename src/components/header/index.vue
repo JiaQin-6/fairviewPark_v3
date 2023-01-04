@@ -8,14 +8,13 @@
 -->
 <template>
   <div class="main">
-    <nav class="navbar navbar-expand-lg navbar-dark px-xl-5">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang" style="width: 55px">
+        <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang">
           <transition name="el-fade-in-linear">
             <img
               class="navbar-brand-logo-mobile"
               :src="logo_m"
-              style="margin-top: 12px; width: 55px"
               alt=""
             />
           </transition>
@@ -603,17 +602,18 @@ export default {
       margin: 0 auto;
       text-align: center;
       width: auto;
+        padding:0;
     }
     .navbar-brand {
       padding: 0;
-      margin-right: 30px;
-      width: 37px;
+      margin-right: 10px;
+      width: 55px;
       position: relative;
       img {
         position: absolute;
         left: 0;
         width: 100%;
-        width: 37px;
+        margin-top: 12px;
       }
     }
     .login-btn1,
@@ -756,6 +756,8 @@ export default {
       box-shadow: none;
       .navbar-toggler-icon {
         width: 35px;
+        vertical-align:top;
+        height:30px;
       }
     }
     .me-auto {
@@ -856,7 +858,7 @@ export default {
       margin-bottom: 0 !important;
     }
   }
-
+  
   .is-show-dropdown {
     display: block;
   }
@@ -881,6 +883,7 @@ export default {
       .container-fluid {
         justify-content: space-between;
         width: 100%;
+        padding: 0 20px ;
         .navbar-collapse {
           margin-left: auto;
           justify-content: space-between;
@@ -907,7 +910,18 @@ export default {
           }
         }
       }
-
+      .navbar-brand {
+      padding: 0;
+      margin-right: 10px;
+      width: 45px;
+      position: relative;
+      img {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        margin-top:15px;
+      }
+    }
       .navbar-brand-logo {
         display: none !important;
       }

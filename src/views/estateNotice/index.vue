@@ -46,7 +46,7 @@
             <el-select
               size="large"
               v-model="nav_index"
-              class="m-2 menu-select"
+              class="menu-select"
               placeholder="Select"
               @change="changeMenu"
             >
@@ -294,7 +294,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
-      padding: 2px 0px 0 20px;
+      padding: 0px 20px 0 20px;
       .estate-notice-content {
         .header {
           align-items: center;
@@ -427,6 +427,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding: 0;
       }
     }
   }

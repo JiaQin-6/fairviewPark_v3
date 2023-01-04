@@ -38,7 +38,7 @@
           <el-select
             size="large"
             v-model="nav_index"
-            class="m-2 menu-select"
+            class="menu-select"
             placeholder="Select"
             @change="
               (val) => {
@@ -58,7 +58,7 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
           <!--  -->
-          <div align="center" style="padding: 5px 20px">
+          <div align="center">
             <!-- pdf -->
             <h5
               class="title fs-18 mb-20 flex-row"
@@ -264,9 +264,11 @@
                     style="
                       background-color: #9cc212;
                       margin: 0;
-                      padding: 10px 0;
+                      padding: 0;
                       color: #fff;
                       font-size: 24px;
+                      line-height:50px!important;
+                      height:50px;
                       min-width: 400px;
                       border-right: 2px solid #fff;
                       font-weight: normal;
@@ -441,9 +443,11 @@
                     style="
                       background-color: #9cc212;
                       margin: 0;
-                      padding: 10px 0;
+                      padding: 0;
                       color: #fff;
                       font-size: 24px;
+                      line-height:50px!important;
+                      height:50px;
                       border-right: 2px solid #fff;
                       min-width: 682px;
                       font-weight: normal;
@@ -1216,7 +1220,7 @@ export default {
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 18px;
-      padding: 2px 0px;
+      padding: 0px 20px;
       .title {
         align-items: center;
         justify-content: space-between;
@@ -1233,13 +1237,14 @@ export default {
       .free-bus {
         .table {
           h5 {
-            background-color: #7da533;
+            background-color: #9cc212;
             margin: 0;
-            padding: 5px;
             font-weight: normal;
             color: #fff;
             border: none;
             font-size: 24px;
+            height: 50px;
+            line-height: 50px!important;
           }
           p {
             background-color: #fffde9;
@@ -1331,6 +1336,9 @@ export default {
             }
           }
         }
+      }
+      .nav-content{
+        padding: 0;
       }
     }
   }
