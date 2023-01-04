@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-14 22:05:48
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 01:49:57
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -81,7 +81,7 @@
                 {
                   title: '街道停泊',
                   list: [
-                    '由於本邨的住宅街道並非為停泊車輛而設，因此，本司政策並不容許車輛泊於任何屋邨道路、街道或公用地方。任何違例停泊車輛將被鎖押而不會預先作出警告。',
+                    '由於本邨的住宅街道並非為停泊車輛而設，因此，本司政策並不容許車輛泊於任何屋苑道路、街道或公用地方。任何違例停泊車輛將被鎖押而不會預先作出警告。',
                     '保安部會向每輛被鎖押之車輛收取下列的費用：',
                     '鎖上車輛收費 -------- HK$ 320.00</br>移走車輛收費 -------------- HK$ 350.00</br>存放車輛收費 ------------- HK$ 320.00 per day',
                     '有關鎖車機制詳情請業主參考業主專區「抽籤鎖車機制」。',

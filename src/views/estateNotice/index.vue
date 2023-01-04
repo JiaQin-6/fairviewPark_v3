@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-14 00:25:34
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 01:51:22
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -17,7 +17,7 @@
           :style="{ 'background-image': 'url(' + banner + ')' }"
         ></div>
         <p>
-          {{ fairview_park_lang === "en_us" ? "Estate" : "屋邨"
+          {{ fairview_park_lang === "en_us" ? "Estate" : "屋苑"
           }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
         </p>
       </div>
@@ -138,7 +138,7 @@ export default {
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
-    //查看所有 屋邨资料 列表
+    //查看所有 屋苑资料 列表
     const findEstateNoticeList = async (id) => {
       try {
         const res = await proxy.$http.findEstateNoticeList({
@@ -382,7 +382,7 @@ export default {
 }
 @media (min-width: 1200px) {
   .nav-wrap-container {
-    width: 992px;
+    width: 1100px;
   }
 }
 @media (min-width: 1400px) {

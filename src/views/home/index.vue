@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:10:14
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-13 23:37:57
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 03:24:00
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/home/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -39,7 +39,7 @@
           >
             <a
               style="position: absolute; height: 100%; width: 100%"
-              :href="item.bannerEnUs"
+              :href="item.webUrlEnUs"
               target="_blank"
               :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
             >
@@ -140,7 +140,7 @@
       <!-- 歡迎瀏覽錦綉花園 -->
       <div class="liulan">
         <h1 style="text-align: center; margin-bottom: 45px">
-          {{ $t("Welcome to browse") }} <a>{{ $t("fairview park") }}</a>
+          {{ $t("Welcome to") }} <a>{{ $t("fairview park") }}</a>
         </h1>
         <div class="container">
           <div class="row flex-center">
@@ -237,7 +237,7 @@
                     {{
                       fairview_park_lang === "en_us"
                         ? "Residents can browse the most updated news, introduction, facilities and floor plans of various house types of Fairview Park;"
-                        : "業戶可以瀏覽屋邨最新資訊、屋邨簡介、屋邨設施以及各屋型的結構平面圖；"
+                        : "業戶可以瀏覽屋苑最新資訊、屋苑簡介、屋苑設施以及各屋型的結構平面圖；"
                     }}
                   </li>
                   <li>
@@ -671,7 +671,7 @@ export default {
 @media (min-width: 1200px) {
   .container_wrap,
   .marquee-container {
-    width: 992px;
+    width: 1100px;
   }
   @{deep} .mobile {
     display: none !important;

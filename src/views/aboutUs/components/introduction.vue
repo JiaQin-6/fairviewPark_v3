@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-13 23:53:08
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 02:46:13
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -14,9 +14,9 @@
         {{ fairview_park_lang === "en_us" ? "Introduction" : "簡介" }}
       </p>
       <div class="container">
-        <div class="row" style="margin:0">
+        <div class="row" style="margin: 0">
           <!--  -->
-          <div class="col col-12" style="padding:0">
+          <div class="col col-12" style="padding: 0">
             <div class="jianjie">
               <p>
                 {{
@@ -30,7 +30,7 @@
                   {{
                     fairview_park_lang === "en_us"
                       ? "Residents can browse the most updated news, introduction, facilities and floor plans of various house types of Fairview Park;"
-                      : "業戶可以瀏覽屋邨最新資訊、屋邨簡介、屋邨設施以及各屋型的結構平面圖；"
+                      : "業戶可以瀏覽屋苑最新資訊、屋苑簡介、屋苑設施以及各屋型的結構平面圖；"
                   }}
                 </li>
                 <li>
@@ -72,10 +72,13 @@
             </div>
           </div>
           <!--  -->
-          <div class="col col-12 mb-20" style="padding:0">
+          <div class="col col-12 mb-20" style="padding: 0">
             <div class="contact-us">
-              <div class="row contact-us-content" style="margin:0">
-                <div class="col-12 col-xxl-7" style="padding: 15px 10px 0;box-sizing:border-box;">
+              <div class="row contact-us-content" style="margin: 0">
+                <div
+                  class="col-12 col-xxl-7"
+                  style="padding: 15px 10px 0; box-sizing: border-box"
+                >
                   <h3 class="mb-20">{{ $t("About us") }}</h3>
                   <div>
                     <ul>
@@ -93,28 +96,30 @@
                             title: fairview_park_lang === 'en_us' ? 'Telephone' : '電話',
                             content:
                               fairview_park_lang === 'en_us'
-                                ? 'Estate Management 2471 1301 (24 hours) <br/> Emergency Hotline 2471 1999 (24 hours) <br/> (Conversations at these telephones may be recorded)'
-                                : '管理公司 2471 1301（24小時） <br/> 緊急熱線 2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
+                                ? 'Estate Management <a href=tel' +
+                                  ':' +
+                                  '2471 1301>2471 1301</a> (24 hours) <br/> Emergency Hotline<a href=tel' +
+                                  ':' +
+                                  '2471 1999> 2471 1999 (24 hours) <br/> (Conversations at these telephones may be recorded)'
+                                : '管理公司 <a href=tel' +
+                                  ':' +
+                                  '2471 1301>2471 1301（24小時） <br/> 緊急熱線 <a href=tel' +
+                                  ':' +
+                                  '2471 1999>2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
                           },
                         ]"
                         :key="index"
                       >
                         <span
-                          style="
-                            display: inline-block;
-                            width: 110px;
-                            flex: 0 0 auto;
-                          "
-                          :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}"
+                          style="display: inline-block; width: 110px; flex: 0 0 auto"
+                          :style="{
+                            width: fairview_park_lang === 'en_us' ? '110px' : '80px',
+                          }"
                           v-html="item.title"
                         ></span>
-                        <i style="
-                            margin-right: 5px;
-                            display: inline-block;
-                          ">:</i>
+                        <i style="margin-right: 5px; display: inline-block">:</i>
                         <span style="display: inline-block" v-html="item.content"></span>
                       </li>
-                   
                     </ul>
                     <ul>
                       <li
@@ -124,8 +129,10 @@
                             title: fairview_park_lang === 'en_us' ? 'Fax' : '傳真',
                             content:
                               fairview_park_lang === 'en_us'
-                                ? 'Estate Management 2471 8210'
-                                : '管理公司 2471 8210',
+                                ? 'Estate Management <a href=tel' +
+                                  ':' +
+                                  '2471 8210>2471 8210'
+                                : '管理公司 <a href=tel' + ':' + '2471 8210>2471 8210',
                           },
                           {
                             title: fairview_park_lang === 'en_us' ? 'Email' : '電郵',
@@ -145,42 +152,44 @@
                         :key="index"
                       >
                         <span
-                          style="
-                            display: inline-block;
-                            width: 110px;
-                            flex: 0 0 auto;
-                          "
-                          :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}"
+                          style="display: inline-block; width: 110px; flex: 0 0 auto"
+                          :style="{
+                            width: fairview_park_lang === 'en_us' ? '110px' : '80px',
+                          }"
                           v-html="item.title"
                         ></span>
-                        <i style="
-                            margin-right: 5px;
-                            display: inline-block;
-                          ">:</i>
+                        <i style="margin-right: 5px; display: inline-block">:</i>
                         <span style="display: inline-block" v-html="item.content"></span>
                       </li>
                     </ul>
-                    <ul class="flex-row" style="margin-bottom:0">
-                      <li style="margin-bottom:0">
-                        <span style="width: 110px; display: inline-block" :style="{'width': fairview_park_lang === 'en_us'?'110px':'80px'}">{{
-                          fairview_park_lang === "en_us" ? "Office Hours" : "辦公時間"
-                        }}</span>
+                    <ul class="flex-row" style="margin-bottom: 0">
+                      <li style="margin-bottom: 0">
+                        <span
+                          style="width: 110px; display: inline-block"
+                          :style="{
+                            width: fairview_park_lang === 'en_us' ? '110px' : '80px',
+                          }"
+                          >{{
+                            fairview_park_lang === "en_us" ? "Office Hours" : "辦公時間"
+                          }}</span
+                        >
                       </li>
-                      <li style="
-                            margin-right: 5px;
-                            margin-bottom:0;
-                            display: inline-block;
-                          ">
+                      <li
+                        style="margin-right: 5px; margin-bottom: 0; display: inline-block"
+                      >
                         :
                       </li>
-                      <li style="margin-right: 20px;margin-bottom:0" >
-                        <div class="flex-row"  v-for="(item, index) in [
+                      <li style="margin-right: 20px; margin-bottom: 0">
+                        <div
+                          class="flex-row"
+                          v-for="(item, index) in [
                             {
                               title:
                                 fairview_park_lang === 'en_us'
                                   ? 'General Office'
                                   : '管理處',
-                              content:fairview_park_lang === 'en_us'
+                              content:
+                                fairview_park_lang === 'en_us'
                                   ? 'Mondays to Saturdays From 09:00 a.m. to 6:00 p.m.(Closed on all Public Holidays)'
                                   : '星期一至六上午九時至六時（公眾假期除外）',
                             },
@@ -189,7 +198,8 @@
                                 fairview_park_lang === 'en_us'
                                   ? 'Security Department'
                                   : '保安部',
-                              content: fairview_park_lang === 'en_us'
+                              content:
+                                fairview_park_lang === 'en_us'
                                   ? 'Security Department Mondays to Sundays 24 Hours'
                                   : '星期一至日24小時',
                             },
@@ -198,23 +208,23 @@
                                 fairview_park_lang === 'en_us'
                                   ? 'Customer Service Department'
                                   : '客戶服務部',
-                              content:fairview_park_lang === 'en_us'
+                              content:
+                                fairview_park_lang === 'en_us'
                                   ? 'Mondays to Sundays From 08:00 a.m. to 8:00 p.m.'
                                   : '星期一至日上午八時至下午八時',
                             },
                           ]"
-                          :key="index">
-                          <p style="min-width:100px">{{item.title}}</p>
-                          <p>{{item.content}}</p>
+                          :key="index"
+                        >
+                          <p style="min-width: 100px">{{ item.title }}</p>
+                          <p>{{ item.content }}</p>
                         </div>
-                       
                       </li>
-                     
                     </ul>
                   </div>
                 </div>
 
-                <div class="col-12 col-xxl-5" style="padding:0">
+                <div class="col-12 col-xxl-5" style="padding: 0">
                   <div class="img">
                     <iframe
                       v-if="fairview_park_lang === 'zh_tw'"
@@ -468,5 +478,3 @@ export default {
   }
 }
 </style>
-
-

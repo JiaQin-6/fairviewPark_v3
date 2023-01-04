@@ -18,13 +18,13 @@
                 text:
                   fairview_park_lang === 'en_us'
                     ? 'Fairview Park (“the Estate”) was developed in the late 1970’s.  Under the Deed of Mutual Covenant in respect of the Estate (“DMC”), Fairview Park Property Management Limited (“the Manager”) has been appointed as the Manager to manage the Estate.  The Manager has decided that in order to enhance communication between the Manager and the various owners, it is desirable to set up an Advisory Committee.'
-                    : '錦綉花園（「屋邨」）建於七十年代後期。根據錦綉花園之公契（「該公契」），錦綉花園物業管理有限公司（「管理人」）獲委任為管理屋邨的管理人。為了加強管理人與各業主之間的溝通，管理人決定成立一個諮詢委員會。',
+                    : '錦綉花園（「屋苑」）建於七十年代後期。根據錦綉花園之公契（「該公契」），錦綉花園物業管理有限公司（「管理人」）獲委任為管理屋苑的管理人。為了加強管理人與各業主之間的溝通，管理人決定成立一個諮詢委員會。',
               },
               {
                 text:
                   fairview_park_lang === 'en_us'
                     ? 'The Fairview Park Management Advisory Committee (“the Committee”) is formed for the purpose of providing a platform for consultation between the Manager and representatives of owners of the Estate as a group under these Rules and Regulations. The Manager will only work with the Committee if the Rules and Regulations stipulated herein are followed.'
-                    : '成立錦綉花園管理諮詢委員會（「委員會」）的目的，旨在提供一個諮詢渠道，讓管理人和屋邨業主代表能在「錦綉花園管理諮詢委員會規章制度」的規範下，以團隊形式磋商屋邨事宜。因此，管理人只會於本規章內的條約得以遵守的情況下，與委員會共事。',
+                    : '成立錦綉花園管理諮詢委員會（「委員會」）的目的，旨在提供一個諮詢渠道，讓管理人和屋苑業主代表能在「錦綉花園管理諮詢委員會規章制度」的規範下，以團隊形式磋商屋苑事宜。因此，管理人只會於本規章內的條約得以遵守的情況下，與委員會共事。',
               },
               {
                 text:
@@ -36,7 +36,7 @@
                     text:
                       fairview_park_lang === 'en_us'
                         ? '(a)&nbsp;&nbsp;Representatives from different sections or sets of sections of the Estate;'
-                        : '(a)&nbsp;&nbsp;屋邨各分段或分段內各組別的代表；',
+                        : '(a)&nbsp;&nbsp;屋苑各分段或分段內各組別的代表；',
                   },
                   {
                     text:
@@ -89,19 +89,19 @@
                     text:
                       fairview_park_lang === 'en_us'
                         ? '(a)&nbsp;&nbsp;liaise between owners and the Manager, providing feedback and reflecting views of owners of the Estate to the management of the Estate;'
-                        : '(a)&nbsp;&nbsp;聯絡業主和管理人，反映業主對屋邨管理的意見；',
+                        : '(a)&nbsp;&nbsp;聯絡業主和管理人，反映業主對屋苑管理的意見；',
                   },
                   {
                     text:
                       fairview_park_lang === 'en_us'
                         ? '(b)&nbsp;&nbsp;appraise the performance of management staff and contractors who provide service to the Estate;'
-                        : '(b)&nbsp;&nbsp;對服務於屋邨的管理人員的服務和承包商的表現作出評價；',
+                        : '(b)&nbsp;&nbsp;對服務於屋苑的管理人員的服務和承包商的表現作出評價；',
                   },
                   {
                     text:
                       fairview_park_lang === 'en_us'
                         ? '(c)&nbsp;&nbsp;advise the Manager in the formulation of policies for the good of the Estate; and'
-                        : '(c)&nbsp;&nbsp;在管理人制定對屋邨有整體利益的政策時提供意見；及',
+                        : '(c)&nbsp;&nbsp;在管理人制定對屋苑有整體利益的政策時提供意見；及',
                   },
                   {
                     text:
@@ -115,7 +115,7 @@
                 text:
                   fairview_park_lang === 'en_us'
                     ? 'The work of the Committee shall be advisory in nature.  The decisions of the Committee shall not in any way affect the operation of the terms of the Government Grant relating to the land in the Estate (“Government Grant”) and the DMC.  No member of the Committee shall advocate for contravening the terms of these documents, and no such activities will be reported or publicized by the Manager.'
-                    : '委員會的工作為諮詢性質。在任何情況下，委員會的決議都不應該影響屋邨內有關政府批地契約條款及該公契的運作。委員會的任何成員均不得鼓吹違反該等契約內的條文，管理人可不作記錄或公佈該等活動。',
+                    : '委員會的工作為諮詢性質。在任何情況下，委員會的決議都不應該影響屋苑內有關政府批地契約條款及該公契的運作。委員會的任何成員均不得鼓吹違反該等契約內的條文，管理人可不作記錄或公佈該等活動。',
               },
             ]"
             :key="index"
@@ -277,7 +277,7 @@
                       text:
                         fairview_park_lang === 'en_us'
                           ? 'Owner shall mean a person who at the close of business on the working day before the Election Day appears from the records of the Manager to be the owner of a residential unit or shop or other non-residential unit in the Estate.  A body corporate may also stand as a candidate in the name of the corporation.'
-                          : '有關業主是指於選舉日前的一個工作天辦公時間結束時在管理人紀錄顯示，當其時為屋邨內住宅單位、店鋪或其他非住宅單位的業主。法人團體也可以公司的名義出任候選人',
+                          : '有關業主是指於選舉日前的一個工作天辦公時間結束時在管理人紀錄顯示，當其時為屋苑內住宅單位、店鋪或其他非住宅單位的業主。法人團體也可以公司的名義出任候選人',
                       index: '3.4.3',
                     },
                     {
@@ -358,7 +358,7 @@
                       text:
                         fairview_park_lang === 'en_us'
                           ? 'The District Councilor is an owner or resident of the Estate and shall submit a copy of address proof to the Manager.'
-                          : '區議員必須是本屋邨業主或住戶，並向管理人提交住址證明副本。',
+                          : '區議員必須是本屋苑業主或住戶，並向管理人提交住址證明副本。',
                       index: '3.5.1',
                     },
                     {
@@ -393,7 +393,7 @@
                       text:
                         fairview_park_lang === 'en_us'
                           ? 'The District Councilor shall have no voting rights at the meeting unless at the time of voting he/she is registered as an owner of a unit in the Estate.'
-                          : '區議員在會議上沒有投票權，除非在投票時該區議員已登記為本屋邨單位的業主。',
+                          : '區議員在會議上沒有投票權，除非在投票時該區議員已登記為本屋苑單位的業主。',
                       index: '3.5.6',
                     },
                     {
@@ -448,13 +448,13 @@
                           text:
                             fairview_park_lang === 'en_us'
                               ? '(b)   ceases to be an owner or resident of the Estate; or'
-                              : '(b)      不再是本屋邨的業主或住戶;或',
+                              : '(b)      不再是本屋苑的業主或住戶;或',
                         },
                         {
                           text:
                             fairview_park_lang === 'en_us'
                               ? '(c)   a resolution has been passed for early termination of the District Councilor as a Committee Member upon a motion of the Committee if such District Councilor has in the opinion of the Committee not provided assistance or performed duties in relation to the Estate affairs'
-                              : '(c)      委員會認為該區議員不能協助或履行本屋邨事務內的功能或職責，並通過有關取消其成員資格的動議。',
+                              : '(c)      委員會認為該區議員不能協助或履行本屋苑事務內的功能或職責，並通過有關取消其成員資格的動議。',
                         },
                       ],
                     },
@@ -565,7 +565,7 @@
                   text:
                     fairview_park_lang === 'en_us'
                       ? 'The first election of members of the Committee shall take place on 7th October 2001.  Subsequent elections shall take place within the 23rd month after the Commencement Date of each term of office.  The Manager of the Estate shall arrange for Candidate Forms and Election Procedures to be distributed.'
-                      : '委員會第一屆選舉應該在二零零一年十月七日舉行。接下來的選舉應該在每屆任期起始日後的第二十三個月內進行。屋邨管理人應該安排派發候選人表格和選舉程序單張。',
+                      : '委員會第一屆選舉應該在二零零一年十月七日舉行。接下來的選舉應該在每屆任期起始日後的第二十三個月內進行。屋苑管理人應該安排派發候選人表格和選舉程序單張。',
                   index: '10',
                 },
               ],

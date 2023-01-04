@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-28 00:04:33
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-15 00:17:39
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 03:21:44
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/login/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -303,7 +303,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <h2>{{ $t("Forgot password") }}</h2>
+            <h2>{{ $t("Forgot password") }}?</h2>
             <div>
               <ul>
                 <li>
@@ -356,6 +356,7 @@
               </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
             </div>
+            <p>{{ fairview_park_lang === "en_us" ? "please" : "请" }}</p>
           </div>
         </div>
       </div>
@@ -681,9 +682,27 @@ export default {
         });
         if (res.data.status === 200) {
           document.getElementById("signUp").style.display = "none";
-          document.getElementById("login").style.display = "block";
+          document.getElementById("login").style.display = "none";
           data.register_error_tip.is_show = false;
           data.register_error_tip.text = "";
+          //如果注册成功了，帮用户自动登录
+          try {
+            const res = await proxy.$http.login({
+              loginName: data.registerForm.loginName,
+              password: data.registerForm.password,
+              lang: data.fairview_park_lang,
+            });
+            if (res.data.status === 200) {
+              document.getElementById("close-login").click();
+              localStorage.setItem("login-info", JSON.stringify(res.data.data));
+              store.commit("setLoginStatus", true);
+            } else {
+              data.login_error_tip.is_show = true;
+              data.login_error_tip.text = res.data.msg;
+            }
+          } catch (error) {
+            console.log(error);
+          }
         } else {
           data.register_error_tip.is_show = true;
           data.register_error_tip.text = res.data.msg;

@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-14 22:06:03
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 01:49:40
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -39,15 +39,15 @@
               ]
             : [
                 {
-                  title: '一般行政事項及執行「公契」和屋邨守則條款',
+                  title: '一般行政事項及執行「公契」和屋苑守則條款',
                   list: [
-                    '行政部負責收取管理費及派發有關單據，與業戶接觸及勸喻業戶遵守「公契」及屋邨守則條款，跟進有關欠交管理費或其他應收取費用或違反「公契」及屋邨守則條款的法律行動。',
+                    '行政部負責收取管理費及派發有關單據，與業戶接觸及勸喻業戶遵守「公契」及屋苑守則條款，跟進有關欠交管理費或其他應收取費用或違反「公契」及屋苑守則條款的法律行動。',
                   ],
                 },
                 {
                   title: '與業戶保持緊密聯絡',
                   list: [
-                    '行政部透過不同途徑跟業戶溝通。除了定期發放屋邨通告與錦绣專訊予全邨業戶，行政部每位職員均樂意與業戶直接會面和對話，以期將本屋苑的環境介紹給新、舊業戶，讓業戶能夠更加了解本屋苑一些重要事項，與及業戶本身居住之物業的有關資料。',
+                    '行政部透過不同途徑跟業戶溝通。除了定期發放屋苑通告與錦绣專訊予全邨業戶，行政部每位職員均樂意與業戶直接會面和對話，以期將本屋苑的環境介紹給新、舊業戶，讓業戶能夠更加了解本屋苑一些重要事項，與及業戶本身居住之物業的有關資料。',
                   ],
                 },
               ]"

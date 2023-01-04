@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-13 11:05:55
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 01:51:55
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -93,7 +93,7 @@
                 text:
                   fairview_park_lang === 'en_us'
                     ? 'Each Candidate shall personally deliver a completed Candidate Form, duly signed by himself and owners nominating him, to the Management Office not later than the day specified in the Estate Notice, being a day not less than 40 days before the Election Day. A corporate owner shall deliver the completed Candidate Form by a duly authorized representative together with a written authorization from the corporation. Upon receipt of a duly completed Candidate Form, the Management Office shall issue an acknowledgment thereof.'
-                    : '候選人須在屋邨管理通告指定的時限內，即在選舉日前不少於四十天，把候選人表格(附錄二)填妥並簽署，並按照要求，連同附有業主簽名提名其參選的提名表格(附錄三)，親自送交管理處。法人團體須由正式授權的代表將填妥的候選人表格，連同法人團體的書面授權書送交管理處。管理處收妥候選人表格及提名表格後，會發通知書予候選人確認收妥表格。',
+                    : '候選人須在屋苑管理通告指定的時限內，即在選舉日前不少於四十天，把候選人表格(附錄二)填妥並簽署，並按照要求，連同附有業主簽名提名其參選的提名表格(附錄三)，親自送交管理處。法人團體須由正式授權的代表將填妥的候選人表格，連同法人團體的書面授權書送交管理處。管理處收妥候選人表格及提名表格後，會發通知書予候選人確認收妥表格。',
                 index: '2',
               },
               {
@@ -157,7 +157,7 @@
                 text:
                   fairview_park_lang === 'en_us'
                     ? 'Voting shall take place on the Election Day at a place within the Estate as shall be decided by the Manager for the first election and thereafter by the Committee. In case of Typhoon Signal No. 8 or Black Rainstorm Warning being hoisted or any other unforeseen events, voting shall be postponed till further notice. The final decision as to what constitutes an unforeseen event shall be solely decided by the Returning Officer.'
-                    : ' 於選舉日在屋邨的某個地方進行投票選舉，第一次選舉地點由管理人決定，之後則由委員會決定。當8號颱風訊號懸掛或天文台發出黑色暴雨警告或任何不能預知的情況，選舉將會延期，直至另行通知。監票主任有最終決定權，界定何謂不能預知的情況。',
+                    : ' 於選舉日在屋苑的某個地方進行投票選舉，第一次選舉地點由管理人決定，之後則由委員會決定。當8號颱風訊號懸掛或天文台發出黑色暴雨警告或任何不能預知的情況，選舉將會延期，直至另行通知。監票主任有最終決定權，界定何謂不能預知的情況。',
                 index: fairview_park_lang === 'en_us' ? '6' : '9',
               },
               {

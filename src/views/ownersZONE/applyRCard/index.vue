@@ -1,8 +1,8 @@
 <!--
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-14 00:32:45
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 03:16:09
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -45,7 +45,14 @@
               :key="index"
               class="col-4 col-lg-12"
               :class="nav_index === index ? 'active' : ''"
-              @click="nav_index = index"
+              @click="
+                () => {
+                  nav_index = index;
+                  if (nav_index === 1) {
+                    findRcardList();
+                  }
+                }
+              "
             >
               <span>{{ item.titleEnUs }}</span>
             </li>
@@ -120,7 +127,7 @@
                   fairview_park_lang === "en_us" ? "Application materials" : "申請資料"
                 }}
               </h5>
-              <li style="color: #07522b; margin-bottom: 10px;font-weight:bold;">
+              <li style="color: #07522b; margin-bottom: 10px; font-weight: bold">
                 {{ address_t }}
               </li>
               <!-- 申請資料填寫 -->
@@ -405,7 +412,7 @@
                   v-html="
                     fairview_park_lang === 'en_us'
                       ? 'I/We, being the registered house owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to apply to the Fairview Park Property Management Limited (”the Estate Management”) for Resident Smart Card(s) (“the Card”) for the persons with details listed in part B above. I/We declare that these persons all live in the Corresponding Premises and the information given in parts A, B and photographs supplied are true and correct. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/><p></p>1. The Card is non-transferrable. In case the eligibility of this application ceases to exist, such as when the Owner is no longer the registered owner of the Corresponding Premises, all Cards issued under this application will be cancelled instantly.<br/><p></p>2. The New Owner(s) must inform the Estate Management whether the Card Users will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, all issued Cards will be cancelled instantly.<br/><p></p>3. The Card is the property of the Estate Management, please return it when your status is no longer valid.<br/><p></p>4. The Card should be shown to Estate Management staff upon request. Estate Management staff have the right to repossess the cancelled Card.<br/><p></p>5. The Estate Management reserves the absolute right to reject the application or cancel all the Cards issued under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/><p></p>6. The Owner shall notify the Estate Management immediately for loss of any Card so as to enable the Estate Management to cancel the said Card.<br/><p></p>7. The Estate Management will charge HK$50 for each of the replacement of the Card by the request of the Owner due to whatsoever reasons.<br/><p></p>8. The Owner hereby declares that he and the Card Users consent to the collection and handling of personal data provided herewith in accordance with the Personal Data Statement below.<br/><p></p>9. The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.'
-                      : '我/我們為上述物業(以下簡稱「相關物業」)之業主，現向錦綉花園物業管理有限公司(以 下簡稱「管理公司」)申請住戶智能咭(以下簡稱住戶咭)予詳列於上述乙部的人士。我 們謹此聲明此等人士皆居住於相關物業以及在本申請表甲及乙部所提供的資料及相片，乃真 實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：<br/><p></p>1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相 關物業的業主，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。<br/><p></p>2. 當相關物業業權出現變動時，新業主必須通知管理公司持咭人是否仍舊相同，否 則管理公司將即時取消已發出的所有住戶咭。<br/><p></p>3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理 公司。<br/><p></p>4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公 司職員有權收回該住戶咭。<br/><p></p>5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋邨守則 之業戶之申請或取消所有已發出予該單位的住戶咭。<br/><p></p>6. 住戶咭如有遺失，業主須立即通知管理公司，以便管理公司取消該住戶咭。<br/><p></p>7. 無論因任何原因，業主如須補領住戶咭，管理公司將收取港幣 50 元之手續費。<br/><p></p>8. 業主在此聲明業主及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提 供的個人資料。<br/><p></p>9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。'
+                      : '我/我們為上述物業(以下簡稱「相關物業」)之業主，現向錦綉花園物業管理有限公司(以 下簡稱「管理公司」)申請住戶智能咭(以下簡稱住戶咭)予詳列於上述乙部的人士。我 們謹此聲明此等人士皆居住於相關物業以及在本申請表甲及乙部所提供的資料及相片，乃真 實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：<br/><p></p>1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相 關物業的業主，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。<br/><p></p>2. 當相關物業業權出現變動時，新業主必須通知管理公司持咭人是否仍舊相同，否 則管理公司將即時取消已發出的所有住戶咭。<br/><p></p>3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理 公司。<br/><p></p>4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公 司職員有權收回該住戶咭。<br/><p></p>5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋苑守則 之業戶之申請或取消所有已發出予該單位的住戶咭。<br/><p></p>6. 住戶咭如有遺失，業主須立即通知管理公司，以便管理公司取消該住戶咭。<br/><p></p>7. 無論因任何原因，業主如須補領住戶咭，管理公司將收取港幣 50 元之手續費。<br/><p></p>8. 業主在此聲明業主及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提 供的個人資料。<br/><p></p>9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。'
                   "
                 ></p>
                 <div style="text-align: center">
@@ -468,9 +475,12 @@
                   <!-- 戶主信息 -->
                   <div
                     class="flex-row user-content"
-                    style="flex: 1; justify-content: space-between;"
+                    style="flex: 1; justify-content: space-between"
                   >
-                    <div class="user-info" style="margin-bottom: 10px;margin-right:10px">
+                    <div
+                      class="user-info"
+                      style="margin-bottom: 10px; margin-right: 10px"
+                    >
                       <div>
                         <h3
                           style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
@@ -685,6 +695,15 @@ export default {
         !data.form.photoFile.file
       ) {
         data.isRequest = false;
+        return false;
+      } else if (
+        data.form.cardNumber1.length<8 
+      ) {
+        ElMessage.error(
+          data.fairview_park_lang === "en_us"
+            ? "需要8-9位!"
+            : "需要8-9位!"
+        );
         return false;
       } else if (
         data.form.relation === "ROf" &&
@@ -938,7 +957,7 @@ export default {
         }
         .application-form {
           box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
-          padding:20px;
+          padding: 20px;
           margin-bottom: 50px;
           border-radius: 5px;
           h5 {
@@ -1057,7 +1076,7 @@ export default {
               h3 {
                 color: var(--mainColor2);
                 margin-bottom: 0;
-                line-height: 24px!important;
+                line-height: 24px !important;
                 &:last-child {
                   color: var(--mainColor1);
                 }
@@ -1085,7 +1104,6 @@ export default {
   .nav-wrap-container {
     width: 720px;
   }
-  
 }
 @media (min-width: 992px) {
   .nav-wrap-container {
@@ -1094,7 +1112,7 @@ export default {
 }
 @media (min-width: 1200px) {
   .nav-wrap-container {
-    width: 992px;
+    width: 1100px;
   }
 }
 @media (min-width: 1400px) {
@@ -1148,9 +1166,9 @@ export default {
     .user-img {
       margin-top: 0 !important;
     }
-    .user-content{
-    flex-wrap: wrap
-  }
+    .user-content {
+      flex-wrap: wrap;
+    }
   }
 }
 </style>

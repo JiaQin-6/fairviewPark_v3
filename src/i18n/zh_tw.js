@@ -1,8 +1,8 @@
 /*
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-15 00:26:54
+ * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
+ * @LastEditTime: 2023-01-05 03:23:46
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -18,15 +18,15 @@ export default {
     'One Stop Service for New Owners': '新業主的一站式服務',
     'House Type Enquiry': '屋型圖查詢',
     'Master Colour Schedule': '外牆顏色系列',
-    'Estate Facilities': '屋邨資料',
+    'Estate Facilities': '屋苑資料',
     'Coach Service': '專巴時間表',
     'Shops Directory': '商場資訊',
     'Carpark Parking Privilege Payment': '停車場泊車優惠收費表',
     'Useful Telephone Nos.': '常用電話及連接',
-    'Estate Notice': '屋邨通告須知',
+    'Estate Notice': '屋苑通告須知',
     'Owner login': '業主登入',
     'Login out': '登出',
-    'Welcome to browse': '歡迎瀏覽',
+    'Welcome to': '歡迎瀏覽',
     'fairview park': '錦綉花園',
     'Resident information': '居民資訊',
     'Browse the web': '瀏覽網頁',
@@ -48,12 +48,12 @@ export default {
     'Information Technology': '資訊科技部',
     "OWNERS's ZONE": '業主專區',
     'FAQ from Residents': '居民常見問題',
-    'Estate Notices': '屋邨通告',
+    'Estate Notices': '屋苑通告',
     'Fairview Park News': '錦綉專訊',
     'Demographic & Opinion Survey': '人口統計及意見調查',
-    'Estate Activities': '屋邨活動',
+    'Estate Activities': '屋苑活動',
     'News Update': '最新消息',
-    'Residents Handbook / Map': '業主手冊及屋邨地圖',
+    'Residents Handbook / Map': '業主手冊及屋苑地圖',
     'Frequently Used Forms': '常用表格',
     'MAC Column': '管理諮詢委員會專欄',
     'Payment List': '收費表',
