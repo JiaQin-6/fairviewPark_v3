@@ -99,6 +99,11 @@ export default {
     }
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
+  .information-push{
+    h3 {
+    font-size: 20px;
+  }
+  }
 }
 </style>

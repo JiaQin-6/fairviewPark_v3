@@ -218,7 +218,7 @@
       <div class="about-us">
         <h1>
           {{ fairview_park_lang === "en_us" ? "About" : "關於"
-          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? "us" : "我們" }}</a>
+          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? " us" : "我們" }}</a>
           <p></p>
         </h1>
         <div class="container">
@@ -417,14 +417,14 @@ export default {
       }
     }
   }
-  #carousel-control-prev{
-    .carousel-control-prev-icon{
+  #carousel-control-prev {
+    .carousel-control-prev-icon {
       height: 60px;
       width: 60px;
     }
   }
-  .carousel-control-next{
-    .carousel-control-next-icon{
+  .carousel-control-next {
+    .carousel-control-next-icon {
       height: 60px;
       width: 60px;
     }
@@ -709,21 +709,39 @@ export default {
   .carousel {
     height: calc(100vw / 2);
   }
-  // @{deep} .banner {
-  //   height: calc(100vw / 2);
-  //   .el-carousel__container {
-  //     height: calc(100vw / 2);
-  //     .el-carousel__item {
-  //       overflow: hidden;
-  //       a {
-  //         img {
-  //           height: 100%;
-  //           width: auto;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
+  .marquee {
+    span {
+      font-size: 15px;
+    }
+  }
+  .container_wrap {
+    .liulan {
+      h1 {
+        font-size: 25px;
+      }
+    }
+    .about-us {
+      h1 {
+        font-size: 25px;
+      }
+      .container {
+        .row {
+          .col {
+            .jianjie {
+              p {
+                font-size: 15px;
+              }
+              ul {
+                li {
+                  font-size: 15px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 @media (max-width: 768px) {
   .container_wrap {

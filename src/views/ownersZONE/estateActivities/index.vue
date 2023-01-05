@@ -58,18 +58,23 @@
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
-          <p v-if="estate_activites_list.length!==0" style="font-size: 36px; color: #9cc212; font-weight: bold">
-              {{ estate_activites_list[nav_index].titleEnUs }}
-            </p>
-          <div style="
-                font-size: 14px;
-                color: #6e6b7b;
-                font-family: Helvetica, Arial, sans-serif;
-              " v-html="estate_activites_content"></div>
+          <p
+            v-if="estate_activites_list.length !== 0"
+            style="font-size: 36px; color: #9cc212; font-weight: bold"
+          >
+            {{ estate_activites_list[nav_index].titleEnUs }}
+          </p>
+          <div
+            style="
+              font-size: 14px;
+              color: #6e6b7b;
+              font-family: Helvetica, Arial, sans-serif;
+            "
+            v-html="estate_activites_content"
+          ></div>
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -78,9 +83,11 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url)
-        .href,
-     
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
+
       nav_index: 0,
     };
   },
@@ -102,8 +109,8 @@ export default {
         });
         if (res.data.status === 200) {
           res.data.data.records.map((item, index) => {
-              item.index = index;
-            });
+            item.index = index;
+          });
           data.estate_activites_list = res.data.data.records;
         }
       } catch (error) {
@@ -124,10 +131,10 @@ export default {
         console.log(error);
       }
     };
-    const changeMenu = async (val) =>{
+    const changeMenu = async (val) => {
       data.nav_index = val;
       for (let i = 0; i < data.estate_activites_list.length; i++) {
-        if(data.estate_activites_list[i].index === val){
+        if (data.estate_activites_list[i].index === val) {
           findOneEstateActivitesById(data.estate_activites_list[i].id);
         }
       }
@@ -139,7 +146,7 @@ export default {
     return {
       ...toRefs(data),
       findOneEstateActivitesById,
-      changeMenu
+      changeMenu,
     };
   },
 };
@@ -150,7 +157,7 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-    height: 280px;
+  height: 280px;
   .img {
     width: 100%;
     height: 280px;
@@ -165,11 +172,11 @@ export default {
     font-size: 48px;
     font-style: normal;
     font-weight: bold;
-        width: 80%;
+    width: 80%;
     text-align: center;
-     font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -230,7 +237,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -247,7 +254,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -258,7 +264,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -271,50 +276,54 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px){
-  .banner{
-      height: 200px;
+@media (max-width: 991px) {
+  .banner {
+    height: 200px;
     img {
-    width:auto;
-  }
+      width: auto;
+    }
+    p{
+      font-size:36px;
+    }
   }
   .nav-wrap {
     .row {
-     
-    .aside {
-      ul{
-        flex-wrap: nowrap; 
-        padding: 0;
+      .aside {
+        ul {
+          flex-wrap: nowrap;
+          padding: 0;
           display: none;
-        li{
-          display: flex;
-          text-align: center;
-          align-items: center;
-          span{
-            margin:0 auto;
+          li {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            span {
+              margin: 0 auto;
+            }
           }
         }
-      }
-      @{deep} .menu-select {
+        @{deep} .menu-select {
           display: block;
-          --el-select-input-focus-border-color:#ccc;
-          .select-trigger{
-            .el-input{
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
               font-size: 18px;
-              .el-input__wrapper{
-                
+              .el-input__wrapper {
               }
             }
-            .is-focus{
+            .is-focus {
               border-color: #ccc;
             }
           }
         }
+      }
+      .nav-content {
+        padding: 0;
+        >p{
+          font-size: 28px!important;
+        }
+      }
     }
-    .nav-content{
-      padding: 0;
-    }
-  }
   }
 }
 </style>

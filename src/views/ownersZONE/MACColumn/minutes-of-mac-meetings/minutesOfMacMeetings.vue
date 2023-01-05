@@ -200,11 +200,11 @@ export default {
         });
         if (res.data.status === 200) {
           res.data.data.records.map((item, index) => {
-              item.index = index;
-            });
+            item.index = index;
+          });
           data.minutes_of_mac_meetings_list = res.data.data.records;
-          data.total1 = data.minutes_of_mac_meetings_list.length
-          handleCurrentChange1(1)
+          data.total1 = data.minutes_of_mac_meetings_list.length;
+          handleCurrentChange1(1);
         }
       } catch (error) {
         console.log(error);
@@ -221,13 +221,12 @@ export default {
             for (let i = 0; i < data.minutes_of_sub_mac_meetings_list.length; i++) {
               if (data.minutes_of_sub_mac_meetings_list[i].id === id) {
                 data.minutes_of_sub_mac_meetings_list[i].children = res.data.data.records;
-                data.total2 =  data.minutes_of_sub_mac_meetings_list[i].children .length
+                data.total2 = data.minutes_of_sub_mac_meetings_list[i].children.length;
               }
             }
-            handleCurrentChange2(1)
+            handleCurrentChange2(1);
           } else {
             data.minutes_of_sub_mac_meetings_list = res.data.data.records;
-            
           }
         }
       } catch (error) {
@@ -251,11 +250,11 @@ export default {
     //
     const selectSubMacMeeting = async (index) => {
       data.sub_mac_meetings_index = index;
-      data.currentPage2 =  1,
-      data.pageSize2 = 5,
-      await findMinutesOfSubComMeetingsList(
-        data.minutes_of_sub_mac_meetings_list[index].id
-      );
+      (data.currentPage2 = 1),
+        (data.pageSize2 = 5),
+        await findMinutesOfSubComMeetingsList(
+          data.minutes_of_sub_mac_meetings_list[index].id
+        );
     };
     const handleSizeChange1 = (val) => {
       data.minutes_of_mac_meetings_show_list = data.minutes_of_mac_meetings_list.slice(
@@ -420,6 +419,7 @@ h5 {
         }
       }
     }
+    
   }
   @{deep} .el-pagination {
     .el-pagination__total {
@@ -476,9 +476,12 @@ h5 {
     }
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .menu-select {
     display: block;
+  }
+  h5 {
+    font-size: 28px;
   }
   .menu-select-sub-meetings {
     display: block;
@@ -487,5 +490,77 @@ h5 {
   .menu {
     display: none;
   }
+  .content {
+    ul {
+      li {
+        font-size: 15px;
+      }
+      @{deep} .el-pagination {
+        .el-pagination__total {
+          font-size: 15px !important;
+        }
+        .el-pagination__sizes {
+          .el-input__inner {
+            font-size: 15px !important;
+          }
+        }
+        .el-pager {
+          li {
+            font-size: 15px !important;
+          }
+        }
+        .el-pagination__jump {
+          font-size: 15px !important;
+          .el-input__inner {
+            font-size: 15px !important;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width:768px) {
+  
+      @{deep} .el-pagination {
+          .el-pagination__total {
+            font-size: 18px;
+            margin: 0;
+          }
+          .el-pagination__sizes{
+            flex-basis: 100%;
+            text-align: left;
+            position: relative;
+            width: 100%;
+            display: block;
+            .el-select{
+              position: relative;
+              left: 0;
+            }
+          }
+          .el-input__inner {
+            font-size: 18px;
+          }
+          .el-icon {
+            font-size: 18px;
+          }
+          .el-pager {
+            width: 79%;
+            li {
+              font-size: 18px;
+              &:hover {
+                color: var(--mainColor2);
+              }
+            }
+            .is-active {
+              color: var(--mainColor2);
+            }
+          }
+          .el-pagination__jump {
+            font-size: 18px;
+            margin: 0;
+          }
+        }
+    
+  
 }
 </style>

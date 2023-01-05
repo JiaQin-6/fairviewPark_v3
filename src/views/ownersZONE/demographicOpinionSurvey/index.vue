@@ -31,7 +31,7 @@
           <div style="text-align: right">
             <el-select
               v-model="demographic_opinion_survey_index"
-              class="m-2"
+              style="margin: 20px 0;"
               placeholder="Select"
               size="large"
               @change="changeDemographicOpinion"
@@ -236,12 +236,18 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
       height: 200px;
     img {
       width: auto;
     }
+    p{
+      font-size: 36px;
+    }
+  }
+  .el-select{
+    width:100%;
   }
 }
 </style>

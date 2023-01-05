@@ -30,7 +30,7 @@
                       >
                         <tbody style="border: 1px solid #275535; border-radius: 5px">
                           <tr style="box-sizing: border-box">
-                            <td
+                            <td class="subject"
                               style="font-size: 36px; color: #9cc212; font-weight: bold"
                             >
                               {{
@@ -41,7 +41,7 @@
                             </td>
                           </tr>
                           <tr style="height: 50px; box-sizing: border-box">
-                            <td style="font-size: 24px; font-weight: bold">
+                            <td class="subTitle" style="font-size: 24px; font-weight: bold">
                               {{
                                 fairview_park_lang === "en_us"
                                   ? "To New Owners or Prospective Buyers"
@@ -396,9 +396,9 @@ export default {
     };
     onMounted(async () => {
       window.addEventListener("resize", getHeight);
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+      // for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
         getHeight();
-      }
+      // }
     });
     onUnmounted(() => {
       window.removeEventListener("resize", getHeight);
@@ -470,6 +470,27 @@ export default {
         .el-collapse-item__content {
           color: #4a4a4a;
         }
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  .new-buyer-notice{
+    .subject{
+      font-size:28px!important;
+    }
+    .subTitle{
+      font-size:20px!important;
+    }
+    td{
+      font-size:15px!important;
+    }
+    .el-collapse{
+      .el-collapse-item{
+        span,p{
+          font-size:15px!important;
+        }
+
       }
     }
   }

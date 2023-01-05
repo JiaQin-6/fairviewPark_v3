@@ -311,7 +311,7 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
@@ -351,6 +351,19 @@ export default {
       }
       .nav-content{
         padding:0;
+        table{
+          .title{
+            font-size: 28px;
+          }
+          td{
+            i{
+
+            }
+            a,span{
+              font-size: 15px;
+            }
+          }
+        }
       }
     }
   }

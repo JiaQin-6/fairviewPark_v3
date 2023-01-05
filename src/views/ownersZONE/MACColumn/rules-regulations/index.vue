@@ -1183,4 +1183,13 @@ h5 {
   font-size: 36px;
   color: var(--mainColor3);
   text-align: left;
-}</style>
+}
+@media (max-width: 991px) {
+  h5{
+    font-size: 28px;
+  }
+  p{
+    font-size: 15px!important;
+  }
+}
+</style>

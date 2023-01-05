@@ -98,4 +98,20 @@ h5 {
     }
   }
 }
+@media (max-width: 991px) {
+  p{
+    font-size: 28px!important;
+    margin-bottom: 20px;
+  }
+  ul{
+    li{
+      font-size: 15px!important;
+      span{
+        a{
+          font-size: 15px!important;
+        }
+      }
+    }
+  }
+ }
 </style>

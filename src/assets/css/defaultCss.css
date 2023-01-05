@@ -79,7 +79,9 @@ img {
   background-size: contain;
   max-width:100% !important;
 }
-
+iframe {
+  max-width: 100% !important;
+}
 i {
   font-style: normal;
 }
@@ -109,4 +111,10 @@ html {
 
 .clearfix {
   *zoom: 1;
+}
+@media (max-width: 991px) {
+  body {
+    font-size: 15px!important;
+  }
+  
 }

@@ -46,12 +46,6 @@ const routes = [
         name: 'shopping-information',
         component: () => import('../views/shoppingInformation/index.vue'),
       },
-       //停车场优惠时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
-        path: '/carpark-parking-privilege-payment',
-        name: 'carpark-parking-privilege-payment',
-        component: () => import('../views/carparkParkingPrivilegePayment/index.vue'),
-      },
       //常用電話及聯繫﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/useful-link',

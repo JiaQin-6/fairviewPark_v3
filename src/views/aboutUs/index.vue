@@ -212,7 +212,6 @@ export default {
   position: relative;
   overflow: hidden;
   height: 280px;
-
   .img {
     width: 100%;
     height: 280px;
@@ -423,11 +422,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
       height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size:36px;
     }
   }
   .nav-wrap {
@@ -464,7 +466,7 @@ export default {
         }
       }
       .nav-content{
-        padding: 0px
+        padding: 0px;
       }
     }
   }

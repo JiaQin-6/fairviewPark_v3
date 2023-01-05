@@ -31,7 +31,7 @@
             <h5>
               {{ fairview_park_lang === "en_us" ? "Frequently used forms" : "常用表格" }}
             </h5>
-            <p style="font-size:24px;font-weight:bold">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
+            <p class="subTitle" style="font-size:24px;font-weight:bold">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
             <ul>
               <li
                 class="flex-row"
@@ -194,11 +194,30 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
       height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size:36px;
+    }
+  }
+  .nav-content{
+    h5{
+      font-size: 28px!important;
+    }
+    .subTitle{
+      font-size: 20px!important;
+      margin-bottom: 20px;
+    }
+    ul{
+      li{
+        i,a{
+          font-size: 15px!important;
+        }
+      }
     }
   }
 }

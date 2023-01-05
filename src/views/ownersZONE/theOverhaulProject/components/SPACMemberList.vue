@@ -71,4 +71,15 @@ export default {
 };
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+ @media (max-width: 991px) {
+  p{
+    font-size: 28px!important;
+  }
+  ul{
+    li{
+      font-size: 15px!important;
+    }
+  }
+ }
+</style>

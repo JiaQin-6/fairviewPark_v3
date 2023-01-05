@@ -47,7 +47,7 @@
               ]"
           :key="index"
         >
-          <li class="li">{{ item.title }}</li>
+          <li class="li" style="font-weight:bold;">{{ item.title }}</li>
           <ul>
             <li v-for="(item2, index2) in item.list" :key="index2" v-html="item2"></li>
           </ul>
@@ -99,5 +99,24 @@ export default {
       }
     }
   }
+}
+@media (max-width: 991px) {
+  .nav-content {
+  .container {
+    h3 {
+    }
+    .row >p{
+      font-size: 28px!important;
+    }
+    .li {
+      font-size: 20px;
+    }
+    ul {
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
 }
 </style>

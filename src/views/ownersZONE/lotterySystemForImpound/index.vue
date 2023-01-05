@@ -147,11 +147,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size:36px;
     }
   }
 }

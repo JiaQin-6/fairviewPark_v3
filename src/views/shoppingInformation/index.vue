@@ -1483,11 +1483,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -1523,6 +1526,22 @@ export default {
       }
       .nav-content{
         padding:0;
+        .nav-content-list{
+          .header{
+            font-size: 28px;
+          }
+          ul{
+            li{
+
+            }
+          }
+        }
+        .nav-content-list2{
+          .header{
+            font-size: 28px;
+          }
+        }
+
       }
     }
   }

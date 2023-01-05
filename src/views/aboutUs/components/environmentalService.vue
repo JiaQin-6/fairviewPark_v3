@@ -10,14 +10,11 @@
   <div class="col-12 col-lg-10 nav-content">
     <div class="container">
       <div class="row">
-       
-        <p style="font-size: 36px;color:#9cc212;font-weight:bold;">
-                              {{
-                                $t('Environmental Service')
-                              }}
-                            </p>
+        <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+          {{ $t("Environmental Service") }}
+        </p>
         <div>
-          <li class="li">{{fairview_park_lang==='en_us'?'Cleaning':'清潔'}}</li>
+          <li class="li" style="font-weight:bold;">{{ fairview_park_lang === "en_us" ? "Cleaning" : "清潔" }}</li>
           <ul>
             <li
               v-for="(item, index) in fairview_park_lang === 'en_us'
@@ -48,7 +45,9 @@
               {{ item }}
             </li>
           </ul>
-          <li class="li">{{fairview_park_lang==='en_us'?'Landscape Maintenance':'園藝保養'}}</li>
+          <li class="li" style="font-weight:bold;">
+            {{ fairview_park_lang === "en_us" ? "Landscape Maintenance" : "園藝保養" }}
+          </li>
           <ul>
             <li
               v-for="(item, index) in fairview_park_lang === 'en_us'
@@ -99,9 +98,9 @@ export default {
       margin-bottom: 20px;
       font-weight: normal;
     }
-    .li{
-        margin-bottom: 20px;
-        font-size: 24px;
+    .li {
+      margin-bottom: 20px;
+      font-size: 24px;
     }
     ul {
       padding: 0px 0 0px 0px;
@@ -109,9 +108,28 @@ export default {
         font-size: 18px;
         list-style-type: disc;
         margin-bottom: 20px;
-        list-style:none;
+        list-style: none;
       }
     }
   }
+}
+@media (max-width: 991px) {
+  .nav-content {
+  .container {
+    .row >p{
+      font-size: 28px!important;
+    }
+    h3 {
+    }
+    .li {
+      font-size: 20px;
+    }
+    ul {
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
 }
 </style>

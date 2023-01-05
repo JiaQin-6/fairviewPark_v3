@@ -115,4 +115,9 @@ h5 {
     }
   }
 }
+@media (max-width: 991px) {
+  h5{
+    font-size: 28px;
+  }
+}
 </style>

@@ -872,6 +872,11 @@ export default {
     width: 1280px !important;
   }
 }
+@media (min-width: 1200px) {
+  .container-fluid {
+    width: 1100px !important;
+  }
+}
 @media (max-width: 991px) {
   .is-show-dropdown {
     display: none;
@@ -899,7 +904,7 @@ export default {
                 padding: 20px 6px 20px;
                 height: auto;
                 border-bottom: 1px solid rgba(237, 235, 235, 0.2);
-                font-size: 26px;
+                font-size: 20px;
               }
             }
             .active {

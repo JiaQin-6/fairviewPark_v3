@@ -33,6 +33,8 @@
   padding: 0;
   border-bottom: 1px solid #dddcdc !important;
   background-color: #BA9859 !important;
+  height: auto!important;
+  white-space: inherit!important;
 }
 .el-popper .el-select-dropdown .el-select-dropdown__wrap .el-scrollbar__view .el-select-dropdown__item:last-child {
   border-bottom: 0!important;
@@ -62,4 +64,7 @@
 }
 .el-popper .el-popper__arrow::before {
   border-color: #BA9859;
+}
+.modal-backdrop {
+  background-color: transparent;
 }

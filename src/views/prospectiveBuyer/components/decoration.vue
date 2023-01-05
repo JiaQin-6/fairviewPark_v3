@@ -584,7 +584,6 @@ export default {
 <style lang="less" scoped>
 .decoration {
   width: 100%;
-
   .content {
     margin: 0px auto;
     padding: 0 20px;
@@ -659,6 +658,16 @@ export default {
       text-align: center;
 
       img {}
+    }
+  }
+}
+@media (max-width: 991px) {
+  .decoration{
+    .content{
+      >p{
+        font-size:28px!important;
+        margin-bottom: 5px;
+      }
     }
   }
 }

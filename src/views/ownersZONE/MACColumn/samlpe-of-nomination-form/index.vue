@@ -8,29 +8,30 @@
 -->
 <template>
   <div>
-    <h5>{{ fairview_park_lang === "en_us" ? "Samlpe of Nomination Form" : "提名表格樣本" }}</h5>
+    <h5>
+      {{ fairview_park_lang === "en_us" ? "Samlpe of Nomination Form" : "提名表格樣本" }}
+    </h5>
     <div style="text-align: center">
-    <img
-      style="margin-bottom: 20px; width: 100%"
-      :src="
-        fairview_park_lang === 'en_us'
-          ? 'https://en.fairviewpark.hk/images/mac-appendix1.png'
-          : 'https://cn.fairviewpark.hk/images/mac-appendix1.png'
-      "
-      alt=""
-    />
-    <img
-      style="width: 100%"
-      :src="
-        fairview_park_lang === 'en_us'
-          ? '	https://en.fairviewpark.hk/images/mac-appendix1-2.png'
-          : 'https://cn.fairviewpark.hk/images/mac-appendix1-2.png'
-      "
-      alt=""
-    />
+      <img
+        style="margin-bottom: 20px; width: 100%"
+        :src="
+          fairview_park_lang === 'en_us'
+            ? 'https://en.fairviewpark.hk/images/mac-appendix1.png'
+            : 'https://cn.fairviewpark.hk/images/mac-appendix1.png'
+        "
+        alt=""
+      />
+      <img
+        style="width: 100%"
+        :src="
+          fairview_park_lang === 'en_us'
+            ? '	https://en.fairviewpark.hk/images/mac-appendix1-2.png'
+            : 'https://cn.fairviewpark.hk/images/mac-appendix1-2.png'
+        "
+        alt=""
+      />
+    </div>
   </div>
-  </div>
-  
 </template>
 
 <script>
@@ -57,4 +58,10 @@ h5 {
   font-size: 36px;
   color: var(--mainColor3);
   text-align: left;
-}</style>
+}
+@media (max-width: 991px) {
+  h5{
+    font-size: 28px;
+  }
+}
+</style>

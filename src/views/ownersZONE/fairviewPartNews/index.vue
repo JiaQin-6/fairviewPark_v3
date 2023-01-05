@@ -27,7 +27,7 @@
           <div style="text-align: right">
             <el-select
               v-model="fairview_part_news_index"
-              class="m-2"
+              style="margin:20px 0"
               placeholder="Select"
               size="large"
               @change="changeFairviewPartNews"
@@ -243,6 +243,12 @@ export default {
     img {
       width: auto;
     }
+    p{
+      font-size: 36px;
+    }
+  }
+  .el-select{
+    width:100%;
   }
 }
 </style>

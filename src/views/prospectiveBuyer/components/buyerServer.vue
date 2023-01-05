@@ -118,4 +118,11 @@ export default {
 .buyer-server {
   width: 100%;
 }
+@media (max-width: 991px) {
+  .buyer-server{
+    p{
+      font-size: 28px!important;
+    }
+  }
+}
 </style>

@@ -94,6 +94,15 @@ export default {
     }
   }
 }
-
+@media (max-width: 991px) {
+  .wall-color-series{
+    .content{
+      >p{
+        font-size:28px!important;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
 
 </style>

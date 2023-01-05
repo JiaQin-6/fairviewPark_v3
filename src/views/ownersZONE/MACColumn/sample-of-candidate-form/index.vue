@@ -8,7 +8,9 @@
 -->
 <template>
   <div>
-    <h5>{{ fairview_park_lang === "en_us" ? "Sample of Candidate Form" : "候選人表格樣本" }}</h5>
+    <h5>
+      {{ fairview_park_lang === "en_us" ? "Sample of Candidate Form" : "候選人表格樣本" }}
+    </h5>
     <div style="text-align: center">
       <img
         style="margin-bottom: 20px; width: 100%"
@@ -48,4 +50,10 @@ h5 {
   font-size: 36px;
   color: var(--mainColor3);
   text-align: left;
-}</style>
+}
+@media (max-width: 991px) {
+  h5{
+    font-size: 28px;
+  }
+}
+</style>

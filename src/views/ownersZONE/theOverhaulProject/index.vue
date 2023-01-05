@@ -39,6 +39,12 @@
                 {
                   title:
                     fairview_park_lang === 'en_us'
+                      ? 'Overhaul Project Information'
+                      : '大維修資訊',
+                },
+                {
+                  title:
+                    fairview_park_lang === 'en_us'
                       ? 'SPAC Member List'
                       : '特別工程諮詢委員會委員名單',
                 },
@@ -77,20 +83,27 @@
                 {
                   title:
                     fairview_park_lang === 'en_us'
+                      ? 'Overhaul Project Information'
+                      : '大維修資訊',
+                  value:1,
+                },
+                {
+                  title:
+                    fairview_park_lang === 'en_us'
                       ? 'SPAC Member List'
                       : '特別工程諮詢委員會委員名單',
-                  value:1,
+                  value:2,
                 },
                 {
                   title:
                     fairview_park_lang === 'en_us'
                       ? 'Minutes of SPAC Meetings'
                       : '會議記錄',
-                      value:2,
+                      value:3,
                 },
                 {
                   title: fairview_park_lang === 'en_us' ? 'FAQ' : '常見問題',
-                  value:3,
+                  value:4,
                 },
               ]"
               :key="index"
@@ -104,9 +117,10 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
           <TheOverhaulProject v-if="nav_index === 0"></TheOverhaulProject>
-          <SPACMemberList v-if="nav_index === 1"></SPACMemberList>
-          <MinutesOfSPACMeetings v-if="nav_index === 2"></MinutesOfSPACMeetings>
-          <FAQ v-if="nav_index === 3"></FAQ>
+          <OverhaulProjectInformation v-if="nav_index === 1"></OverhaulProjectInformation>
+          <SPACMemberList v-if="nav_index === 2"></SPACMemberList>
+          <MinutesOfSPACMeetings v-if="nav_index === 3"></MinutesOfSPACMeetings>
+          <FAQ v-if="nav_index === 4"></FAQ>
         </div>
       </div>
     </div>
@@ -116,12 +130,14 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import TheOverhaulProject from "./components/theOverhaulProject.vue";
+import OverhaulProjectInformation from "./components/overhaulProjectInformation.vue";
 import SPACMemberList from "./components/SPACMemberList.vue";
 import MinutesOfSPACMeetings from "./components/minutesOfSPACMeetings.vue";
 import FAQ from "./components/FAQ.vue";
 export default {
   components: {
     TheOverhaulProject,
+    OverhaulProjectInformation,
     SPACMemberList,
     MinutesOfSPACMeetings,
     FAQ,
@@ -277,11 +293,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
       height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size: 36px;
     }
   }
   .nav-wrap {

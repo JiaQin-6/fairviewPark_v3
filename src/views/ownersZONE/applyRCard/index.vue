@@ -449,7 +449,7 @@
                   <div class="col-12 col-lg-3 col-sm-12" style="margin-bottom: 10px">
                     <h3
                       v-if="item.rcAppStatus === 1"
-                      style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                      style="color:#BA9859;font-size: 24px; font-weight: bold; margin-bottom: 20px"
                     >
                       {{
                         fairview_park_lang === "en_us"
@@ -459,7 +459,7 @@
                     </h3>
                     <h3
                       v-if="item.rcAppStatus === 2"
-                      style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                      style="color:#9cc212;font-size: 24px; font-weight: bold; margin-bottom: 20px"
                     >
                       {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
                     </h3>
@@ -701,8 +701,8 @@ export default {
       ) {
         ElMessage.error(
           data.fairview_park_lang === "en_us"
-            ? "需要8-9位!"
-            : "需要8-9位!"
+            ? "Please fill in the complete 8- or 9-digit Octopus Number "
+            : "请填写完整的8位或9位八达通号码"
         );
         return false;
       } else if (
@@ -1074,12 +1074,8 @@ export default {
               border: 2px solid #ccc;
               padding: 25px;
               h3 {
-                color: var(--mainColor2);
                 margin-bottom: 0;
                 line-height: 24px !important;
-                &:last-child {
-                  color: var(--mainColor1);
-                }
               }
               p {
                 margin-bottom: 0px;
@@ -1126,6 +1122,9 @@ export default {
     img {
       width: auto;
     }
+    p{
+      font-size:36px!important;
+    }
   }
   .aside {
     ul {
@@ -1168,6 +1167,24 @@ export default {
     }
     .user-content {
       flex-wrap: wrap;
+    }
+    .application-form{
+      .item{
+        h5,p{
+          font-size:15px!important;
+        }
+        @{deep} .el-checkbox{
+          white-space:inherit;
+          display:flex!important;
+          align-items: center;
+          margin-bottom:20px;
+          .el-checkbox__label{
+            text-align: left;
+            font-size:15px!important;
+            line-height:18px;
+          }
+        }
+      }
     }
   }
 }

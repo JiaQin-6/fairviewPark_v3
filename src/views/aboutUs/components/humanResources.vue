@@ -75,4 +75,20 @@ export default {
     }
   }
 }
+@media (max-width: 991px) {
+  .nav-content {
+  .container {
+    h3 {
+    }
+    .row >p{
+      font-size: 28px!important;
+    }
+    ul {
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
+}
 </style>

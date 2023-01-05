@@ -390,11 +390,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
       width: auto;
+    }
+    p{
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -430,6 +433,39 @@ export default {
       }
       .nav-content{
         padding: 0;
+        p{
+          font-size: 28px!important;
+        }
+        ul{
+          li{
+            span{
+              a{
+                font-size: 15px;
+              }
+            }
+          }
+        }
+        @{deep} .el-pagination{
+          .el-pagination__total{
+            font-size: 15px!important;
+          }
+          .el-pagination__sizes{
+            .el-input__inner{
+              font-size: 15px!important;
+            }
+          }
+          .el-pager{
+            li{
+              font-size: 15px!important;
+            }
+          }
+          .el-pagination__jump{
+            font-size: 15px!important;
+            .el-input__inner{
+              font-size: 15px!important;
+            }
+          }
+        }
       }
     }
   }

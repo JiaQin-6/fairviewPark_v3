@@ -8,14 +8,14 @@
 -->
 <template>
   <div>
-    <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+    <p class="subject" style="font-size: 36px; color: #9cc212; font-weight: bold">
       {{
         fairview_park_lang === "en_us"
           ? "The Overhaul Project"
           : "大維修"
       }}
     </p>
-    <p style="font-size:24px;font-weight:bold">
+    <p style="font-size:24px;font-weight:bold" class="subTitle">
       {{
         fairview_park_lang === "en_us"
           ? "The Overhaul Project refers to the Project for Replacement of Underground Water Pipes and Refurbishment of Roads."
@@ -123,17 +123,7 @@
         ></iframe>
       </div>
     </div>
-    <!-- 大維修資訊 -->
-    <div>
-      <h5 style="background-color: #389818; color: #fff; font-size: 16px; padding: 5px">
-        {{
-          fairview_park_lang === "en_us" ? "Overhaul Project Information" : "大維修資訊"
-        }}
-      </h5>
-      <div style="text-align: center">
-        <div id="viewer" style="width: 100%; height: 600px; margin: 0 auto"></div>
-      </div>
-    </div>
+   
     <!-- 2021年5月24日 宣傳單張 2021年4月12日 宣傳單張 -->
     <div
       v-for="(item, index) in [
@@ -232,7 +222,6 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import PDFJSExpress from "@pdftron/pdfjs-express";
 export default {
   data() {
     return {
@@ -244,41 +233,12 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       fairview_park_lang: "",
-      tohpByFpn: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-    //查看所有 业主手册及地图 列表
-    const findTohpByFpn = async () => {
-      try {
-        const res = await proxy.$http.findTohpByFpn({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.tohpByFpn = res.data.data.fileEnUs;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    onMounted(async () => {
-      await findTohpByFpn();
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc: data.tohpByFpn,
-        },
-        document.getElementById("viewer")
-      ).then((instance) => {
-        // use APIs here
-      });
-    });
+  
+    onMounted(async () => {});
     return {
       ...toRefs(data),
-      findTohpByFpn,
     };
   },
 };
@@ -289,6 +249,18 @@ export default {
   &:hover {
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     transition: 0.3s;
+  }
+}
+@media (max-width: 991px) {
+  .subject{
+    font-size: 28px!important;
+  }
+  .subTitle{
+    font-size: 20px!important;
+    margin-bottom:10px;
+  }
+  h5,p{
+    font-size: 15px!important;
   }
 }
 </style>

@@ -274,6 +274,18 @@ export default {
       },
       { deep: true, immediate: true }
     );
+    onMounted(async () => {
+       document.onscroll = () => {
+        //如果滚动隐藏下拉框
+        for (let i = 0; i < document.getElementsByClassName("el-popper").length; i++) {
+          if (document.getElementsByClassName("el-popper")[i].style.display !== "none") {
+            document.getElementsByClassName("el-popper")[i].style.display = "none";
+            document.getElementsByClassName("menu-select")[0].click();
+          }
+        }
+      };
+    });
+    
     return {
       ...toRefs(data),
       loginOut,
@@ -325,5 +337,18 @@ export default {
     display: none;
     z-index: 300;
   }
+}
+@media (max-width: 991px) {
+  .ownerIsZONE{
+    .ownerIsZONE-content {
+      ul{
+        li{
+          font-size: 20px;
+          padding: 10px 10px;
+        }
+      }
+    }
+  }
+  
 }
 </style>

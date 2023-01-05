@@ -100,12 +100,12 @@
                                   ':' +
                                   '2471 1301>2471 1301</a> (24 hours) <br/> Emergency Hotline<a href=tel' +
                                   ':' +
-                                  '2471 1999> 2471 1999 (24 hours) <br/> (Conversations at these telephones may be recorded)'
+                                  '2471 1999> 2471 1999</a> (24 hours) <br/> (Conversations at these telephones may be recorded)'
                                 : '管理公司 <a href=tel' +
                                   ':' +
-                                  '2471 1301>2471 1301（24小時） <br/> 緊急熱線 <a href=tel' +
+                                  '2471 1301>2471 1301</a> （24小時） <br/> 緊急熱線 <a href=tel' +
                                   ':' +
-                                  '2471 1999>2471 1999（24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
+                                  '2471 1999>2471 1999</a> （24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
                           },
                         ]"
                         :key="index"
@@ -459,20 +459,36 @@ export default {
     }
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .nav-content {
     .about-us {
+      >p {
+        font-size: 28px!important;
+      }
+
       .container {
-        .row .col .contact-us {
-          .mobile-img {
-            width: 100%;
-            max-width: 688px;
-            display: block;
+        .row {
+          .col{
+            p{
+              font-size: 15px!important;
+            }
+            ul{
+              li{
+                font-size: 15px!important;
+              }
+            }
+            .contact-us {
+              .mobile-img {
+                width: 100%;
+                max-width: 688px;
+                display: block;
+              }
+              .pc-img {
+                display: none;
+              }
+            }
           }
-          .pc-img {
-            display: none;
-          }
-        }
+        } 
       }
     }
   }

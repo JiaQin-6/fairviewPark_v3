@@ -11,7 +11,7 @@
     <div class="container">
       <div class="row">
        
-        <p style="font-size: 36px; color: #9cc212; font-weight: bold">
+        <p class="title" style="font-size: 36px; color: #9cc212; font-weight: bold">
           {{ $t("Security") }}
         </p>
         <p>
@@ -97,7 +97,7 @@
               ]"
           :key="index"
         >
-          <li class="li">{{ item.title }}</li>
+          <li class="li" style="font-weight:bold;">{{ item.title }}</li>
           <ul>
             <li v-for="(item2, index2) in item.list" :key="index2" v-html="item2">
              
@@ -139,7 +139,6 @@ export default {
     }
     p{
         font-size: 18px;
-        margin-bottom: 30px;
         list-style: none; 
     }
     .li {
@@ -156,5 +155,27 @@ export default {
       }
     }
   }
+}
+@media (max-width: 991px) {
+  .nav-content {
+  .container {
+    h3 {
+    }
+    .row .title{
+      font-size: 28px!important;
+    }
+    p{
+        font-size: 15px;
+    }
+    .li {
+      font-size: 20px;
+    }
+    ul {
+      li {
+        font-size: 15px;
+      }
+    }
+  }
+}
 }
 </style>

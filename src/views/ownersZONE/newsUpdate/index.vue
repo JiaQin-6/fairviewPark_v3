@@ -59,17 +59,16 @@
             style="font-size: 36px; color: #9cc212; font-weight: bold"
             v-if="new_update_list.length !== 0"
           >
-            {{
-              new_update_list.filter((item) => {
-                return item.id === new_update_index;
-              })[0].titleEnUs
-            }}
+            {{ getTitle }}
           </p>
-          <div style="
-                font-size: 14px;
-                color: #6e6b7b;
-                font-family: Helvetica, Arial, sans-serif;
-              " v-html="new_update_content.htmlEnUs"></div>
+          <div
+            style="
+              font-size: 14px;
+              color: #6e6b7b;
+              font-family: Helvetica, Arial, sans-serif;
+            "
+            v-html="new_update_content.htmlEnUs"
+          ></div>
         </div>
       </div>
     </div>
@@ -77,7 +76,7 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, computed } from "vue";
 export default {
   data() {
     return {
@@ -125,6 +124,14 @@ export default {
         console.log(error);
       }
     };
+    //getTitle
+    const getTitle = computed(() => {
+      for (let i = 0; i < data.new_update_list.length; i++) {
+        if (data.new_update_list[i].id === data.new_update_index) {
+          return data.new_update_list[i].titleEnUs;
+        }
+      }
+    });
     onMounted(async () => {
       await findNewUpdateList();
       await findOneNewUpdateById(data.new_update_list[0].id);
@@ -133,6 +140,7 @@ export default {
       ...toRefs(data),
       findNewUpdateList,
       findOneNewUpdateById,
+      getTitle,
     };
   },
 };
@@ -283,11 +291,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
       width: auto;
+    }
+    p {
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -321,8 +332,11 @@ export default {
           }
         }
       }
-      .nav-content{
-        padding:0;
+      .nav-content {
+        padding: 0;
+        > p {
+          font-size: 28px !important;
+        }
       }
     }
   }

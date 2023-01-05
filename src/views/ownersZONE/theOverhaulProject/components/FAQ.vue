@@ -656,7 +656,7 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted,onUnmounted } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, onUnmounted } from "vue";
 export default {
   data() {
     return {
@@ -673,12 +673,12 @@ export default {
 
     const getHeight = () => {
       for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height = 
-          document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("title")[i].style.height =
+          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+          "px";
         document.getElementsByClassName("title")[i].style["line-height"] =
-          document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+          "px";
       }
     };
     onMounted(async () => {
@@ -700,61 +700,81 @@ export default {
 
 <style lang="less" scoped>
 @deep:~ ">>>";
-  @{deep} .el-collapse {
-    border: none;
-    .el-collapse-item {
-      margin-bottom: 2px;
-      .el-collapse-item__header {
-        font-size: 18px;
-        align-items: center;
-        background-color: #fffae7;
-        border: none;
-        height: auto;
-        padding: 0;
-        &:hover {
-          background-color: #fff3c4;
-          span {
-            &:first-child {
-              background-color: #cee97b;
-            }
-          }
-        }
-        span {
-          color: #4a4a4a;
-          font-weight: normal;
-          &:first-child {
-            width: 50px;
-            background-color: #e7f3be;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            line-height: 25px;
-          }
-          &:nth-child(2) {
-            padding: 7px 0 7px 10px;
-            flex: 1;
-            // background-color: #fffae7;
-            line-height: 25px;
-            box-sizing: border-box;
-          }
-        }
-      }
-      .is-active {
+@{deep} .el-collapse {
+  border: none;
+  .el-collapse-item {
+    margin-bottom: 2px;
+    .el-collapse-item__header {
+      font-size: 18px;
+      align-items: center;
+      background-color: #fffae7;
+      border: none;
+      height: auto;
+      padding: 0;
+      &:hover {
         background-color: #fff3c4;
         span {
-          font-weight: bold;
           &:first-child {
             background-color: #cee97b;
           }
         }
       }
-      .el-collapse-item__wrap {
-        border: none;
-        .el-collapse-item__content {
-          color: #4a4a4a;
+      span {
+        color: #4a4a4a;
+        font-weight: normal;
+        &:first-child {
+          width: 50px;
+          background-color: #e7f3be;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          line-height: 25px;
+        }
+        &:nth-child(2) {
+          padding: 7px 0 7px 10px;
+          flex: 1;
+          // background-color: #fffae7;
+          line-height: 25px;
+          box-sizing: border-box;
         }
       }
     }
+    .is-active {
+      background-color: #fff3c4;
+      span {
+        font-weight: bold;
+        &:first-child {
+          background-color: #cee97b;
+        }
+      }
+    }
+    .el-collapse-item__wrap {
+      border: none;
+      .el-collapse-item__content {
+        color: #4a4a4a;
+      }
+    }
   }
+}
+@media (max-width: 991px) {
+  p{
+    font-size: 28px!important;
+    margin-bottom: 20px;
+  }
+ .el-collapse{
+  .el-collapse-item{
+    .el-collapse-item__header{
+      .item{
+        font-size:15px;
+      }
+    }
+    .el-collapse-item__content{
+      p{
+        font-size:15px!important;
+      }
+    }
+  }
+ }
+ }
 </style>

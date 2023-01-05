@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div>
+  <div v-loading="loading">
     <!-- login Modal -->
     <div
       class="modal fade"
@@ -31,7 +31,7 @@
           </div>
           <div class="modal-body">
             <h2>{{ $t("Owner login") }}</h2>
-            <h4>{{ $t("Owner zone, please enter the name and password") }}</h4>
+            <!-- <h4>{{ $t("Owner zone, please enter the name and password") }}</h4> -->
             <div>
               <ul>
                 <li>
@@ -202,7 +202,7 @@
                     >{{
                       fairview_park_lang === "en_us"
                         ? "Login ID Missing"
-                        : "登陸名稱不能為空"
+                        : "登入名稱不能為空"
                     }}</i
                   >
                 </li>
@@ -356,7 +356,7 @@
               </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
             </div>
-            <p>{{ fairview_park_lang === "en_us" ? "please" : "请" }}</p>
+            <p>{{ fairview_park_lang === "en_us" ? "If you forgot your Login Name and Contact Email, please contact us." : "如閣下忘記了自設的登入名稱及聯絡電郵，請聯絡我們。" }}</p>
           </div>
         </div>
       </div>
@@ -374,7 +374,9 @@
         <!-- 輸入密碼驗證 -->
         <div class="verify" v-show="!showEditMemberModel">
           <div class="verify-password">
-            <el-icon @click="closeModel"><CloseBold /></el-icon>
+            <el-icon @click="closeModel">
+              <CloseBold />
+            </el-icon>
             <p class="title">
               {{
                 fairview_park_lang === "en_us" ? "Please enter password" : "請輸入密碼"
@@ -389,10 +391,9 @@
               "
               >{{ $t("This field is required.") }}</i
             >
-            <el-button @click="showEditMemberModel=true">{{
+            <el-button @click="showEditMemberModel = true">{{
               fairview_park_lang === "en_us" ? "Confirm" : "確認"
             }}</el-button>
-           
           </div>
         </div>
         <div class="modal-content" v-show="showEditMemberModel">
@@ -553,7 +554,7 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
 import { useStore } from "vuex";
-import { ElMessageBox } from "element-plus";
+import { ElMessageBox,ElMessage } from "element-plus";
 export default {
   data() {
     return {};
@@ -562,6 +563,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
+      loading:false,
       fairview_park_lang: "",
       loginForm: {
         loginName: "", //david
@@ -617,7 +619,7 @@ export default {
         is_show: false,
         text: "",
       },
-      showEditMemberModel:false,
+      showEditMemberModel: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
@@ -666,6 +668,7 @@ export default {
         data.register_error_tip.is_null = false;
         data.register_error_tip.is_email_correct = false;
       }
+      data.loading = true
       try {
         const res = await proxy.$http.register({
           oname: data.registerForm.oname,
@@ -681,6 +684,7 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("signUp").style.display = "none";
           document.getElementById("login").style.display = "none";
+          data.loading = false
           data.register_error_tip.is_show = false;
           data.register_error_tip.text = "";
           //如果注册成功了，帮用户自动登录
@@ -691,6 +695,11 @@ export default {
               lang: data.fairview_park_lang,
             });
             if (res.data.status === 200) {
+              ElMessage({
+                message:
+                  data.fairview_park_lang === "en_us" ? "Register Successful" : "註冊成功",
+                type: "success",
+              });
               document.getElementById("close-login").click();
               localStorage.setItem("login-info", JSON.stringify(res.data.data));
               store.commit("setLoginStatus", true);
@@ -702,11 +711,12 @@ export default {
             console.log(error);
           }
         } else {
+          data.loading = false
           data.register_error_tip.is_show = true;
           data.register_error_tip.text = res.data.msg;
         }
       } catch (error) {
-        console.log(error);
+        data.loading = false
       }
     };
     //忘記密碼
@@ -722,6 +732,7 @@ export default {
         data.forgot_password_error_tip.is_null = false;
         data.forgot_password_error_tip.is_email_correct = false;
       }
+      data.loading = true
       try {
         const res = await proxy.$http.forgetPassword({
           loginName: data.forgotPasswordForm.loginName,
@@ -730,16 +741,24 @@ export default {
         });
         if (res.data.status === 200) {
           document.getElementById("close-forgetPasswor").click();
-          ElMessageBox.alert(`${res.data.msg}`, "", {
-            confirmButtonText: $t("Confirm"),
-          });
+          data.loading = false
+          // ElMessageBox.alert(`${res.data.msg}`, "", {
+          //   confirmButtonText: $t("Confirm"),
+          // });
+          ElMessage({
+                message:
+                  data.fairview_park_lang === "en_us" ? "Email Sent Successful" : "郵件發送成功",
+                type: "success",
+              });
           document.getElementsByClassName("el-overlay")[0].style["background-color"] =
             "transparent";
         } else {
+          data.loading = false
           data.forgot_password_error_tip.is_show = true;
           data.forgot_password_error_tip.text = res.data.msg;
         }
       } catch (error) {
+        data.loading = false
         console.log(error);
       }
     };
@@ -761,6 +780,7 @@ export default {
         data.edit_member_info_error_tip.is_null = false;
         data.edit_member_info_error_tip.is_email_correct = false;
       }
+      data.loading = true
       try {
         const res = await proxy.$http.editMemberInfo({
           id: JSON.parse(localStorage.getItem("login-info")).id,
@@ -776,20 +796,22 @@ export default {
         });
         if (res.data.status === 200) {
           document.getElementById("editMemberInformation").style.display = "none";
+          data.loading = false
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
         } else {
+          data.loading = false
           data.edit_member_info_error_tip.is_show = true;
           data.edit_member_info_error_tip.text = res.data.msg;
         }
       } catch (error) {
-        console.log(error);
+        data.loading = false
       }
     };
     //
     const closeModel = () => {
       var button = document.getElementById("close-edit-member");
-      button.click()
+      button.click();
     };
     onMounted(() => {
       var myModalEl = document.getElementById("editMemberInformation");
@@ -813,9 +835,9 @@ export default {
           ? JSON.parse(localStorage.getItem("login-info")).contactNo
           : "";
       });
-      myModalEl.addEventListener('hidden.bs.modal', event => {
-        data.showEditMemberModel = false
-      })
+      myModalEl.addEventListener("hidden.bs.modal", (event) => {
+        data.showEditMemberModel = false;
+      });
     });
     return {
       ...toRefs(data),
@@ -831,9 +853,11 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .modal {
+  background-color: rgba(0,0,0,.5);
   .modal-dialog {
-    .verify{
+    .verify {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -841,54 +865,61 @@ export default {
       pointer-events: auto;
       background-color: #fff;
       background-clip: padding-box;
-      border: 1px solid rgba(0,0,0,.2);
+      border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 0.3rem;
       outline: 0;
       margin: 0 auto;
+
       .verify-password {
-      position: relative;
-      padding: 30px 20px;
-      text-align: center;
-      .el-icon {
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        cursor: pointer;
-        font-size: 20px;
-      }
-      p {
-        margin-bottom: 20px;
-        font-size: 18px;
-      }
-      input {
-        display: block;
-        width: 100%;
-        max-width: 400px;
-        border: 1px solid rgba(0, 0, 0, 0.5);
-        box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
-        border-radius: 10px;
-        height: 45px;
-        line-height: 45px;
-        padding-left: 10px;
-        margin: 0 auto;
-        margin-bottom: 10px;
-      }
-      @{deep} .el-button {
-        background-color: var(--mainColor2);
-        margin-top: 20px;
-        height: 40px;
-        padding: 0 30px;
-        span {
-          color: #fff;
+        position: relative;
+        padding: 30px 20px;
+        text-align: center;
+
+        .el-icon {
+          position: absolute;
+          right: 10px;
+          top: 10px;
+          cursor: pointer;
+          font-size: 20px;
+        }
+
+        p {
+          margin-bottom: 20px;
           font-size: 18px;
+        }
+
+        input {
+          display: block;
+          width: 100%;
+          max-width: 400px;
+          border: 1px solid rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 4px 62px rgba(153, 171, 198, 0.18);
+          border-radius: 10px;
+          height: 45px;
+          line-height: 45px;
+          padding-left: 10px;
+          margin: 0 auto;
+          margin-bottom: 10px;
+        }
+
+        @{deep} .el-button {
+          background-color: var(--mainColor2);
+          margin-top: 20px;
+          height: 40px;
+          padding: 0 30px;
+
+          span {
+            color: #fff;
+            font-size: 18px;
+          }
         }
       }
     }
-    }
-    
+
     .modal-body {
       text-align: center;
       padding: 0 20px 50px;
+
       h2 {
         font-style: normal;
         color: #2fa94e;
@@ -896,28 +927,34 @@ export default {
         font-size: 38px;
         line-height: 65px;
       }
+
       button {
         margin-bottom: 30px;
       }
+
       h4 {
         color: #8fbc25;
         font-size: 24px;
         margin-bottom: 50px;
         line-height: 41px;
       }
+
       ul {
         text-align: center;
         padding: 0;
         max-width: 400px;
         margin: 0 auto;
+
         li {
           margin: 0 auto 30px;
           align-items: center;
           justify-content: space-between;
+
           .title {
             color: var(--mainColor1);
             text-align: left;
           }
+
           input {
             width: 100%;
             max-width: 400px;
@@ -930,20 +967,24 @@ export default {
           }
         }
       }
+
       .remember {
         justify-content: space-between;
         margin: 0 auto 30px;
         max-width: 400px;
+
         input {
           margin-right: 2px;
           width: 18px;
           height: 18px;
         }
+
         label {
           font-size: 18px;
           line-height: 23px;
           color: #808080;
         }
+
         i {
           font-size: 18px;
           line-height: 23px;
@@ -951,10 +992,12 @@ export default {
           cursor: pointer;
         }
       }
+
       .button {
         margin-bottom: 30px;
+
         button {
-          width: 80%;
+          width: 100%;
           max-width: 400px;
           display: block;
           background: #558426;
@@ -967,6 +1010,7 @@ export default {
           color: #fff;
           margin: 0 auto 30px;
         }
+
         a {
           display: block;
           font-size: 18px;
@@ -976,15 +1020,42 @@ export default {
           cursor: pointer;
         }
       }
+
       .declaration {
         max-width: 400px;
         justify-content: space-between;
         margin: 0 auto;
         text-align: right;
+
         a {
           font-size: 15px;
           line-height: 21px;
           color: rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  .modal {
+    .modal-dialog {
+      .modal-body{
+        h2{
+          font-size: 26px;
+        }
+        h4{
+          font-size: 20px;
+          margin-bottom:30px;
+        }
+        ul{
+          li{
+            margin-bottom:20px;
+          }
+        }
+        .remember{
+          i{
+            font-size: 15px;
+          }
         }
       }
     }

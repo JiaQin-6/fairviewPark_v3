@@ -428,6 +428,9 @@ export default {
     img {
       width: auto;
     }
+    p{
+      font-size: 36px;
+    }
   }
   .nav-wrap {
     .row {
@@ -462,6 +465,12 @@ export default {
       }
       .nav-content {
         padding: 0;
+        h5{
+          font-size: 28px!important;
+        }
+        .item{
+          font-size: 15px!important;
+        }
       }
     }
   }

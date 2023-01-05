@@ -119,9 +119,11 @@
                       style="width: 100%; display: inline-block"
                     >
                       <div align="center" style="height: 100%">
-                        <span style="font-size: 24px; color: #fff; line-height: 50px">{{
-                          item.titleEnUs
-                        }}</span>
+                        <span
+                          class="subTitle"
+                          style="font-size: 24px; color: #fff; line-height: 50px"
+                          >{{ item.titleEnUs }}</span
+                        >
                       </div>
                     </td>
                   </tr>
@@ -255,7 +257,7 @@
             </div>
             <!-- 专巴收费表 -->
             <div
-              class="fs-15"
+              class="fs-15 price-table"
               v-if="nav_index === coach_service_content.coachServiceList.length - 2"
             >
               <div class="mb-30">
@@ -267,8 +269,8 @@
                       padding: 0;
                       color: #fff;
                       font-size: 24px;
-                      line-height:50px!important;
-                      height:50px;
+                      line-height: 50px !important;
+                      height: 50px;
                       min-width: 400px;
                       border-right: 2px solid #fff;
                       font-weight: normal;
@@ -446,8 +448,8 @@
                       padding: 0;
                       color: #fff;
                       font-size: 24px;
-                      line-height:50px!important;
-                      height:50px;
+                      line-height: 50px !important;
+                      height: 50px;
                       border-right: 2px solid #fff;
                       min-width: 682px;
                       font-weight: normal;
@@ -742,7 +744,7 @@
                       : "一號藍線巴士"
                   }}
                 </h5>
-                <div style="display: flex;border: none;">
+                <div style="display: flex; border: none">
                   <p style="width: 50%">
                     {{
                       fairview_park_lang === "en_us"
@@ -876,16 +878,20 @@
                       : "二號红線巴士"
                   }}
                 </h5>
-                <div style="display: flex;border: none;">
+                <div style="display: flex; border: none">
                   <p style="width: 50%">
                     {{
-                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
-                  }}
+                      fairview_park_lang === "en_us"
+                        ? "From Bus Terminus"
+                        : "巴士總站開出"
+                    }}
                   </p>
                   <p style="width: 50%">
                     {{
-                    fairview_park_lang === "en_us" ? "From Bus Terminus" : "巴士總站開出"
-                  }}
+                      fairview_park_lang === "en_us"
+                        ? "From Bus Terminus"
+                        : "巴士總站開出"
+                    }}
                   </p>
                 </div>
                 <ul>
@@ -1109,12 +1115,7 @@ export default {
       findLineMoneyList();
       findOneCoachServiceFile();
       findCoachServiceList();
-      document.onscroll = () =>{
-        //如果滚动隐藏下拉框
-        for (let i = 0; i < document.getElementsByClassName('el-popper').length; i++) {
-          document.getElementsByClassName('el-popper')[i].style.display = 'none'
-        }
-      }
+     
     });
     return {
       ...toRefs(data),
@@ -1244,7 +1245,7 @@ export default {
             border: none;
             font-size: 24px;
             height: 50px;
-            line-height: 50px!important;
+            line-height: 50px !important;
           }
           p {
             background-color: #fffde9;
@@ -1299,11 +1300,14 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {
       width: auto;
+    }
+    p {
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -1337,8 +1341,35 @@ export default {
           }
         }
       }
-      .nav-content{
+      .nav-content {
         padding: 0;
+        p,
+        span,
+        a {
+          font-size: 15px !important;
+        }
+        .title {
+          p {
+            font-size: 28px !important;
+          }
+          span {
+            font-size: 15px;
+          }
+        }
+        .subTitle {
+          font-size: 20px !important;
+        }
+        td {
+          font-size: 15px !important;
+        }
+        .price-table {
+          h5 {
+            font-size: 20px !important;
+          }
+        }
+        .free-bus .table h5 {
+          font-size: 20px !important;
+        }
       }
     }
   }

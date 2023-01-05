@@ -340,11 +340,11 @@ export default {
 
 @media (min-width: 1200px) {
   .top-part-wrap {
-    width: 992px;
+    width: 1100px;
   }
 
   .bottom-part-wrap {
-    width: 992px;
+    width: 1100px;
   }
 
   .bottom-right-part {
@@ -361,6 +361,72 @@ export default {
   .bottom-part-wrap {
     width: 1280px;
   }
+}
+@media (max-width: 991px) {
+  .main {
+
+  .top-part {
+
+    .row {
+
+      .col {
+
+        .logo {
+        }
+
+        .browse {
+
+          h3 {
+          }
+
+          ul {
+            margin-top: 10px;
+            li {
+              font-size: 15px;
+              a {}
+            }
+          }
+        }
+
+        p {
+          font-size: 15px;
+        }
+
+        .image {
+
+          img {
+            &:last-child{
+            }
+          }
+        }
+      }
+
+      .download {
+      }
+    }
+  }
+
+  .bottom-part {
+
+    .row {
+      .col {
+        padding: 0 10px!important;
+        p {
+          font-size: 15px;
+        }
+
+        ul {
+
+          li {
+            a {
+             font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 }
 
 @media (max-width: 767px) {

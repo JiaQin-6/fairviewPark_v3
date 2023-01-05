@@ -450,12 +450,18 @@ h5 {
     }
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .menu-select{
     display: block;
   }
   .sub-menu{
     display: none;
+  }
+  h5{
+    font-size:28px;
+  }
+  p{
+    font-size: 15px!important;
   }
 }
 </style>
