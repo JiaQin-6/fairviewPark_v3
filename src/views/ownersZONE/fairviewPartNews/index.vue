@@ -31,6 +31,7 @@
               placeholder="Select"
               size="large"
               @change="changeFairviewPartNews"
+              placement="bottom"
             >
               <el-option
                 v-for="(item, index) in fairview_part_news_list"
@@ -237,7 +238,7 @@ export default {
     width: 1280px;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   .banner {
     height: 200px;
     img {

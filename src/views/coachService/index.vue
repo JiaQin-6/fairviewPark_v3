@@ -186,6 +186,7 @@
                     : "*預計抵達時間"
                 }}
               </p>
+
               <table
                 width="100%"
                 border="0"
@@ -199,30 +200,43 @@
               >
                 <tbody>
                   <tr>
-                    <td>
-                      <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                        <tbody>
-                          <tr>
-                            <td
-                              valign="top"
-                              v-for="(item, index) in coach_service_content
-                                .coachServiceList[nav_index].endModuleList"
-                              :key="index"
-                              style="font-size: 18px"
-                            >
-                              <p
-                                class="style20"
-                                style="font-weight: bold; color: rgb(156, 194, 18)"
-                              >
-                                {{ item.titleEnUs }}
-                              </p>
-                              <p v-for="(item2, index2) in item.columnList" :key="index2">
-                                {{ item2.text || item2.textEnUs }}
-                              </p>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <td
+                      valign="top"
+                      v-for="(item, index) in coach_service_content.coachServiceList[
+                        nav_index
+                      ].endModuleList"
+                      :key="index"
+                      style="
+                        font-size: 18px;
+                        padding-right: 5px;
+                        color: rgb(156, 194, 18);
+                        font-weight: bold;
+                      "
+                    >
+                      {{ item.titleEnUs }}
+                    </td>
+                  </tr>
+                  <tr
+                    valign="top"
+                    v-for="(item, index) in coach_service_content.coachServiceList[
+                      nav_index
+                    ].endModuleList[0].columnList"
+                    :key="index"
+                    style="font-size: 18px"
+                  >
+                    <td
+                      valign="top"
+                      v-for="(item2, index2) in coach_service_content.coachServiceList[
+                        nav_index
+                      ].endModuleList"
+                      :key="index2"
+                      style="font-size: 18px"
+                    >
+                      {{
+                        coach_service_content.coachServiceList[nav_index].endModuleList[
+                          index2
+                        ].columnList[index].textEnUs
+                      }}
                     </td>
                   </tr>
                 </tbody>
@@ -1115,7 +1129,6 @@ export default {
       findLineMoneyList();
       findOneCoachServiceFile();
       findCoachServiceList();
-     
     });
     return {
       ...toRefs(data),

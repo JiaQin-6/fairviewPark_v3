@@ -13,22 +13,22 @@
     </p>
     <!-- 大維修資訊 -->
     <div style="text-align: right">
-      <!-- <el-select
-        v-model="fairview_part_news_index"
+      <el-select
+        v-model="tohpByFpnIndex"
         style="margin: 20px 0"
         placeholder="Select"
         size="large"
-        @change="changeFairviewPartNews"
+        @change="changeTohpByFpn"
       >
         <el-option
-          v-for="(item, index) in fairview_part_news_list"
+          v-for="(item, index) in tohpByFpnList"
           :key="index"
           :label="item.titleEnUs"
           :value="index"
         />
-      </el-select> -->
-      <div style="text-align: center">
-        <div id="viewer" style="width: 100%; height: 600px; margin: 0 auto"></div>
+      </el-select>
+      <div id="pdf-wrap">
+        <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
       </div>
     </div>
   </div>
@@ -46,24 +46,34 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       fairview_park_lang: "",
-      tohpByFpn: "",
+      tohpByFpnList: [],
+      tohpByFpnIndex: 0,
+      ramNumber: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
-    const findTohpByFpn = async () => {
+    const findTohpByFpn2 = async () => {
       try {
-        const res = await proxy.$http.findTohpByFpn({
+        const res = await proxy.$http.findFairviewParkNewsList({
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.tohpByFpn = res.data.data.fileEnUs;
+          data.tohpByFpnList = res.data.data.records;
         }
       } catch (error) {
         console.log(error);
       }
     };
-    onMounted(async () => {
-      await findTohpByFpn();
+    const changeTohpByFpn = () => {
+      data.ramNumber = getRamNumber(6);
+      document
+        .getElementById("pdf-wrap")
+        .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
+      let div = document.createElement("div");
+      div.id = data.ramNumber;
+      div.style.height = "600px";
+      document.getElementById("pdf-wrap").appendChild(div);
+
       PDFJSExpress(
         {
           path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
@@ -71,16 +81,50 @@ export default {
             process.env.NODE_ENV === "development"
               ? "oCrqt6OMULAoS15T2J62"
               : "ukZ2T6b500exNQH0GDJg",
-          initialDoc: data.tohpByFpn,
+          initialDoc:
+            data.tohpByFpnList.length !== 0 &&
+            data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
         },
-        document.getElementById("viewer")
+        document.getElementById(data.ramNumber)
       ).then((instance) => {
         // use APIs here
+      });
+    };
+    //随机生成数值
+    const getRamNumber = (num) => {
+      var result = "";
+      for (var i = 0; i < num; i++) {
+        result += Math.floor(Math.random() * 36).toString(36); //获取0-9，a-b随机组合成的
+      }
+      //默认字母小写，手动转大写
+      return result.toUpperCase();
+    };
+    onMounted(async () => {
+      await findTohpByFpn2();
+      PDFJSExpress(
+        {
+          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+          licenseKey:
+            process.env.NODE_ENV === "development"
+              ? "oCrqt6OMULAoS15T2J62"
+              : "ukZ2T6b500exNQH0GDJg",
+          initialDoc:
+            data.tohpByFpnList.length !== 0 &&
+            data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
+        },
+        document.getElementById("pdf-preview")
+      ).then((instance) => {
+        // use APIs here
+        // const { documentViewer, annotationManager } = instance.Core;
+        // call methods from instance, documentViewer and annotationManager as needed
+        // instance.UI.setTheme('dark');
       });
     });
     return {
       ...toRefs(data),
-      findTohpByFpn,
+      findTohpByFpn2,
+      changeTohpByFpn,
+      getRamNumber,
     };
   },
 };
@@ -95,6 +139,9 @@ export default {
     li {
       font-size: 15px !important;
     }
+  }
+  .el-select{
+    width:100%;
   }
 }
 </style>

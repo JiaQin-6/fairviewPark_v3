@@ -39,6 +39,7 @@
                     :placeholder="$t('Login name')"
                     v-model="loginForm.loginName"
                     type="text"
+                    :class="{ error: login_error_tip.is_null && !loginForm.loginName }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -51,6 +52,7 @@
                     :placeholder="$t('Password')"
                     v-model="loginForm.password"
                     type="password"
+                    :class="{ error: login_error_tip.is_null && !loginForm.password }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -160,6 +162,7 @@
                     v-model="registerForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
                     type="text"
+                    :class="{ error: register_error_tip.is_null && !registerForm.oname }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -177,6 +180,7 @@
                     v-model="registerForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
                     type="text"
+                    :class="{ error: register_error_tip.is_null && !registerForm.hcode }"
                     @input="registerForm.hcode = registerForm.hcode.toUpperCase()"
                   />
                   <i
@@ -195,6 +199,9 @@
                     v-model="registerForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
                     type="text"
+                    :class="{
+                      error: register_error_tip.is_null && !registerForm.loginName,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -212,6 +219,9 @@
                     v-model="registerForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
                     type="password"
+                    :class="{
+                      error: register_error_tip.is_null && !registerForm.password,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -243,19 +253,18 @@
                     v-model="registerForm.email"
                     :placeholder="$t('Email Address')"
                     type="text"
+                    :class="{
+                      error:
+                        (register_error_tip.is_null && !registerForm.email) ||
+                        register_error_tip.is_email_correct,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_null && !registerForm.email"
-                    >{{
-                      fairview_park_lang === "en_us"
-                        ? "Email Address Missing"
-                        : "電郵不能為空或格式錯誤"
-                    }}</i
-                  >
-                  <i
-                    style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_email_correct && registerForm.email"
+                    v-show="
+                      (register_error_tip.is_null && !registerForm.email) ||
+                      register_error_tip.is_email_correct
+                    "
                     >{{
                       fairview_park_lang === "en_us"
                         ? "Email Address Missing"
@@ -314,6 +323,11 @@
                     v-model="forgotPasswordForm.loginName"
                     type="text"
                     :placeholder="$t('Please enter your login name')"
+                    :class="{
+                      error:
+                        forgot_password_error_tip.is_null &&
+                        !forgotPasswordForm.loginName,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -331,6 +345,12 @@
                     v-model="forgotPasswordForm.email"
                     type="text"
                     :placeholder="$t('Please enter your registration contact email')"
+                    :class="{
+                      error:
+                        (forgot_password_error_tip.is_null &&
+                          !forgotPasswordForm.email) ||
+                        forgot_password_error_tip.is_email_correct,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -356,7 +376,13 @@
               </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
             </div>
-            <p>{{ fairview_park_lang === "en_us" ? "If you forgot your Login Name and Contact Email, please contact us." : "如閣下忘記了自設的登入名稱及聯絡電郵，請聯絡我們。" }}</p>
+            <p>
+              {{
+                fairview_park_lang === "en_us"
+                  ? "If you forgot your Login Name and Contact Email, please contact us."
+                  : "如閣下忘記了自設的登入名稱及聯絡電郵，請聯絡我們。"
+              }}
+            </p>
           </div>
         </div>
       </div>
@@ -416,6 +442,10 @@
                     v-model="editMemberInfoForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
                     type="text"
+                    :class="{
+                      error:
+                        edit_member_info_error_tip.is_null && !editMemberInfoForm.oname,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -447,6 +477,11 @@
                     v-model="editMemberInfoForm.loginName"
                     :placeholder="$t('Login Name (Self Customize)')"
                     type="text"
+                    :class="{
+                      error:
+                        edit_member_info_error_tip.is_null &&
+                        !editMemberInfoForm.loginName,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -462,6 +497,11 @@
                     v-model="editMemberInfoForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
                     type="password"
+                    :class="{
+                      error:
+                        edit_member_info_error_tip.is_null &&
+                        !editMemberInfoForm.password,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -477,6 +517,11 @@
                     v-model="editMemberInfoForm.confirmPassword"
                     :placeholder="$t('Confirm Password (Self Customize)')"
                     type="password"
+                    :class="{
+                      error:
+                        edit_member_info_error_tip.is_null &&
+                        !editMemberInfoForm.confirmPassword,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -509,6 +554,12 @@
                     v-model="editMemberInfoForm.email"
                     :placeholder="$t('Email Address')"
                     type="text"
+                    :class="{
+                      error:
+                        (edit_member_info_error_tip.is_null &&
+                          !editMemberInfoForm.email) ||
+                        edit_member_info_error_tip.is_email_correct,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -554,7 +605,7 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
 import { useStore } from "vuex";
-import { ElMessageBox,ElMessage } from "element-plus";
+import { ElMessageBox, ElMessage } from "element-plus";
 export default {
   data() {
     return {};
@@ -563,11 +614,11 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
-      loading:false,
+      loading: false,
       fairview_park_lang: "",
       loginForm: {
         loginName: "", //david
-        password: "", //n7wb519MMK
+        password: "", //yG1tRPL1x7
       },
       registerForm: {
         oname: null,
@@ -668,7 +719,7 @@ export default {
         data.register_error_tip.is_null = false;
         data.register_error_tip.is_email_correct = false;
       }
-      data.loading = true
+      data.loading = true;
       try {
         const res = await proxy.$http.register({
           oname: data.registerForm.oname,
@@ -684,7 +735,7 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("signUp").style.display = "none";
           document.getElementById("login").style.display = "none";
-          data.loading = false
+          data.loading = false;
           data.register_error_tip.is_show = false;
           data.register_error_tip.text = "";
           //如果注册成功了，帮用户自动登录
@@ -697,7 +748,9 @@ export default {
             if (res.data.status === 200) {
               ElMessage({
                 message:
-                  data.fairview_park_lang === "en_us" ? "Register Successful" : "註冊成功",
+                  data.fairview_park_lang === "en_us"
+                    ? "Register Successful"
+                    : "註冊成功",
                 type: "success",
               });
               document.getElementById("close-login").click();
@@ -711,12 +764,12 @@ export default {
             console.log(error);
           }
         } else {
-          data.loading = false
+          data.loading = false;
           data.register_error_tip.is_show = true;
           data.register_error_tip.text = res.data.msg;
         }
       } catch (error) {
-        data.loading = false
+        data.loading = false;
       }
     };
     //忘記密碼
@@ -732,7 +785,7 @@ export default {
         data.forgot_password_error_tip.is_null = false;
         data.forgot_password_error_tip.is_email_correct = false;
       }
-      data.loading = true
+      data.loading = true;
       try {
         const res = await proxy.$http.forgetPassword({
           loginName: data.forgotPasswordForm.loginName,
@@ -741,24 +794,26 @@ export default {
         });
         if (res.data.status === 200) {
           document.getElementById("close-forgetPasswor").click();
-          data.loading = false
+          data.loading = false;
           // ElMessageBox.alert(`${res.data.msg}`, "", {
           //   confirmButtonText: $t("Confirm"),
           // });
           ElMessage({
-                message:
-                  data.fairview_park_lang === "en_us" ? "Email Sent Successful" : "郵件發送成功",
-                type: "success",
-              });
+            message:
+              data.fairview_park_lang === "en_us"
+                ? "Email Sent Successful"
+                : "郵件發送成功",
+            type: "success",
+          });
           document.getElementsByClassName("el-overlay")[0].style["background-color"] =
             "transparent";
         } else {
-          data.loading = false
+          data.loading = false;
           data.forgot_password_error_tip.is_show = true;
           data.forgot_password_error_tip.text = res.data.msg;
         }
       } catch (error) {
-        data.loading = false
+        data.loading = false;
         console.log(error);
       }
     };
@@ -780,7 +835,7 @@ export default {
         data.edit_member_info_error_tip.is_null = false;
         data.edit_member_info_error_tip.is_email_correct = false;
       }
-      data.loading = true
+      data.loading = true;
       try {
         const res = await proxy.$http.editMemberInfo({
           id: JSON.parse(localStorage.getItem("login-info")).id,
@@ -796,16 +851,16 @@ export default {
         });
         if (res.data.status === 200) {
           document.getElementById("editMemberInformation").style.display = "none";
-          data.loading = false
+          data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
         } else {
-          data.loading = false
+          data.loading = false;
           data.edit_member_info_error_tip.is_show = true;
           data.edit_member_info_error_tip.text = res.data.msg;
         }
       } catch (error) {
-        data.loading = false
+        data.loading = false;
       }
     };
     //
@@ -855,7 +910,7 @@ export default {
 @deep: ~">>>";
 
 .modal {
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
   .modal-dialog {
     .verify {
       position: relative;
@@ -1034,26 +1089,35 @@ export default {
         }
       }
     }
+    .error {
+      border-color: rgb(222, 7, 28) !important;
+      background-color: rgba(222, 7, 28, 0.1);
+      color: rgb(222, 7, 28);
+
+      &::-webkit-input-placeholder {
+        color: rgb(222, 7, 28);
+      }
+    }
   }
 }
 @media (max-width: 991px) {
   .modal {
     .modal-dialog {
-      .modal-body{
-        h2{
+      .modal-body {
+        h2 {
           font-size: 26px;
         }
-        h4{
+        h4 {
           font-size: 20px;
-          margin-bottom:30px;
+          margin-bottom: 30px;
         }
-        ul{
-          li{
-            margin-bottom:20px;
+        ul {
+          li {
+            margin-bottom: 20px;
           }
         }
-        .remember{
-          i{
+        .remember {
+          i {
             font-size: 15px;
           }
         }
