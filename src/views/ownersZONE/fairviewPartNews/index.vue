@@ -26,12 +26,14 @@
         <div style="margin: 0 auto" class="col-12 nav-content mb-20">
           <div style="text-align: right">
             <el-select
+              v-if="fairview_part_news_list.length>0"
               v-model="fairview_part_news_index"
               style="margin:20px 0"
               placeholder="Select"
               size="large"
               @change="changeFairviewPartNews"
               placement="bottom"
+              :teleported="false"
             >
               <el-option
                 v-for="(item, index) in fairview_part_news_list"
@@ -207,6 +209,22 @@ export default {
           }
           .is-focus {
             border-color: #ccc;
+          }
+        }
+        .el-popper{
+          position: absolute;
+          top: 52px!important;
+          left: 0!important;
+          .el-select-dropdown{
+            .el-scrollbar{
+              .el-select-dropdown__wrap{
+                .el-scrollbar__view{
+                  .el-select-dropdown__item{
+                    text-align: left;
+                  }
+                }
+              }
+            }
           }
         }
       }

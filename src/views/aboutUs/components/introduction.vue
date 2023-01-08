@@ -79,7 +79,7 @@
                   class="col-12 col-xxl-7"
                   style="padding: 15px 10px 0; box-sizing: border-box"
                 >
-                  <h3 class="mb-20">{{ $t("About us") }}</h3>
+                  <h3 class="mb-20">{{ fairview_park_lang === 'en_us' ? 'Contact Us' : '聯絡我們' }}</h3>
                   <div>
                     <ul>
                       <li
@@ -131,22 +131,30 @@
                               fairview_park_lang === 'en_us'
                                 ? 'Estate Management <a href=tel' +
                                   ':' +
-                                  '2471 8210>2471 8210'
-                                : '管理公司 <a href=tel' + ':' + '2471 8210>2471 8210',
+                                  '2471 8210>2471 8210</a>'
+                                : '管理公司 <a href=tel' + ':' + '2471 8210>2471 8210</a>',
                           },
                           {
                             title: fairview_park_lang === 'en_us' ? 'Email' : '電郵',
                             content:
                               fairview_park_lang === 'en_us'
-                                ? 'info@fairviewpark.hk'
-                                : 'info@fairviewpark.hk',
+                                ? '<a href=mailto' +
+                                  ':' +
+                                  'info@fairviewpark.hk>info@fairviewpark.hk</a>'
+                                : '<a href=mailto' +
+                                  ':' +
+                                  'info@fairviewpark.hk>info@fairviewpark.hk</a>',
                           },
                           {
                             title: fairview_park_lang === 'en_us' ? 'Website' : '網站',
                             content:
                               fairview_park_lang === 'en_us'
-                                ? 'www.fairviewpark.hk'
-                                : 'www.fairviewpark.hk',
+                                ? '<a href=mailto' +
+                                  ':' +
+                                  'www.fairviewpark.hk>www.fairviewpark.hk</a>'
+                                : '<a href=mailto' +
+                                  ':' +
+                                  'www.fairviewpark.hk>www.fairviewpark.hk</a>',
                           },
                         ]"
                         :key="index"

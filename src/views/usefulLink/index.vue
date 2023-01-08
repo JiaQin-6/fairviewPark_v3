@@ -36,6 +36,7 @@
             </li>
           </ul>
           <el-select
+            v-if="telephone_link_list.length>0"
             size="large"
             v-model="nav_index"
             class="menu-select"

@@ -172,8 +172,8 @@ http.findTheOverhaulProjectList = (arr:any) => {
   return http.post(`/houseweb/theOverhaulProject/findTheOverhaulProjectList`,arr);
 };
 //查看 锦绣花园 pdf
-http.findTohpByFpn = (arr:any) => {
-  return http.post(`/houseweb/theOverhaulProject/findTohpByFpn`,arr);
+http.findTohpByFpn2 = (arr:any) => {
+  return http.post(`/houseweb/theOverhaulProject/findTohpByFpn2`,arr);
 };
 //查看当前登录用户是否已读
 http.findPmLogHave = (arr:any) => {

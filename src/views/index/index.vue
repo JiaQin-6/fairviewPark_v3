@@ -9,137 +9,137 @@
 <template>
   <div :class="{ 'flex-row': is_show }">
     <transition name="el-zoom-in-top">
-    <div class="ownerIsZONE" v-if="is_show">
-      <div class="ownerIsZONE-content">
-        <ul>
-          <li
-            v-for="(item, index) in isShowLoginOutButton?[
-              {
-                router: '/edit-member-information',
-                text: $t('Edit member information'),
-              },
-              {
-                router: '/news-update',
-                text: $t('News Update'),
-              },
-              {
-                router: '/FAQ-from-residents',
-                text: $t('FAQ from Residents'),
-              },
-              {
-                router: '/estate-notice',
-                text: $t('Estate Notices'),
-              },
-              {
-                router: '/estate-activities',
-                text: $t('Estate Activities'),
-              },
-              {
-                router: '/fairview-part-news',
-                text: $t('Fairview Park News'),
-              },
-              {
-                router: '/payment-list',
-                text: $t('Payment List'),
-              },
-              {
-                router: '/apply-resident-smartcard',
-                text: $t('Apply Resident Smartcard'),
-              },
-              {
-                router: '/MAC-column',
-                text: $t('MAC Column'),
-              },
-              {
-                router: '/the-overhaul-project',
-                text: $t('the Overhaul Project'),
-              },
-              {
-                router: '/lottery-system-for-impound',
-                text: $t('Lottery System For Impounding Action'),
-              },
-              {
-                router: '/frequently-used-forms',
-                text: $t('Frequently Used Forms'),
-              },
-              {
-                router: '/residents-handbook-map',
-                text: $t('Residents Handbook / Map'),
-              },
-              {
-                router: '/demographic-opinion-survey',
-                text: $t('Demographic & Opinion Survey'),
-              },
-              {
-                router: '/loginOut',
-                text: $t('Login out'),
-              },
-            ]:[
-              {
-                router: '/news-update',
-                text: $t('News Update'),
-              },
-              {
-                router: '/FAQ-from-residents',
-                text: $t('FAQ from Residents'),
-              },
-              {
-                router: '/estate-notice',
-                text: $t('Estate Notices'),
-              },
-              {
-                router: '/estate-activities',
-                text: $t('Estate Activities'),
-              },
-              {
-                router: '/fairview-part-news',
-                text: $t('Fairview Park News'),
-              },
-              {
-                router: '/payment-list',
-                text: $t('Payment List'),
-              },
-              {
-                router: '/apply-resident-smartcard',
-                text: $t('Apply Resident Smartcard'),
-              },
-              {
-                router: '/MAC-column',
-                text: $t('MAC Column'),
-              },
-              {
-                router: '/the-overhaul-project',
-                text: $t('the Overhaul Project'),
-              },
-              {
-                router: '/lottery-system-for-impound',
-                text: $t('Lottery System For Impounding Action'),
-              },
-              {
-                router: '/frequently-used-forms',
-                text: $t('Frequently Used Forms'),
-              },
-              {
-                router: '/residents-handbook-map',
-                text: $t('Residents Handbook / Map'),
-              },
-              {
-                router: '/demographic-opinion-survey',
-                text: $t('Demographic & Opinion Survey'),
-              },
-            ]"
-            :key="index"
-            @click="selectOwnersZone(item.router)"
-          >
-            {{ item.text }}
-          </li>
-        </ul>
+      <div class="ownerIsZONE" v-if="is_show">
+        <div class="ownerIsZONE-content">
+          <ul>
+            <li
+              v-for="(item, index) in isShowLoginOutButton
+                ? [
+                    {
+                      router: '/edit-member-information',
+                      text: $t('Edit member information'),
+                    },
+                    {
+                      router: '/news-update',
+                      text: $t('News Update'),
+                    },
+                    {
+                      router: '/FAQ-from-residents',
+                      text: $t('FAQ from Residents'),
+                    },
+                    {
+                      router: '/estate-notice',
+                      text: $t('Estate Notices'),
+                    },
+                    {
+                      router: '/estate-activities',
+                      text: $t('Estate Activities'),
+                    },
+                    {
+                      router: '/fairview-part-news',
+                      text: $t('Fairview Park News'),
+                    },
+                    {
+                      router: '/payment-list',
+                      text: $t('Payment List'),
+                    },
+                    {
+                      router: '/apply-resident-smartcard',
+                      text: $t('Apply Resident Smartcard'),
+                    },
+                    {
+                      router: '/MAC-column',
+                      text: $t('MAC Column'),
+                    },
+                    {
+                      router: '/the-overhaul-project',
+                      text: $t('the Overhaul Project'),
+                    },
+                    {
+                      router: '/lottery-system-for-impound',
+                      text: $t('Lottery System For Impounding Action'),
+                    },
+                    {
+                      router: '/frequently-used-forms',
+                      text: $t('Frequently Used Forms'),
+                    },
+                    {
+                      router: '/residents-handbook-map',
+                      text: $t('Residents Handbook / Map'),
+                    },
+                    {
+                      router: '/demographic-opinion-survey',
+                      text: $t('Demographic & Opinion Survey'),
+                    },
+                    {
+                      router: '/loginOut',
+                      text: $t('Login out'),
+                    },
+                  ]
+                : [
+                    {
+                      router: '/news-update',
+                      text: $t('News Update'),
+                    },
+                    {
+                      router: '/FAQ-from-residents',
+                      text: $t('FAQ from Residents'),
+                    },
+                    {
+                      router: '/estate-notice',
+                      text: $t('Estate Notices'),
+                    },
+                    {
+                      router: '/estate-activities',
+                      text: $t('Estate Activities'),
+                    },
+                    {
+                      router: '/fairview-part-news',
+                      text: $t('Fairview Park News'),
+                    },
+                    {
+                      router: '/payment-list',
+                      text: $t('Payment List'),
+                    },
+                    {
+                      router: '/apply-resident-smartcard',
+                      text: $t('Apply Resident Smartcard'),
+                    },
+                    {
+                      router: '/MAC-column',
+                      text: $t('MAC Column'),
+                    },
+                    {
+                      router: '/the-overhaul-project',
+                      text: $t('the Overhaul Project'),
+                    },
+                    {
+                      router: '/lottery-system-for-impound',
+                      text: $t('Lottery System For Impounding Action'),
+                    },
+                    {
+                      router: '/frequently-used-forms',
+                      text: $t('Frequently Used Forms'),
+                    },
+                    {
+                      router: '/residents-handbook-map',
+                      text: $t('Residents Handbook / Map'),
+                    },
+                    {
+                      router: '/demographic-opinion-survey',
+                      text: $t('Demographic & Opinion Survey'),
+                    },
+                  ]"
+              :key="index"
+              @click="selectOwnersZone(item.router)"
+            >
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </transition>
-    <div
-      class="main-content"
-    >
+    </transition>
+    <div class="main-content">
       <Header :isShow="is_show" @showOwnerIsZONE="showOwnerIsZONE"></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
@@ -147,15 +147,22 @@
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
-    <el-backtop style="background-color:transparent">
-      <img style="width:100%" :src="arrowUpCircle" alt="" />
+    <el-backtop style="background-color: transparent">
+      <img style="width: 100%" :src="arrowUpCircle" alt="" />
     </el-backtop>
-
   </div>
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide,watch } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  provide,
+  watch,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Header from "../../components/header/index.vue";
@@ -169,42 +176,46 @@ export default {
     Footer,
     Login,
   },
-  data(){
+  data() {
     return {
       arrowUpCircle: new URL(
         "../../assets/image/home/arrow-up-circle.png",
         import.meta.url
       ).href,
-    }
+    };
   },
   setup() {
     const store = useStore();
     const data = reactive({
       is_show: false,
-      is_show_footer:true,
-      isShowLoginOutButton:true,//是否顯示登出按鈕（app進來web判斷）
+      is_show_footer: true,
+      isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
 
     //判斷當從app進來的時候用戶是否登錄
-    if(route.query.source&&route.query.source==='app'&&!sessionStorage.getItem('app-login-status')){
-      if(route.query.session){
+    if (
+      route.query.source &&
+      route.query.source === "app" &&
+      !sessionStorage.getItem("app-login-status")
+    ) {
+      if (route.query.session) {
         //在app已登錄
-        sessionStorage.setItem('app-login-status','1')
+        sessionStorage.setItem("app-login-status", "1");
         data.is_show_footer = false;
         data.isShowLoginOutButton = false;
-      }else{
+      } else {
         //在app未登錄
-        sessionStorage.setItem('app-login-status','2')
-        data.is_show_footer = false
+        sessionStorage.setItem("app-login-status", "2");
+        data.is_show_footer = false;
       }
-    }else if(sessionStorage.getItem('app-login-status')){
-      if(sessionStorage.getItem('app-login-status')==='1'){
-        data.is_show_footer = false
-        data.isShowLoginOutButton = false
-      }else if(sessionStorage.getItem('app-login-status')==='2'){
-        data.is_show_footer = false
+    } else if (sessionStorage.getItem("app-login-status")) {
+      if (sessionStorage.getItem("app-login-status") === "1") {
+        data.is_show_footer = false;
+        data.isShowLoginOutButton = false;
+      } else if (sessionStorage.getItem("app-login-status") === "2") {
+        data.is_show_footer = false;
       }
     }
     const showOwnerIsZONE = (val) => {
@@ -219,9 +230,8 @@ export default {
           .getPropertyValue("display") !== "none"
       ) {
         document.getElementById("navbar-button").click();
-      } 
+      }
       data.is_show = val;
-      
     };
     //登出
     const loginOut = () => {
@@ -241,51 +251,61 @@ export default {
           .getPropertyValue("display") !== "none"
       ) {
         document.getElementById("navbar-button").click();
-      } 
+      }
       data.is_show = false;
       if (val === "/loginOut") {
         loginOut();
         router.push({
-          path:'/home',
-          query:{
-            lang:sessionStorage.getItem('fairview_park_lang')
-          }
+          path: "/home",
+          query: {
+            lang: sessionStorage.getItem("fairview_park_lang"),
+          },
         });
       } else if (val === "/edit-member-information") {
-        const button = document.createElement('button');
-        button.setAttribute('data-bs-toggle','modal')
-        button.setAttribute('data-bs-target','#editMemberInformation')
-        document.body.appendChild(button)
+        const button = document.createElement("button");
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute("data-bs-target", "#editMemberInformation");
+        document.body.appendChild(button);
         button.click();
-        document.body.removeChild(button)
+        document.body.removeChild(button);
       } else {
         router.push({
-          path:val,
-          query:{
-            lang:sessionStorage.getItem('fairview_park_lang')
-          }
+          path: val,
+          query: {
+            lang: sessionStorage.getItem("fairview_park_lang"),
+          },
         });
       }
     };
     watch(
       () => route,
       (value) => {
-        data.is_show = false
+        data.is_show = false;
       },
       { deep: true, immediate: true }
     );
     onMounted(async () => {
-       document.onscroll = () => {
+      document.onscroll = () => {
         //如果滚动隐藏下拉框
-        for (let i = 0; i < document.getElementsByClassName("el-popper").length; i++) {
-          if (document.getElementsByClassName("el-popper")[i].style.display !== "none") {
-            document.getElementsByClassName("el-popper")[i].style.display = "none";
-            document.getElementsByClassName("menu-select")[0].click();
-          }
+        if (
+          document
+            .getElementsByClassName("menu-select")[0]
+            .getElementsByClassName("is-reverse").length !== 0
+        ) {
+          document.getElementsByClassName("menu-select")[0].click();
         }
+        if (
+          document.getElementsByClassName("el-pagination__sizes") &&
+          document
+            .getElementsByClassName("el-pagination__sizes")[0]
+            .getElementsByClassName("is-reverse").length !== 0
+        ) {
+          document.getElementsByClassName("el-pagination__sizes")[0].childNodes[0].click();
+        }
+        
       };
     });
-    
+
     return {
       ...toRefs(data),
       loginOut,
@@ -327,7 +347,7 @@ export default {
 .main-content {
   position: relative;
   background-color: #fff;
-    width: 100%;
+  width: 100%;
   .mask {
     position: fixed;
     top: 0;
@@ -339,16 +359,15 @@ export default {
   }
 }
 @media (max-width: 991px) {
-  .ownerIsZONE{
+  .ownerIsZONE {
     .ownerIsZONE-content {
-      ul{
-        li{
+      ul {
+        li {
           font-size: 20px;
           padding: 10px 10px;
         }
       }
     }
   }
-  
 }
 </style>

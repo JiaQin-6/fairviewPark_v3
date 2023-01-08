@@ -88,34 +88,37 @@
       </div>
     </div>
     <div class="content">
-      <ul v-show="menuActive === 1">
-        <li
-          v-for="(item, index) in minutes_of_mac_meetings_show_list"
-          :key="index"
-          class="flex-row"
-        >
-          <i>{{ item.index + 1 }}.</i>
-          <span
-            ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+      <el-config-provider :locale="local">
+        <ul v-show="menuActive === 1">
+          <li
+            v-for="(item, index) in minutes_of_mac_meetings_show_list"
+            :key="index"
+            class="flex-row"
           >
-        </li>
-        <!-- 分頁 -->
-        <div style="display: flex; align-items: center" v-if="total !== 0">
-          <el-pagination
-            style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
-            v-model:current-page="currentPage1"
-            v-model:page-size="pageSize1"
-            :page-sizes="[5, 10, 15, 20]"
-            :small="false"
-            :disabled="false"
-            :background="false"
-            layout="total, sizes, prev, pager, next, jumper"
-            :total="total1"
-            @size-change="handleSizeChange1"
-            @current-change="handleCurrentChange1"
-          />
-        </div>
-      </ul>
+            <i>{{ item.index + 1 }}.</i>
+            <span
+              ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+            >
+          </li>
+          <!-- 分頁 -->
+          <div style="display: flex; align-items: center" v-if="total !== 0">
+            <el-pagination
+              style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
+              v-model:current-page="currentPage1"
+              v-model:page-size="pageSize1"
+              :page-sizes="[5, 10, 15, 20]"
+              :small="false"
+              :disabled="false"
+              :background="false"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="total1"
+              @size-change="handleSizeChange1"
+              @current-change="handleCurrentChange1"
+            />
+          </div>
+        </ul>
+      </el-config-provider>
+
       <div v-show="menuActive === 2">
         <div class="menu">
           <span
@@ -171,7 +174,13 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
+import { ElConfigProvider } from "element-plus";
+import zhTw from "element-plus/dist/locale/zh-tw.mjs";
+import en from "element-plus/dist/locale/en.mjs";
 export default {
+  components: {
+    ElConfigProvider,
+  },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
@@ -190,8 +199,10 @@ export default {
       currentPage2: 1,
       pageSize2: 5,
       total2: 0,
+      local: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
     //查看所有列表
     const findMinutesOfMacMeetingsList = async () => {
       try {
@@ -419,7 +430,6 @@ h5 {
         }
       }
     }
-    
   }
   @{deep} .el-pagination {
     .el-pagination__total {
@@ -519,48 +529,47 @@ h5 {
     }
   }
 }
-@media (max-width:768px) {
-  
-      @{deep} .el-pagination {
-          .el-pagination__total {
-            font-size: 18px;
-            margin: 0;
-          }
-          .el-pagination__sizes{
-            flex-basis: 100%;
-            text-align: left;
-            position: relative;
-            width: 100%;
-            display: block;
-            .el-select{
-              position: relative;
-              left: 0;
-            }
-          }
-          .el-input__inner {
-            font-size: 18px;
-          }
-          .el-icon {
-            font-size: 18px;
-          }
-          .el-pager {
-            width: 79%;
-            li {
-              font-size: 18px;
-              &:hover {
-                color: var(--mainColor2);
-              }
-            }
-            .is-active {
-              color: var(--mainColor2);
-            }
-          }
-          .el-pagination__jump {
-            font-size: 18px;
-            margin: 0;
-          }
+@media (max-width: 768px) {
+  @{deep} .el-pagination {
+    .el-pagination__total {
+      font-size: 15px!important;
+      margin: 0;
+    }
+    .el-pagination__sizes {
+      text-align: left;
+      position: relative;
+      width: calc(100% - 85px);
+      display: block;
+      padding-left: 10px;
+      box-sizing: border-box;
+      .el-select {
+        position: relative;
+        left: 0;
+      }
+    }
+    .el-input__inner {
+      font-size: 15px!important;
+    }
+    .el-icon {
+      font-size: 15px!important;
+    }
+    .el-pager {
+      width: 79%;
+      overflow: auto;
+      li {
+        font-size: 15px!important;
+        &:hover {
+          color: var(--mainColor2);
         }
-    
-  
+      }
+      .is-active {
+        color: var(--mainColor2);
+      }
+    }
+    .el-pagination__jump {
+      font-size: 15px!important;
+      margin: 0;
+    }
+  }
 }
 </style>

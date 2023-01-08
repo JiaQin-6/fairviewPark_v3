@@ -36,6 +36,7 @@
             </li>
           </ul>
           <el-select
+            v-if="shop_information_list.length>0"
             size="large"
             v-model="nav_index"
             class="menu-select"

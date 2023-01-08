@@ -292,8 +292,8 @@
               @click="toInformationPush"
             >
               <i class="iconfont icon-lingdang white"></i>
+              <!-- v-if="pmLogHave === 'Y'" -->
               <span
-                v-if="pmLogHave === 'Y'"
                 style="
                   position: absolute;
                   top: 2px;

@@ -374,8 +374,8 @@ export default {
               : "ukZ2T6b500exNQH0GDJg",
           initialDoc:
             data.fairview_park_lang === "en_us"
-              ? "https://en.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Eng.pdf"
-              : "https://cn.fairviewpark.hk/mac/MAC_Election_Activities_Rules_Chi.pdf",
+              ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
+              : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf",
         },
         document.getElementById("pdf-preview-1")
       ).then((instance) => {
@@ -393,8 +393,8 @@ export default {
               : "ukZ2T6b500exNQH0GDJg",
           initialDoc:
             data.fairview_park_lang === "en_us"
-              ? "https://en.fairviewpark.hk/mac/MAC_Election_Timetable_Eng.pdf"
-              : "https://cn.fairviewpark.hk/mac/MAC_Election_Timetable_Chi.pdf",
+              ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+              : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
         },
         document.getElementById("pdf-preview-2")
       ).then((instance) => {

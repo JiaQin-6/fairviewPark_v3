@@ -19,6 +19,7 @@
         placeholder="Select"
         size="large"
         @change="changeTohpByFpn"
+        :teleported="false"
       >
         <el-option
           v-for="(item, index) in tohpByFpnList"
@@ -54,11 +55,11 @@ export default {
     //查看所有 业主手册及地图 列表
     const findTohpByFpn2 = async () => {
       try {
-        const res = await proxy.$http.findFairviewParkNewsList({
+        const res = await proxy.$http.findTohpByFpn2({
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.tohpByFpnList = res.data.data.records;
+          data.tohpByFpnList = res.data.data;
         }
       } catch (error) {
         console.log(error);
@@ -131,6 +132,23 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
+@{deep} .el-popper{
+          position: absolute;
+          top: 52px!important;
+          left: 0!important;
+          .el-select-dropdown{
+            .el-scrollbar{
+              .el-select-dropdown__wrap{
+                .el-scrollbar__view{
+                  .el-select-dropdown__item{
+                    text-align: left;
+                  }
+                }
+              }
+            }
+          }
+        }
 @media (max-width: 991px) {
   p {
     font-size: 28px !important;

@@ -522,7 +522,7 @@
                             ? "Octopus Card Number:"
                             : "八達通編號："
                         }}</strong>
-                        <span>{{ item.rcOcto }}</span>
+                        <span>{{ item.rcOcto }}({{ item.rcOctoBk }})</span>
                       </div>
                     </div>
                     <div class="user-info">
@@ -532,7 +532,7 @@
                           :src="item.rcPhoto"
                           alt=""
                         />
-                      </div>
+                      </div> 
                       <div v-if="item.rcAppStatus === 2">
                         <strong style="margin-right: 5px">{{
                           fairview_park_lang === "en_us"
@@ -701,8 +701,8 @@ export default {
       ) {
         ElMessage.error(
           data.fairview_park_lang === "en_us"
-            ? "Please fill in the complete 8- or 9-digit Octopus Number "
-            : "请填写完整的8位或9位八达通号码"
+            ? "Please fill in the complete 8- or 9-digit Octopus Number"
+            : "請填上八達通卡的8-9位之完整編號"
         );
         return false;
       } else if (

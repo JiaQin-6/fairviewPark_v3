@@ -36,6 +36,7 @@
             </li>
           </ul>
           <el-select
+            v-if="coach_service_content.coachServiceList.length>0"
             size="large"
             v-model="nav_index"
             class="menu-select"
@@ -148,7 +149,7 @@
                   </tr>
                   <tr
                     v-if="item.fleidList.length !== 0"
-                    v-for="(item2, index2) in item.fleidList[0].columnList.length"
+                    v-for="(item2, index2) in getColMaxLength(item.fleidList)"
                     :key="index2"
                     class="flex-row"
                   >
@@ -167,11 +168,10 @@
                         style="padding: 10px 0; margin: 0"
                       >
                         {{
-                          item.fleidList[index3] &&
                           item.fleidList[index3].columnList[index2] &&
-                          item.fleidList[index3].columnList[index2].text
-                            ? item.fleidList[index3].columnList[index2].text
-                            : item.fleidList[index3].columnList[index2].textEnUs
+                              item.fleidList[index3].columnList[index2].textEnUs
+                            ? item.fleidList[index3].columnList[index2].textEnUs
+                            : ""
                         }}
                       </p>
                     </td>
@@ -218,9 +218,9 @@
                   </tr>
                   <tr
                     valign="top"
-                    v-for="(item, index) in coach_service_content.coachServiceList[
-                      nav_index
-                    ].endModuleList[0].columnList"
+                    v-for="(item, index) in getColMaxLength(
+                      coach_service_content.coachServiceList[nav_index].endModuleList
+                    )"
                     :key="index"
                     style="font-size: 18px"
                   >
@@ -232,10 +232,14 @@
                       :key="index2"
                       style="font-size: 18px"
                     >
-                      {{
+                      {{coach_service_content.coachServiceList[nav_index].endModuleList[
+                          index2
+                        ].columnList[index]&&
                         coach_service_content.coachServiceList[nav_index].endModuleList[
                           index2
-                        ].columnList[index].textEnUs
+                        ].columnList[index].textEnUs? coach_service_content.coachServiceList[nav_index].endModuleList[
+                          index2
+                        ].columnList[index].textEnUs:''
                       }}
                     </td>
                   </tr>
@@ -1125,6 +1129,16 @@ export default {
         console.log(error);
       }
     };
+    //獲取table中最長的col的數據
+    const getColMaxLength = (item) => {
+      let maxLength = 0;
+      item.map((item) => {
+        if (item.columnList.length > maxLength) {
+          maxLength = item.columnList.length;
+        }
+      });
+      return maxLength;
+    };
     onMounted(async () => {
       findLineMoneyList();
       findOneCoachServiceFile();
@@ -1135,6 +1149,7 @@ export default {
       findLineMoneyList,
       findOneCoachServiceFile,
       findCoachServiceList,
+      getColMaxLength,
     };
   },
 };

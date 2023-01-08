@@ -44,6 +44,7 @@
               </li>
             </ul>
             <el-select
+              v-if="estate_notice_list.length>0"
               size="large"
               v-model="nav_index"
               class="menu-select"
@@ -96,6 +97,8 @@
                   :total="total"
                   @size-change="handleSizeChange"
                   @current-change="handleCurrentChange"
+                  :teleported="false"
+                  class="pagination"
                 />
               </div>
             </div>
@@ -475,30 +478,32 @@ export default {
     .row {
       @{deep} .el-pagination {
           .el-pagination__total {
-            font-size: 18px;
+            font-size: 15px;
             margin: 0;
           }
           .el-pagination__sizes{
-            flex-basis: 100%;
             text-align: left;
             position: relative;
-            width: 100%;
+            width: calc(100% - 85px);
             display: block;
+            padding-left: 10px;
+            box-sizing: border-box;
             .el-select{
               position: relative;
               left: 0;
             }
           }
           .el-input__inner {
-            font-size: 18px;
+            font-size: 15px;
           }
           .el-icon {
-            font-size: 18px;
+            font-size: 15px;
           }
           .el-pager {
             width: 79%;
+            overflow: auto;
             li {
-              font-size: 18px;
+              font-size: 15px;
               &:hover {
                 color: var(--mainColor2);
               }
@@ -508,7 +513,7 @@ export default {
             }
           }
           .el-pagination__jump {
-            font-size: 18px;
+            font-size: 15px;
             margin: 0;
           }
         }

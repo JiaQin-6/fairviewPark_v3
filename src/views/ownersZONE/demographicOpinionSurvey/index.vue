@@ -30,11 +30,13 @@
         >
           <div style="text-align: right">
             <el-select
+              v-if="demographic_opinion_survey_list.length>0"
               v-model="demographic_opinion_survey_index"
               style="margin: 20px 0;"
               placeholder="Select"
               size="large"
               @change="changeDemographicOpinion"
+              :teleported="false"
             >
               <el-option
                 v-for="(item, index) in demographic_opinion_survey_list"
@@ -208,6 +210,22 @@ export default {
           }
         }
       }
+      .el-popper{
+          position: absolute;
+          top: 52px!important;
+          left: 0!important;
+          .el-select-dropdown{
+            .el-scrollbar{
+              .el-select-dropdown__wrap{
+                .el-scrollbar__view{
+                  .el-select-dropdown__item{
+                    text-align: left;
+                  }
+                }
+              }
+            }
+          }
+        }
     }
   }
 }

@@ -35,6 +35,7 @@
   background-color: #BA9859 !important;
   height: auto!important;
   white-space: inherit!important;
+  text-align: left;
 }
 .el-popper .el-select-dropdown .el-select-dropdown__wrap .el-scrollbar__view .el-select-dropdown__item:last-child {
   border-bottom: 0!important;

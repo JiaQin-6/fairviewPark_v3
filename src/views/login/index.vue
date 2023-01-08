@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div v-loading="loading">
+  <div>
     <!-- login Modal -->
     <div
       class="modal fade"
@@ -18,7 +18,7 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -113,7 +113,7 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -300,7 +300,7 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -396,7 +396,7 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
         <!-- 輸入密碼驗證 -->
         <div class="verify" v-show="!showEditMemberModel">
           <div class="verify-password">
@@ -417,7 +417,13 @@
               "
               >{{ $t("This field is required.") }}</i
             >
-            <el-button @click="showEditMemberModel = true">{{
+            <i
+              style="display: block; color: #fc0d1b; text-align: left"
+              v-show="edit_member_info_error_tip.is_verify_password_error
+              "
+              >{{ $t("Please provide a valid password.") }}</i
+            >
+            <el-button @click="verifyPassword">{{
               fairview_park_lang === "en_us" ? "Confirm" : "確認"
             }}</el-button>
           </div>
@@ -665,6 +671,7 @@ export default {
       },
       edit_member_info_error_tip: {
         is_verify_password_null: false,
+        is_verify_password_error: false,
         is_null: false,
         is_email_correct: false,
         is_show: false,
@@ -691,6 +698,13 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("close-login").click();
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
+          sessionStorage.setItem(
+            "login-user",
+            JSON.stringify({
+              ln: data.loginForm.loginName,
+              pd: data.loginForm.password,
+            })
+          );
           store.commit("setLoginStatus", true);
         } else {
           data.login_error_tip.is_show = true;
@@ -733,8 +747,6 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          document.getElementById("signUp").style.display = "none";
-          document.getElementById("login").style.display = "none";
           data.loading = false;
           data.register_error_tip.is_show = false;
           data.register_error_tip.text = "";
@@ -754,6 +766,7 @@ export default {
                 type: "success",
               });
               document.getElementById("close-login").click();
+              document.getElementById("close-signUp").click();
               localStorage.setItem("login-info", JSON.stringify(res.data.data));
               store.commit("setLoginStatus", true);
             } else {
@@ -795,9 +808,6 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("close-forgetPasswor").click();
           data.loading = false;
-          // ElMessageBox.alert(`${res.data.msg}`, "", {
-          //   confirmButtonText: $t("Confirm"),
-          // });
           ElMessage({
             message:
               data.fairview_park_lang === "en_us"
@@ -815,6 +825,24 @@ export default {
       } catch (error) {
         data.loading = false;
         console.log(error);
+      }
+    };
+    //
+    const verifyPassword = () => {
+      if (!data.editMemberInfoForm.verifyPassword) {
+        //如果为空
+        data.edit_member_info_error_tip.is_verify_password_null = true;
+        return;
+      } else if (
+        sessionStorage.getItem("login-user") &&
+        JSON.parse(sessionStorage.getItem("login-user")).pd!==data.editMemberInfoForm.verifyPassword
+      ) {
+        //如果密码不正确
+        data.edit_member_info_error_tip.is_verify_password_error = true;
+        return;
+      } else {
+        data.editMemberInfoForm.verifyPassword = ''
+        data.showEditMemberModel = true;
       }
     };
     //修改用戶信息
@@ -850,7 +878,11 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          document.getElementById("editMemberInformation").style.display = "none";
+          ElMessage({
+            message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
+            type: "success",
+          });
+          document.getElementById("close-edit-member").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
@@ -863,6 +895,7 @@ export default {
         data.loading = false;
       }
     };
+
     //
     const closeModel = () => {
       var button = document.getElementById("close-edit-member");
@@ -901,6 +934,7 @@ export default {
       forgetPassword,
       editMemberInfo,
       closeModel,
+      verifyPassword,
     };
   },
 };

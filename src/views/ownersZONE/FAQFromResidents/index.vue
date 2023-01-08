@@ -41,6 +41,7 @@
             </li>
           </ul>
           <el-select
+            v-if="FAQ_from_residents_list.length>0"
             size="large"
             v-model="nav_index"
             class="menu-select"

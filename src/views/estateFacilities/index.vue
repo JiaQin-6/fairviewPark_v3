@@ -41,6 +41,7 @@
             </li>
           </ul>
           <el-select
+            v-if="estate_facilities_list.length>0"
             size="large"
             v-model="nav_index"
             class="menu-select"
