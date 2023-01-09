@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 03:25:19
+ * @LastEditTime: 2023-01-09 15:26:45
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -348,6 +348,13 @@ export default {
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
+    //獲取&設置語言
+    if (!sessionStorage.getItem("fairview_park_lang")) {
+        sessionStorage.setItem("fairview_park_lang", "zh_tw");
+        data.fairview_park_lang = "zh_tw";
+      } else {
+        data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+      }
     //判断url是否带有token参数
     if (route.query.session) {
       //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
@@ -376,12 +383,7 @@ export default {
     }
     onMounted(() => {
       // scrollPosition();
-      if (!sessionStorage.getItem("fairview_park_lang")) {
-        sessionStorage.setItem("fairview_park_lang", "zh_tw");
-        data.fairview_park_lang = "zh_tw";
-      } else {
-        data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-      }
+      
       //如果是從app進來用戶未登錄，隱藏登錄button
       if(sessionStorage.getItem('app-login-status')==='2'){
         data.isShowLoginButton = false
