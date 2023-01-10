@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:39:05
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-10 11:28:11
+ * @LastEditTime: 2023-01-10 11:28:06
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\zh_tw.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -80,7 +80,7 @@ export default {
     'Easy access to the information of fairview park': '輕鬆獲取錦綉花園資訊',
     'Apply Resident Smartcard': '申請住戶智能卡',
     'Confirm': '確定',
-    'Select':'請選擇',
-    'New Password':'新密碼',
-    'Confirm New Password':'確認新密碼',
+    'Select': '請選擇',
+    'New Password': '新密碼',
+    'Confirm New Password': '確認新密碼',
 };

@@ -140,6 +140,11 @@ const routes = [
                 name: 'information-push',
                 component: () => import('../views/informationPush/index.vue'),
             },
+            {
+                path: '/pdf',
+                name: 'pdf',
+                component: () => import('../views/pdf/pdf.vue'),
+            },
         ]
     }
 ];
