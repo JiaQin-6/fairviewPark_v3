@@ -33,7 +33,7 @@
               v-if="demographic_opinion_survey_list.length>0"
               v-model="demographic_opinion_survey_index"
               style="margin: 20px 0;"
-              placeholder="Select"
+              :placeholder="$t('Select')"
               size="large"
               @change="changeDemographicOpinion"
               :teleported="false"

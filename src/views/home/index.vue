@@ -718,6 +718,8 @@ export default {
     .liulan {
       h1 {
         font-size: 25px;
+        margin: 20px 0 20px 0;
+        margin-bottom: 20px!important;
       }
     }
     .about-us {

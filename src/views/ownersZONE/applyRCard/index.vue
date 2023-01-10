@@ -39,7 +39,9 @@
                 },
                 {
                   titleEnUs:
-                    fairview_park_lang === 'en_us' ? 'Application Status' : '申請狀況',
+                    fairview_park_lang === 'en_us'
+                      ? 'Application Status'
+                      : '申請狀況',
                 },
               ]"
               :key="index"
@@ -61,7 +63,8 @@
             size="large"
             v-model="nav_index"
             class="m-2 menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in [
@@ -74,7 +77,9 @@
                 },
                 {
                   titleEnUs:
-                    fairview_park_lang === 'en_us' ? 'Application Status' : '申請狀況',
+                    fairview_park_lang === 'en_us'
+                      ? 'Application Status'
+                      : '申請狀況',
                   index: 1,
                 },
               ]"
@@ -100,7 +105,9 @@
                       : 'https://fairviewpark.hk/file/ResidentCard_InstructionTC.html'
                   "
                 >
-                  {{ fairview_park_lang === "en_us" ? "How to apply" : "申請指引" }}</a
+                  {{
+                    fairview_park_lang === "en_us" ? "How to apply" : "申請指引"
+                  }}</a
                 >
               </button>
               <span>{{
@@ -111,7 +118,11 @@
             </div>
             <div class="application">
               <h5>
-                {{ fairview_park_lang === "en_us" ? "B. Card Users" : "乙.持咭人士資料" }}
+                {{
+                  fairview_park_lang === "en_us"
+                    ? "B. Card Users"
+                    : "乙.持咭人士資料"
+                }}
               </h5>
               <p>
                 {{
@@ -124,10 +135,14 @@
             <div class="application-form">
               <h5>
                 {{
-                  fairview_park_lang === "en_us" ? "Application materials" : "申請資料"
+                  fairview_park_lang === "en_us"
+                    ? "Application materials"
+                    : "申請資料"
                 }}
               </h5>
-              <li style="color: #07522b; margin-bottom: 10px; font-weight: bold">
+              <li
+                style="color: #07522b; margin-bottom: 10px; font-weight: bold"
+              >
                 {{ address_t }}
               </li>
               <!-- 申請資料填寫 -->
@@ -156,12 +171,14 @@
                   <li>
                     <div class="form-wrap flex-row mb-10">
                       <span class="col-6">{{
-                        fairview_park_lang === "en_us" ? "2. Relation" : "2. 與業主關係"
+                        fairview_park_lang === "en_us"
+                          ? "2. Relation"
+                          : "2. 與業主關係"
                       }}</span>
                       <el-select
                         v-model="form.relation"
                         class="col-6"
-                        placeholder="Select"
+                        :placeholder="$t('Select')"
                         @change="
                           () => {
                             form.remark = '';
@@ -181,11 +198,17 @@
                               value: 'ROa',
                             },
                             {
-                              label: fairview_park_lang === 'en_us' ? 'Spouse' : '配偶',
+                              label:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Spouse'
+                                  : '配偶',
                               value: 'ROb',
                             },
                             {
-                              label: fairview_park_lang === 'en_us' ? 'Child' : '子女',
+                              label:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Child'
+                                  : '子女',
                               value: 'ROc',
                             },
                             {
@@ -196,7 +219,10 @@
                               value: 'ROd',
                             },
                             {
-                              label: fairview_park_lang === 'en_us' ? 'Parents' : '父母',
+                              label:
+                                fairview_park_lang === 'en_us'
+                                  ? 'Parents'
+                                  : '父母',
                               value: 'ROe',
                             },
                             {
@@ -226,13 +252,22 @@
                     <div v-if="form.relation === 'ROf'">
                       <div class="form-wrap flex-row mb-10">
                         <span class="yellow col-6 pl-20">{{
-                          fairview_park_lang === "en_us" ? "Specify(Others)" : "註明"
+                          fairview_park_lang === "en_us"
+                            ? "Specify(Others)"
+                            : "註明"
                         }}</span>
-                        <el-input v-model="form.remark" class="col-6"></el-input>
+                        <el-input
+                          v-model="form.remark"
+                          class="col-6"
+                        ></el-input>
                       </div>
                       <i
                         v-if="!isRequest && !form.remark"
-                        style="display: block; font-size: 14px; text-align: right"
+                        style="
+                          display: block;
+                          font-size: 14px;
+                          text-align: right;
+                        "
                         class="mt-6 mb-6"
                         >{{
                           fairview_park_lang === "en_us"
@@ -260,7 +295,9 @@
                             }
                           "
                           :auto-upload="false"
-                          :show-file-list="form['relationFile'].file ? true : false"
+                          :show-file-list="
+                            form['relationFile'].file ? true : false
+                          "
                         >
                           <template #trigger>
                             <el-button type="primary"
@@ -273,19 +310,28 @@
                                   ? "更換文件"
                                   : "上傳文件"
                               }}</span
-                              ><el-icon class="el-icon--upload"><upload-filled /></el-icon
+                              ><el-icon class="el-icon--upload"
+                                ><upload-filled /></el-icon
                             ></el-button>
                           </template>
                         </el-upload>
-                        <i class="yellow pl-20" style="flex: 1; margin-top: 10px">{{
-                          fairview_park_lang === "en_us"
-                            ? "*Please upload file size below 2MB and file format must be(.jpg | .jpeg | .png | .pdf)."
-                            : " *請上傳檔案大小為 2MB 以下及檔案格式為(.jpg | .jpeg | .png | .pdf)"
-                        }}</i>
+                        <i
+                          class="yellow pl-20"
+                          style="flex: 1; margin-top: 10px"
+                          >{{
+                            fairview_park_lang === "en_us"
+                              ? "*Please upload file size below 2MB and file format must be(.jpg | .jpeg | .png | .pdf)."
+                              : " *請上傳檔案大小為 2MB 以下及檔案格式為(.jpg | .jpeg | .png | .pdf)"
+                          }}</i
+                        >
                       </div>
                       <i
                         v-if="!isRequest && !form.relationFile.file"
-                        style="display: block; font-size: 14px; text-align: right"
+                        style="
+                          display: block;
+                          font-size: 14px;
+                          text-align: right;
+                        "
                         class="mt-6 mb-6"
                         >{{
                           fairview_park_lang === "en_us"
@@ -328,7 +374,9 @@
                       </div>
                     </div>
                     <i
-                      v-if="!isRequest && (!form.cardNumber1 || !form.cardNumber2)"
+                      v-if="
+                        !isRequest && (!form.cardNumber1 || !form.cardNumber2)
+                      "
                       style="display: block; font-size: 14px; text-align: right"
                       class="mt-6 mb-6"
                       >{{
@@ -376,7 +424,8 @@
                                 ? "更換文件"
                                 : "上傳文件"
                             }}</span
-                            ><el-icon class="el-icon--upload"><upload-filled /></el-icon
+                            ><el-icon class="el-icon--upload"
+                              ><upload-filled /></el-icon
                           ></el-button>
                         </template>
                       </el-upload>
@@ -391,11 +440,15 @@
                           : "該欄位為必填欄位"
                       }}</i
                     >
-                    <i class="yellow" style="margin-top: 10px; display: block">{{
-                      fairview_park_lang === "en_us"
-                        ? "*Please upload file size below 5MB and file format must be (.jpg | .jpeg | .png | .pdf)"
-                        : "*請上傳檔案大小為 5MB 以下及檔案格式為 (.jpg | .jpeg | .png | .pdf)"
-                    }}</i>
+                    <i
+                      class="yellow"
+                      style="margin-top: 10px; display: block"
+                      >{{
+                        fairview_park_lang === "en_us"
+                          ? "*Please upload file size below 5MB and file format must be (.jpg | .jpeg | .png | .pdf)"
+                          : "*請上傳檔案大小為 5MB 以下及檔案格式為 (.jpg | .jpeg | .png | .pdf)"
+                      }}</i
+                    >
                   </li>
                 </ul>
               </div>
@@ -447,7 +500,10 @@
               >
                 <div class="flex-row" style="flex-wrap: wrap">
                   <!-- 取證日期 -->
-                  <div class="col-12 col-lg-3 col-sm-12" style="margin-bottom: 10px">
+                  <div
+                    class="col-12 col-lg-3 col-sm-12"
+                    style="margin-bottom: 10px"
+                  >
                     <h3
                       v-if="item.rcAppStatus === 1"
                       style="
@@ -472,7 +528,11 @@
                         margin-bottom: 20px;
                       "
                     >
-                      {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
+                      {{
+                        fairview_park_lang === "en_us"
+                          ? "Approved"
+                          : "已成功申請"
+                      }}
                     </h3>
                     <p style="font-size: 18px; font-weight: bold">
                       {{
@@ -481,7 +541,9 @@
                           : "預計取證日期："
                       }}
                     </p>
-                    <p style="font-size: 18px">{{ item.lastUpdate.slice(0, 10) }}</p>
+                    <p style="font-size: 18px">
+                      {{ item.lastUpdate.slice(0, 10) }}
+                    </p>
                   </div>
                   <!-- 戶主信息 -->
                   <div
@@ -494,7 +556,11 @@
                     >
                       <div>
                         <h3
-                          style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                          style="
+                            font-size: 24px;
+                            font-weight: bold;
+                            margin-bottom: 20px;
+                          "
                         >
                           {{
                             fairview_park_lang === "en_us"
@@ -505,7 +571,9 @@
                       </div>
                       <div>
                         <strong style="margin-right: 5px">{{
-                          fairview_park_lang === "en_us" ? "Relation" : "與業主關係："
+                          fairview_park_lang === "en_us"
+                            ? "Relation"
+                            : "與業主關係："
                         }}</strong>
                         <span>{{ item.rcrelation }}</span>
                       </div>
@@ -723,10 +791,16 @@ export default {
       }
       data.loading = true;
       if (data.form.relationFile.file) {
-        data.form.relationFile.url = await uploadRcard(data.form.relationFile.file, "rd");
+        data.form.relationFile.url = await uploadRcard(
+          data.form.relationFile.file,
+          "rd"
+        );
       }
       if (data.form.photoFile.file) {
-        data.form.photoFile.url = await uploadRcard(data.form.photoFile.file, "ri");
+        data.form.photoFile.url = await uploadRcard(
+          data.form.photoFile.file,
+          "ri"
+        );
       }
 
       try {
@@ -756,7 +830,9 @@ export default {
           data.form.checked = false;
           ElMessage({
             message:
-              data.fairview_park_lang === "en_us" ? "Submit Successful" : "提交成功",
+              data.fairview_park_lang === "en_us"
+                ? "Submit Successful"
+                : "提交成功",
             type: "success",
           });
         } else {
@@ -775,8 +851,14 @@ export default {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("key", key);
-      formData.append("memberId", JSON.parse(localStorage.getItem("login-info")).id);
-      formData.append("unitCode", JSON.parse(localStorage.getItem("login-info")).topic3);
+      formData.append(
+        "memberId",
+        JSON.parse(localStorage.getItem("login-info")).id
+      );
+      formData.append(
+        "unitCode",
+        JSON.parse(localStorage.getItem("login-info")).topic3
+      );
       try {
         const res = await proxy.$http.uploadRcard(formData);
         if (res.data.status == 200) {
@@ -807,7 +889,9 @@ export default {
       }
     };
     onMounted(() => {
-      let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
+      let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split(
+        "."
+      ); //截取token，获取载体
       var userinfo = JSON.parse(
         decodeURIComponent(
           escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
@@ -890,11 +974,9 @@ export default {
               font-size: 18px;
               margin-right: 5px;
               display: none;
-              color: #000;
             }
             span {
               font-size: 18px;
-              color: #000;
             }
             &:hover {
               background-color: var(--mainColor2);
@@ -1024,7 +1106,7 @@ export default {
                       text-align: center;
                       font-size: 18px;
                     }
-                  }
+                  } 
                 }
                 @{deep}.el-popper{
           position: absolute;
@@ -1038,6 +1120,7 @@ export default {
                   .el-select-dropdown__item{
                     text-align: left;
                     margin-bottom:0;
+                    color:#fff;
                   }
                 }
               }
@@ -1185,6 +1268,25 @@ export default {
           border-color: #ccc;
         }
       }
+       .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
     }
   }
   .nav-content {

@@ -70,7 +70,6 @@ export default {
     'Account Number (On Account Statement)':'客戶號碼 (請參考月結單)',
     'Login Name (Self Customize)':'網站登入名稱 (自訂)',
     'Login Password (Self Customize)':'網站登入密碼 (自訂)',
-    'Confirm Password (Self Customize)':'確認新密碼 (自訂)',
     'Nickname(Optional)':'Nickname (選填)',
     'Email Address':'聯絡電郵 ',
     'Contact Number(Optional)':'聯絡電話 (選填)',
@@ -81,4 +80,7 @@ export default {
     'Easy access to the information of fairview park':'輕鬆獲取錦綉花園資訊',
     'Apply Resident Smartcard':'申請住戶智能卡',
     'Confirm':'確定',
+    'Select':'請選擇',
+    'New Password':'新密碼',
+    'Confirm New Password':'確認新密碼',
 }

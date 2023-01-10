@@ -71,7 +71,6 @@ export default {
     'Account Number (On Account Statement)': 'Account Number (On Account Statement)',
     'Login Name (Self Customize)': 'Login Name (Self Customize)',
     'Login Password (Self Customize)': 'Login Password (Self Customize)',
-    'Confirm Password (Self Customize)': 'Confirm New Password (Self Customize)',
     'Nickname(Optional)': 'Nickname(Optional)',
     'Email Address': 'Email Address',
     'Contact Number(Optional)': 'Contact Number(Optional)',
@@ -81,4 +80,7 @@ export default {
     'Please provide a valid password.': 'Please provide a valid password.',
     'Easy access to the information of fairview park': 'Easy access to the information of fairview park',
     'Confirm': 'Confirm',
+    'Select':'Select',
+    'New Password':'New Password',
+    'Confirm New Password':'Confirm New Password',
 };

@@ -81,7 +81,8 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in [
@@ -135,7 +136,11 @@
               :label="item.text"
               :value="item.value"
             >
-              <i class="iconfont" :class="item.icon" style="margin-right: 10px"></i>
+              <i
+                class="iconfont"
+                :class="item.icon"
+                style="margin-right: 10px"
+              ></i>
               <span>{{ item.text }}</span>
             </el-option>
           </el-select>
@@ -151,7 +156,6 @@
         <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -180,16 +184,26 @@ export default {
   },
   data() {
     return {
-      banner: new URL("../../assets/image/common-banner/about-us.jpg", import.meta.url).href,
-      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
+      banner: new URL(
+        "../../assets/image/common-banner/about-us.jpg",
+        import.meta.url
+      ).href,
+      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url)
+        .href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
         import.meta.url
       ).href,
-      landmark: new URL("../../assets/image/aboutUs/placeholder.png", import.meta.url)
+      landmark: new URL(
+        "../../assets/image/aboutUs/placeholder.png",
+        import.meta.url
+      ).href,
+      phone: new URL(
+        "../../assets/image/aboutUs/telephone.png",
+        import.meta.url
+      ).href,
+      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url)
         .href,
-      phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
-      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
       nav_index: 0,
     };
   },
@@ -424,12 +438,12 @@ export default {
 }
 @media (max-width: 991px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
-    p{
-      font-size:36px;
+    p {
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -451,21 +465,41 @@ export default {
         }
         @{deep} .menu-select {
           display: block;
-          --el-select-input-focus-border-color:#ccc;
-          .select-trigger{
-            .el-input{
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
               font-size: 18px;
-              .el-input__wrapper{
-                
+              .el-input__wrapper {
               }
             }
-            .is-focus{
+            .is-focus {
               border-color: #ccc;
+            }
+          }
+          .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      i {
+                      }
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-      .nav-content{
+      .nav-content {
         padding: 0px;
       }
     }

@@ -12,7 +12,7 @@
       v-model="menuActive"
       class="menu-select"
       style="margin-bottom:20px"
-      placeholder="Select"
+      :placeholder="$t('Select')"
       size="large"
       @click="menuActive = item2.value"
     >

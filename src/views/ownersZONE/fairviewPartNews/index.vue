@@ -29,7 +29,7 @@
               v-if="fairview_part_news_list.length>0"
               v-model="fairview_part_news_index"
               style="margin:20px 0"
-              placeholder="Select"
+              :placeholder="$t('Select')"
               size="large"
               @change="changeFairviewPartNews"
               placement="bottom"

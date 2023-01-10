@@ -18,7 +18,10 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -39,7 +42,9 @@
                     :placeholder="$t('Login name')"
                     v-model="loginForm.loginName"
                     type="text"
-                    :class="{ error: login_error_tip.is_null && !loginForm.loginName }"
+                    :class="{
+                      error: login_error_tip.is_null && !loginForm.loginName,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -52,7 +57,9 @@
                     :placeholder="$t('Password')"
                     v-model="loginForm.password"
                     type="password"
-                    :class="{ error: login_error_tip.is_null && !loginForm.password }"
+                    :class="{
+                      error: login_error_tip.is_null && !loginForm.password,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -98,7 +105,9 @@
                     ? 'https://fairviewpark.hk/file/privacyEN.html'
                     : 'https://fairviewpark.hk/file/privacyTC.html'
                 "
-                >{{ $t("Privacy Policy and Personal Data Collection Statement") }}</a
+                >{{
+                  $t("Privacy Policy and Personal Data Collection Statement")
+                }}</a
               >
             </div>
           </div>
@@ -113,7 +122,10 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -157,12 +169,16 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ $t("Owner Name (On Account Statement)") }}</p>
+                  <p class="title">
+                    {{ $t("Owner Name (On Account Statement)") }}
+                  </p>
                   <input
                     v-model="registerForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
                     type="text"
-                    :class="{ error: register_error_tip.is_null && !registerForm.oname }"
+                    :class="{
+                      error: register_error_tip.is_null && !registerForm.oname,
+                    }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -175,13 +191,19 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t("Account Number (On Account Statement)") }}</p>
+                  <p class="title">
+                    {{ $t("Account Number (On Account Statement)") }}
+                  </p>
                   <input
                     v-model="registerForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
                     type="text"
-                    :class="{ error: register_error_tip.is_null && !registerForm.hcode }"
-                    @input="registerForm.hcode = registerForm.hcode.toUpperCase()"
+                    :class="{
+                      error: register_error_tip.is_null && !registerForm.hcode,
+                    }"
+                    @input="
+                      registerForm.hcode = registerForm.hcode.toUpperCase()
+                    "
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -200,12 +222,15 @@
                     :placeholder="$t('Login Name (Self Customize)')"
                     type="text"
                     :class="{
-                      error: register_error_tip.is_null && !registerForm.loginName,
+                      error:
+                        register_error_tip.is_null && !registerForm.loginName,
                     }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_null && !registerForm.loginName"
+                    v-show="
+                      register_error_tip.is_null && !registerForm.loginName
+                    "
                     >{{
                       fairview_park_lang === "en_us"
                         ? "Login ID Missing"
@@ -214,20 +239,27 @@
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t("Login Password (Self Customize)") }}</p>
+                  <p class="title">
+                    {{ $t("Login Password (Self Customize)") }}
+                  </p>
                   <input
                     v-model="registerForm.password"
                     :placeholder="$t('Login Password (Self Customize)')"
                     type="password"
                     :class="{
-                      error: register_error_tip.is_null && !registerForm.password,
+                      error:
+                        register_error_tip.is_null && !registerForm.password,
                     }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_null && !registerForm.password"
+                    v-show="
+                      register_error_tip.is_null && !registerForm.password
+                    "
                     >{{
-                      fairview_park_lang === "en_us" ? "Password Missing" : "密碼不能為空"
+                      fairview_park_lang === "en_us"
+                        ? "Password Missing"
+                        : "密碼不能為空"
                     }}</i
                   >
                 </li>
@@ -300,7 +332,10 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -317,7 +352,9 @@
               <ul>
                 <li>
                   <p class="title">
-                    {{ fairview_park_lang === "en_us" ? "Login Name" : "登入名稱" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "Login Name" : "登入名稱"
+                    }}
                   </p>
                   <input
                     v-model="forgotPasswordForm.loginName"
@@ -332,19 +369,26 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null && !forgotPasswordForm.loginName
+                      forgot_password_error_tip.is_null &&
+                      !forgotPasswordForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
                   <p class="title">
-                    {{ fairview_park_lang === "en_us" ? "Contact Email" : "聯絡電郵" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Contact Email"
+                        : "聯絡電郵"
+                    }}
                   </p>
                   <input
                     v-model="forgotPasswordForm.email"
                     type="text"
-                    :placeholder="$t('Please enter your registration contact email')"
+                    :placeholder="
+                      $t('Please enter your registration contact email')
+                    "
                     :class="{
                       error:
                         (forgot_password_error_tip.is_null &&
@@ -355,7 +399,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null && !forgotPasswordForm.email
+                      forgot_password_error_tip.is_null &&
+                      !forgotPasswordForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -371,7 +416,10 @@
               </ul>
             </div>
             <div class="button">
-              <p style="color: #fc0d1b" v-show="forgot_password_error_tip.is_show">
+              <p
+                style="color: #fc0d1b"
+                v-show="forgot_password_error_tip.is_show"
+              >
                 {{ forgot_password_error_tip.text }}
               </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
@@ -396,7 +444,10 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <!-- 輸入密碼驗證 -->
         <div class="verify" v-show="!showEditMemberModel">
           <div class="verify-password">
@@ -405,10 +456,20 @@
             </el-icon>
             <p class="title">
               {{
-                fairview_park_lang === "en_us" ? "Please enter password" : "請輸入密碼"
+                fairview_park_lang === "en_us"
+                  ? "To continue, first verify that it's you"
+                  : "如要繼續操作，請驗證您的身分"
               }}
             </p>
-            <input type="password" v-model="editMemberInfoForm.verifyPassword" />
+            <input
+              type="password"
+              v-model="editMemberInfoForm.verifyPassword"
+              :placeholder="
+                fairview_park_lang === 'en_us'
+                  ? 'Please enter password'
+                  : '請輸入密碼'
+              "
+            />
             <i
               style="display: block; color: #fc0d1b; text-align: left"
               v-show="
@@ -419,9 +480,12 @@
             >
             <i
               style="display: block; color: #fc0d1b; text-align: left"
-              v-show="edit_member_info_error_tip.is_verify_password_error
-              "
-              >{{ fairview_park_lang === "en_us" ? "Incorrect password" : "密碼不正確" }}</i
+              v-show="edit_member_info_error_tip.is_verify_password_error"
+              >{{
+                fairview_park_lang === "en_us"
+                  ? "Incorrect password"
+                  : "密碼不正確"
+              }}</i
             >
             <el-button @click="verifyPassword">{{
               fairview_park_lang === "en_us" ? "Confirm" : "確認"
@@ -443,26 +507,32 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ $t("Owner Name (On Account Statement)") }}</p>
+                  <p class="title">
+                    {{ $t("Owner Name (On Account Statement)") }}
+                  </p>
                   <input
                     v-model="editMemberInfoForm.oname"
                     :placeholder="$t('Owner Name (On Account Statement)')"
                     type="text"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_null && !editMemberInfoForm.oname,
+                        edit_member_info_error_tip.is_null &&
+                        !editMemberInfoForm.oname,
                     }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.oname
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.oname
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t("Account Number (On Account Statement)") }}</p>
+                  <p class="title">
+                    {{ $t("Account Number (On Account Statement)") }}
+                  </p>
                   <input
                     v-model="editMemberInfoForm.hcode"
                     :placeholder="$t('Account Number (On Account Statement)')"
@@ -472,7 +542,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.hcode
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.hcode
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -492,16 +563,19 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.loginName
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t("Login Password (Self Customize)") }}</p>
+                  <p class="title">
+                    {{ $t("New Password") }}
+                  </p>
                   <input
                     v-model="editMemberInfoForm.password"
-                    :placeholder="$t('Login Password (Self Customize)')"
+                    :placeholder="$t('New Password')"
                     type="password"
                     :class="{
                       error:
@@ -512,16 +586,19 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.password
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.password
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
-                  <p class="title">{{ $t("Confirm Password (Self Customize)") }}</p>
+                  <p class="title">
+                    {{ $t("Confirm New Password") }}
+                  </p>
                   <input
                     v-model="editMemberInfoForm.confirmPassword"
-                    :placeholder="$t('Confirm Password (Self Customize)')"
+                    :placeholder="$t('Confirm New Password')"
                     type="password"
                     :class="{
                       error:
@@ -570,7 +647,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.email
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -594,7 +672,10 @@
               </ul>
             </div>
             <div class="button">
-              <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
+              <p
+                style="color: #fc0d1b"
+                v-show="edit_member_info_error_tip.is_show"
+              >
                 {{ edit_member_info_error_tip.text }}
               </p>
               <button @click="editMemberInfo">
@@ -609,7 +690,14 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  provide,
+} from "vue";
 import { useStore } from "vuex";
 import { ElMessageBox, ElMessage } from "element-plus";
 export default {
@@ -716,7 +804,8 @@ export default {
     };
     //注册
     const register = async () => {
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.registerForm.oname ||
         !data.registerForm.hcode ||
@@ -787,8 +876,12 @@ export default {
     };
     //忘記密碼
     const forgetPassword = async () => {
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      if (!data.forgotPasswordForm.loginName || !data.forgotPasswordForm.email) {
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (
+        !data.forgotPasswordForm.loginName ||
+        !data.forgotPasswordForm.email
+      ) {
         data.forgot_password_error_tip.is_null = true;
         return;
       } else if (!reg.test(data.forgotPasswordForm.email)) {
@@ -815,8 +908,9 @@ export default {
                 : "郵件發送成功",
             type: "success",
           });
-          document.getElementsByClassName("el-overlay")[0].style["background-color"] =
-            "transparent";
+          document.getElementsByClassName("el-overlay")[0].style[
+            "background-color"
+          ] = "transparent";
         } else {
           data.loading = false;
           data.forgot_password_error_tip.is_show = true;
@@ -835,19 +929,21 @@ export default {
         return;
       } else if (
         sessionStorage.getItem("login-user") &&
-        JSON.parse(sessionStorage.getItem("login-user")).pd!==data.editMemberInfoForm.verifyPassword
+        JSON.parse(sessionStorage.getItem("login-user")).pd !==
+          data.editMemberInfoForm.verifyPassword
       ) {
         //如果密码不正确
         data.edit_member_info_error_tip.is_verify_password_error = true;
         return;
       } else {
-        data.editMemberInfoForm.verifyPassword = ''
+        data.editMemberInfoForm.verifyPassword = "";
         data.showEditMemberModel = true;
       }
     };
     //修改用戶信息
     const editMemberInfo = async () => {
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
@@ -879,7 +975,10 @@ export default {
         });
         if (res.data.status === 200) {
           ElMessage({
-            message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
+            message:
+              data.fairview_park_lang === "en_us"
+                ? "Edit Successful"
+                : "編輯成功",
             type: "success",
           });
           document.getElementById("close-edit-member").click();

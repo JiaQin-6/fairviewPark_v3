@@ -16,11 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-      {{
-          fairview_park_lang === "en_us"
-            ? "The Overhaul Project"
-            : "大維修"
-        }}
+        {{ fairview_park_lang === "en_us" ? "The Overhaul Project" : "大維修" }}
       </p>
     </div>
     <!-- navs -->
@@ -70,7 +66,13 @@
               <span>{{ item.title }}</span>
             </li>
           </ul>
-          <el-select size="large" v-model="nav_index" class="menu-select" placeholder="Select">
+          <el-select
+            size="large"
+            v-model="nav_index"
+            class="menu-select"
+            :placeholder="$t('Select')"
+            :teleported="false"
+          >
             <el-option
               v-for="(item, index) in [
                 {
@@ -78,46 +80,52 @@
                     fairview_park_lang === 'en_us'
                       ? 'The Overhaul Project'
                       : '「大維修」',
-                  value:0,
+                  value: 0,
                 },
                 {
                   title:
                     fairview_park_lang === 'en_us'
                       ? 'Overhaul Project Information'
                       : '大維修資訊',
-                  value:1,
+                  value: 1,
                 },
                 {
                   title:
                     fairview_park_lang === 'en_us'
                       ? 'SPAC Member List'
                       : '特別工程諮詢委員會委員名單',
-                  value:2,
+                  value: 2,
                 },
                 {
                   title:
                     fairview_park_lang === 'en_us'
                       ? 'Minutes of SPAC Meetings'
                       : '會議記錄',
-                      value:3,
+                  value: 3,
                 },
                 {
                   title: fairview_park_lang === 'en_us' ? 'FAQ' : '常見問題',
-                  value:4,
+                  value: 4,
                 },
               ]"
               :key="index"
               :label="item.title"
               :value="item.value"
             >
-              <i class="iconfont" :class="item.icon" style="margin-right:10px"></i>
+              <i
+                class="iconfont"
+                :class="item.icon"
+                style="margin-right: 10px"
+              ></i>
               <span>{{ item.title }}</span>
             </el-option>
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
           <TheOverhaulProject v-if="nav_index === 0"></TheOverhaulProject>
-          <OverhaulProjectInformation v-if="nav_index === 1"></OverhaulProjectInformation>
+          <OverhaulProjectInformation
+            v-if="nav_index === 1"
+          ></OverhaulProjectInformation>
           <SPACMemberList v-if="nav_index === 2"></SPACMemberList>
           <MinutesOfSPACMeetings v-if="nav_index === 3"></MinutesOfSPACMeetings>
           <FAQ v-if="nav_index === 4"></FAQ>
@@ -189,9 +197,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -252,7 +260,7 @@ export default {
           }
         }
       }
-      .menu-select{
+      .menu-select {
         display: none;
       }
     }
@@ -269,7 +277,6 @@ export default {
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
-    
   }
 }
 @media (min-width: 768px) {
@@ -280,7 +287,6 @@ export default {
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
-   
   }
 }
 @media (min-width: 1200px) {
@@ -295,11 +301,11 @@ export default {
 }
 @media (max-width: 991px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
@@ -321,21 +327,39 @@ export default {
         }
         @{deep} .menu-select {
           display: block;
-          --el-select-input-focus-border-color:#ccc;
-          .select-trigger{
-            .el-input{
+          --el-select-input-focus-border-color: #ccc;
+          .select-trigger {
+            .el-input {
               font-size: 18px;
-              .el-input__wrapper{
-                
+              .el-input__wrapper {
               }
             }
-            .is-focus{
+            .is-focus {
               border-color: #ccc;
+            }
+          }
+           .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-      .nav-content{
+      .nav-content {
         padding: 0;
       }
     }

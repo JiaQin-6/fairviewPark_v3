@@ -36,16 +36,17 @@
             </li>
           </ul>
           <el-select
-            v-if="telephone_link_list.length>0"
+            v-if="telephone_link_list.length > 0"
             size="large"
             v-model="nav_index"
             class="menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
             @change="
               (index) => {
                 jumpLink(index);
               }
             "
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in telephone_link_list"
@@ -67,13 +68,18 @@
             v-for="(item, index) in telephone_link_list"
             :key="index"
             width="100%"
-            
           >
-            <tbody >
+            <tbody>
               <tr>
-                <td colspan="2" :style="index===0?'padding:0 0 0px 0':'padding:10px 0 0 0'">
+                <td
+                  colspan="2"
+                  :style="
+                    index === 0 ? 'padding:0 0 0px 0' : 'padding:10px 0 0 0'
+                  "
+                >
                   <span class="style9 title">{{
-                    telephone_link_list[index] && telephone_link_list[index].titleEnUs
+                    telephone_link_list[index] &&
+                    telephone_link_list[index].titleEnUs
                   }}</span>
                 </td>
               </tr>
@@ -91,7 +97,11 @@
                   >
                 </td>
                 <td style="width: 30%" height="25" bgcolor="#FFFFCC">
-                  <el-icon color="#07522b" class="no-inherit" style="margin-right: 5px">
+                  <el-icon
+                    color="#07522b"
+                    class="no-inherit"
+                    style="margin-right: 5px"
+                  >
                     <Phone />
                   </el-icon>
                   <a
@@ -101,7 +111,9 @@
                     style="color: #000; text-decoration: none"
                     :href="'tel:' + item"
                     >{{ item
-                    }}{{ index === item2.tel.split(",").length - 1 ? "" : "," }}</a
+                    }}{{
+                      index === item2.tel.split(",").length - 1 ? "" : ","
+                    }}</a
                   >
                 </td>
               </tr>
@@ -119,8 +131,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../assets/image/common-banner/useful-link.jpg", import.meta.url)
-        .href,
+      banner: new URL(
+        "../../assets/image/common-banner/useful-link.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -148,19 +162,26 @@ export default {
     };
     onMounted(async () => {
       await findUsefulTelephoneNosList2();
-      if (document.getElementById("useful-menu").getBoundingClientRect().height) {
+      if (
+        document.getElementById("useful-menu").getBoundingClientRect().height
+      ) {
         document.getElementsByClassName("nav-content")[0].style.height =
-          document.getElementById("useful-menu").getBoundingClientRect().height > 500
-            ? document.getElementById("useful-menu").getBoundingClientRect().height + "px"
+          document.getElementById("useful-menu").getBoundingClientRect()
+            .height > 500
+            ? document.getElementById("useful-menu").getBoundingClientRect()
+                .height + "px"
             : "500px";
       } else {
-        document.getElementsByClassName("nav-content")[0].style.height = "500px";
+        document.getElementsByClassName("nav-content")[0].style.height =
+          "500px";
       }
     });
     const jumpLink = (index) => {
       let top = 0;
       for (let i = 0; i < index; i++) {
-        top += document.querySelector("#telephone_link_" + (i + 1)).scrollHeight;
+        top += document.querySelector(
+          "#telephone_link_" + (i + 1)
+        ).scrollHeight;
       }
       document.querySelector("#nav-content").scrollTop = top;
       data.nav_index = index;
@@ -348,19 +369,38 @@ export default {
               border-color: #ccc;
             }
           }
+          .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      .nav-content{
-        padding:0;
-        table{
-          .title{
+      .nav-content {
+        padding: 0;
+        table {
+          .title {
             font-size: 28px;
           }
-          td{
-            i{
-
+          td {
+            i {
             }
-            a,span{
+            a,
+            span {
               font-size: 15px;
             }
           }

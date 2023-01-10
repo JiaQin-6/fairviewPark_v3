@@ -50,12 +50,13 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
             @change="
               (val) => {
                 nav_index = val;
               }
             "
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in [
@@ -333,6 +334,25 @@ export default {
             }
             .is-focus{
               border-color: #ccc;
+            }
+          }
+           .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

@@ -41,12 +41,13 @@
             </li>
           </ul>
           <el-select
-            v-if="estate_facilities_list.length>0"
+            v-if="estate_facilities_list.length > 0"
             size="large"
             v-model="nav_index"
             class="menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
             @change="changeMenu"
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in estate_facilities_list"
@@ -63,17 +64,16 @@
             <p class="title" v-if="estate_facilities_list.length !== 0">
               {{ estate_facilities_list[nav_index].titleEnUs }}
             </p>
-           
-                <div
-                id="t-mce"
-                  style="
-                    font-size: 14px;
-                    color: #6e6b7b;
-                    font-family: Helvetica, Arial, sans-serif;
-                  "
-                  v-html="estate_facilities_content"
-                ></div>
-             
+
+            <div
+              id="t-mce"
+              style="
+                font-size: 14px;
+                color: #6e6b7b;
+                font-family: Helvetica, Arial, sans-serif;
+              "
+              v-html="estate_facilities_content"
+            ></div>
           </div>
         </div>
       </div>
@@ -256,10 +256,10 @@ export default {
         color: var(--mainColor3);
         font-weight: bold;
       }
-      #t-mce{
+      #t-mce {
         line-height: 1.5;
-        li{
-          list-style:auto;
+        li {
+          list-style: auto;
         }
       }
     }
@@ -296,7 +296,7 @@ export default {
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
@@ -330,12 +330,31 @@ export default {
               border-color: #ccc;
             }
           }
+          .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
-      .nav-content{
+      .nav-content {
         padding: 0px;
-        .title{
-          font-size: 28px!important;
+        .title {
+          font-size: 28px !important;
         }
       }
     }

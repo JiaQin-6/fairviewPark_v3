@@ -36,16 +36,17 @@
             </li>
           </ul>
           <el-select
-            v-if="shop_information_list.length>0"
+            v-if="shop_information_list.length > 0"
             size="large"
             v-model="nav_index"
             class="menu-select"
-            placeholder="Select"
+            :placeholder="$t('Select')"
             @change="
               (index) => {
                 jumpLink(index);
               }
             "
+            :teleported="false"
           >
             <el-option
               v-for="(item, index) in shop_information_list"
@@ -70,11 +71,16 @@
             <ul v-if="nav_index !== 0" class="flex-row">
               <li
                 class="col-4"
-                v-for="(item2, index2) in shop_information_list[index].secondList"
+                v-for="(item2, index2) in shop_information_list[index]
+                  .secondList"
                 :key="index2"
               >
                 <div class="img col-4">
-                  <img @click="openUrl(item2.websiteUrl)" :src="item2.logUrl" alt="" />
+                  <img
+                    @click="openUrl(item2.websiteUrl)"
+                    :src="item2.logUrl"
+                    alt=""
+                  />
                 </div>
                 <p>{{ item2.titleEnUs }}</p>
                 <span
@@ -98,8 +104,11 @@
             </ul>
           </div>
           <div class="nav-content-list2" v-if="nav_index === 0">
-            <span class="header">{{ $t("Carpark Parking Privilege Payment") }}</span>
-            <table
+            <span class="header">{{
+              $t("Carpark Parking Privilege Payment")
+            }}</span>
+            <!-- 停車場泊車收費表 -->
+            <!-- <table
               align="center"
               border="1"
               cellpadding="0"
@@ -153,9 +162,18 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="23" style="">
-                  <td rowspan="2" height="44" colspan="3" style="font-weight: bold">
+                  <td
+                    rowspan="2"
+                    height="44"
+                    colspan="3"
+                    style="font-weight: bold"
+                  >
                     <p style="margin-left: 5px">
-                      {{ fairview_park_lang === "en_us" ? "Other Drivers" : "其他司機" }}
+                      {{
+                        fairview_park_lang === "en_us"
+                          ? "Other Drivers"
+                          : "其他司機"
+                      }}
                     </p>
                   </td>
                 </tr>
@@ -165,7 +183,9 @@
                   <td rowspan="2" height="66" colspan="2">
                     <p style="margin-left: 5px">
                       {{
-                        fairview_park_lang === "en_us" ? "Mon to Sat" : "星期一至星期六"
+                        fairview_park_lang === "en_us"
+                          ? "Mon to Sat"
+                          : "星期一至六"
                       }}
                     </p>
                   </td>
@@ -221,7 +241,11 @@
                     height="25"
                     colspan="3"
                     bgcolor="#dce9f3"
-                    style="font-size: 20px; font-weight: bold; text-align: center"
+                    style="
+                      font-size: 20px;
+                      font-weight: bold;
+                      text-align: center;
+                    "
                   >
                     {{
                       fairview_park_lang === "en_us"
@@ -239,12 +263,30 @@
                     width="300"
                     style="height: 49.5pt; width: 300px"
                   >
-                    {{ fairview_park_lang === "en_us" ? "Time of Exit" : "出車時間" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Time of Exit"
+                        : "出車時間"
+                    }}
                   </td>
-                  <td rowspan="2" width="229" bgcolor="#dce9f3" style="width: 229px">
-                    {{ fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六" }}
+                  <td
+                    rowspan="2"
+                    width="229"
+                    bgcolor="#dce9f3"
+                    style="width: 229px"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Mon - Sat"
+                        : "星期一至六"
+                    }}
                   </td>
-                  <td rowspan="2" width="169" bgcolor="#dce9f3" style="width: 169px">
+                  <td
+                    rowspan="2"
+                    width="169"
+                    bgcolor="#dce9f3"
+                    style="width: 169px"
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "Sun & Public Holidays"
@@ -256,7 +298,9 @@
 
                 <tr height="23" style="text-align: center">
                   <td rowspan="2" height="44" width="385" style="height: 33pt">
-                    {{ fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘"
+                    }}
                   </td>
                   <td rowspan="6" width="200" bgcolor="#dce9f3">
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
@@ -268,7 +312,12 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "＞30min – 1hr"
@@ -279,60 +328,111 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
-                      fairview_park_lang === "en_us" ? "＞1hr – 2hr" : "＞1小時 – 2小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞1hr – 2hr"
+                        : "＞1小時 – 2小時"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
-                      fairview_park_lang === "en_us" ? "＞2hr – 3hr" : "＞2小時 – 3小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞2hr – 3hr"
+                        : "＞2小時 – 3小時"
                     }}
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16 + HK$1" : "HK$16 + HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$16 + HK$1"
+                        : "HK$16 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
-                      fairview_park_lang === "en_us" ? "＞3hr – 4hr" : "＞3小時 – 4小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞3hr – 4hr"
+                        : "＞3小時 – 4小時"
                     }}
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$32 + HK$1" : "HK$32 + HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$32 + HK$1"
+                        : "HK$32 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$48＋HK$1"
+                        : "HK$48＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="21" style="text-align: center; font-weight: bold">
-                  <td rowspan="2" height="42" width="385" style="height: 31.5pt">:</td>
+                  <td
+                    rowspan="2"
+                    height="42"
+                    width="385"
+                    style="height: 31.5pt"
+                  >
+                    :
+                  </td>
                   <td rowspan="2" width="295" style="">&nbsp;:</td>
                   <td rowspan="2" width="191" style="">:</td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="21" style="text-align: center; font-weight: bold">
-                  <td rowspan="2" height="42" width="385" style="height: 31.5pt">:</td>
+                  <td
+                    rowspan="2"
+                    height="42"
+                    width="385"
+                    style="height: 31.5pt"
+                  >
+                    :
+                  </td>
                   <td rowspan="2" width="295" style="">&nbsp;:</td>
                   <td rowspan="2" width="191" style="">:</td>
                 </tr>
@@ -380,9 +480,17 @@
                     height="25"
                     colspan="3"
                     bgcolor="#dce9f3"
-                    style="font-size: 20px; font-weight: bold; text-align: center"
+                    style="
+                      font-size: 20px;
+                      font-weight: bold;
+                      text-align: center;
+                    "
                   >
-                    {{ fairview_park_lang === "en_us" ? "Other Drivers" : "其他司機" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Other Drivers"
+                        : "其他司機"
+                    }}
                   </td>
                 </tr>
 
@@ -394,11 +502,17 @@
                     width="385"
                     style="height: 49.5pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "Time of Exit" : "出車時間" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Time of Exit"
+                        : "出車時間"
+                    }}
                   </td>
                   <td rowspan="2" width="295" bgcolor="#dce9f3" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六"
+                      fairview_park_lang === "en_us"
+                        ? "Mon - Sat"
+                        : "星期一至六"
                     }}
                   </td>
                   <td rowspan="2" width="191" bgcolor="#dce9f3" style="">
@@ -413,7 +527,9 @@
 
                 <tr height="23" style="text-align: center">
                   <td rowspan="2" height="44" width="385" bgcolor="#dce9f3">
-                    {{ fairview_park_lang === "en_us" ? "0-30 min" : "0-30 分鐘" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "0-30 min" : "0-30 分鐘"
+                    }}
                   </td>
                   <td rowspan="4" width="295" bgcolor="#dce9f3">
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
@@ -425,80 +541,142 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
-                      fairview_park_lang === "en_us" ? "＞30min－1hr" : "＞30分鐘－1小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞30min－1hr"
+                        : "＞30分鐘－1小時"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK$20＋HK$1" : "HK$20＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$20＋HK$1"
+                        : "HK$20＋HK$1"
                     }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞1hr－2hr" : "＞1小時－2小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞1hr－2hr"
+                        : "＞1小時－2小時"
+                    }}
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK$40＋HK$1" : "HK$40＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$40＋HK$1"
+                        : "HK$40＋HK$1"
                     }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞2hr－3hr" : "＞2小時－3小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞2hr－3hr"
+                        : "＞2小時－3小時"
+                    }}
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;
                     {{
-                      fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK$60＋HK$1" : "HK$60＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$60＋HK$1"
+                        : "HK$60＋HK$1"
                     }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞3hr－4hr" : "＞3小時－4小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞3hr－4hr"
+                        : "＞3小時－4小時"
+                    }}
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$48＋HK$1"
+                        : "HK$48＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK$80＋HK$1" : "HK$80＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$80＋HK$1"
+                        : "HK$80＋HK$1"
                     }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="21" style="text-align: center; font-weight: bold">
-                  <td rowspan="2" height="42" width="385" style="height: 31.5pt">:</td>
+                  <td
+                    rowspan="2"
+                    height="42"
+                    width="385"
+                    style="height: 31.5pt"
+                  >
+                    :
+                  </td>
                   <td rowspan="2" width="295" style="">&nbsp;:</td>
                   <td rowspan="2" width="191" style="">:</td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="21" style="text-align: center; font-weight: bold">
-                  <td rowspan="2" height="42" width="385" style="height: 31.5pt">:</td>
+                  <td
+                    rowspan="2"
+                    height="42"
+                    width="385"
+                    style="height: 31.5pt"
+                  >
+                    :
+                  </td>
                   <td rowspan="2" width="295" style="">&nbsp;:</td>
                   <td rowspan="2" width="191" style="">:</td>
                 </tr>
@@ -540,17 +718,14 @@
                     </p>
                   </td>
                 </tr>
-
-                <!--[if supportMisalignedColumns]-->
                 <tr height="0" style="display: none">
                   <td width="300" style=""></td>
                   <td width="229" style=""></td>
                   <td width="169" style=""></td>
                 </tr>
-                <!--[endif]-->
               </tbody>
-            </table>
-            <table
+            </table> -->
+            <!-- <table
               class="mt-30"
               align="center"
               border="1"
@@ -575,7 +750,13 @@
                 </tr>
 
                 <tr height="25" style="">
-                  <td align="center" colspan="3" height="25" bgcolor="#dfecd7" style="">
+                  <td
+                    align="center"
+                    colspan="3"
+                    height="25"
+                    bgcolor="#dfecd7"
+                    style=""
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "Parking Fee：Hourly Charge + Entry Fee : HK$1"
@@ -604,7 +785,10 @@
                 </tr>
                 <tr height="21" style=""></tr>
 
-                <tr height="67" style="mso-height-source: userset; height: 50.25pt">
+                <tr
+                  height="67"
+                  style="mso-height-source: userset; height: 50.25pt"
+                >
                   <td rowspan="2" height="88" colspan="2" width="400" style="">
                     <p style="margin-left: 5px; font-weight: bold">
                       {{
@@ -627,7 +811,11 @@
                 <tr height="23" style="">
                   <td rowspan="2" height="44" colspan="3" width="300" style="">
                     <p style="margin-left: 5px; font-weight: bold">
-                      {{ fairview_park_lang === "en_us" ? "Other Drivers" : "其他司機" }}
+                      {{
+                        fairview_park_lang === "en_us"
+                          ? "Other Drivers"
+                          : "其他司機"
+                      }}
                     </p>
                   </td>
                 </tr>
@@ -638,7 +826,9 @@
                   <td rowspan="2" height="66" colspan="2" width="400" style="">
                     <p style="margin-left: 5px">
                       {{
-                        fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六"
+                        fairview_park_lang === "en_us"
+                          ? "Mon - Sat"
+                          : "星期一至六"
                       }}
                     </p>
                   </td>
@@ -694,7 +884,11 @@
                     height="25"
                     colspan="3"
                     bgcolor="#dce9f3"
-                    style="font-size: 20px; font-weight: bold; text-align: center"
+                    style="
+                      font-size: 20px;
+                      font-weight: bold;
+                      text-align: center;
+                    "
                   >
                     {{
                       fairview_park_lang === "en_us"
@@ -712,11 +906,19 @@
                     width="385"
                     style="height: 49.5pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "Time of Exit" : "出車時間" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Time of Exit"
+                        : "出車時間"
+                    }}
                   </td>
                   <td rowspan="2" bgcolor="#dce9f3" width="438" style="">
                     &nbsp;
-                    {{ fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Mon - Sat"
+                        : "星期一至六"
+                    }}
                   </td>
                   <td rowspan="2" bgcolor="#dce9f3" width="207" style="">
                     {{
@@ -730,19 +932,36 @@
 
                 <tr height="23" style="text-align: center">
                   <td rowspan="2" height="44" width="385" style="height: 33pt">
-                    {{ fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘"
+                    }}
                   </td>
-                  <td rowspan="14" width="438" bgcolor="#dce9f3" style="width: 152pt">
+                  <td
+                    rowspan="14"
+                    width="438"
+                    bgcolor="#dce9f3"
+                    style="width: 152pt"
+                  >
                     &nbsp;{{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
-                  <td rowspan="14" width="207" bgcolor="#dce9f3" style="width: 155pt">
+                  <td
+                    rowspan="14"
+                    width="207"
+                    bgcolor="#dce9f3"
+                    style="width: 155pt"
+                  >
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "＞30min－1hr"
@@ -753,66 +972,141 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞1hr－2hr" : "＞1小時－2小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞1hr－2hr"
+                        : "＞1小時－2小時"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞2hr－3hr" : "＞2小時－3小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞2hr－3hr"
+                        : "＞2小時－3小時"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞3hr－4hr" : "＞3小時－4小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞3hr－4hr"
+                        : "＞3小時－4小時"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞4hr－5hr" : "＞4小時－5小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞4hr－5hr"
+                        : "＞4小時－5小時"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞5hr－6hr" : "＞5小時－6小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞5hr－6hr"
+                        : "＞5小時－6小時"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞6hr－7hr" : "＞6小時－7小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞6hr－7hr"
+                        : "＞6小時－7小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞7hr－8hr" : "＞7小時－8小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞7hr－8hr"
+                        : "＞7小時－8小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -866,7 +1160,11 @@
                     height="25"
                     colspan="3"
                     bgcolor="#dce9f3"
-                    style="font-size: 20px; font-weight: bold; text-align: center"
+                    style="
+                      font-size: 20px;
+                      font-weight: bold;
+                      text-align: center;
+                    "
                   >
                     {{
                       fairview_park_lang === "en_us"
@@ -884,14 +1182,30 @@
                     width="385"
                     style="height: 49.5pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "Time of Exit" : "出車時間" }}
-                  </td>
-                  <td rowspan="2" width="200" bgcolor="#dce9f3" style="width: 152pt">
-                    &nbsp;{{
-                      fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六"
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Time of Exit"
+                        : "出車時間"
                     }}
                   </td>
-                  <td rowspan="2" width="200" bgcolor="#dce9f3" style="width: 155pt">
+                  <td
+                    rowspan="2"
+                    width="200"
+                    bgcolor="#dce9f3"
+                    style="width: 152pt"
+                  >
+                    &nbsp;{{
+                      fairview_park_lang === "en_us"
+                        ? "Mon - Sat"
+                        : "星期一至六"
+                    }}
+                  </td>
+                  <td
+                    rowspan="2"
+                    width="200"
+                    bgcolor="#dce9f3"
+                    style="width: 155pt"
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "Sun & Public Holidays"
@@ -908,12 +1222,24 @@
                     width="385"
                     style="height: 33pt; width: 465pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘"
+                    }}
                   </td>
-                  <td rowspan="6" width="438" bgcolor="#dce9f3" style="width: 152pt">
+                  <td
+                    rowspan="6"
+                    width="438"
+                    bgcolor="#dce9f3"
+                    style="width: 152pt"
+                  >
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
-                  <td rowspan="4" width="207" bgcolor="#dce9f3" style="width: 155pt">
+                  <td
+                    rowspan="4"
+                    width="207"
+                    bgcolor="#dce9f3"
+                    style="width: 155pt"
+                  >
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                 </tr>
@@ -927,7 +1253,9 @@
                     style="height: 49.5pt; width: 465pt"
                   >
                     {{
-                      fairview_park_lang === "en_us" ? "＞30min-1hr" : "＞30分鐘-1小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞30min-1hr"
+                        : "＞30分鐘-1小時"
                     }}
                   </td>
                 </tr>
@@ -940,10 +1268,18 @@
                     width="385"
                     style="height: 49.5pt; width: 465pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "＞1hr-2hr" : "＞1小時-2小時" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞1hr-2hr"
+                        : "＞1小時-2小時"
+                    }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -955,30 +1291,55 @@
                     width="385"
                     style="height: 49.5pt; width: 465pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "＞2hr-3hr" : "＞2小時-3小時" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞2hr-3hr"
+                        : "＞2小時-3小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16 + HK$1" : "HK$16 + HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$16 + HK$1"
+                        : "HK$16 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞3hr-4hr" : "＞3小時-4小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞3hr-4hr"
+                        : "＞3小時-4小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$32 + HK$1" : "HK$32 + HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$32 + HK$1"
+                        : "HK$32 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$48＋HK$1"
+                        : "HK$48＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -1039,9 +1400,17 @@
                     height="25"
                     colspan="3"
                     bgcolor="#dce9f3"
-                    style="font-size: 20px; font-weight: bold; text-align: center"
+                    style="
+                      font-size: 20px;
+                      font-weight: bold;
+                      text-align: center;
+                    "
                   >
-                    {{ fairview_park_lang === "en_us" ? "Other Drivers" : "其他司機" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Other Drivers"
+                        : "其他司機"
+                    }}
                   </td>
                 </tr>
 
@@ -1053,14 +1422,30 @@
                     width="385"
                     style="height: 49.5pt"
                   >
-                    {{ fairview_park_lang === "en_us" ? "Time of Exit" : "出車時間" }}
-                  </td>
-                  <td rowspan="2" width="438" bgcolor="#dce9f3" style="width: 152pt">
-                    &nbsp;{{
-                      fairview_park_lang === "en_us" ? "Mon - Sat" : "星期一至星期六"
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Time of Exit"
+                        : "出車時間"
                     }}
                   </td>
-                  <td rowspan="2" width="207" bgcolor="#dce9f3" style="width: 155pt">
+                  <td
+                    rowspan="2"
+                    width="438"
+                    bgcolor="#dce9f3"
+                    style="width: 152pt"
+                  >
+                    &nbsp;{{
+                      fairview_park_lang === "en_us"
+                        ? "Mon - Sat"
+                        : "星期一至六"
+                    }}
+                  </td>
+                  <td
+                    rowspan="2"
+                    width="207"
+                    bgcolor="#dce9f3"
+                    style="width: 155pt"
+                  >
                     {{
                       fairview_park_lang === "en_us"
                         ? "Sun & Public Holidays"
@@ -1072,7 +1457,9 @@
 
                 <tr height="23" style="text-align: center">
                   <td rowspan="2" height="44" width="385">
-                    {{ fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘"
+                    }}
                   </td>
                   <td rowspan="4" bgcolor="#dce9f3">
                     {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
@@ -1084,58 +1471,114 @@
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
                     {{
-                      fairview_park_lang === "en_us" ? "＞30min－1hr" : "＞30分鐘－1小時"
+                      fairview_park_lang === "en_us"
+                        ? "＞30min－1hr"
+                        : "＞30分鐘－1小時"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$20＋HK$1" : "HK$20＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$20＋HK$1"
+                        : "HK$20＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞1hr－2hr" : "＞1小時－2小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞1hr－2hr"
+                        : "＞1小時－2小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$16＋HK$1"
+                        : "HK$16＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$40＋HK$1" : "HK$40＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$40＋HK$1"
+                        : "HK$40＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞2hr－3hr" : "＞2小時－3小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞2hr－3hr"
+                        : "＞2小時－3小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$32＋HK$1"
+                        : "HK$32＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$60＋HK$1" : "HK$60＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$60＋HK$1"
+                        : "HK$60＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
 
                 <tr height="45" style="text-align: center">
-                  <td rowspan="2" height="66" width="385" style="height: 49.5pt">
-                    {{ fairview_park_lang === "en_us" ? "＞3hr－4hr" : "＞3小時－4小時" }}
+                  <td
+                    rowspan="2"
+                    height="66"
+                    width="385"
+                    style="height: 49.5pt"
+                  >
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "＞3hr－4hr"
+                        : "＞3小時－4小時"
+                    }}
                   </td>
                   <td rowspan="2" width="438" style="width: 152pt">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1"
+                      fairview_park_lang === "en_us"
+                        ? "HK$48＋HK$1"
+                        : "HK$48＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="207" style="width: 155pt">
-                    {{ fairview_park_lang === "en_us" ? "HK$80＋HK$1" : "HK$80＋HK$1" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "HK$80＋HK$1"
+                        : "HK$80＋HK$1"
+                    }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -1190,17 +1633,1070 @@
                     </p>
                   </td>
                 </tr>
-
-                <!--[if supportMisalignedColumns]-->
                 <tr height="0" style="display: none">
                   <td width="385" style=""></td>
                   <td width="438" style="width: 152pt"></td>
                   <td width="207" style="width: 155pt"></td>
                 </tr>
-
-                <!--[endif]-->
               </tbody>
-            </table>
+            </table> -->
+            <div v-if="fairview_park_lang === 'zh_tw'">
+              <table width="100%" border="0" cellspacing="1" cellpadding="10">
+                <tbody>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#9cc212">
+                      <span
+                        style="
+                          font-size: 24px;
+                          color: #ffffff;
+                          font-weight: bold;
+                        "
+                        >銀杏路停車場 - 泊車優惠收費</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#fffde9">
+                      停車場收費 : 時租收費+入場費 : HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>業主有登記八達通咭之用戶</strong>
+                    </td>
+                    <td width="33%" class="border_line">時租收費HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>其他司機</strong></td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">星期一至六</td>
+                    <td class="border_line">時租收費HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">星期日及公眾假期</td>
+                    <td class="border_line">時租收費HK$20</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      時租收費 : 按小時計算，不足一小時亦當一小時計算。<br />
+                      停車場使用守則，請參閱銀杏路停車場入口標示板。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >業主有登記八達通咭之用戶</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>出車時間</strong>
+                    </td>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>星期一至六</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期日及公眾假期</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30分鐘
+                    </td>
+                    <td
+                      rowspan="3"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td class="border_line">&gt;30 分鐘 - 1 小時</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;1小時 - 2小時
+                    </td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;2小時 - 3小時
+                    </td>
+                    <td align="center" class="border_line"> HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;3小時 - 4小時
+                    </td>
+                    <td align="center" class="border_line"> HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1) 小時 - n小時
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">注 : n=泊車時數</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >其他司機</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>出車時間</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期一至六</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期日及公衆假期</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30 分鐘
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;30分鐘 - 1小時
+                    </td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;1小時 - 2小時
+                    </td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$40+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;2小時 - 3小時
+                    </td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$60+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;3小時 - 4小時
+                    </td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                    <td align="center" class="border_line">HK$80+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)小時 - n小時
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                    <td align="center" class="border_line">HK$20 x (n)+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">注 : n=泊車時數</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <br />
+              <table width="100%" border="0" cellspacing="1" cellpadding="10">
+                <tbody>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#9cc212">
+                      <span
+                        style="
+                          font-size: 24px;
+                          color: #ffffff;
+                          font-weight: bold;
+                        "
+                        >紅荷路停車場 - 泊車優惠收費表(24小時)</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#fffde9">
+                      停車場收費 : 時租收費+入場費 : HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>業主有登記八達通咭之用戶</strong>
+                    </td>
+                    <td width="33%" class="border_line">時租收費HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>會所有登記八達通咭之用戶</strong>
+                    </td>
+                    <td class="border_line">時租收費HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><strong>其他司機</strong></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">星期一至六</td>
+                    <td class="border_line">時租收費HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">星期日及公眾假期</td>
+                    <td class="border_line">時租收費HK$20</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      時租收費 : 按小時計算，不足一小時亦當一小時計算。<br />
+                      停車場使用守則，請參閱銀杏路停車場入口標示板。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >業主有登記八達通咭之用戶</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>出車時間</strong>
+                    </td>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>星期一至六</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期日及公眾假期</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30分鐘
+                    </td>
+                    <td
+                      rowspan="7"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="7"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;30 分鐘 - 1 小時
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;1小時 - 2小時
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;2小時 - 3小時
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;3小時 - 4小時
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;4小時 - 5小時
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;5小時 - 6小時
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;6小時 - 7小時
+                    </td>
+                    <td align="center" class="border_line"> HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;7小時 - 8小時
+                    </td>
+                    <td align="center" class="border_line"> HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1) 小時 - n小時
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-6)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-6)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">注 : n=泊車時數</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >業主有登記八達通咭之用戶</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>出車時間</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期一至六</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期日及公衆假期</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30 分鐘
+                    </td>
+                    <td
+                      rowspan="3"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td class="border_line">&gt;30分鐘 - 1小時</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;1小時 - 2小時
+                    </td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;2小時 - 3小時
+                    </td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;3小時 - 4小時
+                    </td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)小時 - n小時
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">注 : n=泊車時數</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >其他司機</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>出車時間</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期一至六</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>星期日及公衆假期</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30 分鐘
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;30分鐘 - 1小時
+                    </td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;1小時 - 2小時
+                    </td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$40+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;2小時 - 3小時
+                    </td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$60+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;3小時 - 4小時
+                    </td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                    <td align="center" class="border_line">HK$80+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)小時 - n小時
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">HK$20 x (n)+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">注: n=泊車時數</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>&nbsp;</p>
+            </div>
+            <div v-if="fairview_park_lang === 'en_us'">
+              <table width="100%" border="0" cellspacing="1" cellpadding="10">
+                <tbody>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#9cc212">
+                      <span
+                        style="
+                          font-size: 24px;
+                          color: #ffffff;
+                          font-weight: bold;
+                        "
+                        >GINKGO ROAD CARPARK - PARKING PRIVILEGE PAYMENT</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#fffde9">
+                      Parking Fee : Hourly Charge+Entry Fee : HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>Owner Registered Octopus Users </strong>
+                    </td>
+                    <td width="33%" class="border_line">Hourly Charge HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2"><strong>Other Drivers </strong></td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">Mon to Sat</td>
+                    <td class="border_line">Hourly Charge HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      Sun &amp; Public Holidays
+                    </td>
+                    <td class="border_line">Hourly Charge HK$20</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      Hourly Charge : Calculated on hourly basis. Part of an
+                      hour is colunted as full hour.<br />
+                      For Carpark Rules, please see sign board at Ginkgo Road
+                      Carpark entrance.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >Owner Registered Octopus Users</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>Time of Exit</strong>
+                    </td>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>Mon - Sat</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Sun &amp; Public Holidays</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30min
+                    </td>
+                    <td
+                      rowspan="3"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td class="border_line">&gt;30min - 1hr</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;1hr - 2hr</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;2hr - 3hr</td>
+                    <td align="center" class="border_line"> HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;3hr - 4hr</td>
+                    <td align="center" class="border_line"> HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)hr - n hr
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Note : n = number of parking hours</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >Other Drivers</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Time of Exit</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Mon - Sat</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Sun &amp; Public Holidays</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30 min
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;30min - 1hr</td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;1hr - 2hr</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$40+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;2hr - 3hr</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$60+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;3hr - 4hr</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                    <td align="center" class="border_line">HK$80+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)hr - nhr
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                    <td align="center" class="border_line">HK$20 x (n)+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Note : n = number of parking hours</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br />
+              <br />
+              <table width="100%" border="0" cellspacing="1" cellpadding="10">
+                <tbody>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#9cc212">
+                      <span
+                        style="
+                          font-size: 24px;
+                          color: #ffffff;
+                          font-weight: bold;
+                        "
+                        >LOTUS ROAD CARPARK - PARKING PRIVILEGE PAYMENT(24
+                        Hours)</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#fffde9">
+                      Parking Fee : Hourly Charge+Entry Fee : HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>Owner Registered Octopus Users</strong>
+                    </td>
+                    <td width="33%" class="border_line">Hourly Charge HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      <strong>Club Registered Octopus Users</strong>
+                    </td>
+                    <td class="border_line">Hourly Charge HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3"><strong>Other Drivers</strong></td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">Mon - Sat</td>
+                    <td class="border_line">Hourly Charge HK$16</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="border_line">
+                      Sun &amp; Public Holidays
+                    </td>
+                    <td class="border_line">Hourly Charge HK$20</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      Hourly Charge : Calculated on hourly basis. Part of an
+                      hour is counted as full hour.<br />
+                      For Carpark Rules, please see sign board at the Lotus Road
+                      Carpark entrance.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >Club Registered Octopus Users</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>Time of Exit</strong>
+                    </td>
+                    <td width="33%" align="center" bgcolor="#fffde9">
+                      <strong>Mon - Sat</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Sun &amp; Public Holidays</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30min
+                    </td>
+                    <td
+                      rowspan="7"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="7"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">
+                      &gt;30min - 1hr
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">&gt;1hr - 2hr</td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">&gt;2hr - 3hr</td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">&gt;3hr - 4hr</td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">&gt;4hr - 5hr</td>
+                  </tr>
+                  <tr align="center">
+                    <td bgcolor="#F2FAFF" class="border_line">&gt;5hr - 6hr</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;6hr - 7hr</td>
+                    <td align="center" class="border_line"> HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;7hr - 8hr</td>
+                    <td align="center" class="border_line"> HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)hr - nhr
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-6)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-6)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Note : n = number of parking hours</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >Owner Registered Octopus Users</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Time of Exit</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Mon - Sat</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Sun &amp; Public Holidays</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30min
+                    </td>
+                    <td
+                      rowspan="3"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr align="center">
+                    <td class="border_line">&gt;30min - 1hr</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;1hr - 2hr</td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;2hr - 3hr</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;3hr - 4hr</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)hr - nhr
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-1)+HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Note : n = number of parking hours</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" align="center" bgcolor="#f1fcdd">
+                      <span style="font-size: 20px; font-weight: bold"
+                        >Other Drivers</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Time of Exit</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Mon - Sat</strong>
+                    </td>
+                    <td align="center" bgcolor="#fffde9">
+                      <strong>Sun &amp; Public Holidays</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      0 - 30min
+                    </td>
+                    <td
+                      rowspan="2"
+                      align="center"
+                      bgcolor="#F2FAFF"
+                      class="border_line"
+                    >
+                      HK$1
+                    </td>
+                    <td align="center" bgcolor="#F2FAFF" class="border_line">
+                      HK$1
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;30min - 1hr</td>
+                    <td align="center" class="border_line">HK$20+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;1hr - 2hr</td>
+                    <td align="center" class="border_line">HK$16+HK$1</td>
+                    <td align="center" class="border_line">HK$40+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;2hr - 3hr</td>
+                    <td align="center" class="border_line">HK$32+HK$1</td>
+                    <td align="center" class="border_line">HK$60+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">&gt;3hr - 4hr</td>
+                    <td align="center" class="border_line">HK$48+HK$1</td>
+                    <td align="center" class="border_line">HK$80+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                    <td align="center" class="border_line">:</td>
+                  </tr>
+                  <tr>
+                    <td align="center" class="border_line">
+                      &gt;(n-1)hr - nhr
+                    </td>
+                    <td align="center" class="border_line">
+                      HK$16 x (n-2)+HK$1
+                    </td>
+                    <td align="center" class="border_line">HK$20 x (n)+HK$1</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Note : n = number of parking hours</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>&nbsp;</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1209,7 +2705,14 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  nextTick,
+} from "vue";
 export default {
   data() {
     return {
@@ -1249,29 +2752,35 @@ export default {
     onMounted(async () => {
       await findShopsDirectoryList2();
       if (
-        document.getElementById("shopping-information-menu").getBoundingClientRect()
-          .height
+        document
+          .getElementById("shopping-information-menu")
+          .getBoundingClientRect().height
       ) {
         document.getElementsByClassName("nav-content")[0].style.height =
-          document.getElementById("shopping-information-menu").getBoundingClientRect()
-            .height > 500
-            ? document.getElementById("shopping-information-menu").getBoundingClientRect()
-                .height + "px"
+          document
+            .getElementById("shopping-information-menu")
+            .getBoundingClientRect().height > 500
+            ? document
+                .getElementById("shopping-information-menu")
+                .getBoundingClientRect().height + "px"
             : "500px";
       } else {
-        document.getElementsByClassName("nav-content")[0].style.height = "500px";
+        document.getElementsByClassName("nav-content")[0].style.height =
+          "500px";
       }
     });
     const jumpLink = (index) => {
       if (index === 0) {
       } else {
-        let top = 0;
-        for (let i = 0; i < index; i++) {
-          top += document.querySelector("#shop_information_" + (i + 1)).scrollHeight;
-        }
-        console.log(top);
-        console.log(document.querySelector("#nav-content"));
-        document.querySelector("#nav-content").scrollTop = top;
+        nextTick(() => {
+          let top = 0;
+          for (let i = 0; i < index; i++) {
+            top += document.querySelector(
+              "#shop_information_" + (i + 1)
+            ).scrollHeight;
+          }
+          document.querySelector("#nav-content").scrollTop = top;
+        });
       }
       data.nav_index = index;
     };
@@ -1490,7 +2999,7 @@ export default {
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
@@ -1523,26 +3032,43 @@ export default {
               border-color: #ccc;
             }
           }
-        }
-      }
-      .nav-content{
-        padding:0;
-        .nav-content-list{
-          .header{
-            font-size: 28px;
-          }
-          ul{
-            li{
-
+          .el-popper {
+            position: absolute;
+            top: 52px !important;
+            left: 0 !important;
+            .el-select-dropdown {
+              .el-scrollbar {
+                .el-select-dropdown__wrap {
+                  .el-scrollbar__view {
+                    .el-select-dropdown__item {
+                      text-align: left;
+                      span {
+                        margin: 0;
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
-        .nav-content-list2{
-          .header{
+      }
+      .nav-content {
+        padding: 0;
+        .nav-content-list {
+          .header {
+            font-size: 28px;
+          }
+          ul {
+            li {
+            }
+          }
+        }
+        .nav-content-list2 {
+          .header {
             font-size: 28px;
           }
         }
-
       }
     }
   }
