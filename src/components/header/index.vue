@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 23:18:57
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-09 15:26:45
+ * @LastEditTime: 2023-01-10 11:30:53
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -58,6 +58,7 @@
             <i v-if="showOwnerZONEList"></i>
           </div>
           <div
+            v-if="is_login"
             style="
               text-decoration: none;
               position: relative;
@@ -869,14 +870,15 @@ export default {
     width: 0;
   }
 }
-@media (min-width: 1400px) {
-  .container-fluid {
-    width: 1280px !important;
-  }
-}
+
 @media (min-width: 1200px) {
   .container-fluid {
     width: 1100px !important;
+  }
+}
+@media (min-width: 1400px) {
+  .container-fluid {
+    width: 1280px !important;
   }
 }
 @media (max-width: 991px) {

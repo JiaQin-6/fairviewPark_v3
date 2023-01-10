@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 1723470065@qq.com
  * @Date: 2022-07-15 10:43:52
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 03:23:26
+ * @LastEditTime: 2023-01-10 11:32:33
  * @FilePath: \dtX-consumer-frontendc:\Users\Shinelon\Desktop\fairviewPark\fairviewPark_v3\src\i18n\en_us.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -46,9 +46,9 @@ export default {
     'Human Resources':'Human Resources',
     'Accounts':'Accounts',
     'Information Technology':'Information Technology',
-    "OWNERS's ZONE":"OWNERS's ZONE",
+    "OWNERS's ZONE":"OWNERS'ZONE",
     'FAQ from Residents':'FAQ from Residents',
-    'Estate Notices':'Estate Notices',
+    'Estate Notices':'Estate Notice',
     'Fairview Park News':'Fairview Park News',
     'Demographic & Opinion Survey':'Demographic & Opinion Survey',
     'Estate Activities':'Estate Activities',

@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 01:52:13
+ * @LastEditTime: 2023-01-09 18:59:50
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -126,8 +126,8 @@
                   <td align="center" colspan="3" height="25" bgcolor="#dfecd7">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Parking Fee：Hourly Charge + Entry Fee : HK$ 1"
-                        : "停車場收費：時租收費 + 入場費 : HK$ 1"
+                        ? "Parking Fee：Hourly Charge + Entry Fee : HK$1"
+                        : "停車場收費：時租收費 + 入場費 : HK$1"
                     }}
                   </td>
                 </tr>
@@ -192,8 +192,8 @@
                   <td rowspan="2" style="text-align: center">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Hourly Charge HK $20"
-                        : "時租收費HK $20"
+                        ? "Hourly Charge HK$20"
+                        : "時租收費HK$20"
                     }}
                   </td>
                 </tr>
@@ -259,10 +259,10 @@
                     {{ fairview_park_lang === "en_us" ? "0-30min" : "0-30分鐘" }}
                   </td>
                   <td rowspan="6" width="200" bgcolor="#dce9f3">
-                    {{ fairview_park_lang === "en_us" ? "HK＄1" : "HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                   <td rowspan="4" width="191" bgcolor="#dce9f3">
-                    {{ fairview_park_lang === "en_us" ? "HK＄1" : "HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -285,7 +285,7 @@
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$16＋HK＄1" : "HK$16＋HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -298,11 +298,11 @@
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$16 + HK＄1" : "HK$16 + HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$16 + HK$1" : "HK$16 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$32＋HK＄1" : "HK$32＋HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -315,11 +315,11 @@
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK$32 + HK＄1" : "HK$32 + HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$32 + HK$1" : "HK$32 + HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
-                    {{ fairview_park_lang === "en_us" ? "HK$48＋HK＄1" : "HK$48＋HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -349,15 +349,15 @@
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
                       fairview_park_lang === "en_us"
-                        ? "HK＄16 x (n-2)＋HK＄1"
-                        : "HK＄16 x (n-2)＋HK＄1"
+                        ? "HK$16 x (n-2)＋HK$1"
+                        : "HK$16 x (n-2)＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "HK＄16 x (n-1)＋HK＄1"
-                        : "HK＄16 x (n-1)＋HK＄1"
+                        ? "HK$16 x (n-1)＋HK$1"
+                        : "HK$16 x (n-1)＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -416,10 +416,10 @@
                     {{ fairview_park_lang === "en_us" ? "0-30 min" : "0-30 分鐘" }}
                   </td>
                   <td rowspan="4" width="295" bgcolor="#dce9f3">
-                    {{ fairview_park_lang === "en_us" ? "HK＄1" : "HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                   <td rowspan="2" width="191" bgcolor="#dce9f3">
-                    {{ fairview_park_lang === "en_us" ? "HK＄1" : "HK＄1" }}
+                    {{ fairview_park_lang === "en_us" ? "HK$1" : "HK$1" }}
                   </td>
                 </tr>
                 <tr height="21" style="height: 15.75pt"></tr>
@@ -432,7 +432,7 @@
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK＄20＋HK＄1" : "HK＄20＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$20＋HK$1" : "HK$20＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -444,12 +444,12 @@
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK＄16＋HK＄1" : "HK＄16＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$16＋HK$1" : "HK$16＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK＄40＋HK＄1" : "HK＄40＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$40＋HK$1" : "HK$40＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -462,12 +462,12 @@
                   <td rowspan="2" width="295" style="">
                     &nbsp;
                     {{
-                      fairview_park_lang === "en_us" ? "HK＄32＋HK＄1" : "HK＄32＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$32＋HK$1" : "HK$32＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK＄60＋HK＄1" : "HK＄60＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$60＋HK$1" : "HK$60＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -479,12 +479,12 @@
                   </td>
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
-                      fairview_park_lang === "en_us" ? "HK＄48＋HK＄1" : "HK＄48＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$48＋HK$1" : "HK$48＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
-                      fairview_park_lang === "en_us" ? "HK＄80＋HK＄1" : "HK＄80＋HK＄1"
+                      fairview_park_lang === "en_us" ? "HK$80＋HK$1" : "HK$80＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -515,15 +515,15 @@
                   <td rowspan="2" width="295" style="">
                     &nbsp;{{
                       fairview_park_lang === "en_us"
-                        ? "HK＄16 x (n-1)＋HK＄1"
-                        : "HK＄16 x (n-1)＋HK＄1"
+                        ? "HK$16 x (n-1)＋HK$1"
+                        : "HK$16 x (n-1)＋HK$1"
                     }}
                   </td>
                   <td rowspan="2" width="191" style="">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "HK＄20 x (n)＋HK＄1"
-                        : "HK＄20 x (n)＋HK＄1"
+                        ? "HK$20 x (n)＋HK$1"
+                        : "HK$20 x (n)＋HK$1"
                     }}
                   </td>
                 </tr>
@@ -578,8 +578,8 @@
                   <td align="center" colspan="3" height="25" bgcolor="#dfecd7" style="">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Parking Fee：Hourly Charge + Entry Fee : HK$ 1"
-                        : "停車場收費：時租收費 ＋入場費 : HK$ 1"
+                        ? "Parking Fee：Hourly Charge + Entry Fee : HK$1"
+                        : "停車場收費：時租收費 ＋入場費 : HK$1"
                     }}
                   </td>
                 </tr>
@@ -597,8 +597,8 @@
                   <td rowspan="2" width="300" style="text-align: center">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Hourly Charge HK＄16"
-                        : "時租收費HK＄16"
+                        ? "Hourly Charge HK$16"
+                        : "時租收費HK$16"
                     }}
                   </td>
                 </tr>
@@ -617,8 +617,8 @@
                   <td rowspan="2" width="300" style="text-align: center">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Hourly Charge HK＄16"
-                        : "時租收費HK＄16"
+                        ? "Hourly Charge HK$16"
+                        : "時租收費HK$16"
                     }}
                   </td>
                 </tr>
@@ -645,8 +645,8 @@
                   <td rowspan="2" width="300" style="text-align: center">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Hourly Charge HK＄16"
-                        : "時租收費HK＄16"
+                        ? "Hourly Charge HK$16"
+                        : "時租收費HK$16"
                     }}
                   </td>
                 </tr>
@@ -665,8 +665,8 @@
                   <td rowspan="2" width="300" style="text-align: center">
                     {{
                       fairview_park_lang === "en_us"
-                        ? "Hourly Charge HK＄20"
-                        : "時租收費HK＄20"
+                        ? "Hourly Charge HK$20"
+                        : "時租收費HK$20"
                     }}
                   </td>
                 </tr>

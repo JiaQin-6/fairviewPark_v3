@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 03:16:09
+ * @LastEditTime: 2023-01-09 18:55:56
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -169,6 +169,7 @@
                             form.relationFile.url = '';
                           }
                         "
+                        :teleported="false"
                       >
                         <el-option
                           v-for="item in [
@@ -449,7 +450,12 @@
                   <div class="col-12 col-lg-3 col-sm-12" style="margin-bottom: 10px">
                     <h3
                       v-if="item.rcAppStatus === 1"
-                      style="color:#BA9859;font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                      style="
+                        color: #ba9859;
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+                      "
                     >
                       {{
                         fairview_park_lang === "en_us"
@@ -459,7 +465,12 @@
                     </h3>
                     <h3
                       v-if="item.rcAppStatus === 2"
-                      style="color:#9cc212;font-size: 24px; font-weight: bold; margin-bottom: 20px"
+                      style="
+                        color: #9cc212;
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-bottom: 20px;
+                      "
                     >
                       {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
                     </h3>
@@ -532,7 +543,7 @@
                           :src="item.rcPhoto"
                           alt=""
                         />
-                      </div> 
+                      </div>
                       <div v-if="item.rcAppStatus === 2">
                         <strong style="margin-right: 5px">{{
                           fairview_park_lang === "en_us"
@@ -696,9 +707,7 @@ export default {
       ) {
         data.isRequest = false;
         return false;
-      } else if (
-        data.form.cardNumber1.length<8 
-      ) {
+      } else if (data.form.cardNumber1.length < 8) {
         ElMessage.error(
           data.fairview_park_lang === "en_us"
             ? "Please fill in the complete 8- or 9-digit Octopus Number"
@@ -971,6 +980,7 @@ export default {
                 margin-bottom: 30px;
                 .form-wrap {
                   align-items: center;
+                  position: relative;
                   span {
                     color: var(--mainColor1);
                   }
@@ -994,6 +1004,10 @@ export default {
                       }
                     }
                   }
+                  @{deep} .el-select{
+                    position: relative !important;
+                    z-index:1 !important;
+                  }
                 }
                 .yellow {
                   color: var(--mainColor2);
@@ -1012,6 +1026,24 @@ export default {
                     }
                   }
                 }
+                @{deep}.el-popper{
+          position: absolute;
+          top: 52px!important;
+          left: 0!important;
+          .el-select-dropdown{
+            .el-scrollbar{
+              .el-select-dropdown__wrap{
+                .el-scrollbar__view{
+                  background-color: var(--mainColor2);
+                  .el-select-dropdown__item{
+                    text-align: left;
+                    margin-bottom:0;
+                  }
+                }
+              }
+            }
+          }
+        }
                 @{deep} .el-input {
                   .el-input__wrapper {
                     .el-input__inner {
