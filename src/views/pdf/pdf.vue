@@ -42,7 +42,7 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
-      source: "/pdf/1.pdf", //预览pdf文件地址
+      source: "https://fairviewpark.hk/new_web/uat/fairview_park_news/Javascript1.pdf", //预览pdf文件地址
       pageNum: 1, //当前页面
       scale: 1, // 缩放比例
       numPages: 0, // 总页数
