@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1369",
+      "name": "缩小",
+      "font_class": "suoxiao",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1370",
+      "name": "放大",
+      "font_class": "fangda",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "136387",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "2488128",
+      "name": "上一页",
+      "font_class": "shangyiye",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "2488136",
+      "name": "下一页",
+      "font_class": "xiayiye",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
       "icon_id": "607132",
       "name": "中心环境",
       "font_class": "zhongxinhuanjing",

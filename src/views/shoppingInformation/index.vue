@@ -1867,7 +1867,7 @@
                           color: #ffffff;
                           font-weight: bold;
                         "
-                        >紅荷路停車場 - 泊車優惠收費表(24小時)</span
+                        >紅荷路停車場 - 泊車優惠收費(24小時)</span
                       >
                     </td>
                   </tr>

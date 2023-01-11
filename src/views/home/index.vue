@@ -448,7 +448,7 @@ export default {
                 scroll_div.scrollLeft++;
               }
             }
-            data.timer = setInterval(Marquee, 10);
+            data.timer = setInterval(Marquee, 50);
           });
         }
       } catch (error) {

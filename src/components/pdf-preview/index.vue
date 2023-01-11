@@ -8,22 +8,35 @@
 -->
 <template>
   <div class="pdf-preview">
-    <div class="pdf-wrap">
-      <vue-pdf-embed
-        :source="source"
-        :style="scale"
-        class="vue-pdf-embed"
-        :page="pageNum"
-      />
-     
-    </div>
-    <div class="page-tool">
-      <div class="page-tool-item" @click="lastPage">上一页</div>
-      <div class="page-tool-item" @click="nextPage">下一页</div>
-      <div class="page-tool-item">{{ pageNum }}/{{ numPages }}</div>
-      <div class="page-tool-item" @click="pageZoomOut">放大</div>
-      <div class="page-tool-item" @click="pageZoomIn">缩小</div>
-      <div class="page-tool-item" @click="download(source, '1')">下载</div>
+    <div class="pdf-preview-content">
+      <div class="page-tool">
+        <div class="page-tool-content">
+          <div class="page-tool-item" @click="lastPage">
+            <i class="iconfont icon-shangyiye" style="font-size: 18px"></i>
+          </div>
+          <div class="page-tool-item" @click="nextPage">
+            <i class="iconfont icon-xiayiye" style="font-size: 18px"></i>
+          </div>
+          <div class="page-tool-item">{{ pageNum }}/{{ numPages }}</div>
+          <div class="page-tool-item" @click="pageZoomOut">
+            <i class="iconfont icon-fangda" style="font-size: 20px"></i>
+          </div>
+          <div class="page-tool-item" @click="pageZoomIn">
+            <i class="iconfont icon-suoxiao" style="font-size: 20px"></i>
+          </div>
+          <div class="page-tool-item" @click="download(source, '1')">
+            <i class="iconfont icon-xiazai" style="font-size: 20px"></i>
+          </div>
+        </div>
+      </div>
+      <div class="pdf-wrap">
+        <vue-pdf-embed
+          :source="source"
+          :style="scale"
+          class="vue-pdf-embed"
+          :page="pageNum"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -31,23 +44,27 @@
 <script>
 import VuePdfEmbed from "vue-pdf-embed";
 import { createLoadingTask } from "vue3-pdfjs/esm"; // 获得总页数
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, computed } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, computed, watch } from "vue";
 export default {
   components: {
     VuePdfEmbed,
   },
-  data() {
-    return {};
+  props:{
+    pdfPreview:{
+        type:String,
+        required: true
+    }
   },
-  setup() {
+  setup(props) {
     let data = reactive({
       fairview_park_lang: "",
-      source: "https://fairviewpark.hk/new_web/uat/fairview_park_news/Javascript1.pdf", //预览pdf文件地址
+      source: "", //预览pdf文件地址
       pageNum: 1, //当前页面
       scale: 1, // 缩放比例
       numPages: 0, // 总页数
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.source = props.pdfPreview
     const scale = computed(() => `transform:scale(${data.scale})`);
     const lastPage = () => {
       if (data.pageNum > 1) {
@@ -70,7 +87,7 @@ export default {
       }
     };
     const download = (data, fileName) => {
-       let blob = new Blob([data], {
+      let blob = new Blob([data], {
         //type类型后端返回来的数据中会有，根据自己实际进行修改
         type: "application/pdf;charset-UTF-8",
       });
@@ -93,6 +110,12 @@ export default {
         window.URL.revokeObjectURL(blobURL);
       }
     };
+    watch(
+      () => props.pdfPreview,
+      (val) => {
+        data.source = val;
+      }
+    );
     onMounted(() => {
       const loadingTask = createLoadingTask(data.source);
       loadingTask.promise.then((pdf) => {
@@ -113,50 +136,70 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.vue-pdf-embed {
-  text-align: center;
-  width: 515px;
-  border: 1px solid #e5e5e5;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
 .pdf-preview {
   position: relative;
-  height: 800px;
   padding: 20px 0;
   box-sizing: border-box;
-  background-color: #e9e9e9;
-}
-.pdf-wrap {
-  height: 100%;
-  overflow-y: auto;
-}
-.vue-pdf-embed {
-  text-align: center;
-  width: 515px;
-  border: 1px solid #e5e5e5;
-  margin: 0 auto;
-  box-sizing: border-box;
+  .pdf-preview-content {
+    margin: 0 auto;
+    height: 100%;
+    .page-tool {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: white;
+      background: #e7ebee;
+
+      .page-tool-content {
+        display: flex;
+        align-items: center;
+        .page-tool-item {
+          padding: 8px 15px;
+          padding-left: 10px;
+          cursor: pointer;
+          color: #868e96;
+        }
+      }
+    }
+    .pdf-wrap {
+      height: 600px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      background-color: #f1f3f5;
+      padding: 20px;
+      .vue-pdf-embed {
+        text-align: center;
+        max-width: 515px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+    }
+  }
 }
 
-.page-tool {
-  position: absolute;
-  bottom: 35px;
-  padding-left: 15px;
-  padding-right: 15px;
-  display: flex;
-  align-items: center;
-  background: rgb(66, 66, 66);
-  color: white;
-  border-radius: 19px;
-  z-index: 100;
-  cursor: pointer;
-  margin-left: 50%;
-  transform: translateX(-50%);
+@media (min-width: 576px) {
+  .pdf-preview-content {
+    width: 540px;
+  }
 }
-.page-tool-item {
-  padding: 8px 15px;
-  padding-left: 10px;
-  cursor: pointer;
+@media (min-width: 768px) {
+  .pdf-preview-content {
+    width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .pdf-preview-content {
+    width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .pdf-preview-content {
+    width: 1100px;
+  }
+}
+@media (min-width: 1400px) {
+  .pdf-preview-content {
+    width: 1280px;
+  }
 }
 </style>
