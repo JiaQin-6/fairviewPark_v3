@@ -256,10 +256,10 @@
                   />
                 </li>
                 <li v-if="fairview_park_lang === 'zh_tw'">
-                  <p class="title">中文暱稱 (選填) :</p>
+                  <p class="title">中文暱稱 (選填)</p>
                   <input
                     v-model="registerForm.cnickname"
-                    placeholder="中文暱稱 (選填) :"
+                    placeholder="中文暱稱 (選填)"
                     type="text"
                   />
                 </li>
@@ -584,10 +584,10 @@
                   />
                 </li>
                 <li v-if="fairview_park_lang === 'zh_tw'">
-                  <p class="title">中文暱稱 (選填) :</p>
+                  <p class="title">中文暱稱 (選填)</p>
                   <input
                     v-model="editMemberInfoForm.cnickname"
-                    placeholder="中文暱稱 (選填) :"
+                    placeholder="中文暱稱 (選填)"
                     type="text"
                   />
                 </li>
@@ -1023,6 +1023,7 @@ export default {
             box-shadow: none;
             input {
               font-size: 18px;
+              color: #000;
             }
           }
         }
@@ -1038,6 +1039,7 @@ export default {
           padding-left: 10px;
           margin: 0 auto;
           margin-bottom: 10px;
+           font-size: 18px;
         }
 
         @{deep} .el-button {
@@ -1101,6 +1103,7 @@ export default {
               box-shadow: none;
               input {
                 font-size: 18px;
+                color: #000;
               }
             }
           }
@@ -1113,6 +1116,7 @@ export default {
             height: 45px;
             line-height: 45px;
             padding-left: 10px;
+             font-size: 18px;
           }
         }
       }

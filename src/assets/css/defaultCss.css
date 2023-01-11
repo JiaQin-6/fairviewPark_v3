@@ -62,7 +62,7 @@ input:disabled {
 
 input::-webkit-input-placeholder {
   text-transform: none !important;
-  color: #ccc;
+  color: #a8abb2;
 }
 
 textarea {

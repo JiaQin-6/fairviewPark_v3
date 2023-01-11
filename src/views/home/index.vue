@@ -109,8 +109,12 @@
             >
           </el-carousel-item>
         </el-carousel>
-        <marquee class="mobile" style="height: 45px; line-height: 45px">
-          <div
+        <!-- <marquee
+          scrollamount="3"
+          class="mobile"
+          style="height: 45px; line-height: 45px"
+        > -->
+        <!-- <div
             style="display: inline"
             v-for="(item, index) in new_notice_list"
             :key="index"
@@ -131,8 +135,57 @@
             <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
               item.contentEnUs
             }}</span>
+          </div> -->
+        <div
+          id="scroll_div"
+          class="mobile"
+          style=" 
+              height: 45px;
+              line-height: 45px
+              overflow: hidden;
+              overflow: hidden;
+              white-space: nowrap;
+              flex:1;
+              margin-left: 10px;
+            "
+        >
+        <div
+            id="scroll_front"
+            style="display: inline-block; "
+          ></div>
+          <div id="scroll_begin" style="display: inline;">
+            <div
+              style="display: inline"
+              v-for="(item, index) in new_notice_list"
+              :key="index"
+            >
+              <a
+                v-if="item.websiteUrl"
+                :href="item.websiteUrl"
+                target="_blank"
+                style="
+                  text-decoration: underline;
+                  font-family: 'Nunito';
+                  font-size: 18px;
+                  margin-right: 40px;
+                  color: #fff;
+                "
+                >{{ item.contentEnUs }}
+              </a>
+              <span
+                style="margin-right: 20px; color: #fff"
+                v-if="!item.websiteUrl"
+                >{{ item.contentEnUs }}</span
+              >
+            </div>
+            <div style="display: inline-block;width: 500px"></div>
           </div>
-        </marquee>
+          <div
+            id="scroll_end"
+            style="display: inline-block; width: 500px"
+          ></div>
+        </div>
+        <!-- </marquee> -->
       </div>
     </div>
     <!-- 主要內容 -->
@@ -170,7 +223,10 @@
                 <img style="width: 100%" :src="item.img_url" alt="" />
                 <button>
                   <router-link
-                    :to="{ path: item.route, query: { lang: fairview_park_lang } }"
+                    :to="{
+                      path: item.route,
+                      query: { lang: fairview_park_lang },
+                    }"
                     >{{ item.text }}</router-link
                   >
                 </button>
@@ -204,7 +260,10 @@
                 >
                   <button>
                     <router-link
-                      :to="{ path: item.route, query: { lang: fairview_park_lang } }"
+                      :to="{
+                        path: item.route,
+                        query: { lang: fairview_park_lang },
+                      }"
                       >{{ item.text }}</router-link
                     >
                   </button>
@@ -218,7 +277,9 @@
       <div class="about-us">
         <h1>
           {{ fairview_park_lang === "en_us" ? "About" : "關於"
-          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? " us" : "我們" }}</a>
+          }}<a href="#/about-us">{{
+            fairview_park_lang === "en_us" ? " us" : "我們"
+          }}</a>
           <p></p>
         </h1>
         <div class="container">
@@ -316,7 +377,14 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  nextTick,
+} from "vue";
 export default {
   data() {
     return {
@@ -328,11 +396,18 @@ export default {
         "../../assets/image/home/pic_index02.jpg",
         import.meta.url
       ).href,
-      bus_time_table: new URL("../../assets/image/home/pic_index03.jpg", import.meta.url)
-        .href,
-      icon_news: new URL("../../assets/image/home/icon_news.png", import.meta.url).href,
-      img1: new URL("../../assets/image/home/aboutus_banner_2e4X.jpg", import.meta.url)
-        .href,
+      bus_time_table: new URL(
+        "../../assets/image/home/pic_index03.jpg",
+        import.meta.url
+      ).href,
+      icon_news: new URL(
+        "../../assets/image/home/icon_news.png",
+        import.meta.url
+      ).href,
+      img1: new URL(
+        "../../assets/image/home/aboutus_banner_2e4X.jpg",
+        import.meta.url
+      ).href,
       img2: new URL(
         "../../assets/image/home/Podcast-Hour-Design-Idea_XPel.jpg",
         import.meta.url
@@ -347,6 +422,7 @@ export default {
       web_banner_list: [],
       fairview_park_lang: "",
       carouselValue: 0,
+      timer: null,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 最新消息
@@ -357,6 +433,23 @@ export default {
         });
         if (res.data.status === 200) {
           data.new_notice_list = res.data.data.records;
+          nextTick(() => {
+            //文字横向滚动
+            let scroll_div = document.getElementById("scroll_div");
+            let scroll_front = document.getElementById("scroll_front");
+            let scroll_begin = document.getElementById("scroll_begin");
+            let scroll_end = document.getElementById("scroll_end");
+            scroll_front.style["width"] =
+              scroll_div.getBoundingClientRect().width + "px";
+            function Marquee() {
+              if (((scroll_end.offsetWidth + scroll_div.getBoundingClientRect().width) - scroll_div.scrollLeft) <= 0) {
+                scroll_div.scrollLeft -= scroll_begin.offsetWidth;
+              } else {
+                scroll_div.scrollLeft++;
+              }
+            }
+            data.timer = setInterval(Marquee, 10);
+          });
         }
       } catch (error) {
         console.log(error);
@@ -377,8 +470,8 @@ export default {
       }
     };
     findWebsiteBannerList();
-    onMounted(() => {
-      findNewNoticeList();
+    onMounted(async () => {
+      await findNewNoticeList();
       setTimeout(() => {
         document.getElementById("carousel-control-prev").click();
       }, 3000);
@@ -396,6 +489,7 @@ export default {
 .carousel {
   height: 450px;
   .carousel-indicators {
+    display: none;
     button {
       width: 14px;
       height: 14px;
@@ -709,9 +803,11 @@ export default {
   .carousel {
     height: calc(100vw / 2);
   }
+
   .marquee {
+    a,
     span {
-      font-size: 15px;
+      font-size: 15px !important;
     }
   }
   .container_wrap {
@@ -719,7 +815,7 @@ export default {
       h1 {
         font-size: 25px;
         margin: 20px 0 20px 0;
-        margin-bottom: 20px!important;
+        margin-bottom: 20px !important;
       }
     }
     .about-us {

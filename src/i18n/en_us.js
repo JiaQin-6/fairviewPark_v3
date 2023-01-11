@@ -46,7 +46,7 @@ export default {
     'Human Resources': 'Human Resources',
     'Accounts': 'Accounts',
     'Information Technology': 'Information Technology',
-    "OWNERS's ZONE": "OWNERS'ZONE",
+    "OWNERS's ZONE": "OWNERS' ZONE",
     'FAQ from Residents': 'FAQ from Residents',
     'Estate Notices': 'Estate Notice',
     'Fairview Park News': 'Fairview Park News',
