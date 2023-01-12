@@ -12,11 +12,7 @@
       <div class="container-fluid">
         <a class="navbar-brand" :href="'#/home?lang=' + fairview_park_lang">
           <transition name="el-fade-in-linear">
-            <img
-              class="navbar-brand-logo-mobile"
-              :src="logo_m"
-              alt=""
-            />
+            <img class="navbar-brand-logo-mobile" :src="logo_m" alt="" />
           </transition>
 
           <!-- <transition name="el-zoom-in-top">
@@ -24,32 +20,51 @@
           </transition> -->
         </a>
         <!-- 手機端顯示的按鈕 -->
-        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
+        <div
+          style="margin-top: 15px; flex: 1; text-align: right"
+          class="mobile-btn"
+        >
           <span
+            class="lang"
             v-if="fairview_park_lang == 'zh_tw'"
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('en_us')"
             >EN</span
           >
           <span
+            class="lang"
             v-if="fairview_park_lang == 'en_us'"
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('zh_tw')"
             >中</span
           >
           <div
-            v-if="!is_login&&isShowLoginButton"
+            v-if="!is_login && isShowLoginButton"
             class="login-btn1"
-            style="position: relative; display: inline-block; flex: 1; text-align: right"
+            style="
+              position: relative;
+              display: inline-block;
+              flex: 1;
+              text-align: right;
+            "
           >
-            <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
+            <button
+              class="login-btn-1"
+              data-bs-toggle="modal"
+              data-bs-target="#login"
+            >
               {{ $t("Owner login") }}
             </button>
           </div>
           <div
             v-if="is_login"
             class="login-btn2"
-            style="position: relative; display: inline-block; flex: 1; text-align: right"
+            style="
+              position: relative;
+              display: inline-block;
+              flex: 1;
+              text-align: right;
+            "
             :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
@@ -102,7 +117,12 @@
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div
-            style="display: flex; flex-direction: column; align-items: center; flex: 1"
+            style="
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              flex: 1;
+            "
           >
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li
@@ -188,7 +208,14 @@
           </div>
 
           <ul
-            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
+            class="
+              lang-infomation
+              navbar-nav
+              me-auto
+              mb-4 mb-lg-0
+              flex-row
+              align-center
+            "
           >
             <div class="lang">
               <span
@@ -205,7 +232,7 @@
               >
             </div>
             <button
-              v-if="!is_login&&isShowLoginButton"
+              v-if="!is_login && isShowLoginButton"
               class="login"
               data-bs-toggle="modal"
               data-bs-target="#login"
@@ -273,7 +300,11 @@
                       $t("Demographic & Opinion Survey")
                     }}</el-dropdown-item>
 
-                    <el-dropdown-item class="yellow" command="/loginOut" v-if="isShowLoginOutButton">
+                    <el-dropdown-item
+                      class="yellow"
+                      command="/loginOut"
+                      v-if="isShowLoginOutButton"
+                    >
                       <el-icon><UserFilled /></el-icon>
                       {{ $t("Login out") }}</el-dropdown-item
                     >
@@ -315,7 +346,15 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+  inject,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -331,7 +370,8 @@ export default {
   data() {
     return {
       logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
-      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url)
+        .href,
     };
   },
   setup(props, ctx) {
@@ -344,18 +384,18 @@ export default {
       pmLogHave: null,
       showLogin_m: false,
       showOwnerZONEList: false,
-      isShowLoginButton:true,//是否顯示登錄按鈕（app進來web判斷）
-      isShowLoginOutButton:true,//是否顯示登出按鈕（app進來web判斷）
+      isShowLoginButton: true, //是否顯示登錄按鈕（app進來web判斷）
+      isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
     //獲取&設置語言
     if (!sessionStorage.getItem("fairview_park_lang")) {
-        sessionStorage.setItem("fairview_park_lang", "zh_tw");
-        data.fairview_park_lang = "zh_tw";
-      } else {
-        data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-      }
+      sessionStorage.setItem("fairview_park_lang", "zh_tw");
+      data.fairview_park_lang = "zh_tw";
+    } else {
+      data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    }
     //判断url是否带有token参数
     if (route.query.session) {
       //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
@@ -384,20 +424,23 @@ export default {
     }
     onMounted(() => {
       // scrollPosition();
-      
+
       //如果是從app進來用戶未登錄，隱藏登錄button
-      if(sessionStorage.getItem('app-login-status')==='2'){
-        data.isShowLoginButton = false
-      }else if(sessionStorage.getItem('app-login-status')==='1'){
-        data.isShowLoginOutButton = false
+      if (sessionStorage.getItem("app-login-status") === "2") {
+        data.isShowLoginButton = false;
+      } else if (sessionStorage.getItem("app-login-status") === "1") {
+        data.isShowLoginOutButton = false;
       }
-      
+
       if (document.getElementsByClassName("el-popper")[0]) {
-        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
-          "fixed";
-        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
-        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
-          "2000";
+        document.getElementsByClassName(
+          "el-popper"
+        )[0].parentNode.style.position = "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top =
+          "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style[
+          "z-index"
+        ] = "2000";
       }
     });
     //切換語言
@@ -605,7 +648,7 @@ export default {
       margin: 0 auto;
       text-align: center;
       width: auto;
-        padding:0;
+      padding: 0;
     }
     .navbar-brand {
       padding: 0;
@@ -629,7 +672,6 @@ export default {
         border: 0;
         font-size: 16px;
         color: #fff;
-        margin-left: 10px;
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;
@@ -759,8 +801,8 @@ export default {
       box-shadow: none;
       .navbar-toggler-icon {
         width: 35px;
-        vertical-align:top;
-        height:30px;
+        vertical-align: top;
+        height: 30px;
       }
     }
     .me-auto {
@@ -814,7 +856,7 @@ export default {
           border-radius: 50px;
           border: 0;
           font-size: 18px;
-          margin-left: 20px;
+          // margin-left: 10px;
           padding: 3px 15px;
           border: 1px solid var(--mainColor2);
           display: inline-block;
@@ -861,7 +903,7 @@ export default {
       margin-bottom: 0 !important;
     }
   }
-  
+
   .is-show-dropdown {
     display: block;
   }
@@ -892,7 +934,7 @@ export default {
       .container-fluid {
         justify-content: space-between;
         width: 100%;
-        padding: 0 20px ;
+        padding: 0 20px;
         .navbar-collapse {
           margin-left: auto;
           justify-content: space-between;
@@ -919,18 +961,29 @@ export default {
           }
         }
       }
-      .navbar-brand {
-      padding: 0;
-      margin-right: 10px;
-      width: 45px;
-      position: relative;
-      img {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        margin-top:15px;
+      .mobile-btn{
+        
+        
+        .lang{
+          height: 32px;
+          line-height: 32px;
+          display: inline-block;
+          font-size: 18px;
+          margin-right: 10px;
+        }
       }
-    }
+      .navbar-brand {
+        padding: 0;
+        margin-right: 10px;
+        width: 45px;
+        position: relative;
+        img {
+          position: absolute;
+          left: 0;
+          width: 100%;
+          margin-top: 15px;
+        }
+      }
       .navbar-brand-logo {
         display: none !important;
       }

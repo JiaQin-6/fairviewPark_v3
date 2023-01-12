@@ -454,6 +454,7 @@
             }}</el-button>
           </div>
         </div>
+        <!-- 编辑资料 -->
         <div class="modal-content" v-show="showEditMemberModel">
           <div class="modal-header">
             <button
@@ -864,7 +865,7 @@ export default {
         console.log(error);
       }
     };
-    //
+    //编辑资料之前验证密码
     const verifyPassword = () => {
       if (!data.editMemberInfoForm.verifyPassword) {
         //如果为空
@@ -889,11 +890,12 @@ export default {
       if (
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
-        !data.editMemberInfoForm.password ||
         !data.editMemberInfoForm.email
       ) {
         data.edit_member_info_error_tip.is_null = true;
         return;
+      } else if(data.editMemberInfoForm.password && !data.editMemberInfoForm.confirmPassword){
+        data.edit_member_info_error_tip.is_null = true;
       } else if (!reg.test(data.editMemberInfoForm.email)) {
         data.edit_member_info_error_tip.is_email_correct = true;
         return;
@@ -1187,13 +1189,24 @@ export default {
         }
       }
     }
-    .error {
+    @{deep} .error {
       border-color: rgb(222, 7, 28) !important;
       background-color: rgba(222, 7, 28, 0.1);
       color: rgb(222, 7, 28);
 
       &::-webkit-input-placeholder {
         color: rgb(222, 7, 28);
+      }
+      .el-input__wrapper{
+        border-color: rgb(222, 7, 28) !important;
+        background-color: rgba(222, 7, 28, 0.1);
+        color: rgb(222, 7, 28);
+        .el-input__inner{
+           &::-webkit-input-placeholder {
+            color: rgb(222, 7, 28);
+          }
+        }
+       
       }
     }
   }

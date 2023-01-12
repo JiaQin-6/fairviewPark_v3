@@ -103,7 +103,7 @@
           <!-- 分頁 -->
           <div style="display: flex; align-items: center" v-if="total !== 0">
             <el-pagination
-              style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
+              style="flex-wrap: wrap; margin: 0 auto; font-size: 18px;width: 100%;"
               v-model:current-page="currentPage1"
               v-model:page-size="pageSize1"
               :page-sizes="[5, 10, 15, 20]"

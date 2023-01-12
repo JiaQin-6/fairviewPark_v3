@@ -287,15 +287,15 @@ export default {
     onMounted(async () => {
       document.onscroll = () => {
         //如果滚动隐藏下拉框
-        if (
-          document.getElementsByClassName("menu-select") &&
-          document.getElementsByClassName("menu-select")[0] &&
-          document
-            .getElementsByClassName("menu-select")[0]
-            .getElementsByClassName("is-reverse").length !== 0
-        ) {
-          document.getElementsByClassName("menu-select")[0].click();
-        }
+        // if (
+        //   document.getElementsByClassName("menu-select") &&
+        //   document.getElementsByClassName("menu-select")[0] &&
+        //   document
+        //     .getElementsByClassName("menu-select")[0]
+        //     .getElementsByClassName("is-reverse").length !== 0
+        // ) {
+        //   document.getElementsByClassName("menu-select")[0].click();
+        // }
         if (
           document.getElementsByClassName("el-pagination__sizes") &&
           document.getElementsByClassName("el-pagination__sizes")[0] &&

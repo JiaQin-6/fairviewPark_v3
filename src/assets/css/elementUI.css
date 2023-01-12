@@ -71,5 +71,5 @@
 }
 .el-select {
   position: relative !important;
-  z-index: 1 !important;
+  z-index: inherit !important;
 }
