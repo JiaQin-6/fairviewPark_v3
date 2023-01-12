@@ -97,7 +97,7 @@
           >
             <i>{{ item.index + 1 }}.</i>
             <span
-              ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+              ><a target="_blank" :href="item.pdfUrlZhTw">{{ item.titleEnUs }}</a></span
             >
           </li>
           <!-- 分頁 -->
@@ -163,9 +163,10 @@
         </div>
       </div>
       <div v-show="menuActive === 3">
-        <div id="pdf-wrap">
+        <!-- <div id="pdf-wrap">
           <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
-        </div>
+        </div> -->
+        <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
       </div>
     </div>
   </div>
@@ -177,9 +178,11 @@ import PDFJSExpress from "@pdftron/pdfjs-express";
 import { ElConfigProvider } from "element-plus";
 import zhTw from "element-plus/dist/locale/zh-tw.mjs";
 import en from "element-plus/dist/locale/en.mjs";
+import PDFPreview from '../../../../components/pdf-preview/index.vue'
 export default {
   components: {
     ElConfigProvider,
+    PDFPreview
   },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
@@ -192,7 +195,10 @@ export default {
       minutes_of_sub_mac_meetings_list: [],
       minutes_of_sub_mac_meetings_show_list: [],
       sub_mac_meetings_index: 0,
-      MacColumnFile: "",
+      MacColumnFile: {
+        pdfUrlEnUs:'',
+        pdfUrlZhTw:'',
+      },
       currentPage1: 1,
       pageSize1: 5,
       total1: 0,
@@ -200,6 +206,8 @@ export default {
       pageSize2: 5,
       total2: 0,
       local: "",
+      pdfPreview:'',
+      pdfDownloadUrl:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
@@ -252,7 +260,8 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.MacColumnFile = res.data.data.pdfUrlEnUs;
+          data.MacColumnFile.pdfUrlEnUs = res.data.data.pdfUrlEnUs;
+          data.MacColumnFile.pdfUrlZhTw = res.data.data.pdfUrlZhTw;
         }
       } catch (error) {
         console.log(error);
@@ -296,17 +305,19 @@ export default {
       await findMinutesOfSubComMeetingsList();
       await findMinutesOfSubComMeetingsList(data.minutes_of_sub_mac_meetings_list[0].id);
       await findOneMacColumnFile();
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc: data.MacColumnFile,
-        },
-        document.getElementById("pdf-preview")
-      ).then((instance) => {});
+      data.pdfPreview = data.MacColumnFile.pdfUrlEnUs
+      data.pdfDownloadUrl = data.MacColumnFile.pdfUrlZhTw
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc: data.MacColumnFile,
+      //   },
+      //   document.getElementById("pdf-preview")
+      // ).then((instance) => {});
     });
     return {
       ...toRefs(data),
@@ -484,6 +495,11 @@ h5 {
     .is-focus {
       border-color: #ccc;
     }
+  }
+}
+@{deep} .pdf-preview{
+  .pdf-preview-content{
+    width:100%;
   }
 }
 @media (max-width: 991px) {

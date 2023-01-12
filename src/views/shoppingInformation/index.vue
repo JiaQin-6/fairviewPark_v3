@@ -65,10 +65,10 @@
             v-for="(item, index) in shop_information_list"
             :key="index"
           >
-            <span v-if="nav_index !== 0 && index !== 0" class="header">{{
+            <span v-show="nav_index !== 0 && index !== 0" class="header">{{
               item && item.titleEnUs
             }}</span>
-            <ul v-if="nav_index !== 0" class="flex-row">
+            <ul v-show="nav_index !== 0" class="flex-row">
               <li
                 class="col-4"
                 v-for="(item2, index2) in shop_information_list[index]
@@ -2770,8 +2770,8 @@ export default {
       }
     });
     const jumpLink = (index) => {
-      if (index === 0) {
-      } else {
+      data.nav_index = index;
+      if (index !== 0) {
         nextTick(() => {
           let top = 0;
           for (let i = 0; i < index; i++) {
@@ -2782,7 +2782,7 @@ export default {
           document.querySelector("#nav-content").scrollTop = top;
         });
       }
-      data.nav_index = index;
+      
     };
     const openUrl = (url) => {
       if (url) {

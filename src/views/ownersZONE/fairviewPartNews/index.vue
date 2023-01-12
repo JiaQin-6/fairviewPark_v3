@@ -48,7 +48,7 @@
                 style="width: 100%; height: 600px; margin: 0 auto"
               ></div>
             </div> -->
-            <PDFPreview :pdfPreview="pdfPreview"></PDFPreview>
+            <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
           </div>
         </div>
       </div>
@@ -80,7 +80,8 @@ export default {
       fairview_part_news_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
-      pdfPreview:'',
+      pdfPreview:'/pdf/1.pdf',
+      pdfDownloadUrl:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -99,6 +100,8 @@ export default {
     const changeFairviewPartNews = () => {
       data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
              data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
+      data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
+             data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
       // data.ramNumber = getRamNumber(6);
       // document
       //   .getElementById("pdf-wrap")
@@ -132,8 +135,10 @@ export default {
     };
     onMounted(async () => {
       await findFairviewParkNewsList();
-      data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
-            data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
+      // data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
+      //       data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
+      // data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
+      //        data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",

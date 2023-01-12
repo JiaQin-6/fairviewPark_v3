@@ -24,7 +24,7 @@
           <div class="page-tool-item" @click="pageZoomIn">
             <i class="iconfont icon-suoxiao" style="font-size: 20px"></i>
           </div>
-          <div class="page-tool-item" @click="download(source, '1')">
+          <div class="page-tool-item" @click="download(pdfDownloadUrl, '1')">
             <i class="iconfont icon-xiazai" style="font-size: 20px"></i>
           </div>
         </div>
@@ -44,27 +44,41 @@
 <script>
 import VuePdfEmbed from "vue-pdf-embed";
 import { createLoadingTask } from "vue3-pdfjs/esm"; // 获得总页数
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, computed, watch } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  computed,
+  watch,
+} from "vue";
 export default {
   components: {
     VuePdfEmbed,
   },
-  props:{
-    pdfPreview:{
-        type:String,
-        required: true
-    }
+  props: {
+    pdfPreview: {
+      type: String,
+      required: true,
+    },
+    pdfDownloadUrl: {
+      type: String,
+      required: true,
+    },
   },
   setup(props) {
     let data = reactive({
       fairview_park_lang: "",
       source: "", //预览pdf文件地址
+      pdfDownloadUrl: "", //下载pdf文件地址
       pageNum: 1, //当前页面
       scale: 1, // 缩放比例
       numPages: 0, // 总页数
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-    data.source = props.pdfPreview
+    data.source = props.pdfPreview;
+    data.pdfDownloadUrl = props.pdfDownloadUrl;
     const scale = computed(() => `transform:scale(${data.scale})`);
     const lastPage = () => {
       if (data.pageNum > 1) {
@@ -78,6 +92,7 @@ export default {
     };
     const pageZoomOut = () => {
       if (data.scale < 2) {
+        
         data.scale += 0.1;
       }
     };
@@ -114,6 +129,7 @@ export default {
       () => props.pdfPreview,
       (val) => {
         data.source = val;
+        data.pdfDownloadUrl = props.pdfDownloadUrl;
       }
     );
     onMounted(() => {
@@ -136,6 +152,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
 .pdf-preview {
   position: relative;
   padding: 20px 0;
@@ -163,15 +180,22 @@ export default {
     }
     .pdf-wrap {
       height: 600px;
-      overflow-y: auto;
+      overflow: auto;
       margin-bottom: 20px;
       background-color: #f1f3f5;
       padding: 20px;
-      .vue-pdf-embed {
+      @{deep} .vue-pdf-embed {
         text-align: center;
         max-width: 515px;
         margin: 0 auto;
         box-sizing: border-box;
+        > div {
+          position: absolute;
+          padding: 10px 20px 20px 20px;
+          box-sizing: border-box;
+          left: 50%;
+          transform: translateX(-50%);
+        }
       }
     }
   }
@@ -200,6 +224,22 @@ export default {
 @media (min-width: 1400px) {
   .pdf-preview-content {
     width: 1280px;
+  }
+}
+@media (max-width: 991px) {
+  .pdf-preview-content{
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, .2);
+    .pdf-wrap {
+      @{deep} .vue-pdf-embed {
+        > div {
+          // position: absolute;
+          // padding: 0px !important;
+          // box-sizing: border-box;
+          // left: 0px !important;
+          // transform: inherit !important;
+        }
+      }
+    }
   }
 }
 </style>

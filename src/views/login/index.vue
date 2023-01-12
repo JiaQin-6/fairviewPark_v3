@@ -293,7 +293,12 @@
                   <input
                     v-model="registerForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
-                    type="number"
+                    @input="
+                    registerForm.contactNo =
+                      registerForm.contactNo.trim().length != 0
+                        ? registerForm.contactNo.replace(/[^0-9]/g, '')
+                        : ''
+                  "
                   />
                 </li>
               </ul>
@@ -538,7 +543,7 @@
                     type="password"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_null &&
+                        edit_member_info_error_tip.is_password_null &&
                         !editMemberInfoForm.password,
                     }"
                     show-password
@@ -547,7 +552,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.password
+                      edit_member_info_error_tip.is_password_null &&
+                      !editMemberInfoForm.password
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -562,7 +568,7 @@
                     type="password"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_null &&
+                        edit_member_info_error_tip.is_password_null &&
                         !editMemberInfoForm.confirmPassword,
                     }"
                     show-password
@@ -570,7 +576,7 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null &&
+                      edit_member_info_error_tip.is_password_null &&
                       !editMemberInfoForm.confirmPassword
                     "
                     >{{ $t("This field is required.") }}</i
@@ -626,7 +632,12 @@
                   <input
                     v-model="editMemberInfoForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
-                    type="number"
+                    @input="
+                    editMemberInfoForm.contactNo =
+                      editMemberInfoForm.contactNo.trim().length != 0
+                        ? editMemberInfoForm.contactNo.replace(/[^0-9]/g, '')
+                        : ''
+                  "
                   />
                 </li>
               </ul>
@@ -711,6 +722,7 @@ export default {
         is_verify_password_null: false,
         is_verify_password_error: false,
         is_null: false,
+        is_password_null: false,
         is_email_correct: false,
         is_show: false,
         text: "",
@@ -797,6 +809,7 @@ export default {
             });
             if (res.data.status === 200) {
               ElMessage({
+                showClose: true,
                 message:
                   data.fairview_park_lang === "en_us"
                     ? "Register Successful"
@@ -847,6 +860,7 @@ export default {
           document.getElementById("close-forgetPasswor").click();
           data.loading = false;
           ElMessage({
+            showClose: true,
             message:
               data.fairview_park_lang === "en_us"
                 ? "Email Sent Successful"
@@ -886,6 +900,11 @@ export default {
     };
     //修改用戶信息
     const editMemberInfo = async () => {
+      data.edit_member_info_error_tip.is_null = false;
+      data.edit_member_info_error_tip.is_password_null = false;
+      data.edit_member_info_error_tip.is_email_correct = false;
+      data.edit_member_info_error_tip.is_show = false;
+      data.edit_member_info_error_tip.text = ''
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.oname ||
@@ -894,8 +913,12 @@ export default {
       ) {
         data.edit_member_info_error_tip.is_null = true;
         return;
-      } else if(data.editMemberInfoForm.password && !data.editMemberInfoForm.confirmPassword){
-        data.edit_member_info_error_tip.is_null = true;
+      } else if (
+        (data.editMemberInfoForm.password && !data.editMemberInfoForm.confirmPassword) ||
+        (data.editMemberInfoForm.confirmPassword && !data.editMemberInfoForm.password)
+      ) {
+        data.edit_member_info_error_tip.is_password_null = true;
+        return;
       } else if (!reg.test(data.editMemberInfoForm.email)) {
         data.edit_member_info_error_tip.is_email_correct = true;
         return;
@@ -918,10 +941,13 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          localStorage.setItem('login-info',JSON.stringify(res.data.data))
           ElMessage({
+            showClose: true,
             message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
             type: "success",
           });
+
           document.getElementById("close-edit-member").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
@@ -1041,7 +1067,7 @@ export default {
           padding-left: 10px;
           margin: 0 auto;
           margin-bottom: 10px;
-           font-size: 18px;
+          font-size: 18px;
         }
 
         @{deep} .el-button {
@@ -1118,7 +1144,7 @@ export default {
             height: 45px;
             line-height: 45px;
             padding-left: 10px;
-             font-size: 18px;
+            font-size: 18px;
           }
         }
       }
@@ -1197,16 +1223,15 @@ export default {
       &::-webkit-input-placeholder {
         color: rgb(222, 7, 28);
       }
-      .el-input__wrapper{
+      .el-input__wrapper {
         border-color: rgb(222, 7, 28) !important;
         background-color: rgba(222, 7, 28, 0.1);
         color: rgb(222, 7, 28);
-        .el-input__inner{
-           &::-webkit-input-placeholder {
+        .el-input__inner {
+          &::-webkit-input-placeholder {
             color: rgb(222, 7, 28);
           }
         }
-       
       }
     }
   }

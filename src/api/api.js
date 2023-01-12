@@ -210,6 +210,7 @@ http.interceptors.response.use(function (response) {
     if (response.data.status === 104) {
         if (localStorage.getItem('login-info')) {
             ElMessage({
+                showClose: true,
                 message: i18n.global.t('Login timeout Please login again'),
                 type: 'warning',
             });

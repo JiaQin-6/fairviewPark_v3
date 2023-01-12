@@ -21,7 +21,7 @@
           >
             <i>{{ index + 1 }}.</i>
             <span
-              ><a :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
+              ><a :href="item.pdfUrlZhTw">{{ item.titleEnUs }}</a></span
             >
           </li>
         </ul>

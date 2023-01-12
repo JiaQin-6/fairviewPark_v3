@@ -73,3 +73,8 @@
   position: relative !important;
   z-index: inherit !important;
 }
+@media (max-width: 576px) {
+  .el-message {
+    width: 90%;
+  }
+}

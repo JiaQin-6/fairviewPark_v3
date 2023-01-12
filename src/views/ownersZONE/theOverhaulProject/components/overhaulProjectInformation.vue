@@ -28,9 +28,10 @@
           :value="index"
         />
       </el-select>
-      <div id="pdf-wrap">
+      <!-- <div id="pdf-wrap">
         <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
-      </div>
+      </div> -->
+      <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
     </div>
   </div>
 </template>
@@ -38,9 +39,10 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
+import PDFPreview from "../../../../components/pdf-preview/index.vue";
 export default {
-  data() {
-    return {};
+  components: {
+    PDFPreview,
   },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
@@ -50,6 +52,8 @@ export default {
       tohpByFpnList: [],
       tohpByFpnIndex: 0,
       ramNumber: "",
+      pdfPreview: "",
+      pdfDownloadUrl: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
@@ -66,30 +70,36 @@ export default {
       }
     };
     const changeTohpByFpn = () => {
-      data.ramNumber = getRamNumber(6);
-      document
-        .getElementById("pdf-wrap")
-        .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
-      let div = document.createElement("div");
-      div.id = data.ramNumber;
-      div.style.height = "600px";
-      document.getElementById("pdf-wrap").appendChild(div);
+      data.pdfPreview =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs;
+      data.pdfDownloadUrl =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
+      // data.ramNumber = getRamNumber(6);
+      // document
+      //   .getElementById("pdf-wrap")
+      //   .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
+      // let div = document.createElement("div");
+      // div.id = data.ramNumber;
+      // div.style.height = "600px";
+      // document.getElementById("pdf-wrap").appendChild(div);
 
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.tohpByFpnList.length !== 0 &&
-            data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
-        },
-        document.getElementById(data.ramNumber)
-      ).then((instance) => {
-        // use APIs here
-      });
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.tohpByFpnList.length !== 0 &&
+      //       data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
+      //   },
+      //   document.getElementById(data.ramNumber)
+      // ).then((instance) => {
+
+      // });
     };
     //随机生成数值
     const getRamNumber = (num) => {
@@ -102,24 +112,26 @@ export default {
     };
     onMounted(async () => {
       await findTohpByFpn2();
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.tohpByFpnList.length !== 0 &&
-            data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
-        },
-        document.getElementById("pdf-preview")
-      ).then((instance) => {
-        // use APIs here
-        // const { documentViewer, annotationManager } = instance.Core;
-        // call methods from instance, documentViewer and annotationManager as needed
-        // instance.UI.setTheme('dark');
-      });
+      data.pdfPreview =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs;
+      data.pdfDownloadUrl =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.tohpByFpnList.length !== 0 &&
+      //       data.tohpByFpnList[data.tohpByFpnIndex].fileEnUs,
+      //   },
+      //   document.getElementById("pdf-preview")
+      // ).then((instance) => {
+      // });
     });
     return {
       ...toRefs(data),
@@ -133,22 +145,27 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
-@{deep} .el-popper{
-          position: absolute;
-          top: 52px!important;
-          left: 0!important;
-          .el-select-dropdown{
-            .el-scrollbar{
-              .el-select-dropdown__wrap{
-                .el-scrollbar__view{
-                  .el-select-dropdown__item{
-                    text-align: left;
-                  }
-                }
-              }
-            }
+@{deep} .el-popper {
+  position: absolute;
+  top: 52px !important;
+  left: 0 !important;
+  .el-select-dropdown {
+    .el-scrollbar {
+      .el-select-dropdown__wrap {
+        .el-scrollbar__view {
+          .el-select-dropdown__item {
+            text-align: left;
           }
         }
+      }
+    }
+  }
+}
+@{deep} .pdf-preview {
+  .pdf-preview-content {
+    width: 100%;
+  }
+}
 @media (max-width: 991px) {
   p {
     font-size: 28px !important;
@@ -158,8 +175,8 @@ export default {
       font-size: 15px !important;
     }
   }
-  .el-select{
-    width:100%;
+  .el-select {
+    width: 100%;
   }
 }
 </style>

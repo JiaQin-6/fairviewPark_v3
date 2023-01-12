@@ -838,7 +838,6 @@ export default {
         border: 0;
         font-size: 18px;
         color: #fff;
-        margin-left: 20px;
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;

@@ -45,12 +45,13 @@
                 :value="index"
               />
             </el-select>
-            <div id="pdf-wrap">
+            <!-- <div id="pdf-wrap">
               <div
                 id="pdf-preview"
                 style="width: 100%; height: 600px; margin: 0 auto"
               ></div>
-            </div>
+            </div> -->
+            <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
           </div>
         </div>
       </div>
@@ -61,7 +62,11 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
+import PDFPreview from '../../../components/pdf-preview/index.vue'
 export default {
+  components:{
+    PDFPreview
+  },
   data() {
     return {
       banner: new URL(
@@ -78,6 +83,8 @@ export default {
       demographic_opinion_survey_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
+      pdfPreview:'',
+      pdfDownloadUrl:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -94,30 +101,34 @@ export default {
       }
     };
     const changeDemographicOpinion = () => {
-      data.ramNumber = getRamNumber(6);
-      document
-        .getElementById("pdf-wrap")
-        .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
-      let div = document.createElement("div");
-      div.id = data.ramNumber;
-      div.style.height = "600px";
-      document.getElementById("pdf-wrap").appendChild(div);
+      data.pdfPreview = data.demographic_opinion_survey_list.length !== 0 &&
+             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs
+      data.pdfDownloadUrl = data.demographic_opinion_survey_list.length !== 0 &&
+             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileZhTw
+      // data.ramNumber = getRamNumber(6);
+      // document
+      //   .getElementById("pdf-wrap")
+      //   .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
+      // let div = document.createElement("div");
+      // div.id = data.ramNumber;
+      // div.style.height = "600px";
+      // document.getElementById("pdf-wrap").appendChild(div);
 
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.demographic_opinion_survey_list.length !== 0 &&
-            data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs,
-        },
-        document.getElementById(data.ramNumber)
-      ).then((instance) => {
-        // use APIs here
-      });
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.demographic_opinion_survey_list.length !== 0 &&
+      //       data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs,
+      //   },
+      //   document.getElementById(data.ramNumber)
+      // ).then((instance) => {
+
+      // });
     };
      //随机生成数值
      const getRamNumber = (num) => {
@@ -130,20 +141,23 @@ export default {
     };
     onMounted(async () => {
       await findDemographicOpinionSurveyList();
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.demographic_opinion_survey_list.length !== 0 &&
-            data.demographic_opinion_survey_list[
-              data.demographic_opinion_survey_index
-            ].fileEnUs, 
-        },
-        document.getElementById("pdf-preview")
-      ).then((instance) => {
-        // use APIs here
-      });
+      data.pdfPreview = data.demographic_opinion_survey_list.length !== 0 &&
+             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs
+      data.pdfDownloadUrl = data.demographic_opinion_survey_list.length !== 0 &&
+             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileZhTw
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.demographic_opinion_survey_list.length !== 0 &&
+      //       data.demographic_opinion_survey_list[
+      //         data.demographic_opinion_survey_index
+      //       ].fileEnUs, 
+      //   },
+      //   document.getElementById("pdf-preview")
+      // ).then((instance) => {
+      // });
     });
     return {
       ...toRefs(data),

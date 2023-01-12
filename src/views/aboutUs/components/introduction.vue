@@ -98,14 +98,14 @@
                               fairview_park_lang === 'en_us'
                                 ? 'Estate Management <a href=tel' +
                                   ':' +
-                                  '2471 1301>2471 1301</a> (24 hours) <br/> Emergency Hotline<a href=tel' +
+                                  '24711301>2471 1301</a> (24 hours) <br/> Emergency Hotline<a href=tel' +
                                   ':' +
-                                  '2471 1999> 2471 1999</a> (24 hours) <br/> (Conversations at these telephones may be recorded)'
+                                  '24711999> 2471 1999</a> (24 hours) <br/> (Conversations at these telephones may be recorded)'
                                 : '管理公司 <a href=tel' +
                                   ':' +
-                                  '2471 1301>2471 1301</a> （24小時） <br/> 緊急熱線 <a href=tel' +
+                                  '24711301>2471 1301</a> （24小時） <br/> 緊急熱線 <a href=tel' +
                                   ':' +
-                                  '2471 1999>2471 1999</a> （24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
+                                  '24711999>2471 1999</a> （24小時） <br/>(請注意，於上述電話號碼之對話可能會被錄音)',
                           },
                         ]"
                         :key="index"
@@ -131,8 +131,8 @@
                               fairview_park_lang === 'en_us'
                                 ? 'Estate Management <a href=tel' +
                                   ':' +
-                                  '2471 8210>2471 8210</a>'
-                                : '管理公司 <a href=tel' + ':' + '2471 8210>2471 8210</a>',
+                                  '24718210>2471 8210</a>'
+                                : '管理公司 <a href=tel' + ':' + '24718210>2471 8210</a>',
                           },
                           {
                             title: fairview_park_lang === 'en_us' ? 'Email' : '電郵',
