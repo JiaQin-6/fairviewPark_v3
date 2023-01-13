@@ -281,6 +281,18 @@ export default {
       () => route,
       (value) => {
         data.is_show = false;
+        if(document.getElementById("close-login")){
+          document.getElementById("close-login").click();
+        }
+        if(document.getElementById("close-signUp")){
+              document.getElementById("close-signUp").click();
+        }
+        if(document.getElementById("close-forgetPasswor")){
+              document.getElementById("close-forgetPasswor").click();
+        }
+        if(document.getElementById("close-edit-member")){
+              document.getElementById("close-edit-member").click();
+        }
       },
       { deep: true, immediate: true }
     );

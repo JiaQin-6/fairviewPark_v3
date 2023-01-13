@@ -35,7 +35,9 @@
             @select="handleSelect"
           >
             <el-menu-item index="1">{{
-              fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度"
+              fairview_park_lang === "en_us"
+                ? "Rules & Regulations"
+                : "規章制度"
             }}</el-menu-item>
             <el-menu-item index="2">{{
               fairview_park_lang === "en_us"
@@ -56,7 +58,9 @@
                 : "應屆管理諮詢委員會委員資料"
             }}</el-menu-item>
             <el-menu-item index="6">{{
-              fairview_park_lang === "en_us" ? "Minutes of MAC Meetings" : "會議記錄"
+              fairview_park_lang === "en_us"
+                ? "Minutes of MAC Meetings"
+                : "會議記錄"
             }}</el-menu-item>
             <el-menu-item index="7">{{
               fairview_park_lang === "en_us"
@@ -64,12 +68,19 @@
                 : "周邊發展項目"
             }}</el-menu-item>
           </el-menu>
-          <el-select class="menu-select" size="large" v-model="activeIndex">
+          <el-select
+            class="menu-select"
+            size="large"
+            v-model="activeIndex"
+            :teleported="false"
+          >
             <el-option
               v-for="(item, index) in [
                 {
                   label:
-                    fairview_park_lang === 'en_us' ? 'Rules & Regulations' : '規章制度',
+                    fairview_park_lang === 'en_us'
+                      ? 'Rules & Regulations'
+                      : '規章制度',
                   value: '1',
                 },
                 {
@@ -88,7 +99,9 @@
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+                    fairview_park_lang === 'en_us'
+                      ? 'Election Procedure'
+                      : '選舉程序',
                   value: '4',
                 },
                 {
@@ -124,11 +137,17 @@
         <div class="col-12 col-lg-10 nav-content mb-20 flex-row">
           <div class="nav-content-wrap" style="width: 100%">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
-            <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
-            <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
+            <SampleOfCandidateForm
+              v-if="activeIndex === '2'"
+            ></SampleOfCandidateForm>
+            <SamlpeOfNominationForm
+              v-if="activeIndex === '3'"
+            ></SamlpeOfNominationForm>
             <ElectionProcedure v-if="activeIndex === '4'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
-            <MinutesOfMacMeetings v-if="activeIndex === '6'"></MinutesOfMacMeetings>
+            <MinutesOfMacMeetings
+              v-if="activeIndex === '6'"
+            ></MinutesOfMacMeetings>
             <NearbyProposedDevelopment
               v-if="activeIndex === '7'"
             ></NearbyProposedDevelopment>
@@ -289,11 +308,10 @@ export default {
     margin: 0 auto;
     @{deep} .el-menu {
       position: sticky;
-        top: 80px;
+      top: 80px;
       background-color: #fff;
       border: none;
       .el-menu-item {
-
         padding: 6px 0 6px 10px;
         height: auto;
         line-height: inherit;
@@ -365,8 +383,8 @@ export default {
     img {
       width: auto;
     }
-    p{
-      font-size:36px;
+    p {
+      font-size: 36px;
     }
   }
   .nav-wrap {
@@ -395,8 +413,8 @@ export default {
         }
       }
       @{deep} .nav-content {
-      padding: 0px;
-    }
+        padding: 0px;
+      }
     }
   }
 }

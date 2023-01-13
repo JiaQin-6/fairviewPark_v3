@@ -137,8 +137,8 @@ export default {
       await findFairviewParkNewsList();
       // data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
       //       data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
-      // data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
-      //        data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
+      data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
+             data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",

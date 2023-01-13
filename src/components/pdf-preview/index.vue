@@ -102,28 +102,13 @@ export default {
       }
     };
     const download = (data, fileName) => {
-      let blob = new Blob([data], {
-        //type类型后端返回来的数据中会有，根据自己实际进行修改
-        type: "application/pdf;charset-UTF-8",
-      });
-      let filename = fileName || "pdf.pdf";
-      if (typeof window.navigator.msSaveBlob !== "undefined") {
-        window.navigator.msSaveBlob(blob, filename);
-      } else {
-        var blobURL = window.URL.createObjectURL(blob);
-        // 创建隐藏<a>标签进行下载
-        var tempLink = document.createElement("a");
-        tempLink.style.display = "none";
-        tempLink.href = blobURL;
-        tempLink.setAttribute("download", filename);
-        if (typeof tempLink.download === "undefined") {
-          tempLink.setAttribute("target", "_blank");
-        }
-        document.body.appendChild(tempLink);
-        tempLink.click();
-        document.body.removeChild(tempLink);
-        window.URL.revokeObjectURL(blobURL);
-      }
+      var tempLink = document.createElement("a");
+      tempLink.style.display = "none";
+      tempLink.href = data;
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+      
     };
     watch(
       () => props.pdfPreview,

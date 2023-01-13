@@ -18,7 +18,10 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -73,7 +76,7 @@
                 <label for="checkbox">记住我</label> -->
               </div>
 
-              <i data-bs-target="#forgetPasswor" data-bs-toggle="modal">{{
+              <i data-bs-target="#forgetPassword" data-bs-toggle="modal">{{
                 $t("Forgot password")
               }}</i>
             </div>
@@ -103,7 +106,9 @@
                     ? 'https://fairviewpark.hk/file/privacyEN.html'
                     : 'https://fairviewpark.hk/file/privacyTC.html'
                 "
-                >{{ $t("Privacy Policy and Personal Data Collection Statement") }}</a
+                >{{
+                  $t("Privacy Policy and Personal Data Collection Statement")
+                }}</a
               >
             </div>
           </div>
@@ -118,7 +123,10 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
@@ -194,7 +202,9 @@
                     :class="{
                       error: register_error_tip.is_null && !registerForm.hcode,
                     }"
-                    @input="registerForm.hcode = registerForm.hcode.toUpperCase()"
+                    @input="
+                      registerForm.hcode = registerForm.hcode.toUpperCase()
+                    "
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -213,12 +223,15 @@
                     :placeholder="$t('Login Name (Self Customize)')"
                     type="text"
                     :class="{
-                      error: register_error_tip.is_null && !registerForm.loginName,
+                      error:
+                        register_error_tip.is_null && !registerForm.loginName,
                     }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_null && !registerForm.loginName"
+                    v-show="
+                      register_error_tip.is_null && !registerForm.loginName
+                    "
                     >{{
                       fairview_park_lang === "en_us"
                         ? "Login ID Missing"
@@ -235,15 +248,20 @@
                     :placeholder="$t('Login Password (Self Customize)')"
                     type="password"
                     :class="{
-                      error: register_error_tip.is_null && !registerForm.password,
+                      error:
+                        register_error_tip.is_null && !registerForm.password,
                     }"
                     show-password
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
-                    v-show="register_error_tip.is_null && !registerForm.password"
+                    v-show="
+                      register_error_tip.is_null && !registerForm.password
+                    "
                     >{{
-                      fairview_park_lang === "en_us" ? "Password Missing" : "密碼不能為空"
+                      fairview_park_lang === "en_us"
+                        ? "Password Missing"
+                        : "密碼不能為空"
                     }}</i
                   >
                 </li>
@@ -294,11 +312,11 @@
                     v-model="registerForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
                     @input="
-                    registerForm.contactNo =
-                      registerForm.contactNo.trim().length != 0
-                        ? registerForm.contactNo.replace(/[^0-9]/g, '')
-                        : ''
-                  "
+                      registerForm.contactNo =
+                        registerForm.contactNo.trim().length != 0
+                          ? registerForm.contactNo.replace(/[^0-9]/g, '')
+                          : ''
+                    "
                   />
                 </li>
               </ul>
@@ -316,16 +334,19 @@
     <!-- forget password modal -->
     <div
       class="modal fade"
-      id="forgetPasswor"
+      id="forgetPassword"
       aria-hidden="true"
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <div class="modal-content">
           <div class="modal-header">
             <button
-              id="close-forgetPasswor"
+              id="close-forgetPassword"
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
@@ -338,7 +359,9 @@
               <ul>
                 <li>
                   <p class="title">
-                    {{ fairview_park_lang === "en_us" ? "Login Name" : "登入名稱" }}
+                    {{
+                      fairview_park_lang === "en_us" ? "Login Name" : "登入名稱"
+                    }}
                   </p>
                   <input
                     v-model="forgotPasswordForm.loginName"
@@ -353,19 +376,26 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null && !forgotPasswordForm.loginName
+                      forgot_password_error_tip.is_null &&
+                      !forgotPasswordForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
                 </li>
                 <li>
                   <p class="title">
-                    {{ fairview_park_lang === "en_us" ? "Contact Email" : "聯絡電郵" }}
+                    {{
+                      fairview_park_lang === "en_us"
+                        ? "Contact Email"
+                        : "聯絡電郵"
+                    }}
                   </p>
                   <input
                     v-model="forgotPasswordForm.email"
                     type="text"
-                    :placeholder="$t('Please enter your registration contact email')"
+                    :placeholder="
+                      $t('Please enter your registration contact email')
+                    "
                     :class="{
                       error:
                         (forgot_password_error_tip.is_null &&
@@ -376,7 +406,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      forgot_password_error_tip.is_null && !forgotPasswordForm.email
+                      forgot_password_error_tip.is_null &&
+                      !forgotPasswordForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -392,7 +423,10 @@
               </ul>
             </div>
             <div class="button">
-              <p style="color: #fc0d1b" v-show="forgot_password_error_tip.is_show">
+              <p
+                style="color: #fc0d1b"
+                v-show="forgot_password_error_tip.is_show"
+              >
                 {{ forgot_password_error_tip.text }}
               </p>
               <button @click="forgetPassword">{{ $t("Submit") }}</button>
@@ -417,7 +451,10 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div
+        class="modal-dialog modal-lg modal-dialog-centered"
+        v-loading="loading"
+      >
         <!-- 輸入密碼驗證 -->
         <div class="verify" v-show="!showEditMemberModel">
           <div class="verify-password">
@@ -435,7 +472,9 @@
               type="password"
               v-model="editMemberInfoForm.verifyPassword"
               :placeholder="
-                fairview_park_lang === 'en_us' ? 'Please enter password' : '請輸入密碼'
+                fairview_park_lang === 'en_us'
+                  ? 'Please enter password'
+                  : '請輸入密碼'
               "
               show-password
             />
@@ -451,7 +490,9 @@
               style="display: block; color: #fc0d1b; text-align: left"
               v-show="edit_member_info_error_tip.is_verify_password_error"
               >{{
-                fairview_park_lang === "en_us" ? "Incorrect password" : "密碼不正確"
+                fairview_park_lang === "en_us"
+                  ? "Incorrect password"
+                  : "密碼不正確"
               }}</i
             >
             <el-button @click="verifyPassword">{{
@@ -484,13 +525,15 @@
                     type="text"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_null && !editMemberInfoForm.oname,
+                        edit_member_info_error_tip.is_null &&
+                        !editMemberInfoForm.oname,
                     }"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.oname
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.oname
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -508,7 +551,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.hcode
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.hcode
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -528,7 +572,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.loginName
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.loginName
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -543,8 +588,9 @@
                     type="password"
                     :class="{
                       error:
-                         (edit_member_info_error_tip.is_password_null &&
-                        !editMemberInfoForm.confirmPassword)||is_confirm_password_error_null,
+                        (edit_member_info_error_tip.is_password_null &&
+                          !editMemberInfoForm.confirmPassword) ||
+                        edit_member_info_error_tip.is_confirm_password_error_null,
                     }"
                     show-password
                   />
@@ -557,12 +603,16 @@
                     "
                     >{{ $t("This field is required.") }}</i
                   >
-                   <i
+                  <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
                       edit_member_info_error_tip.is_confirm_password_error_null
                     "
-                    >{{ fairview_park_lang === 'en_us'?'Confirm password does not match':'密碼不一致' }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Confirm password does not match"
+                        : "密碼不一致"
+                    }}</i
                   >
                 </li>
                 <li>
@@ -576,7 +626,8 @@
                     :class="{
                       error:
                         (edit_member_info_error_tip.is_password_null &&
-                        !editMemberInfoForm.confirmPassword)||is_confirm_password_error_null,
+                          !editMemberInfoForm.confirmPassword) ||
+                        edit_member_info_error_tip.is_confirm_password_error_null,
                     }"
                     show-password
                   />
@@ -588,12 +639,16 @@
                     "
                     >{{ $t("This field is required.") }}</i
                   >
-                   <i
+                  <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
                       edit_member_info_error_tip.is_confirm_password_error_null
                     "
-                    >{{ fairview_park_lang === 'en_us'?'Confirm password does not match':'密碼不一致' }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Confirm password does not match"
+                        : "密碼不一致"
+                    }}</i
                   >
                 </li>
                 <li>
@@ -628,7 +683,8 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
-                      edit_member_info_error_tip.is_null && !editMemberInfoForm.email
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.email
                     "
                     >{{ $t("This field is required.") }}</i
                   >
@@ -647,17 +703,20 @@
                     v-model="editMemberInfoForm.contactNo"
                     :placeholder="$t('Contact Number(Optional)')"
                     @input="
-                    editMemberInfoForm.contactNo =
-                      editMemberInfoForm.contactNo.trim().length != 0
-                        ? editMemberInfoForm.contactNo.replace(/[^0-9]/g, '')
-                        : ''
-                  "
+                      editMemberInfoForm.contactNo =
+                        editMemberInfoForm.contactNo.trim().length != 0
+                          ? editMemberInfoForm.contactNo.replace(/[^0-9]/g, '')
+                          : ''
+                    "
                   />
                 </li>
               </ul>
             </div>
             <div class="button">
-              <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
+              <p
+                style="color: #fc0d1b"
+                v-show="edit_member_info_error_tip.is_show"
+              >
                 {{ edit_member_info_error_tip.text }}
               </p>
               <button @click="editMemberInfo">
@@ -672,7 +731,14 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  provide,
+} from "vue";
 import { useStore } from "vuex";
 import { ElMessageBox, ElMessage } from "element-plus";
 export default {
@@ -781,7 +847,8 @@ export default {
     };
     //注册
     const register = async () => {
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.registerForm.oname ||
         !data.registerForm.hcode ||
@@ -853,8 +920,12 @@ export default {
     };
     //忘記密碼
     const forgetPassword = async () => {
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      if (!data.forgotPasswordForm.loginName || !data.forgotPasswordForm.email) {
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      if (
+        !data.forgotPasswordForm.loginName ||
+        !data.forgotPasswordForm.email
+      ) {
         data.forgot_password_error_tip.is_null = true;
         return;
       } else if (!reg.test(data.forgotPasswordForm.email)) {
@@ -872,7 +943,7 @@ export default {
           lang: sessionStorage.getItem("fairview_park_lang"),
         });
         if (res.data.status === 200) {
-          document.getElementById("close-forgetPasswor").click();
+          document.getElementById("close-forgetPassword").click();
           data.loading = false;
           ElMessage({
             showClose: true,
@@ -882,8 +953,9 @@ export default {
                 : "郵件發送成功",
             type: "success",
           });
-          document.getElementsByClassName("el-overlay")[0].style["background-color"] =
-            "transparent";
+          document.getElementsByClassName("el-overlay")[0].style[
+            "background-color"
+          ] = "transparent";
         } else {
           data.loading = false;
           data.forgot_password_error_tip.is_show = true;
@@ -920,8 +992,9 @@ export default {
       data.edit_member_info_error_tip.is_email_correct = false;
       data.edit_member_info_error_tip.is_show = false;
       data.edit_member_info_error_tip.is_confirm_password_error_null = false;
-      data.edit_member_info_error_tip.text = ''
-      const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+      data.edit_member_info_error_tip.text = "";
+      const reg =
+        /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
@@ -930,12 +1003,17 @@ export default {
         data.edit_member_info_error_tip.is_null = true;
         return;
       } else if (
-        (data.editMemberInfoForm.password && !data.editMemberInfoForm.confirmPassword) ||
-        (data.editMemberInfoForm.confirmPassword && !data.editMemberInfoForm.password)
+        (data.editMemberInfoForm.password &&
+          !data.editMemberInfoForm.confirmPassword) ||
+        (data.editMemberInfoForm.confirmPassword &&
+          !data.editMemberInfoForm.password)
       ) {
         data.edit_member_info_error_tip.is_password_null = true;
         return;
-      } else if(data.editMemberInfoForm.password!==data.editMemberInfoForm.confirmPassword){
+      } else if (
+        data.editMemberInfoForm.password !==
+        data.editMemberInfoForm.confirmPassword
+      ) {
         data.edit_member_info_error_tip.is_confirm_password_error_null = true;
         return;
       } else if (!reg.test(data.editMemberInfoForm.email)) {
@@ -960,10 +1038,13 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          localStorage.setItem('login-info',JSON.stringify(res.data.data))
+          localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
+            message:
+              data.fairview_park_lang === "en_us"
+                ? "Edit Successful"
+                : "編輯成功",
             type: "success",
           });
 
@@ -980,36 +1061,78 @@ export default {
         data.loading = false;
       }
     };
-
     //
     const closeModel = () => {
       var button = document.getElementById("close-edit-member");
       button.click();
     };
     onMounted(() => {
-      var myModalEl = document.getElementById("editMemberInformation");
-      myModalEl.addEventListener("show.bs.modal", function (event) {
-        data.editMemberInfoForm.hcode = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).topic3
-          : "";
-        data.editMemberInfoForm.loginName = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).login
-          : "";
-        data.editMemberInfoForm.nickname = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).name
-          : "";
-        data.editMemberInfoForm.cnickname = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).cname
-          : "";
-        data.editMemberInfoForm.email = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).email
-          : "";
-        data.editMemberInfoForm.contactNo = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).contactNo
-          : "";
+      var editMemberInformationModal = document.getElementById(
+        "editMemberInformation"
+      );
+      editMemberInformationModal.addEventListener(
+        "show.bs.modal",
+        function (event) {
+          data.editMemberInfoForm.hcode = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).topic3
+            : "";
+          data.editMemberInfoForm.loginName = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).login
+            : "";
+          data.editMemberInfoForm.nickname = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).name
+            : "";
+          data.editMemberInfoForm.cnickname = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).cname
+            : "";
+          data.editMemberInfoForm.email = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).email
+            : "";
+          data.editMemberInfoForm.contactNo = localStorage.getItem("login-info")
+            ? JSON.parse(localStorage.getItem("login-info")).contactNo
+            : "";
+        }
+      );
+      //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框
+      editMemberInformationModal.addEventListener(
+        "hidden.bs.modal",
+        (event) => {
+          data.showEditMemberModel = false;
+          data.editMemberInfoForm.verifyPassword = null;
+          data.editMemberInfoForm.oname = null;
+          data.editMemberInfoForm.hcode = null;
+          data.editMemberInfoForm.loginName = null;
+          data.editMemberInfoForm.password = null;
+          data.editMemberInfoForm.confirmPassword = null;
+          data.editMemberInfoForm.nickname = null;
+          data.editMemberInfoForm.cnickname = null;
+          data.editMemberInfoForm.email = null;
+          data.editMemberInfoForm.contactNo = null;
+        }
+      );
+      //当隐藏登录框清除输入数据
+      var loginModal = document.getElementById("login");
+      loginModal.addEventListener("hidden.bs.modal", (event) => {
+        data.loginForm.loginName = "";
+        data.loginForm.password = "";
       });
-      myModalEl.addEventListener("hidden.bs.modal", (event) => {
-        data.showEditMemberModel = false;
+      //当隐藏注册框清除输入数据
+      var signUpModal = document.getElementById("signUp");
+      signUpModal.addEventListener("hidden.bs.modal", (event) => {
+        data.registerForm.oname = null;
+        data.registerForm.hcode = null;
+        data.registerForm.loginName = null;
+        data.registerForm.password = null;
+        data.registerForm.nickname = null;
+        data.registerForm.cnickname = null;
+        data.registerForm.email = null;
+        data.registerForm.contactNo = null;
+      });
+      //当隐藏忘记密码框清除输入数据
+      var forgetPasswordModal = document.getElementById("forgetPassword");
+      forgetPasswordModal.addEventListener("hidden.bs.modal", (event) => {
+        data.forgotPasswordForm.loginName = "";
+        data.forgotPasswordForm.email = "";
       });
     });
     return {
