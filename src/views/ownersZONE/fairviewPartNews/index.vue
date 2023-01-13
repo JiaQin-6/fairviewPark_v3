@@ -80,7 +80,7 @@ export default {
       fairview_part_news_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
-      pdfPreview:'/pdf/1.pdf',
+      pdfPreview:'',
       pdfDownloadUrl:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
@@ -135,8 +135,8 @@ export default {
     };
     onMounted(async () => {
       await findFairviewParkNewsList();
-      // data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
-      //       data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
+      data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
+            data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
       data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
              data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
       // PDFJSExpress(
