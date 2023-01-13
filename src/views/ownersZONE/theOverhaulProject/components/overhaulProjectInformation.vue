@@ -31,7 +31,7 @@
       <!-- <div id="pdf-wrap">
         <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
       </div> -->
-      <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+      <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
     </div>
   </div>
 </template>

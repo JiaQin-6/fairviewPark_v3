@@ -543,8 +543,8 @@
                     type="password"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_password_null &&
-                        !editMemberInfoForm.password,
+                         (edit_member_info_error_tip.is_password_null &&
+                        !editMemberInfoForm.confirmPassword)||is_confirm_password_error_null,
                     }"
                     show-password
                   />
@@ -557,6 +557,13 @@
                     "
                     >{{ $t("This field is required.") }}</i
                   >
+                   <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_confirm_password_error_null
+                    "
+                    >{{ fairview_park_lang === 'en_us'?'Confirm password does not match':'密碼不一致' }}</i
+                  >
                 </li>
                 <li>
                   <p class="title">
@@ -568,8 +575,8 @@
                     type="password"
                     :class="{
                       error:
-                        edit_member_info_error_tip.is_password_null &&
-                        !editMemberInfoForm.confirmPassword,
+                        (edit_member_info_error_tip.is_password_null &&
+                        !editMemberInfoForm.confirmPassword)||is_confirm_password_error_null,
                     }"
                     show-password
                   />
@@ -580,6 +587,13 @@
                       !editMemberInfoForm.confirmPassword
                     "
                     >{{ $t("This field is required.") }}</i
+                  >
+                   <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_confirm_password_error_null
+                    "
+                    >{{ fairview_park_lang === 'en_us'?'Confirm password does not match':'密碼不一致' }}</i
                   >
                 </li>
                 <li>
@@ -723,6 +737,7 @@ export default {
         is_verify_password_error: false,
         is_null: false,
         is_password_null: false,
+        is_confirm_password_error_null: false,
         is_email_correct: false,
         is_show: false,
         text: "",
@@ -904,6 +919,7 @@ export default {
       data.edit_member_info_error_tip.is_password_null = false;
       data.edit_member_info_error_tip.is_email_correct = false;
       data.edit_member_info_error_tip.is_show = false;
+      data.edit_member_info_error_tip.is_confirm_password_error_null = false;
       data.edit_member_info_error_tip.text = ''
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
@@ -919,6 +935,9 @@ export default {
       ) {
         data.edit_member_info_error_tip.is_password_null = true;
         return;
+      } else if(data.editMemberInfoForm.password!==data.editMemberInfoForm.confirmPassword){
+        data.edit_member_info_error_tip.is_confirm_password_error_null = true;
+        return;
       } else if (!reg.test(data.editMemberInfoForm.email)) {
         data.edit_member_info_error_tip.is_email_correct = true;
         return;
@@ -933,7 +952,7 @@ export default {
           oname: data.editMemberInfoForm.oname,
           hcode: data.editMemberInfoForm.hcode,
           loginName: data.editMemberInfoForm.loginName,
-          password: data.editMemberInfoForm.password,
+          password: data.editMemberInfoForm.confirmPassword,
           nickname: data.editMemberInfoForm.nickname,
           cnickname: data.editMemberInfoForm.cnickname,
           email: data.editMemberInfoForm.email,

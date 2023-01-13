@@ -130,6 +130,10 @@ export default {
       (val) => {
         data.source = val;
         data.pdfDownloadUrl = props.pdfDownloadUrl;
+        const loadingTask = createLoadingTask(data.source);
+        loadingTask.promise.then((pdf) => {
+          data.numPages = pdf.numPages;
+        });
       }
     );
     onMounted(() => {

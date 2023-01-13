@@ -41,8 +41,8 @@
             >
               <span>{{
                 fairview_park_lang === "en_us"
-                  ? "House Floor Plan and Fairview Park Map Enquiry"
-                  : "屋宇平面圖及錦綉花園地圖查詢"
+                  ? "House Floor Plan and Map"
+                  : "屋宇平面圖及地圖"
               }}</span>
             </li>
           </ul>
@@ -68,8 +68,8 @@
                 {
                   titleEnUs:
                     fairview_park_lang === 'en_us'
-                      ? 'House Floor Plan and Fairview Park Map Enquiry'
-                      : '屋宇平面圖及錦綉花園地圖查詢',
+                      ? 'House Floor Plan and Map'
+                      : '屋宇平面圖及地圖',
                   index: 2,
                 },
               ]"
@@ -89,8 +89,8 @@
                   ? "Residents Handbook"
                   : "業主手冊"
                 : fairview_park_lang === "en_us"
-                ? "House Floor Plan and Fairview Park Map Enquiry"
-                : "屋宇平面圖及錦綉花園地圖查詢"
+                ? "House Floor Plan and Map"
+                : "屋宇平面圖及地圖"
             }}
           </p>
           <div

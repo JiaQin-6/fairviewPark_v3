@@ -155,7 +155,7 @@
             :small="false"
             :disabled="false"
             :background="false"
-            layout="total, sizes, prev, pager, next, jumper"
+            layout="total, sizes, prev, pager, next"
             :total="total2"
             @size-change="handleSizeChange2"
             @current-change="handleCurrentChange2"
@@ -166,7 +166,7 @@
         <!-- <div id="pdf-wrap">
           <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
         </div> -->
-        <PDFPreview :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+        <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
       </div>
     </div>
   </div>
