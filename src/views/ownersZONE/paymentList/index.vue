@@ -21,7 +21,7 @@
       </p>
     </div>
     <!-- 內容 -->
-    <div class="content mt-20" style=" margin: 20px auto">
+    <!-- <div class="content mt-20" style="margin: 20px auto">
       <h5>
         {{ fairview_park_lang === "en_us" ? "Payment List" : "付款項目" }}
       </h5>
@@ -32,7 +32,6 @@
             : "本收費表將會跟隨有關費用 / 按金調整而做出更改"
         }}
       </p>
-      <!-- 保安部 -->
       <div class="mb-20">
         <div class="flex-row">
           <span
@@ -46,21 +45,30 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Security Department" : "保安部" }}</span
+            >{{
+              fairview_park_lang === "en_us" ? "Security Department" : "保安部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
-          <tr style="width: 100%; background-color: #d5ea95; text-align: center">
+          <tr
+            style="width: 100%; background-color: #d5ea95; text-align: center"
+          >
             <th
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Amount (HK$)' : '金額(港幣$)',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Amount (HK$)'
+                      : '金額(港幣$)',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
                 },
               ]"
               :key="index"
@@ -74,7 +82,10 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Unauthorized Parking Fee' : '違例泊車罰款',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Unauthorized Parking Fee'
+                        : '違例泊車罰款',
                     isHasBottomBorder: false,
                   },
                   {
@@ -82,7 +93,10 @@
                     isHasBottomBorder: false,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Notice for Payment of Unauthorized Parking Fee' : '繳交違例泊車罰款通知書',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Notice for Payment of Unauthorized Parking Fee'
+                        : '繳交違例泊車罰款通知書',
                     isHasBottomBorder: false,
                     pdf: 'https://en.fairviewpark.hk/attachment.php?id=1049',
                   },
@@ -91,27 +105,17 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	Impounding Charge' : '-	鎖車費用',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Impounding Charge'
+                        : '-	鎖車費用',
                     isHasBottomBorder: false,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '320 / each' : '320 / 部',
-                    isHasBottomBorder: false,
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '' : '',
-                    isHasBottomBorder: false,
-                  },
-                ],
-              },
-              {
-                children: [
-                  {
-                    text: fairview_park_lang === 'en_us' ? '-	Removal Charge' : '-	移走車輛費用',
-                    isHasBottomBorder: false,
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '350 / each' : '350 / 部',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '320 / each'
+                        : '320 / 部',
                     isHasBottomBorder: false,
                   },
                   {
@@ -123,11 +127,37 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	Storage Charge' : '-	存放車輛費用',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Removal Charge'
+                        : '-	移走車輛費用',
+                    isHasBottomBorder: false,
+                  },
+                  {
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '350 / each'
+                        : '350 / 部',
+                    isHasBottomBorder: false,
+                  },
+                  {
+                    text: fairview_park_lang === 'en_us' ? '' : '',
+                    isHasBottomBorder: false,
+                  },
+                ],
+              },
+              {
+                children: [
+                  {
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Storage Charge'
+                        : '-	存放車輛費用',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '320 / day' : '320 / 日',
+                    text:
+                      fairview_park_lang === 'en_us' ? '320 / day' : '320 / 日',
                     isHasBottomBorder: true,
                   },
                   {
@@ -154,12 +184,13 @@
               }"
             >
               <span v-if="!item2.pdf">{{ item2.text }}</span>
-              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{ item2.text }}</a>
+              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{
+                item2.text
+              }}</a>
             </td>
           </tr>
         </table>
       </div>
-      <!-- 會計部 -->
       <div class="mb-20">
         <div class="flex-row">
           <span
@@ -173,21 +204,30 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Accounts Department" : "會計部" }}</span
+            >{{
+              fairview_park_lang === "en_us" ? "Accounts Department" : "會計部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
-          <tr style="width: 100%; background-color: #d5ea95; text-align: center">
+          <tr
+            style="width: 100%; background-color: #d5ea95; text-align: center"
+          >
             <th
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Amount (HK$)' : '金額(港幣$)',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Amount (HK$)'
+                      : '金額(港幣$)',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
                 },
               ]"
               :key="index"
@@ -201,16 +241,24 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Management Fee' : '管理費',
-                    isHasBottomBorder: true,
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '1,630 – 2,401 / month	' : '1,630 – 2,401 / 月',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Management Fee'
+                        : '管理費',
                     isHasBottomBorder: true,
                   },
                   {
                     text:
-                      fairview_park_lang === 'en_us' ? 'Estate Management Notice No. 66 (ACD/2022)' : '管理通告第66號 (ACD/2022)',
+                      fairview_park_lang === 'en_us'
+                        ? '1,630 – 2,401 / month	'
+                        : '1,630 – 2,401 / 月',
+                    isHasBottomBorder: true,
+                  },
+                  {
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Estate Management Notice No. 66 (ACD/2022)'
+                        : '管理通告第66號 (ACD/2022)',
                     isHasBottomBorder: true,
                     pdf: 'https://cn.fairviewpark.hk/attachment.php?id=1649',
                   },
@@ -220,12 +268,17 @@
                 children: [
                   {
                     text:
-                      fairview_park_lang === 'en_us' ? 'Collection Charge for Overdue Management Fee' : '逾期支付管理費的行政費用',
+                      fairview_park_lang === 'en_us'
+                        ? 'Collection Charge for Overdue Management Fee'
+                        : '逾期支付管理費的行政費用',
                     isHasBottomBorder: true,
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '200 / claim' : '200 / 次',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '200 / claim'
+                        : '200 / 次',
                     isHasBottomBorder: true,
                     color: '#fffecf',
                   },
@@ -239,11 +292,17 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Registration of a Legal Charge' : '田土廳登記費',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Registration of a Legal Charge'
+                        : '田土廳登記費',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '2,300 / each' : '2,300 / 次',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '2,300 / each'
+                        : '2,300 / 次',
                     isHasBottomBorder: true,
                   },
                   {
@@ -271,12 +330,13 @@
               }"
             >
               <span v-if="!item2.pdf">{{ item2.text }}</span>
-              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{ item2.text }}</a>
+              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{
+                item2.text
+              }}</a>
             </td>
           </tr>
         </table>
       </div>
-      <!-- 行政部 -->
       <div class="mb-20">
         <div class="flex-row">
           <span
@@ -290,21 +350,32 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Administration Department" : "行政部" }}</span
+            >{{
+              fairview_park_lang === "en_us"
+                ? "Administration Department"
+                : "行政部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
-          <tr style="width: 100%; background-color: #d5ea95; text-align: center">
+          <tr
+            style="width: 100%; background-color: #d5ea95; text-align: center"
+          >
             <th
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Amount (HK$)' : '金額(港幣$)',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Amount (HK$)'
+                      : '金額(港幣$)',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
                 },
               ]"
               :key="index"
@@ -318,11 +389,17 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Foundation Fund' : '管理基金',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Foundation Fund'
+                        : '管理基金',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '1,200 / unit' : '1,200 / 物業',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '1,200 / unit'
+                        : '1,200 / 物業',
                     isHasBottomBorder: true,
                   },
                   {
@@ -334,7 +411,10 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Decoration Deposit / Other Charges' : '裝修按金 / 其它收費',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Decoration Deposit / Other Charges'
+                        : '裝修按金 / 其它收費',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
@@ -344,7 +424,10 @@
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Decoration Application Form' : '裝修申請表',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Decoration Application Form'
+                        : '裝修申請表',
                     isHasBottomBorder: false,
                     pdf: 'https://en.fairviewpark.hk/attachment.php?id=38',
                     color: '#fffecf',
@@ -354,12 +437,18 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	Payable by The Owner' : '-	由業主支付的裝修按金',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Payable by The Owner'
+                        : '-	由業主支付的裝修按金',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '10,000 / unit' : '10,000 / 物業',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '10,000 / unit'
+                        : '10,000 / 物業',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
@@ -374,31 +463,17 @@
                 children: [
                   {
                     text:
-                      fairview_park_lang === 'en_us' ? '-	Payable by The Decorator' : '-	由裝修公司支付的裝修按金',
+                      fairview_park_lang === 'en_us'
+                        ? '-	Payable by The Decorator'
+                        : '-	由裝修公司支付的裝修按金',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '10,000 / unit' : '10,000 / 物業',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '' : '',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                ],
-              },
-              {
-                children: [
-                  {
-                    text: fairview_park_lang === 'en_us' ? '-		Handling Fee for Application for Extension of Decoration Period' : '-	申請延長裝修期',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '200 /each' : '200 / 次',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '10,000 / unit'
+                        : '10,000 / 物業',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
@@ -412,31 +487,16 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	Decoration Worker Permit' : '-	裝修工作証',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-		Handling Fee for Application for Extension of Decoration Period'
+                        : '-	申請延長裝修期',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '10 /each' : '10 / 張',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '' : '',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                ],
-              },
-              {
-                children: [
-                  {
-                    text: fairview_park_lang === 'en_us' ? '-	Charge for Non-return, Loss or Damage of a Decoration Worker Permit' : '-	遺失或損毀裝修工作証',
-                    isHasBottomBorder: false,
-                    color: '#fffecf',
-                  },
-                  {
-                    text: fairview_park_lang === 'en_us' ? '100 /each' : '100 / 張',
+                    text:
+                      fairview_park_lang === 'en_us' ? '200 /each' : '200 / 次',
                     isHasBottomBorder: false,
                     color: '#fffecf',
                   },
@@ -450,12 +510,62 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	Charge for Loss of a Decoration Vehicle Entry Permit' : '-	遺失裝修車輛入閘許可証',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Decoration Worker Permit'
+                        : '-	裝修工作証',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                  {
+                    text:
+                      fairview_park_lang === 'en_us' ? '10 /each' : '10 / 張',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                  {
+                    text: fairview_park_lang === 'en_us' ? '' : '',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                ],
+              },
+              {
+                children: [
+                  {
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Charge for Non-return, Loss or Damage of a Decoration Worker Permit'
+                        : '-	遺失或損毀裝修工作証',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                  {
+                    text:
+                      fairview_park_lang === 'en_us' ? '100 /each' : '100 / 張',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                  {
+                    text: fairview_park_lang === 'en_us' ? '' : '',
+                    isHasBottomBorder: false,
+                    color: '#fffecf',
+                  },
+                ],
+              },
+              {
+                children: [
+                  {
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	Charge for Loss of a Decoration Vehicle Entry Permit'
+                        : '-	遺失裝修車輛入閘許可証',
                     isHasBottomBorder: true,
                     color: '#fffecf',
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '100 /each' : '100 / 張',
+                    text:
+                      fairview_park_lang === 'en_us' ? '100 /each' : '100 / 張',
                     isHasBottomBorder: true,
                     color: '#fffecf',
                   },
@@ -469,7 +579,10 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Charge for Record Plan Copy' : '屋宇建築圖則副本',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Charge for Record Plan Copy'
+                        : '屋宇建築圖則副本',
                     isHasBottomBorder: false,
                   },
                   {
@@ -477,7 +590,10 @@
                     isHasBottomBorder: false,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Application Form For Record Plan Copy' : '屋宇建築圖則副本申請表',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Application Form For Record Plan Copy'
+                        : '屋宇建築圖則副本申請表',
                     isHasBottomBorder: false,
                     pdf: 'https://en.fairviewpark.hk/attachment.php?id=1048',
                   },
@@ -486,7 +602,10 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	1st Copy' : '-	首張副本',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	1st Copy'
+                        : '-	首張副本',
                     isHasBottomBorder: false,
                   },
                   {
@@ -502,7 +621,10 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? '-	2nd and Subsequent Copy' : '-	次張起每張副本',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '-	2nd and Subsequent Copy'
+                        : '-	次張起每張副本',
                     isHasBottomBorder: true,
                   },
                   {
@@ -538,8 +660,7 @@
           </tr>
         </table>
       </div>
-       <!-- 客户服务部 -->
-       <div class="mb-20">
+      <div class="mb-20">
         <div class="flex-row">
           <span
             style="
@@ -552,21 +673,32 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Customer Service Department	" : "客户服務部" }}</span
+            >{{
+              fairview_park_lang === "en_us"
+                ? "Customer Service Department	"
+                : "客户服務部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
-          <tr style="width: 100%; background-color: #d5ea95; text-align: center">
+          <tr
+            style="width: 100%; background-color: #d5ea95; text-align: center"
+          >
             <th
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Amount (HK$)' : '金額(港幣$)',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Amount (HK$)'
+                      : '金額(港幣$)',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
                 },
               ]"
               :key="index"
@@ -580,15 +712,22 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Handling Fee for Loss of an Entry Label' : '遺失入閘証手續費',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Handling Fee for Loss of an Entry Label'
+                        : '遺失入閘証手續費',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '50 / each' : '50 / 張',
+                    text:
+                      fairview_park_lang === 'en_us' ? '50 / each' : '50 / 張',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Application Form for RP Car Entry Label (Years 2021 - 2022)' : 'RP 車輛入閘証申請表(2021 - 2022 年度)',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Application Form for RP Car Entry Label (Years 2021 - 2022)'
+                        : 'RP 車輛入閘証申請表(2021 - 2022 年度)',
                     isHasBottomBorder: true,
                     pdf: 'https://cn.fairviewpark.hk/attachment.php?id=1126',
                   },
@@ -597,11 +736,15 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Handling Fee for Loss of a Resident Smart Card' : '補領住戶智能卡手績費',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Handling Fee for Loss of a Resident Smart Card'
+                        : '補領住戶智能卡手績費',
                     isHasBottomBorder: false,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '50 / each' : '50 / 張',
+                    text:
+                      fairview_park_lang === 'en_us' ? '50 / each' : '50 / 張',
                     isHasBottomBorder: false,
                   },
                   {
@@ -621,9 +764,12 @@
                     isHasBottomBorder: false,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Application Form for Resident Smart Card (Owner)' : '住戶智能卡申請表(業戶)',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Application Form for Resident Smart Card (Owner)'
+                        : '住戶智能卡申請表(業戶)',
                     isHasBottomBorder: false,
-                    pdf:'https://cn.fairviewpark.hk/attachment.php?id=778',
+                    pdf: 'https://cn.fairviewpark.hk/attachment.php?id=778',
                   },
                 ],
               },
@@ -638,9 +784,12 @@
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Application Form for Resident Smart Card (Resident Tenant)' : '住戶智能卡申請表(住宅租戶)',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Application Form for Resident Smart Card (Resident Tenant)'
+                        : '住戶智能卡申請表(住宅租戶)',
                     isHasBottomBorder: true,
-                    pdf:'https://cn.fairviewpark.hk/attachment.php?id=779',
+                    pdf: 'https://cn.fairviewpark.hk/attachment.php?id=779',
                   },
                 ],
               },
@@ -662,12 +811,13 @@
               }"
             >
               <span v-if="!item2.pdf">{{ item2.text }}</span>
-              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{ item2.text }}</a>
+              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{
+                item2.text
+              }}</a>
             </td>
           </tr>
         </table>
       </div>
-      <!-- 环境服务部 -->
       <div class="mb-20">
         <div class="flex-row">
           <span
@@ -681,21 +831,32 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Environmental Services Department" : "環境服務部" }}</span
+            >{{
+              fairview_park_lang === "en_us"
+                ? "Environmental Services Department"
+                : "環境服務部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
-          <tr style="width: 100%; background-color: #d5ea95; text-align: center">
+          <tr
+            style="width: 100%; background-color: #d5ea95; text-align: center"
+          >
             <th
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Description' : '付款項目',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Amount (HK$)' : '金額(港幣$)',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Amount (HK$)'
+                      : '金額(港幣$)',
                 },
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
+                  text:
+                    fairview_park_lang === 'en_us' ? 'Document' : '表格/通告',
                 },
               ]"
               :key="index"
@@ -709,15 +870,24 @@
               {
                 children: [
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Disposal Charge for Non-domestic Refuse' : '非家居垃圾清理收費',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Disposal Charge for Non-domestic Refuse'
+                        : '非家居垃圾清理收費',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? '30-120 per unit or volume' : '30-120 / 件(按每件數量/體積計算)',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? '30-120 per unit or volume'
+                        : '30-120 / 件(按每件數量/體積計算)',
                     isHasBottomBorder: true,
                   },
                   {
-                    text: fairview_park_lang === 'en_us' ? 'Estate Management Notice No. 42/2018' : '管理通告第四十二 / 二O一八號',
+                    text:
+                      fairview_park_lang === 'en_us'
+                        ? 'Estate Management Notice No. 42/2018'
+                        : '管理通告第四十二 / 二O一八號',
                     isHasBottomBorder: true,
                     pdf: 'https://en.fairviewpark.hk/attachment.php?id=1083',
                   },
@@ -741,13 +911,14 @@
               }"
             >
               <span v-if="!item2.pdf">{{ item2.text }}</span>
-              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{ item2.text }}</a>
+              <a v-if="item2.pdf" :href="item2.pdf" target="_blank">{{
+                item2.text
+              }}</a>
             </td>
           </tr>
         </table>
       </div>
-       <!-- 维修部 -->
-       <div class="mb-20">
+      <div class="mb-20">
         <div class="flex-row">
           <span
             style="
@@ -760,7 +931,11 @@
               background-color: #699cfc;
               color: #fff;
             "
-            >{{ fairview_park_lang === "en_us" ? "Maintenance Department	" : "維修部" }}</span
+            >{{
+              fairview_park_lang === "en_us"
+                ? "Maintenance Department	"
+                : "維修部"
+            }}</span
           ><img :src="title" alt="" />
         </div>
         <table style="width: 100%">
@@ -768,7 +943,10 @@
             <td
               v-for="(item, index) in [
                 {
-                  text: fairview_park_lang === 'en_us' ? 'Any person who has damaged a public facility in Fairview Park will be served a debit note/quotation for compensation. The debit note/quotation is prepared by the Maintenance Department on the basis of its checking, repair and maintenance costs plus a supervision charge (20% of these costs).' : '	本司向任何損毀本邨公共設施的人仕發送收費單或報價單追討賠償, 金額包括檢查費、維修費及行政費(按上述費用的百分之二十提取)。',
+                  text:
+                    fairview_park_lang === 'en_us'
+                      ? 'Any person who has damaged a public facility in Fairview Park will be served a debit note/quotation for compensation. The debit note/quotation is prepared by the Maintenance Department on the basis of its checking, repair and maintenance costs plus a supervision charge (20% of these costs).'
+                      : '	本司向任何損毀本邨公共設施的人仕發送收費單或報價單追討賠償, 金額包括檢查費、維修費及行政費(按上述費用的百分之二十提取)。',
                 },
               ]"
               :key="index"
@@ -779,7 +957,20 @@
           </tr>
         </table>
       </div>
-    </div>
+    </div> -->
+    <!-- 内容 -->
+    <iframe
+      class="iframe-zh"
+      v-show="fairview_park_lang === 'zh_tw'"
+      style="display: block; width: 100%; height: 500px"
+      src="https://fairviewpark.hk/file/payment-list_cn.html"
+    ></iframe>
+    <iframe
+      class="iframe-en"
+      v-show="fairview_park_lang === 'en_us'"
+      style="display: block; width: 100%; height: 500px"
+      src="https://fairviewpark.hk/file/payment-list_en.html"
+    ></iframe>
   </div>
 </template>
 
@@ -788,8 +979,12 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
-      title: new URL("../../../assets/image/privilege/dp.png", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
+      title: new URL("../../../assets/image/privilege/dp.png", import.meta.url)
+        .href,
     };
   },
   setup() {
@@ -827,12 +1022,12 @@ export default {
       font-weight: bold;
       width: 80%;
       text-align: center;
-      font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
+      font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
       color: #fff;
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
       b {
         color: var(--mainColor1);
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+        text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
       }
     }
   }
@@ -884,12 +1079,12 @@ export default {
 }
 @media (max-width: 991px) {
   .banner {
-      height: 200px!important;
+    height: 200px !important;
     img {
       width: auto;
     }
-    p{
-      font-size:36px!important;
+    p {
+      font-size: 36px !important;
     }
   }
 }
