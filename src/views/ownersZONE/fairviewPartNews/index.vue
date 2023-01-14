@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 01:04:50
+ * @LastEditTime: 2023-01-14 23:42:00
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -26,9 +26,9 @@
         <div style="margin: 0 auto" class="col-12 nav-content mb-20">
           <div style="text-align: right">
             <el-select
-              v-if="fairview_part_news_list.length>0"
+              v-if="fairview_part_news_list.length > 0"
               v-model="fairview_part_news_index"
-              style="margin:20px 0"
+              style="margin: 20px 0"
               :placeholder="$t('Select')"
               size="large"
               @change="changeFairviewPartNews"
@@ -48,7 +48,11 @@
                 style="width: 100%; height: 600px; margin: 0 auto"
               ></div>
             </div> -->
-            <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+            <PDFPreview
+              v-if="pdfPreview"
+              :pdfPreview="pdfPreview"
+              :pdfDownloadUrl="pdfDownloadUrl"
+            ></PDFPreview>
           </div>
         </div>
       </div>
@@ -59,10 +63,10 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
-import PDFPreview from '../../../components/pdf-preview/index.vue'
+import PDFPreview from "../../../components/pdf-preview/index.vue";
 export default {
-  components:{
-    PDFPreview
+  components: {
+    PDFPreview,
   },
   data() {
     return {
@@ -80,8 +84,8 @@ export default {
       fairview_part_news_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
-      pdfPreview:'',
-      pdfDownloadUrl:'',
+      pdfPreview: "/pdf/1.pdf",
+      pdfDownloadUrl: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -98,10 +102,12 @@ export default {
       }
     };
     const changeFairviewPartNews = () => {
-      data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
-             data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
-      data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
-             data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
+      data.pdfPreview =
+        data.fairview_part_news_list.length !== 0 &&
+        data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs;
+      data.pdfDownloadUrl =
+        data.fairview_part_news_list.length !== 0 &&
+        data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw;
       // data.ramNumber = getRamNumber(6);
       // document
       //   .getElementById("pdf-wrap")
@@ -129,16 +135,18 @@ export default {
       var result = "";
       for (var i = 0; i < num; i++) {
         result += Math.floor(Math.random() * 36).toString(36); //获取0-9，a-b随机组合成的
-      }
+      };
       //默认字母小写，手动转大写
       return result.toUpperCase();
     };
     onMounted(async () => {
       await findFairviewParkNewsList();
-      data.pdfPreview = data.fairview_part_news_list.length !== 0 &&
-            data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs
-      data.pdfDownloadUrl = data.fairview_part_news_list.length !== 0 &&
-             data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw
+      // data.pdfPreview =
+      //   data.fairview_part_news_list.length !== 0 &&
+      //   data.fairview_part_news_list[data.fairview_part_news_index].fileEnUs;
+      data.pdfDownloadUrl =
+        data.fairview_part_news_list.length !== 0 &&
+        data.fairview_part_news_list[data.fairview_part_news_index].fileZhTw;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
@@ -195,7 +203,7 @@ export default {
   }
 }
 .nav-wrap {
-  padding: 20px;
+  // padding: 20px;
   margin: 0 auto;
   .row {
     @{deep} .nav-content {
@@ -218,15 +226,15 @@ export default {
             border-color: #ccc;
           }
         }
-        .el-popper{
+        .el-popper {
           position: absolute;
-          top: 52px!important;
-          left: 0!important;
-          .el-select-dropdown{
-            .el-scrollbar{
-              .el-select-dropdown__wrap{
-                .el-scrollbar__view{
-                  .el-select-dropdown__item{
+          top: 52px !important;
+          left: 0 !important;
+          .el-select-dropdown {
+            .el-scrollbar {
+              .el-select-dropdown__wrap {
+                .el-scrollbar__view {
+                  .el-select-dropdown__item {
                     text-align: left;
                   }
                 }
@@ -269,12 +277,15 @@ export default {
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
-  .el-select{
-    width:100%;
+  .nav-wrap {
+    padding: 20px;
+  }
+  .el-select {
+    width: 100%;
   }
 }
 </style>

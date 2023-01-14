@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-09-15 22:13:17
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-05 00:58:33
+ * @LastEditTime: 2023-01-14 23:14:31
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/aboutUs/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -16,23 +16,19 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{
-          fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
+        {{ fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
         }}{{ fairview_park_lang === "en_us" ? " survey" : "意見調查" }}
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div
-          style="margin: 0 auto"
-          class="col-12 nav-content mb-20"
-        >
+        <div style="margin: 0 auto" class="col-12 nav-content mb-20">
           <div style="text-align: right">
             <el-select
-              v-if="demographic_opinion_survey_list.length>0"
+              v-if="demographic_opinion_survey_list.length > 0"
               v-model="demographic_opinion_survey_index"
-              style="margin: 20px 0;"
+              style="margin: 20px 0"
               :placeholder="$t('Select')"
               size="large"
               @change="changeDemographicOpinion"
@@ -51,7 +47,11 @@
                 style="width: 100%; height: 600px; margin: 0 auto"
               ></div>
             </div> -->
-            <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+            <PDFPreview
+              v-if="pdfPreview"
+              :pdfPreview="pdfPreview"
+              :pdfDownloadUrl="pdfDownloadUrl"
+            ></PDFPreview>
           </div>
         </div>
       </div>
@@ -62,10 +62,10 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
-import PDFPreview from '../../../components/pdf-preview/index.vue'
+import PDFPreview from "../../../components/pdf-preview/index.vue";
 export default {
-  components:{
-    PDFPreview
+  components: {
+    PDFPreview,
   },
   data() {
     return {
@@ -83,8 +83,8 @@ export default {
       demographic_opinion_survey_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
-      pdfPreview:'',
-      pdfDownloadUrl:'',
+      pdfPreview: "",
+      pdfDownloadUrl: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -101,10 +101,14 @@ export default {
       }
     };
     const changeDemographicOpinion = () => {
-      data.pdfPreview = data.demographic_opinion_survey_list.length !== 0 &&
-             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs
-      data.pdfDownloadUrl = data.demographic_opinion_survey_list.length !== 0 &&
-             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileZhTw
+      data.pdfPreview =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .fileEnUs;
+      data.pdfDownloadUrl =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .fileZhTw;
       // data.ramNumber = getRamNumber(6);
       // document
       //   .getElementById("pdf-wrap")
@@ -130,8 +134,8 @@ export default {
 
       // });
     };
-     //随机生成数值
-     const getRamNumber = (num) => {
+    //随机生成数值
+    const getRamNumber = (num) => {
       var result = "";
       for (var i = 0; i < num; i++) {
         result += Math.floor(Math.random() * 36).toString(36); //获取0-9，a-b随机组合成的
@@ -141,10 +145,14 @@ export default {
     };
     onMounted(async () => {
       await findDemographicOpinionSurveyList();
-      data.pdfPreview = data.demographic_opinion_survey_list.length !== 0 &&
-             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs
-      data.pdfDownloadUrl = data.demographic_opinion_survey_list.length !== 0 &&
-             data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileZhTw
+      data.pdfPreview =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .fileEnUs;
+      data.pdfDownloadUrl =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .fileZhTw;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
@@ -153,7 +161,7 @@ export default {
       //       data.demographic_opinion_survey_list.length !== 0 &&
       //       data.demographic_opinion_survey_list[
       //         data.demographic_opinion_survey_index
-      //       ].fileEnUs, 
+      //       ].fileEnUs,
       //   },
       //   document.getElementById("pdf-preview")
       // ).then((instance) => {
@@ -201,7 +209,7 @@ export default {
   }
 }
 .nav-wrap {
-  padding: 20px;
+  // padding: 20px;
   margin: 0 auto;
   .row {
     @{deep} .nav-content {
@@ -224,22 +232,22 @@ export default {
           }
         }
       }
-      .el-popper{
-          position: absolute;
-          top: 52px!important;
-          left: 0!important;
-          .el-select-dropdown{
-            .el-scrollbar{
-              .el-select-dropdown__wrap{
-                .el-scrollbar__view{
-                  .el-select-dropdown__item{
-                    text-align: left;
-                  }
+      .el-popper {
+        position: absolute;
+        top: 52px !important;
+        left: 0 !important;
+        .el-select-dropdown {
+          .el-scrollbar {
+            .el-select-dropdown__wrap {
+              .el-scrollbar__view {
+                .el-select-dropdown__item {
+                  text-align: left;
                 }
               }
             }
           }
         }
+      }
     }
   }
 }
@@ -270,16 +278,19 @@ export default {
 }
 @media (max-width: 991px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
-  .el-select{
-    width:100%;
+  .nav-wrap {
+    padding: 20px;
+  }
+  .el-select {
+    width: 100%;
   }
 }
 </style>

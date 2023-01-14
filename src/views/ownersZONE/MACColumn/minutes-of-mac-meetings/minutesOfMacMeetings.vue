@@ -2,7 +2,7 @@
  * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
  * @Date: 2022-10-31 22:31:45
  * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-10 11:29:23
+ * @LastEditTime: 2023-01-14 23:14:46
  * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/ownersZONE/MACColumn/sample-of-candidate-form/index.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -103,7 +103,7 @@
           <!-- 分頁 -->
           <div style="display: flex; align-items: center" v-if="total !== 0">
             <el-pagination
-              style="flex-wrap: wrap; margin: 0 auto; font-size: 18px;width: 100%;"
+              style="flex-wrap: wrap; margin: 0 auto; font-size: 18px; width: 100%"
               v-model:current-page="currentPage1"
               v-model:page-size="pageSize1"
               :page-sizes="[5, 10, 15, 20]"
@@ -166,7 +166,11 @@
         <!-- <div id="pdf-wrap">
           <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
         </div> -->
-        <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+        <PDFPreview
+          v-if="pdfPreview"
+          :pdfPreview="pdfPreview"
+          :pdfDownloadUrl="pdfDownloadUrl"
+        ></PDFPreview>
       </div>
     </div>
   </div>
@@ -178,11 +182,11 @@ import PDFJSExpress from "@pdftron/pdfjs-express";
 import { ElConfigProvider } from "element-plus";
 import zhTw from "element-plus/dist/locale/zh-tw.mjs";
 import en from "element-plus/dist/locale/en.mjs";
-import PDFPreview from '../../../../components/pdf-preview/index.vue'
+import PDFPreview from "../../../../components/pdf-preview/index.vue";
 export default {
   components: {
     ElConfigProvider,
-    PDFPreview
+    PDFPreview,
   },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
@@ -196,8 +200,8 @@ export default {
       minutes_of_sub_mac_meetings_show_list: [],
       sub_mac_meetings_index: 0,
       MacColumnFile: {
-        pdfUrlEnUs:'',
-        pdfUrlZhTw:'',
+        pdfUrlEnUs: "",
+        pdfUrlZhTw: "",
       },
       currentPage1: 1,
       pageSize1: 5,
@@ -206,8 +210,8 @@ export default {
       pageSize2: 5,
       total2: 0,
       local: "",
-      pdfPreview:'',
-      pdfDownloadUrl:'',
+      pdfPreview: "",
+      pdfDownloadUrl: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
@@ -305,8 +309,8 @@ export default {
       await findMinutesOfSubComMeetingsList();
       await findMinutesOfSubComMeetingsList(data.minutes_of_sub_mac_meetings_list[0].id);
       await findOneMacColumnFile();
-      data.pdfPreview = data.MacColumnFile.pdfUrlEnUs
-      data.pdfDownloadUrl = data.MacColumnFile.pdfUrlZhTw
+      data.pdfPreview = data.MacColumnFile.pdfUrlEnUs;
+      data.pdfDownloadUrl = data.MacColumnFile.pdfUrlZhTw;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
@@ -497,9 +501,9 @@ h5 {
     }
   }
 }
-@{deep} .pdf-preview{
-  .pdf-preview-content{
-    width:100%;
+@{deep} .pdf-preview {
+  .pdf-preview-content {
+    width: 100%;
   }
 }
 @media (max-width: 991px) {
@@ -548,7 +552,7 @@ h5 {
 @media (max-width: 768px) {
   @{deep} .el-pagination {
     .el-pagination__total {
-      font-size: 15px!important;
+      font-size: 15px !important;
       margin: 0;
     }
     .el-pagination__sizes {
@@ -563,20 +567,20 @@ h5 {
         left: 0;
       }
     }
-    .btn-prev{
-            margin-left:0;
-          }
+    .btn-prev {
+      margin-left: 0;
+    }
     .el-input__inner {
-      font-size: 15px!important;
+      font-size: 15px !important;
     }
     .el-icon {
-      font-size: 15px!important;
+      font-size: 15px !important;
     }
     .el-pager {
       width: 79%;
       overflow: auto;
       li {
-        font-size: 15px!important;
+        font-size: 15px !important;
         &:hover {
           color: var(--mainColor2);
         }
@@ -586,7 +590,7 @@ h5 {
       }
     }
     .el-pagination__jump {
-      font-size: 15px!important;
+      font-size: 15px !important;
       margin: 0;
     }
   }
