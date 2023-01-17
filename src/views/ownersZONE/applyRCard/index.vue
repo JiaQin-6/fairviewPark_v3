@@ -9,9 +9,6 @@
 <template>
   <div
     class="apply-resident-smartcard custom-loading-svg"
-    v-loading="loading"
-    :element-loading-svg="svg"
-    element-loading-svg-view-box="-10, -10, 50, 50"
   >
     <!-- banner -->
     <div class="banner">
@@ -566,6 +563,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -618,7 +629,7 @@ export default {
         checked: false,
       },
       isRequest: true,
-      loading: false,
+      v_loading: false,
       address_t: "",
       rCardList: [],
     });
@@ -742,7 +753,7 @@ export default {
         data.isRequest = false;
         return false;
       }
-      data.loading = true;
+      data.v_loading = true;
       if (data.form.relationFile.file) {
         data.form.relationFile.url = await uploadRcard(data.form.relationFile.file, "rd");
       }
@@ -764,7 +775,7 @@ export default {
           rcOctoBk: data.form.cardNumber2,
         });
         if (res.data.status === 200) {
-          data.loading = false;
+          data.v_loading = false;
           data.form.name = "";
           data.form.relation = "";
           data.form.remark = "";
@@ -782,7 +793,7 @@ export default {
             type: "success",
           });
         } else {
-          data.loading = false;
+          data.v_loading = false;
           ElMessage({
             showClose: true,
             message: res.data.msg,
@@ -791,7 +802,7 @@ export default {
         }
       } catch (error) {
         console.log(error);
-        data.loading = false;
+        data.v_loading = false;
       }
     };
     const uploadRcard = async (file, key) => {
@@ -819,7 +830,7 @@ export default {
           console.log(res);
           data.rCardList = res.data.data;
         } else {
-          data.loading = false;
+          data.v_loading = false;
           ElMessage({
             showClose: true,
             message: res.data.msg,
@@ -1258,7 +1269,16 @@ export default {
             line-height:18px;
           }
         }
+        
       }
+      @{deep} .el-input{
+          .el-input__wrapper{
+            .el-input__inner{
+            font-size:15px !important;
+          }
+          }
+          
+        }
     }
   }
 }

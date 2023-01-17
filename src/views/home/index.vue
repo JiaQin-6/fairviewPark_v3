@@ -149,11 +149,8 @@
               margin-left: 10px;
             "
         >
-        <div
-            id="scroll_front"
-            style="display: inline-block; "
-          ></div>
-          <div id="scroll_begin" style="display: inline;">
+          <div id="scroll_front" style="display: inline-block"></div>
+          <div id="scroll_begin" style="display: inline-block">
             <div
               style="display: inline"
               v-for="(item, index) in new_notice_list"
@@ -172,18 +169,13 @@
                 "
                 >{{ item.contentEnUs }}
               </a>
-              <span
-                style="margin-right: 20px; color: #fff"
-                v-if="!item.websiteUrl"
-                >{{ item.contentEnUs }}</span
-              >
+              <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
+                item.contentEnUs
+              }}</span>
             </div>
-            <div style="display: inline-block;width: 500px"></div>
+            <div style="display: inline-block; width: 500px"></div>
           </div>
-          <div
-            id="scroll_end"
-            style="display: inline-block; width: 500px"
-          ></div>
+          <div id="scroll_end" style="display: inline-block; width: 500px"></div>
         </div>
         <!-- </marquee> -->
       </div>
@@ -277,9 +269,7 @@
       <div class="about-us">
         <h1>
           {{ fairview_park_lang === "en_us" ? "About" : "關於"
-          }}<a href="#/about-us">{{
-            fairview_park_lang === "en_us" ? " us" : "我們"
-          }}</a>
+          }}<a href="#/about-us">{{ fairview_park_lang === "en_us" ? " us" : "我們" }}</a>
           <p></p>
         </h1>
         <div class="container">
@@ -377,14 +367,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  getCurrentInstance,
-  toRefs,
-  onMounted,
-  nextTick,
-} from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, nextTick } from "vue";
 export default {
   data() {
     return {
@@ -396,18 +379,11 @@ export default {
         "../../assets/image/home/pic_index02.jpg",
         import.meta.url
       ).href,
-      bus_time_table: new URL(
-        "../../assets/image/home/pic_index03.jpg",
-        import.meta.url
-      ).href,
-      icon_news: new URL(
-        "../../assets/image/home/icon_news.png",
-        import.meta.url
-      ).href,
-      img1: new URL(
-        "../../assets/image/home/aboutus_banner_2e4X.jpg",
-        import.meta.url
-      ).href,
+      bus_time_table: new URL("../../assets/image/home/pic_index03.jpg", import.meta.url)
+        .href,
+      icon_news: new URL("../../assets/image/home/icon_news.png", import.meta.url).href,
+      img1: new URL("../../assets/image/home/aboutus_banner_2e4X.jpg", import.meta.url)
+        .href,
       img2: new URL(
         "../../assets/image/home/Podcast-Hour-Design-Idea_XPel.jpg",
         import.meta.url
@@ -439,10 +415,14 @@ export default {
             let scroll_front = document.getElementById("scroll_front");
             let scroll_begin = document.getElementById("scroll_begin");
             let scroll_end = document.getElementById("scroll_end");
-            scroll_front.style["width"] =
-              scroll_div.getBoundingClientRect().width + "px";
+            scroll_front.style["width"] = scroll_div.getBoundingClientRect().width + "px";
             function Marquee() {
-              if (((scroll_end.offsetWidth + scroll_div.getBoundingClientRect().width) - scroll_div.scrollLeft) <= 0) {
+              if (
+                scroll_end.offsetWidth +
+                  scroll_div.getBoundingClientRect().width -
+                  scroll_div.scrollLeft <=
+                0
+              ) {
                 scroll_div.scrollLeft -= scroll_begin.offsetWidth;
               } else {
                 scroll_div.scrollLeft++;
@@ -475,6 +455,35 @@ export default {
       setTimeout(() => {
         document.getElementById("carousel-control-prev").click();
       }, 3000);
+      //
+      var observer = new IntersectionObserver(function (changes) {
+        console.log(changes);
+        changes.forEach(function (change) {
+          var container = change.target;
+          // 相交率，默认是相对于浏览器视窗
+          if (change.intersectionRatio > 0) {
+            setTimeout(() => {
+              container.className += " show animate__animated animate__fadeIn";
+              
+            }, 500);
+            observer.unobserve(container);
+          }
+        });
+      });
+      observer.observe(document.getElementsByClassName("liulan")[0]);
+      var observer = new IntersectionObserver(function (changes) {
+        changes.forEach(function (change) {
+          var container = change.target;
+          // 相交率，默认是相对于浏览器视窗
+          if (change.intersectionRatio > 0) {
+            setTimeout(() => {
+              container.className += " show animate__animated animate__fadeIn";
+            }, 500);
+            observer.unobserve(container);
+          }
+        });
+      });
+      observer.observe(document.getElementsByClassName("about-us")[0]);
     });
     return {
       ...toRefs(data),
@@ -559,6 +568,7 @@ export default {
 .container_wrap {
   margin: 0 auto;
   .liulan {
+    opacity: 0;
     h1 {
       margin-top: 60px;
       font-size: 32px;
@@ -662,6 +672,7 @@ export default {
   }
   .about-us {
     padding-bottom: 20px;
+    opacity: 0;
     h1 {
       margin: 30px auto 30px;
       font-size: 32px;
@@ -735,6 +746,9 @@ export default {
         }
       }
     }
+  }
+  .show{
+    opacity: 1;
   }
 }
 
@@ -810,8 +824,15 @@ export default {
       font-size: 15px !important;
     }
   }
+  #scroll_div {
+    #scroll_begin {
+      height: 45px;
+      line-height: 45px;
+    }
+  }
   .container_wrap {
     .liulan {
+      opacity: 0;
       h1 {
         font-size: 25px;
         margin: 20px 0 20px 0;
@@ -819,6 +840,7 @@ export default {
       }
     }
     .about-us {
+      opacity: 0;
       h1 {
         font-size: 25px;
       }
@@ -839,11 +861,15 @@ export default {
         }
       }
     }
+    .show{
+      opacity: 1;
+    }
   }
 }
 @media (max-width: 768px) {
   .container_wrap {
     .liulan {
+      opacity: 0;
       .container {
         .row {
           .col {

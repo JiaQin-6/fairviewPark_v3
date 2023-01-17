@@ -31,6 +31,7 @@ import './assets/css/commonClass.css';
 import './assets/css/quillEditor.css';
 import './assets/css/elementUI.css';
 import './assets/css/defaultCss.css';
+import './assets/css/animate.css';
 import './fonts/iconfont.css';
 //国际化
 import i18n from "./i18n/index.js";

@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
           <ul class="row">
             <li
               v-for="(item, index) in coach_service_content.coachServiceList"
@@ -60,7 +60,7 @@
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
           <!--  -->
-          <div align="center">
+          <div align="center" class="animate__animated animate__fadeInRight">
             <!-- pdf -->
             <h5
               class="title fs-18 mb-20 flex-row"
@@ -1026,6 +1026,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -1064,6 +1078,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       nav_index: 0,
       coach_service_content: {
         coachServiceList: [],
@@ -1080,9 +1095,11 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.coach_service_content.lineMoneyList = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -1106,6 +1123,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           res.data.data.pageResult.records.map((item, index) => {
             item.index = index;
           });
@@ -1127,6 +1145,7 @@ export default {
           );
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -1141,6 +1160,7 @@ export default {
       return maxLength;
     };
     onMounted(async () => {
+      data.v_loading = true;
       findLineMoneyList();
       findOneCoachServiceFile();
       findCoachServiceList();

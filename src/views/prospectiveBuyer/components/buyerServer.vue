@@ -8,7 +8,7 @@
 -->
 <template>
   <div class="buyer-server">
-    <div class="content" style="margin: 0px auto; padding: 0 20px">
+    <div class="content" style="margin: 0px auto; padding: 0px">
       <p style="font-size: 36px; color: #9cc212; font-weight: bold">
         {{
           fairview_park_lang === "en_us"

@@ -102,6 +102,7 @@
               v-if="pdfPreview"
               :pdfPreview="pdfPreview"
               :pdfDownloadUrl="pdfDownloadUrl"
+              :pageNumber="pageNumber"
             ></PDFPreview>
           </div>
           <div
@@ -146,6 +147,7 @@ export default {
       fairview_park_lang: "",
       pdfPreview: "",
       pdfDownloadUrl: "",
+      pageNumber:0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
@@ -170,6 +172,9 @@ export default {
       data.pdfDownloadUrl =
         data.residents_handboo_map_content &&
         data.residents_handboo_map_content.fileUrlZhTw;
+      data.pageNumber =
+        data.residents_handboo_map_content &&
+        data.residents_handboo_map_content.remark;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",

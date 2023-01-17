@@ -14,6 +14,7 @@
     <!-- 大維修資訊 -->
     <div style="text-align: right">
       <el-select
+        v-if="tohpByFpnList.length > 0"
         v-model="tohpByFpnIndex"
         style="margin: 20px 0"
         placeholder="Select"
@@ -31,7 +32,12 @@
       <!-- <div id="pdf-wrap">
         <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
       </div> -->
-      <PDFPreview v-if="pdfPreview" :pdfPreview="pdfPreview" :pdfDownloadUrl="pdfDownloadUrl"></PDFPreview>
+      <PDFPreview
+        v-if="pdfPreview"
+        :pdfPreview="pdfPreview"
+        :pdfDownloadUrl="pdfDownloadUrl"
+        :pageNumber="pageNumber"
+      ></PDFPreview>
     </div>
   </div>
 </template>
@@ -54,6 +60,7 @@ export default {
       ramNumber: "",
       pdfPreview: "",
       pdfDownloadUrl: "",
+      pageNumber:0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
@@ -76,6 +83,9 @@ export default {
       data.pdfDownloadUrl =
         data.tohpByFpnList.length !== 0 &&
         data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
+      data.pageNumber =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].remark;
       // data.ramNumber = getRamNumber(6);
       // document
       //   .getElementById("pdf-wrap")
@@ -118,6 +128,9 @@ export default {
       data.pdfDownloadUrl =
         data.tohpByFpnList.length !== 0 &&
         data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
+      data.pageNumber =
+        data.tohpByFpnList.length !== 0 &&
+        data.tohpByFpnList[data.tohpByFpnIndex].remark;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",

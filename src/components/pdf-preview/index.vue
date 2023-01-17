@@ -18,10 +18,10 @@
             <i class="iconfont icon-xiayiye" style="font-size: 18px"></i>
           </div>
           <div class="page-tool-item">{{ pageNum }}/{{ numPages }}</div>
-          <div class="page-tool-item" @click="pageZoomOut">
+          <div class="page-tool-item display" @click="pageZoomOut">
             <i class="iconfont icon-fangda" style="font-size: 20px"></i>
           </div>
-          <div class="page-tool-item" @click="pageZoomIn">
+          <div class="page-tool-item display" @click="pageZoomIn">
             <i class="iconfont icon-suoxiao" style="font-size: 20px"></i>
           </div>
           <div class="page-tool-item" @click="download(pdfDownloadUrl, '1')">
@@ -30,12 +30,12 @@
         </div>
       </div>
       <div class="pdf-wrap">
-        <vue-pdf-embed
+        <VuePdfEmbed
           :source="source"
-          :style="scale"
+          :style="scaleStyle"
           class="vue-pdf-embed"
           :page="pageNum"
-        />
+        ></VuePdfEmbed>
       </div>
     </div>
   </div>
@@ -43,7 +43,7 @@
 
 <script>
 import VuePdfEmbed from "vue-pdf-embed";
-import { createLoadingTask } from "vue3-pdfjs/esm"; // 获得总页数
+// import { createLoadingTask } from "vue3-pdfjs/esm/index.js"; // 获得总页数
 import {
   ref,
   reactive,
@@ -66,9 +66,13 @@ export default {
       type: String,
       required: true,
     },
+    pageNumber:{
+      type:Number,
+      required:true,
+    }
   },
   setup(props) {
-    let data = reactive({
+    const data = reactive({
       fairview_park_lang: "",
       source: "", //预览pdf文件地址
       pdfDownloadUrl: "", //下载pdf文件地址
@@ -79,7 +83,8 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.source = props.pdfPreview;
     data.pdfDownloadUrl = props.pdfDownloadUrl;
-    const scale = computed(() => `transform:scale(${data.scale})`);
+    data.numPages = props.pageNumber;
+    const scaleStyle = computed(() => `transform:scale(${data.scale})`);
     const lastPage = () => {
       if (data.pageNum > 1) {
         data.pageNum -= 1;
@@ -92,7 +97,6 @@ export default {
     };
     const pageZoomOut = () => {
       if (data.scale < 2) {
-        
         data.scale += 0.1;
       }
     };
@@ -115,17 +119,18 @@ export default {
       (val) => {
         data.source = val;
         data.pdfDownloadUrl = props.pdfDownloadUrl;
-        const loadingTask = createLoadingTask(data.source);
-        loadingTask.promise.then((pdf) => {
-          data.numPages = pdf.numPages;
-        });
+        data.numPages = props.pageNumber;
+        // const loadingTask = createLoadingTask(data.source);
+        // loadingTask._capability.promise.then((pdf) => {
+        //   data.numPages = pdf.numPages;
+        // });
       }
     );
     onMounted(() => {
-      const loadingTask = createLoadingTask(data.source);
-      loadingTask.promise.then((pdf) => {
-        data.numPages = pdf.numPages;
-      });
+      // const loadingTask = createLoadingTask(data.source);
+      // loadingTask._capability.promise.then((pdf) => {
+      //   data.numPages = pdf.numPages;
+      // });
     });
     return {
       ...toRefs(data),
@@ -134,7 +139,7 @@ export default {
       pageZoomOut,
       pageZoomIn,
       download,
-      scale,
+      scaleStyle,
     };
   },
 };
@@ -228,6 +233,9 @@ export default {
           // transform: inherit !important;
         }
       }
+    }
+    .display{
+      display:none;
     }
   }
 }

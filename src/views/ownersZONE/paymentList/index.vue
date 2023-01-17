@@ -959,18 +959,20 @@
       </div>
     </div> -->
     <!-- 内容 -->
-    <iframe
+    <div class="content">
+      <iframe
       class="iframe-zh"
       v-show="fairview_park_lang === 'zh_tw'"
-      style="display: block; width: 100%; height: 800px;padding:20px"
+      style="display: block; width: 100%; height: 800px;padding:20px 0"
       src="https://fairviewpark.hk/file/payment-list_cn.html"
     ></iframe>
     <iframe
       class="iframe-en"
       v-show="fairview_park_lang === 'en_us'"
-      style="display: block; width: 100%; height: 800px;padding:20px"
+      style="display: block; width: 100%; height: 800px;padding:20px 0"
       src="https://fairviewpark.hk/file/payment-list_en.html"
     ></iframe>
+    </div>
   </div>
 </template>
 

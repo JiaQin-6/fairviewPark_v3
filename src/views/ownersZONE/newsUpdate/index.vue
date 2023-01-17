@@ -74,6 +74,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -92,6 +106,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       new_update_list: [],
       new_update_index: null,
       new_update_content: [],
@@ -105,9 +120,11 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.new_update_list = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -119,10 +136,12 @@ export default {
           id: id,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.new_update_content = res.data.data;
           data.new_update_index = res.data.data.id;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -135,6 +154,7 @@ export default {
       }
     });
     onMounted(async () => {
+      data.v_loading = true;
       await findNewUpdateList();
       await findOneNewUpdateById(data.new_update_list[0].id);
     });

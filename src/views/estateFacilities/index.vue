@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
           <ul class="row menu-ul">
             <li
               v-for="(item, index) in estate_facilities_list"
@@ -32,6 +32,7 @@
               :class="nav_index === index ? 'active' : ''"
               @click="
                 () => {
+                  v_loading = true;
                   nav_index = index;
                   findOneEstateFacilities(item.id);
                 }
@@ -59,8 +60,8 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content mb-20">
-          <div>
+        <div class="col-12 col-lg-10 nav-content mb-20 ">
+          <div class="animate__animated animate__fadeInRight">
             <p class="title" v-if="estate_facilities_list.length !== 0">
               {{ estate_facilities_list[nav_index].titleEnUs }}
             </p>
@@ -78,6 +79,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -96,6 +111,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       estate_facilities_list: [],
       estate_facilities_content: null,
       fairview_park_lang: "",
@@ -110,12 +126,14 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           res.data.data.records.map((item, index) => {
             item.index = index;
           });
           data.estate_facilities_list = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -127,13 +145,16 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.estate_facilities_content = res.data.data.htmlEnUs;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
     const changeMenu = (val) => {
+      data.v_loading = true;
       data.nav_index = val;
       for (let i = 0; i < data.estate_facilities_list.length; i++) {
         if (data.estate_facilities_list[i].index === val) {
@@ -142,6 +163,7 @@ export default {
       }
     };
     onMounted(async () => {
+      data.v_loading = true;
       await findEstateFacilitiesList();
       findOneEstateFacilities(data.estate_facilities_list[0].id);
     });

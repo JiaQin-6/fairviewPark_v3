@@ -32,6 +32,7 @@
               :class="nav_index === index ? 'active' : ''"
               @click="
                 () => {
+                  v_loading = true;
                   nav_index = index;
                   findOneEstateActivitesById(item.id);
                 }
@@ -77,6 +78,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -97,6 +112,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       estate_activites_list: [],
       estate_activites_content: null,
       fairview_park_lang: "",
@@ -110,12 +126,14 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           res.data.data.records.map((item, index) => {
             item.index = index;
           });
           data.estate_activites_list = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -127,13 +145,16 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.estate_activites_content = res.data.data.htmlEnUs;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
     const changeMenu = async (val) => {
+      data.v_loading = true;
       data.nav_index = val;
       for (let i = 0; i < data.estate_activites_list.length; i++) {
         if (data.estate_activites_list[i].index === val) {
@@ -142,6 +163,7 @@ export default {
       }
     };
     onMounted(async () => {
+      data.v_loading = true;
       await findEstateActivitesList();
       findOneEstateActivitesById(data.estate_activites_list[0].id);
     });

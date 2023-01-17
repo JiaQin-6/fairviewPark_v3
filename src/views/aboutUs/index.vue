@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
           <ul class="row menu-ul">
             <li
               v-for="(item, index) in [
@@ -136,26 +136,41 @@
               :label="item.text"
               :value="item.value"
             >
-              <i
-                class="iconfont"
-                :class="item.icon"
-                style="margin-right: 10px"
-              ></i>
+              <i class="iconfont" :class="item.icon" style="margin-right: 10px"></i>
               <span>{{ item.text }}</span>
             </el-option>
           </el-select>
         </div>
-        <Introduction v-show="nav_index === 0"></Introduction>
-        <CustomerService v-show="nav_index === 1"></CustomerService>
-        <EnvironmentalService v-show="nav_index === 2"></EnvironmentalService>
-        <Security v-show="nav_index === 3"></Security>
-        <Maintenance v-show="nav_index === 4"></Maintenance>
-        <Administration v-show="nav_index === 5"></Administration>
-        <HumanResources v-show="nav_index === 6"></HumanResources>
-        <Accounts v-show="nav_index === 7"></Accounts>
-        <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
+        <div
+          style="padding: 0"
+          class="col-12 col-lg-10 flex-row animate__animated animate__fadeInRight"
+        >
+          <Introduction v-show="nav_index === 0"></Introduction>
+          <CustomerService v-show="nav_index === 1"></CustomerService>
+          <EnvironmentalService v-show="nav_index === 2"></EnvironmentalService>
+          <Security v-show="nav_index === 3"></Security>
+          <Maintenance v-show="nav_index === 4"></Maintenance>
+          <Administration v-show="nav_index === 5"></Administration>
+          <HumanResources v-show="nav_index === 6"></HumanResources>
+          <Accounts v-show="nav_index === 7"></Accounts>
+          <InformationTechnology v-show="nav_index === 8"></InformationTechnology>
+        </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -184,31 +199,23 @@ export default {
   },
   data() {
     return {
-      banner: new URL(
-        "../../assets/image/common-banner/about-us.jpg",
-        import.meta.url
-      ).href,
-      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url)
+      banner: new URL("../../assets/image/common-banner/about-us.jpg", import.meta.url)
         .href,
+      map: new URL("../../assets/image/home/snazzy-image.png", import.meta.url).href,
       structure: new URL(
         "../../assets/image/aboutUs/handbook_chart.jpeg",
         import.meta.url
       ).href,
-      landmark: new URL(
-        "../../assets/image/aboutUs/placeholder.png",
-        import.meta.url
-      ).href,
-      phone: new URL(
-        "../../assets/image/aboutUs/telephone.png",
-        import.meta.url
-      ).href,
-      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url)
+      landmark: new URL("../../assets/image/aboutUs/placeholder.png", import.meta.url)
         .href,
+      phone: new URL("../../assets/image/aboutUs/telephone.png", import.meta.url).href,
+      email: new URL("../../assets/image/aboutUs/Group.png", import.meta.url).href,
       nav_index: 0,
     };
   },
   setup() {
     let data = reactive({
+      v_loading: false,
       fairview_park_lang: "",
       nav_index: "",
     });

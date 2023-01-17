@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
           <ul class="row menu-ul">
             <li
               v-for="(item, index) in [
@@ -103,7 +103,7 @@
             </el-option>
           </el-select>
         </div>
-        <div class="col-12 col-lg-10 nav-content flex-row">
+        <div class="col-12 col-lg-10 nav-content flex-row animate__animated animate__fadeInRight">
           <ProspecticeBuy v-show="nav_index === 0"></ProspecticeBuy>
           <BuyerServer v-show="nav_index === 1"></BuyerServer>
           <Decoration v-show="nav_index === 2"></Decoration>

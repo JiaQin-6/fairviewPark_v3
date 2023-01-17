@@ -332,20 +332,32 @@
         </div>
       </div>
       <div v-show="menuActive === 2">
-        <div id="pdf-wrap">
+        <!-- <div id="pdf-wrap">
           <div
             id="pdf-preview-1"
             style="width: 100%; height: 600px; margin: 0 auto"
           ></div>
-        </div>
+        </div> -->
+        <PDFPreview
+          v-if="pdfPreview1"
+          :pdfPreview="pdfPreview1"
+          :pdfDownloadUrl="pdfDownloadUrl1"
+          :pageNumber="1"
+        ></PDFPreview>
       </div>
       <div v-show="menuActive === 3">
-        <div id="pdf-wrap">
+        <!-- <div id="pdf-wrap">
           <div
             id="pdf-preview-2"
             style="width: 100%; height: 600px; margin: 0 auto"
           ></div>
-        </div>
+        </div> -->
+        <PDFPreview
+          v-if="pdfPreview2"
+          :pdfPreview="pdfPreview2"
+          :pdfDownloadUrl="pdfDownloadUrl2"
+          :pageNumber="1"
+        ></PDFPreview>
       </div>
     </div>
   </div>
@@ -354,55 +366,65 @@
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 import PDFJSExpress from "@pdftron/pdfjs-express";
+import PDFPreview from "../../../../components/pdf-preview/index.vue";
 export default {
+  components: {
+    PDFPreview,
+  },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       fairview_park_lang: "",
       menuActive: 1,
+      pdfPreview1: "",
+      pdfDownloadUrl1: "",
+      pdfPreview2: "",
+      pdfDownloadUrl2: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
     onMounted(async () => {
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.fairview_park_lang === "en_us"
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.fairview_park_lang === "en_us"
+      //         ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
+      //         : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf",
+      //   },
+      //   document.getElementById("pdf-preview-1")
+      // ).then((instance) => {});
+      data.pdfPreview1 = data.fairview_park_lang === "en_us"
               ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
-              : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf",
-        },
-        document.getElementById("pdf-preview-1")
-      ).then((instance) => {
-        // use APIs here
-        // const { documentViewer, annotationManager } = instance.Core;
-        // call methods from instance, documentViewer and annotationManager as needed
-        // instance.UI.setTheme('dark');
-      });
-      PDFJSExpress(
-        {
-          path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-          licenseKey:
-            process.env.NODE_ENV === "development"
-              ? "oCrqt6OMULAoS15T2J62"
-              : "ukZ2T6b500exNQH0GDJg",
-          initialDoc:
-            data.fairview_park_lang === "en_us"
-              ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-              : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
-        },
-        document.getElementById("pdf-preview-2")
-      ).then((instance) => {
-        // use APIs here
-        // const { documentViewer, annotationManager } = instance.Core;
-        // call methods from instance, documentViewer and annotationManager as needed
-        // instance.UI.setTheme('dark');
-      });
+              : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
+      data.pdfDownloadUrl1 = data.fairview_park_lang === "en_us"
+              ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
+              : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
+      // PDFJSExpress(
+      //   {
+      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
+      //     licenseKey:
+      //       process.env.NODE_ENV === "development"
+      //         ? "oCrqt6OMULAoS15T2J62"
+      //         : "ukZ2T6b500exNQH0GDJg",
+      //     initialDoc:
+      //       data.fairview_park_lang === "en_us"
+      //         ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+      //         : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
+      //   },
+      //   document.getElementById("pdf-preview-2")
+      // ).then((instance) => {});
+      data.pdfPreview2 = data.fairview_park_lang === "en_us"
+               ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+               : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
+      data.pdfDownloadUrl2 = data.fairview_park_lang === "en_us"
+               ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+               : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf";
     });
     return {
       ...toRefs(data),
@@ -448,6 +470,11 @@ h5 {
     .is-focus {
       border-color: #ccc;
     }
+  }
+}
+@{deep} .pdf-preview {
+  .pdf-preview-content {
+    width: 100%;
   }
 }
 @media (max-width: 991px) {

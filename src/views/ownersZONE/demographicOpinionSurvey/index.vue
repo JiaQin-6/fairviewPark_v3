@@ -51,11 +51,26 @@
               v-if="pdfPreview"
               :pdfPreview="pdfPreview"
               :pdfDownloadUrl="pdfDownloadUrl"
+              :pageNumber="pageNumber"
             ></PDFPreview>
           </div>
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -79,12 +94,14 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       demographic_opinion_survey_list: [],
       demographic_opinion_survey_index: 0,
       fairview_park_lang: "",
       ramNumber: "",
       pdfPreview: "",
       pdfDownloadUrl: "",
+      pageNumber:0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -94,9 +111,11 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.demographic_opinion_survey_list = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -109,6 +128,10 @@ export default {
         data.demographic_opinion_survey_list.length !== 0 &&
         data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
           .fileZhTw;
+      data.pageNumber =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .remark;
       // data.ramNumber = getRamNumber(6);
       // document
       //   .getElementById("pdf-wrap")
@@ -144,6 +167,7 @@ export default {
       return result.toUpperCase();
     };
     onMounted(async () => {
+      data.v_loading = true
       await findDemographicOpinionSurveyList();
       data.pdfPreview =
         data.demographic_opinion_survey_list.length !== 0 &&
@@ -153,6 +177,10 @@ export default {
         data.demographic_opinion_survey_list.length !== 0 &&
         data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
           .fileZhTw;
+      data.pageNumber =
+        data.demographic_opinion_survey_list.length !== 0 &&
+        data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
+          .remark;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
@@ -236,7 +264,9 @@ export default {
         position: absolute;
         top: 52px !important;
         left: 0 !important;
+          background-color: var(--mainColor2);
         .el-select-dropdown {
+          background-color: var(--mainColor2);
           .el-scrollbar {
             .el-select-dropdown__wrap {
               .el-scrollbar__view {
@@ -287,10 +317,15 @@ export default {
     }
   }
   .nav-wrap {
-    padding: 20px;
+    // padding: 20px;
   }
   .el-select {
     width: 100%;
+  }
+}
+@media (max-width: 575px) {
+  .nav-wrap {
+    padding: 20px;
   }
 }
 </style>

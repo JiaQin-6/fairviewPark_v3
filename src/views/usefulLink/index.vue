@@ -23,7 +23,7 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20">
+        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
           <ul class="row" id="useful-menu">
             <li
               v-for="(item, index) in telephone_link_list"
@@ -58,7 +58,7 @@
             </el-option>
           </el-select>
         </div>
-        <div id="nav-content" class="col-12 col-lg-10 nav-content mb-20">
+        <div id="nav-content" class="col-12 col-lg-10 nav-content mb-20 animate__animated animate__fadeInRight">
           <!-- <div align="center"> -->
           <table
             :id="'telephone_link_' + (index + 1)"
@@ -123,6 +123,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -141,6 +155,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       nav_index: 0,
       telephone_link_list: [],
       fairview_park_lang: "",
@@ -154,13 +169,16 @@ export default {
           parentId: id,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.telephone_link_list = res.data.data.records;
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
     onMounted(async () => {
+      data.v_loading = true;
       await findUsefulTelephoneNosList2();
       if (
         document.getElementById("useful-menu").getBoundingClientRect().height

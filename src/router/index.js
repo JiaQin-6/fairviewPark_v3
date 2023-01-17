@@ -164,7 +164,7 @@ router.beforeEach((to, from, next) => {
 });
 // 检查服务端是否已经更新，如果更新刷新页面
 async function checkAppNewVersion() {
-    const url = `${location.pathname.split('index.html')}version.json?t=${Date.now()}`;
+    const url = `${location.pathname.split('index.html')[0]}version.json?t=${Date.now()}`;
     let res = null;
     try {
         res = await axios.get(url);

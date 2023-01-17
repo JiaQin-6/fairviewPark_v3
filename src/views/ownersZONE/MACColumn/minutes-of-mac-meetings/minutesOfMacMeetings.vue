@@ -170,6 +170,7 @@
           v-if="pdfPreview"
           :pdfPreview="pdfPreview"
           :pdfDownloadUrl="pdfDownloadUrl"
+          :pageNumber="pageNumber"
         ></PDFPreview>
       </div>
     </div>
@@ -212,6 +213,7 @@ export default {
       local: "",
       pdfPreview: "",
       pdfDownloadUrl: "",
+      pageNumber:0,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
@@ -311,6 +313,7 @@ export default {
       await findOneMacColumnFile();
       data.pdfPreview = data.MacColumnFile.pdfUrlEnUs;
       data.pdfDownloadUrl = data.MacColumnFile.pdfUrlZhTw;
+      data.pageNumber = data.MacColumnFile.remark;
       // PDFJSExpress(
       //   {
       //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",

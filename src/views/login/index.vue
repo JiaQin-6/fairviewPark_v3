@@ -1039,6 +1039,13 @@ export default {
         });
         if (res.data.status === 200) {
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
+          //
+          if(data.editMemberInfoForm.confirmPassword){
+            sessionStorage.setItem('login-user',JSON.stringify({
+              ln: data.editMemberInfoForm.loginName,
+              pd: data.editMemberInfoForm.confirmPassword
+            })) 
+          }
           ElMessage({
             showClose: true,
             message:
@@ -1108,6 +1115,15 @@ export default {
           data.editMemberInfoForm.cnickname = null;
           data.editMemberInfoForm.email = null;
           data.editMemberInfoForm.contactNo = null;
+          //关闭提示
+          data.edit_member_info_error_tip.is_verify_password_null = false;
+          data.edit_member_info_error_tip.is_verify_password_error = false;
+          data.edit_member_info_error_tip.is_null = false;
+          data.edit_member_info_error_tip.is_password_null = false;
+          data.edit_member_info_error_tip.is_confirm_password_error_null = false;
+          data.edit_member_info_error_tip.is_email_correct = false;
+          data.edit_member_info_error_tip.is_show = false;
+          data.edit_member_info_error_tip.text = "";  
         }
       );
       //当隐藏登录框清除输入数据
@@ -1115,6 +1131,10 @@ export default {
       loginModal.addEventListener("hidden.bs.modal", (event) => {
         data.loginForm.loginName = "";
         data.loginForm.password = "";
+        //关闭提示
+        data.login_error_tip.is_null = false
+        data.login_error_tip.is_show = false
+        data.login_error_tip.text = ""
       });
       //当隐藏注册框清除输入数据
       var signUpModal = document.getElementById("signUp");
@@ -1127,12 +1147,24 @@ export default {
         data.registerForm.cnickname = null;
         data.registerForm.email = null;
         data.registerForm.contactNo = null;
+        //关闭提示
+        data.register_error_tip.is_null = false;
+        data.register_error_tip.is_email_correct = false;
+        data.register_error_tip.is_show = false;
+        data.register_error_tip.text = "";
+      
       });
       //当隐藏忘记密码框清除输入数据
       var forgetPasswordModal = document.getElementById("forgetPassword");
       forgetPasswordModal.addEventListener("hidden.bs.modal", (event) => {
         data.forgotPasswordForm.loginName = "";
         data.forgotPasswordForm.email = "";
+        //关闭提示
+        data.forgot_password_error_tip.is_null = false;
+        data.forgot_password_error_tip.is_email_correct = false;
+        data.forgot_password_error_tip.is_show = false;
+        data.forgot_password_error_tip.text = "";
+      
       });
     });
     return {

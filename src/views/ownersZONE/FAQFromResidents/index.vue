@@ -32,6 +32,7 @@
               :class="nav_index === index ? 'active' : ''"
               @click="
                 () => {
+                  v_loading = true;
                   nav_index = index;
                   findFaqFromResidentsList(item.id);
                 }
@@ -97,6 +98,20 @@
         </div>
       </div>
     </div>
+     <!-- loading -->
+     <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':v_loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -123,6 +138,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      v_loading:false,
       nav_index: 0,
       FAQ_from_residents_list: [],
       FAQ_from_residents_sub_list: [],
@@ -139,6 +155,7 @@ export default {
           parentId: id,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           if (id) {
             data.FAQ_from_residents_sub_list = res.data.data.records;
             data.FAQ_from_residents_sub_content = [];
@@ -149,6 +166,7 @@ export default {
               getHeight();
             });
           } else {
+            data.v_loading = false;
             res.data.data.records.map((item, index) => {
               item.index = index;
             });
@@ -156,6 +174,7 @@ export default {
           }
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
@@ -168,14 +187,17 @@ export default {
           id: id,
         });
         if (res.data.status === 200) {
+          data.v_loading = false;
           data.FAQ_from_residents_sub_content.push(res.data.data);
         }
       } catch (error) {
+        data.v_loading = false;
         console.log(error);
       }
     };
     //
     const changeMenu = async (val) => {
+      data.v_loading = true
       data.nav_index = val;
       for (let i = 0; i < data.FAQ_from_residents_list.length; i++) {
         if (data.FAQ_from_residents_list[i].index === val) {
@@ -194,6 +216,7 @@ export default {
       }
     };
     onMounted(async () => {
+      data.v_loading = true;
       await findFaqFromResidentsList();
       await findFaqFromResidentsList(data.FAQ_from_residents_list[0].id);
       window.addEventListener("resize", getHeight);
