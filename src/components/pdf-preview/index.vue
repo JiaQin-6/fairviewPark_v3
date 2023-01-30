@@ -9,7 +9,7 @@
 <template>
   <div class="pdf-preview">
     <div class="pdf-preview-content">
-      <div class="page-tool">
+      <!-- <div class="page-tool">
         <div class="page-tool-content">
           <div class="page-tool-item" @click="lastPage">
             <i class="iconfont icon-shangyiye" style="font-size: 18px"></i>
@@ -18,10 +18,10 @@
             <i class="iconfont icon-xiayiye" style="font-size: 18px"></i>
           </div>
           <div class="page-tool-item">{{ pageNum }}/{{ numPages }}</div>
-          <div class="page-tool-item display" @click="pageZoomOut">
+          <div class="page-tool-item" @click="pageZoomOut">
             <i class="iconfont icon-fangda" style="font-size: 20px"></i>
           </div>
-          <div class="page-tool-item display" @click="pageZoomIn">
+          <div class="page-tool-item" @click="pageZoomIn">
             <i class="iconfont icon-suoxiao" style="font-size: 20px"></i>
           </div>
           <div class="page-tool-item" @click="download(pdfDownloadUrl, '1')">
@@ -35,8 +35,15 @@
           :style="scaleStyle"
           class="vue-pdf-embed"
           :page="pageNum"
-        ></VuePdfEmbed>
-      </div>
+        ></VuePdfEmbed> 
+      </div> -->
+      <iframe
+        width="100%"
+        height="700px"
+        frameborder="0"
+        :src="`${env}/web/viewer.html?file=${encodeURIComponent(source)}`"
+      >
+      </iframe>
     </div>
   </div>
 </template>
@@ -52,6 +59,7 @@ import {
   onMounted,
   computed,
   watch,
+  nextTick,
 } from "vue";
 export default {
   components: {
@@ -66,10 +74,10 @@ export default {
       type: String,
       required: true,
     },
-    pageNumber:{
-      type:Number,
-      required:true,
-    }
+    pageNumber: {
+      type: Number,
+      required: true,
+    },
   },
   setup(props) {
     const data = reactive({
@@ -79,6 +87,12 @@ export default {
       pageNum: 1, //当前页面
       scale: 1, // 缩放比例
       numPages: 0, // 总页数
+      env:
+        location.hostname === "localhost"
+          ? ""
+          : import.meta.env.DEV
+          ? "/app/dist"
+          : "/new_web/prod/web",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.source = props.pdfPreview;
@@ -98,11 +112,35 @@ export default {
     const pageZoomOut = () => {
       if (data.scale < 2) {
         data.scale += 0.1;
+        nextTick(() => {
+          let pdf_wrap_width = document
+            .getElementsByClassName("pdf-wrap")[0]
+            .getBoundingClientRect().width;
+          console.log(pdf_wrap_width);
+          let canvas_width = document
+            .getElementsByTagName("canvas")[0]
+            .getBoundingClientRect().width;
+          console.log(canvas_width);
+          if (pdf_wrap_width < canvas_width) {
+            document.getElementsByTagName("canvas")[0].style["margin-left"] =
+              canvas_width - pdf_wrap_width - 20 + "px";
+          }
+        });
       }
     };
     const pageZoomIn = () => {
       if (data.scale > 1) {
         data.scale -= 0.1;
+        nextTick(() => {
+          let pdf_wrap_width = document.getElementsByClassName("pdf-wrap")[0]
+            .getBoundingClientRect.width;
+          let canvas_width = document.getElementsByTagName("canvas")[0]
+            .getBoundingClientRect.width;
+          if (pdf_wrap_width > canvas_width) {
+            document.getElementsByTagName("canvas")[0].style["margin-left"] =
+              pdf_wrap_width - canvas_width - 20 + "px";
+          }
+        });
       }
     };
     const download = (data, fileName) => {
@@ -112,25 +150,49 @@ export default {
       document.body.appendChild(tempLink);
       tempLink.click();
       document.body.removeChild(tempLink);
-      
     };
     watch(
       () => props.pdfPreview,
       (val) => {
         data.source = val;
-        data.pdfDownloadUrl = props.pdfDownloadUrl;
-        data.numPages = props.pageNumber;
-        // const loadingTask = createLoadingTask(data.source);
+        // data.pdfDownloadUrl = props.pdfDownloadUrl;
+        // let loadingTask = createLoadingTask(data.source);
         // loadingTask._capability.promise.then((pdf) => {
         //   data.numPages = pdf.numPages;
         // });
       }
     );
     onMounted(() => {
-      // const loadingTask = createLoadingTask(data.source);
+      // let loadingTask = createLoadingTask(data.source);
       // loadingTask._capability.promise.then((pdf) => {
       //   data.numPages = pdf.numPages;
       // });
+      let timer = null;
+      timer = setInterval(() => {
+        if (
+          document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument.getElementById("editorModeButtons")&&
+          document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument.getElementById("viewFind")
+        ) {
+          clearInterval(timer);
+
+          document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument.getElementById("mainContainer").style['min-width'] =
+            "329px";
+          document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument.getElementById("editorModeButtons").style.display =
+            "none";
+          document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument.getElementById("viewFind").style.display =
+            "none";
+        }
+      }, 500);
     });
     return {
       ...toRefs(data),
@@ -221,8 +283,8 @@ export default {
   }
 }
 @media (max-width: 991px) {
-  .pdf-preview-content{
-    box-shadow: 0 0 3px 3px rgba(0, 0, 0, .2);
+  .pdf-preview-content {
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
     .pdf-wrap {
       @{deep} .vue-pdf-embed {
         > div {
@@ -234,8 +296,8 @@ export default {
         }
       }
     }
-    .display{
-      display:none;
+    .display {
+      display: none;
     }
   }
 }

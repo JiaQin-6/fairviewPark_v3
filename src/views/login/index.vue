@@ -78,7 +78,7 @@
 
               <i data-bs-target="#forgetPassword" data-bs-toggle="modal">{{
                 $t("Forgot password")
-              }}</i>
+              }}?</i>
             </div>
             <div class="button">
               <p style="color: #fc0d1b" v-show="login_error_tip.is_show">
@@ -434,9 +434,9 @@
             <p>
               {{
                 fairview_park_lang === "en_us"
-                  ? "If you forgot your Login Name and Contact Email, please contact us."
-                  : "如閣下忘記了自設的登入名稱及聯絡電郵，請聯絡我們。"
-              }}
+                  ? "If you forgot your Login Name and Contact Email, please"
+                  : "如閣下忘記了自設的登入名稱及聯絡電郵，請"
+              }}<span @click="toAboutsUs" style="cursor: pointer;">{{ fairview_park_lang === "en_us"?'contact us.':'聯絡我們。' }}</span>
             </p>
           </div>
         </div>
@@ -738,8 +738,10 @@ import {
   toRefs,
   onMounted,
   provide,
+  
 } from "vue";
 import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
 export default {
   data() {
@@ -812,6 +814,7 @@ export default {
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
+    const router = useRouter();
     //登陸
     const login = async () => {
       if (!data.loginForm.loginName || !data.loginForm.password) {
@@ -1073,6 +1076,16 @@ export default {
       var button = document.getElementById("close-edit-member");
       button.click();
     };
+    //去联系我们页面
+    const toAboutsUs = () =>{
+      document.getElementById("close-forgetPassword").click();
+      router.push({
+        path:'/about-us',
+        query:{
+          lang:data.fairview_park_lang
+        }
+      })
+    };
     onMounted(() => {
       var editMemberInformationModal = document.getElementById(
         "editMemberInformation"
@@ -1174,6 +1187,7 @@ export default {
       forgetPassword,
       editMemberInfo,
       closeModel,
+      toAboutsUs,
       verifyPassword,
     };
   },
@@ -1198,6 +1212,7 @@ export default {
       border-radius: 0.3rem;
       outline: 0;
       margin: 0 auto;
+      
 
       .verify-password {
         position: relative;

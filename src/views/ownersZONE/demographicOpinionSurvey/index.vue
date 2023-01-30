@@ -249,6 +249,7 @@ export default {
       }
       .el-select {
         --el-select-input-focus-border-color: #ccc;
+        width: 100%;
         .select-trigger {
           .el-input {
             font-size: 18px;

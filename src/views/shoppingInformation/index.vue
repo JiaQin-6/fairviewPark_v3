@@ -23,8 +23,8 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
-          <ul class="row" id="shopping-information-menu">
+        <div class="col-12 col-lg-2 aside mb-20">
+          <ul class="row animate__animated animate__fadeInLeft" id="shopping-information-menu">
             <li
               v-for="(item, index) in shop_information_list"
               :key="index"
@@ -1411,6 +1411,7 @@ export default {
           flex-wrap: wrap;
           li {
             padding-right: 10px;
+            margin-bottom: 15px;
             align-items: center;
             span {
               text-align: center;

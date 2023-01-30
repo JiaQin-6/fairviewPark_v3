@@ -23,8 +23,8 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
-          <ul class="row menu-ul">
+        <div class="col-12 col-lg-2 aside mb-20">
+          <ul class="row menu-ul animate__animated animate__fadeInLeft">
             <li
               v-for="(item, index) in [
                 {

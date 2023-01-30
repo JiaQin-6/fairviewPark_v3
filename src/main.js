@@ -38,5 +38,6 @@ import i18n from "./i18n/index.js";
 //axios
 import http from './api/api';
 app.config.globalProperties.$http = http;
+//引用
 app.use(i18n).use(router).use(store).use(ElementPlus).mount('#app');
 export { ElMessage };

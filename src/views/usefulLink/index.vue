@@ -23,8 +23,8 @@
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row nav-wrap-container">
-        <div class="col-12 col-lg-2 aside mb-20 animate__animated animate__fadeInLeft">
-          <ul class="row" id="useful-menu">
+        <div class="col-12 col-lg-2 aside mb-20">
+          <ul class="row animate__animated animate__fadeInLeft" id="useful-menu">
             <li
               v-for="(item, index) in telephone_link_list"
               :key="index"

@@ -969,12 +969,13 @@ export default {
             margin-right: 20px;
             cursor: pointer;
             vertical-align: middle;
-            height: 36px;
-            flex: 1 0 auto;
+            height: 39px;
+            width: 200px;
           }
           span {
             vertical-align: middle;
             margin-top: 5px;
+            flex:1;
           }
         }
         .application {

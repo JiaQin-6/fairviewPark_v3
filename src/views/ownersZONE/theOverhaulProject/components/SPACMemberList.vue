@@ -34,10 +34,6 @@
             text: fairview_park_lang === 'en_us' ? 'Mr. Wong Chor Ming' : '黃楚銘先生',
           },
           {
-            text:
-              fairview_park_lang === 'en_us' ? 'Mr. Yu Wing Shing William' : '庾永盛先生',
-          },
-          {
             text: fairview_park_lang === 'en_us' ? 'Ms. Young Wing Mui' : '楊詠梅女士',
           },
         ]"

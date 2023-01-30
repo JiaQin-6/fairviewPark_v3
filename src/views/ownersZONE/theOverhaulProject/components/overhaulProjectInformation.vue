@@ -16,7 +16,7 @@
       <el-select
         v-if="tohpByFpnList.length > 0"
         v-model="tohpByFpnIndex"
-        style="margin: 20px 0"
+        style="margin: 20px 0;width:100%"
         placeholder="Select"
         size="large"
         @change="changeTohpByFpn"

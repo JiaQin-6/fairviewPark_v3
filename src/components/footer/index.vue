@@ -61,9 +61,15 @@
         >
           <p>{{ $t("Easy access to the information of fairview park") }}</p>
           <div class="image flex-row space-between">
-            <img style="width: 32%" :src="app_store_icon" alt="" />
-            <img style="width: 32%" :src="google_play_icon" alt="" />
-            <img style="width: 32%" :src="download_apk_icon" alt="" />
+            <a href="https://apps.apple.com/hk/app/fairview-park-錦綉花園/id1637553568" target="_blank" style="width: 32%">
+              <img :src="app_store_icon" alt="" />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.fairviewpark.hk" target="_blank" style="width: 32%">
+              <img :src="google_play_icon" alt="" />
+            </a>
+            <a href="https://fairviewpark.hk/file/android/fairviewpark.apk" target="_blank" style="width: 32%">
+              <img :src="download_apk_icon" alt="" />
+            </a>
           </div>
         </div>
       </div>
