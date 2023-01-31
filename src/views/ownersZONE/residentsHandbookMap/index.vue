@@ -124,7 +124,6 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import PDFJSExpress from "@pdftron/pdfjs-express";
 import PDFPreview from "../../../components/pdf-preview/index.vue";
 export default {
   components: {
@@ -175,19 +174,7 @@ export default {
       data.pageNumber =
         data.residents_handboo_map_content &&
         data.residents_handboo_map_content.remark;
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey:
-      //       process.env.NODE_ENV === "development"
-      //         ? "oCrqt6OMULAoS15T2J62"
-      //         : "ukZ2T6b500exNQH0GDJg",
-      //     initialDoc:
-      //       data.residents_handboo_map_content &&
-      //       data.residents_handboo_map_content.fileUrlEnUs,
-      //   },
-      //   document.getElementById("viewer")
-      // ).then((instance) => {});
+      
     });
     return {
       ...toRefs(data),

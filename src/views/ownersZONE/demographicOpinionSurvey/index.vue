@@ -76,7 +76,6 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import PDFJSExpress from "@pdftron/pdfjs-express";
 import PDFPreview from "../../../components/pdf-preview/index.vue";
 export default {
   components: {
@@ -132,30 +131,7 @@ export default {
         data.demographic_opinion_survey_list.length !== 0 &&
         data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
           .remark;
-      // data.ramNumber = getRamNumber(6);
-      // document
-      //   .getElementById("pdf-wrap")
-      //   .removeChild(document.getElementById("pdf-wrap").childNodes[0]);
-      // let div = document.createElement("div");
-      // div.id = data.ramNumber;
-      // div.style.height = "600px";
-      // document.getElementById("pdf-wrap").appendChild(div);
-
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey:
-      //       process.env.NODE_ENV === "development"
-      //         ? "oCrqt6OMULAoS15T2J62"
-      //         : "ukZ2T6b500exNQH0GDJg",
-      //     initialDoc:
-      //       data.demographic_opinion_survey_list.length !== 0 &&
-      //       data.demographic_opinion_survey_list[data.demographic_opinion_survey_index].fileEnUs,
-      //   },
-      //   document.getElementById(data.ramNumber)
-      // ).then((instance) => {
-
-      // });
+      
     };
     //随机生成数值
     const getRamNumber = (num) => {
@@ -181,19 +157,7 @@ export default {
         data.demographic_opinion_survey_list.length !== 0 &&
         data.demographic_opinion_survey_list[data.demographic_opinion_survey_index]
           .remark;
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey: process.env.NODE_ENV==='development'?"oCrqt6OMULAoS15T2J62":"ukZ2T6b500exNQH0GDJg",
-      //     initialDoc:
-      //       data.demographic_opinion_survey_list.length !== 0 &&
-      //       data.demographic_opinion_survey_list[
-      //         data.demographic_opinion_survey_index
-      //       ].fileEnUs,
-      //   },
-      //   document.getElementById("pdf-preview")
-      // ).then((instance) => {
-      // });
+     
     });
     return {
       ...toRefs(data),

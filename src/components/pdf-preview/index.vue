@@ -92,7 +92,7 @@ export default {
           ? ""
           : import.meta.env.DEV
           ? "/app/dist"
-          : "/new_web/prod/web",
+          : "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.source = props.pdfPreview;

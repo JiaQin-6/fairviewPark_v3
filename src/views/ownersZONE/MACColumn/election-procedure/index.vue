@@ -365,7 +365,6 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import PDFJSExpress from "@pdftron/pdfjs-express";
 import PDFPreview from "../../../../components/pdf-preview/index.vue";
 export default {
   components: {
@@ -385,40 +384,12 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
     onMounted(async () => {
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey:
-      //       process.env.NODE_ENV === "development"
-      //         ? "oCrqt6OMULAoS15T2J62"
-      //         : "ukZ2T6b500exNQH0GDJg",
-      //     initialDoc:
-      //       data.fairview_park_lang === "en_us"
-      //         ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
-      //         : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf",
-      //   },
-      //   document.getElementById("pdf-preview-1")
-      // ).then((instance) => {});
       data.pdfPreview1 = data.fairview_park_lang === "en_us"
               ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
               : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
       data.pdfDownloadUrl1 = data.fairview_park_lang === "en_us"
               ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
               : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey:
-      //       process.env.NODE_ENV === "development"
-      //         ? "oCrqt6OMULAoS15T2J62"
-      //         : "ukZ2T6b500exNQH0GDJg",
-      //     initialDoc:
-      //       data.fairview_park_lang === "en_us"
-      //         ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-      //         : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
-      //   },
-      //   document.getElementById("pdf-preview-2")
-      // ).then((instance) => {});
       data.pdfPreview2 = data.fairview_park_lang === "en_us"
                ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
                : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",

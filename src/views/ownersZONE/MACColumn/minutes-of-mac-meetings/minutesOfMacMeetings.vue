@@ -179,7 +179,6 @@
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
-import PDFJSExpress from "@pdftron/pdfjs-express";
 import { ElConfigProvider } from "element-plus";
 import zhTw from "element-plus/dist/locale/zh-tw.mjs";
 import en from "element-plus/dist/locale/en.mjs";
@@ -314,17 +313,7 @@ export default {
       data.pdfPreview = data.MacColumnFile.pdfUrlEnUs;
       data.pdfDownloadUrl = data.MacColumnFile.pdfUrlZhTw;
       data.pageNumber = data.MacColumnFile.remark;
-      // PDFJSExpress(
-      //   {
-      //     path: location.pathname.split("index.html")[0] + "public/pdfjsexpress",
-      //     licenseKey:
-      //       process.env.NODE_ENV === "development"
-      //         ? "oCrqt6OMULAoS15T2J62"
-      //         : "ukZ2T6b500exNQH0GDJg",
-      //     initialDoc: data.MacColumnFile,
-      //   },
-      //   document.getElementById("pdf-preview")
-      // ).then((instance) => {});
+      
     });
     return {
       ...toRefs(data),
