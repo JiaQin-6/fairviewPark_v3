@@ -332,12 +332,11 @@
         </div>
       </div>
       <div v-show="menuActive === 2">
-        <!-- <div id="pdf-wrap">
-          <div
-            id="pdf-preview-1"
-            style="width: 100%; height: 600px; margin: 0 auto"
-          ></div>
-        </div> -->
+        <div class="share" v-if="isShowShareButton">
+             <el-button @click="sharePdf(pdfPreview1)">
+              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
+             </el-button>
+            </div>
         <PDFPreview
           v-if="pdfPreview1"
           :pdfPreview="pdfPreview1"
@@ -346,12 +345,11 @@
         ></PDFPreview>
       </div>
       <div v-show="menuActive === 3">
-        <!-- <div id="pdf-wrap">
-          <div
-            id="pdf-preview-2"
-            style="width: 100%; height: 600px; margin: 0 auto"
-          ></div>
-        </div> -->
+        <div class="share" v-if="isShowShareButton">
+             <el-button @click="sharePdf(pdfPreview2)">
+              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
+             </el-button>
+            </div>
         <PDFPreview
           v-if="pdfPreview2"
           :pdfPreview="pdfPreview2"
@@ -380,10 +378,23 @@ export default {
       pdfDownloadUrl1: "",
       pdfPreview2: "",
       pdfDownloadUrl2: "",
+      isShowShareButton:false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-
+ //分享pdf鏈接
+ const sharePdf = (link) => {
+      let a = document.createElement('a');
+      a.href = link;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a)
+    };
     onMounted(async () => {
+      //如果是從app進來用戶未登錄，隱藏分享button
+      if (sessionStorage.getItem("app-login-status")) {
+        data.isShowShareButton = true;
+      } 
       data.pdfPreview1 = data.fairview_park_lang === "en_us"
               ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
               : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
@@ -399,6 +410,7 @@ export default {
     });
     return {
       ...toRefs(data),
+      sharePdf
     };
   },
 };
@@ -443,6 +455,15 @@ h5 {
     }
   }
 }
+.share{
+  text-align: right;
+        .el-button{
+          background-color: var(--mainColor2);
+          color:#fff;
+          border-color: var(--mainColor2);
+          padding: 10px 20px;
+        }
+      }
 @{deep} .pdf-preview {
   .pdf-preview-content {
     width: 100%;

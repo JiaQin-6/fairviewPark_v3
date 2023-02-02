@@ -7,9 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div
-    class="apply-resident-smartcard custom-loading-svg"
-  >
+  <div class="apply-resident-smartcard custom-loading-svg">
     <!-- banner -->
     <div class="banner">
       <div
@@ -305,6 +303,12 @@
                           class="mr-6"
                           maxlength="9"
                           v-model="form.cardNumber1"
+                          @input="
+                            form.cardNumber1 =
+                              form.cardNumber1.trim().length != 0
+                                ? form.cardNumber1.replace(/[^0-9]/g, '')
+                                : ''
+                          "
                         ></el-input>
                         <div
                           class="flex-row"
@@ -320,6 +324,12 @@
                             style="width: 20px"
                             maxlength="1"
                             v-model="form.cardNumber2"
+                            @input="
+                              form.cardNumber2 =
+                                form.cardNumber2.trim().length != 0
+                                  ? form.cardNumber2.replace(/[^0-9]/g, '')
+                                  : ''
+                            "
                           ></el-input
                           >)
                         </div>
@@ -575,7 +585,7 @@
         position: fixed;
         z-index: 10000;
       "
-      :style="{'display':v_loading?'':'none'}"
+      :style="{ display: v_loading ? '' : 'none' }"
     ></div>
   </div>
 </template>
@@ -1270,7 +1280,7 @@ export default {
             line-height:18px;
           }
         }
-        
+
       }
       @{deep} .el-input{
           .el-input__wrapper{
@@ -1278,7 +1288,7 @@ export default {
             font-size:15px !important;
           }
           }
-          
+
         }
     }
   }

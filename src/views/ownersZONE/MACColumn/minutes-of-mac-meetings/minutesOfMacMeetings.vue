@@ -97,7 +97,7 @@
           >
             <i>{{ item.index + 1 }}.</i>
             <span
-              ><a target="_blank" :href="item.pdfUrlZhTw">{{ item.titleEnUs }}</a></span
+              ><a target="_blank" :href="item.pdfUrlEnUs">{{ item.titleEnUs }}</a></span
             >
           </li>
           <!-- 分頁 -->
@@ -132,9 +132,7 @@
           <p>{{ minutes_of_sub_mac_meetings_list[sub_mac_meetings_index].titleEnUs }}</p>
           <ul>
             <li
-              v-for="(item, index) in minutes_of_sub_mac_meetings_show_list[
-                sub_mac_meetings_index
-              ].children"
+              v-for="(item, index) in minutes_of_sub_mac_meetings_show_list"
               :key="index"
               class="flex-row"
             >
@@ -163,9 +161,11 @@
         </div>
       </div>
       <div v-show="menuActive === 3">
-        <!-- <div id="pdf-wrap">
-          <div id="pdf-preview" style="width: 100%; height: 600px; margin: 0 auto"></div>
-        </div> -->
+        <div class="share" v-if="isShowShareButton">
+             <el-button @click="sharePdf">
+              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
+             </el-button>
+            </div>
         <PDFPreview
           v-if="pdfPreview"
           :pdfPreview="pdfPreview"
@@ -213,6 +213,7 @@ export default {
       pdfPreview: "",
       pdfDownloadUrl: "",
       pageNumber:0,
+      isShowShareButton:false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
@@ -275,8 +276,8 @@ export default {
     //
     const selectSubMacMeeting = async (index) => {
       data.sub_mac_meetings_index = index;
-      (data.currentPage2 = 1),
-        (data.pageSize2 = 5),
+      data.currentPage2 = 1
+        data.pageSize2 = 5
         await findMinutesOfSubComMeetingsList(
           data.minutes_of_sub_mac_meetings_list[index].id
         );
@@ -294,18 +295,32 @@ export default {
       );
     };
     const handleSizeChange2 = (val) => {
-      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list.slice(
+      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list[data.sub_mac_meetings_index].children.slice(
         (data.currentPage2 - 1) * val,
         data.currentPage2 * val
       );
     };
     const handleCurrentChange2 = (val) => {
-      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list.slice(
+      data.minutes_of_sub_mac_meetings_show_list = data.minutes_of_sub_mac_meetings_list[data.sub_mac_meetings_index].children.slice(
         (val - 1) * data.pageSize2,
         val * data.pageSize2
       );
+      console.log(data.minutes_of_sub_mac_meetings_show_list)
+    };
+    //分享pdf鏈接
+    const sharePdf = () => {
+      let a = document.createElement('a');
+      a.href = data.pdfPreview;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a)
     };
     onMounted(async () => {
+      //如果是從app進來用戶未登錄，隱藏分享button
+      if (sessionStorage.getItem("app-login-status")) {
+        data.isShowShareButton = true;
+      } 
       findMinutesOfMacMeetingsList();
       await findMinutesOfSubComMeetingsList();
       await findMinutesOfSubComMeetingsList(data.minutes_of_sub_mac_meetings_list[0].id);
@@ -325,6 +340,7 @@ export default {
       handleCurrentChange1,
       handleSizeChange2,
       handleCurrentChange2,
+      sharePdf
     };
   },
 };
@@ -437,7 +453,17 @@ h5 {
         }
       }
     }
+   
   }
+  .share{
+    text-align: right;
+        .el-button{
+          background-color: var(--mainColor2);
+          color:#fff;
+          border-color: var(--mainColor2);
+          padding: 10px 20px;
+        }
+      }
   @{deep} .el-pagination {
     .el-pagination__total {
       font-size: 18px;

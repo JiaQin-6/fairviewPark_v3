@@ -171,6 +171,13 @@ export default {
       timer = setInterval(() => {
         if (
           document
+            .getElementsByTagName("iframe")&&
+            document
+            .getElementsByTagName("iframe")[0]&&
+            document
+            .getElementsByTagName("iframe")[0]
+            .contentDocument&&
+          document
             .getElementsByTagName("iframe")[0]
             .contentDocument.getElementById("editorModeButtons")&&
           document

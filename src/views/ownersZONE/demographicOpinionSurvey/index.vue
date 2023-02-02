@@ -41,12 +41,11 @@
                 :value="index"
               />
             </el-select>
-            <!-- <div id="pdf-wrap">
-              <div
-                id="pdf-preview"
-                style="width: 100%; height: 600px; margin: 0 auto"
-              ></div>
-            </div> -->
+            <div class="share" v-if="isShowShareButton">
+             <el-button @click="sharePdf">
+              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
+             </el-button>
+            </div>
             <PDFPreview
               v-if="pdfPreview"
               :pdfPreview="pdfPreview"
@@ -101,6 +100,7 @@ export default {
       pdfPreview: "",
       pdfDownloadUrl: "",
       pageNumber:0,
+      isShowShareButton:false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
@@ -133,17 +133,22 @@ export default {
           .remark;
       
     };
-    //随机生成数值
-    const getRamNumber = (num) => {
-      var result = "";
-      for (var i = 0; i < num; i++) {
-        result += Math.floor(Math.random() * 36).toString(36); //获取0-9，a-b随机组合成的
-      }
-      //默认字母小写，手动转大写
-      return result.toUpperCase();
+    //分享pdf鏈接
+    const sharePdf = () => {
+      console.log(data.pdfPreview)
+      let a = document.createElement('a');
+      a.href = data.pdfPreview;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a)
     };
     onMounted(async () => {
       data.v_loading = true
+      //如果是從app進來用戶未登錄，隱藏分享button
+      if (sessionStorage.getItem("app-login-status")) {
+        data.isShowShareButton = true;
+      } 
       await findDemographicOpinionSurveyList();
       data.pdfPreview =
         data.demographic_opinion_survey_list.length !== 0 &&
@@ -163,7 +168,7 @@ export default {
       ...toRefs(data),
       findDemographicOpinionSurveyList,
       changeDemographicOpinion,
-      getRamNumber,
+      sharePdf,
     };
   },
 };
@@ -223,6 +228,14 @@ export default {
           .is-focus {
             border-color: #ccc;
           }
+        }
+      }
+      .share{
+        .el-button{
+          background-color: var(--mainColor2);
+          color:#fff;
+          border-color: var(--mainColor2);
+          padding: 10px 20px;
         }
       }
       .el-popper {

@@ -98,6 +98,11 @@
             id="viewer"
             style="width: 100%; height: 600px; margin: 0 auto"
           >
+          <div class="share" v-if="isShowShareButton">
+             <el-button @click="sharePdf">
+              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
+             </el-button>
+            </div>
             <PDFPreview
               v-if="pdfPreview"
               :pdfPreview="pdfPreview"
@@ -147,6 +152,7 @@ export default {
       pdfPreview: "",
       pdfDownloadUrl: "",
       pageNumber:0,
+      isShowShareButton:false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
 
@@ -163,7 +169,20 @@ export default {
         console.log(error);
       }
     };
+     //分享pdf鏈接
+     const sharePdf = () => {
+      let a = document.createElement('a');
+      a.href = data.pdfPreview;
+      a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a)
+    };
     onMounted(async () => {
+      //如果是從app進來用戶未登錄，隱藏分享button
+      if (sessionStorage.getItem("app-login-status")) {
+        data.isShowShareButton = true;
+      } 
       await findResidentsHandbookMap();
       data.pdfPreview =
         data.residents_handboo_map_content &&
@@ -179,6 +198,7 @@ export default {
     return {
       ...toRefs(data),
       findResidentsHandbookMap,
+      sharePdf
     };
   },
 };
@@ -278,6 +298,15 @@ export default {
       padding: 2px 20px;
       img {
         max-width: 100%;
+      }
+      .share{
+        text-align: right;
+        .el-button{
+          background-color: var(--mainColor2);
+          color:#fff;
+          border-color: var(--mainColor2);
+          padding: 10px 20px;
+        }
       }
       .pdf-preview-content{
         width:100%;

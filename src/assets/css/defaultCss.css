@@ -94,6 +94,7 @@ body {
   /* font-family        : Montserrat; */
   font-family: Helvetica, Arial, sans-serif;
   color: #4a4a4a!important;
+  position: relative;
 }
 
 html {
