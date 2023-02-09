@@ -152,15 +152,20 @@ export default {
     const data = reactive({
       fairview_park_lang: "",
     });
+    //獲取&設置語言
+    if (!sessionStorage.getItem("fairview_park_lang")) {
+      sessionStorage.setItem("fairview_park_lang", "zh_tw");
+      data.fairview_park_lang = "zh_tw";
+    } else {
+      data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    }
     //判断url是否带有语言参数
     if (
       route.query.lang &&
       (route.query.lang === "en_us" || route.query.lang === "zh_tw")
     ) {
       data.fairview_park_lang = route.query.lang;
-    } else {
-      data.fairview_park_lang = "zh_tw";
-    }
+    } 
     console.log(data.fairview_park_lang);
     const transferFooter = () => {
       let height = document.getElementById("footer").getBoundingClientRect().height;
