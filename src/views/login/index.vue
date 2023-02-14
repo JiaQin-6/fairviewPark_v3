@@ -227,6 +227,9 @@
                         register_error_tip.is_null && !registerForm.loginName,
                     }"
                   />
+                  <i style="display: block; text-align: left">{{ fairview_park_lang === "en_us"
+                        ? "Login Name (Self Customize﹣it must contain only letters，numbers and symbol)"
+                        : "登入名稱 (自訂﹣只接受英文，數字及符號)" }}</i>
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="
