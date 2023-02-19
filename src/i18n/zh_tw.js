@@ -68,7 +68,7 @@ export default {
     'Online user registration': '網上用戶註冊',
     'Owner Name (On Account Statement)': '登記業主名稱 (請參考月結單)',
     'Account Number (On Account Statement)': '客戶號碼 (請參考月結單)',
-    'Login Name (Self Customize)': '網站登入名稱 (自訂)',
+    'Login Name (Self Customize)': '網站登入名稱 (自訂﹣只接受英文，數字及符號)',
     'Login Password (Self Customize)': '網站登入密碼 (自訂)',
     'Nickname(Optional)': 'Nickname (選填)',
     'Email Address': '聯絡電郵 ',

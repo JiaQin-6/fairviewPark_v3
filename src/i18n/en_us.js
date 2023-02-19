@@ -69,7 +69,7 @@ export default {
     'Apply Resident Smartcard': 'Apply Resident Smartcard',
     'Owner Name (On Account Statement)': 'Owner Name (On Account Statement)',
     'Account Number (On Account Statement)': 'Account Number (On Account Statement)',
-    'Login Name (Self Customize)': 'Login Name (Self Customize)',
+    'Login Name (Self Customize)': 'Login Name (Self Customize﹣it must contain only letters, numbers and symbol)',
     'Login Password (Self Customize)': 'Login Password (Self Customize)',
     'Nickname(Optional)': 'Nickname(Optional)',
     'Email Address': 'Email Address',
