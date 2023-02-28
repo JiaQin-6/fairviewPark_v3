@@ -141,7 +141,7 @@
             <h2>{{ $t("Online user registration") }}</h2>
             <button
               style="
-                background-color: var(--mainColor3);
+                background-color: #B59962;
                 color: #fff;
                 padding: 5px 30px;
                 margin-right: 20px;
@@ -175,11 +175,12 @@
                   </p>
                   <input
                     v-model="registerForm.oname"
-                    :placeholder="$t('Owner Name (On Account Statement)')"
+                    :placeholder="$t('Same as the owner is name on the monthly statement, including symbols')"
                     type="text"
                     :class="{
                       error: register_error_tip.is_null && !registerForm.oname,
                     }"
+                    @input="registerForm.oname=registerForm.oname.toUpperCase()"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -197,7 +198,7 @@
                   </p>
                   <input
                     v-model="registerForm.hcode"
-                    :placeholder="$t('Account Number (On Account Statement)')"
+                    :placeholder="$t('A-BRS-100 must be filled in as ABRS100')"
                     type="text"
                     :class="{
                       error: register_error_tip.is_null && !registerForm.hcode,
@@ -521,13 +522,14 @@
                   </p>
                   <input
                     v-model="editMemberInfoForm.oname"
-                    :placeholder="$t('Owner Name (On Account Statement)')"
+                    :placeholder="$t('Same as the owner is name on the monthly statement, including symbols')"
                     type="text"
                     :class="{
                       error:
                         edit_member_info_error_tip.is_null &&
                         !editMemberInfoForm.oname,
                     }"
+                    @input="editMemberInfoForm.oname=editMemberInfoForm.oname.toUpperCase()"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -544,7 +546,7 @@
                   </p>
                   <input
                     v-model="editMemberInfoForm.hcode"
-                    :placeholder="$t('Account Number (On Account Statement)')"
+                    :placeholder="$t('A-BRS-100 must be filled in as ABRS100')"
                     type="text"
                     disabled
                   />

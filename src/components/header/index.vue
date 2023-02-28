@@ -20,20 +20,21 @@
           </transition> -->
         </a>
         <!-- 手機端顯示的按鈕 -->
-        <div
-          style="margin-top: 15px; flex: 1; text-align: right"
-          class="mobile-btn"
-        >
+        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
           <span
             class="lang"
-            v-if="fairview_park_lang == 'zh_tw'"
+            v-if="
+              fairview_park_lang == 'zh_tw' && isShowLoginButton && isShowLoginOutButton
+            "
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('en_us')"
             >EN</span
           >
           <span
             class="lang"
-            v-if="fairview_park_lang == 'en_us'"
+            v-if="
+              fairview_park_lang == 'en_us' && isShowLoginButton && isShowLoginOutButton
+            "
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('zh_tw')"
             >中</span
@@ -41,30 +42,16 @@
           <div
             v-if="!is_login && isShowLoginButton"
             class="login-btn1"
-            style="
-              position: relative;
-              display: inline-block;
-              flex: 1;
-              text-align: right;
-            "
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
           >
-            <button
-              class="login-btn-1"
-              data-bs-toggle="modal"
-              data-bs-target="#login"
-            >
+            <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
               {{ $t("Owner login") }}
             </button>
           </div>
           <div
             v-if="is_login"
             class="login-btn2"
-            style="
-              position: relative;
-              display: inline-block;
-              flex: 1;
-              text-align: right;
-            "
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
             :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
@@ -117,12 +104,7 @@
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div
-            style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              flex: 1;
-            "
+            style="display: flex; flex-direction: column; align-items: center; flex: 1"
           >
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li
@@ -208,24 +190,25 @@
           </div>
 
           <ul
-            class="
-              lang-infomation
-              navbar-nav
-              me-auto
-              mb-4 mb-lg-0
-              flex-row
-              align-center
-            "
+            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
           >
             <div class="lang">
               <span
-                v-if="fairview_park_lang == 'zh_tw'"
+                v-if="
+                  fairview_park_lang == 'zh_tw' &&
+                  isShowLoginButton &&
+                  isShowLoginOutButton
+                "
                 style="cursor: pointer"
                 @click="changeLang('en_us')"
                 >EN</span
               >
               <span
-                v-if="fairview_park_lang == 'en_us'"
+                v-if="
+                  fairview_park_lang == 'en_us' &&
+                  isShowLoginButton &&
+                  isShowLoginOutButton
+                "
                 style="cursor: pointer"
                 @click="changeLang('zh_tw')"
                 >中</span
@@ -346,15 +329,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  getCurrentInstance,
-  toRefs,
-  onMounted,
-  watch,
-  inject,
-} from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -371,8 +346,7 @@ export default {
   data() {
     return {
       logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
-      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url)
-        .href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
   setup(props, ctx) {
@@ -434,14 +408,11 @@ export default {
       }
 
       if (document.getElementsByClassName("el-popper")[0]) {
-        document.getElementsByClassName(
-          "el-popper"
-        )[0].parentNode.style.position = "fixed";
-        document.getElementsByClassName("el-popper")[0].parentNode.style.top =
-          "0";
-        document.getElementsByClassName("el-popper")[0].parentNode.style[
-          "z-index"
-        ] = "2000";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
+          "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
+          "2000";
       }
     });
     //切換語言
@@ -961,10 +932,8 @@ export default {
           }
         }
       }
-      .mobile-btn{
-        
-        
-        .lang{
+      .mobile-btn {
+        .lang {
           height: 32px;
           line-height: 32px;
           display: inline-block;

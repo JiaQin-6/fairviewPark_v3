@@ -14,12 +14,12 @@
     <div style="text-align: center">
       <img
         style="margin-bottom: 20px; width: 100%"
-        src="https://cn.fairviewpark.hk/images/mac-form.png"
+        src="https://fairviewpark.hk/file/mac/mac-form.png"
         alt=""
       />
       <img
         style="width: 100%"
-        src="https://cn.fairviewpark.hk/images/mac-form-2.png"
+        src="https://fairviewpark.hk/file/mac/mac-form-2.png"
         alt=""
       />
     </div>
