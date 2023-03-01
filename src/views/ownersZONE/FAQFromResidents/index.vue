@@ -158,8 +158,8 @@ export default {
           if (id) {
             data.FAQ_from_residents_sub_list = res.data.data.records;
             data.FAQ_from_residents_sub_content = [];
-            data.FAQ_from_residents_sub_list.map((item) => {
-              findOneFaqFromResidents(id, item.id);
+            data.FAQ_from_residents_sub_list.map((item,index) => {
+              findOneFaqFromResidents(id, item.id,index);
             });
             nextTick(() => {
               getHeight();
@@ -178,7 +178,7 @@ export default {
       }
     };
     //查看一條數據
-    const findOneFaqFromResidents = async (parentId, id) => {
+    const findOneFaqFromResidents = async (parentId, id,index) => {
       try {
         const res = await proxy.$http.findOneFaqFromResidents({
           lang: data.fairview_park_lang,
@@ -187,7 +187,7 @@ export default {
         });
         if (res.data.status === 200) {
           data.v_loading = false;
-          data.FAQ_from_residents_sub_content.push(res.data.data);
+          data.FAQ_from_residents_sub_content[index] = res.data.data
         }
       } catch (error) {
         data.v_loading = false;

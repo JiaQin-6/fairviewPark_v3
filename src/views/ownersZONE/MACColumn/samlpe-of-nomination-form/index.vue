@@ -16,8 +16,8 @@
         style="margin-bottom: 20px; width: 100%"
         :src="
           fairview_park_lang === 'en_us'
-            ? 'https://en.fairviewpark.hk/images/mac-appendix1.png'
-            : 'https://cn.fairviewpark.hk/images/mac-appendix1.png'
+            ? 'https://fairviewpark.hk/file/mac/mac-appendix1_en.png'
+            : 'https://fairviewpark.hk/file/mac/mac-appendix1.png'
         "
         alt=""
       />
@@ -25,8 +25,8 @@
         style="width: 100%"
         :src="
           fairview_park_lang === 'en_us'
-            ? '	https://en.fairviewpark.hk/images/mac-appendix1-2.png'
-            : 'https://cn.fairviewpark.hk/images/mac-appendix1-2.png'
+            ? 'https://fairviewpark.hk/file/mac/mac-appendix1-2_en.png'
+            : 'https://fairviewpark.hk/file/mac/mac-appendix1-2.png'
         "
         alt=""
       />

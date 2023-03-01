@@ -23,14 +23,18 @@
         <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
           <span
             class="lang"
-            v-if="fairview_park_lang == 'zh_tw'"
+            v-if="
+              fairview_park_lang == 'zh_tw' && isShowLoginButton && isShowLoginOutButton
+            "
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('en_us')"
             >EN</span
           >
           <span
             class="lang"
-            v-if="fairview_park_lang == 'en_us'"
+            v-if="
+              fairview_park_lang == 'en_us' && isShowLoginButton && isShowLoginOutButton
+            "
             style="cursor: pointer; color: #fff; vertical-align: middle"
             @click="changeLang('zh_tw')"
             >中</span
@@ -190,13 +194,21 @@
           >
             <div class="lang">
               <span
-                v-if="fairview_park_lang == 'zh_tw'"
+                v-if="
+                  fairview_park_lang == 'zh_tw' &&
+                  isShowLoginButton &&
+                  isShowLoginOutButton
+                "
                 style="cursor: pointer"
                 @click="changeLang('en_us')"
                 >EN</span
               >
               <span
-                v-if="fairview_park_lang == 'en_us'"
+                v-if="
+                  fairview_park_lang == 'en_us' &&
+                  isShowLoginButton &&
+                  isShowLoginOutButton
+                "
                 style="cursor: pointer"
                 @click="changeLang('zh_tw')"
                 >中</span

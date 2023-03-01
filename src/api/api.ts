@@ -16,7 +16,7 @@ import router from '../router'
 let baseUrl = "";
 switch (process.env.NODE_ENV) {
   case "development": // 注意这里的名字要和步骤二中设置的环境名字对应起来
-    baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
+    baseUrl = "https://app.fairviewpark.hk"; //这里是测试环境中的url
     break;
   case "production":
     baseUrl = "https://app.fairviewpark.hk"; //生产环境url
