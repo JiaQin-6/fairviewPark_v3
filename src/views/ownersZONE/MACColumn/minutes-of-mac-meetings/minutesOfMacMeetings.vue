@@ -12,7 +12,6 @@
       v-model="menuActive"
       class="menu-select"
       style="margin-bottom: 20px"
-      :placeholder="$t('Select')"
       size="large"
       @click="menuActive = item2.value"
     >
@@ -45,7 +44,6 @@
       v-model="sub_mac_meetings_index"
       class="menu-select-sub-meetings"
       style="margin-bottom: 20px"
-      :placeholder="$t('Select')"
       size="large"
       @change="selectSubMacMeeting"
     >

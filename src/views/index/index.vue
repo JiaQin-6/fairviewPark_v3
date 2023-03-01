@@ -17,117 +17,117 @@
                 ? [
                     {
                       router: '/edit-member-information',
-                      text: $t('Edit member information'),
+                      text: $t('headed.Edit_member_information'),
                     },
                     {
                       router: '/news-update',
-                      text: $t('News Update'),
+                      text: $t('headed.News_Update'),
                     },
                     {
                       router: '/FAQ-from-residents',
-                      text: $t('FAQ from Residents'),
+                      text: $t('headed.FAQ_from_Residents'),
                     },
                     {
                       router: '/estate-notice',
-                      text: $t('Estate Notices'),
+                      text: $t('headed.Estate_Notices'),
                     },
                     {
                       router: '/estate-activities',
-                      text: $t('Estate Activities'),
+                      text: $t('headed.Estate_Activities'),
                     },
                     {
                       router: '/fairview-part-news',
-                      text: $t('Fairview Park News'),
+                      text: $t('headed.Fairview_Park_News'),
                     },
                     {
                       router: '/payment-list',
-                      text: $t('Payment List'),
+                      text: $t('headed.Payment_List'),
                     },
                     {
                       router: '/apply-resident-smartcard',
-                      text: $t('Apply Resident Smartcard'),
+                      text: $t('headed.Apply_Resident_Smartcard'),
                     },
                     {
                       router: '/MAC-column',
-                      text: $t('MAC Column'),
+                      text: $t('headed.MAC_Column'),
                     },
                     {
                       router: '/the-overhaul-project',
-                      text: $t('the Overhaul Project'),
+                      text: $t('headed.the_Overhaul_Project'),
                     },
                     {
                       router: '/lottery-system-for-impound',
-                      text: $t('Lottery System For Impounding Action'),
+                      text: $t('headed.Lottery_System_For_Impounding_Action'),
                     },
                     {
                       router: '/frequently-used-forms',
-                      text: $t('Frequently Used Forms'),
+                      text: $t('headed.Frequently_Used_Forms'),
                     },
                     {
                       router: '/residents-handbook-map',
-                      text: $t('Residents Handbook / Map'),
+                      text: $t('headed.Residents_Handbook_Map'),
                     },
                     {
                       router: '/demographic-opinion-survey',
-                      text: $t('Demographic & Opinion Survey'),
+                      text: $t('headed.Demographic_Opinion_Survey'),
                     },
                     {
                       router: '/loginOut',
-                      text: $t('Login out'),
+                      text: $t('headed.Login_out'),
                     },
                   ]
                 : [
                     {
                       router: '/news-update',
-                      text: $t('News Update'),
+                      text: $t('headed.News_Update'),
                     },
                     {
                       router: '/FAQ-from-residents',
-                      text: $t('FAQ from Residents'),
+                      text: $t('headed.FAQ_from_Residents'),
                     },
                     {
                       router: '/estate-notice',
-                      text: $t('Estate Notices'),
+                      text: $t('headed.Estate_Notices'),
                     },
                     {
                       router: '/estate-activities',
-                      text: $t('Estate Activities'),
+                      text: $t('headed.Estate_Activities'),
                     },
                     {
                       router: '/fairview-part-news',
-                      text: $t('Fairview Park News'),
+                      text: $t('headed.Fairview_Park_News'),
                     },
                     {
                       router: '/payment-list',
-                      text: $t('Payment List'),
+                      text: $t('headed.Payment_List'),
                     },
                     {
                       router: '/apply-resident-smartcard',
-                      text: $t('Apply Resident Smartcard'),
+                      text: $t('headed.Apply_Resident_Smartcard'),
                     },
                     {
                       router: '/MAC-column',
-                      text: $t('MAC Column'),
+                      text: $t('headed.MAC_Column'),
                     },
                     {
                       router: '/the-overhaul-project',
-                      text: $t('the Overhaul Project'),
+                      text: $t('headed.the_Overhaul_Project'),
                     },
                     {
                       router: '/lottery-system-for-impound',
-                      text: $t('Lottery System For Impounding Action'),
+                      text: $t('headed.Lottery_System_For_Impounding_Action'),
                     },
                     {
                       router: '/frequently-used-forms',
-                      text: $t('Frequently Used Forms'),
+                      text: $t('headed.Frequently_Used_Forms'),
                     },
                     {
                       router: '/residents-handbook-map',
-                      text: $t('Residents Handbook / Map'),
+                      text: $t('headed.Residents_Handbook_Map'),
                     },
                     {
                       router: '/demographic-opinion-survey',
-                      text: $t('Demographic & Opinion Survey'),
+                      text: $t('headed.Demographic_Opinion_Survey'),
                     },
                   ]"
               :key="index"

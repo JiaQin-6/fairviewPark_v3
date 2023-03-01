@@ -10,58 +10,27 @@
   <div>
     <!-- 轮播图 -->
     <div>
-      <div
-        id="carouselExampleFade"
-        class="carousel slide carousel-fade"
-        data-bs-interval="3000"
-        data-bs-ride="carousel"
-      >
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-interval="3000" data-bs-ride="carousel">
         <div class="carousel-indicators">
-          <button
-            v-for="(item, index) in web_banner_list"
-            :key="index"
-            type="button"
-            data-bs-target="#carouselExampleFade"
-            :data-bs-slide-to="index"
-            :class="{ active: carouselValue === index }"
-            aria-current="true"
-            :aria-label="'Slide' + (index + 1)"
-          ></button>
+          <button v-for="(item, index) in web_banner_list" :key="index" type="button"
+            data-bs-target="#carouselExampleFade" :data-bs-slide-to="index" :class="{ active: carouselValue === index }"
+            aria-current="true" :aria-label="'Slide' + (index + 1)"></button>
         </div>
         <div style="height: 100%" class="carousel-inner">
           <!-- web_banner_list -->
-          <div
-            style="height: 100%"
-            class="carousel-item"
-            :class="{ active: carouselValue === index }"
-            v-for="(item, index) in web_banner_list"
-            :key="index"
-          >
-            <a
-              style="position: absolute; height: 100%; width: 100%"
-              :href="item.webUrlEnUs"
-              target="_blank"
-              :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
-            >
+          <div style="height: 100%" class="carousel-item" :class="{ active: carouselValue === index }"
+            v-for="(item, index) in web_banner_list" :key="index">
+            <a style="position: absolute; height: 100%; width: 100%" :href="item.webUrlEnUs" target="_blank"
+              :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }">
             </a>
           </div>
         </div>
-        <button
-          id="carousel-control-prev"
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="prev"
-        >
+        <button id="carousel-control-prev" class="carousel-control-prev" type="button"
+          data-bs-target="#carouselExampleFade" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleFade"
-          data-bs-slide="next"
-        >
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -71,50 +40,31 @@
     <div class="marquee">
       <div class="marquee-container">
         <img :src="icon_news" class="icon-laba" alt="" />
-        <el-carousel
-          v-if="new_notice_list.length !== 0"
-          indicator-position="none"
-          height="45px"
-          direction="vertical"
-          :autoplay="true"
-          class="pc"
-        >
-          <el-carousel-item
-            style="display: flex; align-items: center"
-            v-for="(item, index) in new_notice_list"
-            :key="index"
-          >
-            <a
-              v-show="item.websiteUrl"
-              :href="item.websiteUrl"
-              target="_blank"
-              style="
-                font-size: 18px;
-                margin-right: 40px;
-                color: #fff;
-                text-decoration: underline;
-              "
-              class="line_clamp_2"
-              >{{ item.contentEnUs }}
+        <el-carousel v-if="new_notice_list.length !== 0" indicator-position="none" height="45px" direction="vertical"
+          :autoplay="true" class="pc">
+          <el-carousel-item style="display: flex; align-items: center" v-for="(item, index) in new_notice_list"
+            :key="index">
+            <a v-show="item.websiteUrl" :href="item.websiteUrl" target="_blank" style="
+                  font-size: 18px;
+                  margin-right: 40px;
+                  color: #fff;
+                  text-decoration: underline;
+                " class="line_clamp_2">{{ item.contentEnUs }}
             </a>
-            <span
-              v-show="!item.websiteUrl"
-              style="
+            <span v-show="!item.websiteUrl" style="
                 font-size: 18px;
                 margin-right: 40px;
                 color: #fff;
                 text-decoration: none;
-              "
-              >{{ item.contentEnUs }}</span
-            >
-          </el-carousel-item>
-        </el-carousel>
-        <!-- <marquee
+                ">{{ item.contentEnUs }}</span>
+        </el-carousel-item>
+      </el-carousel>
+      <!-- <marquee
           scrollamount="3"
           class="mobile"
           style="height: 45px; line-height: 45px"
         > -->
-        <!-- <div
+      <!-- <div
             style="display: inline"
             v-for="(item, index) in new_notice_list"
             :key="index"
@@ -128,46 +78,33 @@
                 font-family: 'Nunito';
                 font-size: 18px;
                 margin-right: 40px;
-                color: #fff;
-              "
-              >{{ item.contentEnUs }}
-            </a>
-            <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
-              item.contentEnUs
-            }}</span>
-          </div> -->
-        <div
-          id="scroll_div"
-          class="mobile"
-          style=" 
-              height: 45px;
-              line-height: 45px
-              overflow: hidden;
-              overflow: hidden;
-              white-space: nowrap;
-              flex:1;
-              margin-left: 10px;
-            "
-        >
-          <div id="scroll_front" style="display: inline-block"></div>
-          <div id="scroll_begin" style="display: inline-block">
-            <div
-              style="display: inline"
-              v-for="(item, index) in new_notice_list"
-              :key="index"
-            >
-              <a
-                v-if="item.websiteUrl"
-                :href="item.websiteUrl"
-                target="_blank"
-                style="
-                  text-decoration: underline;
-                  font-family: 'Nunito';
-                  font-size: 18px;
-                  margin-right: 40px;
                   color: #fff;
                 "
                 >{{ item.contentEnUs }}
+              </a>
+              <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
+                item.contentEnUs
+              }}</span>
+            </div> -->
+        <div id="scroll_div" class="mobile" style="
+              height: 45px;
+              line-height: 45px;
+              overflow: hidden;
+              overflow: hidden;
+              white-space: nowrap;
+              flex: 1;
+              margin-left: 10px;
+            ">
+          <div id="scroll_front" style="display: inline-block"></div>
+          <div id="scroll_begin" style="display: inline-block">
+            <div style="display: inline" v-for="(item, index) in new_notice_list" :key="index">
+              <a v-if="item.websiteUrl" :href="item.websiteUrl" target="_blank" style="
+                    text-decoration: underline;
+                    font-family: 'Nunito';
+                    font-size: 18px;
+                    margin-right: 40px;
+                    color: #fff;
+                  ">{{ item.contentEnUs }}
               </a>
               <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
                 item.contentEnUs
@@ -185,79 +122,63 @@
       <!-- 歡迎瀏覽錦綉花園 -->
       <div class="liulan">
         <h1 style="text-align: center; margin-bottom: 45px">
-          {{ $t("Welcome to") }} <a>{{ $t("fairview park") }}</a>
+          {{ $t("home.Welcome_to") }} <a>{{ $t("home.fairview_park") }}</a>
         </h1>
         <div class="container">
           <div class="row flex-center">
-            <div
-              class="col col-12 col-md-4 col-lg-4 col-sm-12"
-              v-for="(item, index) in [
+            <div class="col col-12 col-md-4 col-lg-4 col-sm-12" v-for="(item, index) in [
+              {
+                text: $t('home.Shops_Directory'),
+                img_url: shop_information,
+                route: '/shopping-information',
+              },
+              {
+                text: $t('home.information'),
+                img_url: resident_information,
+                route: '/prospective-buyer',
+              },
+
+              {
+                text: $t('home.Coach_Service'),
+                img_url: bus_time_table,
+                route: '/coach-service',
+              },
+            ]" :key="index">
+              <div class="bg h100">
+                <img style="width: 100%" :src="item.img_url" alt="" />
+                <button>
+                  <router-link :to="{
+                    path: item.route,
+                    query: { lang: fairview_park_lang },
+                  }">{{ item.text }}</router-link>
+                </button>
+              </div>
+            </div>
+            <el-carousel indicator-position="outside">
+              <el-carousel-item v-for="(item, index) in [
                 {
-                  text: $t('Shops Directory'),
+                  text: $t('home.Shops_Directory'),
                   img_url: shop_information,
                   route: '/shopping-information',
                 },
                 {
-                  text: $t('Resident information'),
+                  text: $t('home.Resident_information'),
                   img_url: resident_information,
                   route: '/prospective-buyer',
                 },
 
                 {
-                  text: $t('Coach Service'),
+                  text: $t('home.Coach_Service'),
                   img_url: bus_time_table,
                   route: '/coach-service',
                 },
-              ]"
-              :key="index"
-            >
-              <div class="bg h100">
-                <img style="width: 100%" :src="item.img_url" alt="" />
-                <button>
-                  <router-link
-                    :to="{
+              ]" :key="index">
+                <div class="bg h100" :style="{ 'background-image': 'url(' + item.img_url + ')' }">
+                  <button>
+                    <router-link :to="{
                       path: item.route,
                       query: { lang: fairview_park_lang },
-                    }"
-                    >{{ item.text }}</router-link
-                  >
-                </button>
-              </div>
-            </div>
-            <el-carousel indicator-position="outside">
-              <el-carousel-item
-                v-for="(item, index) in [
-                  {
-                    text: $t('Shops Directory'),
-                    img_url: shop_information,
-                    route: '/shopping-information',
-                  },
-                  {
-                    text: $t('Resident information'),
-                    img_url: resident_information,
-                    route: '/prospective-buyer',
-                  },
-
-                  {
-                    text: $t('Coach Service'),
-                    img_url: bus_time_table,
-                    route: '/coach-service',
-                  },
-                ]"
-                :key="index"
-              >
-                <div
-                  class="bg h100"
-                  :style="{ 'background-image': 'url(' + item.img_url + ')' }"
-                >
-                  <button>
-                    <router-link
-                      :to="{
-                        path: item.route,
-                        query: { lang: fairview_park_lang },
-                      }"
-                      >{{ item.text }}</router-link
-                    >
+                    }">{{ item.text }}</router-link>
                   </button>
                 </div>
               </el-carousel-item>
@@ -277,58 +198,19 @@
             <div class="col col-12 col-lg-6 col-sm-12">
               <div class="jianjie">
                 <p>
-                  {{
-                    fairview_park_lang === "en_us"
-                      ? "Welcome to the website of Fairview Park Property Management Limited. Residents can communicate with us by visiting our purpose-designed website. We hope to provide the following value-added services to our residents through this website:"
-                      : "歡迎進入錦綉花園物業管理有限公司網站，業戶可透過由我們自行設計之網站與我們聯繫，我們希望為業戶提供以下增值服務："
-                  }}
+                  {{ $t("home.content_1") }}
                 </p>
                 <ul>
-                  <li>
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Residents can browse the most updated news, introduction, facilities and floor plans of various house types of Fairview Park;"
-                        : "業戶可以瀏覽屋苑最新資訊、屋苑簡介、屋苑設施以及各屋型的結構平面圖；"
-                    }}
-                  </li>
-                  <li>
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Prospective buyers can obtain information about Fairview Park and answers of frequently asked questions;"
-                        : "新買家可從網站得到有關錦綉花園的訊息和常遇之問題和答案；"
-                    }}
-                  </li>
-                  <li>
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Residents can download various application forms from the website in order to save time;"
-                        : "業戶可自行下載各類所需表格，節省業戶的寶貴時間；"
-                    }}
-                  </li>
-                  <li>
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Residents can peruse the list of members and rules and regulations of Fairview Park Management Advisory Committee (MAC) which was established in 2001;"
-                        : "業戶可查閱自2001年成立的錦綉花園管理諮詢委員會的規章制度及本屆委員名單；"
-                    }}
-                  </li>
-                  <li>
-                    {{
-                      fairview_park_lang === "en_us"
-                        ? "Residents can link up with the frequently used websites of public sectors and governmental departments easily."
-                        : "附載常用公共機構和政府部門的網址，業戶可輕易連結到相關網頁。"
-                    }}
+                  <li v-for="(item, index) in content_2" :key="index">
+                    {{ item }}
                   </li>
                 </ul>
-                <router-link
-                  :to="{
-                    path: '/about-us',
-                    query: {
-                      lang: fairview_park_lang,
-                    },
-                  }"
-                  style="text-decoration: none"
-                >
+                <router-link :to="{
+                  path: '/about-us',
+                  query: {
+                    lang: fairview_park_lang,
+                  },
+                }" style="text-decoration: none">
                   <button class="fs-16">
                     {{ fairview_park_lang === "en_us" ? "More" : "了解更多" }}
                   </button>
@@ -337,26 +219,14 @@
             </div>
             <div class="col col-12 col-lg-6 col-sm-12">
               <div class="img">
-                <iframe
-                  v-if="fairview_park_lang === 'zh_tw'"
+                <iframe v-if="fairview_park_lang === 'zh_tw'"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.7091679275286!2d114.04272728986919!3d22.47756085206866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1669042722648!5m2!1szh-TW!2shk"
-                  width="100%"
-                  height="450"
-                  style="border-radius: 10px"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
-                <iframe
-                  v-if="fairview_park_lang === 'en_us'"
+                  width="100%" height="450" style="border-radius: 10px" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe v-if="fairview_park_lang === 'en_us'"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1082.7590476129535!2d114.04501169813709!3d22.477493702608907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1668099153161!5m2!1sen!2shk"
-                  width="100%"
-                  height="450"
-                  style="border-radius: 10px"
-                  allowfullscreen=""
-                  loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"
-                ></iframe>
+                  width="100%" height="450" style="border-radius: 10px" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>
@@ -399,8 +269,13 @@ export default {
       fairview_park_lang: "",
       carouselValue: 0,
       timer: null,
+      content_2: [],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.content_2 =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.home.content_2
+        : window.i18n_zh_tw.home.content_2;
     //查看所有 最新消息
     const findNewNoticeList = async () => {
       try {
@@ -419,8 +294,8 @@ export default {
             function Marquee() {
               if (
                 scroll_end.offsetWidth +
-                  scroll_div.getBoundingClientRect().width -
-                  scroll_div.scrollLeft <=
+                scroll_div.getBoundingClientRect().width -
+                scroll_div.scrollLeft <=
                 0
               ) {
                 scroll_div.scrollLeft -= scroll_begin.offsetWidth;
@@ -457,14 +332,12 @@ export default {
       }, 3000);
       //
       var observer = new IntersectionObserver(function (changes) {
-        console.log(changes);
         changes.forEach(function (change) {
           var container = change.target;
           // 相交率，默认是相对于浏览器视窗
           if (change.intersectionRatio > 0) {
             setTimeout(() => {
               container.className += " show animate__animated animate__fadeIn";
-              
             }, 500);
             observer.unobserve(container);
           }
@@ -495,16 +368,20 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .carousel {
   height: 450px;
+
   .carousel-indicators {
     display: none;
+
     button {
       width: 14px;
       height: 14px;
       border-radius: 50%;
       border: 2px solid transparent;
     }
+
     .active {
       width: 14px;
       height: 14px;
@@ -513,6 +390,7 @@ export default {
       border: 2px solid #fff;
     }
   }
+
   .carousel-inner {
     .carousel-item {
       a {
@@ -520,12 +398,14 @@ export default {
       }
     }
   }
+
   #carousel-control-prev {
     .carousel-control-prev-icon {
       height: 60px;
       width: 60px;
     }
   }
+
   .carousel-control-next {
     .carousel-control-next-icon {
       height: 60px;
@@ -533,6 +413,7 @@ export default {
     }
   }
 }
+
 .marquee {
   background: var(--mainColor2);
   box-sizing: border-box;
@@ -543,42 +424,51 @@ export default {
     align-items: center;
     margin: 0 auto;
     padding: 0 20px;
+
     .icon-laba {
       display: inline-block;
       width: 24px;
       color: #fff;
       margin-right: 15px;
     }
+
     .el-carousel {
       display: inline-block;
       width: 100%;
+
       .el-carousel__container {
-        .el-carousel__item {
-        }
+        .el-carousel__item {}
       }
     }
+
     @{deep} .mobile {
       display: block;
     }
+
     @{deep} .pc {
       display: none;
     }
   }
 }
+
 .container_wrap {
   margin: 0 auto;
+
   .liulan {
     opacity: 0;
+
     h1 {
       margin-top: 60px;
       font-size: 32px;
       font-weight: 800;
       font-family: "微软雅黑";
+
       a {
         color: var(--mainColor1);
         font-family: "微软雅黑";
       }
     }
+
     .container {
       .row {
         .col {
@@ -587,17 +477,21 @@ export default {
           box-sizing: border-box;
           margin-bottom: 50px;
           border-radius: 30px;
+
           &:hover {
             transition: all 0.2s ease-in-out;
             transform: translateY(-10px);
           }
+
           .bg {
             background-size: cover;
             border-radius: 20px;
             overflow: hidden;
+
             &:hover {
               box-shadow: 0 0 8px 3px rgba(10, 10, 10, 0.2);
             }
+
             button {
               position: absolute;
               bottom: 20px;
@@ -609,9 +503,11 @@ export default {
               padding: 8px 0;
               border: 0;
               color: #fff;
+
               &:hover {
                 background: var(--mainColor1);
               }
+
               a {
                 color: #fff;
                 text-decoration: none;
@@ -620,8 +516,10 @@ export default {
             }
           }
         }
+
         @{deep} .el-carousel {
           display: none;
+
           .el-carousel__container {
             .el-carousel__item {
               .bg {
@@ -629,6 +527,7 @@ export default {
                 border-radius: 20px;
                 overflow: hidden;
                 background-size: cover;
+
                 button {
                   position: absolute;
                   bottom: 20px;
@@ -640,9 +539,11 @@ export default {
                   padding: 8px 0;
                   border: 0;
                   color: #fff;
+
                   &:hover {
                     background: var(--mainColor1);
                   }
+
                   a {
                     color: #fff;
                     text-decoration: none;
@@ -652,6 +553,7 @@ export default {
               }
             }
           }
+
           .el-carousel__indicators {
             .el-carousel__indicator {
               .el-carousel__button {
@@ -660,6 +562,7 @@ export default {
                 border-radius: 50%;
               }
             }
+
             .is-active {
               .el-carousel__button {
                 background-color: var(--mainColor1);
@@ -670,9 +573,11 @@ export default {
       }
     }
   }
+
   .about-us {
     padding-bottom: 20px;
     opacity: 0;
+
     h1 {
       margin: 30px auto 30px;
       font-size: 32px;
@@ -683,35 +588,44 @@ export default {
         color: var(--mainColor3);
         text-decoration: none;
       }
+
       p {
         width: 100px;
         margin: 5px auto 0;
         border-bottom: 4px solid var(--mainColor2);
       }
     }
+
     .container {
       .row {
         .col {
           text-align: left;
+
           .jianjie {
             margin-bottom: 30px;
+
             .title {
               color: red;
             }
+
             h2 {
               margin: 26px 0 20px 0;
+
               a {
                 color: #82be00;
               }
             }
+
             p {
               font-size: 18px;
               font-weight: 700;
               color: var(--el-text-color-primary);
               margin-bottom: 20px;
             }
+
             ul {
               padding: 0px 0 5px 35px;
+
               li {
                 font-size: 18px;
                 list-style-type: disc;
@@ -719,18 +633,22 @@ export default {
                 margin-bottom: 10px;
               }
             }
+
             button {
               background: var(--mainColor2);
               padding: 7px 35px;
               border-radius: 25px;
               border: 2px solid var(--mainColor2);
               color: #fff;
+
               a {
                 color: var(--mainColor2);
               }
+
               &:hover {
                 background: #fff;
                 color: var(--mainColor2);
+
                 a {
                   color: var(--mainColor2);
                 }
@@ -747,67 +665,87 @@ export default {
       }
     }
   }
-  .show{
+
+  .show {
     opacity: 1;
   }
 }
 
 @media (min-width: 576px) {
+
   .container_wrap,
   .marquee-container {
     width: 540px;
   }
+
   @{deep} .mobile {
     display: block !important;
   }
+
   @{deep} .pc {
     display: none !important;
   }
 }
+
 @media (min-width: 768px) {
+
   .container_wrap,
   .marquee-container {
     width: 720px;
   }
+
   @{deep} .mobile {
     display: block !important;
   }
+
   @{deep} .pc {
     display: none !important;
   }
 }
+
 @media (min-width: 992px) {
+
   .container_wrap,
   .marquee-container {
     width: 960px;
   }
+
   @{deep} .mobile {
     display: none !important;
   }
+
   @{deep} .pc {
     display: block !important;
   }
 }
+
 @media (min-width: 1200px) {
+
   .container_wrap,
   .marquee-container {
     width: 1100px;
   }
+
   @{deep} .mobile {
     display: none !important;
   }
+
   @{deep} .pc {
     display: block !important;
   }
 }
+
 @media (min-width: 1400px) {
+
   .container_wrap,
   .marquee-container {
     width: 1280px;
   }
+
   @{deep} .mobile {
     display: none !important;
   }
+
   @{deep} .pc {
     display: block !important;
   }
@@ -819,31 +757,38 @@ export default {
   }
 
   .marquee {
+
     a,
     span {
       font-size: 15px !important;
     }
   }
+
   #scroll_div {
     #scroll_begin {
       height: 45px;
       line-height: 45px;
     }
   }
+
   .container_wrap {
     .liulan {
       opacity: 0;
+
       h1 {
         font-size: 25px;
         margin: 20px 0 20px 0;
         margin-bottom: 20px !important;
       }
     }
+
     .about-us {
       opacity: 0;
+
       h1 {
         font-size: 25px;
       }
+
       .container {
         .row {
           .col {
@@ -851,6 +796,7 @@ export default {
               p {
                 font-size: 15px;
               }
+
               ul {
                 li {
                   font-size: 15px;
@@ -861,20 +807,24 @@ export default {
         }
       }
     }
-    .show{
+
+    .show {
       opacity: 1;
     }
   }
 }
+
 @media (max-width: 768px) {
   .container_wrap {
     .liulan {
       opacity: 0;
+
       .container {
         .row {
           .col {
             display: none;
           }
+
           .el-carousel {
             display: block;
           }

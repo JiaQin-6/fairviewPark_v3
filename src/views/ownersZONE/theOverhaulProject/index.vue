@@ -70,7 +70,6 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             :teleported="false"
           >
             <el-option

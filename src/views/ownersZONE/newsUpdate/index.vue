@@ -39,7 +39,6 @@
             v-if="new_update_list.length>0"
             v-model="new_update_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             size="large"
             @change="
               () => {

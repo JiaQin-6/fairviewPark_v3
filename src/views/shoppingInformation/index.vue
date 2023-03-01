@@ -40,7 +40,6 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             @change="
               (index) => {
                 jumpLink(index);
@@ -105,7 +104,7 @@
           </div>
           <div class="nav-content-list2" v-if="nav_index === 0">
             <span class="header">{{
-              $t("Carpark Parking Privilege Payment")
+              $t("shopping_Information.Carpark_Parking_Privilege_Payment")
             }}</span>
             <!-- 停車場泊車收費表 -->
             <!-- <div v-if="fairview_park_lang === 'zh_tw'">
@@ -1239,7 +1238,7 @@ export default {
           data.v_loading = false;
           data.shop_information_list = res.data.data.records;
           data.shop_information_list.unshift({
-            titleEnUs: proxy.$t("Carpark Parking Privilege Payment"),
+            titleEnUs: proxy.$t("shopping_Information.Carpark_Parking_Privilege_Payment"),
           });
         }
       } catch (error) {

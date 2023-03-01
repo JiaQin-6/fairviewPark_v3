@@ -40,7 +40,6 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             @change="
               (index) => {
                 jumpLink(index);

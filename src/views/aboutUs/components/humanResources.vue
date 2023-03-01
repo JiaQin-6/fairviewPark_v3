@@ -12,20 +12,12 @@
       <div class="row">
        
         <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-          {{ $t("Human Resources") }}
+          {{ $t("aboutUs_Human_Resources.Human_Resources") }}
         </p>
         <div>
           <ul>
             <li
-              v-for="(item, index) in fairview_park_lang === 'en_us'
-                ? [
-                    'Human Resources Department is responsible for recruiting, organizing, managing and motivating our staff members whose common aim is to always provide quality service to the residents of Fairview Park.',
-                    'Human Resources Department’s work is internal, but it has the key role in developing staff members from each department, so the most suitable people will be retained to directly serve our valued residents every day.',
-                  ]
-                : [
-                    '人力資源部負責招聘、調配、管理及推動一眾同心合力為錦綉花園居民提供優質服務的員工。',
-                    '人力資源部的工作雖然是對內，其主要功能卻是致力發展每個部門的員工之所長，務求讓最適合的人，在公司內各司其職，一同服務錦綉居民。',
-                  ]"
+              v-for="(item, index) in content"
               :key="index"
               v-html="item"
             ></li>
@@ -45,8 +37,13 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      content:[],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.content =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.aboutUs_Human_Resources.content_1
+        : window.i18n_zh_tw.aboutUs_Human_Resources.content_1;
     return {
       ...toRefs(data),
     };

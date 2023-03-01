@@ -17,8 +17,7 @@
           :style="{ 'background-image': 'url(' + banner + ')' }"
         ></div>
         <p>
-          {{ fairview_park_lang === "en_us" ? "Estate" : "屋苑"
-          }}{{ fairview_park_lang === "en_us" ? " Notice" : "通告" }}
+          {{ $t("headed.Estate_Notices") }}
         </p>
       </div>
       <!-- navs -->
@@ -33,7 +32,7 @@
                 :class="nav_index === index ? 'active' : ''"
                 @click="
                   () => {
-                    v_loading = true
+                    v_loading = true;
                     nav_index = index;
                     currentPage = 1;
                     pageSize = 5;
@@ -45,13 +44,12 @@
               </li>
             </ul>
             <el-select
-              v-if="estate_notice_list.length>0"
+              v-if="estate_notice_list.length > 0"
               size="large"
               v-model="nav_index"
               class="menu-select"
-              :placeholder="$t('Select')"
               @change="changeMenu"
-            :teleported="false"
+              :teleported="false"
             >
               <el-option
                 v-for="(item, index) in estate_notice_list"
@@ -88,7 +86,7 @@
               <!-- 分頁 -->
               <div style="display: flex; align-items: center" v-if="total !== 0">
                 <el-pagination
-                  style="flex-wrap: wrap; margin: 0 auto; font-size: 18px;width: 100%;"
+                  style="flex-wrap: wrap; margin: 0 auto; font-size: 18px; width: 100%"
                   v-model:current-page="currentPage"
                   v-model:page-size="pageSize"
                   :page-sizes="[5, 10, 15, 20]"
@@ -119,7 +117,7 @@
           position: fixed;
           z-index: 10000;
         "
-        :style="{'display':v_loading?'':'none'}"
+        :style="{ display: v_loading ? '' : 'none' }"
       ></div>
     </div>
   </el-config-provider>
@@ -146,7 +144,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
-      v_loading:false,
+      v_loading: false,
       estate_notice_list: [],
       estate_notice_content: [],
       estate_notice_show_content: [],
@@ -173,7 +171,7 @@ export default {
             });
             data.estate_notice_content = res.data.data.records;
             data.total = data.estate_notice_content.length;
-            handleCurrentChange(1)
+            handleCurrentChange(1);
           } else {
             res.data.data.records.map((item, index) => {
               item.index = index;
@@ -188,7 +186,7 @@ export default {
     };
     //
     const changeMenu = async (val) => {
-      data.v_loading = true
+      data.v_loading = true;
       data.nav_index = val;
       for (let i = 0; i < data.estate_notice_list.length; i++) {
         if (data.estate_notice_list[i].index === val) {
@@ -209,10 +207,9 @@ export default {
       );
     };
     onMounted(async () => {
-      data.v_loading = true
+      data.v_loading = true;
       await findEstateNoticeList();
       await findEstateNoticeList(data.estate_notice_list[0].id);
-      
     });
     return {
       ...toRefs(data),
@@ -420,7 +417,7 @@ export default {
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
@@ -474,38 +471,38 @@ export default {
           }
         }
       }
-      .nav-content{
+      .nav-content {
         padding: 0;
-        p{
-          font-size: 28px!important;
+        p {
+          font-size: 28px !important;
         }
-        ul{
-          li{
-            span{
-              a{
+        ul {
+          li {
+            span {
+              a {
                 font-size: 15px;
               }
             }
           }
         }
-        @{deep} .el-pagination{
-          .el-pagination__total{
-            font-size: 15px!important;
+        @{deep} .el-pagination {
+          .el-pagination__total {
+            font-size: 15px !important;
           }
-          .el-pagination__sizes{
-            .el-input__inner{
-              font-size: 15px!important;
+          .el-pagination__sizes {
+            .el-input__inner {
+              font-size: 15px !important;
             }
           }
-          .el-pager{
-            li{
-              font-size: 15px!important;
+          .el-pager {
+            li {
+              font-size: 15px !important;
             }
           }
-          .el-pagination__jump{
-            font-size: 15px!important;
-            .el-input__inner{
-              font-size: 15px!important;
+          .el-pagination__jump {
+            font-size: 15px !important;
+            .el-input__inner {
+              font-size: 15px !important;
             }
           }
         }
@@ -513,54 +510,54 @@ export default {
     }
   }
 }
-@media (max-width:768px) {
+@media (max-width: 768px) {
   .nav-wrap {
     .row {
       @{deep} .el-pagination {
-          .el-pagination__total {
-            font-size: 15px;
-            margin: 0;
-          }
-          .el-pagination__sizes{
-            text-align: left;
+        .el-pagination__total {
+          font-size: 15px;
+          margin: 0;
+        }
+        .el-pagination__sizes {
+          text-align: left;
+          position: relative;
+          width: calc(100% - 85px);
+          display: block;
+          padding-left: 10px;
+          box-sizing: border-box;
+          .el-select {
             position: relative;
-            width: calc(100% - 85px);
-            display: block;
-            padding-left: 10px;
-            box-sizing: border-box;
-            .el-select{
-              position: relative;
-              left: 0;
-            }
+            left: 0;
           }
-          
-          .btn-prev{
-            margin-left:0;
-          }
-          .el-input__inner {
+        }
+
+        .btn-prev {
+          margin-left: 0;
+        }
+        .el-input__inner {
+          font-size: 15px;
+        }
+        .el-icon {
+          font-size: 15px;
+        }
+        .el-pager {
+          width: 79%;
+          overflow: auto;
+          li {
             font-size: 15px;
-          }
-          .el-icon {
-            font-size: 15px;
-          }
-          .el-pager {
-            width: 79%;
-            overflow: auto;
-            li {
-              font-size: 15px;
-              &:hover {
-                color: var(--mainColor2);
-              }
-            }
-            .is-active {
+            &:hover {
               color: var(--mainColor2);
             }
           }
-          .el-pagination__jump {
-            font-size: 15px;
-            margin: 0;
+          .is-active {
+            color: var(--mainColor2);
           }
         }
+        .el-pagination__jump {
+          font-size: 15px;
+          margin: 0;
+        }
+      }
     }
   }
 }

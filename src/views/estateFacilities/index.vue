@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Estate" : "屋苑"
-        }}{{ fairview_park_lang === "en_us" ? " Facilities" : "資料" }}
+        {{ $t('headed.Estate_Facilities')}}
       </p>
     </div>
     <!-- navs -->
@@ -46,7 +45,6 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             @change="changeMenu"
             :teleported="false"
           >

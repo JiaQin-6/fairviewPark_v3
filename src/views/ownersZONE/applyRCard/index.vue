@@ -56,7 +56,6 @@
             size="large"
             v-model="nav_index"
             class="m-2 menu-select"
-            :placeholder="$t('Select')"
             :teleported="false"
           >
             <el-option
@@ -157,7 +156,6 @@
                       <el-select
                         v-model="form.relation"
                         class="col-6"
-                        :placeholder="$t('Select')"
                         @change="
                           () => {
                             form.remark = '';

@@ -11,21 +11,11 @@
     <div class="container">
       <div class="row">
         <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-          {{ $t("Customer Service") }}
+          {{ $t("aboutUs_Customer_Service.Customer_Service") }}
         </p>
         <ul>
           <li
-            v-for="(item, index) in fairview_park_lang === 'en_us'
-              ? [
-                  'Customer Service Department receives service requests, complaints and performance feedbacks from residents and delivers the messages to the departments concerned for follow-up action aiming at further enhancing our service quality.',
-                  'Customer Service Department is also responsible for organizing festive activities in the estate.',
-                  'We will assign a reference number for each service request or complaint made in person, by phone or in writing so that progress can be traced and monitored easily and closely to ensure the requests or complaints are handled properly.',
-                ]
-              : [
-                  '客戶服務部負責接收業戶的服務要求、投訴及對我們服務表現的意見，並將收到的訊息轉交予有關的部門跟進，從而提升服務質素。',
-                  '客戶服務部並負責籌備及推廣本邨舉辦的節日活動。',
-                  '在接獲每一宗服務要求或投訴個案，不論是透過親身、電話或書面方式，我們會給予一個檔案編號，方便日後密切跟進及監察每宗個案，務求令業戶的要求或投訴獲得最妥善的處理。',
-                ]"
+            v-for="(item, index) in content"
             :key="index"
           >
             {{ item }}
@@ -45,8 +35,13 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      content:[],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.content =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.aboutUs_Customer_Service.content_1
+        : window.i18n_zh_tw.aboutUs_Customer_Service.content_1;
     return {
       ...toRefs(data),
     };

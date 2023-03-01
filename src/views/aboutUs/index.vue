@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "About" : "關於"
-        }}{{ fairview_park_lang === "en_us" ? " us" : "我們" }}
+        {{ $t("headed.About_us") }}
       </p>
     </div>
     <!-- navs -->
@@ -29,39 +28,39 @@
               v-for="(item, index) in [
                 {
                   icon: 'icon-zhuye',
-                  text: $t('Introduction'),
+                  text: $t('aboutUs_Introduction.Introduction'),
                 },
                 {
                   icon: 'icon-kehufuwukefu',
-                  text: $t('Customer Service'),
+                  text: $t('aboutUs_Customer_Service.Customer_Service'),
                 },
                 {
                   icon: 'icon-zhongxinhuanjing',
-                  text: $t('Environmental Service'),
+                  text: $t('aboutUs_Environmental_Service.Environmental_Service'),
                 },
                 {
                   icon: 'icon-baoan',
-                  text: $t('Security'),
+                  text: $t('aboutUs_Security.Security'),
                 },
                 {
                   icon: 'icon-weixiu',
-                  text: $t('Maintenance'),
+                  text: $t('aboutUs_Maintenance.Maintenance'),
                 },
                 {
                   icon: 'icon-tuandui',
-                  text: $t('Administration'),
+                  text: $t('aboutUs_Administration.Administration'),
                 },
                 {
                   icon: 'icon-renliziyuan',
-                  text: $t('Human Resources'),
+                  text: $t('aboutUs_Human_Resources.Human_Resources'),
                 },
                 {
                   icon: 'icon-tubiaozhizuomoban-48',
-                  text: $t('Accounts'),
+                  text: $t('aboutUs_Accounts.Accounts'),
                 },
                 {
                   icon: 'icon-zixun',
-                  text: $t('Information Technology'),
+                  text: $t('aboutUs_Information_Technology.Information_Technology'),
                 },
               ]"
               :key="index"
@@ -81,54 +80,53 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             :teleported="false"
           >
             <el-option
               v-for="(item, index) in [
                 {
                   icon: 'icon-zhuye',
-                  text: $t('Introduction'),
+                  text: $t('aboutUs_Introduction.Introduction'),
                   value: 0,
                 },
                 {
                   icon: 'icon-kehufuwukefu',
-                  text: $t('Customer Service'),
+                  text: $t('aboutUs_Customer_Service.Customer_Service'),
                   value: 1,
                 },
                 {
                   icon: 'icon-zhongxinhuanjing',
-                  text: $t('Environmental Service'),
+                  text: $t('aboutUs_Environmental_Service.Environmental_Service'),
                   value: 2,
                 },
                 {
                   icon: 'icon-baoan',
-                  text: $t('Security'),
+                  text: $t('aboutUs_Security.Security'),
                   value: 3,
                 },
                 {
                   icon: 'icon-weixiu',
-                  text: $t('Maintenance'),
+                  text: $t('aboutUs_Maintenance.Maintenance'),
                   value: 4,
                 },
                 {
                   icon: 'icon-tuandui',
-                  text: $t('Administration'),
+                  text: $t('aboutUs_Administration.Administration'),
                   value: 5,
                 },
                 {
                   icon: 'icon-renliziyuan',
-                  text: $t('Human Resources'),
+                  text: $t('aboutUs_Human_Resources.Human_Resources'),
                   value: 6,
                 },
                 {
                   icon: 'icon-tubiaozhizuomoban-48',
-                  text: $t('Accounts'),
+                  text: $t('aboutUs_Accounts.Accounts'),
                   value: 7,
                 },
                 {
                   icon: 'icon-zixun',
-                  text: $t('Information Technology'),
+                  text: $t('aboutUs_Information_Technology.Information_Technology'),
                   value: 8,
                 },
               ]"
@@ -169,7 +167,7 @@
         position: fixed;
         z-index: 10000;
       "
-      :style="{'display':v_loading?'':'none'}"
+      :style="{ display: v_loading ? '' : 'none' }"
     ></div>
   </div>
 </template>

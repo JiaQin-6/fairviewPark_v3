@@ -20,10 +20,7 @@
           </transition> -->
         </a>
         <!-- 手機端顯示的按鈕 -->
-        <div
-          style="margin-top: 15px; flex: 1; text-align: right"
-          class="mobile-btn"
-        >
+        <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
           <span
             class="lang"
             v-if="fairview_park_lang == 'zh_tw'"
@@ -41,34 +38,20 @@
           <div
             v-if="!is_login && isShowLoginButton"
             class="login-btn1"
-            style="
-              position: relative;
-              display: inline-block;
-              flex: 1;
-              text-align: right;
-            "
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
           >
-            <button
-              class="login-btn-1"
-              data-bs-toggle="modal"
-              data-bs-target="#login"
-            >
-              {{ $t("Owner login") }}
+            <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
+              {{ $t("headed.Owner_login") }}
             </button>
           </div>
           <div
             v-if="is_login"
             class="login-btn2"
-            style="
-              position: relative;
-              display: inline-block;
-              flex: 1;
-              text-align: right;
-            "
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
             :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
-              {{ $t("OWNERS's ZONE") }}
+              {{ $t("headed.OWNERS_s_ZONE") }}
             </button>
             <i v-if="showOwnerZONEList"></i>
           </div>
@@ -117,12 +100,7 @@
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div
-            style="
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              flex: 1;
-            "
+            style="display: flex; flex-direction: column; align-items: center; flex: 1"
           >
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li
@@ -134,37 +112,37 @@
                 v-for="(item, index) in [
                   {
                     type: 'default',
-                    text: $t('Home'),
+                    text: $t('headed.Home'),
                     href: '#/home?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('About us'),
+                    text: $t('headed.About_us'),
                     href: '#/about-us?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('Prospective Buyer'),
+                    text: $t('headed.Prospective_Buyer'),
                     href: '#/prospective-buyer?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('Estate Facilities'),
+                    text: $t('headed.Estate_Facilities'),
                     href: '#/estate-facilities?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('Coach Service'),
+                    text: $t('headed.Coach_Service'),
                     href: '#/coach-service?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('Shops Directory'),
+                    text: $t('headed.Shops_Directory'),
                     href: '#/shopping-information?lang=' + fairview_park_lang,
                   },
                   {
                     type: 'default',
-                    text: $t('Useful Telephone Nos.'),
+                    text: $t('headed.Useful_Telephone_Nos'),
                     href: '#/useful-link?lang=' + fairview_park_lang,
                   },
                 ]"
@@ -208,14 +186,7 @@
           </div>
 
           <ul
-            class="
-              lang-infomation
-              navbar-nav
-              me-auto
-              mb-4 mb-lg-0
-              flex-row
-              align-center
-            "
+            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
           >
             <div class="lang">
               <span
@@ -237,7 +208,7 @@
               data-bs-toggle="modal"
               data-bs-target="#login"
             >
-              {{ $t("Owner login") }}
+              {{ $t("headed.Owner_login") }}
             </button>
             <div>
               <el-dropdown
@@ -246,7 +217,7 @@
                 @command="selectOwnersZone"
               >
                 <el-button type="primary">
-                  {{ $t("OWNERS's ZONE")
+                  {{ $t("headed.OWNERS_s_ZONE")
                   }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </el-button>
                 <template #dropdown>
@@ -258,46 +229,46 @@
                       data-bs-toggle="modal"
                       data-bs-target="#editMemberInformation"
                       ><el-icon><EditPen /></el-icon
-                      >{{ $t("Edit member information") }}</el-dropdown-item
+                      >{{ $t("headed.Edit_member_information") }}</el-dropdown-item
                     >
                     <el-dropdown-item command="/news-update">{{
-                      $t("News Update")
+                      $t("headed.News_Update")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/FAQ-from-residents">{{
-                      $t("FAQ from Residents")
+                      $t("headed.FAQ_from_Residents")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/estate-notice">{{
-                      $t("Estate Notices")
+                      $t("headed.Estate_Notices")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/estate-activities">{{
-                      $t("Estate Activities")
+                      $t("headed.Estate_Activities")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/fairview-part-news">{{
-                      $t("Fairview Park News")
+                      $t("headed.Fairview_Park_News")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/payment-list">{{
-                      $t("Payment List")
+                      $t("headed.Payment_List")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/apply-resident-smartcard">{{
-                      $t("Apply Resident Smartcard")
+                      $t("headed.Apply_Resident_Smartcard")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/MAC-column">{{
-                      $t("MAC Column")
+                      $t("headed.MAC_Column")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/the-overhaul-project">{{
-                      $t("the Overhaul Project")
+                      $t("headed.the_Overhaul_Project")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/lottery-system-for-impound">{{
-                      $t("Lottery System For Impounding Action")
+                      $t("headed.Lottery_System_For_Impounding_Action")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/frequently-used-forms">{{
-                      $t("Frequently Used Forms")
+                      $t("headed.Frequently_Used_Forms")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/residents-handbook-map">{{
-                      $t("Residents Handbook / Map")
+                      $t("headed.Residents_Handbook_Map")
                     }}</el-dropdown-item>
                     <el-dropdown-item command="/demographic-opinion-survey">{{
-                      $t("Demographic & Opinion Survey")
+                      $t("headed.Demographic_Opinion_Survey")
                     }}</el-dropdown-item>
 
                     <el-dropdown-item
@@ -306,7 +277,7 @@
                       v-if="isShowLoginOutButton"
                     >
                       <el-icon><UserFilled /></el-icon>
-                      {{ $t("Login out") }}</el-dropdown-item
+                      {{ $t("headed.Login_out") }}</el-dropdown-item
                     >
                   </el-dropdown-menu>
                 </template>
@@ -346,15 +317,7 @@
 </template>
 
 <script>
-import {
-  ref,
-  reactive,
-  getCurrentInstance,
-  toRefs,
-  onMounted,
-  watch,
-  inject,
-} from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -371,8 +334,7 @@ export default {
   data() {
     return {
       logo: new URL("../../assets/image/home/logo.png", import.meta.url).href,
-      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url)
-        .href,
+      logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
   setup(props, ctx) {
@@ -434,14 +396,11 @@ export default {
       }
 
       if (document.getElementsByClassName("el-popper")[0]) {
-        document.getElementsByClassName(
-          "el-popper"
-        )[0].parentNode.style.position = "fixed";
-        document.getElementsByClassName("el-popper")[0].parentNode.style.top =
-          "0";
-        document.getElementsByClassName("el-popper")[0].parentNode.style[
-          "z-index"
-        ] = "2000";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
+          "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
+          "2000";
       }
     });
     //切換語言
@@ -961,10 +920,8 @@ export default {
           }
         }
       }
-      .mobile-btn{
-        
-        
-        .lang{
+      .mobile-btn {
+        .lang {
           height: 32px;
           line-height: 32px;
           display: inline-block;

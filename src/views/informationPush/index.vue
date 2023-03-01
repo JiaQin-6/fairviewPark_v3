@@ -8,17 +8,15 @@
 -->
 <template>
   <div class="information-push">
-    <h3 class="mb-20">{{fairview_park_lang==='en_us'?'Push Up Message Record':'推送訊息記錄'}}</h3>
+    <h3 class="mb-20">
+      {{ $t('informationPush.Push_Up_Message_Record') }}
+    </h3>
     <div class="information-push-wrap">
-      <ul class="col col-12 col-lg-8 col-sm-12" style="padding:0 10px">
-        <li
-          class="flex-row mb-20"
-          v-for="(item, index) in pmLogList"
-          :key="index"
-        >
-          <div class="col col-2 col-lg-1 order">{{index+1}}.</div>
+      <ul class="col col-12 col-lg-8 col-sm-12" style="padding: 0 10px">
+        <li class="flex-row mb-20" v-for="(item, index) in pmLogList" :key="index">
+          <div class="col col-2 col-lg-1 order">{{ index + 1 }}.</div>
           <div class="col col-10 col-lg-11 content">
-            <p>{{ item.pushdate.slice(0,10) }}</p>
+            <p>{{ item.pushdate.slice(0, 10) }}</p>
             <p>{{ item.title }}</p>
             <p>{{ item.descriptions }}</p>
           </div>
@@ -39,7 +37,7 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
       fairview_park_lang: "",
-      pmLogList:null,
+      pmLogList: null,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
@@ -49,7 +47,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.pmLogList = res.data.data.records
+          data.pmLogList = res.data.data.records;
         }
       } catch (error) {
         console.log(error);
@@ -100,10 +98,10 @@ export default {
   }
 }
 @media (max-width: 991px) {
-  .information-push{
+  .information-push {
     h3 {
-    font-size: 20px;
-  }
+      font-size: 20px;
+    }
   }
 }
 </style>

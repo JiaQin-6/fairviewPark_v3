@@ -12,39 +12,10 @@
       <div class="row">
        
         <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-          {{ $t("Information Technology") }}
+          {{ $t("aboutUs_Information_Technology.Information_Technology") }}
         </p>
         <div
-          v-for="(item, index) in fairview_park_lang === 'en_us'
-            ? [
-                {
-                  title: 'Main Duty of Information Technology Department',
-                  list: [
-                    'Provide technical support service to all departments for all equipment and system related to information technology, including Server, Workstation, Intranet and Administration System, and Hardware and Software installation and maintenance service.',
-                  ],
-                },
-                {
-                  title:
-                    'Other systems in Fairview Park related to information technology',
-                  list: [
-                    'Provide maintenance service for Fairview Park Website and all IT Systems such as Resident Smart Card System, CCTV System, Electronic Door Look System, Main Gate and Bus Stop Information Display System.',
-                  ],
-                },
-              ]
-            : [
-                {
-                  title: '資訊科技部主要工作',
-                  list: [
-                    '負責錦綉花園管理處各部門之資訊科技相關技術之支援工作，包括所有伺服器、工作站、內聯網及各行政系統以及軟硬件安裝及維護等。',
-                  ],
-                },
-                {
-                  title: '錦綉花園屋苑範圍內與資訊科技相關之工作',
-                  list: [
-                    '工作範圍包括維護錦綉花園網站及所有與資訊科技相關的系統，例如住戶智能咭系統、閉路電視系統、電子門鎖、大閘及巴士站訊息公告系統等。',
-                  ],
-                },
-              ]"
+          v-for="(item, index) in content"
           :key="index"
         >
           <li class="li" style="font-weight:bold;">{{ item.title }}</li>
@@ -66,8 +37,13 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      content:[],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.content =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.aboutUs_Information_Technology.content_1
+        : window.i18n_zh_tw.aboutUs_Information_Technology.content_1;
     return {
       ...toRefs(data),
     };

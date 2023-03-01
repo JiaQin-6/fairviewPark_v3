@@ -24,32 +24,32 @@
             <ul class="link mt-20 fs-16 flex-row flex-wrap">
               <li>
                 <a :href="'#/about-us?lang=' + fairview_park_lang">{{
-                  $t("About us")
+                  $t("footer.About_us")
                 }}</a>
               </li>
               <li>
                 <a :href="'#/prospective-buyer?lang=' + fairview_park_lang">{{
-                  $t("Prospective Buyer")
+                  $t("footer.Prospective_Buyer")
                 }}</a>
               </li>
               <li>
                 <a :href="'#/estate-facilities?lang=' + fairview_park_lang">{{
-                  $t("Estate Facilities")
+                  $t("footer.Estate_Facilities")
                 }}</a>
               </li>
               <li>
                 <a :href="'#/coach-service?lang=' + fairview_park_lang">{{
-                  $t("Coach Service")
+                  $t("footer.Coach_Service")
                 }}</a>
               </li>
               <li>
                 <a :href="'#/shopping-information?lang=' + fairview_park_lang">{{
-                  $t("Shops Directory")
+                  $t("footer.Shops_Directory")
                 }}</a>
               </li>
               <li>
                 <a :href="'#/useful-link?lang=' + fairview_park_lang">{{
-                  $t("Useful Telephone Nos.")
+                  $t("footer.Useful_Telephone_Nos")
                 }}</a>
               </li>
             </ul>
@@ -59,7 +59,7 @@
         <div
           class="col col-12 col-xl-5 col-lg-6 col-md-6 col-sm-12 flex-row flex-column download"
         >
-          <p>{{ $t("Easy access to the information of fairview park") }}</p>
+          <p>{{ $t("footer.Easy_access_to_the_information_of_fairview_park") }}</p>
           <div class="image flex-row space-between">
             <a href="https://apps.apple.com/hk/app/fairview-park-錦綉花園/id1637553568" target="_blank" style="width: 32%">
               <img :src="app_store_icon" alt="" />
@@ -80,8 +80,8 @@
         <!-- 左部份 -->
         <div style="padding:0" class="col col-12 col-xl-5 col-lg-5 col-md-5">
           <p class="fs-18" style="padding:0">
-            {{ $t("All Rights Reserved") }} {{ new Date().getFullYear() }}
-            {{ $t("Fairview Park Property Management Limited") }}
+            {{ $t("footer.All_Rights_Reserved") }} {{ new Date().getFullYear() }}
+            {{ $t("footer.Fairview_Park_Property_Management_Limited") }}
           </p>
         </div>
         <!-- 右部份 -->
@@ -95,7 +95,7 @@
                     ? 'https://fairviewpark.hk/file/disclaimerEN.html'
                     : 'https://fairviewpark.hk/file/disclaimerTC.html'
                 "
-                >{{ $t("Disclaimer") }}</a
+                >{{ $t("footer.Disclaimer") }}</a
               >
             </li>
             <li class="fs-18">
@@ -106,7 +106,7 @@
                     ? 'https://fairviewpark.hk/file/privacyEN.html'
                     : 'https://fairviewpark.hk/file/privacyTC.html'
                 "
-                >{{ $t("Privacy Policy and Personal Data Collection Statement") }}</a
+                >{{ $t("footer.Privacy_Policy_and_Personal_Data_Collection_Statement") }}</a
               >
             </li>
           </ul>

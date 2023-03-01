@@ -10,24 +10,13 @@
   <div class="col-12 col-lg-10 nav-content">
     <div class="container">
       <div class="row">
-       
         <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-          {{ $t("Accounts") }}
+          {{ $t("aboutUs_Accounts.Accounts") }}
         </p>
         <div>
           <ul>
             <li
-              v-for="(item, index) in fairview_park_lang === 'en_us'
-                ? [
-                    'Accounts Department issues statements of account to owners, handles various sources of income, follows cases of bounced cheques or problems relating to autopay, handles refund of deposits and answers enquiries from residents about their accounts.',
-                    'House owners can pay the management fee by cash at designated convenience store by presenting their monthly Statement of Account each with a barcode printed thereon or by crossed cheque or by autopay. We highly recommend you to use autopay as it is the most convenient and the fastest method, and can prevent the risk of being charged an overdue interest arising from late payment.',
-                    'Furthermore, Accounts Department has to comply with the payment procedure to ensure the budget is met. At the year end we will arrange our accounts to be audited, and make projections for the future years aiming at achieving surplus or breaking even.',
-                  ]
-                : [
-                    '會計部負責發出月結單，處理各項收入，跟進被銀行退回的支票及有關自動轉帳的各類問題，同時亦負責發還按金及處理業戶有關帳項的查詢。',
-                    '業主可攜附印有條碼的月結單到指定的便利店以現金繳交管理費，亦可以支票或自動轉帳形式繳費。我們極力推薦使用自動轉帳繳交管理費，因為這方式最快捷方便，並能防止業主因遲交管理費而須支付逾期利息的風險。',
-                    '此外，會計部會根據既定的付款批核程序，確保各項開支符合預算。每年的財政年度完結時，我們會將所有收支帳目交予會計師審核並為來年作出財政預算，務求達至盈餘或收支平衡。',
-                  ]"
+              v-for="(item, index) in content"
               :key="index"
               v-html="item"
             ></li>
@@ -47,8 +36,13 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      content: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    data.content =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.aboutUs_Accounts.content_1
+        : window.i18n_zh_tw.aboutUs_Accounts.content_1;
     return {
       ...toRefs(data),
     };
@@ -79,18 +73,18 @@ export default {
 }
 @media (max-width: 991px) {
   .nav-content {
-  .container {
-    h3 {
-    }
-    .row >p{
-      font-size: 28px!important;
-    }
-    ul {
-      li {
-        font-size: 15px;
+    .container {
+      h3 {
+      }
+      .row > p {
+        font-size: 28px !important;
+      }
+      ul {
+        li {
+          font-size: 15px;
+        }
       }
     }
   }
-}
 }
 </style>

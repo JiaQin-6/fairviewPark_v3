@@ -50,7 +50,6 @@
             size="large"
             v-model="nav_index"
             class="menu-select"
-            :placeholder="$t('Select')"
             @change="
               (val) => {
                 nav_index = val;
