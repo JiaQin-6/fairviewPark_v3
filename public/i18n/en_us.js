@@ -282,6 +282,9 @@ window.i18n_en_us =  {
         'Online_user_registration': 'Online user registration',
         'How_to_Create_Account': 'How to Create Account',
         'Owner_Name': 'Owner Name (On Account Statement)',
+        'Same_as_the_owner_is_name': "Same as the owner's name on the monthly statement, including symbols",
+
+        'A_BRS_100_must_be_filled':'A-BRS-100 must be filled in as ABRS100',
         'Account_Number': 'Account Number (On Account Statement)',
         'Login_Name': 'Login Name (Self Customize)',
         'Login_Password': 'Login Password (Self Customize)',
@@ -307,6 +310,9 @@ window.i18n_en_us =  {
         'To_continue_first_verify_that_its_you':"To continue, first verify that it's you",
         'Edit_member_information':'Edit member information',
         'Owner_Name': 'Owner Name (On Account Statement)',
+        'Same_as_the_owner_is_name': "Same as the owner's name on the monthly statement, including symbols",
+
+        'A_BRS_100_must_be_filled':'A-BRS-100 must be filled in as ABRS100',
         'Account_Number': 'Account Number (On Account Statement)',
         'This_field_is_required': 'This field is required.',
         'Login_Name': 'Login Name (Self Customize)',
@@ -367,5 +373,12 @@ window.i18n_en_us =  {
     },
     informationPush:{
       'Push_Up_Message_Record':'Push Up Message Record'
+    },
+    applyRCard:{
+      'Apply_Resident_Smartcard':'Apply Resident Smartcard',
+      'Application_Status':'Application Status',
+      'After_apply_success':'(After apply success, Please wait about five working days to Customer Service Department get the Resident Smart Card)',
+      'the_Registered_House_Owner':'I/We, the Registered House Owner(s) of the captioned premises am/are now applying to the Fairview Park Property Management Limited for the Resident Smart Card for each of the following card users with 1 recent color photo* (size: 40mm×50mm) and residence proof (if applicable) attached:',
+      'we_being_the_registered_house_owner':'I/We, being the registered house owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to apply to the Fairview Park Property Management Limited (”the Estate Management”) for Resident Smart Card(s) (“the Card”) for the persons with details listed in part B above. I/We declare that these persons all live in the Corresponding Premises and the information given in parts A, B and photographs supplied are true and correct. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/><p></p>1. The Card is non-transferrable. In case the eligibility of this application ceases to exist, such as when the Owner is no longer the registered owner of the Corresponding Premises, all Cards issued under this application will be cancelled instantly.<br/><p></p>2. The New Owner(s) must inform the Estate Management whether the Card Users will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, all issued Cards will be cancelled instantly.<br/><p></p>3. The Card is the property of the Estate Management, please return it when your status is no longer valid.<br/><p></p>4. The Card should be shown to Estate Management staff upon request. Estate Management staff have the right to repossess the cancelled Card.<br/><p></p>5. The Estate Management reserves the absolute right to reject the application or cancel all the Cards issued under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/><p></p>6. The Owner shall notify the Estate Management immediately for loss of any Card so as to enable the Estate Management to cancel the said Card.<br/><p></p>7. The Estate Management will charge HK$50 for each of the replacement of the Card by the request of the Owner due to whatsoever reasons.<br/><p></p>8. The Owner hereby declares that he and the Card Users consent to the collection and handling of personal data provided herewith in accordance with the Personal Data Statement below.<br/><p></p>9. The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.',
     }
 };

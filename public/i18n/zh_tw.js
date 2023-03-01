@@ -33,6 +33,21 @@ window.i18n_zh_tw =  {
         'Residents_Handbook_Map': '業主手冊及屋苑地圖',
         'Demographic_Opinion_Survey': '人口統計及意見調查',
     },
+    home:{
+      'Welcome_to': '歡迎瀏覽',
+      'fairview_park': '錦綉花園',
+      'Shops_Directory': '商場資訊',
+      'Resident information': '居民資訊',
+      'Coach_Service': '專巴時間表',
+      'content_1':'歡迎進入錦綉花園物業管理有限公司網站，業戶可透過由我們自行設計之網站與我們聯繫，我們希望為業戶提供以下增值服務：',
+      'content_2':[
+        '業戶可以瀏覽屋苑最新資訊、屋苑簡介、屋苑設施以及各屋型的結構平面圖；',
+        '新買家可從網站得到有關錦綉花園的訊息和常遇之問題和答案；',
+        '業戶可自行下載各類所需表格，節省業戶的寶貴時間；',
+        '業戶可查閱自2001年成立的錦綉花園管理諮詢委員會的規章制度及本屆委員名單；',
+        '附載常用公共機構和政府部門的網址，業戶可輕易連結到相關網頁。',
+      ]
+  },
     footer:{
         'About_us': '關於我們',
         'Prospective_Buyer': '新買家須知',
@@ -45,21 +60,6 @@ window.i18n_zh_tw =  {
         'Fairview_Park_Property_Management_Limited': '錦綉花園物業管理有限公司保留一切權利',
         'Disclaimer': '免責聲明',
         'Privacy_Policy_and_Personal_Data_Collection_Statement': '私隱政策及收集個人資料聲明',
-    },
-    home:{
-        'Welcome_to': '歡迎瀏覽',
-        'fairview_park': '錦綉花園',
-        'Shops_Directory': '商場資訊',
-        'Resident information': '居民資訊',
-        'Coach_Service': '專巴時間表',
-        'content_1':'歡迎進入錦綉花園物業管理有限公司網站，業戶可透過由我們自行設計之網站與我們聯繫，我們希望為業戶提供以下增值服務：',
-        'content_2':[
-          '業戶可以瀏覽屋苑最新資訊、屋苑簡介、屋苑設施以及各屋型的結構平面圖；',
-          '新買家可從網站得到有關錦綉花園的訊息和常遇之問題和答案；',
-          '業戶可自行下載各類所需表格，節省業戶的寶貴時間；',
-          '業戶可查閱自2001年成立的錦綉花園管理諮詢委員會的規章制度及本屆委員名單；',
-          '附載常用公共機構和政府部門的網址，業戶可輕易連結到相關網頁。',
-        ]
     },
     aboutUs_Accounts:{
         'Accounts':'會計部',
@@ -274,9 +274,11 @@ window.i18n_zh_tw =  {
         'Online_user_registration': '網上用戶註冊',
         'How_to_Create_Account': '網上註冊指引',
         'Owner_Name': '登記業主名稱 (請參考月結單)',
+        'Same_as_the_owner_is_name':'與月結單上之業主名稱相同，包括字符',
+        'A_BRS_100_must_be_filled':'例如 A-BRS-100, 請填寫 ABRS100',
         'Account_Number': '客戶號碼 (請參考月結單)',
-        'Login_Name': '網站登入名稱 (自訂)',
-        'Login_Password': '網站登入密碼 (自訂)',
+        'Login_Name': '登入名稱 (自訂﹣只接受英文，數字及符號)',
+        'Login_Password': '登入密碼 (自訂)',
         'Nickname': 'Nickname (選填)',
         'Email_Address': '聯絡電郵',
         'Contact_Number': '聯絡電話 (選填)',
@@ -299,9 +301,11 @@ window.i18n_zh_tw =  {
         'To_continue_first_verify_that_its_you':'如要繼續操作，請驗證您的身分',
         'Edit_member_information':'編輯賬號資料',
         'Owner_Name': '登記業主名稱 (請參考月結單)',
+        'Same_as_the_owner_is_name':'與月結單上之業主名稱相同，包括字符',
+        'A_BRS_100_must_be_filled':'例如 A-BRS-100, 請填寫 ABRS100',
         'Account_Number': '客戶號碼 (請參考月結單)',
         'This_field_is_required': '此欄位必填',
-        'Login_Name': '網站登入名稱 (自訂)',
+        'Login_Name': '登入名稱 (自訂﹣只接受英文，數字及符號)',
         'New_Password': '新密碼',
         'Confirm_New_Password': '確認新密碼',
         'Nickname': 'Nickname (選填)',
@@ -359,5 +363,12 @@ window.i18n_zh_tw =  {
     },
     informationPush:{
       'Push_Up_Message_Record':'推送訊息記錄'
+    },
+    applyRCard:{
+      'Apply_Resident_Smartcard':'申請住戶智能卡',
+      'Application_Status':'申請狀況',
+      'After_apply_success':'(申請成功後，請等約5天工作天到客戶服務部領取住戶智能卡)',
+      'the_Registered_House_Owner':'本人/我們為上述物業的註冊業主，現向錦綉花園物業管理有限公司申請錦綉住戶口咭予以下每一個持咭人士，並附上其彩色近照1張* (尺寸:40mm×50mm)及住址證明 (如適用)。',
+      'we_being_the_registered_house_owner':'我/我們為上述物業(以下簡稱「相關物業」)之業主，現向錦綉花園物業管理有限公司(以 下簡稱「管理公司」)申請住戶智能咭(以下簡稱住戶咭)予詳列於上述乙部的人士。我 們謹此聲明此等人士皆居住於相關物業以及在本申請表甲及乙部所提供的資料及相片，乃真 實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：<br/><p></p>1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相 關物業的業主，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。<br/><p></p>2. 當相關物業業權出現變動時，新業主必須通知管理公司持咭人是否仍舊相同，否 則管理公司將即時取消已發出的所有住戶咭。<br/><p></p>3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理 公司。<br/><p></p>4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公 司職員有權收回該住戶咭。<br/><p></p>5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋苑守則 之業戶之申請或取消所有已發出予該單位的住戶咭。<br/><p></p>6. 住戶咭如有遺失，業主須立即通知管理公司，以便管理公司取消該住戶咭。<br/><p></p>7. 無論因任何原因，業主如須補領住戶咭，管理公司將收取港幣 50 元之手續費。<br/><p></p>8. 業主在此聲明業主及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提 供的個人資料。<br/><p></p>9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。',
     }
 };

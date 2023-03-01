@@ -164,7 +164,7 @@
                   </p>
                   <input
                     v-model="registerForm.oname"
-                    :placeholder="$t('Same as the owner is name on the monthly statement, including symbols')"
+                    :placeholder="$t('sign_up.Same_as_the_owner_is_name')"
                     type="text"
                     :class="{
                       error: register_error_tip.is_null && !registerForm.oname,
@@ -187,7 +187,7 @@
                   </p>
                   <input
                     v-model="registerForm.hcode"
-                    :placeholder="$t('A-BRS-100 must be filled in as ABRS100')"
+                    :placeholder="$t('sign_up.A_BRS_100_must_be_filled')"
                     type="text"
                     :class="{
                       error: register_error_tip.is_null && !registerForm.hcode,
@@ -475,7 +475,7 @@
                   </p>
                   <input
                     v-model="editMemberInfoForm.oname"
-                    :placeholder="$t('Same as the owner is name on the monthly statement, including symbols')"
+                    :placeholder="$t('Edit_member_information.Same_as_the_owner_is_name')"
                     type="text"
                     :class="{
                       error:
@@ -497,7 +497,7 @@
                   </p>
                   <input
                     v-model="editMemberInfoForm.hcode"
-                    :placeholder="$t('A-BRS-100 must be filled in as ABRS100')"
+                    :placeholder="$t('Edit_member_information.A_BRS_100_must_be_filled')"
                     type="text"
                     disabled
                   />

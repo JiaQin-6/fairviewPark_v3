@@ -14,8 +14,8 @@ const i18n = createI18n({
     globalInjection: true,
     locale: sessionStorage.getItem('fairview_park_lang') || 'zh_tw',
     messages: {
-        'zh_tw': zh,
-        'en_us': en,
+        'zh_tw': window.i18n_zh_tw,
+        'en_us': window.i18n_en_us,
     }
 });
 export default i18n;
