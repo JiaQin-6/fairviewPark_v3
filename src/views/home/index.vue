@@ -133,7 +133,7 @@
                 route: '/shopping-information',
               },
               {
-                text: $t('home.information'),
+                text: $t('home.Resident_information'),
                 img_url: resident_information,
                 route: '/prospective-buyer',
               },

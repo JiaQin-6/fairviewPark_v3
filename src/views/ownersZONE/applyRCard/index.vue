@@ -859,18 +859,21 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@deep:~ '>>>';
+@deep: ~">>>";
+
 .apply-resident-smartcard {
   .banner {
     position: relative;
     overflow: hidden;
     height: 280px;
+
     .img {
       width: 100%;
       height: 280px;
       background-size: cover;
       background-position: bottom;
     }
+
     p {
       position: absolute;
       left: 50%;
@@ -884,18 +887,22 @@ export default {
       font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
       color: #fff;
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+
       b {
         color: var(--mainColor1);
         text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
       }
     }
   }
+
   .apply-resident-smartcard-wrap {
     .nav-wrap-container {
       margin: 0 auto;
       padding-top: 30px;
+
       .aside {
         padding: 0;
+
         ul {
           position: sticky;
           top: 80px;
@@ -905,53 +912,66 @@ export default {
           margin: 0;
           background-color: #fff;
           padding: 10px;
+
           li {
             text-align: left;
             margin-bottom: 5px;
             padding: 6px 0px 6px 10px;
             box-sizing: border-box;
             cursor: pointer;
+
             i {
               font-size: 18px;
               margin-right: 5px;
               display: none;
             }
+
             span {
               font-size: 18px;
             }
+
             &:hover {
               background-color: var(--mainColor2);
               color: #fff;
+
               i {
                 color: #fff;
               }
+
               span {
                 color: #fff;
               }
             }
           }
+
           .active {
             background-color: var(--mainColor2);
             color: #fff;
+
             i {
               color: #fff;
             }
+
             span {
               color: #fff;
             }
           }
         }
+
         .menu-select {
           display: none;
         }
       }
+
       .nav-content {
         padding: 10px 20px 0;
+
         .how-to-apply {
           margin-bottom: 30px;
           padding: 0;
           display: flex;
           align-items: center;
+
           button {
             background-color: var(--mainColor3);
             color: #fff;
@@ -962,18 +982,21 @@ export default {
             height: 39px;
             width: 200px;
           }
+
           span {
             vertical-align: middle;
             margin-top: 5px;
-            flex:1;
+            flex: 1;
           }
         }
+
         .application {
           border-radius: 5px;
           overflow: hidden;
           padding: 0;
           border: 1px solid var(--mainColor1);
           margin-bottom: 30px;
+
           h5 {
             font-size: 18px;
             background-color: var(--mainColor1);
@@ -982,45 +1005,57 @@ export default {
             box-sizing: border-box;
             margin-bottom: 0;
           }
+
           p {
             font-size: 18px;
             padding: 10px;
             box-sizing: border-box;
           }
         }
+
         .application-form {
           box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
           padding: 20px;
           margin-bottom: 50px;
           border-radius: 5px;
+
           h5 {
             font-size: 18px;
             font-weight: bold;
           }
+
           .form {
             ul {
               padding-left: 0;
+
               li {
                 margin-bottom: 30px;
+
                 .form-wrap {
                   align-items: center;
                   position: relative;
+
                   span {
                     color: var(--mainColor1);
                   }
+
                   @{deep} .el-upload {
                     .el-button {
                       background-color: var(--bs-gray-600);
                       border-color: var(--bs-gray-600);
+
                       &:hover {
                         background-color: var(--mainColor2);
                         border-color: var(--mainColor2);
                       }
+
                       span {
                         color: #fff;
+
                         span {
                           margin-right: 10px;
                         }
+
                         .el-icon {
                           color: #fff;
                           font-size: 18px;
@@ -1028,17 +1063,21 @@ export default {
                       }
                     }
                   }
-                  @{deep} .el-select{
+
+                  @{deep} .el-select {
                     position: relative !important;
-                    z-index:1 !important;
+                    z-index: 1 !important;
                   }
                 }
+
                 .yellow {
                   color: var(--mainColor2);
                 }
+
                 i {
                   color: var(--bs-red);
                 }
+
                 @{deep} .card-name {
                   .el-input__wrapper {
                     box-shadow: none;
@@ -1050,25 +1089,29 @@ export default {
                     }
                   }
                 }
-                @{deep}.el-popper{
-          position: absolute;
-          top: 52px!important;
-          left: 0!important;
-          .el-select-dropdown{
-            .el-scrollbar{
-              .el-select-dropdown__wrap{
-                .el-scrollbar__view{
-                  background-color: var(--mainColor2);
-                  .el-select-dropdown__item{
-                    text-align: left;
-                    margin-bottom:0;
-                    color:#fff;
+
+                @{deep}.el-popper {
+                  position: absolute;
+                  top: 52px !important;
+                  left: 0 !important;
+
+                  .el-select-dropdown {
+                    .el-scrollbar {
+                      .el-select-dropdown__wrap {
+                        .el-scrollbar__view {
+                          background-color: var(--mainColor2);
+
+                          .el-select-dropdown__item {
+                            text-align: left;
+                            margin-bottom: 0;
+                            color: #fff;
+                          }
+                        }
+                      }
+                    }
                   }
                 }
-              }
-            }
-          }
-        }
+
                 @{deep} .el-input {
                   .el-input__wrapper {
                     .el-input__inner {
@@ -1079,35 +1122,43 @@ export default {
               }
             }
           }
+
           .item {
             h5 {
               font-size: 18px;
               margin-bottom: 10px;
               font-weight: bold;
             }
+
             p {
               font-size: 18px;
               margin-bottom: 20px;
             }
+
             .el-button {
               background-color: var(--mainColor2);
               border-radius: 50px;
               padding: 0 20px;
               color: #fff;
+
               &:hover {
                 border: 1px solid var(--mainColor2);
                 background-color: #fff;
                 color: var(--mainColor2);
               }
+
               span {
               }
             }
+
             @{deep} .el-checkbox {
               .el-checkbox__input {
                 vertical-align: middle;
+
                 .el-checkbox__inner {
                   width: 20px;
                   height: 20px;
+
                   &:after {
                     top: 1px;
                     left: 5px;
@@ -1124,16 +1175,20 @@ export default {
             }
           }
         }
+
         .cardList {
           ul {
             padding: 0;
+
             li {
               border: 2px solid #ccc;
               padding: 25px;
+
               h3 {
                 margin-bottom: 0;
                 line-height: 24px !important;
               }
+
               p {
                 margin-bottom: 0px;
               }
@@ -1143,133 +1198,159 @@ export default {
       }
     }
   }
+
   @{deep} .el-loading-mask {
     height: 100vh;
     position: fixed;
   }
 }
+
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .nav-wrap-container {
     width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .nav-wrap-container {
     width: 1100px;
   }
 }
+
 @media (min-width: 1400px) {
   .nav-wrap-container {
     width: 1280px;
   }
 }
+
 @media (max-width: 991px) {
   .banner {
     height: 200px !important;
+
     img {
       width: auto;
     }
-    p{
-      font-size:36px!important;
+
+    p {
+      font-size: 36px !important;
     }
   }
+
   .aside {
     ul {
       flex-wrap: nowrap;
       padding: 0;
       display: none;
+
       li {
         display: flex;
         text-align: center;
         align-items: center;
+
         span {
           margin: 0 auto;
         }
       }
     }
+
     @{deep} .menu-select {
       display: block !important;
       --el-select-input-focus-border-color: #ccc;
+
       .select-trigger {
         .el-input {
           font-size: 18px;
+
           .el-input__wrapper {
           }
         }
+
         .is-focus {
           border-color: #ccc;
         }
       }
-       .el-popper {
-            position: absolute;
-            top: 52px !important;
-            left: 0 !important;
-            .el-select-dropdown {
-              .el-scrollbar {
-                .el-select-dropdown__wrap {
-                  .el-scrollbar__view {
-                    .el-select-dropdown__item {
-                      text-align: left;
-                      span {
-                        margin: 0;
-                      }
-                    }
+
+      .el-popper {
+        position: absolute;
+        top: 52px !important;
+        left: 0 !important;
+
+        .el-select-dropdown {
+          .el-scrollbar {
+            .el-select-dropdown__wrap {
+              .el-scrollbar__view {
+                .el-select-dropdown__item {
+                  text-align: left;
+
+                  span {
+                    margin: 0;
                   }
                 }
               }
             }
           }
+        }
+      }
     }
   }
+
   .nav-content {
     .how-to-apply {
       flex-wrap: wrap !important;
+
       button {
         flex: 0 auto !important;
       }
     }
+
     .user-img {
       margin-top: 0 !important;
     }
+
     .user-content {
       flex-wrap: wrap;
     }
-    .application-form{
-      .item{
-        h5,p{
-          font-size:15px!important;
+
+    .application-form {
+      .item {
+        h5,
+        p {
+          font-size: 15px !important;
         }
-        @{deep} .el-checkbox{
-          white-space:inherit;
-          display:flex!important;
+
+        @{deep} .el-checkbox {
+          white-space: inherit;
+          display: flex !important;
           align-items: center;
-          margin-bottom:20px;
-          .el-checkbox__label{
+          margin-bottom: 20px;
+
+          .el-checkbox__label {
             text-align: left;
-            font-size:15px!important;
-            line-height:18px;
+            font-size: 15px !important;
+            line-height: 18px;
           }
         }
-
       }
-      @{deep} .el-input{
-          .el-input__wrapper{
-            .el-input__inner{
-            font-size:15px !important;
-          }
-          }
 
+      @{deep} .el-input {
+        .el-input__wrapper {
+          .el-input__inner {
+            font-size: 15px !important;
+          }
         }
+      }
     }
   }
 }

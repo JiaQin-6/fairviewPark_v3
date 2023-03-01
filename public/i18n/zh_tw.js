@@ -37,7 +37,7 @@ window.i18n_zh_tw =  {
       'Welcome_to': '歡迎瀏覽',
       'fairview_park': '錦綉花園',
       'Shops_Directory': '商場資訊',
-      'Resident information': '居民資訊',
+      'Resident_information': '居民資訊',
       'Coach_Service': '專巴時間表',
       'content_1':'歡迎進入錦綉花園物業管理有限公司網站，業戶可透過由我們自行設計之網站與我們聯繫，我們希望為業戶提供以下增值服務：',
       'content_2':[

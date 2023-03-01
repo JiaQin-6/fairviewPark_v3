@@ -50,7 +50,7 @@ window.i18n_en_us =  {
         'Welcome_to': 'Welcome to',
         'fairview_park': 'Fairview Park',
         'Shops_Directory': 'Shops Directory',
-        'Resident information': 'Resident information',
+        'Resident_information': 'Resident information',
         'Coach_Service': 'Coach Service',
         'content_1':'Welcome to the website of Fairview Park Property Management Limited. Residents can communicate with us by visiting our purpose-designed website. We hope to provide the following value-added services to our residents through this website:',
         'content_2':[
