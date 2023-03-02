@@ -11,9 +11,7 @@
     <div class="content" style="margin: 0px auto; padding: 0px">
       <p style="font-size: 36px; color: #9cc212; font-weight: bold">
         {{
-          fairview_park_lang === "en_us"
-            ? "One Stop Service for New Owners"
-            : "新業主的一站式服務"
+          $t('ProspectiveBuyer_One_Stop_Service_for_New_Owners.One_Stop_Service_for_New_Owners')
         }}
       </p>
       <table border="0" align="center" cellpadding="0" cellspacing="0">

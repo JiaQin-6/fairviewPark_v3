@@ -17,7 +17,7 @@
       ></div>
       <p>
         {{
-          fairview_park_lang === "en_us" ? "Apply Resident Smartcard" : "申請住戶智能卡"
+          $t('headed.Apply_Resident_Smartcard')
         }}
       </p>
     </div>

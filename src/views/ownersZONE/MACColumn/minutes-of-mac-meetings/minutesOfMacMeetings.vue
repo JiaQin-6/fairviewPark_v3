@@ -55,7 +55,7 @@
       />
     </el-select>
     <h5>
-      {{ fairview_park_lang === "en_us" ? "MAC Meetings" : "會議記錄" }}
+      {{ $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings') }}
     </h5>
     <div class="menu">
       <div

@@ -9,7 +9,7 @@
 <template>
   <div>
     <h5>
-      {{ fairview_park_lang === "en_us" ? "Sample of Candidate Form" : "候選人表格樣本" }}
+      {{ $t('MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form') }}
     </h5>
     <div style="text-align: center">
       <img

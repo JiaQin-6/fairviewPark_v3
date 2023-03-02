@@ -9,7 +9,7 @@
 <template>
   <div style="text-align: center">
     <h5>
-      {{ fairview_park_lang === "en_us" ? "11th MAC Members" : "應屆管理諮詢委員會委員資料" }}
+      {{ $t('MACColumn_11th_MAC_Members.11th_MAC_Members') }}
     </h5>
     <img style="width:100%;max-width:592px!important;" :src="fairview_park_lang === 'en_us' ? MAC_member_en : MAC_member" alt="" />
   </div>

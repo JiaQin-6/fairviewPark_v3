@@ -16,7 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "The Overhaul Project" : "大維修" }}
+        {{ $t('headed.the_Overhaul_Project') }}
       </p>
     </div>
     <!-- navs -->

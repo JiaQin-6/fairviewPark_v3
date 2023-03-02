@@ -11,9 +11,7 @@
     <div class="content" style="margin:0px auto;padding:0px;">
       <p style="padding:0;font-size: 36px;color:#9cc212;font-weight:bold;">
         {{
-            fairview_park_lang === "en_us"
-              ? "Master Colour Schedule"
-              : "外牆顏色系列"
+          $t('ProspectiveBuyer_Master_Colour_Schedule.Master_Colour_Schedule')
         }}
       </p>
       <table

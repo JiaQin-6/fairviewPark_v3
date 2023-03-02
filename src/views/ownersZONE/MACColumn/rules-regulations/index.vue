@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5>
-      {{ fairview_park_lang === "en_us" ? "Rules & Regulations" : "規章制度" }}
+      {{ $t('MACColumn_Rules_Regulations.Rules_Regulations') }}
     </h5>
     <ul style="font-size: 18px; padding: 0">
       <li>

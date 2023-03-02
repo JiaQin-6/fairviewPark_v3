@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "MAC" : "管理諮詢委員會"
-        }}{{ fairview_park_lang === "en_us" ? " Column" : "專欄" }}
+        {{ $t('headed.MAC_Column')
+        }}
       </p>
     </div>
     <!-- navs -->
@@ -35,37 +35,25 @@
             @select="handleSelect"
           >
             <el-menu-item index="1">{{
-              fairview_park_lang === "en_us"
-                ? "Rules & Regulations"
-                : "規章制度"
+              $t('MACColumn_Rules_Regulations.Rules_Regulations')
             }}</el-menu-item>
             <el-menu-item index="2">{{
-              fairview_park_lang === "en_us"
-                ? "Sample of Candidate Form"
-                : "候選人表格樣本"
+              $t('MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form')
             }}</el-menu-item>
             <el-menu-item index="3">{{
-              fairview_park_lang === "en_us"
-                ? "Samlpe of Nomination Form"
-                : "提名表格樣本"
+              $t('MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form')
             }}</el-menu-item>
             <el-menu-item index="4">{{
-              fairview_park_lang === "en_us" ? "Election Procedure" : "選舉程序"
+              $t('MACColumn_Election_Procedure.Election_Procedure')
             }}</el-menu-item>
             <el-menu-item index="5">{{
-              fairview_park_lang === "en_us"
-                ? "11th MAC Members"
-                : "應屆管理諮詢委員會委員資料"
+              $t('MACColumn_11th_MAC_Members.11th_MAC_Members')
             }}</el-menu-item>
             <el-menu-item index="6">{{
-              fairview_park_lang === "en_us"
-                ? "Minutes of MAC Meetings"
-                : "會議記錄"
+              $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings')
             }}</el-menu-item>
             <el-menu-item index="7">{{
-              fairview_park_lang === "en_us"
-                ? "Nearby Proposed Development(s)"
-                : "周邊發展項目"
+              $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development')
             }}</el-menu-item>
           </el-menu>
           <el-select
@@ -78,53 +66,38 @@
               v-for="(item, index) in [
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Rules & Regulations'
-                      : '規章制度',
+                  $t('MACColumn_Rules_Regulations.Rules_Regulations'),
                   value: '1',
                 },
                 {
-                  label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Sample of Candidate Form'
-                      : '候選人表格樣本',
+                  label:$t('MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form'),
                   value: '2',
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Samlpe of Nomination Form'
-                      : '提名表格樣本',
+                  $t('MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form'),
                   value: '3',
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Election Procedure'
-                      : '選舉程序',
+                  $t('MACColumn_Election_Procedure.Election_Procedure'),
                   value: '4',
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? '11th MAC Members'
-                      : '應屆管理諮詢委員會委員資料',
+                  $t('MACColumn_11th_MAC_Members.11th_MAC_Members'),
                   value: '5',
                   children: [],
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Minutes of MAC Meetings'
-                      : '會議記錄',
+                  $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings'),
                   value: '6',
                   children: [],
                 },
                 {
                   label:
-                    fairview_park_lang === 'en_us'
-                      ? 'Nearby Proposed Development(s)'
-                      : '周邊發展項目',
+                  $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development'),
                   value: '7',
                 },
               ]"

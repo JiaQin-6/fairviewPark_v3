@@ -9,7 +9,7 @@
 <template>
   <div>
     <h5>
-      {{ fairview_park_lang === "en_us" ? "Samlpe of Nomination Form" : "提名表格樣本" }}
+      {{ $t('MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form') }}
     </h5>
     <div style="text-align: center">
       <img

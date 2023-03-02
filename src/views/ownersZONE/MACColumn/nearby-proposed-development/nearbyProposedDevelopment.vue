@@ -10,7 +10,7 @@
   <div>
     <h5>
       {{
-        fairview_park_lang === "en_us" ? "Nearby Proposed Development(s)" : "周邊發展項目"
+        $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development')
       }}
     </h5>
     <h6>

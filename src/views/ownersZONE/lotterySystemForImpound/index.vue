@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Lottery system for" : "抽籤鎖車"
-        }}{{ fairview_park_lang === "en_us" ? " Impounding Action" : "機制" }}
+        {{ $t('headed.Lottery_System_For_Impounding_Action')
+        }}
       </p>
     </div>
     <!-- navs -->

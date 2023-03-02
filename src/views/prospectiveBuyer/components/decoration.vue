@@ -11,9 +11,7 @@
     <div class="content row">
       <p style="padding:0;font-size: 36px;color:#9cc212;font-weight:bold;">
         {{
-            fairview_park_lang === "en_us"
-              ? "House Type Enquiry"
-              : "原型圖查詢"
+          $t('ProspectiveBuyer_House_Type_Enquiry.House_Type_Enquiry')
         }}
       </p>
       <!-- nar -->

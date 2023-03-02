@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Prospective" : "新買家"
-        }}{{ fairview_park_lang === "en_us" ? " buyer" : "須知" }}
+        {{ $t('headed.Prospective_Buyer')
+        }}
       </p>
     </div>
     <!-- navs -->
@@ -30,26 +30,22 @@
                 {
                   icon: '',
                   text:
-                    fairview_park_lang === 'en_us' ? 'Prospective buyer' : '買家須知',
+                    $t('ProspectiveBuyer_Prospective_buyer.Prospective_buyer'),
                 },
                 {
                   icon: '',
                   text:
-                    fairview_park_lang === 'en_us'
-                      ? 'One Stop Service for New Owners'
-                      : '新業主的一站式服務',
+                  $t('ProspectiveBuyer_One_Stop_Service_for_New_Owners.One_Stop_Service_for_New_Owners'),
                 },
                 {
                   icon: '',
                   text:
-                    fairview_park_lang === 'en_us' ? 'House Type Enquiry' : '原型圖查詢',
+                  $t('ProspectiveBuyer_House_Type_Enquiry.House_Type_Enquiry'),
                 },
                 {
                   icon: '',
                   text:
-                    fairview_park_lang === 'en_us'
-                      ? 'Master Colour Schedule'
-                      : '外牆顏色系列',
+                  $t('ProspectiveBuyer_Master_Colour_Schedule.Master_Colour_Schedule'),
                 },
               ]"
               :key="index"
@@ -74,23 +70,19 @@
             <el-option
               v-for="(item, index) in [
                 {
-                  text:  fairview_park_lang === 'en_us' ? 'Prospective buyer' : '買家須知',
+                  text:  $t('ProspectiveBuyer_Prospective_buyer.Prospective_buyer'),
                   value: 0,
                 },
                 {
-                  text:  fairview_park_lang === 'en_us'
-                      ? 'One Stop Service for New Owners'
-                      : '新業主的一站式服務',
+                  text:  $t('ProspectiveBuyer_One_Stop_Service_for_New_Owners.One_Stop_Service_for_New_Owners'),
                   value: 1,
                 },
                 {
-                  text:  fairview_park_lang === 'en_us' ? 'House Type Enquiry' : '原型圖查詢',
+                  text:  $t('ProspectiveBuyer_House_Type_Enquiry.House_Type_Enquiry'),
                   value: 2,
                 },
                 {
-                  text:  fairview_park_lang === 'en_us'
-                      ? 'Master Colour Schedule'
-                      : '外牆顏色系列',
+                  text:  $t('ProspectiveBuyer_Master_Colour_Schedule.Master_Colour_Schedule'),
                   value: 3,
                 },
               ]"

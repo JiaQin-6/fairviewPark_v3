@@ -16,22 +16,24 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Frequently Used" : "常用"
-        }}{{ fairview_park_lang === "en_us" ? " Forms" : "表格" }}
+        {{ $t("headed.Frequently_Used_Forms") }}
       </p>
     </div>
     <!-- navs -->
     <div class="nav-wrap">
       <div class="row">
-        <div
-          style="margin: 0 auto"
-          class="col-12 nav-content mb-20"
-        >
+        <div style="margin: 0 auto" class="col-12 nav-content mb-20">
           <div>
             <h5>
-              {{ fairview_park_lang === "en_us" ? "Frequently used forms" : "常用表格" }}
+              {{ $t("headed.Frequently_Used_Forms") }}
             </h5>
-            <p class="subTitle" style="font-size:24px;font-weight:bold">{{fairview_park_lang === "en_us" ?'Residents can obtain any application forms from our Customer Service Department.':'住戶可到本處客戶服務索取任何有關申請表格'}}</p>
+            <p class="subTitle" style="font-size: 24px; font-weight: bold">
+              {{
+                fairview_park_lang === "en_us"
+                  ? "Residents can obtain any application forms from our Customer Service Department."
+                  : "住戶可到本處客戶服務索取任何有關申請表格"
+              }}
+            </p>
             <ul>
               <li
                 class="flex-row"
@@ -56,7 +58,10 @@ import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
   data() {
     return {
-      banner: new URL("../../../assets/image/common-banner/owner-zone.jpg", import.meta.url).href,
+      banner: new URL(
+        "../../../assets/image/common-banner/owner-zone.jpg",
+        import.meta.url
+      ).href,
     };
   },
   setup() {
@@ -96,7 +101,7 @@ export default {
 .banner {
   position: relative;
   overflow: hidden;
-    height: 280px;
+  height: 280px;
   .img {
     width: 100%;
     height: 280px;
@@ -113,9 +118,9 @@ export default {
     font-weight: bold;
     width: 80%;
     text-align: center;
-    font-family: 'Poppins-Bold', SourceHanSansCN-Regular, Arial;
-      color: #fff;
-      text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+    font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
+    color: #fff;
+    text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
@@ -130,42 +135,42 @@ export default {
       background-color: #fff;
       font-size: 13px;
       padding: 12px 15px;
-      h5{
+      h5 {
         color: #9cc212;
-          font-size: 36px;
-          font-weight: bold;
+        font-size: 36px;
+        font-weight: bold;
       }
-       ul {
-          padding: 0;
-          li {
-            font-size: 18px;
-            margin-bottom: 20px;
+      ul {
+        padding: 0;
+        li {
+          font-size: 18px;
+          margin-bottom: 20px;
+          align-items: center;
+          background-color: #e3f3b3;
+
+          i {
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            width: 40px;
+            text-align: center;
             background-color: #e3f3b3;
+            height: 100%;
+          }
 
-            i {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              width: 40px;
-              text-align: center;
-              background-color: #e3f3b3;
-              height: 100%;
-            }
+          span {
+            line-height: 25px;
+            background-color: #fff0be;
+            flex: 1;
+            padding: 7px 0 7px 10px;
 
-            span {
-              line-height: 25px;
-              background-color: #fff0be;
-              flex: 1;
-              padding: 7px 0 7px 10px;
-
-              a {
-                text-decoration: none;
-                color: #4a4a4a;
-              }
+            a {
+              text-decoration: none;
+              color: #4a4a4a;
             }
           }
         }
+      }
     }
   }
 }
@@ -196,26 +201,27 @@ export default {
 }
 @media (max-width: 991px) {
   .banner {
-      height: 200px;
+    height: 200px;
     img {
       width: auto;
     }
-    p{
-      font-size:36px;
+    p {
+      font-size: 36px;
     }
   }
-  .nav-content{
-    h5{
-      font-size: 28px!important;
+  .nav-content {
+    h5 {
+      font-size: 28px !important;
     }
-    .subTitle{
-      font-size: 20px!important;
+    .subTitle {
+      font-size: 20px !important;
       margin-bottom: 20px;
     }
-    ul{
-      li{
-        i,a{
-          font-size: 15px!important;
+    ul {
+      li {
+        i,
+        a {
+          font-size: 15px !important;
         }
       }
     }

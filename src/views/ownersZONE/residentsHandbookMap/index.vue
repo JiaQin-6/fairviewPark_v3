@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Residents Handbook /" : "業主手冊及"
-        }}{{ fairview_park_lang === "en_us" ? " Map" : "屋苑地圖" }}
+        {{ $t('headed.Residents_Handbook_Map')
+        }}
       </p>
     </div>
     <!-- navs -->

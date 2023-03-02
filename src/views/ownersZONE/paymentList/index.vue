@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Payment" : "收費"
-        }}{{ fairview_park_lang === "en_us" ? " List" : "表" }}
+        {{ $t('headed.Payment_List')
+        }}
       </p>
     </div>
     <!-- 內容 -->

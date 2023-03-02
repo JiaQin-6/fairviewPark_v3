@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Demographic opinion" : "人口統計及"
-        }}{{ fairview_park_lang === "en_us" ? " survey" : "意見調查" }}
+        {{ $t('headed.Demographic_Opinion_Survey')
+        }}
       </p>
     </div>
     <!-- navs -->

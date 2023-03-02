@@ -16,8 +16,8 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ fairview_park_lang === "en_us" ? "Useful Telephone" : "常用電話及"
-        }}{{ fairview_park_lang === "en_us" ? " Nos." : "連接" }}
+        {{ $t('headed.Useful_Telephone_Nos')
+        }}
       </p>
     </div>
     <!-- navs -->
