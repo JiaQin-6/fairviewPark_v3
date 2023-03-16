@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.Estate_Activities')
-        }}
+        {{ $t("headed.Estate_Activities") }}
       </p>
     </div>
     <!-- navs -->
@@ -42,7 +41,7 @@
             </li>
           </ul>
           <el-select
-            v-if="estate_activites_list.length>0"
+            v-if="estate_activites_list.length > 0"
             size="large"
             v-model="nav_index"
             class="menu-select"
@@ -89,7 +88,7 @@
         position: fixed;
         z-index: 10000;
       "
-      :style="{'display':v_loading?'':'none'}"
+      :style="{ display: v_loading ? '' : 'none' }"
     ></div>
   </div>
 </template>
@@ -111,7 +110,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
-      v_loading:false,
+      v_loading: false,
       estate_activites_list: [],
       estate_activites_content: null,
       fairview_park_lang: "",
@@ -177,16 +176,19 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .banner {
   position: relative;
   overflow: hidden;
   height: 280px;
+
   .img {
     width: 100%;
     height: 280px;
     background-size: cover;
     background-position: bottom;
   }
+
   p {
     position: absolute;
     left: 50%;
@@ -200,18 +202,23 @@ export default {
     font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
     color: #fff;
     text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     }
   }
 }
+
 .nav-wrap {
   padding: 20px;
+
   .row {
     margin: 0 auto;
+
     .aside {
       padding: 0;
+
       ul {
         position: sticky;
         top: 80px;
@@ -221,6 +228,7 @@ export default {
         margin: 0;
         background-color: #fff;
         padding: 10px;
+
         li {
           text-align: left;
           margin-bottom: 5px;
@@ -228,87 +236,107 @@ export default {
           box-sizing: border-box;
           background-color: rgb(235, 233, 233);
           cursor: pointer;
+
           i {
             font-size: 15px;
             margin-right: 5px;
             display: none;
             color: #000;
           }
+
           span {
             font-size: 18px;
             color: #000;
           }
+
           &:hover {
             background-color: var(--mainColor2);
             color: #fff;
+
             i {
               color: #fff;
             }
+
             span {
               color: #fff;
             }
           }
         }
+
         .active {
           background-color: var(--mainColor2);
           color: #fff;
+
           i {
             color: #fff;
           }
+
           span {
             color: #fff;
           }
         }
       }
+
       .menu-select {
         display: none;
       }
     }
+
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
       padding: 0px 20px 0 20px;
+
       img {
         max-width: 100%;
       }
     }
   }
 }
+
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .nav-wrap-container {
     width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .nav-wrap-container {
     width: 1100px;
   }
 }
+
 @media (min-width: 1400px) {
   .nav-wrap-container {
     width: 1280px;
   }
 }
+
 @media (max-width: 991px) {
   .banner {
     height: 200px;
+
     img {
       width: auto;
     }
-    p{
-      font-size:36px;
+
+    p {
+      font-size: 36px;
     }
   }
+
   .nav-wrap {
     .row {
       .aside {
@@ -316,38 +344,47 @@ export default {
           flex-wrap: nowrap;
           padding: 0;
           display: none;
+
           li {
             display: flex;
             text-align: center;
             align-items: center;
+
             span {
               margin: 0 auto;
             }
           }
         }
+
         @{deep} .menu-select {
           display: block;
           --el-select-input-focus-border-color: #ccc;
+
           .select-trigger {
             .el-input {
               font-size: 18px;
+
               .el-input__wrapper {
               }
             }
+
             .is-focus {
               border-color: #ccc;
             }
           }
-           .el-popper {
+
+          .el-popper {
             position: absolute;
             top: 52px !important;
             left: 0 !important;
+
             .el-select-dropdown {
               .el-scrollbar {
                 .el-select-dropdown__wrap {
                   .el-scrollbar__view {
                     .el-select-dropdown__item {
                       text-align: left;
+
                       span {
                         margin: 0;
                       }
@@ -359,10 +396,12 @@ export default {
           }
         }
       }
+
       .nav-content {
         padding: 0;
-        >p{
-          font-size: 28px!important;
+
+        > p {
+          font-size: 28px !important;
         }
       }
     }

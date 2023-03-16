@@ -9,14 +9,16 @@
 <template>
   <div>
     <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-      {{ fairview_park_lang === "en_us" ? "Overhaul Project Information" : "大維修資訊" }}
+      {{
+        $t("TheOverhaulProject_Overhaul_Project_Information.Overhaul_Project_Information")
+      }}
     </p>
     <!-- 大維修資訊 -->
     <div style="text-align: right">
       <el-select
         v-if="tohpByFpnList.length > 0"
         v-model="tohpByFpnIndex"
-        style="margin: 20px 0;width:100%"
+        style="margin: 20px 0; width: 100%"
         placeholder="Select"
         size="large"
         @change="changeTohpByFpn"
@@ -30,10 +32,10 @@
         />
       </el-select>
       <div class="share" v-if="isShowShareButton">
-             <el-button @click="sharePdf">
-              {{ fairview_park_lang==='en_us'?'Share':'分享' }}
-             </el-button>
-            </div>
+        <el-button @click="sharePdf">
+          {{ fairview_park_lang === "en_us" ? "Share" : "分享" }}
+        </el-button>
+      </div>
       <PDFPreview
         v-if="pdfPreview"
         :pdfPreview="pdfPreview"
@@ -61,8 +63,8 @@ export default {
       ramNumber: "",
       pdfPreview: "",
       pdfDownloadUrl: "",
-      pageNumber:0,
-      isShowShareButton:false,
+      pageNumber: 0,
+      isShowShareButton: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
@@ -86,24 +88,23 @@ export default {
         data.tohpByFpnList.length !== 0 &&
         data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
       data.pageNumber =
-        data.tohpByFpnList.length !== 0 &&
-        data.tohpByFpnList[data.tohpByFpnIndex].remark;
+        data.tohpByFpnList.length !== 0 && data.tohpByFpnList[data.tohpByFpnIndex].remark;
     };
-     //分享pdf鏈接
-     const sharePdf = () => {
-      console.log(data.pdfPreview)
-      let a = document.createElement('a');
+    //分享pdf鏈接
+    const sharePdf = () => {
+      console.log(data.pdfPreview);
+      let a = document.createElement("a");
       a.href = data.pdfPreview;
-      a.target = '_blank';
+      a.target = "_blank";
       document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a)
+      document.body.removeChild(a);
     };
     onMounted(async () => {
       //如果是從app進來用戶未登錄，隱藏分享button
       if (sessionStorage.getItem("app-login-status")) {
         data.isShowShareButton = true;
-      } 
+      }
       await findTohpByFpn2();
       data.pdfPreview =
         data.tohpByFpnList.length !== 0 &&
@@ -112,8 +113,7 @@ export default {
         data.tohpByFpnList.length !== 0 &&
         data.tohpByFpnList[data.tohpByFpnIndex].fileZhTw;
       data.pageNumber =
-        data.tohpByFpnList.length !== 0 &&
-        data.tohpByFpnList[data.tohpByFpnIndex].remark;
+        data.tohpByFpnList.length !== 0 && data.tohpByFpnList[data.tohpByFpnIndex].remark;
     });
     return {
       ...toRefs(data),
@@ -143,14 +143,14 @@ export default {
     }
   }
 }
-.share{
-        .el-button{
-          background-color: var(--mainColor2);
-          color:#fff;
-          border-color: var(--mainColor2);
-          padding: 10px 20px;
-        }
-      }
+.share {
+  .el-button {
+    background-color: var(--mainColor2);
+    color: #fff;
+    border-color: var(--mainColor2);
+    padding: 10px 20px;
+  }
+}
 @{deep} .pdf-preview {
   .pdf-preview-content {
     width: 100%;

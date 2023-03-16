@@ -10,7 +10,7 @@
   <el-config-provider :locale="local">
     <div>
       <p style="font-size: 36px; color: #9cc212; font-weight: bold">
-        {{ fairview_park_lang === "en_us" ? "Minutes of SPAC Meetings" : "會議記錄" }}
+        {{ $t('TheOverhaulProject_Minutes_of_SPAC_Meetings.Minutes_of_SPAC_Meetings') }}
       </p>
       <div class="content">
         <ul>

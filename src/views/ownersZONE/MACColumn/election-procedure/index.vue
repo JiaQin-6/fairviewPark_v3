@@ -8,79 +8,119 @@
 -->
 <template>
   <div>
-    <el-select v-model="menuActive" class="menu-select" style="margin-bottom:20px" size="large"
-      @click="menuActive = item2.value">
-      <el-option v-for="(item, index) in [
-        {
-          text: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
-          value: 1,
-        },
-        {
-          text:
-            fairview_park_lang === 'en_us' ? 'Election Activities Rules' : '選舉守則',
-          value: 2,
-        },
-        {
-          text:
-            fairview_park_lang === 'en_us'
-              ? 'Election Activities Rules Time Table'
-              : '選舉守則時間表',
-          value: 3,
-        },
-      ]" :key="index" :label="item.text" :value="item.value" />
+    <el-select
+      v-model="menuActive"
+      class="menu-select"
+      style="margin-bottom: 20px"
+      size="large"
+      @click="menuActive = item2.value"
+    >
+      <el-option
+        v-for="(item, index) in [
+          {
+            text: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+            value: 1,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us' ? 'Election Activities Rules' : '選舉守則',
+            value: 2,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us'
+                ? 'Election Activities Rules Time Table'
+                : '選舉守則時間表',
+            value: 3,
+          },
+        ]"
+        :key="index"
+        :label="item.text"
+        :value="item.value"
+      />
     </el-select>
-    <h5>{{ $t('MACColumn_Rules_Regulations.Rules_Regulations') }}</h5>
+    <h5>{{ $t("MACColumn_Rules_Regulations.Rules_Regulations") }}</h5>
     <div class="menu">
-      <div class="sub-menu" :class="{ active: menuActive === item2.value }" v-for="(item2, index2) in [
-        {
-          text: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
-          value: 1,
-        },
-        {
-          text:
-            fairview_park_lang === 'en_us' ? 'Election Activities Rules' : '選舉守則',
-          value: 2,
-        },
-        {
-          text:
-            fairview_park_lang === 'en_us'
-              ? 'Election Activities Rules Time Table'
-              : '選舉守則時間表',
-          value: 3,
-        },
-      ]" :key="index2" @click="menuActive = item2.value">
+      <div
+        class="sub-menu"
+        :class="{ active: menuActive === item2.value }"
+        v-for="(item2, index2) in [
+          {
+            text: fairview_park_lang === 'en_us' ? 'Election Procedure' : '選舉程序',
+            value: 1,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us' ? 'Election Activities Rules' : '選舉守則',
+            value: 2,
+          },
+          {
+            text:
+              fairview_park_lang === 'en_us'
+                ? 'Election Activities Rules Time Table'
+                : '選舉守則時間表',
+            value: 3,
+          },
+        ]"
+        :key="index2"
+        @click="menuActive = item2.value"
+      >
         {{ item2.text }}
       </div>
     </div>
     <div>
-      <div v-show="menuActive === 1" style="font-size: 18px" v-for="(item, index) in content" :key="index">
+      <div
+        v-show="menuActive === 1"
+        style="font-size: 18px"
+        v-for="(item, index) in content"
+        :key="index"
+      >
         <p v-show="item.title">{{ item.title }}</p>
-        <p style="display: flex" v-show="item.children && item2.text" v-for="(item2, index2) in item.children"
-          :key="index2">
+        <p
+          style="display: flex"
+          v-show="item.children && item2.text"
+          v-for="(item2, index2) in item.children"
+          :key="index2"
+        >
           <span style="margin-right: 10px">{{ item2.index }}.</span>{{ item2.text }}
         </p>
         <div style="padding: 0 20px">
-          <p style="display: flex" v-for="(item3, index3) in item.children2" :key="index3">
-            <span>{{ item3.index }}</span>{{ item3.text }}
+          <p
+            style="display: flex"
+            v-for="(item3, index3) in item.children2"
+            :key="index3"
+          >
+            <span>{{ item3.index }}</span
+            >{{ item3.text }}
           </p>
         </div>
       </div>
       <div v-show="menuActive === 2">
         <div class="share" v-if="isShowShareButton">
           <el-button @click="sharePdf(pdfPreview1)">
-            {{ fairview_park_lang === 'en_us' ? 'Share' : '分享' }}
+            {{ fairview_park_lang === "en_us" ? "Share" : "分享" }}
           </el-button>
         </div>
-        <PDFPreview v-if="pdfPreview1" :pdfPreview="pdfPreview1" :pdfDownloadUrl="pdfDownloadUrl1" :pageNumber="1">
+        <PDFPreview
+          v-if="pdfPreview1"
+          :pdfPreview="pdfPreview1"
+          :pdfDownloadUrl="pdfDownloadUrl1"
+          :pageNumber="1"
+        >
         </PDFPreview>
       </div>
       <div v-show="menuActive === 3">
         <div class="share" v-if="isShowShareButton">
           <el-button @click="sharePdf(pdfPreview2)">
-            {{ fairview_park_lang === 'en_us' ? 'Share' : '分享' }}
+            {{ fairview_park_lang === "en_us" ? "Share" : "分享" }}
           </el-button>
         </div>
-        <PDFPreview v-if="pdfPreview2" :pdfPreview="pdfPreview2" :pdfDownloadUrl="pdfDownloadUrl2" :pageNumber="1">
+        <PDFPreview
+          v-if="pdfPreview2"
+          :pdfPreview="pdfPreview2"
+          :pdfDownloadUrl="pdfDownloadUrl2"
+          :pageNumber="1"
+        >
         </PDFPreview>
       </div>
     </div>
@@ -114,34 +154,38 @@ export default {
         : window.i18n_zh_tw.MACColumn_Election_Procedure.content;
     //分享pdf鏈接
     const sharePdf = (link) => {
-      let a = document.createElement('a');
+      let a = document.createElement("a");
       a.href = link;
-      a.target = '_blank';
+      a.target = "_blank";
       document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a)
+      document.body.removeChild(a);
     };
     onMounted(async () => {
       //如果是從app進來用戶未登錄，隱藏分享button
       if (sessionStorage.getItem("app-login-status")) {
         data.isShowShareButton = true;
       }
-      data.pdfPreview1 = data.fairview_park_lang === "en_us"
-        ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
-        : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
-      data.pdfDownloadUrl1 = data.fairview_park_lang === "en_us"
-        ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
-        : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
-      data.pdfPreview2 = data.fairview_park_lang === "en_us"
-        ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-        : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf",
-        data.pdfDownloadUrl2 = data.fairview_park_lang === "en_us"
-          ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-          : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf";
+      data.pdfPreview1 =
+        data.fairview_park_lang === "en_us"
+          ? "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
+          : "https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
+      data.pdfDownloadUrl1 =
+        data.fairview_park_lang === "en_us"
+          ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
+          : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
+      (data.pdfPreview2 =
+        data.fairview_park_lang === "en_us"
+          ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+          : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf"),
+        (data.pdfDownloadUrl2 =
+          data.fairview_park_lang === "en_us"
+            ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
+            : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf");
     });
     return {
       ...toRefs(data),
-      sharePdf
+      sharePdf,
     };
   },
 };
@@ -181,7 +225,8 @@ h5 {
     .el-input {
       font-size: 18px;
 
-      .el-input__wrapper {}
+      .el-input__wrapper {
+      }
     }
 
     .is-focus {

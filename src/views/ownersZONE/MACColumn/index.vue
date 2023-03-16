@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.MAC_Column')
-        }}
+        {{ $t("headed.MAC_Column") }}
       </p>
     </div>
     <!-- navs -->
@@ -35,25 +34,25 @@
             @select="handleSelect"
           >
             <el-menu-item index="1">{{
-              $t('MACColumn_Rules_Regulations.Rules_Regulations')
+              $t("MACColumn_Rules_Regulations.Rules_Regulations")
             }}</el-menu-item>
             <el-menu-item index="2">{{
-              $t('MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form')
+              $t("MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form")
             }}</el-menu-item>
             <el-menu-item index="3">{{
-              $t('MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form')
+              $t("MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form")
             }}</el-menu-item>
             <el-menu-item index="4">{{
-              $t('MACColumn_Election_Procedure.Election_Procedure')
+              $t("MACColumn_Election_Procedure.Election_Procedure")
             }}</el-menu-item>
             <el-menu-item index="5">{{
-              $t('MACColumn_11th_MAC_Members.11th_MAC_Members')
+              $t("MACColumn_11th_MAC_Members.11th_MAC_Members")
             }}</el-menu-item>
             <el-menu-item index="6">{{
-              $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings')
+              $t("MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings")
             }}</el-menu-item>
             <el-menu-item index="7">{{
-              $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development')
+              $t("MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development")
             }}</el-menu-item>
           </el-menu>
           <el-select
@@ -65,39 +64,39 @@
             <el-option
               v-for="(item, index) in [
                 {
-                  label:
-                  $t('MACColumn_Rules_Regulations.Rules_Regulations'),
+                  label: $t('MACColumn_Rules_Regulations.Rules_Regulations'),
                   value: '1',
                 },
                 {
-                  label:$t('MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form'),
+                  label: $t(
+                    'MACColumn_Sample_of_Candidate_Form.Sample_of_Candidate_Form'
+                  ),
                   value: '2',
                 },
                 {
-                  label:
-                  $t('MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form'),
+                  label: $t(
+                    'MACColumn_Samlpe_of_Nomination_Form.Samlpe_of_Nomination_Form'
+                  ),
                   value: '3',
                 },
                 {
-                  label:
-                  $t('MACColumn_Election_Procedure.Election_Procedure'),
+                  label: $t('MACColumn_Election_Procedure.Election_Procedure'),
                   value: '4',
                 },
                 {
-                  label:
-                  $t('MACColumn_11th_MAC_Members.11th_MAC_Members'),
+                  label: $t('MACColumn_11th_MAC_Members.11th_MAC_Members'),
                   value: '5',
                   children: [],
                 },
                 {
-                  label:
-                  $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings'),
+                  label: $t('MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings'),
                   value: '6',
                   children: [],
                 },
                 {
-                  label:
-                  $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development'),
+                  label: $t(
+                    'MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development'
+                  ),
                   value: '7',
                 },
               ]"
@@ -110,17 +109,11 @@
         <div class="col-12 col-lg-10 nav-content mb-20 flex-row">
           <div class="nav-content-wrap" style="width: 100%">
             <RulesRegulations v-if="activeIndex === '1'"></RulesRegulations>
-            <SampleOfCandidateForm
-              v-if="activeIndex === '2'"
-            ></SampleOfCandidateForm>
-            <SamlpeOfNominationForm
-              v-if="activeIndex === '3'"
-            ></SamlpeOfNominationForm>
+            <SampleOfCandidateForm v-if="activeIndex === '2'"></SampleOfCandidateForm>
+            <SamlpeOfNominationForm v-if="activeIndex === '3'"></SamlpeOfNominationForm>
             <ElectionProcedure v-if="activeIndex === '4'"></ElectionProcedure>
             <MACMembers v-if="activeIndex === '5'"></MACMembers>
-            <MinutesOfMacMeetings
-              v-if="activeIndex === '6'"
-            ></MinutesOfMacMeetings>
+            <MinutesOfMacMeetings v-if="activeIndex === '6'"></MinutesOfMacMeetings>
             <NearbyProposedDevelopment
               v-if="activeIndex === '7'"
             ></NearbyProposedDevelopment>

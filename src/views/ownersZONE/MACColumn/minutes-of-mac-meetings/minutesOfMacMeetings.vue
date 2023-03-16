@@ -86,6 +86,7 @@
       </div>
     </div>
     <div class="content">
+      <!-- 大會議記錄 -->
       <el-config-provider :locale="local">
         <ul v-show="menuActive === 1">
           <li
@@ -116,7 +117,7 @@
           </div>
         </ul>
       </el-config-provider>
-
+      <!-- 分組會議記錄 -->
       <div v-show="menuActive === 2">
         <div class="menu">
           <span
@@ -158,6 +159,7 @@
           />
         </div>
       </div>
+      <!-- 工作回顧 -->
       <div v-show="menuActive === 3">
         <div class="share" v-if="isShowShareButton">
              <el-button @click="sharePdf">

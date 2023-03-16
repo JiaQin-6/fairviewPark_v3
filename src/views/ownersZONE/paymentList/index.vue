@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.Payment_List')
-        }}
+        {{ $t("headed.Payment_List") }}
       </p>
     </div>
     <!-- 內容 -->
@@ -961,17 +960,17 @@
     <!-- 内容 -->
     <div class="content">
       <iframe
-      class="iframe-zh"
-      v-show="fairview_park_lang === 'zh_tw'"
-      style="display: block; width: 100%; height: 800px;padding:20px 0"
-      src="https://fairviewpark.hk/file/payment-list_cn.html"
-    ></iframe>
-    <iframe
-      class="iframe-en"
-      v-show="fairview_park_lang === 'en_us'"
-      style="display: block; width: 100%; height: 800px;padding:20px 0"
-      src="https://fairviewpark.hk/file/payment-list_en.html"
-    ></iframe>
+        class="iframe-zh"
+        v-show="fairview_park_lang === 'zh_tw'"
+        style="display: block; width: 100%; height: 800px; padding: 20px 0"
+        src="https://fairviewpark.hk/file/payment-list_cn.html"
+      ></iframe>
+      <iframe
+        class="iframe-en"
+        v-show="fairview_park_lang === 'en_us'"
+        style="display: block; width: 100%; height: 800px; padding: 20px 0"
+        src="https://fairviewpark.hk/file/payment-list_en.html"
+      ></iframe>
     </div>
   </div>
 </template>
@@ -985,8 +984,7 @@ export default {
         "../../../assets/image/common-banner/owner-zone.jpg",
         import.meta.url
       ).href,
-      title: new URL("../../../assets/image/privilege/dp.png", import.meta.url)
-        .href,
+      title: new URL("../../../assets/image/privilege/dp.png", import.meta.url).href,
     };
   },
   setup() {

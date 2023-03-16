@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.News_Update')
-        }}
+        {{ $t("headed.News_Update") }}
       </p>
     </div>
     <!-- navs -->
@@ -36,7 +35,7 @@
             </li>
           </ul>
           <el-select
-            v-if="new_update_list.length>0"
+            v-if="new_update_list.length > 0"
             v-model="new_update_index"
             class="menu-select"
             size="large"
@@ -85,7 +84,7 @@
         position: fixed;
         z-index: 10000;
       "
-      :style="{'display':v_loading?'':'none'}"
+      :style="{ display: v_loading ? '' : 'none' }"
     ></div>
   </div>
 </template>
@@ -105,7 +104,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
-      v_loading:false,
+      v_loading: false,
       new_update_list: [],
       new_update_index: null,
       new_update_content: [],

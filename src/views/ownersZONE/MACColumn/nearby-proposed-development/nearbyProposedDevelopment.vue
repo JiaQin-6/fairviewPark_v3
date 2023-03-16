@@ -9,9 +9,7 @@
 <template>
   <div>
     <h5>
-      {{
-        $t('MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development')
-      }}
+      {{ $t("MACColumn_Nearby_Proposed_Development.Nearby_Proposed_Development") }}
     </h5>
     <h6>
       {{
@@ -27,11 +25,8 @@
           :key="index"
           class="col-6 col-md-4"
         >
-          <a :href="item.pdfUrlEnUs" style="border: 2px solid #f7f7f7;">
-            <img
-              :src="item.fileImage"
-              alt=""
-            />
+          <a :href="item.pdfUrlEnUs" style="border: 2px solid #f7f7f7">
+            <img :src="item.fileImage" alt="" />
           </a>
           <p>{{ item.titleEnUs }}</p>
         </li>
@@ -116,7 +111,7 @@ h5 {
   }
 }
 @media (max-width: 991px) {
-  h5{
+  h5 {
     font-size: 28px;
   }
 }

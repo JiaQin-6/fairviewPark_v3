@@ -7,7 +7,6 @@
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
  */
 import {ElMessage} from '../main.js'
-import i18n from '../i18n/index.js'
 //导入axios
 import axios from "axios";
 import router from '../router'
@@ -217,7 +216,7 @@ http.interceptors.response.use(
       if(localStorage.getItem('login-info')){
         ElMessage({
           showClose: true,
-          message: i18n.global.t('Login timeout Please login again'),
+          message: sessionStorage.getItem('fairview_park_lang')==='en_us'?'Login timeout Please login again':'登錄逾時，請重新登入! ',
           type: 'warning',
         })
       }

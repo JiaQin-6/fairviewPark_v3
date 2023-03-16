@@ -45,7 +45,9 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="login_error_tip.is_null && !loginForm.loginName"
-                    >{{ $t("login.Please_provide_a_valid_login_name") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                        ? "Please provide a valid login name."
+                        : "請輸入正確的登陸名" }}</i
                   >
                 </li>
                 <li>
@@ -61,17 +63,16 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="login_error_tip.is_null && !loginForm.password"
-                    >{{ $t("login.Please_provide_a_valid_password") }}</i
+                    >{{ fairview_park_lang === "en_us"
+                        ? "Please provide a valid password."
+                        : "請輸入正確的密碼" }}</i
                   >
                 </li>
               </ul>
             </div>
             <div class="remember flex-row">
               <div class="flex-row" style="align-items: center">
-                <!-- <input id="checkbox" type="checkbox" />
-                <label for="checkbox">记住我</label> -->
               </div>
-
               <i data-bs-target="#forgetPassword" data-bs-toggle="modal"
                 >{{ $t("login.Forgot_password") }}?</i
               >
@@ -305,7 +306,7 @@
               <p style="color: #fc0d1b" v-show="register_error_tip.is_show">
                 {{ register_error_tip.text }}
               </p>
-              <button @click="register">{{ $t("Sign_up.Sign_up") }}</button>
+              <button @click="register">{{ $t("sign_up.Sign_up") }}</button>
             </div>
           </div>
         </div>
@@ -386,7 +387,7 @@
                       forgot_password_error_tip.is_email_correct &&
                       forgotPasswordForm.email
                     "
-                    >{{ $t("forget_password.Please_provide_a_valid_email") }}</i
+                    >{{ fairview_park_lang === 'en_us' ? 'Please provide a valid email.' : '請輸入正確格式的郵件' }}</i
                   >
                 </li>
               </ul>
@@ -640,7 +641,7 @@
                       edit_member_info_error_tip.is_email_correct &&
                       editMemberInfoForm.email
                     "
-                    >{{ $t("Edit_member_information.Please_provide_a_valid_email") }}</i
+                    >{{ fairview_park_lang === 'en_us' ? 'Please provide a valid email.' : '請輸入正確格式的郵件' }}</i
                   >
                 </li>
                 <li>

@@ -16,8 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.Lottery_System_For_Impounding_Action')
-        }}
+        {{ $t("headed.Lottery_System_For_Impounding_Action") }}
       </p>
     </div>
     <!-- navs -->
@@ -153,8 +152,8 @@ export default {
     img {
       width: auto;
     }
-    p{
-      font-size:36px;
+    p {
+      font-size: 36px;
     }
   }
 }

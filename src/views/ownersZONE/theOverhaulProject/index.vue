@@ -16,7 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.the_Overhaul_Project') }}
+        {{ $t("headed.the_Overhaul_Project") }}
       </p>
     </div>
     <!-- navs -->
@@ -27,31 +27,19 @@
             <li
               v-for="(item, index) in [
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'The Overhaul Project'
-                      : '「大維修」',
+                  title:$t('TheOverhaulProject.The_Overhaul_Project'),
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'Overhaul Project Information'
-                      : '大維修資訊',
+                  title:$t('TheOverhaulProject_Overhaul_Project_Information.Overhaul_Project_Information'),
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'SPAC Member List'
-                      : '特別工程諮詢委員會委員名單',
+                  title:$t('TheOverhaulProject_SPAC_Member_List.SPAC_Member_List'),
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'Minutes of SPAC Meetings'
-                      : '會議記錄',
+                  title:$t('TheOverhaulProject_Minutes_of_SPAC_Meetings.Minutes_of_SPAC_Meetings'),
                 },
                 {
-                  title: fairview_park_lang === 'en_us' ? 'FAQ' : '常見問題',
+                  title: $t('TheOverhaulProject_FAQ.FAQ'),
                 },
               ]"
               :key="index"
@@ -75,35 +63,23 @@
             <el-option
               v-for="(item, index) in [
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'The Overhaul Project'
-                      : '「大維修」',
+                  title:$t('TheOverhaulProject.The_Overhaul_Project'),
                   value: 0,
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'Overhaul Project Information'
-                      : '大維修資訊',
+                  title:$t('TheOverhaulProject_Overhaul_Project_Information.Overhaul_Project_Information'),
                   value: 1,
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'SPAC Member List'
-                      : '特別工程諮詢委員會委員名單',
+                  title:$t('TheOverhaulProject_SPAC_Member_List.SPAC_Member_List'),
                   value: 2,
                 },
                 {
-                  title:
-                    fairview_park_lang === 'en_us'
-                      ? 'Minutes of SPAC Meetings'
-                      : '會議記錄',
+                  title:$t('TheOverhaulProject_Minutes_of_SPAC_Meetings.Minutes_of_SPAC_Meetings'),
                   value: 3,
                 },
                 {
-                  title: fairview_park_lang === 'en_us' ? 'FAQ' : '常見問題',
+                  title: $t('TheOverhaulProject_FAQ.FAQ'),
                   value: 4,
                 },
               ]"
@@ -111,20 +87,14 @@
               :label="item.title"
               :value="item.value"
             >
-              <i
-                class="iconfont"
-                :class="item.icon"
-                style="margin-right: 10px"
-              ></i>
+              <i class="iconfont" :class="item.icon" style="margin-right: 10px"></i>
               <span>{{ item.title }}</span>
             </el-option>
           </el-select>
         </div>
         <div class="col-12 col-lg-10 nav-content mb-20">
           <TheOverhaulProject v-if="nav_index === 0"></TheOverhaulProject>
-          <OverhaulProjectInformation
-            v-if="nav_index === 1"
-          ></OverhaulProjectInformation>
+          <OverhaulProjectInformation v-if="nav_index === 1"></OverhaulProjectInformation>
           <SPACMemberList v-if="nav_index === 2"></SPACMemberList>
           <MinutesOfSPACMeetings v-if="nav_index === 3"></MinutesOfSPACMeetings>
           <FAQ v-if="nav_index === 4"></FAQ>
@@ -337,7 +307,7 @@ export default {
               border-color: #ccc;
             }
           }
-           .el-popper {
+          .el-popper {
             position: absolute;
             top: 52px !important;
             left: 0 !important;

@@ -10,7 +10,7 @@
   <div>
     <p style="font-size: 36px; color: #9cc212; font-weight: bold">
       {{
-        fairview_park_lang === "en_us" ? "SPAC Member List" : "特別工程諮詢委員會委員名單"
+        $t('TheOverhaulProject_SPAC_Member_List.SPAC_Member_List')
       }}
     </p>
     <ul style="padding:0">

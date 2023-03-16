@@ -7,8 +7,8 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { createI18n } from 'vue-i18n';
-import zh from './zh_tw.js';
-import en from './en_us.js';
+// import zh from './zh_tw.js';
+// import en from './en_us.js';
 const i18n = createI18n({
     legacy: false,
     globalInjection: true,
