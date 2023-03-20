@@ -96,7 +96,7 @@
                     :key="index3"
                     style="color: #000; text-decoration: none"
                     :href="'tel:' + item3"
-                    >{{ item3 }}</a
+                    >{{ item3.replace(/(.{4})/g,"$1 ") }}</a
                   ></span
                 >
               </li>
