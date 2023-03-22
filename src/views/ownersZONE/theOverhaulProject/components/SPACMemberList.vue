@@ -17,26 +17,7 @@
       <li
         style="font-size: 18px"
         class="mb-16"
-        v-for="(item, index) in [
-          {
-            text:
-              fairview_park_lang === 'en_us'
-                ? 'Mr. Wong Wai Kwan (Convener)'
-                : '王維君先生 (召集人)',
-          },
-          {
-            text: fairview_park_lang === 'en_us' ? 'Mr. So Wai Yan' : '蘇偉人先生',
-          },
-          {
-            text: fairview_park_lang === 'en_us' ? 'Ms. Choi Mei Nga' : '蔡美雅女士',
-          },
-          {
-            text: fairview_park_lang === 'en_us' ? 'Mr. Wong Chor Ming' : '黃楚銘先生',
-          },
-          {
-            text: fairview_park_lang === 'en_us' ? 'Ms. Young Wing Mui' : '楊詠梅女士',
-          },
-        ]"
+        v-for="(item, index) in content"
         :key="index"
       >
         {{ index + 1 }}.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ item.text }}
@@ -56,9 +37,13 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
       fairview_park_lang: "",
+      content:null,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-
+    data.content =
+      data.fairview_park_lang === "en_us"
+        ? window.i18n_en_us.TheOverhaulProject_SPAC_Member_List.content
+        : window.i18n_zh_tw.TheOverhaulProject_SPAC_Member_List.content;
     onMounted(async () => {});
     return {
       ...toRefs(data),

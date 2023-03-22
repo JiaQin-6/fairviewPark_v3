@@ -325,6 +325,20 @@
         </div>
       </div>
     </nav>
+     <!-- loading -->
+     <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{ display: v_loading ? '' : 'none' }"
+    ></div>
   </div>
 </template>
 
@@ -342,6 +356,8 @@ export default {
   props: {
     loginStatus: Boolean,
     isShow: Boolean,
+    isShowLoginButton: Boolean,
+    isShowLoginOutButton: Boolean,
   },
   data() {
     return {
@@ -353,13 +369,13 @@ export default {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
+      v_loading:false,
       route_url: "",
       fairview_park_lang: "",
       is_login: false,
       pmLogHave: null,
       showLogin_m: false,
       showOwnerZONEList: false,
-      isShowLoginButton: true, //是否顯示登錄按鈕（app進來web判斷）
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
@@ -398,15 +414,6 @@ export default {
       data.is_login = true;
     }
     onMounted(() => {
-      // scrollPosition();
-
-      //如果是從app進來用戶未登錄，隱藏登錄button
-      if (sessionStorage.getItem("app-login-status") === "2") {
-        data.isShowLoginButton = false;
-      } else if (sessionStorage.getItem("app-login-status") === "1") {
-        data.isShowLoginOutButton = false;
-      }
-
       if (document.getElementsByClassName("el-popper")[0]) {
         document.getElementsByClassName("el-popper")[0].parentNode.style.position =
           "fixed";
@@ -417,6 +424,7 @@ export default {
     });
     //切換語言
     const changeLang = (lang) => {
+      data.v_loading = true
       if (
         document.getElementById("navbar-button") &&
         window
@@ -425,11 +433,14 @@ export default {
       ) {
         document.getElementById("navbar-button").click();
       }
-      sessionStorage.setItem("fairview_park_lang", lang);
-      data.fairview_park_lang = lang;
-      proxy.$i18n.locale = lang;
-      location.href = location.href.replace(route.query.lang, lang);
-      location.reload();
+      setTimeout(()=>{
+        sessionStorage.setItem("fairview_park_lang", lang);
+        data.fairview_park_lang = lang;
+        proxy.$i18n.locale = lang;
+        location.href = location.href.replace(route.query.lang, lang);
+        location.reload();
+      },500)
+      
     };
     //切換路由
     const changeRouter = (href, children) => {

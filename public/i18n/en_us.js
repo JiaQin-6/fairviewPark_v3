@@ -1892,5 +1892,23 @@ window.i18n_en_us = {
   },
   TheOverhaulProject_SPAC_Member_List: {
     'SPAC_Member_List': 'SPAC Member List',
+    'content':[
+      {
+        text:'Mr. Wong Wai Kwan (Convener)'
+      },
+        {
+        text:'Mr. So Wai Yan'
+      },
+        {
+        text:'Ms. Choi Mei Nga'
+      },
+        {
+        text:'Mr. Wong Chor Ming'
+      },
+        {
+        text:'Ms. Young Wing Mui'
+      },
+
+    ]
   },
 };

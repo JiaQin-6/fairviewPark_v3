@@ -1705,5 +1705,23 @@ window.i18n_zh_tw = {
   },
   TheOverhaulProject_SPAC_Member_List: {
     'SPAC_Member_List': '特別工程諮詢委員會委員名單',
+     'content':[
+      {
+        text:'王維君先生 (召集人)'
+      },
+        {
+        text:'蘇偉人先生'
+      },
+        {
+        text:'蔡美雅女士'
+      },
+        {
+        text:'黃楚銘先生'
+      },
+        {
+        text:'楊詠梅女士'
+      },
+
+    ]
   },
 };

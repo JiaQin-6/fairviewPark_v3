@@ -11,25 +11,13 @@
     <h5>
       {{ $t('MACColumn_11th_MAC_Members.11th_MAC_Members') }}
     </h5>
-    <img style="width:100%;max-width:592px!important;" :src="fairview_park_lang === 'en_us' ? MAC_member_en : MAC_member" alt="" />
+    <img style="width:100%;max-width:592px!important;" :src="fairview_park_lang === 'en_us' ? 'https://fairviewpark.hk/file/mac/11thMAC_member_en.jpeg' :' https://fairviewpark.hk/file/mac/11thMAC_member.jpeg'" alt="" />
   </div>
 </template>
 
 <script>
 import { ref, reactive, getCurrentInstance, toRefs, onMounted } from "vue";
 export default {
-  data() {
-    return {
-      MAC_member: new URL(
-        "../../../../assets/image/MAC-column/11thMAC_member.jpeg",
-        import.meta.url
-      ).href,
-      MAC_member_en: new URL(
-        "../../../../assets/image/MAC-column/11thMAC_member_en.jpeg",
-        import.meta.url
-      ).href,
-    };
-  },
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();

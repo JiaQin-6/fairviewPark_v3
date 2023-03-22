@@ -140,7 +140,7 @@
       </div>
     </transition>
     <div class="main-content">
-      <Header :isShow="is_show" @showOwnerIsZONE="showOwnerIsZONE"></Header>
+      <Header :isShow="is_show" :isShowLoginButton="isShowLoginButton" :isShowLoginOutButton="isShowLoginOutButton" @showOwnerIsZONE="showOwnerIsZONE"></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
@@ -190,6 +190,7 @@ export default {
       is_show: false,
       is_show_footer: true,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
+      isShowLoginButton:true,//是否顯示登錄按鈕（app進來web判斷）
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -209,6 +210,7 @@ export default {
         //在app未登錄
         sessionStorage.setItem("app-login-status", "2");
         data.is_show_footer = false;
+        data.isShowLoginButton = false
       }
     } else if (sessionStorage.getItem("app-login-status")) {
       if (sessionStorage.getItem("app-login-status") === "1") {
@@ -216,6 +218,7 @@ export default {
         data.isShowLoginOutButton = false;
       } else if (sessionStorage.getItem("app-login-status") === "2") {
         data.is_show_footer = false;
+        data.isShowLoginButton = false
       }
     }
     const showOwnerIsZONE = (val) => {
