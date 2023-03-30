@@ -39,7 +39,7 @@
       </div> -->
       <iframe
         width="100%"
-        height="700px"
+        height="100%"
         frameborder="0"
         :src="`${env}/web/viewer.html?file=${encodeURIComponent(source)}`"
       >
@@ -220,6 +220,7 @@ export default {
   position: relative;
   padding: 20px 0;
   box-sizing: border-box;
+  height: 100%;
   .pdf-preview-content {
     margin: 0 auto;
     height: 100%;

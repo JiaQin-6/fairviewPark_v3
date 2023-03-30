@@ -29,9 +29,7 @@
             </h5>
             <p class="subTitle" style="font-size: 24px; font-weight: bold">
               {{
-                fairview_park_lang === "en_us"
-                  ? "Residents can obtain any application forms from our Customer Service Department."
-                  : "住戶可到本處客戶服務索取任何有關申請表格"
+                $t('Frequently_Used_Forms.Residents_can_obtain_any_application_forms')
               }}
             </p>
             <ul>

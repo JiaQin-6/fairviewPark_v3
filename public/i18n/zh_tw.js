@@ -1724,4 +1724,13 @@ window.i18n_zh_tw = {
 
     ]
   },
+  //業主手冊及屋苑地圖
+  Residents_Handbook_Map:{
+    'Residents_Handbook':'住戶手冊',
+    'House_Floor_Plan_and_Map':'屋宇平面圖及地圖'
+  },
+  //常用表格
+  Frequently_Used_Forms:{
+    'Residents_can_obtain_any_application_forms':'住戶可到本處客戶服務索取任何有關申請表格'
+  }
 };

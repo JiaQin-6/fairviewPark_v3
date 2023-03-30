@@ -45,12 +45,14 @@
               {{ fairview_park_lang==='en_us'?'Share':'分享' }}
              </el-button>
             </div>
-            <PDFPreview
+            <div style="height:700px">
+              <PDFPreview
               v-if="pdfPreview"
               :pdfPreview="pdfPreview"
               :pdfDownloadUrl="pdfDownloadUrl"
               :pageNumber="pageNumber"
             ></PDFPreview>
+            </div>
           </div>
         </div>
       </div>

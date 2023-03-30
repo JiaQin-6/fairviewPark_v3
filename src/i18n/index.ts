@@ -15,8 +15,8 @@ const i18n = createI18n({
   globalInjection: true,// 全局注册 $t方法
   locale: sessionStorage.getItem('fairview_park_lang') || 'zh_tw',
   messages: {
-    'zh_tw': window.i18n_zh_tw,
-    'en_us': window.i18n_en_us,
+    'zh_tw': (window as any).i18n_zh_tw,
+    'en_us': (window as any).i18n_en_us,
   }
 });
 

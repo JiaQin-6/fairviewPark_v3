@@ -210,7 +210,7 @@ http.interceptors.response.use(function (response) {
         if (localStorage.getItem('login-info')) {
             ElMessage({
                 showClose: true,
-                message: sessionStorage.getItem('fairview_park_lang')==='en_us'?'Login timeout Please login again':'登錄逾時，請重新登入! ',
+                message: sessionStorage.getItem('fairview_park_lang') === 'en_us' ? 'Login timeout Please login again' : '登錄逾時，請重新登入! ',
                 type: 'warning',
             });
         }

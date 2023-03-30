@@ -29,20 +29,14 @@
               :class="nav_index === 1 ? 'active' : ''"
               @click="nav_index = 1"
             >
-              <span>{{
-                fairview_park_lang === "en_us" ? "Residents Handbook" : "業主手冊"
-              }}</span>
+              <span>{{ $t("Residents_Handbook_Map.Residents_Handbook") }}</span>
             </li>
             <li
               class="col-4 col-lg-12"
               :class="nav_index === 2 ? 'active' : ''"
               @click="nav_index = 2"
             >
-              <span>{{
-                fairview_park_lang === "en_us"
-                  ? "House Floor Plan and Map"
-                  : "屋宇平面圖及地圖"
-              }}</span>
+              <span>{{ $t("Residents_Handbook_Map.House_Floor_Plan_and_Map") }}</span>
             </li>
           </ul>
           <el-select
@@ -59,15 +53,11 @@
             <el-option
               v-for="(item, index) in [
                 {
-                  titleEnUs:
-                    fairview_park_lang === 'en_us' ? 'Residents Handbook' : '業主手冊',
+                  titleEnUs: $t('Residents_Handbook_Map.Residents_Handbook'),
                   index: 1,
                 },
                 {
-                  titleEnUs:
-                    fairview_park_lang === 'en_us'
-                      ? 'House Floor Plan and Map'
-                      : '屋宇平面圖及地圖',
+                  titleEnUs: $t('Residents_Handbook_Map.House_Floor_Plan_and_Map'),
                   index: 2,
                 },
               ]"
@@ -83,12 +73,8 @@
           <p style="font-size: 36px; color: #9cc212; font-weight: bold">
             {{
               nav_index === 1
-                ? fairview_park_lang === "en_us"
-                  ? "Residents Handbook"
-                  : "業主手冊"
-                : fairview_park_lang === "en_us"
-                ? "House Floor Plan and Map"
-                : "屋宇平面圖及地圖"
+                ? $t("Residents_Handbook_Map.Residents_Handbook")
+                : $t("Residents_Handbook_Map.House_Floor_Plan_and_Map")
             }}
           </p>
           <div
@@ -202,16 +188,19 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .banner {
   position: relative;
   overflow: hidden;
   height: 280px;
+
   .img {
     width: 100%;
     height: 280px;
     background-size: cover;
     background-position: bottom;
   }
+
   p {
     position: absolute;
     left: 50%;
@@ -225,18 +214,23 @@ export default {
     font-family: "Poppins-Bold", SourceHanSansCN-Regular, Arial;
     color: #fff;
     text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
+
     b {
       color: var(--mainColor1);
       text-shadow: 0px 1px 4px rgb(0 0 0 / 50%);
     }
   }
 }
+
 .nav-wrap {
   padding: 20px;
+
   .row {
     margin: 0 auto;
+
     .aside {
       padding: 0;
+
       ul {
         position: sticky;
         top: 80px;
@@ -246,57 +240,71 @@ export default {
         margin: 0;
         background-color: #fff;
         padding: 10px;
+
         li {
           text-align: left;
           margin-bottom: 5px;
           padding: 6px 0px 6px 10px;
           box-sizing: border-box;
           cursor: pointer;
+
           i {
             font-size: 15px;
             margin-right: 5px;
             display: none;
             color: #000;
           }
+
           span {
             font-size: 18px;
             color: #000;
           }
+
           &:hover {
             background-color: var(--mainColor2);
             color: #fff;
+
             i {
               color: #fff;
             }
+
             span {
               color: #fff;
             }
           }
         }
+
         .active {
           background-color: var(--mainColor2);
           color: #fff;
+
           i {
             color: #fff;
           }
+
           span {
             color: #fff;
           }
         }
       }
+
       .menu-select {
         display: none;
       }
     }
+
     @{deep} .nav-content {
       background-color: #fff;
       font-size: 13px;
       padding: 2px 20px;
+
       img {
         max-width: 100%;
       }
+
       .share {
         text-align: right;
+
         .el-button {
           background-color: var(--mainColor2);
           color: #fff;
@@ -304,47 +312,57 @@ export default {
           padding: 10px 20px;
         }
       }
+
       .pdf-preview-content {
         width: 100%;
       }
     }
   }
 }
+
 @media (min-width: 576px) {
   .nav-wrap-container {
     width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .nav-wrap-container {
     width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .nav-wrap-container {
     width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .nav-wrap-container {
     width: 1100px;
   }
 }
+
 @media (min-width: 1400px) {
   .nav-wrap-container {
     width: 1280px;
   }
 }
+
 @media (max-width: 992px) {
   .banner {
     height: 200px;
+
     img {
       width: auto;
     }
+
     p {
       font-size: 36px !important;
     }
   }
+
   .nav-wrap {
     .row {
       .aside {
@@ -352,38 +370,47 @@ export default {
           flex-wrap: nowrap;
           padding: 0;
           display: none;
+
           li {
             display: flex;
             text-align: center;
             align-items: center;
+
             span {
               margin: 0 auto;
             }
           }
         }
+
         @{deep} .menu-select {
           display: block;
           --el-select-input-focus-border-color: #ccc;
+
           .select-trigger {
             .el-input {
               font-size: 18px;
+
               .el-input__wrapper {
               }
             }
+
             .is-focus {
               border-color: #ccc;
             }
           }
+
           .el-popper {
             position: absolute;
             top: 52px !important;
             left: 0 !important;
+
             .el-select-dropdown {
               .el-scrollbar {
                 .el-select-dropdown__wrap {
                   .el-scrollbar__view {
                     .el-select-dropdown__item {
                       text-align: left;
+
                       span {
                         margin: 0;
                       }
@@ -395,8 +422,10 @@ export default {
           }
         }
       }
+
       .nav-content {
         padding: 0;
+
         > p {
           font-size: 28px !important;
         }

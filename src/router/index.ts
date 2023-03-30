@@ -156,13 +156,16 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   // 检查版本更新
   if (location.hostname !== "localhost") {
-    checkAppNewVersion()
+    // checkAppNewVersion()
     // 监听页面打开显示
-    document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) {
-        checkAppNewVersion()
-      }
-    })
+    if (!(window as any).isHasVisibilitychange) {
+      document.addEventListener('visibilitychange', function () {
+        (window as any).isHasVisibilitychange = true;
+          if (!document.hidden) {
+              checkAppNewVersion();
+          }
+      });
+  }
   }
   next();
 })

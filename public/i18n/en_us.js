@@ -1911,4 +1911,13 @@ window.i18n_en_us = {
 
     ]
   },
+  //業主手冊及屋苑地圖
+  Residents_Handbook_Map:{
+    'Residents_Handbook':'Residents Handbook',
+    'House_Floor_Plan_and_Map':'House Floor Plan and Map'
+  },
+  //常用表格
+  Frequently_Used_Forms:{
+    'Residents_can_obtain_any_application_forms':'Residents can obtain any application forms from our Customer Service Department.'
+  }
 };
