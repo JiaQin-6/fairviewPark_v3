@@ -159,8 +159,8 @@ router.beforeEach((to, from, next) => {
     // checkAppNewVersion()
     // 监听页面打开显示
     if (!(window as any).isHasVisibilitychange) {
+      (window as any).isHasVisibilitychange = true;
       document.addEventListener('visibilitychange', function () {
-        (window as any).isHasVisibilitychange = true;
           if (!document.hidden) {
               checkAppNewVersion();
           }
