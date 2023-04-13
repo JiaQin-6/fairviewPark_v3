@@ -426,9 +426,11 @@ export default {
     const changeLang = (lang) => {
       data.v_loading = true
       if (
-        document.getElementById("navbar-button") &&
-        window
+        document.getElementById("navbar-button") &&window
           .getComputedStyle(document.getElementById("navbar-button"))
+          .getPropertyValue("display") !== "none"&&
+        window
+          .getComputedStyle(document.getElementById("navbarSupportedContent"))
           .getPropertyValue("display") !== "none"
       ) {
         document.getElementById("navbar-button").click();

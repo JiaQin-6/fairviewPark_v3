@@ -10,7 +10,11 @@
   <div>
     <!-- banner -->
     <div class="banner">
-      <div class="img" style="width: 100%; height: 100%" :style="{ 'background-image': 'url(' + banner + ')' }"></div>
+      <div
+        class="img"
+        style="width: 100%; height: 100%"
+        :style="{ 'background-image': 'url(' + banner + ')' }"
+      ></div>
       <p>
         {{ $t("headed.Coach_Service") }}
       </p>
@@ -20,19 +24,34 @@
       <div class="row nav-wrap-container">
         <div class="col-12 col-lg-2 aside mb-20">
           <ul class="row animate__animated animate__fadeInLeft">
-            <li v-for="(item, index) in coach_service_content.coachServiceList" :key="index" class="col-4 col-lg-12"
-              :class="nav_index === index ? 'active' : ''" @click="selectNav(index)">
+            <li
+              v-for="(item, index) in coach_service_content.coachServiceList"
+              :key="index"
+              class="col-4 col-lg-12"
+              :class="nav_index === index ? 'active' : ''"
+              @click="selectNav(index)"
+            >
               <span>{{ item.titleEnUs }}</span>
             </li>
           </ul>
-          <el-select v-if="coach_service_content.coachServiceList.length > 0" size="large" v-model="nav_index"
-            class="menu-select" @change="
+          <el-select
+            v-if="coach_service_content.coachServiceList.length > 0"
+            size="large"
+            v-model="nav_index"
+            class="menu-select"
+            @change="
               (val) => {
                 selectNav(val);
               }
-            " :teleported="false">
-            <el-option v-for="(item, index) in coach_service_content.coachServiceList" :key="index"
-              :label="item.titleEnUs" :value="item.index">
+            "
+            :teleported="false"
+          >
+            <el-option
+              v-for="(item, index) in coach_service_content.coachServiceList"
+              :key="index"
+              :label="item.titleEnUs"
+              :value="item.index"
+            >
               <span>{{ item.titleEnUs }}</span>
             </el-option>
           </el-select>
@@ -41,63 +60,111 @@
           <!--  -->
           <div align="center" class="animate__animated animate__fadeInRight">
             <!-- pdf -->
-            <h5 class="title fs-18 mb-20 flex-row" style="text-align: left; flex-wrap: wrap">
-              <p style="text-decoration: none; margin: 0" v-if="coach_service_content.coachServiceList.length !== 0">
+            <h5
+              class="title fs-18 mb-20 flex-row"
+              style="text-align: left; flex-wrap: wrap"
+            >
+              <p
+                style="text-decoration: none; margin: 0"
+                v-if="coach_service_content.coachServiceList.length !== 0"
+              >
                 {{ coach_service_content.coachServiceList[nav_index].titleEnUs }}
               </p>
-              <span v-if="
-                coach_service_content &&
-                coach_service_content.coachServiceList.length !== 0 &&
-                coach_service_content.coachServiceList[nav_index].launchTime
-              ">{{
-  $t("coach_service.Effect_Day") +
-  (coach_service_content &&
-    coach_service_content.coachServiceList.length !== 0 &&
-    coach_service_content.coachServiceList[nav_index].launchTime.slice(
-      0,
-      10
-    ))
-}}</span>
+              <span
+                v-if="
+                  coach_service_content &&
+                  coach_service_content.coachServiceList.length !== 0 &&
+                  coach_service_content.coachServiceList[nav_index].launchTime
+                "
+                >{{
+                  $t("coach_service.Effect_Day") +
+                  (coach_service_content &&
+                    coach_service_content.coachServiceList.length !== 0 &&
+                    coach_service_content.coachServiceList[nav_index].launchTime.slice(
+                      0,
+                      10
+                    ))
+                }}</span
+              >
             </h5>
             <!-- 时间表 -->
-            <div v-if="
-              nav_index !== coach_service_content.coachServiceList.length - 1 &&
-              nav_index !== coach_service_content.coachServiceList.length - 2
-            ">
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" v-for="(item, index) in coach_service_content.coachServiceList.length !==
-                0 && coach_service_content.coachServiceList[nav_index].sectionList" :key="index" class="fs-18 mb-30">
+            <div
+              v-if="
+                nav_index !== coach_service_content.coachServiceList.length - 1 &&
+                nav_index !== coach_service_content.coachServiceList.length - 2
+              "
+            >
+              <table
+                width="100%"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                v-for="(item, index) in coach_service_content.coachServiceList.length !==
+                  0 && coach_service_content.coachServiceList[nav_index].sectionList"
+                :key="index"
+                class="fs-18 mb-30"
+              >
                 <tbody>
                   <tr style="width: 100%; display: inline-block; margin-bottom: 2px">
-                    <td height="auto" :colspan="item.fleidList.length" bgcolor="#9cc212"
-                      style="width: 100%; display: inline-block">
+                    <td
+                      height="auto"
+                      :colspan="item.fleidList.length"
+                      bgcolor="#9cc212"
+                      style="width: 100%; display: inline-block"
+                    >
                       <div align="center" style="height: 100%">
-                        <span class="subTitle" style="font-size: 24px; color: #fff; line-height: 50px">{{ item.titleEnUs
-                        }}</span>
+                        <span
+                          class="subTitle"
+                          style="font-size: 24px; color: #fff; line-height: 50px"
+                          >{{ item.titleEnUs }}</span
+                        >
                       </div>
                     </td>
                   </tr>
                   <tr class="flex-row">
-                    <td valign="top" :bgcolor="
-                      index2 % 2 === 0 ? '#fffde9' : index2 % 2 === 1 ? '#f1fcdd' : ''
-                    " v-for="(item2, index2) in item.fleidList" :key="index2"
-                      style="width: 100%; display: inline-block; margin-right: 2px">
-                      <p align="center" class="style34" style="padding: 10px 0; margin: 0; font-weight: bold">
+                    <td
+                      valign="top"
+                      :bgcolor="
+                        index2 % 2 === 0 ? '#fffde9' : index2 % 2 === 1 ? '#f1fcdd' : ''
+                      "
+                      v-for="(item2, index2) in item.fleidList"
+                      :key="index2"
+                      style="width: 100%; display: inline-block; margin-right: 2px"
+                    >
+                      <p
+                        align="center"
+                        class="style34"
+                        style="padding: 10px 0; margin: 0; font-weight: bold"
+                      >
                         {{ item2.titleEnUs }}
                       </p>
                     </td>
                   </tr>
-                  <tr v-if="item.fleidList.length !== 0" v-for="(item2, index2) in getColMaxLength(item.fleidList)"
-                    :key="index2" class="flex-row">
-                    <td valign="top" :bgcolor="
-                      index3 % 2 === 0 ? '#fffde9' : index3 % 2 === 1 ? '#f1fcdd' : ''
-                    " style="width: 100%; display: inline-block; margin-right: 2px"
-                      v-for="(item3, index3) in item.fleidList.length" :key="index3">
-                      <p align="center" class="style34" style="padding: 10px 0; margin: 0">
+                  <tr
+                    v-if="item.fleidList.length !== 0"
+                    v-for="(item2, index2) in getColMaxLength(item.fleidList)"
+                    :key="index2"
+                    class="flex-row"
+                  >
+                    <td
+                      valign="top"
+                      :bgcolor="
+                        index3 % 2 === 0 ? '#fffde9' : index3 % 2 === 1 ? '#f1fcdd' : ''
+                      "
+                      style="width: 100%; display: inline-block; margin-right: 2px"
+                      v-for="(item3, index3) in item.fleidList.length"
+                      :key="index3"
+                    >
+                      <p
+                        align="center"
+                        class="style34"
+                        style="padding: 10px 0; margin: 0"
+                      >
                         {{
                           item.fleidList[index3].columnList[index2] &&
                           item.fleidList[index3].columnList[index2].textEnUs
-                          ? item.fleidList[index3].columnList[index2].textEnUs
-                          : ""
+                            ? item.fleidList[index3].columnList[index2].textEnUs
+                            : ""
                         }}
                       </p>
                     </td>
@@ -109,30 +176,51 @@
                 {{ $t("coach_service.Expected_arrival_time") }}
               </p>
 
-              <table width="100%" border="0" cellpadding="0" cellspacing="0" v-if="
-                coach_service_content.coachServiceList.length !== 0 &&
-                coach_service_content.coachServiceList[nav_index].endModuleList
-                  .length !== 0
-              ">
+              <table
+                width="100%"
+                border="0"
+                cellpadding="0"
+                cellspacing="0"
+                v-if="
+                  coach_service_content.coachServiceList.length !== 0 &&
+                  coach_service_content.coachServiceList[nav_index].endModuleList
+                    .length !== 0
+                "
+              >
                 <tbody>
                   <tr>
-                    <td valign="top" v-for="(item, index) in coach_service_content.coachServiceList[
-                      nav_index
-                    ].endModuleList" :key="index" style="
-                          font-size: 18px;
-                          padding-right: 5px;
-                          color: rgb(156, 194, 18);
-                          font-weight: bold;
-                        ">
+                    <td
+                      valign="top"
+                      v-for="(item, index) in coach_service_content.coachServiceList[
+                        nav_index
+                      ].endModuleList"
+                      :key="index"
+                      style="
+                        font-size: 18px;
+                        padding-right: 5px;
+                        color: rgb(156, 194, 18);
+                        font-weight: bold;
+                      "
+                    >
                       {{ item.titleEnUs }}
                     </td>
                   </tr>
-                  <tr valign="top" v-for="(item, index) in getColMaxLength(
-                    coach_service_content.coachServiceList[nav_index].endModuleList
-                  )" :key="index" style="font-size: 18px">
-                    <td valign="top" v-for="(item2, index2) in coach_service_content.coachServiceList[
-                      nav_index
-                    ].endModuleList" :key="index2" style="font-size: 18px">
+                  <tr
+                    valign="top"
+                    v-for="(item, index) in getColMaxLength(
+                      coach_service_content.coachServiceList[nav_index].endModuleList
+                    )"
+                    :key="index"
+                    style="font-size: 18px"
+                  >
+                    <td
+                      valign="top"
+                      v-for="(item2, index2) in coach_service_content.coachServiceList[
+                        nav_index
+                      ].endModuleList"
+                      :key="index2"
+                      style="font-size: 18px"
+                    >
                       {{
                         coach_service_content.coachServiceList[nav_index].endModuleList[
                           index2
@@ -140,24 +228,28 @@
                         coach_service_content.coachServiceList[nav_index].endModuleList[
                           index2
                         ].columnList[index].textEnUs
-                        ? coach_service_content.coachServiceList[nav_index]
-                          .endModuleList[index2].columnList[index].textEnUs
-                        : ""
+                          ? coach_service_content.coachServiceList[nav_index]
+                              .endModuleList[index2].columnList[index].textEnUs
+                          : ""
                       }}
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <a :href="coach_service_content.coachServiceFile" target="_blank" style="
-                    display: inline-block;
-                    width: 100%;
-                    font-size: 18px;
-                    text-align: left;
-                    margin-top: 30px;
-                    padding: 5px 0;
-                    background-color: rgb(255, 253, 233);
-                    text-decoration: none;
-                  ">
+              <a
+                :href="coach_service_content.coachServiceFile"
+                target="_blank"
+                style="
+                  display: inline-block;
+                  width: 100%;
+                  font-size: 18px;
+                  text-align: left;
+                  margin-top: 30px;
+                  padding: 5px 0;
+                  background-color: rgb(255, 253, 233);
+                  text-decoration: none;
+                "
+              >
                 {{ $t("coach_service.content_1") }}
               </a>
               <p style="font-size: 18px; text-align: left; margin-top: 10px">
@@ -165,118 +257,148 @@
               </p>
             </div>
             <!-- 专巴收费表 -->
-            <div class="fs-15 price-table" v-if="nav_index === coach_service_content.coachServiceList.length - 2">
+            <div
+              class="fs-15 price-table"
+              v-if="nav_index === coach_service_content.coachServiceList.length - 2"
+            >
               <!--  -->
               <div class="mb-30">
                 <div style="overflow: auto; padding: 0">
-                  <h5 style="
-                        background-color: #9cc212;
-                        margin: 0;
-                        padding: 0;
-                        color: #fff;
-                        font-size: 24px;
-                        line-height: 50px !important;
-                        height: 50px;
-                        min-width: 400px;
-                        border-right: 2px solid #fff;
-                        font-weight: normal;
-                      ">
+                  <h5
+                    style="
+                      background-color: #9cc212;
+                      margin: 0;
+                      padding: 0;
+                      color: #fff;
+                      font-size: 24px;
+                      line-height: 50px !important;
+                      height: 50px;
+                      min-width: 400px;
+                      border-right: 2px solid #fff;
+                      font-weight: normal;
+                    "
+                  >
                     {{ $t("coach_service.COACH_FARE_TABLE") }}
                   </h5>
                   <ul class="flex-row" style="padding: 0; margin: 0 0 2px 0">
-                    <li v-for="(item, index) in [
-                      {
-                        text: $t('coach_service.Route'),
-                      },
-                      {
-                        text: $t('coach_service.Fare'),
-                      },
-                    ]" :key="index" style="
+                    <li
+                      v-for="(item, index) in [
+                        {
+                          text: $t('coach_service.Route'),
+                        },
+                        {
+                          text: $t('coach_service.Fare'),
+                        },
+                      ]"
+                      :key="index"
+                      style="
+                        background-color: #f1fcdd;
+                        font-size: 18px;
+                        align-items: center;
+                        text-align: center;
+                        border-right: 2px solid #fff;
+                        min-width: 100px;
+                        font-weight: bold;
+                      "
+                      class="col-3 flex-row"
+                    >
+                      <span style="margin: 0 auto">{{ item.text }}</span>
+                    </li>
+                    <li class="col-6">
+                      <div
+                        style="
                           background-color: #f1fcdd;
                           font-size: 18px;
                           align-items: center;
                           text-align: center;
+                          padding: 20px;
+                          border-bottom: 2px solid #fff;
                           border-right: 2px solid #fff;
-                          min-width: 100px;
+                          min-width: 200px;
                           font-weight: bold;
-                        " class="col-3 flex-row">
-                      <span style="margin: 0 auto">{{ item.text }}</span>
-                    </li>
-                    <li class="col-6">
-                      <div style="
-                            background-color: #f1fcdd;
-                            font-size: 18px;
-                            align-items: center;
-                            text-align: center;
-                            padding: 20px;
-                            border-bottom: 2px solid #fff;
-                            border-right: 2px solid #fff;
-                            min-width: 200px;
-                            font-weight: bold;
-                          " class="col-12 flex-row">
+                        "
+                        class="col-12 flex-row"
+                      >
                         <span style="margin: 0 auto">{{
                           $t("coach_service.Octopus_Card")
                         }}</span>
                       </div>
                       <div class="flex-row col-12">
-                        <div v-for="(item, index) in [
-                          {
-                            text: $t('coach_service.Fare_of_Registered_Resident'),
-                          },
-                          {
-                            text: $t(
-                              'coach_service.Fare_of_Registered_Resident_Elderly_and_Children'
-                            ),
-                          },
-                        ]" :key="index" style="
-                              background-color: #f1fcdd;
-                              font-size: 18px;
-                              align-items: center;
-                              text-align: center;
-                              padding: 20px 0;
-                              min-width: 100px;
-                              border-right: 2px solid #fff;
-                              font-weight: bold;
-                            " class="col-6 flex-row">
+                        <div
+                          v-for="(item, index) in [
+                            {
+                              text: $t('coach_service.Fare_of_Registered_Resident'),
+                            },
+                            {
+                              text: $t(
+                                'coach_service.Fare_of_Registered_Resident_Elderly_and_Children'
+                              ),
+                            },
+                          ]"
+                          :key="index"
+                          style="
+                            background-color: #f1fcdd;
+                            font-size: 18px;
+                            align-items: center;
+                            text-align: center;
+                            padding: 20px 0;
+                            min-width: 100px;
+                            border-right: 2px solid #fff;
+                            font-weight: bold;
+                          "
+                          class="col-6 flex-row"
+                        >
                           <span style="margin: 0 auto">{{ item.text }}</span>
                         </div>
                       </div>
                     </li>
                   </ul>
-                  <ul v-for="(item, index) in coach_service_content.lineMoneyList" :key="index" class="flex-row"
-                    style="padding: 0; margin: 0 0 2px 0">
-                    <li style="
-                          background-color: #fffde9;
-                          font-size: 18px;
-                          align-items: center;
-                          text-align: center;
+                  <ul
+                    v-for="(item, index) in coach_service_content.lineMoneyList"
+                    :key="index"
+                    class="flex-row"
+                    style="padding: 0; margin: 0 0 2px 0"
+                  >
+                    <li
+                      style="
+                        background-color: #fffde9;
+                        font-size: 18px;
+                        align-items: center;
+                        text-align: center;
 
-                          border-right: 2px solid #fff;
-                          padding: 20px;
-                          min-width: 100px;
-                        " class="col-3 flex-row">
+                        border-right: 2px solid #fff;
+                        padding: 20px;
+                        min-width: 100px;
+                      "
+                      class="col-3 flex-row"
+                    >
                       <span style="margin: 0 auto">{{ item.title }}</span>
                     </li>
-                    <li v-for="(item2, index2) in JSON.parse(item.moneyJson)" :key="index2" style="
-                          background-color: #fffde9;
-                          font-size: 18px;
-                          align-items: center;
-                          text-align: center;
-                          border-right: 2px solid #fff;
-                          padding: 20px;
-                          min-width: 100px;
-                        " class="col-3 flex-row">
+                    <li
+                      v-for="(item2, index2) in JSON.parse(item.moneyJson)"
+                      :key="index2"
+                      style="
+                        background-color: #fffde9;
+                        font-size: 18px;
+                        align-items: center;
+                        text-align: center;
+                        border-right: 2px solid #fff;
+                        padding: 20px;
+                        min-width: 100px;
+                      "
+                      class="col-3 flex-row"
+                    >
                       <span style="margin: 0 auto">{{
                         item2.price
-                        ? "$" + item2.price
-                        : $t("coach_service.Not_Applicable")
+                          ? "$" + item2.price
+                          : $t("coach_service.Not_Applicable")
                       }}</span>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <!--  -->
-            <!-- <p style="text-align: left; font-size: 18px">
+              <!--  -->
+              <!-- <p style="text-align: left; font-size: 18px">
                 <b>{{ $t("coach_service.Estate_Coach_Fare_Discount") }}</b>
               </p>
               <p style="text-align: left; font-size: 18px">
@@ -540,17 +662,17 @@
                   {{ $t("coach_service.content_2") }}
                 </p> -->
               <div class="content">
-                <iframe class="iframe-zh" v-show="fairview_park_lang === 'zh_tw'"
-                  style=" width: 100%; padding: 20px 0"
-                  src="https://fairviewpark.hk/file/coach_fare_table_CN.html" id="external-frame"
-                  ></iframe>
-                <iframe class="iframe-en" v-show="fairview_park_lang === 'en_us'"
-                  style="display: block; width: 100%; height: 850px; padding: 20px 0"
-                  src="https://fairviewpark.hk/file/coach_fare_table_EN.html" frameborder="0"></iframe>
+                <div style="width: 100%; padding: 20px 0" id="price-table"></div>
+                <p style="font-size: 18px; text-align: left; margin-top: 50px">
+                  {{ $t("coach_service.content_2") }}
+                </p>
               </div>
             </div>
             <!-- 免费穿梭巴士 -->
-            <div class="free-bus" v-if="nav_index === coach_service_content.coachServiceList.length - 1">
+            <div
+              class="free-bus"
+              v-if="nav_index === coach_service_content.coachServiceList.length - 1"
+            >
               <div class="table">
                 <h5>
                   {{ $t("coach_service.free_bus.No_1_Blue_Route_Shuttle_Bus") }}
@@ -565,74 +687,80 @@
                 </div>
 
                 <ul>
-                  <li v-for="(item, index) in [
-                    {
-                      index1: '1.',
-                      time1: '10:30',
-                      index2: '10.',
-                      time2: '15:00',
-                    },
-                    {
-                      index1: '2.',
-                      time1: '11:00',
-                      index2: '11.',
-                      time2: '15:30',
-                    },
-                    {
-                      index1: '3.',
-                      time1: '11:30',
-                      index2: '12.',
-                      time2: '16:00',
-                    },
-                    {
-                      index1: '4.',
-                      time1: '12:00',
-                      index2: '13.',
-                      time2: '16:30',
-                    },
-                    {
-                      index1: '5.',
-                      time1: '12:30',
-                      index2: '14.',
-                      time2: '17:00',
-                    },
-                    {
-                      index1: '6.',
-                      time1: '13:00',
-                      index2: '15.',
-                      time2: '17:30',
-                    },
-                    {
-                      index1: '7.',
-                      time1: '13:30',
-                      index2: '16.',
-                      time2: '18:00',
-                    },
-                    {
-                      index1: '8.',
-                      time1: '14:00',
-                      index2: '17.',
-                      time2: '18:30',
-                    },
-                    {
-                      index1: '9.',
-                      time1: '14:30',
-                      index2: '18.',
-                      time2: '19:00',
-                    },
-                  ]" :key="index" class="flex-row">
+                  <li
+                    v-for="(item, index) in [
+                      {
+                        index1: '1.',
+                        time1: '10:30',
+                        index2: '10.',
+                        time2: '15:00',
+                      },
+                      {
+                        index1: '2.',
+                        time1: '11:00',
+                        index2: '11.',
+                        time2: '15:30',
+                      },
+                      {
+                        index1: '3.',
+                        time1: '11:30',
+                        index2: '12.',
+                        time2: '16:00',
+                      },
+                      {
+                        index1: '4.',
+                        time1: '12:00',
+                        index2: '13.',
+                        time2: '16:30',
+                      },
+                      {
+                        index1: '5.',
+                        time1: '12:30',
+                        index2: '14.',
+                        time2: '17:00',
+                      },
+                      {
+                        index1: '6.',
+                        time1: '13:00',
+                        index2: '15.',
+                        time2: '17:30',
+                      },
+                      {
+                        index1: '7.',
+                        time1: '13:30',
+                        index2: '16.',
+                        time2: '18:00',
+                      },
+                      {
+                        index1: '8.',
+                        time1: '14:00',
+                        index2: '17.',
+                        time2: '18:30',
+                      },
+                      {
+                        index1: '9.',
+                        time1: '14:30',
+                        index2: '18.',
+                        time2: '19:00',
+                      },
+                    ]"
+                    :key="index"
+                    class="flex-row"
+                  >
                     <span style="text-align: center">
                       <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index1
-                        }}</i>{{ item.time1 }}
+                        }}</i
+                        >{{ item.time1 }}
                       </div>
                     </span>
                     <span>
                       <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index2
-                        }}</i>{{ item.time2 }}
+                        }}</i
+                        >{{ item.time2 }}
                       </div>
                     </span>
                   </li>
@@ -643,16 +771,23 @@
                 <p style="text-align: left" class="fs-18">
                   {{ $t("coach_service.free_bus.Shuttle_Bus_Routing") }}
                 </p>
-                <div class="img" style="
-                      width: 100%;
-                      max-width: 500px;
-                      max-height: 500px;
-                      background-color: #ccc;
-                    ">
+                <div
+                  class="img"
+                  style="
+                    width: 100%;
+                    max-width: 500px;
+                    max-height: 500px;
+                    background-color: #ccc;
+                  "
+                >
                   <img style="width: 100%" :src="router2_blue" alt="" />
                 </div>
                 <div style="width: 100%">
-                  <img style="width: 100%" :src="fairview_park_lang === 'en_us' ? router1_en : router1" alt="" />
+                  <img
+                    style="width: 100%"
+                    :src="fairview_park_lang === 'en_us' ? router1_en : router1"
+                    alt=""
+                  />
                 </div>
               </div>
               <!--  -->
@@ -669,74 +804,80 @@
                   </p>
                 </div>
                 <ul>
-                  <li v-for="(item, index) in [
-                    {
-                      index1: '1.',
-                      time1: '10:30',
-                      index2: '10.',
-                      time2: '15:00',
-                    },
-                    {
-                      index1: '2.',
-                      time1: '11:00',
-                      index2: '11.',
-                      time2: '15:30',
-                    },
-                    {
-                      index1: '3.',
-                      time1: '11:30',
-                      index2: '12.',
-                      time2: '16:00',
-                    },
-                    {
-                      index1: '4.',
-                      time1: '12:00',
-                      index2: '13.',
-                      time2: '16:30',
-                    },
-                    {
-                      index1: '5.',
-                      time1: '12:30',
-                      index2: '14.',
-                      time2: '17:00',
-                    },
-                    {
-                      index1: '6.',
-                      time1: '13:00',
-                      index2: '15.',
-                      time2: '17:30',
-                    },
-                    {
-                      index1: '7.',
-                      time1: '13:30',
-                      index2: '16.',
-                      time2: '18:00',
-                    },
-                    {
-                      index1: '8.',
-                      time1: '14:00',
-                      index2: '17.',
-                      time2: '18:30',
-                    },
-                    {
-                      index1: '9.',
-                      time1: '14:30',
-                      index2: '18.',
-                      time2: '19:00',
-                    },
-                  ]" :key="index" class="flex-row">
+                  <li
+                    v-for="(item, index) in [
+                      {
+                        index1: '1.',
+                        time1: '10:30',
+                        index2: '10.',
+                        time2: '15:00',
+                      },
+                      {
+                        index1: '2.',
+                        time1: '11:00',
+                        index2: '11.',
+                        time2: '15:30',
+                      },
+                      {
+                        index1: '3.',
+                        time1: '11:30',
+                        index2: '12.',
+                        time2: '16:00',
+                      },
+                      {
+                        index1: '4.',
+                        time1: '12:00',
+                        index2: '13.',
+                        time2: '16:30',
+                      },
+                      {
+                        index1: '5.',
+                        time1: '12:30',
+                        index2: '14.',
+                        time2: '17:00',
+                      },
+                      {
+                        index1: '6.',
+                        time1: '13:00',
+                        index2: '15.',
+                        time2: '17:30',
+                      },
+                      {
+                        index1: '7.',
+                        time1: '13:30',
+                        index2: '16.',
+                        time2: '18:00',
+                      },
+                      {
+                        index1: '8.',
+                        time1: '14:00',
+                        index2: '17.',
+                        time2: '18:30',
+                      },
+                      {
+                        index1: '9.',
+                        time1: '14:30',
+                        index2: '18.',
+                        time2: '19:00',
+                      },
+                    ]"
+                    :key="index"
+                    class="flex-row"
+                  >
                     <span style="text-align: center">
                       <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index1
-                        }}</i>{{ item.time1 }}
+                        }}</i
+                        >{{ item.time1 }}
                       </div>
                     </span>
                     <span>
                       <div style="width: 150px; text-align: left; margin: 0 auto">
                         <i style="display: inline-block; margin-right: 50px">{{
                           item.index2
-                        }}</i>{{ item.time2 }}
+                        }}</i
+                        >{{ item.time2 }}
                       </div>
                     </span>
                   </li>
@@ -747,16 +888,23 @@
                 <p style="text-align: left" class="fs-18">
                   {{ $t("coach_service.free_bus.Shuttle_Bus_Routing") }}
                 </p>
-                <div class="img" style="
-                      width: 100%;
-                      max-width: 500px;
-                      max-height: 500px;
-                      background-color: #ccc;
-                    ">
+                <div
+                  class="img"
+                  style="
+                    width: 100%;
+                    max-width: 500px;
+                    max-height: 500px;
+                    background-color: #ccc;
+                  "
+                >
                   <img style="width: 100%" :src="Routing_Red" alt="" />
                 </div>
                 <div style="width: 100%">
-                  <img style="width: 100%" :src="fairview_park_lang === 'en_us' ? router2_en : router2" alt="" />
+                  <img
+                    style="width: 100%"
+                    :src="fairview_park_lang === 'en_us' ? router2_en : router2"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>
@@ -765,14 +913,19 @@
       </div>
     </div>
     <!-- loading -->
-    <div class="loading" v-loading="v_loading" style="
-          width: 100vw;
-          height: 100vh;
-          top: 0;
-          left: 0;
-          position: fixed;
-          z-index: 10000;
-        " :style="{ display: v_loading ? '' : 'none' }"></div>
+    <div
+      class="loading"
+      v-loading="v_loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{ display: v_loading ? '' : 'none' }"
+    ></div>
   </div>
 </template>
 
@@ -891,19 +1044,25 @@ export default {
       });
       return maxLength;
     };
-    //设置iframe高度
-    const setIframeHeight = (iframe) => {
-      if (iframe) {
-        console.log(iframe.contentWindow.document.body.scrollHeight)
-        iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px';
-
-      }
-    };
     //选择nav
     const selectNav = (index) => {
       if (index === data.coach_service_content.coachServiceList.length - 2) {
-        nextTick(() => {
-          setIframeHeight(document.getElementById("external-frame"))
+        nextTick(async () => {
+          //https://fairviewpark.hk/file/coach_fare_table_CN.html
+          //https://fairviewpark.hk/file/coach_fare_table_EN.html
+          fetch(
+            `${
+              data.fairview_park_lang === "en_us"
+                ? "https://fairviewpark.hk/file/coach_fare_table_EN.html"
+                : "https://fairviewpark.hk/file/coach_fare_table_CN.html"
+            }`
+          )
+            .then( (response)=> {
+              return response.text();
+            })
+            .then((htmlJson)=>{
+              document.getElementById("price-table").innerHTML = htmlJson;
+            });
         });
       }
       data.nav_index = index;
@@ -920,7 +1079,6 @@ export default {
       findOneCoachServiceFile,
       findCoachServiceList,
       getColMaxLength,
-      setIframeHeight,
       selectNav,
     };
   },
@@ -1171,7 +1329,8 @@ export default {
             .el-input {
               font-size: 18px;
 
-              .el-input__wrapper {}
+              .el-input__wrapper {
+              }
             }
 
             .is-focus {
