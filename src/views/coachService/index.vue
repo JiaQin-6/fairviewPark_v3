@@ -1053,8 +1053,8 @@ export default {
           fetch(
             `${
               data.fairview_park_lang === "en_us"
-                ? "https://fairviewpark.hk/file/coach_fare_table_EN.html"
-                : "https://fairviewpark.hk/file/coach_fare_table_CN.html"
+                ? `${location.origin}/file/coach_fare_table_EN.html`
+                : `${location.origin}/file/coach_fare_table_CN.html`
             }`
           )
             .then( (response)=> {
