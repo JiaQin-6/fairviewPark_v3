@@ -150,12 +150,17 @@ const router = createRouter({
 });
 //定义全局导航守卫
 router.beforeEach((to, from, next) => {
+    //如果是带有www开头的url自动转成不带www的url
+    if (location.href.indexOf('www.') !== -1) {
+        let newUrl = location.href.replace('www.', '');
+        location.href = newUrl;
+    }
     // 检查版本更新
     if (location.hostname !== "localhost") {
         // checkAppNewVersion()
         // 监听页面打开显示
         if (!window.isHasVisibilitychange) {
-             window.isHasVisibilitychange = true;
+            window.isHasVisibilitychange = true;
             document.addEventListener('visibilitychange', function () {
                 if (!document.hidden) {
                     checkAppNewVersion();
