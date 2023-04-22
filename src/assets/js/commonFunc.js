@@ -7,20 +7,20 @@
  * @FilePath: /vue3.0/Users/david/Desktop/github_project/DTX/src/assets/js/commonFun.js
  */
 function CommonFunc() {
-  this.getIsPC = () => {
-    var userAgentInfo = navigator.userAgent;
-    var Agents = ["Android", "iPhone",
-      "SymbianOS", "Windows Phone",
-      "iPad", "iPod"];
-    var flagPc = true;
-    for (var i = 0; i < Agents.length; i++) {
-      if (userAgentInfo.indexOf(Agents[i]) > 0) {
-        flagPc = false;
-        break;
+    this.getIsPC = () => {
+      var userAgentInfo = navigator.userAgent;
+      var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+      var flagPc = true;
+      for (var i = 0; i < Agents.length; i++) {
+        if (userAgentInfo.indexOf(Agents[i]) > 0) {
+          flagPc = false;
+          break;
+        }
       }
-    }
-    return flagPc;
-  },
+      return flagPc;
+    },
     //驗證email
     this.verificationEmail = (email) => {
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;

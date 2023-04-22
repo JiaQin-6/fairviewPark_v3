@@ -150,6 +150,8 @@
     <el-backtop style="background-color: transparent">
       <img style="width: 100%" :src="arrowUpCircle" alt="" />
     </el-backtop>
+    <!-- 非會員和正式會員信息彈框 -->
+    <RealTimeInfo :showRealTimeInfo="showRealTimeInfo" @close="()=>{showRealTimeInfo = false}"></RealTimeInfo>
   </div>
 </template>
 
@@ -167,6 +169,7 @@ import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import Header from "../../components/header/index.vue";
 import Footer from "../../components/footer/index.vue";
+import RealTimeInfo from "../../components/real-time-info/index.vue";
 import Login from "../login/index.vue";
 import commonFunc from "../../assets/js/commonFunc";
 // import  "../../assets/js/rem";
@@ -174,6 +177,7 @@ export default {
   components: {
     Header,
     Footer,
+    RealTimeInfo,
     Login,
   },
   data() {
@@ -191,6 +195,7 @@ export default {
       is_show_footer: true,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
       isShowLoginButton:true,//是否顯示登錄按鈕（app進來web判斷）
+      showRealTimeInfo:false,//是否显示资讯内容组件
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -221,6 +226,8 @@ export default {
         data.isShowLoginButton = false
       }
     }
+    //
+    
     const showOwnerIsZONE = (val) => {
       if (
         document.getElementById("navbar-button") &&
@@ -300,6 +307,7 @@ export default {
       { deep: true, immediate: true }
     );
     onMounted(async () => {
+      data.showRealTimeInfo = true;
       document.onscroll = () => {
         //如果滚动隐藏下拉框
         // if (
