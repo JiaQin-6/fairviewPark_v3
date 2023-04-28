@@ -9,34 +9,6 @@
 <template>
   <div class="pdf-preview">
     <div class="pdf-preview-content">
-      <!-- <div class="page-tool">
-        <div class="page-tool-content">
-          <div class="page-tool-item" @click="lastPage">
-            <i class="iconfont icon-shangyiye" style="font-size: 18px"></i>
-          </div>
-          <div class="page-tool-item" @click="nextPage">
-            <i class="iconfont icon-xiayiye" style="font-size: 18px"></i>
-          </div>
-          <div class="page-tool-item">{{ pageNum }}/{{ numPages }}</div>
-          <div class="page-tool-item" @click="pageZoomOut">
-            <i class="iconfont icon-fangda" style="font-size: 20px"></i>
-          </div>
-          <div class="page-tool-item" @click="pageZoomIn">
-            <i class="iconfont icon-suoxiao" style="font-size: 20px"></i>
-          </div>
-          <div class="page-tool-item" @click="download(pdfDownloadUrl, '1')">
-            <i class="iconfont icon-xiazai" style="font-size: 20px"></i>
-          </div>
-        </div>
-      </div>
-      <div class="pdf-wrap">
-        <VuePdfEmbed
-          :source="source"
-          :style="scaleStyle"
-          class="vue-pdf-embed"
-          :page="pageNum"
-        ></VuePdfEmbed> 
-      </div> -->
       <iframe
         width="100%"
         height="100%"
@@ -50,7 +22,6 @@
 
 <script>
 import VuePdfEmbed from "vue-pdf-embed";
-// import { createLoadingTask } from "vue3-pdfjs/esm/index.js"; // 获得总页数
 import {
   ref,
   reactive,
@@ -88,11 +59,7 @@ export default {
       scale: 1, // 缩放比例
       numPages: 0, // 总页数
       env:
-        location.hostname === "localhost"
-          ? ""
-          : import.meta.env.DEV
-          ? "/app/dist"
-          : "",
+        location.hostname === "localhost" ? "" : import.meta.env.DEV ? "/app/dist" : "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.source = props.pdfPreview;
@@ -154,49 +121,47 @@ export default {
     watch(
       () => props.pdfPreview,
       (val) => {
+        nextTick(() => {
+          let timer = null;
+          timer = setInterval(() => {
+            if (
+              document.getElementsByTagName("iframe") &&
+              document.getElementsByTagName("iframe")[0] &&
+              document.getElementsByTagName("iframe")[0].contentDocument&&
+              document.getElementsByTagName("iframe")[0].contentDocument.getElementById("editorModeButtons")
+            ) {
+              clearInterval(timer);
+              document
+                .getElementsByTagName("iframe")[0]
+                .contentDocument.getElementById("mainContainer").style["min-width"] =
+                "329px";
+              document
+                .getElementsByTagName("iframe")[0]
+                .contentDocument.getElementById("editorModeButtons").style.display =
+                "none";
+            }
+          }, 100);
+        });
         data.source = val;
-        // data.pdfDownloadUrl = props.pdfDownloadUrl;
-        // let loadingTask = createLoadingTask(data.source);
-        // loadingTask._capability.promise.then((pdf) => {
-        //   data.numPages = pdf.numPages;
-        // });
+       
       }
     );
     onMounted(() => {
-      // let loadingTask = createLoadingTask(data.source);
-      // loadingTask._capability.promise.then((pdf) => {
-      //   data.numPages = pdf.numPages;
-      // });
       let timer = null;
       timer = setInterval(() => {
         if (
-          document
-            .getElementsByTagName("iframe")&&
-            document
-            .getElementsByTagName("iframe")[0]&&
-            document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument&&
-          document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("editorModeButtons")&&
-          document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("viewFind")
+          document.getElementsByTagName("iframe") &&
+          document.getElementsByTagName("iframe")[0] &&
+          document.getElementsByTagName("iframe")[0].contentDocument&&
+          document.getElementsByTagName("iframe")[0].contentDocument.getElementById("editorModeButtons")
         ) {
           clearInterval(timer);
-
           document
             .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("mainContainer").style['min-width'] =
-            "329px";
+            .contentDocument.getElementById("mainContainer").style["min-width"] = "329px";
           document
             .getElementsByTagName("iframe")[0]
             .contentDocument.getElementById("editorModeButtons").style.display =
-            "none";
-          document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("viewFind").style.display =
             "none";
         }
       }, 500);
