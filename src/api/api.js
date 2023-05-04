@@ -15,7 +15,7 @@ import router from '../router';
 let baseUrl = "";
 switch (process.env.NODE_ENV) {
     case "development": // 注意这里的名字要和步骤二中设置的环境名字对应起来
-        baseUrl = "https://app.fairviewpark.hk"; //这里是测试环境中的url
+        baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
         break;
     case "production":
         baseUrl = "https://app.fairviewpark.hk"; //生产环境url
@@ -189,6 +189,11 @@ http.uploadRcard = (arr) => {
 //查看申请的所有智能卡
 http.findRcardList = (arr) => {
     return http.post(`/houseweb/rcard/findRcardList`, arr);
+};
+/* version2 **/
+//查询最新一条弹窗信息
+http.findOneNewPopupBox = (arr) => {
+    return http.post(`/houseweb/popupBox/findOneNewPopupBox`, arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */

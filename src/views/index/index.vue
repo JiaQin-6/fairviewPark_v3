@@ -140,7 +140,12 @@
       </div>
     </transition>
     <div class="main-content">
-      <Header :isShow="is_show" :isShowLoginButton="isShowLoginButton" :isShowLoginOutButton="isShowLoginOutButton" @showOwnerIsZONE="showOwnerIsZONE"></Header>
+      <Header
+        :isShow="is_show"
+        :isShowLoginButton="isShowLoginButton"
+        :isShowLoginOutButton="isShowLoginOutButton"
+        @showOwnerIsZONE="showOwnerIsZONE"
+      ></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
@@ -151,7 +156,15 @@
       <img style="width: 100%" :src="arrowUpCircle" alt="" />
     </el-backtop>
     <!-- 非會員和正式會員信息彈框 -->
-    <RealTimeInfo :showRealTimeInfo="showRealTimeInfo" @close="()=>{showRealTimeInfo = false}"></RealTimeInfo>
+    <RealTimeInfo
+      :showRealTimeInfo="showRealTimeInfo"
+      :newRealTimeInfo="newRealTimeInfo"
+      @close="
+        () => {
+          showRealTimeInfo = false;
+        }
+      "
+    ></RealTimeInfo>
   </div>
 </template>
 
@@ -189,13 +202,18 @@ export default {
     };
   },
   setup() {
+    const { proxy, ctx } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
       is_show: false,
       is_show_footer: true,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
-      isShowLoginButton:true,//是否顯示登錄按鈕（app進來web判斷）
-      showRealTimeInfo:false,//是否显示资讯内容组件
+      isShowLoginButton: true, //是否顯示登錄按鈕（app進來web判斷）
+      showRealTimeInfo: false, //是否显示资讯内容组件
+      newRealTimeInfo: {
+        id: "",
+        content: "",
+      },
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -215,7 +233,7 @@ export default {
         //在app未登錄
         sessionStorage.setItem("app-login-status", "2");
         data.is_show_footer = false;
-        data.isShowLoginButton = false
+        data.isShowLoginButton = false;
       }
     } else if (sessionStorage.getItem("app-login-status")) {
       if (sessionStorage.getItem("app-login-status") === "1") {
@@ -223,11 +241,10 @@ export default {
         data.isShowLoginOutButton = false;
       } else if (sessionStorage.getItem("app-login-status") === "2") {
         data.is_show_footer = false;
-        data.isShowLoginButton = false
+        data.isShowLoginButton = false;
       }
     }
     //
-    
     const showOwnerIsZONE = (val) => {
       if (
         document.getElementById("navbar-button") &&
@@ -247,6 +264,20 @@ export default {
     const loginOut = () => {
       localStorage.removeItem("login-info");
       store.commit("setLoginStatus", false);
+    };
+    //查询最新一条弹窗信息
+    const findOneNewPopupBox = async (memberType) => {
+      try {
+        const res = await proxy.$http.findOneNewPopupBox({
+          memberType:memberType,
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          return res.data.data
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     //
     const selectOwnersZone = (val) => {
@@ -291,25 +322,106 @@ export default {
       () => route,
       (value) => {
         data.is_show = false;
-        if(document.getElementById("close-login")){
+        if (document.getElementById("close-login")) {
           document.getElementById("close-login").click();
         }
-        if(document.getElementById("close-signUp")){
-              document.getElementById("close-signUp").click();
+        if (document.getElementById("close-signUp")) {
+          document.getElementById("close-signUp").click();
         }
-        if(document.getElementById("close-forgetPasswor")){
-              document.getElementById("close-forgetPasswor").click();
+        if (document.getElementById("close-forgetPasswor")) {
+          document.getElementById("close-forgetPasswor").click();
         }
-        if(document.getElementById("close-edit-member")){
-              document.getElementById("close-edit-member").click();
+        if (document.getElementById("close-edit-member")) {
+          document.getElementById("close-edit-member").click();
+        }
+      },
+      { deep: true, immediate: true }
+    );
+    watch(
+      () => store.state.loginStatus,
+      async (val) => {
+        //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
+        //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
+        const ownerData = await findOneNewPopupBox(0);
+        const nonMemberData = await findOneNewPopupBox(2);
+        //根据localStorage中的状态来决定显示隐藏
+        let newData = {
+          nonMember: {
+            id: nonMemberData.id,
+            content: nonMemberData.htmlEnUs,
+          },
+          owner: {
+            id: ownerData.id,
+            content: ownerData.htmlEnUs,
+          },
+        };
+
+        if (val) {
+          data.newRealTimeInfo.id = newData.owner.id;
+          data.newRealTimeInfo.content = newData.owner.content;
+          if (localStorage.getItem("real-info")) {
+            if (
+              newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
+            ) {
+              localStorage.setItem(
+                "real-info",
+                JSON.stringify({
+                  nonMember: {
+                    id: JSON.parse(localStorage.getItem("real-info")).nonMember.id,
+                    show: JSON.parse(localStorage.getItem("real-info")).nonMember.show,
+                  },
+                  owner: {
+                    id: newData.owner.id,
+                    show: true,
+                  },
+                })
+              );
+            }
+
+            if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
+              data.showRealTimeInfo = true;
+            }
+          } else {
+            data.showRealTimeInfo = true;
+          }
+        } else {
+          data.newRealTimeInfo.id = newData.nonMember.id;
+          data.newRealTimeInfo.content = newData.nonMember.content;
+          if (localStorage.getItem("real-info")) {
+            if (
+              newData.nonMember.id !==
+                JSON.parse(localStorage.getItem("real-info")).nonMember.id
+            ) {
+              localStorage.setItem(
+                "real-info",
+                JSON.stringify({
+                  nonMember: {
+                    id: newData.nonMember.id,
+                    show: true,
+                  },
+                  owner: {
+                    id: JSON.parse(localStorage.getItem("real-info")).owner.id,
+                    show: JSON.parse(localStorage.getItem("real-info")).owner.show,
+                  },
+                })
+              );
+            }
+            if (
+              JSON.parse(localStorage.getItem("real-info")).nonMember.show
+            ) {
+              data.showRealTimeInfo = true;
+            }
+          } else {
+            data.showRealTimeInfo = true;
+          }
         }
       },
       { deep: true, immediate: true }
     );
     onMounted(async () => {
-      data.showRealTimeInfo = true;
+      
+      //如果滚动隐藏下拉框
       document.onscroll = () => {
-        //如果滚动隐藏下拉框
         // if (
         //   document.getElementsByClassName("menu-select") &&
         //   document.getElementsByClassName("menu-select")[0] &&
@@ -338,6 +450,7 @@ export default {
       loginOut,
       selectOwnersZone,
       showOwnerIsZONE,
+      findOneNewPopupBox,
     };
   },
 };
