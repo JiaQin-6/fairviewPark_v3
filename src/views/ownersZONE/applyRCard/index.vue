@@ -88,14 +88,14 @@
                       : 'https://fairviewpark.hk/file/ResidentCard_InstructionTC.html'
                   "
                 >
-                  {{ fairview_park_lang === "en_us" ? "How to apply" : "申請指引" }}</a
+                {{ $t("applyRCard.How_to_apply") }}</a
                 >
               </button>
               <span>{{ $t("applyRCard.After_apply_success") }}</span>
             </div>
             <div class="application">
               <h5>
-                {{ fairview_park_lang === "en_us" ? "B. Card Users" : "乙.持咭人士資料" }}
+                {{ $t("applyRCard.B_Card_Users") }}
               </h5>
               <p>
                 {{ $t("applyRCard.the_Registered_House_Owner") }}
@@ -103,9 +103,7 @@
             </div>
             <div class="application-form">
               <h5>
-                {{
-                  fairview_park_lang === "en_us" ? "Application materials" : "申請資料"
-                }}
+                {{ $t("applyRCard.Application_materials") }}
               </h5>
               <li style="color: #07522b; margin-bottom: 10px; font-weight: bold">
                 {{ address_t }}
@@ -115,11 +113,7 @@
                 <ul>
                   <li>
                     <div class="form-wrap flex-row">
-                      <span class="col-6">{{
-                        fairview_park_lang === "en_us"
-                          ? "1. Name of Card User (as appears in the ID document)"
-                          : "1. 持咭人姓名(如身份證明文件所顯示)"
-                      }}</span>
+                      <span class="col-6">{{ $t("applyRCard.Name_of_Card_User") }}</span>
                       <el-input v-model="form.name" class="col-6"></el-input>
                     </div>
                     <i
@@ -135,9 +129,7 @@
                   </li>
                   <li>
                     <div class="form-wrap flex-row mb-10">
-                      <span class="col-6">{{
-                        fairview_park_lang === "en_us" ? "2. Relation" : "2. 與業主關係"
-                      }}</span>
+                      <span class="col-6">{{ $t("applyRCard.Relation") }}</span>
                       <el-select
                         v-model="form.relation"
                         class="col-6"
@@ -221,11 +213,7 @@
                         }}</i
                       >
                       <div class="form-wrap flex-row mb-10 flex-wrap">
-                        <span class="yellow col-6 pl-20">{{
-                          fairview_park_lang === "en_us"
-                            ? "Upload Document"
-                            : "上傳証明文件"
-                        }}</span>
+                        <span class="yellow col-6 pl-20">{{ $t("applyRCard.Upload_the_address_proof") }}</span>
 
                         <el-upload
                           ref="relationFile"
@@ -277,11 +265,7 @@
                   </li>
                   <li>
                     <div class="form-wrap flex-row mb-10">
-                      <span class="col-6">{{
-                        fairview_park_lang === "en_us"
-                          ? "3. Octopus Card Number"
-                          : "3. 八達通編號"
-                      }}</span>
+                      <span class="col-6">{{ $t("applyRCard.Octopus_Card_Number") }}</span>
                       <div class="flex-row">
                         <el-input
                           class="mr-6"
@@ -337,11 +321,7 @@
                   </li>
                   <li>
                     <div class="form-wrap flex-row">
-                      <span class="col-6">{{
-                        fairview_park_lang === "en_us"
-                          ? "4. Card User's Photo Upload"
-                          : "4. 上載住戶照片"
-                      }}</span>
+                      <span class="col-6">{{ $t("applyRCard.Card_User_s_Photo_Upload") }}</span>
                       <el-upload
                         ref="photoFile"
                         class="upload-demo col-6"
@@ -508,20 +488,16 @@
                         <span>{{ item.rcrelationOther }}</span>
                       </div>
                       <div v-if="item.rcrelationDoc">
-                        <strong style="margin-right: 5px">{{
-                          fairview_park_lang === "en_us"
-                            ? "Uploaded Document:"
-                            : "證明文件檔案名稱："
-                        }}</strong>
+                        <strong style="margin-right: 5px">{{ $t("applyRCard.Uploaded_Document") }}</strong>
                         <span style="display: block">{{
                           item.rcrelationDoc.split("/").pop()
                         }}</span>
                       </div>
                       <div>
-                        <strong style="margin-right: 5px">{{
+                        <strong style="margin-right: 5px">{{ $t("applyRCard.Octopus_Card_Number") }}{{
                           fairview_park_lang === "en_us"
-                            ? "Octopus Card Number:"
-                            : "八達通編號："
+                            ? ":"
+                            : "："
                         }}</strong>
                         <span>{{ item.rcOcto }}({{ item.rcOctoBk }})</span>
                       </div>
@@ -535,11 +511,7 @@
                         />
                       </div>
                       <div v-if="item.rcAppStatus === 2">
-                        <strong style="margin-right: 5px">{{
-                          fairview_park_lang === "en_us"
-                            ? "Approved Image Record:"
-                            : "已審核圖片記錄編號 :"
-                        }}</strong>
+                        <strong style="margin-right: 5px">{{ $t("applyRCard.Approved_Image_Record") }}</strong>
                         <span style="display: block">{{
                           item.rcPhoto.split("/").pop()
                         }}</span>
