@@ -9,12 +9,8 @@
 <template>
   <div class="pdf-preview">
     <div class="pdf-preview-content">
-      <iframe
-        width="100%"
-        height="100%"
-        frameborder="0"
-        :src="`${env}/web/viewer.html?file=${encodeURIComponent(source)}`"
-      >
+      <iframe width="100%" height="100%" frameborder="0"
+        :src="`${env}/web/viewer.html?file=${encodeURIComponent(source)}`">
       </iframe>
     </div>
   </div>
@@ -121,51 +117,11 @@ export default {
     watch(
       () => props.pdfPreview,
       (val) => {
-        nextTick(() => {
-          let timer = null;
-          timer = setInterval(() => {
-            if (
-              document.getElementsByTagName("iframe") &&
-              document.getElementsByTagName("iframe")[0] &&
-              document.getElementsByTagName("iframe")[0].contentDocument&&
-              document.getElementsByTagName("iframe")[0].contentDocument.getElementById("editorModeButtons")
-            ) {
-              clearInterval(timer);
-              document
-                .getElementsByTagName("iframe")[0]
-                .contentDocument.getElementById("mainContainer").style["min-width"] =
-                "329px";
-              document
-                .getElementsByTagName("iframe")[0]
-                .contentDocument.getElementById("editorModeButtons").style.display =
-                "none";
-            }
-          }, 100);
-        });
         data.source = val;
-       
+
       }
     );
-    onMounted(() => {
-      let timer = null;
-      timer = setInterval(() => {
-        if (
-          document.getElementsByTagName("iframe") &&
-          document.getElementsByTagName("iframe")[0] &&
-          document.getElementsByTagName("iframe")[0].contentDocument&&
-          document.getElementsByTagName("iframe")[0].contentDocument.getElementById("editorModeButtons")
-        ) {
-          clearInterval(timer);
-          document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("mainContainer").style["min-width"] = "329px";
-          document
-            .getElementsByTagName("iframe")[0]
-            .contentDocument.getElementById("editorModeButtons").style.display =
-            "none";
-        }
-      }, 500);
-    });
+    onMounted(() => { });
     return {
       ...toRefs(data),
       lastPage,
@@ -181,14 +137,17 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .pdf-preview {
   position: relative;
   padding: 20px 0;
   box-sizing: border-box;
   height: 100%;
+
   .pdf-preview-content {
     margin: 0 auto;
     height: 100%;
+
     .page-tool {
       display: flex;
       flex-direction: column;
@@ -199,6 +158,7 @@ export default {
       .page-tool-content {
         display: flex;
         align-items: center;
+
         .page-tool-item {
           padding: 8px 15px;
           padding-left: 10px;
@@ -207,18 +167,21 @@ export default {
         }
       }
     }
+
     .pdf-wrap {
       height: 550px;
       overflow: auto;
       margin-bottom: 20px;
       background-color: #f1f3f5;
       padding: 20px;
+
       @{deep} .vue-pdf-embed {
         text-align: center;
         max-width: 515px;
         margin: 0 auto;
         box-sizing: border-box;
-        > div {
+
+        >div {
           position: absolute;
           padding: 10px 20px 20px 20px;
           box-sizing: border-box;
@@ -235,32 +198,38 @@ export default {
     width: 540px;
   }
 }
+
 @media (min-width: 768px) {
   .pdf-preview-content {
     width: 720px;
   }
 }
+
 @media (min-width: 992px) {
   .pdf-preview-content {
     width: 960px;
   }
 }
+
 @media (min-width: 1200px) {
   .pdf-preview-content {
     width: 1100px;
   }
 }
+
 @media (min-width: 1400px) {
   .pdf-preview-content {
     width: 1280px;
   }
 }
+
 @media (max-width: 991px) {
   .pdf-preview-content {
     box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+
     .pdf-wrap {
       @{deep} .vue-pdf-embed {
-        > div {
+        >div {
           // position: absolute;
           // padding: 0px !important;
           // box-sizing: border-box;
@@ -269,9 +238,9 @@ export default {
         }
       }
     }
+
     .display {
       display: none;
     }
   }
-}
-</style>
+}</style>

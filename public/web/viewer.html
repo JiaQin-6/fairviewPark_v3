@@ -101,7 +101,7 @@ See https://github.com/adobe-type-tools/cmap-resources
       <div id="sidebarResizer"></div>
     </div> <!-- sidebarContainer -->
 
-    <div id="mainContainer">
+    <div id="mainContainer" style="min-width:329px">
       <div class="findbar hidden doorHanger" id="findbar">
         <div id="findbarInputContainer">
           <input id="findInput" class="toolbarField" title="Find" placeholder="Find in document…" tabindex="91"
@@ -332,7 +332,7 @@ See https://github.com/adobe-type-tools/cmap-resources
 
               <div class="verticalToolbarSeparator hiddenMediumView"></div>
 
-              <div id="editorModeButtons" class="splitToolbarButton toggled" role="radiogroup">
+              <div id="editorModeButtons" style="display:none" class="splitToolbarButton toggled" role="radiogroup">
                 <button id="editorFreeText" class="toolbarButton" disabled="disabled" title="Text" role="radio"
                   aria-checked="false" tabindex="34" data-l10n-id="editor_free_text2">
                   <span data-l10n-id="editor_free_text2_label">Text</span>
@@ -362,7 +362,7 @@ See https://github.com/adobe-type-tools/cmap-resources
               </div>
               <span id="scaleSelectContainer" class="dropdownToolbarButton">
                 <select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">
-                  <option id="pageAutoOption" title="" value="auto" selected="selected" data-l10n-id="page_scale_auto">
+                  <option id="pageAutoOption" title="" value="auto" data-l10n-id="page_scale_auto">
                     Automatic Zoom</option>
                   <option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual
                     Size</option>
@@ -374,7 +374,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                   </option>
                   <option title="" value="0.75" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 75 }'>75%
                   </option>
-                  <option title="" value="1" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 100 }'>100%
+                  <option title="" value="1" data-l10n-id="page_scale_percent" selected="selected" data-l10n-args='{ "scale": 100 }'>100%
                   </option>
                   <option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%
                   </option>

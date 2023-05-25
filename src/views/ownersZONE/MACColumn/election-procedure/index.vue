@@ -178,14 +178,14 @@ export default {
         data.fairview_park_lang === "en_us"
           ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Eng.pdf"
           : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Activities_Rules_Chi.pdf";
-      (data.pdfPreview2 =
+      data.pdfPreview2 =
         data.fairview_park_lang === "en_us"
           ? "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-          : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf"),
-        (data.pdfDownloadUrl2 =
+          : "https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf";
+      data.pdfDownloadUrl2 =
           data.fairview_park_lang === "en_us"
             ? "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Eng.pdf"
-            : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf");
+            : "https://app.fairviewpark.hk/houseweb/web/downFile?filePath=https://fairviewpark.hk/file/mac/MAC_Election_Timetable_Chi.pdf";
     });
     return {
       ...toRefs(data),
