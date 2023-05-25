@@ -101,6 +101,7 @@
             {{ fairview_park_lang === "en_us" ? "Share" : "分享" }}
           </el-button>
         </div>
+        <div style="height: 700px">
         <PDFPreview
           v-if="pdfPreview1"
           :pdfPreview="pdfPreview1"
@@ -108,6 +109,7 @@
           :pageNumber="1"
         >
         </PDFPreview>
+      </div>
       </div>
       <div v-show="menuActive === 3">
         <div class="share" v-if="isShowShareButton">
