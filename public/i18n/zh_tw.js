@@ -20,6 +20,7 @@ window.i18n_zh_tw = {
     'Shops_Directory': '商場資訊',
     'Useful_Telephone_Nos': '常用電話及連接',
     'Edit_member_information': '編輯賬號資料',
+    'Tenant_account_management': '租客賬號管理',
     'News_Update': '最新消息',
     'FAQ_from_Residents': '居民常見問題',
     'Estate_Notices': '屋苑通告',
@@ -1732,5 +1733,10 @@ window.i18n_zh_tw = {
   //常用表格
   Frequently_Used_Forms:{
     'Residents_can_obtain_any_application_forms':'住戶可到本處客戶服務索取任何有關申請表格'
+  },
+  //首頁信息彈框
+  real_time_info:{
+    I_understand_the_above_information:'我明白以上信息',
+    Confirm:'確定',
   }
 };

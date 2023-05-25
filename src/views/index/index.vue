@@ -20,6 +20,10 @@
                       text: $t('headed.Edit_member_information'),
                     },
                     {
+                      router: '/start-up-tenant',
+                      text: $t('headed.Tenant_account_management'),
+                    },
+                    {
                       router: '/news-update',
                       text: $t('headed.News_Update'),
                     },
@@ -149,6 +153,7 @@
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
+      <TenantAccountManagement></TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
@@ -184,6 +189,7 @@ import Header from "../../components/header/index.vue";
 import Footer from "../../components/footer/index.vue";
 import RealTimeInfo from "../../components/real-time-info/index.vue";
 import Login from "../login/index.vue";
+import TenantAccountManagement from "../tenantAccountManagement/index.vue";
 import commonFunc from "../../assets/js/commonFunc";
 // import  "../../assets/js/rem";
 export default {
@@ -192,6 +198,7 @@ export default {
     Footer,
     RealTimeInfo,
     Login,
+    TenantAccountManagement,
   },
   data() {
     return {
@@ -309,7 +316,14 @@ export default {
         document.body.appendChild(button);
         button.click();
         document.body.removeChild(button);
-      } else {
+      } else if (val === "/start-up-tenant") {
+        const button = document.createElement("button");
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute("data-bs-target", "#startUp");
+        document.body.appendChild(button);
+        button.click();
+        document.body.removeChild(button);
+      }  else {
         router.push({
           path: val,
           query: {

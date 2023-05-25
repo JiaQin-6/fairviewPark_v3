@@ -657,6 +657,10 @@
                     "
                   />
                 </li>
+                <el-radio-group v-model="editMemberInfoForm.isAgreeAuthorization" class="ml-4">
+                  <el-radio label="1" size="large">是</el-radio>
+                  <el-radio label="2" size="large">{{ fairview_park_lang === "en_us" ? "No" : "更新" }}</el-radio>
+                </el-radio-group>
               </ul>
             </div>
             <div class="button">
@@ -1187,7 +1191,9 @@ export default {
         }
       }
     }
-
+    .modal-header{
+      border-bottom: none;
+    }
     .modal-body {
       text-align: center;
       padding: 0 20px 50px;
@@ -1218,7 +1224,7 @@ export default {
         margin: 0 auto;
 
         li {
-          margin: 0 auto 30px;
+          margin: 0 auto 20px;
           align-items: center;
           justify-content: space-between;
 

@@ -12,6 +12,7 @@
       '--mainColor1': '#07522b',
       '--mainColor2': '#BA9859',
       '--mainColor3': '#9cc212',
+      '--mainColor4': '#dc3545',
     }"
   />
 </template>

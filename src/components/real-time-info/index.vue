@@ -2,18 +2,15 @@
   <div class="real-time-info" v-show="show">
     <div class="real-time-info-content">
       <!-- 主要内容 -->
-      <div class="main-content" v-html="newRealTimeInfo&&newRealTimeInfo.content"></div>
+      <div class="main-content" style="height:80%" v-html="newRealTimeInfo && newRealTimeInfo.content"></div>
       <!-- 选项框 -->
       <div>
         <div class="mb-2 flex items-center text-sm">
-          <el-radio-group v-model="radio" class="ml-4">
-            <el-radio label="1" size="large">下次提示我</el-radio>
-            <el-radio label="2" size="large">下次不再提示我</el-radio>
-          </el-radio-group>
+          <el-checkbox v-model="iknow" :label="$t('real_time_info.I_understand_the_above_information')" size="large" />
         </div>
       </div>
       <!-- 按钮 -->
-      <el-button @click="close" :disabled="!radio">确定</el-button>
+      <el-button @click="close" round>{{ $t('real_time_info.Confirm') }}</el-button>
     </div>
   </div>
 </template>
@@ -34,20 +31,20 @@ export default {
     showRealTimeInfo: {
       type: Boolean,
     },
-    newRealTimeInfo:{
-        type:Object,
+    newRealTimeInfo: {
+      type: Object,
     }
   },
   setup(props, ctx) {
     const data = reactive({
       show: false,
       fairview_park_lang: "",
-      radio: "",
+      iknow: '',
     });
     watch(
       () => props.showRealTimeInfo,
       (value) => {
-        data.radio = '';
+        data.iknow = '';
         data.show = value;
       }
     );
@@ -57,20 +54,20 @@ export default {
     //   { deep: true, immediate: true }
     // );
     const close = () => {
-        /*
-                    nonMember（非会员）：{
-                        id:'',
-                        show:'',
-                    }
-                    owner（业主）{
-                        id:'',
-                        show:'',
-                    }
-                    residents（住客）{
-                        id:'',
-                        show:'',
-                    }
-            **/
+      /*
+                  nonMember（非会员）：{
+                      id:'',
+                      show:'',
+                  }
+                  owner（业主）{
+                      id:'',
+                      show:'',
+                  }
+                  residents（住客）{
+                      id:'',
+                      show:'',
+                  }
+          **/
       //判断身份，和localStorage中的状态，修改对应状态
       let obj;
       if (localStorage.getItem("login-info")) {
@@ -85,14 +82,14 @@ export default {
           },
           owner: {
             id: props.newRealTimeInfo.id,
-            show: data.radio === "1" ? true : false,
+            show: data.iknow ? false : true,
           },
         };
       } else {
         obj = {
           nonMember: {
             id: props.newRealTimeInfo.id,
-            show: data.radio === "1" ? true : false,
+            show: data.iknow ? false : true,
           },
           owner: {
             id: localStorage.getItem("real-info")
@@ -116,6 +113,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@deep: ~">>>";
+
 .real-time-info {
   position: fixed;
   left: 0;
@@ -126,14 +125,73 @@ export default {
   align-items: center;
   text-align: center;
   z-index: 20;
+  background-color: rgba(0, 0, 0, 0.5);
 
   .real-time-info-content {
     width: 50%;
     height: 50%;
     background-color: #fff;
     margin: 0 auto;
-    box-shadow: 0 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 6px 5px rgba(56, 55, 55, 0.5);
+    border-radius: 6px;
+    padding: 20px;
+    box-sizing: border-box;
+
+    .main-content {
+      box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
+      border-radius: 6px;
+      overflow: auto;
+    }
+
+    @{deep} .el-checkbox {
+      .el-checkbox__input {
+        input {}
+
+        span {
+          border-color: #606266;
+        }
+      }
+
+      .el-checkbox__label {}
+    }
+
+    @{deep} .is-checked {
+      .el-checkbox__input {
+        input {}
+
+        span {
+          border-color: var(--mainColor3);
+          background-color: var(--mainColor3);
+        }
+      }
+
+      .el-checkbox__label {
+        color: var(--mainColor3);
+      }
+    }
+
+    @{deep} .el-button {
+      background-color: var(--mainColor2);
+      height: 40px;
+      padding: 0 30px;
+
+      span {
+        color: #fff;
+        font-size: 18px;
+      }
+    }
   }
 }
+
+@media (max-width: 991px) {
+  .real-time-info {
+    .real-time-info-content {
+      width: 90%;
+      height: 80%;
+      padding: 15px;
+    }
+  }
+
+}
 </style>
->
+

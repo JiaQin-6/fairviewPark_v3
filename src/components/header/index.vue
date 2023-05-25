@@ -243,6 +243,15 @@
                       ><el-icon><EditPen /></el-icon
                       >{{ $t("headed.Edit_member_information") }}</el-dropdown-item
                     >
+                    <el-dropdown-item
+                      v-if="isShowLoginOutButton"
+                      command="/start-up-tenant"
+                      data-bs-toggle="modal"
+                      data-bs-target="#startUp"
+                      >
+                      <!-- <el-icon><EditPen /></el-icon> -->
+                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
+                    >
                     <el-dropdown-item command="/news-update">{{
                       $t("headed.News_Update")
                     }}</el-dropdown-item>
@@ -472,7 +481,7 @@ export default {
             lang: data.fairview_park_lang,
           },
         });
-      } else if (val === "/edit-member-information") {
+      } else if (val === "/edit-member-information"||val ==='/start-up-tenant') {
       } else {
         router.push({
           path: val,

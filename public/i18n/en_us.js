@@ -20,6 +20,7 @@ window.i18n_en_us = {
     'Shops_Directory': 'Shops Directory',
     'Useful_Telephone_Nos': 'Useful Telephone Nos.',
     'Edit_member_information': 'Edit member information',
+    'Tenant_account_management': '租客賬號管理',
     'News_Update': 'News Update',
     'FAQ_from_Residents': 'FAQ from Residents',
     'Estate_Notices': 'Estate Notices',
@@ -1919,5 +1920,10 @@ window.i18n_en_us = {
   //常用表格
   Frequently_Used_Forms:{
     'Residents_can_obtain_any_application_forms':'Residents can obtain any application forms from our Customer Service Department.'
+  },
+  //首頁信息彈框
+  real_time_info:{
+    I_understand_the_above_information:'I understand the above information',
+    Confirm:'Confirm',
   }
 };
