@@ -45,9 +45,11 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="login_error_tip.is_null && !loginForm.loginName"
-                    >{{ fairview_park_lang === "en_us"
+                    >{{
+                      fairview_park_lang === "en_us"
                         ? "Please provide a valid login name."
-                        : "請輸入正確的登陸名" }}</i
+                        : "請輸入正確的登陸名"
+                    }}</i
                   >
                 </li>
                 <li>
@@ -63,16 +65,17 @@
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
                     v-show="login_error_tip.is_null && !loginForm.password"
-                    >{{ fairview_park_lang === "en_us"
+                    >{{
+                      fairview_park_lang === "en_us"
                         ? "Please provide a valid password."
-                        : "請輸入正確的密碼" }}</i
+                        : "請輸入正確的密碼"
+                    }}</i
                   >
                 </li>
               </ul>
             </div>
             <div class="remember flex-row">
-              <div class="flex-row" style="align-items: center">
-              </div>
+              <div class="flex-row" style="align-items: center"></div>
               <i data-bs-target="#forgetPassword" data-bs-toggle="modal"
                 >{{ $t("login.Forgot_password") }}?</i
               >
@@ -135,7 +138,7 @@
             <h2>{{ $t("sign_up.Online_user_registration") }}</h2>
             <button
               style="
-                background-color: #B59962;
+                background-color: #b59962;
                 color: #fff;
                 padding: 5px 30px;
                 margin-right: 20px;
@@ -170,7 +173,7 @@
                     :class="{
                       error: register_error_tip.is_null && !registerForm.oname,
                     }"
-                    @input="registerForm.oname=registerForm.oname.toUpperCase()"
+                    @input="registerForm.oname = registerForm.oname.toUpperCase()"
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -387,7 +390,11 @@
                       forgot_password_error_tip.is_email_correct &&
                       forgotPasswordForm.email
                     "
-                    >{{ fairview_park_lang === 'en_us' ? 'Please provide a valid email.' : '請輸入正確格式的郵件' }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Please provide a valid email."
+                        : "請輸入正確格式的郵件"
+                    }}</i
                   >
                 </li>
               </ul>
@@ -417,9 +424,9 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <!-- 輸入密碼驗證 -->
-        <div class="verify" v-show="!showEditMemberModel">
+        <div class="verify" v-show="!showEditMemberModel" v-loading="verifyPasswordLoading">
           <div class="verify-password">
             <el-icon @click="closeModel">
               <CloseBold />
@@ -456,7 +463,7 @@
           </div>
         </div>
         <!-- 编辑资料 -->
-        <div class="modal-content" v-show="showEditMemberModel">
+        <div class="modal-content" v-show="showEditMemberModel" v-loading="loading">
           <div class="modal-header">
             <button
               id="close-edit-member"
@@ -482,7 +489,9 @@
                       error:
                         edit_member_info_error_tip.is_null && !editMemberInfoForm.oname,
                     }"
-                    @input="editMemberInfoForm.oname=editMemberInfoForm.oname.toUpperCase()"
+                    @input="
+                      editMemberInfoForm.oname = editMemberInfoForm.oname.toUpperCase()
+                    "
                   />
                   <i
                     style="display: block; color: #fc0d1b; text-align: left"
@@ -641,7 +650,11 @@
                       edit_member_info_error_tip.is_email_correct &&
                       editMemberInfoForm.email
                     "
-                    >{{ fairview_park_lang === 'en_us' ? 'Please provide a valid email.' : '請輸入正確格式的郵件' }}</i
+                    >{{
+                      fairview_park_lang === "en_us"
+                        ? "Please provide a valid email."
+                        : "請輸入正確格式的郵件"
+                    }}</i
                   >
                 </li>
                 <li>
@@ -657,12 +670,53 @@
                     "
                   />
                 </li>
-                <el-radio-group v-model="editMemberInfoForm.isAgreeAuthorization" class="ml-4">
-                  <el-radio label="1" size="large">是</el-radio>
-                  <el-radio label="2" size="large">{{ fairview_park_lang === "en_us" ? "No" : "更新" }}</el-radio>
-                </el-radio-group>
+                <li>
+                  <p class="title">願意授權管理處,協助處理住客啟動賬號信息？</p>
+                  <el-radio-group
+                    v-model="editMemberInfoForm.isAgreeAuthorization"
+                    class="ml-4"
+                  >
+                    <el-radio label="Y" size="large">{{
+                      fairview_park_lang === "en_us" ? "Yes" : "是"
+                    }}</el-radio>
+                    <el-radio label="N" size="large">{{
+                      fairview_park_lang === "en_us" ? "No" : "否"
+                    }}</el-radio>
+                  </el-radio-group>
+                  <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.isAgreeAuthorization
+                    "
+                    >{{ $t("Edit_member_information.This_field_is_required") }}</i
+                  >
+                </li>
+                <li>
+                  <p class="title">願意接收實體信件信息？</p>
+                  <el-radio-group
+                    v-model="editMemberInfoForm.isAgreeReceiveLetter"
+                    class="ml-4"
+                  >
+                    <el-radio label="Y" size="large">{{
+                      fairview_park_lang === "en_us" ? "Yes" : "是"
+                    }}</el-radio>
+                    <el-radio label="N" size="large">{{
+                      fairview_park_lang === "en_us" ? "No" : "否"
+                    }}</el-radio>
+                  </el-radio-group>
+                  <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_null &&
+                      !editMemberInfoForm.isAgreeReceiveLetter
+                    "
+                    >{{ $t("Edit_member_information.This_field_is_required") }}</i
+                  >
+                </li>
               </ul>
             </div>
+            <p class="update-time" v-if="editMemberInfoForm.updateTime">上次更新資料時間:{{ editMemberInfoForm.updateTime }}</p>
             <div class="button">
               <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
                 {{ edit_member_info_error_tip.text }}
@@ -692,10 +746,11 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
       loading: false,
+      verifyPasswordLoading: false,
       fairview_park_lang: "",
       loginForm: {
-        loginName: "", //david
-        password: "", //yG1tRPL1x7
+        loginName: null, //david
+        password: null, //yG1tRPL1x7
       },
       registerForm: {
         oname: null,
@@ -713,6 +768,7 @@ export default {
       },
       editMemberInfoForm: {
         verifyPassword: null,
+        verifyCode: null,
         oname: null,
         hcode: null,
         loginName: null,
@@ -722,6 +778,9 @@ export default {
         cnickname: null,
         email: null,
         contactNo: null,
+        isAgreeAuthorization: null,
+        isAgreeReceiveLetter: null,
+        updateTime: null,
       },
       login_error_tip: {
         is_null: false,
@@ -772,13 +831,6 @@ export default {
         if (res.data.status === 200) {
           document.getElementById("close-login").click();
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
-          sessionStorage.setItem(
-            "login-user",
-            JSON.stringify({
-              ln: data.loginForm.loginName,
-              pd: data.loginForm.password,
-            })
-          );
           store.commit("setLoginStatus", true);
         } else {
           data.login_error_tip.is_show = true;
@@ -904,16 +956,12 @@ export default {
       }
     };
     //编辑资料之前验证密码
-    const verifyPassword = () => {
+    const verifyPassword = async () => {
       if (!data.editMemberInfoForm.verifyPassword) {
         //如果为空
         data.edit_member_info_error_tip.is_verify_password_null = true;
         return;
-      } else if (
-        sessionStorage.getItem("login-user") &&
-        JSON.parse(sessionStorage.getItem("login-user")).pd !==
-          data.editMemberInfoForm.verifyPassword
-      ) {
+      } else if (!(await checkPassword(data.editMemberInfoForm.verifyPassword))) {
         //如果密码不正确
         data.edit_member_info_error_tip.is_verify_password_error = true;
         return;
@@ -924,17 +972,21 @@ export default {
     };
     //修改用戶信息
     const editMemberInfo = async () => {
-      data.edit_member_info_error_tip.is_null = false;
-      data.edit_member_info_error_tip.is_password_null = false;
-      data.edit_member_info_error_tip.is_email_correct = false;
-      data.edit_member_info_error_tip.is_show = false;
-      data.edit_member_info_error_tip.is_confirm_password_error_null = false;
-      data.edit_member_info_error_tip.text = "";
+      console.log(data.editMemberInfoForm);
+      for (const key in data.edit_member_info_error_tip) {
+          if (key === "text") {
+            data.edit_member_info_error_tip[key] = "";
+          } else {
+            data.edit_member_info_error_tip[key] = false;
+          }
+        }
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
-        !data.editMemberInfoForm.email
+        !data.editMemberInfoForm.email ||
+        !data.editMemberInfoForm.isAgreeAuthorization ||
+        !data.editMemberInfoForm.isAgreeReceiveLetter
       ) {
         data.edit_member_info_error_tip.is_null = true;
         return;
@@ -969,19 +1021,20 @@ export default {
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
           lang: data.fairview_park_lang,
+          typeList:[
+              {
+                  typeCode:"auth_start",//授权处理固定传值（默认Y）
+                  typeValue:data.editMemberInfoForm.isAgreeAuthorization//Y是；N否
+              },
+              {
+                  typeCode:"accept_email",//接受实体邮件固定传值（默认N）
+                  typeValue:data.editMemberInfoForm.isAgreeReceiveLetter//Y是；N否
+              }
+          ],
+          verifyCode:data.editMemberInfoForm.verifyCode,
         });
         if (res.data.status === 200) {
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
-          //
-          if (data.editMemberInfoForm.confirmPassword) {
-            sessionStorage.setItem(
-              "login-user",
-              JSON.stringify({
-                ln: data.editMemberInfoForm.loginName,
-                pd: data.editMemberInfoForm.confirmPassword,
-              })
-            );
-          }
           ElMessage({
             showClose: true,
             message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
@@ -1016,6 +1069,24 @@ export default {
         },
       });
     };
+    const checkPassword = async (password) => {
+      data.verifyPasswordLoading = true;
+      try {
+        const res = await proxy.$http.checkPassword({
+          password: password,
+        });
+        if (res.data.status === 200) {
+          data.editMemberInfoForm.verifyCode = res.data.data
+          return true;
+        } else {
+          data.verifyPasswordLoading = false;
+          return false;
+        }
+      } catch (error) {
+        data.verifyPasswordLoading = false;
+        return false;
+      }
+    };
     onMounted(() => {
       var editMemberInformationModal = document.getElementById("editMemberInformation");
       editMemberInformationModal.addEventListener("show.bs.modal", function (event) {
@@ -1037,29 +1108,24 @@ export default {
         data.editMemberInfoForm.contactNo = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).contactNo
           : "";
+        data.editMemberInfoForm.updateTime = localStorage.getItem("login-info")
+          ? JSON.parse(localStorage.getItem("login-info")).editInfoTime
+          : "";
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框
       editMemberInformationModal.addEventListener("hidden.bs.modal", (event) => {
         data.showEditMemberModel = false;
-        data.editMemberInfoForm.verifyPassword = null;
-        data.editMemberInfoForm.oname = null;
-        data.editMemberInfoForm.hcode = null;
-        data.editMemberInfoForm.loginName = null;
-        data.editMemberInfoForm.password = null;
-        data.editMemberInfoForm.confirmPassword = null;
-        data.editMemberInfoForm.nickname = null;
-        data.editMemberInfoForm.cnickname = null;
-        data.editMemberInfoForm.email = null;
-        data.editMemberInfoForm.contactNo = null;
+        for (const key in data.editMemberInfoForm) {
+          data.editMemberInfoForm[key] = null;
+        }
         //关闭提示
-        data.edit_member_info_error_tip.is_verify_password_null = false;
-        data.edit_member_info_error_tip.is_verify_password_error = false;
-        data.edit_member_info_error_tip.is_null = false;
-        data.edit_member_info_error_tip.is_password_null = false;
-        data.edit_member_info_error_tip.is_confirm_password_error_null = false;
-        data.edit_member_info_error_tip.is_email_correct = false;
-        data.edit_member_info_error_tip.is_show = false;
-        data.edit_member_info_error_tip.text = "";
+        for (const key in data.edit_member_info_error_tip) {
+          if (key === "text") {
+            data.edit_member_info_error_tip[key] = "";
+          } else {
+            data.edit_member_info_error_tip[key] = false;
+          }
+        }
       });
       //当隐藏登录框清除输入数据
       var loginModal = document.getElementById("login");
@@ -1074,30 +1140,32 @@ export default {
       //当隐藏注册框清除输入数据
       var signUpModal = document.getElementById("signUp");
       signUpModal.addEventListener("hidden.bs.modal", (event) => {
-        data.registerForm.oname = null;
-        data.registerForm.hcode = null;
-        data.registerForm.loginName = null;
-        data.registerForm.password = null;
-        data.registerForm.nickname = null;
-        data.registerForm.cnickname = null;
-        data.registerForm.email = null;
-        data.registerForm.contactNo = null;
+        for (const key in data.registerForm) {
+          data.registerForm[key] = null;
+        }
         //关闭提示
-        data.register_error_tip.is_null = false;
-        data.register_error_tip.is_email_correct = false;
-        data.register_error_tip.is_show = false;
-        data.register_error_tip.text = "";
+        for (const key in data.register_error_tip) {
+          if (key === "text") {
+            data.register_error_tip[key] = "";
+          } else {
+            data.register_error_tip[key] = false;
+          }
+        }
       });
       //当隐藏忘记密码框清除输入数据
       var forgetPasswordModal = document.getElementById("forgetPassword");
       forgetPasswordModal.addEventListener("hidden.bs.modal", (event) => {
-        data.forgotPasswordForm.loginName = "";
-        data.forgotPasswordForm.email = "";
+        for (const key in data.forgotPasswordForm) {
+          data.forgotPasswordForm[key] = null;
+        }
         //关闭提示
-        data.forgot_password_error_tip.is_null = false;
-        data.forgot_password_error_tip.is_email_correct = false;
-        data.forgot_password_error_tip.is_show = false;
-        data.forgot_password_error_tip.text = "";
+        for (const key in data.forgot_password_error_tip) {
+          if (key === "text") {
+            data.forgot_password_error_tip[key] = "";
+          } else {
+            data.forgot_password_error_tip[key] = false;
+          }
+        }
       });
     });
     return {
@@ -1119,6 +1187,7 @@ export default {
 
 .modal {
   background-color: rgba(0, 0, 0, 0.5);
+
   .modal-dialog {
     .verify {
       position: relative;
@@ -1150,19 +1219,23 @@ export default {
           margin-bottom: 20px;
           font-size: 18px;
         }
+
         @{deep} .el-input {
           height: 45px;
           line-height: 45px;
+
           .el-input__wrapper {
             border-radius: 10px;
             border: 1px solid rgba(0, 0, 0, 0.5);
             box-shadow: none;
+
             input {
               font-size: 18px;
               color: #000;
             }
           }
         }
+
         input {
           display: block;
           width: 100%;
@@ -1191,9 +1264,11 @@ export default {
         }
       }
     }
-    .modal-header{
+
+    .modal-header {
       border-bottom: none;
     }
+
     .modal-body {
       text-align: center;
       padding: 0 20px 50px;
@@ -1232,19 +1307,59 @@ export default {
             color: var(--mainColor1);
             text-align: left;
           }
+
           @{deep} .el-input {
             height: 45px;
             line-height: 45px;
+
             .el-input__wrapper {
               border-radius: 10px;
               border: 1px solid rgba(0, 0, 0, 0.5);
               box-shadow: none;
+
               input {
                 font-size: 18px;
                 color: #000;
               }
             }
           }
+
+          @{deep} .el-radio-group {
+            width: 100%;
+
+            .el-radio {
+              .el-radio__input {
+                .el-radio__inner {
+                  width: 18px;
+                  height: 18px;
+                }
+              }
+
+              .el-radio__label {
+                font-size: 18px;
+              }
+            }
+
+            .is-checked {
+              .el-radio__input {
+                .el-radio__inner {
+                  background-color: #fff;
+                  border: 1px solid var(--mainColor1);
+
+                  &:after {
+                    width: 13px;
+                    height: 13px;
+                    background-color: var(--mainColor1);
+                  }
+                }
+              }
+
+              .el-radio__label {
+                color: var(--mainColor1);
+              }
+            }
+          }
+
           input {
             width: 100%;
             max-width: 400px;
@@ -1255,8 +1370,14 @@ export default {
             line-height: 45px;
             padding-left: 10px;
             font-size: 18px;
+            color: #4a4a4a;
           }
         }
+      }
+
+      .update-time {
+        margin-bottom: 10px;
+        color: var(--mainColor2);
       }
 
       .remember {
@@ -1325,6 +1446,7 @@ export default {
         }
       }
     }
+
     @{deep} .error {
       border-color: rgb(222, 7, 28) !important;
       background-color: rgba(222, 7, 28, 0.1);
@@ -1333,10 +1455,12 @@ export default {
       &::-webkit-input-placeholder {
         color: rgb(222, 7, 28);
       }
+
       .el-input__wrapper {
         border-color: rgb(222, 7, 28) !important;
         background-color: rgba(222, 7, 28, 0.1);
         color: rgb(222, 7, 28);
+
         .el-input__inner {
           &::-webkit-input-placeholder {
             color: rgb(222, 7, 28);
@@ -1346,6 +1470,7 @@ export default {
     }
   }
 }
+
 @media (max-width: 991px) {
   .modal {
     .modal-dialog {
@@ -1353,15 +1478,28 @@ export default {
         h2 {
           font-size: 26px;
         }
+
         h4 {
           font-size: 20px;
           margin-bottom: 30px;
         }
+
         ul {
           li {
             margin-bottom: 20px;
+
+            @{deep} .el-radio-group {
+              width: 100%;
+
+              .el-radio {
+                .el-radio__label {
+                  font-size: 15px;
+                }
+              }
+            }
           }
         }
+
         .remember {
           i {
             font-size: 15px;

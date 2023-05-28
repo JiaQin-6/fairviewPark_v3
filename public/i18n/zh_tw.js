@@ -11,6 +11,7 @@ window.i18n_zh_tw = {
   headed: {
     'Owner_login': '業主登入',
     'OWNERS_s_ZONE': "業主專區",
+    'TENANT_s_ZONE': "租客專區",
     'Login_out': '登出',
     'Home': '首頁',
     'About_us': '關於我們',

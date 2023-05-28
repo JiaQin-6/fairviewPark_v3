@@ -11,6 +11,7 @@ window.i18n_en_us = {
   headed: {
     'Owner_login': 'Owner login',
     'OWNERS_s_ZONE': "OWNERS's ZONE",
+    'TENANT_s_ZONE': "TENANT's ZONE",
     'Login_out': 'Login out',
     'Home': 'Home',
     'About_us': 'About us',

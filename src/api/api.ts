@@ -50,6 +50,10 @@ http.forgetPassword = (arr:any) => {
 http.editMemberInfo = (arr:any) => {
   return http.post(`/houseweb/member/editMemberInfo`,arr);
 };
+//编辑用户信息前验证密码
+http.checkPassword = (arr:any) => {
+  return http.post(`/houseweb/member/checkPassword`,arr);
+};
 //申请智能卡
 http.applyRCard = (arr:any) => {
   return http.post(`/houseweb/rcard/applyRCard`,arr);
@@ -194,6 +198,14 @@ http.findRcardList = (arr:any) => {
 //查询最新一条弹窗信息
 http.findOneNewPopupBox = (arr:any) => {
   return http.post(`/houseweb/popupBox/findOneNewPopupBox`,arr);
+};
+//官网里业主启动关闭租客账号操作
+http.clickTenantLaunch = (arr:any) => {
+  return http.post(`/houseweb/tenant/clickTenantLaunch`,arr);
+};
+//租客修改密码
+http.editTenantMemberInfo = (arr:any) => {
+  return http.post(`/houseweb/member/editTenantMemberInfo`,arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */

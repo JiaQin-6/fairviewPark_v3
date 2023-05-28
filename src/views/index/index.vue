@@ -153,6 +153,7 @@
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
+      <EditTenantInformation></EditTenantInformation>
       <TenantAccountManagement></TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
@@ -189,6 +190,7 @@ import Header from "../../components/header/index.vue";
 import Footer from "../../components/footer/index.vue";
 import RealTimeInfo from "../../components/real-time-info/index.vue";
 import Login from "../login/index.vue";
+import EditTenantInformation from "../login/editTenantInformation.vue";
 import TenantAccountManagement from "../tenantAccountManagement/index.vue";
 import commonFunc from "../../assets/js/commonFunc";
 // import  "../../assets/js/rem";
@@ -198,6 +200,7 @@ export default {
     Footer,
     RealTimeInfo,
     Login,
+    EditTenantInformation,
     TenantAccountManagement,
   },
   data() {

@@ -8,7 +8,6 @@
 -->
 <template>
   <div>
-    <!-- login Modal -->
     <div class="modal fade" id="startUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
@@ -20,7 +19,11 @@
           <div class="modal-body">
             <h2>租客賬號管理</h2>
             <div>
-              <el-button class="open-btn" type="primary">開啟租客管理</el-button>
+              <el-button class="open-btn" type="primary" @click="clickTenantLaunch({
+                  tenantId: '',
+                  launchType: 'Y',
+                  memberLogin: '',
+                })">開啟租客管理</el-button>
             </div>
             <div>
               <p class="name">
@@ -57,15 +60,22 @@
       </div>
     </div>
     <!-- 關閉租客賬號提示 -->
-    <div v-if="isShowCloseBox" class="close-box" style="position:fixed;padding:20px;left:50%;top:50%;transform:translate(-50%,-50%);background-color:#fff;box-shadow:0 0 3px 3px rgba(101, 99, 99,.5)">
-      <div style="text-align:right"><el-icon @click="isShowCloseBox=false"><Close /></el-icon>
-        </div>
+    <div v-if="isShowCloseBox" class="close-box"
+      style="position:fixed;padding:20px;left:50%;top:50%;transform:translate(-50%,-50%);background-color:#fff;box-shadow:0 0 3px 3px rgba(101, 99, 99,.5)">
+      <div style="text-align:right"><el-icon @click="isShowCloseBox = false">
+          <Close />
+        </el-icon>
+      </div>
       <h4>關閉賬號</h4>
       <p>安排：户口一旦被關閉，您的租客將不能操作其户口，其相關户口資料亦會失效。</p>
       <el-checkbox v-model="isAgreeClose" label="我明白及同意上述關閉户口安排" size="large" />
       <div class="button flex-row space-between">
-        <el-button type="info" @click="isShowCloseBox=false">返回</el-button>
-        <el-button @click="isShowCloseBox=false" type="primary" :disabled="!isAgreeClose">確認</el-button>
+        <el-button type="info" @click="isShowCloseBox = false">返回</el-button>
+        <el-button @click="clickTenantLaunch({
+            tenantId: tenantId,
+            launchType: 'N',
+            memberLogin: name,
+          })" type="primary" :disabled="!isAgreeClose">確認</el-button>
       </div>
     </div>
   </div>
@@ -83,10 +93,11 @@ export default {
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
+      tenantId: '',
       name: '',
       password: '',
-      isAgreeClose:false,
-      isShowCloseBox:false,
+      isAgreeClose: false,
+      isShowCloseBox: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
@@ -100,11 +111,28 @@ export default {
     const closeTenantManagement = () => {
       data.isShowCloseBox = true
     };
+    const clickTenantLaunch = async (arr) => {
+      data.loading = true;
+      try {
+        const res = await proxy.$http.clickTenantLaunch(arr);
+        if (res.data.status === 200) {
+          console.log(res)
+          if(arr.tenantId){
+            isShowCloseBox = false
+          }
+        } else {
+          data.loading = false;
+        }
+      } catch (error) {
+        data.loading = false;
+      }
+    };
     onMounted(() => { });
     return {
       ...toRefs(data),
       closeModel,
       closeTenantManagement,
+      clickTenantLaunch,
     };
   },
 };
@@ -191,60 +219,69 @@ export default {
     }
   }
 }
-.close-box{
+
+.close-box {
   width: 400px;
   text-align: center;
   z-index: 2000;
   border-radius: 6px;
-  i{
+
+  i {
     font-size: 18px;
     cursor: pointer;
   }
-  h4{
+
+  h4 {
     margin-bottom: 20px;
   }
-  p{
+
+  p {
     color: var(--mainColor4);
     margin-bottom: 20px;
   }
+
   @{deep} .el-checkbox {
     margin-bottom: 20px;
-      .el-checkbox__input {
-        input {}
 
-        span {
-          border-color: #606266;
-        }
-      }
+    .el-checkbox__input {
+      input {}
 
-      .el-checkbox__label {
-        font-size: 18px;
+      span {
+        border-color: #606266;
       }
     }
-    @{deep} .is-checked {
-      .el-checkbox__input {
-        input {}
 
-        span {
-          border-color: var(--mainColor3);
-          background-color: var(--mainColor3);
-        }
-      }
+    .el-checkbox__label {
+      font-size: 18px;
+    }
+  }
 
-      .el-checkbox__label {
-        color: var(--mainColor3);
+  @{deep} .is-checked {
+    .el-checkbox__input {
+      input {}
+
+      span {
+        border-color: var(--mainColor3);
+        background-color: var(--mainColor3);
       }
     }
-    .button{
-      @{deep} .el-button{
-        &:last-child{
-          background-color: var(--mainColor2);
-          border:1px solid var(--mainColor2);
-        }
+
+    .el-checkbox__label {
+      color: var(--mainColor3);
+    }
+  }
+
+  .button {
+    @{deep} .el-button {
+      &:last-child {
+        background-color: var(--mainColor2);
+        border: 1px solid var(--mainColor2);
+      }
+    }
+  }
+
 }
-    }
-    
-}
+
 @media (max-width: 991px) {
   .modal {
     .modal-dialog {
