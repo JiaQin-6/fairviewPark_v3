@@ -8,24 +8,34 @@
 -->
 <template>
   <div>
-    <div class="modal fade" id="startUp" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-      aria-labelledby="staticBackdropLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
-        <div class="modal-content">
+    <div
+      class="modal fade"
+      id="startUp"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered" >
+        <div class="modal-content" v-loading="loading">
           <div class="modal-header">
-            <button id="close-start-up" type="button" class="btn-close" data-bs-dismiss="modal"
-              aria-label="Close"></button>
+            <button
+              id="close-start-up"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <h2>租客賬號管理</h2>
-            <div>
-              <el-button class="open-btn" type="primary" @click="clickTenantLaunch({
-                  tenantId: '',
-                  launchType: 'Y',
-                  memberLogin: '',
-                })">開啟租客管理</el-button>
+            <div v-if="tenantInfo&&!tenantInfo.status">
+              <el-button class="open-btn" type="primary" @click="clickTenantLaunch('Y')"
+                >開啟租客管理</el-button
+              >
             </div>
-            <div>
+            <div v-if="tenantInfo&&tenantInfo.status">
               <p class="name">
                 <span>登入名稱:</span>
                 <span>aa</span>
@@ -36,46 +46,73 @@
               </p>
               <p class="copy">複製賬號資料</p>
               <ul>
-                <li v-for="(item, index) in [{
-                  title: '上一次啓動租客賬號的來源:',
-                  value: 'a'
-                }, {
-                  title: '上一次啓動租客賬號的時間:',
-                  value: 'a'
-                }, {
-                  title: '上一次「複製該登入信息」的時間:',
-                  value: 'a'
-                }, {
-                  title: '上一次租客登入時間:',
-                  value: 'a'
-                }]" :key="index">
+                <li
+                  v-for="(item, index) in [
+                    {
+                      title: '上一次啓動租客賬號的來源:',
+                      value: 'a',
+                    },
+                    {
+                      title: '上一次啓動租客賬號的時間:',
+                      value: 'a',
+                    },
+                    {
+                      title: '上一次「複製該登入信息」的時間:',
+                      value: 'a',
+                    },
+                    {
+                      title: '上一次租客登入時間:',
+                      value: 'a',
+                    },
+                  ]"
+                  :key="index"
+                >
                   <span>{{ item.title }}</span>
                   <span>{{ item.value }}</span>
                 </li>
               </ul>
-              <el-button class="close-btn" @click="closeTenantManagement" type="danger">關閉租客管理</el-button>
+              <el-button class="close-btn" @click="closeTenantManagement" type="danger"
+                >關閉租客管理</el-button
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- 關閉租客賬號提示 -->
-    <div v-if="isShowCloseBox" class="close-box"
-      style="position:fixed;padding:20px;left:50%;top:50%;transform:translate(-50%,-50%);background-color:#fff;box-shadow:0 0 3px 3px rgba(101, 99, 99,.5)">
-      <div style="text-align:right"><el-icon @click="isShowCloseBox = false">
+    <div
+      v-if="isShowCloseBox"
+      class="close-box"
+      style="
+        position: fixed;
+        padding: 20px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        box-shadow: 0 0 3px 3px rgba(101, 99, 99, 0.5);
+      "
+    >
+      <div style="text-align: right">
+        <el-icon @click="isShowCloseBox = false">
           <Close />
         </el-icon>
       </div>
       <h4>關閉賬號</h4>
       <p>安排：户口一旦被關閉，您的租客將不能操作其户口，其相關户口資料亦會失效。</p>
-      <el-checkbox v-model="isAgreeClose" label="我明白及同意上述關閉户口安排" size="large" />
+      <el-checkbox
+        v-model="isAgreeClose"
+        label="我明白及同意上述關閉户口安排"
+        size="large"
+      />
       <div class="button flex-row space-between">
         <el-button type="info" @click="isShowCloseBox = false">返回</el-button>
-        <el-button @click="clickTenantLaunch({
-            tenantId: tenantId,
-            launchType: 'N',
-            memberLogin: name,
-          })" type="primary" :disabled="!isAgreeClose">確認</el-button>
+        <el-button
+          @click="clickTenantLaunch('N')"
+          type="primary"
+          :disabled="!isAgreeClose"
+          >確認</el-button
+        >
       </div>
     </div>
   </div>
@@ -93,45 +130,81 @@ export default {
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
-      tenantId: '',
-      name: '',
-      password: '',
+      tenantInfo:null,
+      name: "",
+      password: "",
       isAgreeClose: false,
       isShowCloseBox: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
     const router = useRouter();
-
+    
     //
     const closeModel = () => {
       var button = document.getElementById("close-edit-tenant");
       button.click();
     };
     const closeTenantManagement = () => {
-      data.isShowCloseBox = true
+      data.isShowCloseBox = true;
     };
-    const clickTenantLaunch = async (arr) => {
+    //業主查看租客情況
+    const selectTenantStatus = async () => {
       data.loading = true;
       try {
-        const res = await proxy.$http.clickTenantLaunch(arr);
+        const res = await proxy.$http.selectTenantStatus({
+          id: JSON.parse(localStorage.getItem("login-info")).id,
+        });
         if (res.data.status === 200) {
-          console.log(res)
-          if(arr.tenantId){
-            isShowCloseBox = false
+          console.log(res);
+        } else if (res.data.status === 501) {
+          data.tenantInfo = {
+            status:false
+          }
+        } 
+        data.loading = false;
+      } catch (error) {
+        data.loading = false;
+      }
+    };
+    //開啟或關閉租客賬號
+    const clickTenantLaunch = async (type) => {
+      data.loading = true;
+      try {
+        const res = await proxy.$http.clickTenantLaunch({
+          ownerId: JSON.parse(localStorage.getItem("login-info")).id,
+          launchType: type,
+        });
+        if (res.data.status === 200) {
+          if(type==='Y'){
+            selectTenantStatus()
+          }else{
+            data.isShowCloseBox =false;
+            document.getElementById("startUp").click();
           }
         } else {
+          ElMessage({
+            message: res.data.msg,
+            type: 'warning',
+          })
           data.loading = false;
         }
       } catch (error) {
         data.loading = false;
       }
     };
-    onMounted(() => { });
+    onMounted(() => {
+      var startUpModal = document.getElementById("startUp");
+      startUpModal.addEventListener("show.bs.modal", (event) => {
+        selectTenantStatus();
+      })
+      
+    });
     return {
       ...toRefs(data),
       closeModel,
       closeTenantManagement,
+      selectTenantStatus,
       clickTenantLaunch,
     };
   },
@@ -244,7 +317,8 @@ export default {
     margin-bottom: 20px;
 
     .el-checkbox__input {
-      input {}
+      input {
+      }
 
       span {
         border-color: #606266;
@@ -258,7 +332,8 @@ export default {
 
   @{deep} .is-checked {
     .el-checkbox__input {
-      input {}
+      input {
+      }
 
       span {
         border-color: var(--mainColor3);
@@ -279,7 +354,6 @@ export default {
       }
     }
   }
-
 }
 
 @media (max-width: 991px) {

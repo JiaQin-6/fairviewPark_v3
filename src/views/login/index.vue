@@ -1076,6 +1076,7 @@ export default {
           password: password,
         });
         if (res.data.status === 200) {
+          data.verifyPasswordLoading = false;
           data.editMemberInfoForm.verifyCode = res.data.data
           return true;
         } else {
