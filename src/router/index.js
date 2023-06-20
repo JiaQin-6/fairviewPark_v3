@@ -155,18 +155,22 @@ router.beforeEach((to, from, next) => {
         let newUrl = location.href.replace('www.', '');
         location.href = newUrl;
     }
+    //判斷token是否過期，如果過期刪除localStorage登陸數據
+    checkToken();
     // 检查版本更新
-    if (location.hostname !== "localhost") {
-        // checkAppNewVersion()
-        // 监听页面打开显示
-        if (!window.isHasVisibilitychange) {
-            window.isHasVisibilitychange = true;
-            document.addEventListener('visibilitychange', function () {
-                if (!document.hidden) {
+    // 监听页面打开显示
+    if (!window.isHasVisibilitychange) {
+        window.isHasVisibilitychange = true;
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+                //判斷token是否過期，如果過期刪除localStorage登陸數據
+                checkToken();
+                //检查服务端是否已经更新，如果更新刷新页面
+                if (location.hostname !== "localhost") {
                     checkAppNewVersion();
                 }
-            });
-        }
+            }
+        });
     }
     next();
 });
@@ -190,5 +194,17 @@ async function checkAppNewVersion() {
         window.location.reload();
     }
     sessionStorage.setItem('fairview-park-version', version);
+}
+//
+function checkToken() {
+    //判斷token是否過期，如果過期刪除localStorage登陸數據
+    if (localStorage.getItem('login-info')) {
+        var userinfo = JSON.parse(decodeURIComponent(escape(window.atob(JSON.parse(window.localStorage.getItem('login-info')).jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))));
+        console.log(new Date().getTime());
+        console.log(userinfo.jwtExpiresDate);
+        if (new Date().getTime() > (userinfo.jwtExpiresDate - 5000)||!userinfo.jwtExpiresDate) {
+            localStorage.removeItem('login-info');
+        }
+    }
 }
 export default router;

@@ -426,7 +426,11 @@
     >
       <div class="modal-dialog modal-lg modal-dialog-centered">
         <!-- 輸入密碼驗證 -->
-        <div class="verify" v-show="!showEditMemberModel" v-loading="verifyPasswordLoading">
+        <div
+          class="verify"
+          v-show="!showEditMemberModel"
+          v-loading="verifyPasswordLoading"
+        >
           <div class="verify-password">
             <el-icon @click="closeModel">
               <CloseBold />
@@ -716,7 +720,9 @@
                 </li>
               </ul>
             </div>
-            <p class="update-time" v-if="editMemberInfoForm.updateTime">上次更新資料時間:{{ editMemberInfoForm.updateTime }}</p>
+            <p class="update-time" v-if="editMemberInfoForm.updateTime">
+              上次更新資料時間:{{ editMemberInfoForm.updateTime }}
+            </p>
             <div class="button">
               <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
                 {{ edit_member_info_error_tip.text }}
@@ -972,14 +978,13 @@ export default {
     };
     //修改用戶信息
     const editMemberInfo = async () => {
-      console.log(data.editMemberInfoForm);
       for (const key in data.edit_member_info_error_tip) {
-          if (key === "text") {
-            data.edit_member_info_error_tip[key] = "";
-          } else {
-            data.edit_member_info_error_tip[key] = false;
-          }
+        if (key === "text") {
+          data.edit_member_info_error_tip[key] = "";
+        } else {
+          data.edit_member_info_error_tip[key] = false;
         }
+      }
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       if (
         !data.editMemberInfoForm.oname ||
@@ -1021,23 +1026,26 @@ export default {
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
           lang: data.fairview_park_lang,
-          typeList:[
-              {
-                  typeCode:"auth_start",//授权处理固定传值（默认Y）
-                  typeValue:data.editMemberInfoForm.isAgreeAuthorization//Y是；N否
-              },
-              {
-                  typeCode:"accept_email",//接受实体邮件固定传值（默认N）
-                  typeValue:data.editMemberInfoForm.isAgreeReceiveLetter//Y是；N否
-              }
+          typeList: [
+            {
+              typeCode: "auth_start", //授权处理固定传值（默认Y）
+              typeValue: data.editMemberInfoForm.isAgreeAuthorization, //Y是；N否
+            },
+            {
+              typeCode: "accept_email", //接受实体邮件固定传值（默认N）
+              typeValue: data.editMemberInfoForm.isAgreeReceiveLetter, //Y是；N否
+            },
           ],
-          verifyCode:data.editMemberInfoForm.verifyCode,
+          verifyCode: data.editMemberInfoForm.verifyCode,
         });
         if (res.data.status === 200) {
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
+            message:
+              data.fairview_park_lang === "en_us"
+                ? "Edit Successful, Please login again!"
+                : "編輯成功,請從新登陸！",
             type: "success",
           });
 
@@ -1077,7 +1085,7 @@ export default {
         });
         if (res.data.status === 200) {
           data.verifyPasswordLoading = false;
-          data.editMemberInfoForm.verifyCode = res.data.data
+          data.editMemberInfoForm.verifyCode = res.data.data;
           return true;
         } else {
           data.verifyPasswordLoading = false;
@@ -1091,27 +1099,29 @@ export default {
     onMounted(() => {
       var editMemberInformationModal = document.getElementById("editMemberInformation");
       editMemberInformationModal.addEventListener("show.bs.modal", function (event) {
-        data.editMemberInfoForm.hcode = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).topic3
-          : "";
-        data.editMemberInfoForm.loginName = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).login
-          : "";
-        data.editMemberInfoForm.nickname = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).name
-          : "";
-        data.editMemberInfoForm.cnickname = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).cname
-          : "";
-        data.editMemberInfoForm.email = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).email
-          : "";
-        data.editMemberInfoForm.contactNo = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).contactNo
-          : "";
-        data.editMemberInfoForm.updateTime = localStorage.getItem("login-info")
-          ? JSON.parse(localStorage.getItem("login-info")).editInfoTime
-          : "";
+        let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
+        var userinfo = JSON.parse(
+          decodeURIComponent(
+            escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+          )
+        );
+        data.editMemberInfoForm.hcode = userinfo.topic3 || "";
+        data.editMemberInfoForm.loginName = userinfo.login || "";
+        data.editMemberInfoForm.nickname = userinfo.name || "";
+        data.editMemberInfoForm.cnickname = userinfo.cname || "";
+        data.editMemberInfoForm.email = userinfo.email || "";
+        data.editMemberInfoForm.contactNo = userinfo.contactNo || "";
+        data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList
+          ? userinfo.authList.filter((item) => {
+               return item.typeCode == "auth_start";
+            })[0].typeValue
+          : null;
+        data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList
+          ? userinfo.authList.filter((item) => {
+            return item.typeCode == "accept_email";
+            })[0].typeValue
+          : null;
+        data.editMemberInfoForm.updateTime = userinfo.editInfoTime || "";
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框
       editMemberInformationModal.addEventListener("hidden.bs.modal", (event) => {

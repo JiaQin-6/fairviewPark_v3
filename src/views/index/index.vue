@@ -279,11 +279,11 @@ export default {
     const findOneNewPopupBox = async (memberType) => {
       try {
         const res = await proxy.$http.findOneNewPopupBox({
-          memberType:memberType,
+          memberType: memberType,
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          return res.data.data
+          return res.data.data;
         }
       } catch (error) {
         console.log(error);
@@ -326,7 +326,7 @@ export default {
         document.body.appendChild(button);
         button.click();
         document.body.removeChild(button);
-      }  else {
+      } else {
         router.push({
           path: val,
           query: {
@@ -372,10 +372,11 @@ export default {
             content: ownerData.htmlEnUs,
           },
         };
-
+        console.log(val);
         if (val) {
           data.newRealTimeInfo.id = newData.owner.id;
           data.newRealTimeInfo.content = newData.owner.content;
+
           if (localStorage.getItem("real-info")) {
             if (
               newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
@@ -407,7 +408,7 @@ export default {
           if (localStorage.getItem("real-info")) {
             if (
               newData.nonMember.id !==
-                JSON.parse(localStorage.getItem("real-info")).nonMember.id
+              JSON.parse(localStorage.getItem("real-info")).nonMember.id
             ) {
               localStorage.setItem(
                 "real-info",
@@ -423,9 +424,7 @@ export default {
                 })
               );
             }
-            if (
-              JSON.parse(localStorage.getItem("real-info")).nonMember.show
-            ) {
+            if (JSON.parse(localStorage.getItem("real-info")).nonMember.show) {
               data.showRealTimeInfo = true;
             }
           } else {
@@ -436,7 +435,6 @@ export default {
       { deep: true, immediate: true }
     );
     onMounted(async () => {
-      
       //如果滚动隐藏下拉框
       document.onscroll = () => {
         // if (

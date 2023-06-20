@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div>
+  <div v-show="isShowModal">
     <div
       class="modal fade"
       id="startUp"
@@ -17,7 +17,7 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content" v-loading="loading">
           <div class="modal-header">
             <button
@@ -30,44 +30,46 @@
           </div>
           <div class="modal-body">
             <h2>租客賬號管理</h2>
-            <div v-if="tenantInfo&&!tenantInfo.status">
+            <div v-if="tenantInfo && !tenantInfo.status">
               <el-button class="open-btn" type="primary" @click="clickTenantLaunch('Y')"
                 >開啟租客管理</el-button
               >
             </div>
-            <div v-if="tenantInfo&&tenantInfo.status">
+            <div v-if="tenantInfo && tenantInfo.status">
               <p class="name">
                 <span>登入名稱:</span>
-                <span>aa</span>
+                <span>{{ tenantInfo.memberLogin }}</span>
               </p>
               <p class="password">
                 <span>登入密碼:</span>
-                <span>aa</span>
+                <span>{{ tenantInfo.password }}</span>
               </p>
-              <p class="copy">複製賬號資料</p>
+              <p class="copy" @click.prevent="copyTenantInfo">複製賬號資料</p>
               <ul>
                 <li
                   v-for="(item, index) in [
                     {
                       title: '上一次啓動租客賬號的來源:',
-                      value: 'a',
+                      value: tenantInfo.lastLaunchSource === 1 ? '管理處' : '業主',
                     },
                     {
                       title: '上一次啓動租客賬號的時間:',
-                      value: 'a',
+                      value: tenantInfo.lastLaunchStartTime,
                     },
                     {
                       title: '上一次「複製該登入信息」的時間:',
-                      value: 'a',
+                      value: tenantInfo.lastCopyTime,
                     },
                     {
                       title: '上一次租客登入時間:',
-                      value: 'a',
+                      value: tenantInfo.lastLoginTime,
                     },
                   ]"
                   :key="index"
                 >
-                  <span>{{ item.title }}</span>
+                  <span style="display: inline-block; margin-right: 8px">{{
+                    item.title
+                  }}</span>
                   <span>{{ item.value }}</span>
                 </li>
               </ul>
@@ -119,7 +121,15 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, provide } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  provide,
+  nextTick,
+} from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
@@ -130,16 +140,17 @@ export default {
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
-      tenantInfo:null,
+      tenantInfo: null,
       name: "",
       password: "",
       isAgreeClose: false,
       isShowCloseBox: false,
+      isShowModal: false,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
     const router = useRouter();
-    
+
     //
     const closeModel = () => {
       var button = document.getElementById("close-edit-tenant");
@@ -156,12 +167,28 @@ export default {
           id: JSON.parse(localStorage.getItem("login-info")).id,
         });
         if (res.data.status === 200) {
-          console.log(res);
-        } else if (res.data.status === 501) {
-          data.tenantInfo = {
-            status:false
+          data.isShowModal = true;
+          if (res.data.data.launchType === "Y") {
+            data.tenantInfo = res.data.data;
+            data.tenantInfo.status = true;
+          } else if (res.data.data.launchType === "N") {
+            data.tenantInfo = res.data.data;
+            data.tenantInfo.status = false;
           }
-        } 
+        } else if (res.data.status === 501) {
+          data.isShowModal = false;
+          data.tenantInfo = null;
+          data.isShowCloseBox = false;
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        } else {
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        }
         data.loading = false;
       } catch (error) {
         data.loading = false;
@@ -176,29 +203,46 @@ export default {
           launchType: type,
         });
         if (res.data.status === 200) {
-          if(type==='Y'){
-            selectTenantStatus()
-          }else{
-            data.isShowCloseBox =false;
-            document.getElementById("startUp").click();
+          if (type === "Y") {
+            selectTenantStatus();
+          } else if (type === "N") {
+            data.isShowCloseBox = false;
+            document.getElementById("close-start-up").click();
           }
         } else {
           ElMessage({
             message: res.data.msg,
-            type: 'warning',
-          })
-          data.loading = false;
+            type: "warning",
+          });
         }
+        data.loading = true;
       } catch (error) {
         data.loading = false;
       }
+    };
+    const copyTenantInfo = () => {
+      const node = document.createElement("span");
+      node.innerText = `登入名稱: ${data.tenantInfo.memberLogin} / 密碼: ${data.tenantInfo.password}`;
+      document.body.appendChild(node);
+      const range = document.createRange();
+      range.selectNode(node);
+      const selection = window.getSelection();
+      selection.empty();
+      selection.addRange(range);
+      document.execCommand("copy");
+      selection.empty();
+      range.detach();
+      document.body.removeChild(node);
+      ElMessage({
+        message: "Successfully copied!",
+        type: "success",
+      });
     };
     onMounted(() => {
       var startUpModal = document.getElementById("startUp");
       startUpModal.addEventListener("show.bs.modal", (event) => {
         selectTenantStatus();
-      })
-      
+      });
     });
     return {
       ...toRefs(data),
@@ -206,6 +250,7 @@ export default {
       closeTenantManagement,
       selectTenantStatus,
       clickTenantLaunch,
+      copyTenantInfo,
     };
   },
 };

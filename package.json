@@ -25,7 +25,8 @@
     "vue-pdf-embed": "^1.1.5",
     "vue-router": "^4.1.2",
     "vue3-pdfjs": "^0.1.6",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.0.0",
