@@ -13,127 +13,7 @@
         <div class="ownerIsZONE-content">
           <ul>
             <li
-              v-for="(item, index) in isShowLoginOutButton
-                ? [
-                    {
-                      router: '/edit-member-information',
-                      text: $t('headed.Edit_member_information'),
-                    },
-                    {
-                      router: '/start-up-tenant',
-                      text: $t('headed.Tenant_account_management'),
-                    },
-                    {
-                      router: '/news-update',
-                      text: $t('headed.News_Update'),
-                    },
-                    {
-                      router: '/FAQ-from-residents',
-                      text: $t('headed.FAQ_from_Residents'),
-                    },
-                    {
-                      router: '/estate-notice',
-                      text: $t('headed.Estate_Notices'),
-                    },
-                    {
-                      router: '/estate-activities',
-                      text: $t('headed.Estate_Activities'),
-                    },
-                    {
-                      router: '/fairview-part-news',
-                      text: $t('headed.Fairview_Park_News'),
-                    },
-                    {
-                      router: '/payment-list',
-                      text: $t('headed.Payment_List'),
-                    },
-                    {
-                      router: '/apply-resident-smartcard',
-                      text: $t('headed.Apply_Resident_Smartcard'),
-                    },
-                    {
-                      router: '/MAC-column',
-                      text: $t('headed.MAC_Column'),
-                    },
-                    {
-                      router: '/the-overhaul-project',
-                      text: $t('headed.the_Overhaul_Project'),
-                    },
-                    {
-                      router: '/lottery-system-for-impound',
-                      text: $t('headed.Lottery_System_For_Impounding_Action'),
-                    },
-                    {
-                      router: '/frequently-used-forms',
-                      text: $t('headed.Frequently_Used_Forms'),
-                    },
-                    {
-                      router: '/residents-handbook-map',
-                      text: $t('headed.Residents_Handbook_Map'),
-                    },
-                    {
-                      router: '/demographic-opinion-survey',
-                      text: $t('headed.Demographic_Opinion_Survey'),
-                    },
-                    {
-                      router: '/loginOut',
-                      text: $t('headed.Login_out'),
-                    },
-                  ]
-                : [
-                    {
-                      router: '/news-update',
-                      text: $t('headed.News_Update'),
-                    },
-                    {
-                      router: '/FAQ-from-residents',
-                      text: $t('headed.FAQ_from_Residents'),
-                    },
-                    {
-                      router: '/estate-notice',
-                      text: $t('headed.Estate_Notices'),
-                    },
-                    {
-                      router: '/estate-activities',
-                      text: $t('headed.Estate_Activities'),
-                    },
-                    {
-                      router: '/fairview-part-news',
-                      text: $t('headed.Fairview_Park_News'),
-                    },
-                    {
-                      router: '/payment-list',
-                      text: $t('headed.Payment_List'),
-                    },
-                    {
-                      router: '/apply-resident-smartcard',
-                      text: $t('headed.Apply_Resident_Smartcard'),
-                    },
-                    {
-                      router: '/MAC-column',
-                      text: $t('headed.MAC_Column'),
-                    },
-                    {
-                      router: '/the-overhaul-project',
-                      text: $t('headed.the_Overhaul_Project'),
-                    },
-                    {
-                      router: '/lottery-system-for-impound',
-                      text: $t('headed.Lottery_System_For_Impounding_Action'),
-                    },
-                    {
-                      router: '/frequently-used-forms',
-                      text: $t('headed.Frequently_Used_Forms'),
-                    },
-                    {
-                      router: '/residents-handbook-map',
-                      text: $t('headed.Residents_Handbook_Map'),
-                    },
-                    {
-                      router: '/demographic-opinion-survey',
-                      text: $t('headed.Demographic_Opinion_Survey'),
-                    },
-                  ]"
+              v-for="(item, index) in loginPower"
               :key="index"
               @click="selectOwnersZone(item.router)"
             >
@@ -183,6 +63,7 @@ import {
   onMounted,
   provide,
   watch,
+  computed,
 } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
@@ -322,7 +203,7 @@ export default {
       } else if (val === "/start-up-tenant") {
         const button = document.createElement("button");
         button.setAttribute("data-bs-toggle", "modal");
-        button.setAttribute("data-bs-target", "#startUp");
+        button.setAttribute("data-bs-target", "#editTenantInformation");
         document.body.appendChild(button);
         button.click();
         document.body.removeChild(button);
@@ -434,6 +315,80 @@ export default {
       },
       { deep: true, immediate: true }
     );
+    const loginPower = computed(() => {
+      let o_array = [
+        {
+          router: "/news-update",
+          text: proxy.$t("headed.News_Update"),
+        },
+        {
+          router: "/FAQ-from-residents",
+          text: proxy.$t("headed.FAQ_from_Residents"),
+        },
+        {
+          router: "/estate-notice",
+          text: proxy.$t("headed.Estate_Notices"),
+        },
+        {
+          router: "/estate-activities",
+          text: proxy.$t("headed.Estate_Activities"),
+        },
+        {
+          router: "/fairview-part-news",
+          text: proxy.$t("headed.Fairview_Park_News"),
+        },
+        {
+          router: "/payment-list",
+          text: proxy.$t("headed.Payment_List"),
+        },
+        {
+          router: "/apply-resident-smartcard",
+          text: proxy.$t("headed.Apply_Resident_Smartcard"),
+        },
+        {
+          router: "/MAC-column",
+          text: proxy.$t("headed.MAC_Column"),
+        },
+        {
+          router: "/the-overhaul-project",
+          text: proxy.$t("headed.the_Overhaul_Project"),
+        },
+        {
+          router: "/lottery-system-for-impound",
+          text: proxy.$t("headed.Lottery_System_For_Impounding_Action"),
+        },
+        {
+          router: "/frequently-used-forms",
+          text: proxy.$t("headed.Frequently_Used_Forms"),
+        },
+        {
+          router: "/residents-handbook-map",
+          text: proxy.$t("headed.Residents_Handbook_Map"),
+        },
+        {
+          router: "/demographic-opinion-survey",
+          text: proxy.$t("headed.Demographic_Opinion_Survey"),
+        },
+      ];
+      if (data.isShowLoginOutButton) {
+        o_array.push({
+          router: "/loginOut",
+          text: proxy.$t("headed.Login_out"),
+        });
+      }
+      if (data.loginInfo && data.loginInfo.groupId === 0) {
+        o_array.unshift({
+          router: "/edit-member-information",
+          text: proxy.$t("headed.Edit_member_information"),
+        });
+      } else {
+        o_array.unshift({
+          router: "/start-up-tenant",
+          text: proxy.$t("headed.Tenant_account_management"),
+        });
+      }
+      return o_array;
+    });
     onMounted(async () => {
       //如果滚动隐藏下拉框
       document.onscroll = () => {
@@ -466,6 +421,7 @@ export default {
       selectOwnersZone,
       showOwnerIsZONE,
       findOneNewPopupBox,
+      loginPower,
     };
   },
 };
@@ -479,15 +435,18 @@ export default {
   height: calc(100vh - 60px);
   width: 100vw;
   z-index: 10;
+
   .ownerIsZONE-content {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     overflow: auto;
     position: relative;
+
     ul {
       padding: 0;
       background-color: var(--mainColor2);
+
       li {
         border-bottom: 1px solid rgba(206, 204, 204, 0.3);
         padding: 12px 10px;
@@ -499,10 +458,12 @@ export default {
     }
   }
 }
+
 .main-content {
   position: relative;
   background-color: #fff;
   width: 100%;
+
   .mask {
     position: fixed;
     top: 0;
@@ -513,6 +474,7 @@ export default {
     z-index: 300;
   }
 }
+
 @media (max-width: 991px) {
   .ownerIsZONE {
     .ownerIsZONE-content {

@@ -55,7 +55,11 @@
             :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
-              {{ $t("headed.OWNERS_s_ZONE") }}
+              {{
+                loginInfo && loginInfo.groupId === 0
+                  ? $t("headed.OWNERS_s_ZONE")
+                  : $t("headed.TENANT_s_ZONE")
+              }}
             </button>
             <i v-if="showOwnerZONEList"></i>
           </div>
@@ -248,7 +252,11 @@
                           : '#editTenantInformation'
                       "
                       ><el-icon> <EditPen /> </el-icon
-                      >{{ $t("headed.Edit_member_information") }}</el-dropdown-item
+                      >{{
+                        loginInfo && loginInfo.groupId === 0
+                          ? $t("headed.Edit_member_information")
+                          : $t("headed.Tenant_account_management")
+                      }}</el-dropdown-item
                     >
                     <el-dropdown-item
                       v-if="isShowLoginOutButton && loginInfo && loginInfo.groupId === 0"
@@ -408,14 +416,6 @@ export default {
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
-
-    // const loginInfo = computed(() => {
-    //   if (localStorage.getItem("login-info")) {
-    //     return JSON.parse(localStorage.getItem("login-info"));
-    //   } else {
-    //     return null;
-    //   }
-    // });
     //獲取&設置語言
     if (!sessionStorage.getItem("fairview_park_lang")) {
       sessionStorage.setItem("fairview_park_lang", "zh_tw");

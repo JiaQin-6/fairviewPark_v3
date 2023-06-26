@@ -234,7 +234,7 @@ export default {
       range.detach();
       document.body.removeChild(node);
       ElMessage({
-        message: "Successfully copied!",
+        message: "复制成功",
         type: "success",
       });
     };

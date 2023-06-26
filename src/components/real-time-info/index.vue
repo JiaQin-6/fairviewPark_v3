@@ -2,15 +2,23 @@
   <div class="real-time-info" v-show="show">
     <div class="real-time-info-content">
       <!-- 主要内容 -->
-      <div class="main-content" style="height:80%" v-html="newRealTimeInfo && newRealTimeInfo.content"></div>
+      <div
+        class="main-content"
+        style="height: 80%"
+        v-html="newRealTimeInfo && newRealTimeInfo.content"
+      ></div>
       <!-- 选项框 -->
       <div>
         <div class="mb-2 flex items-center text-sm">
-          <el-checkbox v-model="iknow" :label="$t('real_time_info.I_understand_the_above_information')" size="large" />
+          <el-checkbox
+            v-model="iknow"
+            :label="$t('real_time_info.I_understand_the_above_information')"
+            size="large"
+          />
         </div>
       </div>
       <!-- 按钮 -->
-      <el-button @click="close" round>{{ $t('real_time_info.Confirm') }}</el-button>
+      <el-button @click="close" round>{{ $t("real_time_info.Confirm") }}</el-button>
     </div>
   </div>
 </template>
@@ -33,18 +41,18 @@ export default {
     },
     newRealTimeInfo: {
       type: Object,
-    }
+    },
   },
   setup(props, ctx) {
     const data = reactive({
       show: false,
       fairview_park_lang: "",
-      iknow: '',
+      iknow: "",
     });
     watch(
       () => props.showRealTimeInfo,
       (value) => {
-        data.iknow = '';
+        data.iknow = "";
         data.show = value;
       }
     );
@@ -75,7 +83,7 @@ export default {
           nonMember: {
             id: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).nonMember.id
-              : '',
+              : "",
             show: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).nonMember.show
               : true,
@@ -94,7 +102,7 @@ export default {
           owner: {
             id: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).owner.id
-              : '',
+              : "",
             show: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).owner.show
               : true,
@@ -129,7 +137,7 @@ export default {
 
   .real-time-info-content {
     width: 50%;
-    height: 50%;
+    height: 400px;
     background-color: #fff;
     margin: 0 auto;
     box-shadow: 0 0 6px 5px rgba(56, 55, 55, 0.5);
@@ -141,23 +149,28 @@ export default {
       box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
       border-radius: 6px;
       overflow: auto;
+      padding: 5px;
     }
 
     @{deep} .el-checkbox {
       .el-checkbox__input {
-        input {}
+        input {
+        }
 
         span {
           border-color: #606266;
         }
       }
 
-      .el-checkbox__label {}
+      .el-checkbox__label {
+        font-size: 16px;
+      }
     }
 
     @{deep} .is-checked {
       .el-checkbox__input {
-        input {}
+        input {
+        }
 
         span {
           border-color: var(--mainColor3);
@@ -172,7 +185,7 @@ export default {
 
     @{deep} .el-button {
       background-color: var(--mainColor2);
-      height: 40px;
+      // height: 40px;
       padding: 0 30px;
 
       span {
@@ -191,7 +204,5 @@ export default {
       padding: 15px;
     }
   }
-
 }
 </style>
-

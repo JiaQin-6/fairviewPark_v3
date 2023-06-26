@@ -200,10 +200,12 @@ function checkToken() {
     //判斷token是否過期，如果過期刪除localStorage登陸數據
     if (localStorage.getItem('login-info')) {
         var userinfo = JSON.parse(decodeURIComponent(escape(window.atob(JSON.parse(window.localStorage.getItem('login-info')).jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))));
+        console.log(userinfo);
         console.log(new Date().getTime());
         console.log(userinfo.jwtExpiresDate);
-        if (new Date().getTime() > (userinfo.jwtExpiresDate - 5000)||!userinfo.jwtExpiresDate) {
+        if (new Date().getTime() > (userinfo.jwtExpiresDate - 5000)) {
             localStorage.removeItem('login-info');
+            sessionStorage.removeItem('fairview-part-store');
         }
     }
 }

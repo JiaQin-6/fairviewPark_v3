@@ -212,6 +212,7 @@ function checkToken(){
     console.log(userinfo.jwtExpiresDate)
     if(new Date().getTime()>(userinfo.jwtExpiresDate-5000)){
       localStorage.removeItem('login-info')
+      sessionStorage.removeItem('fairview-part-store')
     }
   }
 }

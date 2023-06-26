@@ -159,6 +159,28 @@
                     }}</i
                   >
                 </li>
+                <li>
+                  <p class="title">願意接收實體信件信息？</p>
+                  <el-radio-group
+                    v-model="editTenantInfoForm.isAgreeReceiveLetter"
+                    class="ml-4"
+                  >
+                    <el-radio label="Y" size="large">{{
+                      fairview_park_lang === "en_us" ? "Yes" : "是"
+                    }}</el-radio>
+                    <el-radio label="N" size="large">{{
+                      fairview_park_lang === "en_us" ? "No" : "否"
+                    }}</el-radio>
+                  </el-radio-group>
+                  <i
+                    style="display: block; color: #fc0d1b; text-align: left"
+                    v-show="
+                      edit_member_info_error_tip.is_null &&
+                      !editTenantInfoForm.isAgreeReceiveLetter
+                    "
+                    >{{ $t("Edit_member_information.This_field_is_required") }}</i
+                  >
+                </li>
               </ul>
             </div>
             <div class="button">
@@ -194,10 +216,11 @@ export default {
 
       editTenantInfoForm: {
         verifyPassword: null,
-        verifyCode:null,
+        verifyCode: null,
         loginName: null,
         password: null,
         confirmPassword: null,
+        isAgreeReceiveLetter: null,
       },
       edit_member_info_error_tip: {
         is_verify_password_null: false,
@@ -219,9 +242,7 @@ export default {
         //如果为空
         data.edit_member_info_error_tip.is_verify_password_null = true;
         return;
-      } else if (
-        !await checkPassword()
-      ) {
+      } else if (!(await checkPassword())) {
         //如果密码不正确
         data.edit_member_info_error_tip.is_verify_password_error = true;
         return;
@@ -256,7 +277,13 @@ export default {
       try {
         const res = await proxy.$http.editTenantMemberInfo({
           password: data.editTenantInfoForm.confirmPassword,
-          verifyCode:data.editTenantInfoForm.verifyCode
+          verifyCode: data.editTenantInfoForm.verifyCode,
+          typeList: [
+            {
+              typeCode: "accept_email", //接受实体邮件固定传值（默认N）
+              typeValue: data.editTenantInfoForm.isAgreeReceiveLetter, //Y是；N否
+            },
+          ],
         });
         if (res.data.status === 200) {
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
@@ -288,21 +315,21 @@ export default {
       button.click();
     };
     //编辑之前检查密码是否正确
-    const checkPassword = async ()=>{
+    const checkPassword = async () => {
       try {
         const res = await proxy.$http.checkPassword({
           password: data.editTenantInfoForm.verifyPassword,
         });
         if (res.data.status === 200) {
-          data.editTenantInfoForm.verifyCode = res.data.data
-          return true
+          data.editTenantInfoForm.verifyCode = res.data.data;
+          return true;
         } else {
           data.loading = false;
-          return false
+          return false;
         }
       } catch (error) {
         data.loading = false;
-        return false
+        return false;
       }
     };
     onMounted(() => {
@@ -311,7 +338,6 @@ export default {
         data.editTenantInfoForm.loginName = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).login
           : "";
-       
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框
       editTenantInformationModal.addEventListener("hidden.bs.modal", (event) => {
@@ -480,7 +506,41 @@ export default {
               }
             }
           }
+          @{deep} .el-radio-group {
+            width: 100%;
 
+            .el-radio {
+              .el-radio__input {
+                .el-radio__inner {
+                  width: 18px;
+                  height: 18px;
+                }
+              }
+
+              .el-radio__label {
+                font-size: 18px;
+              }
+            }
+
+            .is-checked {
+              .el-radio__input {
+                .el-radio__inner {
+                  background-color: #fff;
+                  border: 1px solid var(--mainColor1);
+
+                  &:after {
+                    width: 13px;
+                    height: 13px;
+                    background-color: var(--mainColor1);
+                  }
+                }
+              }
+
+              .el-radio__label {
+                color: var(--mainColor1);
+              }
+            }
+          }
           input {
             width: 100%;
             max-width: 400px;
@@ -523,7 +583,6 @@ export default {
           cursor: pointer;
         }
       }
-
     }
 
     @{deep} .error {
@@ -566,9 +625,17 @@ export default {
         ul {
           li {
             margin-bottom: 20px;
+            @{deep} .el-radio-group {
+              width: 100%;
+
+              .el-radio {
+                .el-radio__label {
+                  font-size: 15px;
+                }
+              }
+            }
           }
         }
-
       }
     }
   }

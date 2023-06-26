@@ -8,7 +8,9 @@
     "test": "vite build --mode test",
     "postbuild": "node ./build/build.js",
     "posttest": "node ./build/build.js",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "ftpdeploy": "vite ftpdeploy --genHist --diffFileOnly --ftpCfgPath /ftpdeploy/ --ftpHistPath /ftpdeploy/",
+    "upload": "vite build;vite ftpdeploy --genHist --diffFileOnly --ftpCfgPath /ftpdeploy/ --ftpHistPath /ftpdeploy/"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
@@ -20,6 +22,7 @@
     "pdfjs-dist": "^2.16.105",
     "vue": "^3.2.31",
     "vue-class-component": "^8.0.0-0",
+    "vue-cli-plugin-ftp-deploy": "^0.1.16",
     "vue-i18n": "^9.2.0-beta.37",
     "vue-pdf": "^4.3.0",
     "vue-pdf-embed": "^1.1.5",
