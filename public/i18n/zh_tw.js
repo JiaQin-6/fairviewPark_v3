@@ -297,6 +297,9 @@ window.i18n_zh_tw = {
     'Email_Address': '聯絡電郵',
     'Contact_Number': '聯絡電話 (選填)',
     'Sign_up': '註冊',
+    'Willing_to_authorize_the_management_office':'願意授權管理處,協助處理住客啟動賬號信息？',
+    'Willing_to_receive_physical_mail_information':'願意接收實體信件信息？',
+    'Last_updated_data_time':'上次更新資料時間',
 
   },
   //忘記密碼
@@ -1760,5 +1763,6 @@ window.i18n_zh_tw = {
     I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉户口安排',
     Return:'返回',
     Confirm:'確認',
+    Copy_Successful:'复制成功!'
   }
 };

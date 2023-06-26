@@ -21,7 +21,7 @@ window.i18n_en_us = {
     'Shops_Directory': 'Shops Directory',
     'Useful_Telephone_Nos': 'Useful Telephone Nos.',
     'Edit_member_information': 'Edit member information',
-    'Tenant_account_management': '租客賬號管理',
+    'Tenant_account_management': 'Tenant Account Management',
     'News_Update': 'News Update',
     'FAQ_from_Residents': 'FAQ from Residents',
     'Estate_Notices': 'Estate Notices',
@@ -305,7 +305,9 @@ window.i18n_en_us = {
     'Email_Address': 'Email Address',
     'Contact_Number': 'Contact Number(Optional)',
     'Sign_up': 'Sign up',
-
+    'Willing_to_authorize_the_management_office':'Willing to authorize the management office to assist in processing resident activation account information?',
+    'Willing_to_receive_physical_mail_information':'Willing to receive physical mail information?',
+    'Last_updated_data_time':'Last updated data time',
   },
   //忘記密碼
   forget_password: {
@@ -1947,5 +1949,6 @@ window.i18n_en_us = {
     I_understand_and_agree_to_the_above_arrangement:'I understand and agree to the above arrangement for closing my household registration',
     Return:'Return',
     Confirm:'Confirm',
+    Copy_Successful:'Copy Successful!'
   }
 };

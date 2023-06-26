@@ -675,7 +675,9 @@
                   />
                 </li>
                 <li>
-                  <p class="title">願意授權管理處,協助處理住客啟動賬號信息？</p>
+                  <p class="title">
+                    {{ $t("sign_up.Willing_to_authorize_the_management_office") }}
+                  </p>
                   <el-radio-group
                     v-model="editMemberInfoForm.isAgreeAuthorization"
                     class="ml-4"
@@ -697,7 +699,9 @@
                   >
                 </li>
                 <li>
-                  <p class="title">願意接收實體信件信息？</p>
+                  <p class="title">
+                    {{ $t("sign_up.Willing_to_receive_physical_mail_information") }}
+                  </p>
                   <el-radio-group
                     v-model="editMemberInfoForm.isAgreeReceiveLetter"
                     class="ml-4"
@@ -721,7 +725,9 @@
               </ul>
             </div>
             <p class="update-time" v-if="editMemberInfoForm.updateTime">
-              上次更新資料時間:{{ editMemberInfoForm.updateTime }}
+              {{ $t("sign_up.Last_updated_data_time") }}:{{
+                editMemberInfoForm.updateTime
+              }}
             </p>
             <div class="button">
               <p style="color: #fc0d1b" v-show="edit_member_info_error_tip.is_show">
@@ -1113,12 +1119,12 @@ export default {
         data.editMemberInfoForm.contactNo = userinfo.contactNo || "";
         data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList
           ? userinfo.authList.filter((item) => {
-               return item.typeCode == "auth_start";
+              return item.typeCode == "auth_start";
             })[0].typeValue
           : null;
         data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList
           ? userinfo.authList.filter((item) => {
-            return item.typeCode == "accept_email";
+              return item.typeCode == "accept_email";
             })[0].typeValue
           : null;
         data.editMemberInfoForm.updateTime = userinfo.editInfoTime || "";

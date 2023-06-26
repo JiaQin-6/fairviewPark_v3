@@ -198,24 +198,10 @@
           >
             <div class="lang">
               <span
-                v-if="
-                  fairview_park_lang == 'zh_tw' &&
-                  isShowLoginButton &&
-                  isShowLoginOutButton
-                "
+                v-if="isShowLoginButton && isShowLoginOutButton"
                 style="cursor: pointer"
-                @click="changeLang('en_us')"
-                >EN</span
-              >
-              <span
-                v-if="
-                  fairview_park_lang == 'en_us' &&
-                  isShowLoginButton &&
-                  isShowLoginOutButton
-                "
-                style="cursor: pointer"
-                @click="changeLang('zh_tw')"
-                >中</span
+                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
+                >{{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}</span
               >
             </div>
             <button
@@ -267,46 +253,14 @@
                       <!-- <el-icon><EditPen /></el-icon> -->
                       {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
                     >
-                    <el-dropdown-item command="/news-update">{{
-                      $t("headed.News_Update")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/FAQ-from-residents">{{
-                      $t("headed.FAQ_from_Residents")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-notice">{{
-                      $t("headed.Estate_Notices")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-activities">{{
-                      $t("headed.Estate_Activities")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/fairview-part-news">{{
-                      $t("headed.Fairview_Park_News")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/payment-list">{{
-                      $t("headed.Payment_List")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/apply-resident-smartcard">{{
-                      $t("headed.Apply_Resident_Smartcard")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/MAC-column">{{
-                      $t("headed.MAC_Column")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/the-overhaul-project">{{
-                      $t("headed.the_Overhaul_Project")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/lottery-system-for-impound">{{
-                      $t("headed.Lottery_System_For_Impounding_Action")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/frequently-used-forms">{{
-                      $t("headed.Frequently_Used_Forms")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/residents-handbook-map">{{
-                      $t("headed.Residents_Handbook_Map")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/demographic-opinion-survey">{{
-                      $t("headed.Demographic_Opinion_Survey")
-                    }}</el-dropdown-item>
-
+                    <el-dropdown-item
+                      v-for="(item, index) in loginInfo && loginInfo.menuList"
+                      :key="index"
+                      :command="'/' + item.route"
+                      >{{
+                        fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw
+                      }}</el-dropdown-item
+                    >
                     <el-dropdown-item
                       class="yellow"
                       command="/loginOut"

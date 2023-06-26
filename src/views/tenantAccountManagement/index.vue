@@ -135,7 +135,7 @@
           @click="clickTenantLaunch('N')"
           type="primary"
           :disabled="!isAgreeClose"
-          >{{$t('tenant_account_management.Confirm')}}</el-button
+          >{{ $t("tenant_account_management.Confirm") }}</el-button
         >
       </div>
     </div>
@@ -244,7 +244,9 @@ export default {
     };
     const copyTenantInfo = () => {
       const node = document.createElement("span");
-      node.innerText = `${proxy.$t('tenant_account_management.Login_Name')}: ${data.tenantInfo.memberLogin} / ${proxy.$t('tenant_account_management.password')}: ${data.tenantInfo.password}`;
+      node.innerText = `${proxy.$t("tenant_account_management.Login_Name")}: ${
+        data.tenantInfo.memberLogin
+      } / ${proxy.$t("tenant_account_management.password")}: ${data.tenantInfo.password}`;
       document.body.appendChild(node);
       const range = document.createRange();
       range.selectNode(node);
@@ -256,7 +258,7 @@ export default {
       range.detach();
       document.body.removeChild(node);
       ElMessage({
-        message: "复制成功",
+        message: proxy.$t("tenant_account_management.Copy_Successful"),
         type: "success",
       });
     };
