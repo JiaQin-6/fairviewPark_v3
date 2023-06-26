@@ -1928,5 +1928,24 @@ window.i18n_en_us = {
   real_time_info:{
     I_understand_the_above_information:'I understand the above information',
     Confirm:'Confirm',
+  },
+  //开启关闭租客弹框
+  tenant_account_management:{
+    Enable_tenant_management:'Enable Tenant Management',
+    Login_Name:'Login Name',
+    password:'Password',
+    Copy_account_information:'Copy Account Information',
+    The_source_of_the_last_activation_of_the_tenant_account:'The source of the last activation of the tenant account:',
+    Owner:'Owner',
+    Fairview_Park_Management_Office:'Fairview Park Management Office',
+    The_time_of_the_last_activation_of_the_tenant_account:'The time of the last activation of the tenant account:',
+    The_time_of_the_copy_of_the_tenant_account_information:'The time of the copy of the tenant account information:',
+    The_time_of_the_last_login_of_the_tenant_account:'The time of the last login of the tenant account:',
+    Turn_off_tenant_management:'Turn off tenant management',
+    Close_account:'Close account',
+    Once_the_account_is_closed:'Arrangement: Once the account is closed, your tenant will not be able to operate their account, and their relevant account information will also become invalid.',
+    I_understand_and_agree_to_the_above_arrangement:'I understand and agree to the above arrangement for closing my household registration',
+    Return:'Return',
+    Confirm:'Confirm',
   }
 };

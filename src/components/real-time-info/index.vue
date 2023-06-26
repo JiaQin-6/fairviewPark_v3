@@ -11,7 +11,7 @@
       <div>
         <div class="mb-2 flex items-center text-sm">
           <el-checkbox
-            v-model="iknow"
+            v-model="iKnow"
             :label="$t('real_time_info.I_understand_the_above_information')"
             size="large"
           />
@@ -47,12 +47,12 @@ export default {
     const data = reactive({
       show: false,
       fairview_park_lang: "",
-      iknow: "",
+      iKnow: "",
     });
     watch(
       () => props.showRealTimeInfo,
       (value) => {
-        data.iknow = "";
+        data.iKnow = "";
         data.show = value;
       }
     );
@@ -63,19 +63,19 @@ export default {
     // );
     const close = () => {
       /*
-                  nonMember（非会员）：{
-                      id:'',
-                      show:'',
-                  }
-                  owner（业主）{
-                      id:'',
-                      show:'',
-                  }
-                  residents（住客）{
-                      id:'',
-                      show:'',
-                  }
-          **/
+        nonMember（非会员）：{
+            id:'',
+            show:'',
+        }
+        owner（业主）{
+            id:'',
+            show:'',
+        }
+        residents（住客）{
+            id:'',
+            show:'',
+        }
+      **/
       //判断身份，和localStorage中的状态，修改对应状态
       let obj;
       if (localStorage.getItem("login-info")) {
@@ -90,14 +90,14 @@ export default {
           },
           owner: {
             id: props.newRealTimeInfo.id,
-            show: data.iknow ? false : true,
+            show: data.iKnow ? false : true,
           },
         };
       } else {
         obj = {
           nonMember: {
             id: props.newRealTimeInfo.id,
-            show: data.iknow ? false : true,
+            show: data.iKnow ? false : true,
           },
           owner: {
             id: localStorage.getItem("real-info")
