@@ -55,7 +55,11 @@
             :class="{ 'show-owner-zone-list': showOwnerZONEList }"
           >
             <button class="login-btn-2" @click="showOwnerIsZONE">
-              {{ $t("headed.OWNERS_s_ZONE") }}
+              {{
+                loginInfo && loginInfo.groupId === 0
+                  ? $t("headed.OWNERS_s_ZONE")
+                  : $t("headed.TENANT_s_ZONE")
+              }}
             </button>
             <i v-if="showOwnerZONEList"></i>
           </div>
@@ -194,24 +198,10 @@
           >
             <div class="lang">
               <span
-                v-if="
-                  fairview_park_lang == 'zh_tw' &&
-                  isShowLoginButton &&
-                  isShowLoginOutButton
-                "
+                v-if="isShowLoginButton && isShowLoginOutButton"
                 style="cursor: pointer"
-                @click="changeLang('en_us')"
-                >EN</span
-              >
-              <span
-                v-if="
-                  fairview_park_lang == 'en_us' &&
-                  isShowLoginButton &&
-                  isShowLoginOutButton
-                "
-                style="cursor: pointer"
-                @click="changeLang('zh_tw')"
-                >中</span
+                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
+                >{{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}</span
               >
             </div>
             <button
@@ -229,7 +219,10 @@
                 @command="selectOwnersZone"
               >
                 <el-button type="primary">
-                  {{ $t("headed.OWNERS_s_ZONE")
+                  {{
+                    loginInfo && loginInfo.groupId === 0
+                      ? $t("headed.OWNERS_s_ZONE")
+                      : $t("headed.TENANT_s_ZONE")
                   }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </el-button>
                 <template #dropdown>
@@ -239,56 +232,43 @@
                       class="yellow"
                       command="/edit-member-information"
                       data-bs-toggle="modal"
-                      data-bs-target="#editMemberInformation"
-                      ><el-icon><EditPen /></el-icon
-                      >{{ $t("headed.Edit_member_information") }}</el-dropdown-item
+                      :data-bs-target="
+                        loginInfo && loginInfo.groupId === 0
+                          ? '#editMemberInformation'
+                          : '#editTenantInformation'
+                      "
+                      ><el-icon> <EditPen /> </el-icon
+                      >{{
+                        loginInfo && loginInfo.groupId === 0
+                          ? $t("headed.Edit_member_information")
+                          : $t("headed.Tenant_account_management")
+                      }}</el-dropdown-item
                     >
-                    <el-dropdown-item command="/news-update">{{
-                      $t("headed.News_Update")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/FAQ-from-residents">{{
-                      $t("headed.FAQ_from_Residents")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-notice">{{
-                      $t("headed.Estate_Notices")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-activities">{{
-                      $t("headed.Estate_Activities")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/fairview-part-news">{{
-                      $t("headed.Fairview_Park_News")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/payment-list">{{
-                      $t("headed.Payment_List")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/apply-resident-smartcard">{{
-                      $t("headed.Apply_Resident_Smartcard")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/MAC-column">{{
-                      $t("headed.MAC_Column")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/the-overhaul-project">{{
-                      $t("headed.the_Overhaul_Project")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/lottery-system-for-impound">{{
-                      $t("headed.Lottery_System_For_Impounding_Action")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/frequently-used-forms">{{
-                      $t("headed.Frequently_Used_Forms")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/residents-handbook-map">{{
-                      $t("headed.Residents_Handbook_Map")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/demographic-opinion-survey">{{
-                      $t("headed.Demographic_Opinion_Survey")
-                    }}</el-dropdown-item>
-
+                    <el-dropdown-item
+                      v-if="isShowLoginOutButton && loginInfo && loginInfo.groupId === 0"
+                      command="/start-up-tenant"
+                      data-bs-toggle="modal"
+                      data-bs-target="#startUp"
+                    >
+                      <!-- <el-icon><EditPen /></el-icon> -->
+                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
+                    >
+                    <el-dropdown-item
+                      v-for="(item, index) in loginInfo && loginInfo.menuList"
+                      :key="index"
+                      :command="'/' + item.route"
+                      >{{
+                        fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw
+                      }}</el-dropdown-item
+                    >
                     <el-dropdown-item
                       class="yellow"
                       command="/loginOut"
                       v-if="isShowLoginOutButton"
                     >
-                      <el-icon><UserFilled /></el-icon>
+                      <el-icon>
+                        <UserFilled />
+                      </el-icon>
                       {{ $t("headed.Login_out") }}</el-dropdown-item
                     >
                   </el-dropdown-menu>
@@ -325,8 +305,8 @@
         </div>
       </div>
     </nav>
-     <!-- loading -->
-     <div
+    <!-- loading -->
+    <div
       class="loading"
       v-loading="v_loading"
       style="
@@ -343,7 +323,16 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, watch, inject } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  watch,
+  inject,
+  computed,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -369,7 +358,7 @@ export default {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
-      v_loading:false,
+      v_loading: false,
       route_url: "",
       fairview_park_lang: "",
       is_login: false,
@@ -377,6 +366,7 @@ export default {
       showLogin_m: false,
       showOwnerZONEList: false,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
+      loginInfo: null,
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -387,7 +377,7 @@ export default {
     } else {
       data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     }
-    //判断url是否带有token参数
+    //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
     if (route.query.session) {
       //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
       // token变量传需要解析的jwt值
@@ -399,6 +389,7 @@ export default {
       );
       userinfo.jwt = route.query.session;
       localStorage.setItem("login-info", JSON.stringify(userinfo));
+      store.commit("setLoginStatus", true);
     }
     //判断url是否带有语言参数
     if (
@@ -412,6 +403,7 @@ export default {
     //如果有登陸信息就顯示登陸
     if (localStorage.getItem("login-info")) {
       data.is_login = true;
+      data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
     }
     onMounted(() => {
       if (document.getElementsByClassName("el-popper")[0]) {
@@ -424,25 +416,25 @@ export default {
     });
     //切換語言
     const changeLang = (lang) => {
-      data.v_loading = true
+      data.v_loading = true;
       if (
-        document.getElementById("navbar-button") &&window
+        document.getElementById("navbar-button") &&
+        window
           .getComputedStyle(document.getElementById("navbar-button"))
-          .getPropertyValue("display") !== "none"&&
+          .getPropertyValue("display") !== "none" &&
         window
           .getComputedStyle(document.getElementById("navbarSupportedContent"))
           .getPropertyValue("display") !== "none"
       ) {
         document.getElementById("navbar-button").click();
       }
-      setTimeout(()=>{
+      setTimeout(() => {
         sessionStorage.setItem("fairview_park_lang", lang);
         data.fairview_park_lang = lang;
         proxy.$i18n.locale = lang;
         location.href = location.href.replace(route.query.lang, lang);
         location.reload();
-      },500)
-      
+      }, 500);
     };
     //切換路由
     const changeRouter = (href, children) => {
@@ -472,7 +464,7 @@ export default {
             lang: data.fairview_park_lang,
           },
         });
-      } else if (val === "/edit-member-information") {
+      } else if (val === "/edit-member-information" || val === "/start-up-tenant") {
       } else {
         router.push({
           path: val,
@@ -582,6 +574,9 @@ export default {
       (val) => {
         data.is_login = val;
         if (data.is_login) {
+          if (localStorage.getItem("login-info")) {
+            data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
+          }
           findPmLogHave();
         }
       }
@@ -610,11 +605,13 @@ export default {
 
 <style lang="less" scoped>
 @deep: ~">>>";
+
 .main {
   position: sticky;
   top: 0;
   z-index: 20;
   height: 62px;
+
   .navbar {
     height: 100%;
     left: 0px;
@@ -635,11 +632,13 @@ export default {
       width: auto;
       padding: 0;
     }
+
     .navbar-brand {
       padding: 0;
       margin-right: 10px;
       width: 55px;
       position: relative;
+
       img {
         position: absolute;
         left: 0;
@@ -647,9 +646,11 @@ export default {
         margin-top: 12px;
       }
     }
+
     .login-btn1,
     .login-btn2 {
       position: relative;
+
       button {
         margin-right: 10px;
         background: var(--mainColor2);
@@ -665,6 +666,7 @@ export default {
         //   color: var(--mainColor2);
         // }
       }
+
       i {
         position: absolute;
         top: 20px;
@@ -675,25 +677,31 @@ export default {
         border-style: solid;
       }
     }
+
     .show-owner-zone-list {
       button {
         background: #fff;
         color: var(--mainColor2);
       }
     }
+
     .navbar-collapse {
       margin-left: auto;
       justify-content: space-between;
+
       .navbar-nav {
         height: 100%;
+
         .nav-item {
           padding: 15px 6px;
+
           .nav-link {
             height: 100%;
             color: #fff;
             box-sizing: border-box;
             border-bottom: 2px solid transparent;
           }
+
           .dropdown-toggle {
             &::after {
               display: none;
@@ -708,9 +716,11 @@ export default {
             left: auto;
             box-shadow: 0 0 5px 3px rgba(107, 106, 106, 0.3);
             border: 0;
+
             &:hover {
               display: block;
             }
+
             li {
               &:hover {
                 a {
@@ -718,20 +728,24 @@ export default {
                   background-color: var(--mainColor2) !important;
                 }
               }
+
               a {
                 color: var(--el-text-color-regular);
               }
             }
           }
+
           &:hover {
             .nav-link {
               border-bottom: 2px solid var(--mainColor2);
+
               span {
                 color: var(--mainColor2);
               }
             }
           }
         }
+
         .dropdown {
           &:hover {
             .dropdown-menu {
@@ -740,9 +754,11 @@ export default {
             }
           }
         }
+
         .active {
           .nav-link {
             border-bottom: 2px solid var(--mainColor2);
+
             span {
               color: var(--mainColor2);
             }
@@ -750,6 +766,7 @@ export default {
         }
       }
     }
+
     > .show {
       background-color: #fff;
       margin-top: -33px;
@@ -761,21 +778,26 @@ export default {
         li {
           border-bottom: 1px solid rgba(0, 0, 0, 0.1);
           padding: 8px 30px;
+
           a {
             color: #066ac9 !important;
+
             span {
               color: #066ac9 !important;
             }
           }
         }
+
         .icon-lingdang {
           color: #255534 !important;
         }
       }
+
       .btn {
         padding: 10px 0;
       }
     }
+
     .navbar-toggler {
       margin-top: 11px;
       margin-right: 0px;
@@ -784,39 +806,48 @@ export default {
       padding: 5px;
       border: 0;
       box-shadow: none;
+
       .navbar-toggler-icon {
         width: 35px;
         vertical-align: top;
         height: 30px;
       }
     }
+
     .me-auto {
       margin-right: 0 !important;
       text-align: center;
       align-items: center;
+
       li {
         font-size: 18px;
+
         a {
           padding: 0 5px;
         }
       }
+
       .active {
         .nav-link {
           color: #fff;
         }
       }
+
       .lang {
         padding: 0 10px;
+
         span {
           display: inline-block;
           font-size: 18px;
           color: #fff;
           width: 40px;
+
           &:hover {
             color: var(--mainColor2);
           }
         }
       }
+
       .login {
         background: var(--mainColor2);
         border-radius: 50px;
@@ -826,14 +857,17 @@ export default {
         padding: 3px 15px;
         border: 1px solid var(--mainColor2);
         white-space: nowrap;
+
         &:hover {
           background: #fff;
           color: var(--mainColor2);
         }
       }
+
       .icon-lingdang {
         font-size: 25px;
       }
+
       @{deep} .el-dropdown {
         .el-button {
           background: var(--mainColor2);
@@ -851,6 +885,7 @@ export default {
             font-size: 18px;
             color: #fff;
           }
+
           &:hover {
             background: #fff;
 
@@ -859,6 +894,7 @@ export default {
             }
           }
         }
+
         .el-dropdown-link {
           width: 100px;
           background: #8fbc25;
@@ -868,6 +904,7 @@ export default {
           font-size: 18px;
           color: #fff;
           margin-right: 20px;
+
           .el-icon {
             color: #fff;
           }
@@ -876,11 +913,13 @@ export default {
     }
   }
 }
+
 @{deep} .el-popper {
   .el-dropdown-menu__item {
     font-size: 18px;
   }
 }
+
 @media (min-width: 992px) {
   .navbar-expand-lg {
     .navbar-collapse ul li {
@@ -891,6 +930,7 @@ export default {
   .is-show-dropdown {
     display: block;
   }
+
   .mobile-btn {
     display: none;
     width: 0;
@@ -902,29 +942,37 @@ export default {
     width: 1100px !important;
   }
 }
+
 @media (min-width: 1400px) {
   .container-fluid {
     width: 1280px !important;
   }
 }
+
 @media (max-width: 991px) {
   .is-show-dropdown {
     display: none;
   }
+
   .main {
     height: 62px;
+
     .navbar {
       justify-content: space-between;
+
       .container-fluid {
         justify-content: space-between;
         width: 100%;
         padding: 0 20px;
+
         .navbar-collapse {
           margin-left: auto;
           justify-content: space-between;
+
           .navbar-nav {
             height: auto;
             width: 100%;
+
             .nav-item {
               height: auto;
               padding: 0;
@@ -937,6 +985,7 @@ export default {
                 font-size: 20px;
               }
             }
+
             .active {
               .nav-link {
                 border-bottom: 1px solid var(--mainColor2);
@@ -945,6 +994,7 @@ export default {
           }
         }
       }
+
       .mobile-btn {
         .lang {
           height: 32px;
@@ -954,11 +1004,13 @@ export default {
           margin-right: 10px;
         }
       }
+
       .navbar-brand {
         padding: 0;
         margin-right: 10px;
         width: 45px;
         position: relative;
+
         img {
           position: absolute;
           left: 0;
@@ -966,6 +1018,7 @@ export default {
           margin-top: 15px;
         }
       }
+
       .navbar-brand-logo {
         display: none !important;
       }
@@ -976,6 +1029,7 @@ export default {
   .login {
     display: none;
   }
+
   .lang-infomation {
     display: none;
   }

@@ -16,9 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{
-          $t('headed.Apply_Resident_Smartcard')
-        }}
+        {{ $t("headed.Apply_Resident_Smartcard") }}
       </p>
     </div>
     <div class="apply-resident-smartcard-wrap">
@@ -98,7 +96,11 @@
                 {{ $t("applyRCard.B_Card_Users") }}
               </h5>
               <p>
-                {{ $t("applyRCard.the_Registered_House_Owner") }}
+                {{
+                  loginInfo && loginInfo.groupId === 0
+                    ? $t("applyRCard.the_Registered_House_Owner")
+                    : $t("applyRCard.the_Registered_House_Talent")
+                }}
               </p>
             </div>
             <div class="application-form">
@@ -144,41 +146,89 @@
                         placeholder=" "
                       >
                         <el-option
-                          v-for="item in [
-                            {
-                              label:
-                                fairview_park_lang === 'en_us'
-                                  ? 'Owner / co-owner'
-                                  : '業主/共同業主',
-                              value: 'ROa',
-                            },
-                            {
-                              label: fairview_park_lang === 'en_us' ? 'Spouse' : '配偶',
-                              value: 'ROb',
-                            },
-                            {
-                              label: fairview_park_lang === 'en_us' ? 'Child' : '子女',
-                              value: 'ROc',
-                            },
-                            {
-                              label:
-                                fairview_park_lang === 'en_us'
-                                  ? 'Domestic Helper'
-                                  : '家庭傭工',
-                              value: 'ROd',
-                            },
-                            {
-                              label: fairview_park_lang === 'en_us' ? 'Parents' : '父母',
-                              value: 'ROe',
-                            },
-                            {
-                              label:
-                                fairview_park_lang === 'en_us'
-                                  ? 'Other (please specify)'
-                                  : '其他(請註明)',
-                              value: 'ROf',
-                            },
-                          ]"
+                          v-for="item in loginInfo && loginInfo.groupId === 0
+                            ? [
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Owner / co-owner'
+                                      : '業主/共同業主',
+                                  value: 'ROa',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us' ? 'Spouse' : '配偶',
+                                  value: 'ROb',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us' ? 'Child' : '子女',
+                                  value: 'ROc',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Domestic Helper'
+                                      : '家庭傭工',
+                                  value: 'ROd',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us' ? 'Parents' : '父母',
+                                  value: 'ROe',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Other (please specify)'
+                                      : '其他(請註明)',
+                                  value: 'ROf',
+                                },
+                              ]
+                            : [
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Tenant/Co-Tenant'
+                                      : '承住人/共同承住人',
+                                  value: 'RTa',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Tenant Spouse'
+                                      : '承住人配偶',
+                                  value: 'RTb',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'TenantChild'
+                                      : '承住人子女',
+                                  value: 'RTc',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Tenant Domestic Helper'
+                                      : '承住人家庭傭工',
+                                  value: 'RTd',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Tenant Parents'
+                                      : '承住人父母',
+                                  value: 'RTe',
+                                },
+                                {
+                                  label:
+                                    fairview_park_lang === 'en_us'
+                                      ? 'Other (please specify)'
+                                      : '其他(請註明)',
+                                  value: 'ROf',
+                                },
+                              ]"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -381,8 +431,16 @@
                   }}
                 </h5>
                 <p
+                  v-if="loginInfo && loginInfo.groupId === 0"
                   style="margin-bottom: 30px"
                   v-html="$t('applyRCard.we_being_the_registered_house_owner')"
+                ></p>
+                <p
+                  v-else
+                  style="margin-bottom: 30px"
+                  v-html="
+                    $t('applyRCard.We_being_the_registered_house_Owner_and_the_Tenant')
+                  "
                 ></p>
                 <div style="text-align: center">
                   <el-checkbox
@@ -594,8 +652,14 @@ export default {
       v_loading: false,
       address_t: "",
       rCardList: [],
+      loginInfo: null, //登陸信息
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    //如果有登陸信息就顯示登陸
+    if (localStorage.getItem("login-info")) {
+      data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
+    }
+    //
     const handleRelationFileExceed = (files) => {
       ctx.$refs.relationFile.clearFiles();
       const file = files[0];

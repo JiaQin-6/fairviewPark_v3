@@ -7,6 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 import { createStore } from 'vuex';
+import createPersistedState from "vuex-persistedstate"; //引入vuex状态持久化（页面刷新状态依然保存）
 export default createStore({
     state: {
         loginStatus: null,
@@ -18,5 +19,11 @@ export default createStore({
         },
     },
     actions: {},
-    modules: {}
+    modules: {},
+    plugins: [
+        createPersistedState({
+            key: 'fairview-part-store',
+            storage: window.sessionStorage, //使用会话缓存机制
+        })
+    ]
 });

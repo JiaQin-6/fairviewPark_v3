@@ -33,7 +33,7 @@ const routes = [
         name: 'prospective-buyer',
         component: () => import('../views/prospectiveBuyer/index.vue'),
       },
-     
+
       //屋邨資料﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/estate-facilities',
@@ -59,8 +59,8 @@ const routes = [
         name: 'estate-notice',
         component: () => import('../views/estateNotice/index.vue'),
       },
-       //居民常見問題﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //居民常見問題﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/FAQ-from-residents',
         name: 'FAQ-from-residents',
         component: () => import('../views/ownersZONE/FAQFromResidents/index.vue'),
@@ -71,20 +71,20 @@ const routes = [
         name: 'fairview-part-news',
         component: () => import('../views/ownersZONE/fairviewPartNews/index.vue'),
       },
-       //人口統計及意見調查﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //人口統計及意見調查﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/demographic-opinion-survey',
         name: 'demographic-opinion-survey',
         component: () => import('../views/ownersZONE/demographicOpinionSurvey/index.vue'),
       },
-       //屋邨活動﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //屋邨活動﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/estate-activities',
         name: 'estate-activities',
         component: () => import('../views/ownersZONE/estateActivities/index.vue'),
       },
-       //最新消息﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //最新消息﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/news-update',
         name: 'news-update',
         component: () => import('../views/ownersZONE/newsUpdate/index.vue'),
@@ -113,26 +113,26 @@ const routes = [
         name: 'payment-list',
         component: () => import('../views/ownersZONE/paymentList/index.vue'),
       },
-       //抽簽鎖車機制﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //抽簽鎖車機制﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/lottery-system-for-impound',
         name: 'lottery-system-for-impound',
         component: () => import('../views/ownersZONE/lotterySystemForImpound/index.vue'),
       },
-       //更換地下喉管及行車道路翻新工程（大維修）﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //更換地下喉管及行車道路翻新工程（大維修）﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/the-overhaul-project',
         name: 'the-overhaul-project',
         component: () => import('../views/ownersZONE/theOverhaulProject/index.vue'),
       },
-       //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/coach-service',
         name: 'coach-service',
         component: () => import('../views/coachService/index.vue'),
       },
-       //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
-       {
+      //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      {
         path: '/apply-resident-smartcard',
         name: 'apply-resident-smartcard',
         component: () => import('../views/ownersZONE/applyRCard/index.vue'),
@@ -155,23 +155,28 @@ const router = createRouter({
 //定义全局导航守卫
 router.beforeEach((to, from, next) => {
   //如果是带有www开头的url自动转成不带www的url
-  if(location.href.indexOf('www.')!==-1){
-    let newUrl = location.href.replace('www.','')
+  if (location.href.indexOf('www.') !== -1) {
+    let newUrl = location.href.replace('www.', '')
     location.href = newUrl
   }
+  //判斷token是否過期，如果過期刪除localStorage登陸數據
+  checkToken()
   // 检查版本更新
-  if (location.hostname !== "localhost") {
-    // checkAppNewVersion()
-    // 监听页面打开显示
-    if (!(window as any).isHasVisibilitychange) {
-      (window as any).isHasVisibilitychange = true;
-      document.addEventListener('visibilitychange', function () {
-          if (!document.hidden) {
-              checkAppNewVersion();
-          }
-      });
+  // 监听页面打开显示
+  if (!(window as any).isHasVisibilitychange) {
+    (window as any).isHasVisibilitychange = true;
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) {
+        //判斷token是否過期，如果過期刪除localStorage登陸數據
+        checkToken()
+        //检查服务端是否已经更新，如果更新刷新页面
+        if (location.hostname !== "localhost") {
+          checkAppNewVersion();
+        }
+      }
+    });
   }
-  }
+
   next();
 })
 // 检查服务端是否已经更新，如果更新刷新页面
@@ -192,5 +197,23 @@ async function checkAppNewVersion() {
     window.location.reload()
   }
   sessionStorage.setItem('fairview-park-version', version)
+}
+//
+function checkToken(){
+  //判斷token是否過期，如果過期刪除localStorage登陸數據
+  if (localStorage.getItem('login-info')) {
+    var userinfo = JSON.parse(
+      decodeURIComponent(
+        escape(window.atob(JSON.parse((window as any).localStorage.getItem('login-info')).jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))
+      )
+    );
+    console.log(userinfo)
+    console.log(new Date().getTime())
+    console.log(userinfo.jwtExpiresDate)
+    if(new Date().getTime()>(userinfo.jwtExpiresDate-5000)){
+      localStorage.removeItem('login-info')
+      sessionStorage.removeItem('fairview-part-store')
+    }
+  }
 }
 export default router

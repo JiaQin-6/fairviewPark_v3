@@ -3,6 +3,7 @@ window.i18n_en_us = {
   headed: {
     'Owner_login': 'Owner login',
     'OWNERS_s_ZONE': "OWNERS's ZONE",
+    'TENANT_s_ZONE': "TENANT's ZONE",
     'Login_out': 'Login out',
     'Home': 'Home',
     'About_us': 'About us',
@@ -12,6 +13,7 @@ window.i18n_en_us = {
     'Shops_Directory': 'Shops Directory',
     'Useful_Telephone_Nos': 'Useful Telephone Nos.',
     'Edit_member_information': 'Edit member information',
+    'Tenant_account_management': 'Tenant Account Management',
     'News_Update': 'News Update',
     'FAQ_from_Residents': 'FAQ from Residents',
     'Estate_Notices': 'Estate Notices',
@@ -295,7 +297,9 @@ window.i18n_en_us = {
     'Email_Address': 'Email Address',
     'Contact_Number': 'Contact Number(Optional)',
     'Sign_up': 'Sign up',
-
+    'Willing_to_authorize_the_management_office':'Willing to authorize the management office to assist in processing resident activation account information?',
+    'Willing_to_receive_physical_mail_information':'Willing to receive physical mail information?',
+    'Last_updated_data_time':'Last updated data time',
   },
   //忘記密碼
   forget_password: {
@@ -396,6 +400,8 @@ window.i18n_en_us = {
     'Card_User_s_Photo_Upload':'4. Card User\'s Photo Upload',
     'Uploaded_Document':'Uploaded Document:',
     'Approved_Image_Record':'Approved Image Record',
+    'the_Registered_House_Talent': ' I/We, the Registered House Talent(s) of the captioned premises am/are now applying to the Fairview Park Property Management Limited for the Resident Smart Card for each of the following card users with 1 recent color photo* (size: 40mm×50mm) and residence proof (if applicable) attached:',
+    'We_being_the_registered_house_Owner_and_the_Tenant': 'We, being the registered house Owner(s) and the Tenant(s) of the captioned premises (“the CorrespondingPremises”), wish to apply to the Fairview Park Property Management Limited (”the Estate Management”) forResident Smart Card(s) (“the Card”) for the persons with details listed in part C above. We declare that thesepersons all live in the Corresponding Premises and the information given in parts A, B, C and photographssupplied are true and correct. We fully understand and agree to accept and be bound by all the followingterms and conditions:<br/><p></p>1. The Card is non-transferrable. In case the eligibility of this application ceases to exist, such as when theOwner is no longer the registered owner of the Corresponding Premises, or at the end of the Tenancy, oronce the latest tenant application for the Card(s) is submitted by the Owner, all previous Cards alreadyissued and Cards issued under this application will be cancelled instantly. <br/><p></p>2. The New Owner(s) / Current Tenant(s) must inform the Estate Management whether the Card Users willremain the same when there is a change of ownership of the Corresponding Premises. Otherwise, all issuedCards will be cancelled instantly<br/><p></p>3. The Card is the property of the Estate Management. Please return it when your status is no longer valid.<br/><p></p>4. The Card should be shown to Estate Management staff upon request. Estate Management staff have theright to repossess the cancelled Card.<br/><p></p>5. The Estate Management reserves the absolute right to reject the application or cancel all the Cardsissued under the Corresponding Premises if the Owner is in arrear of any fees including managementfee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/><p></p>6. The Owner(s)/Tenant(s) shall notify the Estate Management immediately for loss of any Card so as to enablethe Estate Management to cancel the said Card.<br/><p></p>7. The Estate Management will charge HK$50 for each of the replacement of the Card by the request of theOwner(s) / Tenant(s) due to whatsoever reasons.<br/><p></p>8. The Owner(s) and the Tenant(s) hereby declare that the Tenant(s) and the Card Users consent to thecollection and handling of personal data provided herewith in accordance with the Personal Data Statementbelow<br/><p></p>9. The Estate Management reserves the right to revise any terms and conditions herein at any time withoutfurther notice.',
   },
   //管理諮詢委員會專欄
   MACColumn_Rules_Regulations: {
@@ -1921,5 +1927,30 @@ window.i18n_en_us = {
   //常用表格
   Frequently_Used_Forms:{
     'Residents_can_obtain_any_application_forms':'Residents can obtain any application forms from our Customer Service Department.'
+  },
+  //首頁信息彈框
+  real_time_info:{
+    I_understand_the_above_information:'I understand the above information',
+    Confirm:'Confirm',
+  },
+  //开启关闭租客弹框
+  tenant_account_management:{
+    Enable_tenant_management:'Enable Tenant Management',
+    Login_Name:'Login Name',
+    password:'Password',
+    Copy_account_information:'Copy Account Information',
+    The_source_of_the_last_activation_of_the_tenant_account:'The source of the last activation of the tenant account:',
+    Owner:'Owner',
+    Fairview_Park_Management_Office:'Fairview Park Management Office',
+    The_time_of_the_last_activation_of_the_tenant_account:'The time of the last activation of the tenant account:',
+    The_time_of_the_copy_of_the_tenant_account_information:'The time of the copy of the tenant account information:',
+    The_time_of_the_last_login_of_the_tenant_account:'The time of the last login of the tenant account:',
+    Turn_off_tenant_management:'Turn off tenant management',
+    Close_account:'Close account',
+    Once_the_account_is_closed:'Arrangement: Once the account is closed, your tenant will not be able to operate their account, and their relevant account information will also become invalid.',
+    I_understand_and_agree_to_the_above_arrangement:'I understand and agree to the above arrangement for closing my household registration',
+    Return:'Return',
+    Confirm:'Confirm',
+    Copy_Successful:'Copy Successful!'
   }
 };
