@@ -1739,5 +1739,24 @@ window.i18n_zh_tw = {
   real_time_info:{
     I_understand_the_above_information:'我明白以上信息',
     Confirm:'確定',
+  },
+  //开启关闭租客弹框
+  tenant_account_management:{
+    Enable_tenant_management:'開啟租客管理',
+    Login_Name:'登入名稱',
+    password:'登入密碼',
+    Copy_account_information:'複製賬號資料',
+    The_source_of_the_last_activation_of_the_tenant_account:'上一次啓動租客賬號的來源:',
+    Owner:'業主',
+    Fairview_Park_Management_Office:'管理處',
+    The_time_of_the_last_activation_of_the_tenant_account:'上一次啓動租客賬號的時間:',
+    The_time_of_the_copy_of_the_tenant_account_information:'上一次「複製該登入信息」的時間:',
+    The_time_of_the_last_login_of_the_tenant_account:'上一次租客登入時間:',
+    Turn_off_tenant_management:'關閉租客管理',
+    Close_account:'關閉賬號',
+    Once_the_account_is_closed:'安排：户口一旦被關閉，您的租客將不能操作其户口，其相關户口資料亦會失效。',
+    I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉户口安排',
+    Return:'返回',
+    Confirm:'確認',
   }
 };

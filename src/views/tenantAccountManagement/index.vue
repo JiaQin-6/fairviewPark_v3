@@ -29,39 +29,57 @@
             ></button>
           </div>
           <div class="modal-body">
-            <h2>租客賬號管理</h2>
+            <h2>{{ $t("headed.Tenant_account_management") }}</h2>
             <div v-if="tenantInfo && !tenantInfo.status">
-              <el-button class="open-btn" type="primary" @click="clickTenantLaunch('Y')"
-                >開啟租客管理</el-button
+              <el-button
+                class="open-btn"
+                type="primary"
+                @click="clickTenantLaunch('Y')"
+                >{{ $t("tenant_account_management.Enable_tenant_management") }}</el-button
               >
             </div>
             <div v-if="tenantInfo && tenantInfo.status">
               <p class="name">
-                <span>登入名稱:</span>
+                <span>{{ $t("tenant_account_management.Login_Name") }}:</span>
                 <span>{{ tenantInfo.memberLogin }}</span>
               </p>
               <p class="password">
-                <span>登入密碼:</span>
+                <span>{{ $t("tenant_account_management.password") }}:</span>
                 <span>{{ tenantInfo.password }}</span>
               </p>
-              <p class="copy" @click.prevent="copyTenantInfo">複製賬號資料</p>
+              <p class="copy" @click.prevent="copyTenantInfo">
+                {{ $t("tenant_account_management.Copy_account_information") }}
+              </p>
               <ul>
                 <li
                   v-for="(item, index) in [
                     {
-                      title: '上一次啓動租客賬號的來源:',
-                      value: tenantInfo.lastLaunchSource === 1 ? '管理處' : '業主',
+                      title: $t(
+                        'tenant_account_management.The_source_of_the_last_activation_of_the_tenant_account'
+                      ),
+                      value:
+                        tenantInfo.lastLaunchSource === 1
+                          ? $t(
+                              'tenant_account_management.Fairview_Park_Management_Office'
+                            )
+                          : $t('tenant_account_management.Owner'),
                     },
                     {
-                      title: '上一次啓動租客賬號的時間:',
+                      title: $t(
+                        'tenant_account_management.The_time_of_the_last_activation_of_the_tenant_account'
+                      ),
                       value: tenantInfo.lastLaunchStartTime,
                     },
                     {
-                      title: '上一次「複製該登入信息」的時間:',
+                      title: $t(
+                        'tenant_account_management.The_time_of_the_copy_of_the_tenant_account_information'
+                      ),
                       value: tenantInfo.lastCopyTime,
                     },
                     {
-                      title: '上一次租客登入時間:',
+                      title: $t(
+                        'tenant_account_management.The_time_of_the_last_login_of_the_tenant_account'
+                      ),
                       value: tenantInfo.lastLoginTime,
                     },
                   ]"
@@ -73,9 +91,9 @@
                   <span>{{ item.value }}</span>
                 </li>
               </ul>
-              <el-button class="close-btn" @click="closeTenantManagement" type="danger"
-                >關閉租客管理</el-button
-              >
+              <el-button class="close-btn" @click="closeTenantManagement" type="danger">{{
+                $t("tenant_account_management.Turn_off_tenant_management")
+              }}</el-button>
             </div>
           </div>
         </div>
@@ -100,20 +118,24 @@
           <Close />
         </el-icon>
       </div>
-      <h4>關閉賬號</h4>
-      <p>安排：户口一旦被關閉，您的租客將不能操作其户口，其相關户口資料亦會失效。</p>
+      <h4>{{ $t("tenant_account_management.Close_account") }}</h4>
+      <p>{{ $t("tenant_account_management.Once_the_account_is_closed") }}</p>
       <el-checkbox
         v-model="isAgreeClose"
-        label="我明白及同意上述關閉户口安排"
+        :label="
+          $t('tenant_account_management.I_understand_and_agree_to_the_above_arrangement')
+        "
         size="large"
       />
       <div class="button flex-row space-between">
-        <el-button type="info" @click="isShowCloseBox = false">返回</el-button>
+        <el-button type="info" @click="isShowCloseBox = false">{{
+          $t("tenant_account_management.Return")
+        }}</el-button>
         <el-button
           @click="clickTenantLaunch('N')"
           type="primary"
           :disabled="!isAgreeClose"
-          >確認</el-button
+          >{{$t('tenant_account_management.Confirm')}}</el-button
         >
       </div>
     </div>
@@ -222,7 +244,7 @@ export default {
     };
     const copyTenantInfo = () => {
       const node = document.createElement("span");
-      node.innerText = `登入名稱: ${data.tenantInfo.memberLogin} / 密碼: ${data.tenantInfo.password}`;
+      node.innerText = `${proxy.$t('tenant_account_management.Login_Name')}: ${data.tenantInfo.memberLogin} / ${proxy.$t('tenant_account_management.password')}: ${data.tenantInfo.password}`;
       document.body.appendChild(node);
       const range = document.createRange();
       range.selectNode(node);

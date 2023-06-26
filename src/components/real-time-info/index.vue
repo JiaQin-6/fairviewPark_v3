@@ -2,15 +2,23 @@
   <div class="real-time-info" v-show="show">
     <div class="real-time-info-content">
       <!-- 主要内容 -->
-      <div class="main-content" style="height:80%" v-html="newRealTimeInfo && newRealTimeInfo.content"></div>
+      <div
+        class="main-content"
+        style="height: 80%"
+        v-html="newRealTimeInfo && newRealTimeInfo.content"
+      ></div>
       <!-- 选项框 -->
       <div>
         <div class="mb-2 flex items-center text-sm">
-          <el-checkbox v-model="iknow" :label="$t('real_time_info.I_understand_the_above_information')" size="large" />
+          <el-checkbox
+            v-model="iKnow"
+            :label="$t('real_time_info.I_understand_the_above_information')"
+            size="large"
+          />
         </div>
       </div>
       <!-- 按钮 -->
-      <el-button @click="close" round>{{ $t('real_time_info.Confirm') }}</el-button>
+      <el-button @click="close" round>{{ $t("real_time_info.Confirm") }}</el-button>
     </div>
   </div>
 </template>
@@ -33,18 +41,18 @@ export default {
     },
     newRealTimeInfo: {
       type: Object,
-    }
+    },
   },
   setup(props, ctx) {
     const data = reactive({
       show: false,
       fairview_park_lang: "",
-      iknow: '',
+      iKnow: "",
     });
     watch(
       () => props.showRealTimeInfo,
       (value) => {
-        data.iknow = '';
+        data.iKnow = "";
         data.show = value;
       }
     );
@@ -55,19 +63,19 @@ export default {
     // );
     const close = () => {
       /*
-                  nonMember（非会员）：{
-                      id:'',
-                      show:'',
-                  }
-                  owner（业主）{
-                      id:'',
-                      show:'',
-                  }
-                  residents（住客）{
-                      id:'',
-                      show:'',
-                  }
-          **/
+        nonMember（非会员）：{
+            id:'',
+            show:'',
+        }
+        owner（业主）{
+            id:'',
+            show:'',
+        }
+        residents（住客）{
+            id:'',
+            show:'',
+        }
+      **/
       //判断身份，和localStorage中的状态，修改对应状态
       let obj;
       if (localStorage.getItem("login-info")) {
@@ -75,26 +83,26 @@ export default {
           nonMember: {
             id: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).nonMember.id
-              : '',
+              : "",
             show: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).nonMember.show
               : true,
           },
           owner: {
             id: props.newRealTimeInfo.id,
-            show: data.iknow ? false : true,
+            show: data.iKnow ? false : true,
           },
         };
       } else {
         obj = {
           nonMember: {
             id: props.newRealTimeInfo.id,
-            show: data.iknow ? false : true,
+            show: data.iKnow ? false : true,
           },
           owner: {
             id: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).owner.id
-              : '',
+              : "",
             show: localStorage.getItem("real-info")
               ? JSON.parse(localStorage.getItem("real-info")).owner.show
               : true,
@@ -145,19 +153,22 @@ export default {
 
     @{deep} .el-checkbox {
       .el-checkbox__input {
-        input {}
+        input {
+        }
 
         span {
           border-color: #606266;
         }
       }
 
-      .el-checkbox__label {}
+      .el-checkbox__label {
+      }
     }
 
     @{deep} .is-checked {
       .el-checkbox__input {
-        input {}
+        input {
+        }
 
         span {
           border-color: var(--mainColor3);
@@ -191,7 +202,5 @@ export default {
       padding: 15px;
     }
   }
-
 }
 </style>
-

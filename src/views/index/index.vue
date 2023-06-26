@@ -280,7 +280,7 @@ export default {
       try {
         const res = await proxy.$http.findOneNewPopupBox({
           memberType: memberType,
-          lang: data.fairview_park_lang,
+          lang: sessionStorage.getItem("fairview_park_lang")||'zh_tw',
         });
         if (res.data.status === 200) {
           return res.data.data;
