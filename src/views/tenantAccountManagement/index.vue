@@ -11,6 +11,7 @@
     <div
       class="modal fade"
       id="startUp"
+      ref="startUp"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabindex="-1"
@@ -158,7 +159,7 @@ import { ElMessageBox, ElMessage } from "element-plus";
 export default {
   setup(props, { emit }) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
-    const { proxy, ctx } = getCurrentInstance();
+    const { proxy, ctx, refs } = getCurrentInstance();
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
@@ -187,6 +188,7 @@ export default {
       try {
         const res = await proxy.$http.selectTenantStatus({
           id: JSON.parse(localStorage.getItem("login-info")).id,
+          lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           data.isShowModal = true;
@@ -198,6 +200,7 @@ export default {
             data.tenantInfo.status = false;
           }
         } else if (res.data.status === 501) {
+          document.getElementById("close-start-up").click();
           data.isShowModal = false;
           data.tenantInfo = null;
           data.isShowCloseBox = false;
@@ -262,11 +265,13 @@ export default {
         type: "success",
       });
     };
+    const startUp = ref();
     onMounted(() => {
       var startUpModal = document.getElementById("startUp");
       startUpModal.addEventListener("show.bs.modal", (event) => {
         selectTenantStatus();
       });
+      console.log(startUp);
     });
     return {
       ...toRefs(data),

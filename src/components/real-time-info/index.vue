@@ -2,14 +2,15 @@
   <div class="real-time-info" v-show="show">
     <div class="real-time-info-content">
       <!-- 主要内容 -->
-      <div
-        class="main-content"
-        style="height: 80%"
-        v-html="newRealTimeInfo && newRealTimeInfo.content"
-      ></div>
+      <div class="main-content">
+        <div
+          class="main-content-box"
+          v-html="newRealTimeInfo && newRealTimeInfo.content"
+        ></div>
+      </div>
       <!-- 选项框 -->
       <div>
-        <div class="mb-2 flex items-center text-sm">
+        <div class="mb-2 mt-2 flex items-center text-sm">
           <el-checkbox
             v-model="iKnow"
             :label="$t('real_time_info.I_understand_the_above_information')"
@@ -137,7 +138,6 @@ export default {
 
   .real-time-info-content {
     width: 50%;
-    height: 400px;
     background-color: #fff;
     margin: 0 auto;
     box-shadow: 0 0 6px 5px rgba(56, 55, 55, 0.5);
@@ -148,11 +148,19 @@ export default {
     .main-content {
       box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
       border-radius: 6px;
-      overflow: auto;
       padding: 5px;
+      height: 300px;
+      .main-content-box {
+        overflow: auto;
+        height: 290px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
     }
 
     @{deep} .el-checkbox {
+      white-space: inherit;
       .el-checkbox__input {
         input {
         }
@@ -200,8 +208,26 @@ export default {
   .real-time-info {
     .real-time-info-content {
       width: 90%;
-      height: 80%;
-      padding: 15px;
+      padding: 8px 8px 20px 8px;
+      .main-content {
+        height: 500px;
+        .main-content-box {
+          overflow: auto;
+          height: 490px;
+        }
+      }
+      @{deep} .el-checkbox {
+        padding: 0 10px;
+        .el-checkbox__label {
+          font-size: 13px;
+          // text-align: left;
+        }
+      }
+      @{deep}.el-button {
+        span {
+          font-size: 15px;
+        }
+      }
     }
   }
 }

@@ -1752,7 +1752,7 @@ window.i18n_zh_tw = {
   },
   //首頁信息彈框
   real_time_info:{
-    I_understand_the_above_information:'我明白以上信息',
+    I_understand_the_above_information:'本人已知悉上述資訊，不要再顯示此頁面',
     Confirm:'確定',
   },
   //开启关闭租客弹框

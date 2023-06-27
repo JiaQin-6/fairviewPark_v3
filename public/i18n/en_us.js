@@ -1930,7 +1930,7 @@ window.i18n_en_us = {
   },
   //首頁信息彈框
   real_time_info:{
-    I_understand_the_above_information:'I understand the above information',
+    I_understand_the_above_information:'I have received the above information.  Please do not display this web page again',
     Confirm:'Confirm',
   },
   //开启关闭租客弹框
