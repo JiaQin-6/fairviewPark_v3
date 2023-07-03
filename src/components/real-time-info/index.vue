@@ -66,8 +66,11 @@ export default {
       (value) => {
         setTimeout(() => {
           if(document.getElementById('main-content-box')){
-            if(document.getElementById('main-content-box').offsetHeight>=document.getElementById('main-content-box').scrollHeight){
+            let dom = document.getElementById('main-content-box')
+            if((dom.offsetHeight!==0)&&(dom.offsetHeight>=dom.scrollHeight)){
               data.showbtn = true
+            }else{
+              data.showbtn = false
             }
           }
         }, 0);
