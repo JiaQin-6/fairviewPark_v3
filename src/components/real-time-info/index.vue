@@ -21,7 +21,9 @@
         </div>
       </div>
       <!-- 按钮 -->
-      <el-button v-show="showbtn" @click="close" round>{{ $t("real_time_info.Confirm") }}</el-button>
+      <el-button v-show="showbtn" @click="close" round>{{
+        $t("real_time_info.Confirm")
+      }}</el-button>
     </div>
   </div>
 </template>
@@ -52,32 +54,30 @@ export default {
       show: false,
       fairview_park_lang: "",
       iKnow: "",
-      showbtn:false,//是否显示按钮
+      showbtn: false, //是否显示按钮
     });
     watch(
       () => props.showRealTimeInfo,
       (value) => {
         data.iKnow = "";
         data.show = value;
+        if (document.getElementById("main-content-box")) {
+        // document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
+        //   if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
+        //     data.showbtn = true
+        //   }
+        // })
+        setTimeout(() => {
+          data.showbtn = true;
+        }, 3000);
+      }
       }
     );
-    watch(
-      () => props.newRealTimeInfo,
-      (value) => {
-        setTimeout(() => {
-          if(document.getElementById('main-content-box')){
-            let dom = document.getElementById('main-content-box')
-            if((dom.offsetHeight!==0)&&(dom.offsetHeight>=dom.scrollHeight)){
-              data.showbtn = true
-            }else{
-              data.showbtn = false
-            }
-          }
-        }, 0);
-        
-      },
-      { deep: true, immediate: true }
-    );
+    // watch(
+    //   () => props.newRealTimeInfo,
+    //   (value) => {},
+    //   { deep: true, immediate: true }
+    // );
     const close = () => {
       /*
         nonMember（非会员）：{
@@ -130,13 +130,7 @@ export default {
       ctx.emit("close");
     };
     onMounted(async () => {
-      if(document.getElementById('main-content-box')){
-            document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
-              if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
-                data.showbtn = true
-              }
-            })
-          }
+      
     });
     return {
       ...toRefs(data),
@@ -212,7 +206,7 @@ export default {
       }
 
       .el-checkbox__label {
-        color: var(--mainColor3);
+        color: #606266;
       }
     }
 
@@ -235,10 +229,10 @@ export default {
       width: 90%;
       padding: 8px 8px 20px 8px;
       .main-content {
-        height: 500px;
+        height: 335px;
         .main-content-box {
           overflow: auto;
-          height: 490px;
+          height: 334px;
         }
       }
       @{deep} .el-checkbox {
