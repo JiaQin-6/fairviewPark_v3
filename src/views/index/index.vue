@@ -238,6 +238,7 @@ export default {
     watch(
       () => store.state.loginStatus,
       async (val) => {
+        localStorage.removeItem("real-info");
         //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
         //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
         const ownerData = await findOneNewPopupBox(0);
@@ -245,16 +246,19 @@ export default {
         //根据localStorage中的状态来决定显示隐藏
         let newData = {
           nonMember: {
-            id: nonMemberData.id,
-            content: nonMemberData.htmlEnUs,
+            id: nonMemberData&&nonMemberData.id,
+            content: nonMemberData&&nonMemberData.htmlEnUs,
           },
           owner: {
-            id: ownerData.id,
-            content: ownerData.htmlEnUs,
+            id: ownerData&&ownerData.id,
+            content: ownerData&&ownerData.htmlEnUs,
           },
         };
         console.log(val);
         if (val) {
+          if(!ownerData){
+            return false
+          }
           data.newRealTimeInfo.id = newData.owner.id;
           data.newRealTimeInfo.content = newData.owner.content;
 
@@ -284,6 +288,9 @@ export default {
             data.showRealTimeInfo = true;
           }
         } else {
+          if(!nonMemberData){
+            return false
+          }
           data.newRealTimeInfo.id = newData.nonMember.id;
           data.newRealTimeInfo.content = newData.nonMember.content;
           if (localStorage.getItem("real-info")) {

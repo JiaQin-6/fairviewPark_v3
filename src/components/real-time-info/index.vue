@@ -5,11 +5,12 @@
       <div class="main-content">
         <div
           class="main-content-box"
+          id="main-content-box"
           v-html="newRealTimeInfo && newRealTimeInfo.content"
         ></div>
       </div>
       <!-- 选项框 -->
-      <div>
+      <div v-show="showbtn">
         <div class="mb-2 mt-2 flex items-center text-sm">
           <el-checkbox
             v-model="iKnow"
@@ -19,7 +20,7 @@
         </div>
       </div>
       <!-- 按钮 -->
-      <el-button @click="close" round>{{ $t("real_time_info.Confirm") }}</el-button>
+      <el-button v-show="showbtn" @click="close" round>{{ $t("real_time_info.Confirm") }}</el-button>
     </div>
   </div>
 </template>
@@ -49,6 +50,7 @@ export default {
       show: false,
       fairview_park_lang: "",
       iKnow: "",
+      showbtn:false,//是否显示按钮
     });
     watch(
       () => props.showRealTimeInfo,
@@ -113,6 +115,15 @@ export default {
       localStorage.setItem("real-info", JSON.stringify(obj));
       ctx.emit("close");
     };
+    onMounted(async () => {
+      if(document.getElementById('main-content-box')){
+        document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
+          if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
+            data.showbtn = true
+          }
+        })
+      }
+    });
     return {
       ...toRefs(data),
       close,
@@ -153,9 +164,9 @@ export default {
       .main-content-box {
         overflow: auto;
         height: 290px;
-        &::-webkit-scrollbar {
-          display: none;
-        }
+        // &::-webkit-scrollbar {
+        //   display: none;
+        // }
       }
     }
 

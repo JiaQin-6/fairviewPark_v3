@@ -203,7 +203,7 @@ function checkToken() {
         console.log(userinfo);
         console.log(new Date().getTime());
         console.log(userinfo.jwtExpiresDate);
-        if (new Date().getTime() > (userinfo.jwtExpiresDate - 5000)) {
+        if (!userinfo.jwtExpiresDate || (new Date().getTime() > (userinfo.jwtExpiresDate - 5000))) {
             localStorage.removeItem('login-info');
             sessionStorage.removeItem('fairview-part-store');
         }
