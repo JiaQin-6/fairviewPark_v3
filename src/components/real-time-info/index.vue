@@ -6,6 +6,7 @@
         <div
           class="main-content-box"
           id="main-content-box"
+          ref="main-content-box"
           v-html="newRealTimeInfo && newRealTimeInfo.content"
         ></div>
       </div>
@@ -46,6 +47,7 @@ export default {
     },
   },
   setup(props, ctx) {
+    const { proxy } = getCurrentInstance();
     const data = reactive({
       show: false,
       fairview_park_lang: "",
@@ -59,11 +61,20 @@ export default {
         data.show = value;
       }
     );
-    // watch(
-    //   () => newRealTimeInfo,
-    //   (value) => {},
-    //   { deep: true, immediate: true }
-    // );
+    watch(
+      () => props.newRealTimeInfo,
+      (value) => {
+        setTimeout(() => {
+          if(document.getElementById('main-content-box')){
+            if(document.getElementById('main-content-box').offsetHeight>=document.getElementById('main-content-box').scrollHeight){
+              data.showbtn = true
+            }
+          }
+        }, 0);
+        
+      },
+      { deep: true, immediate: true }
+    );
     const close = () => {
       /*
         nonMember（非会员）：{
@@ -117,12 +128,12 @@ export default {
     };
     onMounted(async () => {
       if(document.getElementById('main-content-box')){
-        document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
-          if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
-            data.showbtn = true
+            document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
+              if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
+                data.showbtn = true
+              }
+            })
           }
-        })
-      }
     });
     return {
       ...toRefs(data),
