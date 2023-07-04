@@ -11,7 +11,6 @@
         ></div>
       </div>
       <!-- 选项框 -->
-      <div v-show="showbtn" class="animate__animated animate__fadeIn">
         <div class="mb-2 mt-2 flex items-center text-sm">
           <el-checkbox
             v-model="iKnow"
@@ -20,10 +19,10 @@
           />
         </div>
       <!-- 按钮 -->
-      <el-button @click="close" round>{{
+      <el-button @click="close" round :disabled="disabledBtn" :class="{'disabledBtn':!disabledBtn}">{{
         $t("real_time_info.Confirm")
       }}</el-button>
-      </div>
+      
       
     </div>
   </div>
@@ -55,7 +54,7 @@ export default {
       show: false,
       fairview_park_lang: "",
       iKnow: "",
-      showbtn: false, //是否显示按钮
+      disabledBtn: true, //是否禁用按钮
     });
     watch(
       () => props.showRealTimeInfo,
@@ -65,11 +64,11 @@ export default {
         if (document.getElementById("main-content-box")) {
         // document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
         //   if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
-        //     data.showbtn = true
+        //     data.disabledBtn = true
         //   }
         // })
         setTimeout(() => {
-          data.showbtn = true;
+          data.disabledBtn = false;
         }, 3000);
       }
       }
@@ -212,7 +211,7 @@ export default {
     }
 
     @{deep} .el-button {
-      background-color: var(--mainColor2);
+      background-color: #ced4da;
       // height: 40px;
       padding: 0 30px;
 
@@ -220,6 +219,9 @@ export default {
         color: #fff;
         font-size: 18px;
       }
+    }
+    .disabledBtn{
+      background-color: var(--mainColor2);
     }
   }
 }
