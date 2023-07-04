@@ -1,5 +1,5 @@
 <template>
-  <div class="real-time-info" v-show="show">
+  <div class="real-time-info " v-show="show" >
     <div class="real-time-info-content">
       <!-- 主要内容 -->
       <div class="main-content">
@@ -11,7 +11,7 @@
         ></div>
       </div>
       <!-- 选项框 -->
-      <div v-show="showbtn">
+      <div v-show="showbtn" class="animate__animated animate__fadeIn">
         <div class="mb-2 mt-2 flex items-center text-sm">
           <el-checkbox
             v-model="iKnow"
@@ -19,11 +19,12 @@
             size="large"
           />
         </div>
-      </div>
       <!-- 按钮 -->
-      <el-button v-show="showbtn" @click="close" round>{{
+      <el-button @click="close" round>{{
         $t("real_time_info.Confirm")
       }}</el-button>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -232,7 +233,7 @@ export default {
         height: 335px;
         .main-content-box {
           overflow: auto;
-          height: 334px;
+          height: 324px;
         }
       }
       @{deep} .el-checkbox {
