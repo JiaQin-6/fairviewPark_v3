@@ -361,11 +361,10 @@ export default {
     watch(
       () => store.state.loginStatus,
       async (val) => {
-        localStorage.removeItem("real-info");
         //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
         //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
-        const ownerData = await findOneNewPopupBox(0);
-        const nonMemberData = await findOneNewPopupBox(2);
+        const ownerData = await findOneNewPopupBox(0);//业主
+        const nonMemberData = await findOneNewPopupBox(2);//游客
         //根据localStorage中的状态来决定显示隐藏
         let newData = {
           nonMember: {
