@@ -5,6 +5,7 @@
   "scripts": {
     "serve": "vite",
     "build": "vite build",
+    "pre": "vite build --mode pre",
     "test": "vite build --mode test",
     "postbuild": "node ./build/build.js",
     "posttest": "node ./build/build.js",

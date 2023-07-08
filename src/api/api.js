@@ -13,9 +13,12 @@ import router from '../router';
 //创建多个基地址
 //创建一个axios实例
 let baseUrl = "";
-switch (process.env.NODE_ENV) {
+switch (import.meta.env.MODE) {
     case "development": // 注意这里的名字要和步骤二中设置的环境名字对应起来
         baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
+        break;
+    case "pre":
+        baseUrl = "http://43.252.167.44:8092"; //这里是預生產环境中的url
         break;
     case "production":
         baseUrl = "https://app.fairviewpark.hk"; //生产环境url

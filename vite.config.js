@@ -17,6 +17,7 @@ export default defineConfig({
     strictPort: true, // 严格端口 true:如果端口已被使用，则直接退出，而不会再进行后续端口的尝试。
   },
   plugins: [vue(), vueJsx()],
+  define: { 'process.env': {} },
   server: {
     open: true,
   },
