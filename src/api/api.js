@@ -18,7 +18,7 @@ switch (import.meta.env.MODE) {
         baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
         break;
     case "pre":
-        baseUrl = "http://43.252.167.44:8092"; //这里是預生產环境中的url
+        baseUrl = "https://app.fairviewpark.hk/pre"; //这里是預生產环境中的url
         break;
     case "production":
         baseUrl = "https://app.fairviewpark.hk"; //生产环境url
