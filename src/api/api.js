@@ -202,15 +202,15 @@ http.findRcardList = (arr) => {
 http.findOneNewPopupBox = (arr) => {
     return http.post(`/houseweb/popupBox/findOneNewPopupBox`, arr);
 };
-//业主查看租客情况
+//业主查看住客情况
 http.selectTenantStatus = (arr) => {
     return http.post(`/houseweb/tenant/selectTenantStatus`, arr);
 };
-//官网里业主启动关闭租客账号操作
+//官网里业主启动关闭住客账号操作
 http.clickTenantLaunch = (arr) => {
     return http.post(`/houseweb/tenant/clickTenantLaunch`, arr);
 };
-//租客修改密码
+//住客修改密码
 http.editTenantMemberInfo = (arr) => {
     return http.post(`/houseweb/member/editTenantMemberInfo`, arr);
 };

@@ -1,11 +1,3 @@
-<!--
- * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @Date: 2022-09-15 23:18:57
- * @LastEditors: error: git config user.name && git config user.email & please set dead value or install git
- * @LastEditTime: 2023-01-10 11:30:53
- * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/components/header/index.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <template>
   <div class="main">
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -14,31 +6,17 @@
           <transition name="el-fade-in-linear">
             <img class="navbar-brand-logo-mobile" :src="logo_m" alt="" />
           </transition>
-
-          <!-- <transition name="el-zoom-in-top">
-            <img class="navbar-brand-logo" v-show="!showLogin_m" :src="logo" alt="" />
-          </transition> -->
         </a>
         <!-- 手機端顯示的按鈕 -->
         <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
           <span
             class="lang"
-            v-if="
-              fairview_park_lang == 'zh_tw' && isShowLoginButton && isShowLoginOutButton
-            "
+            v-if="isShowLoginButton && isShowLoginOutButton"
+            @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
             style="cursor: pointer; color: #fff; vertical-align: middle"
-            @click="changeLang('en_us')"
-            >EN</span
           >
-          <span
-            class="lang"
-            v-if="
-              fairview_park_lang == 'en_us' && isShowLoginButton && isShowLoginOutButton
-            "
-            style="cursor: pointer; color: #fff; vertical-align: middle"
-            @click="changeLang('zh_tw')"
-            >中</span
-          >
+            {{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}
+          </span>
           <div
             v-if="!is_login && isShowLoginButton"
             class="login-btn1"
@@ -231,12 +209,6 @@
                       v-if="isShowLoginOutButton"
                       class="yellow"
                       command="/edit-member-information"
-                      data-bs-toggle="modal"
-                      :data-bs-target="
-                        loginInfo && loginInfo.groupId === 0
-                          ? '#editMemberInformation'
-                          : '#editTenantInformation'
-                      "
                       ><el-icon> <EditPen /> </el-icon
                       >{{
                         loginInfo && loginInfo.groupId === 0
@@ -244,62 +216,22 @@
                           : $t("headed.Tenant_account_management")
                       }}</el-dropdown-item
                     >
-                    <!-- <el-dropdown-item
+                    <el-dropdown-item
                       v-if="isShowLoginOutButton && loginInfo && loginInfo.groupId === 0"
-                      command="/start-up-tenant"
-                      data-bs-toggle="modal"
-                      data-bs-target="#startUp"
-                    > -->
-                    <!-- <el-icon><EditPen /></el-icon> -->
-                    <!-- {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
-                    > -->
-                    <!-- <el-dropdown-item
+                      command="/start-up"
+                    >
+                      <!-- <el-icon><EditPen /></el-icon> -->
+                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
+                    >
+                    <el-dropdown-item
                       v-for="(item, index) in loginInfo && loginInfo.menuList"
                       :key="index"
                       :command="'/' + item.route"
                       >{{
                         fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw
                       }}</el-dropdown-item
-                    > -->
-                    <el-dropdown-item command="/news-update">{{
-                      $t("headed.News_Update")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/FAQ-from-residents">{{
-                      $t("headed.FAQ_from_Residents")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-notice">{{
-                      $t("headed.Estate_Notices")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/estate-activities">{{
-                      $t("headed.Estate_Activities")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/fairview-part-news">{{
-                      $t("headed.Fairview_Park_News")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/payment-list">{{
-                      $t("headed.Payment_List")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/apply-resident-smartcard">{{
-                      $t("headed.Apply_Resident_Smartcard")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/MAC-column">{{
-                      $t("headed.MAC_Column")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/the-overhaul-project">{{
-                      $t("headed.the_Overhaul_Project")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/lottery-system-for-impound">{{
-                      $t("headed.Lottery_System_For_Impounding_Action")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/frequently-used-forms">{{
-                      $t("headed.Frequently_Used_Forms")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/residents-handbook-map">{{
-                      $t("headed.Residents_Handbook_Map")
-                    }}</el-dropdown-item>
-                    <el-dropdown-item command="/demographic-opinion-survey">{{
-                      $t("headed.Demographic_Opinion_Survey")
-                    }}</el-dropdown-item>
+                    >
+
                     <el-dropdown-item
                       class="yellow"
                       command="/loginOut"
@@ -495,6 +427,7 @@ export default {
     };
     //
     const selectOwnersZone = (val) => {
+      console.log(val);
       if (val === "/loginOut") {
         loginOut();
         router.push({
@@ -503,7 +436,20 @@ export default {
             lang: data.fairview_park_lang,
           },
         });
-      } else if (val === "/edit-member-information" || val === "/start-up-tenant") {
+      } else if (val === "/start-up") {
+        selectTenantStatus();
+      } else if (val === "/edit-member-information") {
+        const button = document.createElement("button");
+        button.setAttribute("data-bs-toggle", "modal");
+        button.setAttribute(
+          "data-bs-target",
+          data.loginInfo && data.loginInfo.groupId === 0
+            ? "#editMemberInformation"
+            : "#editTenantInformation"
+        );
+        document.body.appendChild(button);
+        button.click();
+        document.body.removeChild(button);
       } else {
         router.push({
           path: val,
@@ -575,6 +521,37 @@ export default {
     //     }
     //   });
     // };
+    //業主查看住客情況
+    const selectTenantStatus = async () => {
+      data.loading = true;
+      try {
+        const res = await proxy.$http.selectTenantStatus({
+          id: JSON.parse(localStorage.getItem("login-info")).id,
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          const button = document.createElement("button");
+          button.setAttribute("data-bs-toggle", "modal");
+          button.setAttribute("data-bs-target", "#startUp");
+          document.body.appendChild(button);
+          button.click();
+          document.body.removeChild(button);
+        } else if (res.data.status === 501) {
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        } else {
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        }
+        data.loading = false;
+      } catch (error) {
+        data.loading = false;
+      }
+    };
     //监听器
     watch(
       () => route,
@@ -637,6 +614,7 @@ export default {
       hideOwnerIsZONE,
       findPmLogHave,
       toInformationPush,
+      selectTenantStatus,
     };
   },
 };

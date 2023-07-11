@@ -674,7 +674,7 @@
                     "
                   />
                 </li>
-                <!-- <li>
+                <li>
                   <p class="title">
                     {{ $t("sign_up.Willing_to_authorize_the_management_office") }}
                   </p>
@@ -721,7 +721,7 @@
                     "
                     >{{ $t("Edit_member_information.This_field_is_required") }}</i
                   >
-                </li> -->
+                </li>
               </ul>
             </div>
             <p class="update-time" v-if="editMemberInfoForm.updateTime">
@@ -992,13 +992,13 @@ export default {
         }
       }
       const reg = /^[A-Za-z0-9.^\u4e00-\u9fa5_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      // ||
-      //   !data.editMemberInfoForm.isAgreeAuthorization ||
-      //   !data.editMemberInfoForm.isAgreeReceiveLetter
+
       if (
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
-        !data.editMemberInfoForm.email
+        !data.editMemberInfoForm.email ||
+        !data.editMemberInfoForm.isAgreeAuthorization ||
+        !data.editMemberInfoForm.isAgreeReceiveLetter
       ) {
         data.edit_member_info_error_tip.is_null = true;
         return;
@@ -1021,16 +1021,7 @@ export default {
         data.edit_member_info_error_tip.is_email_correct = false;
       }
       data.loading = true;
-      // typeList: [
-      //       {
-      //         typeCode: "auth_start", //授权处理固定传值（默认Y）
-      //         typeValue: data.editMemberInfoForm.isAgreeAuthorization, //Y是；N否
-      //       },
-      //       {
-      //         typeCode: "accept_email", //接受实体邮件固定传值（默认N）
-      //         typeValue: data.editMemberInfoForm.isAgreeReceiveLetter, //Y是；N否
-      //       },
-      //     ],
+
       try {
         const res = await proxy.$http.editMemberInfo({
           id: JSON.parse(localStorage.getItem("login-info")).id,
@@ -1043,11 +1034,20 @@ export default {
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
           lang: data.fairview_park_lang,
-
+          typeList: [
+            {
+              typeCode: "auth_start", //授权处理固定传值（默认Y）
+              typeValue: data.editMemberInfoForm.isAgreeAuthorization, //Y是；N否
+            },
+            {
+              typeCode: "accept_email", //接受实体邮件固定传值（默认N）
+              typeValue: data.editMemberInfoForm.isAgreeReceiveLetter, //Y是；N否
+            },
+          ],
           verifyCode: data.editMemberInfoForm.verifyCode,
         });
         if (res.data.status === 200) {
-          localStorage.setItem("login-info", JSON.stringify(res.data.data));
+          // localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
             message:
@@ -1061,6 +1061,14 @@ export default {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
+          localStorage.removeItem("login-info");
+          store.commit("setLoginStatus", false);
+          router.push({
+            path: "/",
+            query: {
+              lang: data.fairview_park_lang,
+            },
+          });
         } else {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = true;
@@ -1119,16 +1127,16 @@ export default {
         data.editMemberInfoForm.cnickname = userinfo.cname || "";
         data.editMemberInfoForm.email = userinfo.email || "";
         data.editMemberInfoForm.contactNo = userinfo.contactNo || "";
-        // data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList
-        //   ? userinfo.authList.filter((item) => {
-        //       return item.typeCode == "auth_start";
-        //     })[0].typeValue
-        //   : null;
-        // data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList
-        //   ? userinfo.authList.filter((item) => {
-        //       return item.typeCode == "accept_email";
-        //     })[0].typeValue
-        //   : null;
+        data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList
+          ? userinfo.authList.filter((item) => {
+              return item.typeCode == "auth_start";
+            })[0].typeValue
+          : null;
+        data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList
+          ? userinfo.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            })[0].typeValue
+          : null;
         data.editMemberInfoForm.updateTime = userinfo.editInfoTime || "";
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框

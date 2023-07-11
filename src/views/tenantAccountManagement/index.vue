@@ -86,10 +86,11 @@
                   ]"
                   :key="index"
                 >
-                  <span style="display: inline-block; margin-right: 8px">{{
-                    item.title
-                  }}</span>
-                  <span>{{ item.value }}</span>
+                  <span
+                    style="display: inline-block; margin-right: 10px; text-align: left"
+                    >{{ item.title }}</span
+                  >
+                  <span style="text-align: left">{{ item.value }}</span>
                 </li>
               </ul>
               <el-button class="close-btn" @click="closeTenantManagement" type="danger">{{
@@ -100,7 +101,7 @@
         </div>
       </div>
     </div>
-    <!-- 關閉租客賬號提示 -->
+    <!-- 關閉住客賬號提示 -->
     <div
       v-if="isShowCloseBox"
       class="close-box"
@@ -126,7 +127,6 @@
         :label="
           $t('tenant_account_management.I_understand_and_agree_to_the_above_arrangement')
         "
-        size="large"
       />
       <div class="button flex-row space-between">
         <el-button type="info" @click="isShowCloseBox = false">{{
@@ -182,7 +182,7 @@ export default {
     const closeTenantManagement = () => {
       data.isShowCloseBox = true;
     };
-    //業主查看租客情況
+    //業主查看住客情況
     const selectTenantStatus = async () => {
       data.loading = true;
       try {
@@ -190,6 +190,7 @@ export default {
           id: JSON.parse(localStorage.getItem("login-info")).id,
           lang: data.fairview_park_lang,
         });
+        console.log(res.data);
         if (res.data.status === 200) {
           data.isShowModal = true;
           if (res.data.data.launchType === "Y") {
@@ -201,9 +202,9 @@ export default {
           }
         } else if (res.data.status === 501) {
           document.getElementById("close-start-up").click();
-          data.isShowModal = false;
-          data.tenantInfo = null;
-          data.isShowCloseBox = false;
+          // data.isShowModal = false;
+          // data.tenantInfo = null;
+          // data.isShowCloseBox = false;
           ElMessage({
             message: res.data.msg,
             type: "warning",
@@ -219,7 +220,7 @@ export default {
         data.loading = false;
       }
     };
-    //開啟或關閉租客賬號
+    //開啟或關閉住客賬號
     const clickTenantLaunch = async (type) => {
       data.loading = true;
       try {
@@ -355,11 +356,11 @@ export default {
         text-align: center;
         padding: 0;
         margin: 0 auto 30px;
-
+        width: 90%;
         li {
+          display: flex;
           margin-bottom: 5px;
           align-items: center;
-          justify-content: space-between;
           color: #2fa94e;
         }
       }
@@ -368,7 +369,8 @@ export default {
 }
 
 .close-box {
-  width: 400px;
+  width: 500px;
+  max-width: 90%;
   text-align: center;
   z-index: 2000;
   border-radius: 6px;
@@ -389,6 +391,7 @@ export default {
 
   @{deep} .el-checkbox {
     margin-bottom: 20px;
+    height: auto;
 
     .el-checkbox__input {
       input {
@@ -401,6 +404,8 @@ export default {
 
     .el-checkbox__label {
       font-size: 18px;
+      white-space: wrap;
+      text-align: left;
     }
   }
 
@@ -448,8 +453,17 @@ export default {
         }
 
         ul {
+          width: 100%;
           li {
             margin-bottom: 10px;
+            span {
+              &:first-child {
+                flex: 1;
+              }
+              &:last-child {
+                width: 30%;
+              }
+            }
           }
         }
       }

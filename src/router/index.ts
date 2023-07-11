@@ -207,9 +207,9 @@ function checkToken(){
         escape(window.atob(JSON.parse((window as any).localStorage.getItem('login-info')).jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))
       )
     );
-    console.log(userinfo)
-    console.log(new Date().getTime())
-    console.log(userinfo.jwtExpiresDate)
+    // console.log(userinfo)
+    // console.log(new Date().getTime())
+    // console.log(userinfo.jwtExpiresDate)
     if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
       localStorage.removeItem('login-info')
       sessionStorage.removeItem('fairview-part-store')

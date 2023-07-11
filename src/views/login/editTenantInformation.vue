@@ -220,7 +220,7 @@ export default {
         loginName: null,
         password: null,
         confirmPassword: null,
-        isAgreeReceiveLetter: null,
+        isAgreeReceiveLetter: "Y",
       },
       edit_member_info_error_tip: {
         is_verify_password_null: false,
@@ -253,7 +253,6 @@ export default {
     };
     //修改用戶信息
     const editMemberInfo = async () => {
-      console.log(data.editTenantInfoForm);
       data.edit_member_info_error_tip.is_null = false;
       data.edit_member_info_error_tip.is_password_null = false;
       data.edit_member_info_error_tip.is_show = false;
@@ -286,13 +285,13 @@ export default {
           ],
         });
         if (res.data.status === 200) {
-          localStorage.setItem("login-info", JSON.stringify(res.data.data));
-          //
-          if (data.editTenantInfoForm.confirmPassword) {
-          }
+          // localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message: data.fairview_park_lang === "en_us" ? "Edit Successful" : "編輯成功",
+            message:
+              data.fairview_park_lang === "en_us"
+                ? "Edit Successful, Please login again!"
+                : "編輯成功,請從新登陸！",
             type: "success",
           });
 
@@ -300,6 +299,14 @@ export default {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
+          localStorage.removeItem("login-info");
+          store.commit("setLoginStatus", false);
+          router.push({
+            path: "/",
+            query: {
+              lang: data.fairview_park_lang,
+            },
+          });
         } else {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = true;

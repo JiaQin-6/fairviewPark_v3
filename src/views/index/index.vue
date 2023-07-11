@@ -1,142 +1,11 @@
-<!--
- * @Author: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @Date: 2022-09-15 22:11:53
- * @LastEditors: 嘉嘉 51945758+JiaQin-6@users.noreply.github.com
- * @LastEditTime: 2022-12-06 21:26:02
- * @FilePath: /fairview park cms/Users/david/Desktop/fairviewpark_v3/fairviewPark_v3/src/views/index/index.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <template>
   <div :class="{ 'flex-row': is_show }">
     <transition name="el-zoom-in-top">
       <div class="ownerIsZONE" v-if="is_show">
         <div class="ownerIsZONE-content">
           <ul>
-            <!-- <li
-              v-for="(item, index) in loginPower"
-              :key="index"
-              @click="selectOwnersZone(item.router)"
-            >
-              {{ item.text }}
-            </li> -->
             <li
-              v-for="(item, index) in isShowLoginOutButton
-                ? [
-                    {
-                      router: '/edit-member-information',
-                      text: $t('headed.Edit_member_information'),
-                    },
-                    {
-                      router: '/news-update',
-                      text: $t('headed.News_Update'),
-                    },
-                    {
-                      router: '/FAQ-from-residents',
-                      text: $t('headed.FAQ_from_Residents'),
-                    },
-                    {
-                      router: '/estate-notice',
-                      text: $t('headed.Estate_Notices'),
-                    },
-                    {
-                      router: '/estate-activities',
-                      text: $t('headed.Estate_Activities'),
-                    },
-                    {
-                      router: '/fairview-part-news',
-                      text: $t('headed.Fairview_Park_News'),
-                    },
-                    {
-                      router: '/payment-list',
-                      text: $t('headed.Payment_List'),
-                    },
-                    {
-                      router: '/apply-resident-smartcard',
-                      text: $t('headed.Apply_Resident_Smartcard'),
-                    },
-                    {
-                      router: '/MAC-column',
-                      text: $t('headed.MAC_Column'),
-                    },
-                    {
-                      router: '/the-overhaul-project',
-                      text: $t('headed.the_Overhaul_Project'),
-                    },
-                    {
-                      router: '/lottery-system-for-impound',
-                      text: $t('headed.Lottery_System_For_Impounding_Action'),
-                    },
-                    {
-                      router: '/frequently-used-forms',
-                      text: $t('headed.Frequently_Used_Forms'),
-                    },
-                    {
-                      router: '/residents-handbook-map',
-                      text: $t('headed.Residents_Handbook_Map'),
-                    },
-                    {
-                      router: '/demographic-opinion-survey',
-                      text: $t('headed.Demographic_Opinion_Survey'),
-                    },
-                    {
-                      router: '/loginOut',
-                      text: $t('headed.Login_out'),
-                    },
-                  ]
-                : [
-                    {
-                      router: '/news-update',
-                      text: $t('headed.News_Update'),
-                    },
-                    {
-                      router: '/FAQ-from-residents',
-                      text: $t('headed.FAQ_from_Residents'),
-                    },
-                    {
-                      router: '/estate-notice',
-                      text: $t('headed.Estate_Notices'),
-                    },
-                    {
-                      router: '/estate-activities',
-                      text: $t('headed.Estate_Activities'),
-                    },
-                    {
-                      router: '/fairview-part-news',
-                      text: $t('headed.Fairview_Park_News'),
-                    },
-                    {
-                      router: '/payment-list',
-                      text: $t('headed.Payment_List'),
-                    },
-                    {
-                      router: '/apply-resident-smartcard',
-                      text: $t('headed.Apply_Resident_Smartcard'),
-                    },
-                    {
-                      router: '/MAC-column',
-                      text: $t('headed.MAC_Column'),
-                    },
-                    {
-                      router: '/the-overhaul-project',
-                      text: $t('headed.the_Overhaul_Project'),
-                    },
-                    {
-                      router: '/lottery-system-for-impound',
-                      text: $t('headed.Lottery_System_For_Impounding_Action'),
-                    },
-                    {
-                      router: '/frequently-used-forms',
-                      text: $t('headed.Frequently_Used_Forms'),
-                    },
-                    {
-                      router: '/residents-handbook-map',
-                      text: $t('headed.Residents_Handbook_Map'),
-                    },
-                    {
-                      router: '/demographic-opinion-survey',
-                      text: $t('headed.Demographic_Opinion_Survey'),
-                    },
-                  ]"
+              v-for="(item, index) in loginPower"
               :key="index"
               @click="selectOwnersZone(item.router)"
             >
@@ -330,6 +199,8 @@ export default {
         document.body.appendChild(button);
         button.click();
         document.body.removeChild(button);
+      } else if (val === "/start-up") {
+        selectTenantStatus();
       } else {
         router.push({
           path: val,
@@ -337,6 +208,37 @@ export default {
             lang: sessionStorage.getItem("fairview_park_lang"),
           },
         });
+      }
+    };
+    //業主查看住客情況
+    const selectTenantStatus = async () => {
+      data.loading = true;
+      try {
+        const res = await proxy.$http.selectTenantStatus({
+          id: JSON.parse(localStorage.getItem("login-info")).id,
+          lang: data.fairview_park_lang,
+        });
+        if (res.data.status === 200) {
+          const button = document.createElement("button");
+          button.setAttribute("data-bs-toggle", "modal");
+          button.setAttribute("data-bs-target", "#startUp");
+          document.body.appendChild(button);
+          button.click();
+          document.body.removeChild(button);
+        } else if (res.data.status === 501) {
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        } else {
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+        }
+        data.loading = false;
+      } catch (error) {
+        data.loading = false;
       }
     };
     watch(
@@ -363,8 +265,8 @@ export default {
       async (val) => {
         //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
         //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
-        const ownerData = await findOneNewPopupBox(0);//业主
-        const nonMemberData = await findOneNewPopupBox(2);//游客
+        const ownerData = await findOneNewPopupBox(0); //业主
+        const nonMemberData = await findOneNewPopupBox(2); //游客
         //根据localStorage中的状态来决定显示隐藏
         let newData = {
           nonMember: {
@@ -376,7 +278,6 @@ export default {
             content: ownerData && ownerData.htmlEnUs,
           },
         };
-        console.log(val);
         if (val) {
           if (!ownerData) {
             return false;
@@ -445,67 +346,30 @@ export default {
       { deep: true, immediate: true }
     );
     const loginPower = computed(() => {
-      let o_array = [
-        {
-          router: "/news-update",
-          text: proxy.$t("headed.News_Update"),
-        },
-        {
-          router: "/FAQ-from-residents",
-          text: proxy.$t("headed.FAQ_from_Residents"),
-        },
-        {
-          router: "/estate-notice",
-          text: proxy.$t("headed.Estate_Notices"),
-        },
-        {
-          router: "/estate-activities",
-          text: proxy.$t("headed.Estate_Activities"),
-        },
-        {
-          router: "/fairview-part-news",
-          text: proxy.$t("headed.Fairview_Park_News"),
-        },
-        {
-          router: "/payment-list",
-          text: proxy.$t("headed.Payment_List"),
-        },
-        {
-          router: "/apply-resident-smartcard",
-          text: proxy.$t("headed.Apply_Resident_Smartcard"),
-        },
-        {
-          router: "/MAC-column",
-          text: proxy.$t("headed.MAC_Column"),
-        },
-        {
-          router: "/the-overhaul-project",
-          text: proxy.$t("headed.the_Overhaul_Project"),
-        },
-        {
-          router: "/lottery-system-for-impound",
-          text: proxy.$t("headed.Lottery_System_For_Impounding_Action"),
-        },
-        {
-          router: "/frequently-used-forms",
-          text: proxy.$t("headed.Frequently_Used_Forms"),
-        },
-        {
-          router: "/residents-handbook-map",
-          text: proxy.$t("headed.Residents_Handbook_Map"),
-        },
-        {
-          router: "/demographic-opinion-survey",
-          text: proxy.$t("headed.Demographic_Opinion_Survey"),
-        },
-      ];
+      let o_array = [];
+      JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
+        o_array.push({
+          router: item.route,
+          text:
+            sessionStorage.getItem("fairview_park_lang") === "en_us"
+              ? item.nameEnUs
+              : item.nameZhTw,
+        });
+      });
       if (data.isShowLoginOutButton) {
         o_array.push({
           router: "/loginOut",
           text: proxy.$t("headed.Login_out"),
         });
       }
-      if (data.loginInfo && data.loginInfo.groupId === 0) {
+      if (
+        localStorage.getItem("login-info") &&
+        JSON.parse(localStorage.getItem("login-info")).groupId === 0
+      ) {
+        o_array.unshift({
+          router: "/start-up",
+          text: proxy.$t("headed.Tenant_account_management"),
+        });
         o_array.unshift({
           router: "/edit-member-information",
           text: proxy.$t("headed.Edit_member_information"),
@@ -521,15 +385,6 @@ export default {
     onMounted(async () => {
       //如果滚动隐藏下拉框
       document.onscroll = () => {
-        // if (
-        //   document.getElementsByClassName("menu-select") &&
-        //   document.getElementsByClassName("menu-select")[0] &&
-        //   document
-        //     .getElementsByClassName("menu-select")[0]
-        //     .getElementsByClassName("is-reverse").length !== 0
-        // ) {
-        //   document.getElementsByClassName("menu-select")[0].click();
-        // }
         if (
           document.getElementsByClassName("el-pagination__sizes") &&
           document.getElementsByClassName("el-pagination__sizes")[0] &&
@@ -551,6 +406,7 @@ export default {
       showOwnerIsZONE,
       findOneNewPopupBox,
       loginPower,
+      selectTenantStatus,
     };
   },
 };

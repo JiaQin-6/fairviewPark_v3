@@ -86,7 +86,7 @@
                       : 'https://fairviewpark.hk/file/ResidentCard_InstructionTC.html'
                   "
                 >
-                {{ $t("applyRCard.How_to_apply") }}</a
+                  {{ $t("applyRCard.How_to_apply") }}</a
                 >
               </button>
               <span>{{ $t("applyRCard.After_apply_success") }}</span>
@@ -147,88 +147,8 @@
                       >
                         <el-option
                           v-for="item in loginInfo && loginInfo.groupId === 0
-                            ? [
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Owner / co-owner'
-                                      : '業主/共同業主',
-                                  value: 'ROa',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us' ? 'Spouse' : '配偶',
-                                  value: 'ROb',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us' ? 'Child' : '子女',
-                                  value: 'ROc',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Domestic Helper'
-                                      : '家庭傭工',
-                                  value: 'ROd',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us' ? 'Parents' : '父母',
-                                  value: 'ROe',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Other (please specify)'
-                                      : '其他(請註明)',
-                                  value: 'ROf',
-                                },
-                              ]
-                            : [
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Tenant/Co-Tenant'
-                                      : '承住人/共同承住人',
-                                  value: 'RTa',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Tenant Spouse'
-                                      : '承住人配偶',
-                                  value: 'RTb',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'TenantChild'
-                                      : '承住人子女',
-                                  value: 'RTc',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Tenant Domestic Helper'
-                                      : '承住人家庭傭工',
-                                  value: 'RTd',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Tenant Parents'
-                                      : '承住人父母',
-                                  value: 'RTe',
-                                },
-                                {
-                                  label:
-                                    fairview_park_lang === 'en_us'
-                                      ? 'Other (please specify)'
-                                      : '其他(請註明)',
-                                  value: 'ROf',
-                                },
-                              ]"
+                            ? memberRalationList
+                            : residentRalationList"
                           :key="item.value"
                           :label="item.label"
                           :value="item.value"
@@ -263,7 +183,9 @@
                         }}</i
                       >
                       <div class="form-wrap flex-row mb-10 flex-wrap">
-                        <span class="yellow col-6 pl-20">{{ $t("applyRCard.Upload_the_address_proof") }}</span>
+                        <span class="yellow col-6 pl-20">{{
+                          $t("applyRCard.Upload_the_address_proof")
+                        }}</span>
 
                         <el-upload
                           ref="relationFile"
@@ -315,7 +237,9 @@
                   </li>
                   <li>
                     <div class="form-wrap flex-row mb-10">
-                      <span class="col-6">{{ $t("applyRCard.Octopus_Card_Number") }}</span>
+                      <span class="col-6">{{
+                        $t("applyRCard.Octopus_Card_Number")
+                      }}</span>
                       <div class="flex-row">
                         <el-input
                           class="mr-6"
@@ -371,7 +295,9 @@
                   </li>
                   <li>
                     <div class="form-wrap flex-row">
-                      <span class="col-6">{{ $t("applyRCard.Card_User_s_Photo_Upload") }}</span>
+                      <span class="col-6">{{
+                        $t("applyRCard.Card_User_s_Photo_Upload")
+                      }}</span>
                       <el-upload
                         ref="photoFile"
                         class="upload-demo col-6"
@@ -535,7 +461,15 @@
                         <strong style="margin-right: 5px">{{
                           fairview_park_lang === "en_us" ? "Relation" : "與業主關係："
                         }}</strong>
-                        <span>{{ item.rcrelation }}</span>
+                        <span>{{
+                          loginInfo && loginInfo.groupId === 0
+                            ? memberRalationList.filter((obj) => {
+                                return obj.value === item.rcrelation;
+                              })[0].label
+                            : residentRalationList.filter((obj) => {
+                                return obj.value === item.rcrelation;
+                              })[0].label
+                        }}</span>
                       </div>
                       <div v-if="item.rcrelationOther">
                         <strong style="margin-right: 5px">{{
@@ -546,17 +480,18 @@
                         <span>{{ item.rcrelationOther }}</span>
                       </div>
                       <div v-if="item.rcrelationDoc">
-                        <strong style="margin-right: 5px">{{ $t("applyRCard.Uploaded_Document") }}</strong>
+                        <strong style="margin-right: 5px">{{
+                          $t("applyRCard.Uploaded_Document")
+                        }}</strong>
                         <span style="display: block">{{
                           item.rcrelationDoc.split("/").pop()
                         }}</span>
                       </div>
                       <div>
-                        <strong style="margin-right: 5px">{{ $t("applyRCard.Octopus_Card_Number") }}{{
-                          fairview_park_lang === "en_us"
-                            ? ":"
-                            : "："
-                        }}</strong>
+                        <strong style="margin-right: 5px"
+                          >{{ $t("applyRCard.Octopus_Card_Number")
+                          }}{{ fairview_park_lang === "en_us" ? ":" : "：" }}</strong
+                        >
                         <span>{{ item.rcOcto }}({{ item.rcOctoBk }})</span>
                       </div>
                     </div>
@@ -569,7 +504,9 @@
                         />
                       </div>
                       <div v-if="item.rcAppStatus === 2">
-                        <strong style="margin-right: 5px">{{ $t("applyRCard.Approved_Image_Record") }}</strong>
+                        <strong style="margin-right: 5px">{{
+                          $t("applyRCard.Approved_Image_Record")
+                        }}</strong>
                         <span style="display: block">{{
                           item.rcPhoto.split("/").pop()
                         }}</span>
@@ -628,6 +565,7 @@ export default {
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
+    console.log(getCurrentInstance());
     let data = reactive({
       nav_index: 0,
       fairview_park_lang: "",
@@ -653,6 +591,58 @@ export default {
       address_t: "",
       rCardList: [],
       loginInfo: null, //登陸信息
+      memberRalationList: [
+        {
+          label: proxy.$t("applyRCard.Owner_co-owner"),
+          value: "ROa",
+        },
+        {
+          label: proxy.$t("applyRCard.Spouse"),
+          value: "ROb",
+        },
+        {
+          label: proxy.$t("applyRCard.Child"),
+          value: "ROc",
+        },
+        {
+          label: proxy.$t("applyRCard.Domestic_Helper"),
+          value: "ROd",
+        },
+        {
+          label: proxy.$t("applyRCard.Parents"),
+          value: "ROe",
+        },
+        {
+          label: proxy.$t("applyRCard.Other_please_specify"),
+          value: "ROf",
+        },
+      ],
+      residentRalationList: [
+        {
+          label: proxy.$t("applyRCard.Tenant_Co-Tenant"),
+          value: "RTa",
+        },
+        {
+          label: proxy.$t("applyRCard.Tenant_Spouse"),
+          value: "RTb",
+        },
+        {
+          label: proxy.$t("applyRCard.TenantChild"),
+          value: "RTc",
+        },
+        {
+          label: proxy.$t("applyRCard.Tenant_Domestic_Helper"),
+          value: "RTd",
+        },
+        {
+          label: proxy.$t("applyRCard.Tenant_Parents"),
+          value: "RTe",
+        },
+        {
+          label: proxy.$t("applyRCard.Other_please_specify"),
+          value: "ROf",
+        },
+      ],
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //如果有登陸信息就顯示登陸

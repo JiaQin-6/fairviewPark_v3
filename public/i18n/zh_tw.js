@@ -11,7 +11,7 @@ window.i18n_zh_tw = {
   headed: {
     'Owner_login': '業主登入',
     'OWNERS_s_ZONE': "業主專區",
-    'TENANT_s_ZONE': "租客專區",
+    'TENANT_s_ZONE': "住客專區",
     'Login_out': '登出',
     'Home': '首頁',
     'About_us': '關於我們',
@@ -21,7 +21,7 @@ window.i18n_zh_tw = {
     'Shops_Directory': '商場資訊',
     'Useful_Telephone_Nos': '常用電話及連接',
     'Edit_member_information': '編輯賬號資料',
-    'Tenant_account_management': '租客賬號管理',
+    'Tenant_account_management': '住客賬號管理',
     'News_Update': '最新消息',
     'FAQ_from_Residents': '居民常見問題',
     'Estate_Notices': '屋苑通告',
@@ -403,6 +403,17 @@ window.i18n_zh_tw = {
     'Approved_Image_Record':'已審核圖片記錄編號：',
     'the_Registered_House_Talent': '本人/我們為上述物業的註冊承住人，現向錦綉花園物業管理有限公司申請錦綉住戶口咭予以下每一個持咭人士，並附上其彩色近照1張* (尺寸:40mm×50mm)及住址證明 (如適用)。',
     'We_being_the_registered_house_Owner_and_the_Tenant': '我們為上述物業(以下簡稱「相關物業」)之業主及承租人，現向錦綉花園物業管理有限公司(以下簡稱「管理公司」)申請住戶智能咭(以下簡稱「住戶咭」)予詳列於上述丙部的人士。我們謹此聲明此等人士皆居住於相關物業以及在本申請表甲、乙及丙部所提供的資料及相片，乃真實及正確無誤，我們完全明白並同意接受及受約束於下列條款及條件：<br/><p></p>1. 住戶咭不能轉讓。如作出是項申請之基本資格不再存在，例如上述業主不再是相關物業的業主，或租約期滿，或當業主提交最新的租戶住戶咭申請表時，所有以往所發出的住戶咭及於此申請表申請的住戶咭將即時被取消。<br/><p></p>2. 當相關物業業權出現變動時，新業主或現有租戶必須通知管理公司持咭人是否仍舊相同，否則管理公司將即時取消已發出的所有住戶咭。<br/><p></p>3. 住戶咭乃屬管理公司所有，如持咭人身份已不符合使用此住戶咭，請交回予管理公司。<br/><p></p>4. 持咭人應按管理公司保安人員之要求出示住戶咭，若該住戶咭已被取消，管理公司職員有權收回該住戶咭。<br/><p></p>5. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋邨守則之業戶之申請或取消所有已發出予該單位的住戶咭。<br/><p></p>6. 住戶咭如有遺失，業主/承租人須立即通知管理公司，以便管理公司取消該住戶咭。<br/><p></p>7. 無論因任何原因，業主/承租人如須補領住戶咭，管理公司將收取港幣 50 元之手續費。<br/><p></p>8. 業主及承租人在此聲明，承租人及持咭人士同意管理公司收集和處理根據下面的個人資料聲明提供的個人資料。<br/><p></p>9. 管理公司保留絕對權利隨時修訂本申請表上之任何條款及條件而不作另行通告。',
+    'Owner_co-owner':'業主/共同業主',
+    'Spouse':'配偶',
+    'Child':'子女',
+    'Domestic_Helper':'家庭傭工',
+    'Parents':'父母',
+    'Other_please_specify':'其他(請註明)',
+    'Tenant_Co-Tenant':'承住人/共同承住人',
+    'Tenant_Spouse':'承住人配偶',
+    'TenantChild':'承住人子女',
+    'Tenant_Domestic_Helper':'承住人家庭傭工',
+    'Tenant_Parents':'承住人父母',
   },
   //管理諮詢委員會專欄
   MACColumn_Rules_Regulations: {
@@ -1755,24 +1766,24 @@ window.i18n_zh_tw = {
     I_understand_the_above_information:'本人已知悉上述資訊，不要再顯示此頁面',
     Confirm:'確定',
   },
-  //开启关闭租客弹框
+  //开启关闭住客弹框
   tenant_account_management:{
-    Enable_tenant_management:'開啟租客管理',
+    Enable_tenant_management:'開啟住客管理',
     Login_Name:'登入名稱',
     password:'登入密碼',
     Copy_account_information:'複製賬號資料',
-    The_source_of_the_last_activation_of_the_tenant_account:'上一次啓動租客賬號的來源:',
+    The_source_of_the_last_activation_of_the_tenant_account:'上一次啓動住客賬號的來源:',
     Owner:'業主',
     Fairview_Park_Management_Office:'管理處',
-    The_time_of_the_last_activation_of_the_tenant_account:'上一次啓動租客賬號的時間:',
+    The_time_of_the_last_activation_of_the_tenant_account:'上一次啓動住客賬號的時間:',
     The_time_of_the_copy_of_the_tenant_account_information:'上一次「複製該登入信息」的時間:',
-    The_time_of_the_last_login_of_the_tenant_account:'上一次租客登入時間:',
-    Turn_off_tenant_management:'關閉租客管理',
+    The_time_of_the_last_login_of_the_tenant_account:'上一次住客登入時間:',
+    Turn_off_tenant_management:'關閉住客管理',
     Close_account:'關閉賬號',
-    Once_the_account_is_closed:'安排：户口一旦被關閉，您的租客將不能操作其户口，其相關户口資料亦會失效。',
+    Once_the_account_is_closed:'安排：户口一旦被關閉，您的住客將不能操作其户口，其相關户口資料亦會失效。',
     I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉户口安排',
     Return:'返回',
     Confirm:'確認',
-    Copy_Successful:'复制成功!'
+    Copy_Successful:'複製成功!'
   }
 };
