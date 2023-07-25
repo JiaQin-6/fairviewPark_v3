@@ -70,10 +70,10 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ $t("Edit_member_information.Login_Name") }}</p>
+                  <p class="title">{{ $t("Edit_member_information.Login_Name_tenant") }}</p>
                   <input
                     v-model="editTenantInfoForm.loginName"
-                    :placeholder="$t('Edit_member_information.Login_Name')"
+                    :placeholder="$t('Edit_member_information.Login_Name_tenant')"
                     type="text"
                     :class="{
                       error:
@@ -160,7 +160,9 @@
                   >
                 </li>
                 <li>
-                  <p class="title">願意接收實體信件信息？</p>
+                  <p style="text-align:left">{{ $t('Edit_member_information.If_the_Tenant_forgets_the_passwords') }}</p></li>
+                <li>
+                  <p class="title">{{ $t('Edit_member_information.Willing_to_receive_physical_mail_information') }}</p>
                   <el-radio-group
                     v-model="editTenantInfoForm.isAgreeReceiveLetter"
                     class="ml-4"
@@ -220,7 +222,7 @@ export default {
         loginName: null,
         password: null,
         confirmPassword: null,
-        isAgreeReceiveLetter: "Y",
+        isAgreeReceiveLetter: "N",
       },
       edit_member_info_error_tip: {
         is_verify_password_null: false,

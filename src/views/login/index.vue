@@ -790,7 +790,7 @@ export default {
         cnickname: null,
         email: null,
         contactNo: null,
-        isAgreeAuthorization: null,
+        isAgreeAuthorization: 'N',
         isAgreeReceiveLetter: null,
         updateTime: null,
       },
@@ -828,6 +828,7 @@ export default {
     const router = useRouter();
     //登陸
     const login = async () => {
+      data.login_error_tip.is_show = false;
       if (!data.loginForm.loginName || !data.loginForm.password) {
         data.login_error_tip.is_null = true;
         return;

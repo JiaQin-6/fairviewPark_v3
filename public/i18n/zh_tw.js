@@ -9,7 +9,7 @@
 window.i18n_zh_tw = {
   //頂部菜單欄
   headed: {
-    'Owner_login': '業主登入',
+    'Owner_login': '登入',
     'OWNERS_s_ZONE': "業主專區",
     'TENANT_s_ZONE': "住客專區",
     'Login_out': '登出',
@@ -274,18 +274,18 @@ window.i18n_zh_tw = {
   },
   //登陸
   login: {
-    'Owner_login': '業主登入',
+    'Owner_login': '登入',
     'Login_name': '登入名稱',
     'Password': '密碼',
-    'Forgot_password': '忘記密碼',
+    'Forgot_password': '業主忘記密碼',
     'Sign_in': '登入',
-    'Online_user_registration': '網上用戶註冊',
+    'Online_user_registration': '業主註冊',
     'Disclaimer': '免責聲明',
     'Privacy_Policy_and_Personal_Data_Collection_Statement': '私隱政策及收集個人資料聲明',
   },
   //註冊
   sign_up: {
-    'Online_user_registration': '網上用戶註冊',
+    'Online_user_registration': '業主註冊',
     'How_to_Create_Account': '網上註冊指引',
     'Owner_Name': '登記業主名稱 (請參考月結單)',
     'Same_as_the_owner_is_name': '與月結單上之業主名稱相同，包括字符',
@@ -297,7 +297,7 @@ window.i18n_zh_tw = {
     'Email_Address': '聯絡電郵',
     'Contact_Number': '聯絡電話 (選填)',
     'Sign_up': '註冊',
-    'Willing_to_authorize_the_management_office':'願意授權管理處,協助處理住客啟動賬號信息？',
+    'Willing_to_authorize_the_management_office':'願意授權管理公司管理住客賬號？',
     'Willing_to_receive_physical_mail_information':'願意接收實體信件信息？',
     'Last_updated_data_time':'上次更新資料時間',
 
@@ -306,7 +306,7 @@ window.i18n_zh_tw = {
   forget_password: {
     'Login_Name': '登入名稱',
     'Contact_Email': '聯絡電郵',
-    'Forgot_password': '忘記密碼',
+    'Forgot_password': '業主忘記密碼',
     'Please_enter_your_login_name': '請輸入閣下之登入名稱',
     'This_field_is_required': '此欄位必填',
     'Please_enter_your_registration_contact_email': '請輸入閣下之登記聯絡電郵',
@@ -329,6 +329,9 @@ window.i18n_zh_tw = {
     'Nickname': 'Nickname (選填)',
     'Email_Address': '聯絡電郵',
     'Contact_Number': '聯絡電話 (選填)',
+    'If_the_Tenant_forgets_the_passwords':'如住戶忘記密碼，請通知業主或管理公司重置戶口。',
+    'Willing_to_receive_physical_mail_information':'願意接收實體屋苑通告？',
+    'Login_Name_tenant':'登入名稱',
   },
   //商場資訊
   shopping_Information: {
@@ -1768,10 +1771,10 @@ window.i18n_zh_tw = {
   },
   //开启关闭住客弹框
   tenant_account_management:{
-    Enable_tenant_management:'開啟住客管理',
+    Enable_tenant_management:'啓動住客賬號',
     Login_Name:'登入名稱',
     password:'登入密碼',
-    Copy_account_information:'複製賬號資料',
+    Copy_account_information:'複製邀請',
     The_source_of_the_last_activation_of_the_tenant_account:'上一次啓動住客賬號的來源:',
     Owner:'業主',
     Fairview_Park_Management_Office:'管理處',
@@ -1779,11 +1782,19 @@ window.i18n_zh_tw = {
     The_time_of_the_copy_of_the_tenant_account_information:'上一次「複製該登入信息」的時間:',
     The_time_of_the_last_login_of_the_tenant_account:'上一次住客登入時間:',
     Turn_off_tenant_management:'關閉住客管理',
-    Close_account:'關閉賬號',
-    Once_the_account_is_closed:'安排：户口一旦被關閉，您的住客將不能操作其户口，其相關户口資料亦會失效。',
-    I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉户口安排',
+    Close_account:'關閉住客賬號',
+    Once_the_account_is_closed:'安排：關閉住客賬號後，其賬號將不能使用。重新開啓後，密碼將會重置。',
+    I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉住客賬號安排',
     Return:'返回',
     Confirm:'確認',
-    Copy_Successful:'複製成功!'
+    Copy_Successful:'複製成功，請分享給住客登入',
+    Account_Record:'賬號記錄',
+    Never:'無',
+    You_are_now_being_invite_to_log_in :'現正邀請您登入錦綉花園物業管理有限公司網站。',
+    Website:'網   址',
+    Login_password:'住戶登入密碼',
+    Invitation_time:'邀請時間',
+    I_We_being_the_registered_house_owner:'我/我們為相關物業之業主(以下簡稱「業主」)，現向錦綉花園物業管理有限公司(以下簡稱「管理公司」) 啓動相關物業的住客帳號(以下簡稱「住客帳號」)。我們謹此聲明此等人士使用住客帳號時皆居住於相關物業，我們完全明白並同意接受及受約束於下列條款及條件：<br/>1. 我/我們不再是相關物業的業主，住客賬號將被關閉。<br/>2. 當相關物業業權出現變動時，新業主必須通知管理公司住客是否仍舊相同，否則管理公司將關閉已開啓的住客賬號。<br/>3. 住客賬號乃屬管理公司所有，如住客身份已不符合使用此賬號，管理公司將關閉已開啓的住客賬號。<br/>4. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋苑守則 之業戶之申請或關閉已開啓的住客賬號。<br/>5. 住客賬號如有異常，業主可自行關閉帳號，或通知管理公司，以便取消該住客賬號。<br/>6. 業主可編輯賬號，按需要授權管理公司協助管理住客賬號。<br/>7. 業主可自行複製邀請住客賬號，並會妥善分享住客賬號登入訊息。<br/>8. 住客賬號一經分享，代表業主同意用家登入錦綉花園物業管理有限公司流動裝置程式及申請相關服務。<br/>9. 管理公司保留絕對權利隨時修訂是次功能之任何條款及條件而不作另行通告。',
+    I_Accept_and_Understand_the_Terms_and_Agreement:'本人同意上述條款',
   }
 };

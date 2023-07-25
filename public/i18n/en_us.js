@@ -1,7 +1,7 @@
 window.i18n_en_us = {
   //頂部菜單欄
   headed: {
-    'Owner_login': 'Owner login',
+    'Owner_login': 'Login',
     'OWNERS_s_ZONE': "OWNERS's ZONE",
     'TENANT_s_ZONE': "TENANT's ZONE",
     'Login_out': 'Login out',
@@ -274,18 +274,18 @@ window.i18n_en_us = {
   },
   //登陸
   login: {
-    'Owner_login': 'Owner login',
+    'Owner_login': 'Login',
     'Login_name': 'Login name',
     'Password': 'Password',
-    'Forgot_password': 'Forgot password',
+    'Forgot_password': 'Owner Forget Password',
     'Sign_in': 'Sign in',
-    'Online_user_registration': 'Online user registration',
+    'Online_user_registration': 'Owner Registration',
     'Disclaimer': 'Disclaimer',
     'Privacy_Policy_and_Personal_Data_Collection_Statement': 'Privacy Policy and Personal Data Collection Statement',
   },
    //註冊
   sign_up: {
-    'Online_user_registration': 'Online user registration',
+    'Online_user_registration': 'Owner Registration',
     'How_to_Create_Account': 'How to Create Account',
     'Owner_Name': 'Owner Name (On Account Statement)',
     'Same_as_the_owner_is_name': "Same as the owner's name on the monthly statement, including symbols",
@@ -297,7 +297,7 @@ window.i18n_en_us = {
     'Email_Address': 'Email Address',
     'Contact_Number': 'Contact Number(Optional)',
     'Sign_up': 'Sign up',
-    'Willing_to_authorize_the_management_office':'Willing to authorize the management office to assist in processing resident activation account information?',
+    'Willing_to_authorize_the_management_office':'Willing to authorize the estate management to manage the tenant account?',
     'Willing_to_receive_physical_mail_information':'Willing to receive physical mail information?',
     'Last_updated_data_time':'Last updated data time',
   },
@@ -305,7 +305,7 @@ window.i18n_en_us = {
   forget_password: {
     'Login_Name': 'Login Name',
     'Contact_Email': 'Contact Email',
-    'Forgot_password': 'Forgot password',
+    'Forgot_password': 'Owner Forget Password',
     'Please_enter_your_login_name': 'Please enter your registered login name',
     'This_field_is_required': 'This field is required.',
     'Please_enter_your_registration_contact_email': 'Please enter your registered e-mail',
@@ -328,6 +328,9 @@ window.i18n_en_us = {
     'Nickname': 'Nickname(Optional)',
     'Email_Address': 'Email Address',
     'Contact_Number': 'Contact Number(Optional)',
+    'If_the_Tenant_forgets_the_passwords':'If the Tenant forgets the passwords, please contact either your Owner or Estate Management for reset your account.',
+    'Willing_to_receive_physical_mail_information':'Willing to receive physical Estate Notice?',
+    'Login_Name_tenant':'Login Name',
   },
   //商場資訊
   shopping_Information: {
@@ -1946,10 +1949,10 @@ window.i18n_en_us = {
   },
   //开启关闭住客弹框
   tenant_account_management:{
-    Enable_tenant_management:'Enable Tenant Management',
+    Enable_tenant_management:'Enable Tenant Account',
     Login_Name:'Login Name',
     password:'Password',
-    Copy_account_information:'Copy Account Information',
+    Copy_account_information:'Copy Invitation',
     The_source_of_the_last_activation_of_the_tenant_account:'The source of the last activation of the tenant account:',
     Owner:'Owner',
     Fairview_Park_Management_Office:'Fairview Park Management Office',
@@ -1957,11 +1960,19 @@ window.i18n_en_us = {
     The_time_of_the_copy_of_the_tenant_account_information:'The time of the copy of the tenant account information:',
     The_time_of_the_last_login_of_the_tenant_account:'The time of the last login of the tenant account:',
     Turn_off_tenant_management:'Turn off tenant management',
-    Close_account:'Close account',
-    Once_the_account_is_closed:'Arrangement: Once the account is closed, your tenant will not be able to operate their account, and their relevant account information will also become invalid.',
-    I_understand_and_agree_to_the_above_arrangement:'I understand and agree to the above arrangement for closing my household registration',
+    Close_account:'Disable Tenant Account',
+    Once_the_account_is_closed:'Arrangement: After disable the tenant account, the account will no longer be available. After re-enable it, the password will be reset.',
+    I_understand_and_agree_to_the_above_arrangement:'I understand and agree the above mentioned Arrangement of Disable Tenant Account',
     Return:'Return',
     Confirm:'Confirm',
-    Copy_Successful:'Copy Successful!'
+    Copy_Successful:'Copy successfully, please share to your tenant.',
+    Account_Record:'Account Record',
+    Never:'Never',
+    You_are_now_being_invite_to_log_in :'You are now being invited to log in to the website of Fairview Park Property Management Limited.',
+    Website:'Website',
+    Login_password:'Login password',
+    Invitation_time:'Invitation time',
+    I_We_being_the_registered_house_owner:'I/We, being the registered house owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to enable the Corresponding Premises’ Tenant Account  (”the Tenant Account”) of the Fairview Park Property Management Limited (”the Estate Management”). I/We declare that these persons who are going to use the Tenant Account all live in the Corresponding Premises. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/>1.I/We no longer be the registered owner of the Corresponding Premises, the Tenant Account will be disabled.<br/>2.The New Owner(s) must inform the Estate Management whether the Tenant will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, the Tenant Account will be disabled.<br/>3.The Tenant Account is the property of the Estate Management, it will be disabled when the status is no longer valid.<br/>4.The Estate Management reserves the absolute right to reject the application or disable the Tenant Account under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/>5.If the Tenant Account is abnormal, the Owner shall either disable the Tenant Account or notify the Estate Management immediately so as to enable the Estate Management to disable the Tenant Account.<br/>6.The Owner can edit the member information, and authorize the estate management to manage the Tenant Account.<br/>7.The Owner can copy the invitation detail by himself/herself, and will share the credential information properly.<br/>8.Once the Tenant Account is shared, the Owner agrees that the Tenant Account user is able to log in to the Fairview Park Property Management Limited Mobile App, and apply for related services.<br/>9.The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.',
+    I_Accept_and_Understand_the_Terms_and_Agreement:'I Accept and Understand the Terms and Agreement',
   }
 };

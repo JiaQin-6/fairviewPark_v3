@@ -30,69 +30,102 @@
             ></button>
           </div>
           <div class="modal-body">
+            <!-- 如果沒有住客信息 -->
             <h2>{{ $t("headed.Tenant_account_management") }}</h2>
             <div v-if="tenantInfo && !tenantInfo.status">
-              <el-button
-                class="open-btn"
-                type="primary"
-                @click="clickTenantLaunch('Y')"
-                >{{ $t("tenant_account_management.Enable_tenant_management") }}</el-button
-              >
+              <p
+                class="open-tip mb-20"
+                style="text-align: left; padding: 0 10px"
+                v-html="
+                  $t('tenant_account_management.I_We_being_the_registered_house_owner')
+                "
+              ></p>
+              <el-checkbox
+                v-model="isAgreeOpen"
+                :label="
+                  $t(
+                    'tenant_account_management.I_Accept_and_Understand_the_Terms_and_Agreement'
+                  )
+                "
+              />
+              <div>
+                <el-button
+                  class="open-btn"
+                  type="primary"
+                  :disabled="!isAgreeOpen"
+                  @click="clickTenantLaunch('Y')"
+                  >{{
+                    $t("tenant_account_management.Enable_tenant_management")
+                  }}</el-button
+                >
+              </div>
             </div>
+            <!-- 如果有住客信息 -->
             <div v-if="tenantInfo && tenantInfo.status">
               <p class="name">
                 <span>{{ $t("tenant_account_management.Login_Name") }}:</span>
                 <span>{{ tenantInfo.memberLogin }}</span>
               </p>
-              <p class="password">
+              <p class="password" style="position: relative">
                 <span>{{ $t("tenant_account_management.password") }}:</span>
-                <span>{{ tenantInfo.password }}</span>
+                <span>{{ showPassword ? tenantInfo.password : "********" }}</span>
+                <i
+                  @click="showPassword = !showPassword"
+                  class="iconfont icon-yanjing_xianshi_o fs-20 pointer"
+                ></i>
               </p>
-              <p class="copy" @click.prevent="copyTenantInfo">
+              <button class="copy" @click.prevent="copyTenantInfo">
+                <i class="iconfont icon-fuzhi"></i>
                 {{ $t("tenant_account_management.Copy_account_information") }}
-              </p>
-              <ul>
-                <li
-                  v-for="(item, index) in [
-                    {
-                      title: $t(
-                        'tenant_account_management.The_source_of_the_last_activation_of_the_tenant_account'
-                      ),
-                      value:
-                        tenantInfo.lastLaunchSource === 1
-                          ? $t(
-                              'tenant_account_management.Fairview_Park_Management_Office'
-                            )
-                          : $t('tenant_account_management.Owner'),
-                    },
-                    {
-                      title: $t(
-                        'tenant_account_management.The_time_of_the_last_activation_of_the_tenant_account'
-                      ),
-                      value: tenantInfo.lastLaunchStartTime,
-                    },
-                    {
-                      title: $t(
-                        'tenant_account_management.The_time_of_the_copy_of_the_tenant_account_information'
-                      ),
-                      value: tenantInfo.lastCopyTime,
-                    },
-                    {
-                      title: $t(
-                        'tenant_account_management.The_time_of_the_last_login_of_the_tenant_account'
-                      ),
-                      value: tenantInfo.lastLoginTime,
-                    },
-                  ]"
-                  :key="index"
-                >
-                  <span
-                    style="display: inline-block; margin-right: 10px; text-align: left"
-                    >{{ item.title }}</span
+              </button>
+              <div class="account-record">
+                <h5>{{ $t("tenant_account_management.Account_Record") }}</h5>
+                <ul>
+                  <li
+                    v-for="(item, index) in [
+                      {
+                        title: $t(
+                          'tenant_account_management.The_source_of_the_last_activation_of_the_tenant_account'
+                        ),
+                        value:
+                          tenantInfo.lastLaunchSource === 4
+                            ? $t(
+                                'tenant_account_management.Fairview_Park_Management_Office'
+                              )
+                            : $t('tenant_account_management.Owner'),
+                      },
+                      {
+                        title: $t(
+                          'tenant_account_management.The_time_of_the_last_activation_of_the_tenant_account'
+                        ),
+                        value: tenantInfo.lastLaunchStartTime,
+                      },
+                      {
+                        title: $t(
+                          'tenant_account_management.The_time_of_the_copy_of_the_tenant_account_information'
+                        ),
+                        value: tenantInfo.lastCopyTime,
+                      },
+                      {
+                        title: $t(
+                          'tenant_account_management.The_time_of_the_last_login_of_the_tenant_account'
+                        ),
+                        value: tenantInfo.lastLoginTime,
+                      },
+                    ]"
+                    :key="index"
                   >
-                  <span style="text-align: left">{{ item.value }}</span>
-                </li>
-              </ul>
+                    <span
+                      style="display: inline-block; margin-right: 10px; text-align: left"
+                      >{{ item.title }}</span
+                    >
+                    <span style="text-align: left">{{
+                      item.value || $t("tenant_account_management.Never")
+                    }}</span>
+                  </li>
+                </ul>
+              </div>
+
               <el-button class="close-btn" @click="closeTenantManagement" type="danger">{{
                 $t("tenant_account_management.Turn_off_tenant_management")
               }}</el-button>
@@ -166,9 +199,11 @@ export default {
       tenantInfo: null,
       name: "",
       password: "",
-      isAgreeClose: false,
+      isAgreeClose: false, //是否同意關閉
+      isAgreeOpen: false, //是否同意開啟
       isShowCloseBox: false,
       isShowModal: false,
+      showPassword: false, //是否顯示密碼
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
@@ -190,7 +225,6 @@ export default {
           id: JSON.parse(localStorage.getItem("login-info")).id,
           lang: data.fairview_park_lang,
         });
-        console.log(res.data);
         if (res.data.status === 200) {
           data.isShowModal = true;
           if (res.data.data.launchType === "Y") {
@@ -232,25 +266,45 @@ export default {
           if (type === "Y") {
             selectTenantStatus();
           } else if (type === "N") {
+            data.loading = false;
             data.isShowCloseBox = false;
             document.getElementById("close-start-up").click();
+          } else if (type === "C") {
+            data.loading = false;
           }
         } else {
+          data.loading = false;
           ElMessage({
             message: res.data.msg,
             type: "warning",
           });
         }
-        data.loading = true;
       } catch (error) {
         data.loading = false;
       }
     };
-    const copyTenantInfo = () => {
+    const copyTenantInfo = async () => {
+      await clickTenantLaunch("C");
       const node = document.createElement("span");
-      node.innerText = `${proxy.$t("tenant_account_management.Login_Name")}: ${
-        data.tenantInfo.memberLogin
-      } / ${proxy.$t("tenant_account_management.password")}: ${data.tenantInfo.password}`;
+      node.innerHTML = `${proxy.$t(
+        "tenant_account_management.You_are_now_being_invite_to_log_in"
+      )}<br/>${proxy.$t(
+        "tenant_account_management.Website"
+      )}: http://www.fairviewpark.hk<br/>${proxy.$t(
+        "tenant_account_management.Login_Name"
+      )}: ${data.tenantInfo.memberLogin}<br/>${proxy.$t(
+        "tenant_account_management.Login_password"
+      )}: ${data.tenantInfo.password}<br/>${proxy.$t(
+        "tenant_account_management.Invitation_time"
+      )}: ${new Date().getFullYear()}${data.fairview_park_lang === "en_us" ? "-" : "年"}${
+        new Date().getMonth() + 1 > 9
+          ? new Date().getMonth() + 1
+          : "0" + (new Date().getMonth() + 1)
+      }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
+        new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
+      }${
+        data.fairview_park_lang === "en_us" ? "-" : "日"
+      }&nbsp${new Date().toLocaleTimeString()}`;
       document.body.appendChild(node);
       const range = document.createRange();
       range.selectNode(node);
@@ -303,16 +357,18 @@ export default {
 
       h2 {
         font-style: normal;
-        color: #2fa94e;
         margin-bottom: 20px;
         font-size: 38px;
         line-height: 65px;
       }
-
+      .open-tip {
+        font-size: 18px;
+        color: var(--mainColor3);
+      }
       .open-btn {
         background-color: var(--mainColor3);
         border-color: var(--mainColor3);
-        margin: 30px auto;
+        margin: 0px auto 30px;
         font-size: 18px;
       }
 
@@ -332,12 +388,20 @@ export default {
 
           &:first-child {
             margin-right: 5px;
-            color: #2fa94e;
+            color: #07522b;
           }
 
           &:last-child {
-            color: var(--mainColor2);
+            color: #4a4a4a;
           }
+        }
+        i {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          margin-left: 110px;
+          font-size: 20px;
+          line-height: 25px;
         }
       }
 
@@ -346,22 +410,39 @@ export default {
         cursor: pointer;
         margin-top: 20px;
         margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 18px;
+        padding: 0 10px;
       }
 
       button {
         margin-bottom: 30px;
       }
-
+      .account-record {
+        box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
+        border-radius: 6px;
+        padding: 10px 5px;
+        margin: 0 auto 30px;
+        h5 {
+          margin-bottom: 10px;
+        }
+      }
       ul {
         text-align: center;
         padding: 0;
-        margin: 0 auto 30px;
+        margin: 0 auto 0px;
         width: 90%;
         li {
           display: flex;
           margin-bottom: 5px;
           align-items: center;
-          color: #2fa94e;
+          span {
+            color: #07522b;
+            &:last-child {
+              color: #4a4a4a;
+            }
+          }
         }
       }
     }
@@ -389,42 +470,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  @{deep} .el-checkbox {
-    margin-bottom: 20px;
-    height: auto;
-
-    .el-checkbox__input {
-      input {
-      }
-
-      span {
-        border-color: #606266;
-      }
-    }
-
-    .el-checkbox__label {
-      font-size: 18px;
-      white-space: wrap;
-      text-align: left;
-    }
-  }
-
-  @{deep} .is-checked {
-    .el-checkbox__input {
-      input {
-      }
-
-      span {
-        border-color: var(--mainColor3);
-        background-color: var(--mainColor3);
-      }
-    }
-
-    .el-checkbox__label {
-      color: var(--mainColor3);
-    }
-  }
-
   .button {
     @{deep} .el-button {
       &:last-child {
@@ -432,6 +477,41 @@ export default {
         border: 1px solid var(--mainColor2);
       }
     }
+  }
+}
+@{deep} .el-checkbox {
+  margin-bottom: 20px;
+  height: auto;
+
+  .el-checkbox__input {
+    input {
+    }
+
+    span {
+      border-color: #606266;
+    }
+  }
+
+  .el-checkbox__label {
+    font-size: 18px;
+    white-space: wrap;
+    text-align: left;
+  }
+}
+
+@{deep} .is-checked {
+  .el-checkbox__input {
+    input {
+    }
+
+    span {
+      border-color: var(--mainColor3);
+      background-color: var(--mainColor3);
+    }
+  }
+
+  .el-checkbox__label {
+    color: var(--mainColor3);
   }
 }
 
@@ -442,16 +522,35 @@ export default {
         h2 {
           font-size: 26px;
         }
-
+        .open-tip {
+          font-size: 18px;
+        }
         .open-btn {
-          margin: 30px auto;
-          font-size: 15px;
+          margin: 0px auto 30px;
+          font-size: 18px;
         }
 
         .close-btn {
-          font-size: 15px;
+          font-size: 18px;
         }
-
+        .password {
+          i {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 90px;
+            font-size: 20px;
+            top: 0;
+            line-height: 20px;
+          }
+        }
+        .account-record {
+          padding: 10px;
+          margin: 0 auto 30px;
+          h5 {
+            margin-bottom: 10px;
+          }
+        }
         ul {
           width: 100%;
           li {
