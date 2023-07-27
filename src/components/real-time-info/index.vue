@@ -1,29 +1,21 @@
 <template>
-  <div class="real-time-info " v-show="show" >
+  <div class="real-time-info " v-show="show">
     <div class="real-time-info-content">
       <!-- 主要内容 -->
       <div class="main-content">
-        <div
-          class="main-content-box"
-          id="main-content-box"
-          ref="main-content-box"
-          v-html="newRealTimeInfo && newRealTimeInfo.content"
-        ></div>
+        <div class="main-content-box" id="main-content-box" ref="main-content-box"
+          v-html="newRealTimeInfo && newRealTimeInfo.content"></div>
       </div>
       <!-- 选项框 -->
-        <div class="mb-2 mt-2 flex items-center text-sm">
-          <el-checkbox
-            v-model="iKnow"
-            :label="$t('real_time_info.I_understand_the_above_information')"
-            size="large"
-          />
-        </div>
+      <div class="mb-2 mt-2 flex items-center text-sm">
+        <el-checkbox v-model="iKnow" :label="$t('real_time_info.I_understand_the_above_information')" size="large" />
+      </div>
       <!-- 按钮 -->
-      <el-button @click="close" round :disabled="disabledBtn" :class="{'disabledBtn':!disabledBtn}">{{
+      <el-button @click="close" round :disabled="disabledBtn" :class="{ 'disabledBtn': !disabledBtn }">{{
         $t("real_time_info.Confirm")
       }}</el-button>
-      
-      
+
+
     </div>
   </div>
 </template>
@@ -62,15 +54,18 @@ export default {
         data.iKnow = "";
         data.show = value;
         if (document.getElementById("main-content-box")) {
-        // document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
-        //   if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
-        //     data.disabledBtn = true
-        //   }
-        // })
-        setTimeout(() => {
-          data.disabledBtn = false;
-        }, 3000);
-      }
+          // document.getElementById('main-content-box').addEventListener('scroll',(e)=>{
+          //   if(e.target.scrollHeight<=(e.target.scrollTop+e.target.offsetHeight)){
+          //     data.disabledBtn = true
+          //   }
+          // })
+          if (value) {
+            setTimeout(() => {
+              data.disabledBtn = false;
+            }, 3000);
+          }
+
+        }
       }
     );
     // watch(
@@ -126,11 +121,12 @@ export default {
           },
         };
       }
+      data.disabledBtn = true;
       localStorage.setItem("real-info", JSON.stringify(obj));
       ctx.emit("close");
     };
     onMounted(async () => {
-      
+
     });
     return {
       ...toRefs(data),
@@ -169,6 +165,7 @@ export default {
       border-radius: 6px;
       padding: 5px;
       height: 300px;
+
       .main-content-box {
         overflow: auto;
         height: 290px;
@@ -180,9 +177,9 @@ export default {
 
     @{deep} .el-checkbox {
       white-space: inherit;
+
       .el-checkbox__input {
-        input {
-        }
+        input {}
 
         span {
           border-color: #606266;
@@ -196,8 +193,7 @@ export default {
 
     @{deep} .is-checked {
       .el-checkbox__input {
-        input {
-        }
+        input {}
 
         span {
           border-color: var(--mainColor3);
@@ -220,7 +216,8 @@ export default {
         font-size: 18px;
       }
     }
-    .disabledBtn{
+
+    .disabledBtn {
       background-color: var(--mainColor2);
     }
   }
@@ -231,20 +228,25 @@ export default {
     .real-time-info-content {
       width: 90%;
       padding: 8px 8px 20px 8px;
+
       .main-content {
         height: 335px;
+
         .main-content-box {
           overflow: auto;
           height: 324px;
         }
       }
+
       @{deep} .el-checkbox {
         padding: 0 10px;
+
         .el-checkbox__label {
           font-size: 13px;
           // text-align: left;
         }
       }
+
       @{deep}.el-button {
         span {
           font-size: 15px;

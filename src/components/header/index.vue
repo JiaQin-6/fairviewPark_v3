@@ -588,6 +588,7 @@ export default {
     watch(
       () => store.state.loginStatus,
       (val) => {
+        console.log(val)
         data.is_login = val;
         if (data.is_login) {
           if (localStorage.getItem("login-info")) {

@@ -119,7 +119,8 @@
               <div class="bg h100">
                 <img style="width: 100%" :src="item.img_url" alt="" />
                 <button>
-                  <router-link :to="{
+                  <router-link style="height:100%;width:100%;display:inline-block;
+                  padding: 8px 0;" :to="{
                     path: item.route,
                     query: { lang: fairview_park_lang },
                   }">{{ item.text }}</router-link>
@@ -147,7 +148,8 @@
               ]" :key="index">
                 <div class="bg h100" :style="{ 'background-image': 'url(' + item.img_url + ')' }">
                   <button>
-                    <router-link :to="{
+                    <router-link style="height:100%;width:100%;display:inline-block;
+                  padding: 8px 0;" :to="{
                       path: item.route,
                       query: { lang: fairview_park_lang },
                     }">{{ item.text }}</router-link>
@@ -472,7 +474,6 @@ export default {
               width: 80%;
               background: rgba(143, 188, 37, 0.9);
               border-radius: 20px;
-              padding: 8px 0;
               border: 0;
               color: #fff;
 
@@ -508,7 +509,6 @@ export default {
                   width: 80%;
                   background: rgba(143, 188, 37, 0.9);
                   border-radius: 20px;
-                  padding: 8px 0;
                   border: 0;
                   color: #fff;
 

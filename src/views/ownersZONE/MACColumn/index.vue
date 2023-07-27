@@ -46,7 +46,7 @@
               $t("MACColumn_Election_Procedure.Election_Procedure")
             }}</el-menu-item>
             <el-menu-item index="5">{{
-              $t("MACColumn_11th_MAC_Members.11th_MAC_Members")
+              $t("MACColumn_MAC_Members.MAC_Members")
             }}</el-menu-item>
             <el-menu-item index="6">{{
               $t("MACColumn_Minutes_of_MAC_Meetings.Minutes_of_MAC_Meetings")
@@ -84,7 +84,7 @@
                   value: '4',
                 },
                 {
-                  label: $t('MACColumn_11th_MAC_Members.11th_MAC_Members'),
+                  label: $t('MACColumn_MAC_Members.MAC_Members'),
                   value: '5',
                   children: [],
                 },

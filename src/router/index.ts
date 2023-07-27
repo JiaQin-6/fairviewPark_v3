@@ -9,6 +9,7 @@
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import axios from 'axios'
+import store from '../store/index'
 const routes = [
   {
     path: '/',
@@ -210,10 +211,10 @@ function checkToken(){
     // console.log(userinfo)
     // console.log(new Date().getTime())
     // console.log(userinfo.jwtExpiresDate)
-    if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
+    // if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
       localStorage.removeItem('login-info')
-      sessionStorage.removeItem('fairview-part-store')
-    }
+      store.commit('setLoginStatus', false);
+    // }
   }
 }
 export default router

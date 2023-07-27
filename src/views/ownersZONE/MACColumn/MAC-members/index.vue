@@ -9,7 +9,7 @@
 <template>
   <div style="text-align: center">
     <h5>
-      {{ $t('MACColumn_11th_MAC_Members.11th_MAC_Members') }}
+      {{ $t('MACColumn_MAC_Members.MAC_Members') }}
     </h5>
     <img style="width:100%;max-width:592px!important;" :src="fairview_park_lang === 'en_us' ? 'https://fairviewpark.hk/file/mac/11thMAC_member_en.jpeg' :' https://fairviewpark.hk/file/mac/11thMAC_member.jpeg'" alt="" />
   </div>

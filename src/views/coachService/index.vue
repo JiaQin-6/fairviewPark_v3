@@ -33,7 +33,23 @@
             >
               <span>{{ item.titleEnUs }}</span>
             </li>
+            <li>
+              <a
+                :href="coach_service_content.coachServiceFile"
+                target="_blank"
+                style="
+                  display: inline-block;
+                  width: 100%;
+                  font-size: 18px;
+                  text-align: left;
+                  text-decoration: none;
+                "
+              >
+                {{ $t("coach_service.content_1") }}
+              </a>
+            </li>
           </ul>
+
           <el-select
             v-if="coach_service_content.coachServiceList.length > 0"
             size="large"
@@ -53,6 +69,21 @@
               :value="item.index"
             >
               <span>{{ item.titleEnUs }}</span>
+            </el-option>
+            <el-option value="coachServiceFile">
+              <a
+                :href="coach_service_content.coachServiceFile"
+                target="_blank"
+                style="
+                  display: inline-block;
+                  width: 100%;
+                  font-size: 18px;
+                  text-align: left;
+                  text-decoration: none;
+                "
+              >
+                {{ $t("coach_service.content_1") }}
+              </a>
             </el-option>
           </el-select>
         </div>
@@ -236,23 +267,7 @@
                   </tr>
                 </tbody>
               </table>
-              <a
-                :href="coach_service_content.coachServiceFile"
-                target="_blank"
-                style="
-                  display: inline-block;
-                  width: 100%;
-                  font-size: 18px;
-                  text-align: left;
-                  margin-top: 30px;
-                  padding: 5px 0;
-                  background-color: rgb(255, 253, 233);
-                  text-decoration: none;
-                "
-              >
-                {{ $t("coach_service.content_1") }}
-              </a>
-              <p style="font-size: 18px; text-align: left; margin-top: 10px">
+              <p style="font-size: 18px; text-align: left; margin-top: 30px">
                 {{ $t("coach_service.content_2") }}
               </p>
             </div>
@@ -397,270 +412,6 @@
                   </ul>
                 </div>
               </div>
-              <!--  -->
-              <!-- <p style="text-align: left; font-size: 18px">
-                <b>{{ $t("coach_service.Estate_Coach_Fare_Discount") }}</b>
-              </p>
-              <p style="text-align: left; font-size: 18px">
-                {{ $t("coach_service.content_3") }}
-                <u>{{ $t("coach_service.content_4") }}</u>
-                {{ $t("coach_service.content_5") }}
-              </p>
-              <p
-                style="text-align: left; font-size: 18px"
-                v-html="$t('coach_service.content_6')"
-              ></p>
-              <div class="mb-30" style="margin-top: 30px">
-                <div style="overflow: auto; padding: 0">
-                  <h5
-                    style="
-                      background-color: #9cc212;
-                      margin: 0;
-                      padding: 0;
-                      color: #fff;
-                      font-size: 24px;
-                      line-height: 50px !important;
-                      height: 50px;
-                      border-right: 2px solid #fff;
-                      min-width: 682px;
-                      font-weight: normal;
-                    "
-                  >
-                    {{ $t("coach_service.content_7") }}
-                  </h5>
-                  <table style="width: 100%; text-align: center">
-                    <tr style="">
-                      <th
-                        rowspan="5"
-                        style="
-                          width: 10%;
-                          background-color: #f1fcdd;
-                          border: 2px solid #fff;
-                          min-width: 90px;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Age") }}
-                      </th>
-                      <th
-                        style="
-                          width: 15%;
-                          background-color: #f1fcdd;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          min-width: 100px;
-                          font-weight: bold;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Resident") }}
-                      </th>
-                      <th
-                        style="
-                          width: 25%;
-                          background-color: #f1fcdd;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          min-width: 165px;
-                          font-weight: bold;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Requirements") }}
-                      </th>
-                      <th
-                        style="
-                          width: 25%;
-                          background-color: #f1fcdd;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          min-width: 165px;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Type_of_Octopus_Card") }}
-                      </th>
-                      <th
-                        style="
-                          width: 25%;
-                          background-color: #f1fcdd;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          min-width: 160px;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Benefit") }}
-                      </th>
-                    </tr>
-                    <tr>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.from_4_to_13") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                        rowspan="4"
-                      >
-                        {{ $t("coach_service.content_8") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Children") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Half_Fare") }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.from_13_to_60") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Adult_or_Personalised") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Resident_Privilege") }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.from_60_to_65") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Personalised") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Half_Fare_2") }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.at_or_above_65") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Elderly_or_Personalised") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #f9fcf0;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Half_Fare_3") }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                      >
-                        {{ $t("coach_service.Non_Resident") }}
-                      </td>
-                      <td
-                        style="
-                          background-color: #fffde9;
-                          padding: 15px;
-                          border: 2px solid #fff;
-                          font-size: 18px;
-                        "
-                        colspan="4"
-                      >
-                        {{ $t("coach_service.No_Benefit") }}
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <p style="font-size: 18px; text-align: left; margin-top: 50px">
-                  {{ $t("coach_service.content_2") }}
-                </p> -->
               <div class="content">
                 <div style="width: 100%; padding: 20px 0" id="price-table"></div>
                 <p style="font-size: 18px; text-align: left; margin-top: 50px">
@@ -930,7 +681,7 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, nextTick } from "vue";
+import { ref, reactive, getCurrentInstance, toRefs, onMounted, nextTick,watch } from "vue";
 export default {
   data() {
     return {
@@ -1046,6 +797,9 @@ export default {
     };
     //选择nav
     const selectNav = (index) => {
+      if(index==='coachServiceFile'){
+        return false
+      }
       if (index === data.coach_service_content.coachServiceList.length - 2) {
         nextTick(async () => {
           //https://fairviewpark.hk/file/coach_fare_table_CN.html
@@ -1057,16 +811,24 @@ export default {
                 : `${location.origin}/file/coach_fare_table_CN.html`
             }`
           )
-            .then( (response)=> {
+            .then((response) => {
               return response.text();
             })
-            .then((htmlJson)=>{
+            .then((htmlJson) => {
               document.getElementById("price-table").innerHTML = htmlJson;
             });
         });
       }
       data.nav_index = index;
     };
+    watch(
+      () => data.nav_index,
+      (val,oldDate) => {
+        if(val==='coachServiceFile'){
+          data.nav_index = oldDate
+        }
+      }
+    );
     onMounted(async () => {
       data.v_loading = true;
       findLineMoneyList();
@@ -1155,7 +917,7 @@ export default {
             color: #000;
           }
 
-          span {
+          span,a {
             font-size: 18px;
             color: #000;
           }
@@ -1164,11 +926,7 @@ export default {
             background-color: var(--mainColor2);
             color: #fff;
 
-            i {
-              color: #fff;
-            }
-
-            span {
+            i,span,a {
               color: #fff;
             }
           }
@@ -1352,6 +1110,9 @@ export default {
 
                       span {
                         margin: 0;
+                      }
+                      a{
+                        color:#fff;
                       }
                     }
                   }

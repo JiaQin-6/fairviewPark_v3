@@ -46,7 +46,7 @@
               style="display: block; color: #fc0d1b; text-align: left"
               v-show="edit_member_info_error_tip.is_verify_password_error"
               >{{
-                fairview_park_lang === "en_us" ? "Incorrect password" : "密碼不正確"
+                fairview_park_lang === "en_us" ? "Password incorrect. If you forgets the passwords, please contact either your Owner or Estate Management for reset your account." : "密碼不正確。如忘記密碼，請通知業主或管理公司重置戶口。"
               }}</i
             >
             <el-button @click="verifyPassword">{{
@@ -320,6 +320,8 @@ export default {
     };
     //
     const closeModel = () => {
+      data.edit_member_info_error_tip.is_verify_password_null = false
+      data.edit_member_info_error_tip.is_verify_password_error = false
       var button = document.getElementById("close-edit-tenant-model");
       button.click();
     };

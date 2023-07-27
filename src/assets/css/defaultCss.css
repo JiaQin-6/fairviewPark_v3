@@ -57,7 +57,7 @@ input {
 }
 
 input:disabled {
-  background-color: #fff !important;
+  background-color: #e1e0e0 !important;
 }
 
 input::-webkit-input-placeholder {

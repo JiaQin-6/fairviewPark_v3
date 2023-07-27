@@ -79,7 +79,8 @@
               <button style="border-radius: 50px; border: 0">
                 <a
                   target="_blank"
-                  style="text-decoration: none; color: #fff"
+                  style="text-decoration: none; color: #fff;width:100%;display:inline-block;
+            padding: 5px 30px;"
                   :href="
                     fairview_park_lang === 'en_us'
                       ? 'https://fairviewpark.hk/file/ResidentCard_InstructionEN.html'
@@ -365,7 +366,7 @@
                   v-else
                   style="margin-bottom: 30px"
                   v-html="
-                    $t('applyRCard.We_being_the_registered_house_Owner_and_the_Tenant')
+                    $t('applyRCard.We_being_the_registered_house_tenant')
                   "
                 ></p>
                 <div style="text-align: center">
@@ -640,7 +641,7 @@ export default {
         },
         {
           label: proxy.$t("applyRCard.Other_please_specify"),
-          value: "ROf",
+          value: "RTf",
         },
       ],
     });
@@ -1001,7 +1002,6 @@ export default {
           button {
             background-color: var(--mainColor3);
             color: #fff;
-            padding: 5px 30px;
             margin-right: 20px;
             cursor: pointer;
             vertical-align: middle;
