@@ -18,8 +18,8 @@
       aria-labelledby="staticBackdropLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
-        <div class="modal-content">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" v-loading="loading">
           <div class="modal-header">
             <button
               id="close-login"
@@ -123,8 +123,8 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
-        <div class="modal-content">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" v-loading="loading">
           <div class="modal-header">
             <button
               id="close-signUp"
@@ -323,8 +323,8 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
-        <div class="modal-content">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" v-loading="loading">
           <div class="modal-header">
             <button
               id="close-forgetPassword"
@@ -790,7 +790,7 @@ export default {
         cnickname: null,
         email: null,
         contactNo: null,
-        isAgreeAuthorization: 'N',
+        isAgreeAuthorization: "N",
         isAgreeReceiveLetter: null,
         updateTime: null,
       },
@@ -835,6 +835,7 @@ export default {
       } else {
         data.login_error_tip.is_null = false;
       }
+      data.loading = true;
       try {
         const res = await proxy.$http.login({
           loginName: data.loginForm.loginName,
@@ -845,11 +846,31 @@ export default {
           document.getElementById("close-login").click();
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
           store.commit("setLoginStatus", true);
+          //如果是住客＆第一次登陸彈出編輯框
+          let loginInfo = JSON.parse(localStorage.getItem("login-info"));
+          let strings = loginInfo.jwt.split("."); //截取token，获取载体
+          var userinfo = JSON.parse(
+            decodeURIComponent(
+              escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+            )
+          );
+          console.log(userinfo);
+          data.loading = false;
+          if (loginInfo.groupId === 1 && userinfo.verifyCode) {
+            const button = document.createElement("button");
+            button.setAttribute("data-bs-toggle", "modal");
+            button.setAttribute("data-bs-target", "#editTenantInformation");
+            document.body.appendChild(button);
+            button.click();
+            document.body.removeChild(button);
+          }
         } else {
+          data.loading = false;
           data.login_error_tip.is_show = true;
           data.login_error_tip.text = res.data.msg;
         }
       } catch (error) {
+        data.loading = false;
         console.log(error);
       }
     };

@@ -16,9 +16,9 @@
       aria-labelledby="exampleModalToggleLabel2"
       tabindex="-1"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered" v-loading="loading">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
         <!-- 輸入密碼驗證 -->
-        <div class="verify" v-show="!showEditTenantModel">
+        <div class="verify" v-show="!showEditTenantModel" v-loading="loading">
           <div class="verify-password">
             <el-icon @click="closeModel">
               <CloseBold />
@@ -46,7 +46,9 @@
               style="display: block; color: #fc0d1b; text-align: left"
               v-show="edit_member_info_error_tip.is_verify_password_error"
               >{{
-                fairview_park_lang === "en_us" ? "Password incorrect. If you forgets the passwords, please contact either your Owner or Estate Management for reset your account." : "密碼不正確。如忘記密碼，請通知業主或管理公司重置戶口。"
+                fairview_park_lang === "en_us"
+                  ? "Password incorrect. If you forgets the passwords, please contact either your Owner or Estate Management for reset your account."
+                  : "密碼不正確。如忘記密碼，請通知業主或管理公司重置戶口。"
               }}</i
             >
             <el-button @click="verifyPassword">{{
@@ -55,7 +57,7 @@
           </div>
         </div>
         <!-- 编辑资料 -->
-        <div class="modal-content" v-show="showEditTenantModel">
+        <div class="modal-content" v-show="showEditTenantModel"  v-loading="loading">
           <div class="modal-header">
             <button
               id="close-edit-tenant-model"
@@ -70,7 +72,9 @@
             <div>
               <ul>
                 <li>
-                  <p class="title">{{ $t("Edit_member_information.Login_Name_tenant") }}</p>
+                  <p class="title">
+                    {{ $t("Edit_member_information.Login_Name_tenant") }}
+                  </p>
                   <input
                     v-model="editTenantInfoForm.loginName"
                     :placeholder="$t('Edit_member_information.Login_Name_tenant')"
@@ -160,9 +164,20 @@
                   >
                 </li>
                 <li>
-                  <p style="text-align:left">{{ $t('Edit_member_information.If_the_Tenant_forgets_the_passwords') }}</p></li>
+                  <p style="text-align: left">
+                    {{
+                      $t("Edit_member_information.If_the_Tenant_forgets_the_passwords")
+                    }}
+                  </p>
+                </li>
                 <li>
-                  <p class="title">{{ $t('Edit_member_information.Willing_to_receive_physical_mail_information') }}</p>
+                  <p class="title">
+                    {{
+                      $t(
+                        "Edit_member_information.Willing_to_receive_physical_mail_information"
+                      )
+                    }}
+                  </p>
                   <el-radio-group
                     v-model="editTenantInfoForm.isAgreeReceiveLetter"
                     class="ml-4"
@@ -320,18 +335,20 @@ export default {
     };
     //
     const closeModel = () => {
-      data.edit_member_info_error_tip.is_verify_password_null = false
-      data.edit_member_info_error_tip.is_verify_password_error = false
+      data.edit_member_info_error_tip.is_verify_password_null = false;
+      data.edit_member_info_error_tip.is_verify_password_error = false;
       var button = document.getElementById("close-edit-tenant-model");
       button.click();
     };
     //编辑之前检查密码是否正确
     const checkPassword = async () => {
+          data.loading = true;
       try {
         const res = await proxy.$http.checkPassword({
           password: data.editTenantInfoForm.verifyPassword,
         });
         if (res.data.status === 200) {
+          data.loading = false;
           data.editTenantInfoForm.verifyCode = res.data.data;
           return true;
         } else {
@@ -346,6 +363,19 @@ export default {
     onMounted(() => {
       var editTenantInformationModal = document.getElementById("editTenantInformation");
       editTenantInformationModal.addEventListener("show.bs.modal", function (event) {
+        //如果是住客首次登陸，修改密碼不需要輸入密碼
+        let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
+        var userinfo = JSON.parse(
+          decodeURIComponent(
+            escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+          )
+        );
+        console.log(userinfo);
+        if (userinfo.verifyCode) {
+          data.editTenantInfoForm.verifyCode = userinfo.verifyCode;
+          data.editTenantInfoForm.verifyPassword = "";
+          data.showEditTenantModel = true;
+        }
         data.editTenantInfoForm.loginName = localStorage.getItem("login-info")
           ? JSON.parse(localStorage.getItem("login-info")).login
           : "";

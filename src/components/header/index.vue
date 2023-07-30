@@ -427,7 +427,6 @@ export default {
     };
     //
     const selectOwnersZone = (val) => {
-      console.log(val);
       if (val === "/loginOut") {
         loginOut();
         router.push({

@@ -291,7 +291,7 @@ export default {
       )}<br/>${proxy.$t(
         "tenant_account_management.Website"
       )}: http://www.fairviewpark.hk<br/>${proxy.$t(
-        "tenant_account_management.Login_Name"
+        "tenant_account_management.tenant_Login_Name"
       )}: ${data.tenantInfo.memberLogin}<br/>${proxy.$t(
         "tenant_account_management.Login_password"
       )}: ${data.tenantInfo.password}<br/>${proxy.$t(
@@ -302,9 +302,17 @@ export default {
           : "0" + (new Date().getMonth() + 1)
       }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
         new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
-      }${
-        data.fairview_park_lang === "en_us" ? "-" : "日"
-      }&nbsp${new Date().toLocaleTimeString()}`;
+      }${data.fairview_park_lang === "en_us" ? "" : "日"}&nbsp${
+        new Date().getHours() > 9 ? new Date().getHours() : "0" + new Date().getHours()
+      }:${
+        new Date().getMinutes() > 9
+          ? new Date().getMinutes()
+          : "0" + new Date().getMinutes()
+      }:${
+        new Date().getSeconds() > 9
+          ? new Date().getSeconds()
+          : "0" + new Date().getSeconds()
+      }`;
       document.body.appendChild(node);
       const range = document.createRange();
       range.selectNode(node);
