@@ -206,7 +206,6 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item
-                      v-if="isShowLoginOutButton"
                       class="yellow"
                       command="/edit-member-information"
                       ><el-icon> <EditPen /> </el-icon
@@ -217,7 +216,7 @@
                       }}</el-dropdown-item
                     >
                     <el-dropdown-item
-                      v-if="isShowLoginOutButton && loginInfo && loginInfo.groupId === 0"
+                      v-if="loginInfo && loginInfo.groupId === 0"
                       command="/start-up"
                     >
                       <!-- <el-icon><EditPen /></el-icon> -->
@@ -529,12 +528,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          const button = document.createElement("button");
-          button.setAttribute("data-bs-toggle", "modal");
-          button.setAttribute("data-bs-target", "#startUp");
-          document.body.appendChild(button);
-          button.click();
-          document.body.removeChild(button);
+          ctx.emit('showTenantModal',true)
         } else if (res.data.status === 501) {
           ElMessage({
             message: res.data.msg,

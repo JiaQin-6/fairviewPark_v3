@@ -166,7 +166,7 @@
                           : "該欄位為必填欄位"
                       }}</i
                     >
-                    <div v-if="form.relation === 'ROf'">
+                    <div v-if="form.relation === 'ROf'||form.relation === 'RTf'">
                       <div class="form-wrap flex-row mb-10">
                         <span class="yellow col-6 pl-20">{{
                           fairview_park_lang === "en_us" ? "Specify(Others)" : "註明"

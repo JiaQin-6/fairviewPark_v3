@@ -211,10 +211,10 @@ function checkToken(){
     // console.log(userinfo)
     // console.log(new Date().getTime())
     // console.log(userinfo.jwtExpiresDate)
-    // if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
+    if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
       localStorage.removeItem('login-info')
       store.commit('setLoginStatus', false);
-    // }
+    }
   }
 }
 export default router

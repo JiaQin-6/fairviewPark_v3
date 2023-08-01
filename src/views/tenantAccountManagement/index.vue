@@ -7,29 +7,14 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div v-show="isShowModal">
-    <div
-      class="modal fade"
-      id="startUp"
-      ref="startUp"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabindex="-1"
-      aria-labelledby="staticBackdropLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" v-loading="loading">
-          <div class="modal-header">
-            <button
-              id="close-start-up"
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+  <div>
+    <div class="tenantModal">
+      <div class="tenantModal-dialog">
+        <div class="tenantModal-content  animate__animated animate__fadeIn">
+          <div class="tenantModal-header">
+            <el-icon @click="closeModel"><Close /></el-icon>
           </div>
-          <div class="modal-body">
+          <div class="tenantModal-body">
             <!-- 如果沒有住客信息 -->
             <h2>{{ $t("headed.Tenant_account_management") }}</h2>
             <div v-if="tenantInfo && !tenantInfo.status">
@@ -189,10 +174,12 @@ import {
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
+// 导入插件
+import useClipboard from "vue-clipboard3";
 export default {
-  setup(props, { emit }) {
+  setup(props,ctx) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
-    const { proxy, ctx, refs } = getCurrentInstance();
+    const { proxy, refs } = getCurrentInstance();
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
@@ -202,7 +189,6 @@ export default {
       isAgreeClose: false, //是否同意關閉
       isAgreeOpen: false, //是否同意開啟
       isShowCloseBox: false,
-      isShowModal: false,
       showPassword: false, //是否顯示密碼
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
@@ -211,8 +197,7 @@ export default {
 
     //
     const closeModel = () => {
-      var button = document.getElementById("close-edit-tenant");
-      button.click();
+      ctx.emit("hideTenantModal", false);
     };
     const closeTenantManagement = () => {
       data.isShowCloseBox = true;
@@ -226,7 +211,6 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          data.isShowModal = true;
           if (res.data.data.launchType === "Y") {
             data.tenantInfo = res.data.data;
             data.tenantInfo.status = true;
@@ -235,10 +219,7 @@ export default {
             data.tenantInfo.status = false;
           }
         } else if (res.data.status === 501) {
-          document.getElementById("close-start-up").click();
-          // data.isShowModal = false;
-          // data.tenantInfo = null;
-          // data.isShowCloseBox = false;
+          closeModel();
           ElMessage({
             message: res.data.msg,
             type: "warning",
@@ -268,7 +249,7 @@ export default {
           } else if (type === "N") {
             data.loading = false;
             data.isShowCloseBox = false;
-            document.getElementById("close-start-up").click();
+            closeModel();
           } else if (type === "C") {
             data.loading = false;
           }
@@ -283,58 +264,56 @@ export default {
         data.loading = false;
       }
     };
+    // 使用插件
     const copyTenantInfo = async () => {
-      await clickTenantLaunch("C");
-      const node = document.createElement("span");
-      node.innerHTML = `${proxy.$t(
-        "tenant_account_management.You_are_now_being_invite_to_log_in"
-      )}<br/>${proxy.$t(
-        "tenant_account_management.Website"
-      )}: http://www.fairviewpark.hk<br/>${proxy.$t(
-        "tenant_account_management.tenant_Login_Name"
-      )}: ${data.tenantInfo.memberLogin}<br/>${proxy.$t(
-        "tenant_account_management.Login_password"
-      )}: ${data.tenantInfo.password}<br/>${proxy.$t(
-        "tenant_account_management.Invitation_time"
-      )}: ${new Date().getFullYear()}${data.fairview_park_lang === "en_us" ? "-" : "年"}${
-        new Date().getMonth() + 1 > 9
-          ? new Date().getMonth() + 1
-          : "0" + (new Date().getMonth() + 1)
-      }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
-        new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
-      }${data.fairview_park_lang === "en_us" ? "" : "日"}&nbsp${
-        new Date().getHours() > 9 ? new Date().getHours() : "0" + new Date().getHours()
-      }:${
-        new Date().getMinutes() > 9
-          ? new Date().getMinutes()
-          : "0" + new Date().getMinutes()
-      }:${
-        new Date().getSeconds() > 9
-          ? new Date().getSeconds()
-          : "0" + new Date().getSeconds()
-      }`;
-      document.body.appendChild(node);
-      const range = document.createRange();
-      range.selectNode(node);
-      const selection = window.getSelection();
-      selection.empty();
-      selection.addRange(range);
-      document.execCommand("copy");
-      selection.empty();
-      range.detach();
-      document.body.removeChild(node);
-      ElMessage({
-        message: proxy.$t("tenant_account_management.Copy_Successful"),
-        type: "success",
-      });
+      const { toClipboard } = useClipboard();
+      try {
+        let node = document.createElement("textarea");
+        node.innerHTML = `${proxy.$t(
+          "tenant_account_management.You_are_now_being_invite_to_log_in"
+        )}\n${proxy.$t(
+          "tenant_account_management.Website"
+        )}: http://www.fairviewpark.hk\n${proxy.$t(
+          "tenant_account_management.tenant_Login_Name"
+        )}: ${data.tenantInfo.memberLogin}\n${proxy.$t(
+          "tenant_account_management.Login_password"
+        )}: ${data.tenantInfo.password}\n${proxy.$t(
+          "tenant_account_management.Invitation_time"
+        )}: ${new Date().getFullYear()}${
+          data.fairview_park_lang === "en_us" ? "-" : "年"
+        }${
+          new Date().getMonth() + 1 > 9
+            ? new Date().getMonth() + 1
+            : "0" + (new Date().getMonth() + 1)
+        }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
+          new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
+        }${data.fairview_park_lang === "en_us" ? "" : "日"} ${
+          new Date().getHours() > 9 ? new Date().getHours() : "0" + new Date().getHours()
+        }:${
+          new Date().getMinutes() > 9
+            ? new Date().getMinutes()
+            : "0" + new Date().getMinutes()
+        }:${
+          new Date().getSeconds() > 9
+            ? new Date().getSeconds()
+            : "0" + new Date().getSeconds()
+        }`;
+        document.body.appendChild(node);
+        // 复制
+        await toClipboard(node.innerHTML);
+        document.body.removeChild(node);
+        // 复制成功
+        ElMessage({
+          message: proxy.$t("tenant_account_management.Copy_Successful"),
+          type: "success",
+        });
+      } catch (e) {
+        // 复制失败
+      }
     };
-    const startUp = ref();
+    // const startUp = ref();
     onMounted(() => {
-      var startUpModal = document.getElementById("startUp");
-      startUpModal.addEventListener("show.bs.modal", (event) => {
-        selectTenantStatus();
-      });
-      console.log(startUp);
+      selectTenantStatus();
     });
     return {
       ...toRefs(data),
@@ -351,104 +330,149 @@ export default {
 <style lang="less" scoped>
 @deep: ~">>>";
 
-.modal {
+.tenantModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1055;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
   background-color: rgba(0, 0, 0, 0.5);
-
-  .modal-dialog {
-    .modal-header {
-      border-bottom: 0;
-    }
-
-    .modal-body {
-      text-align: center;
-      padding: 0 20px 50px;
-
-      h2 {
-        font-style: normal;
-        margin-bottom: 20px;
-        font-size: 38px;
-        line-height: 65px;
+  .tenantModal-dialog {
+    display: flex;
+    align-items: center;
+    max-width: 800px;
+    margin: 1.75rem auto;
+    min-height: calc(100% - 3.5rem);
+    .tenantModal-content {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      pointer-events: auto;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 0.3rem;
+      outline: 0;
+      .tenantModal-header {
+        text-align: right;
+        padding: 20px 20px 0;
+        .el-icon{
+          font-size:30px;
+          font-weight: bold;
+          cursor: pointer;
+        }
       }
-      .open-tip {
-        font-size: 18px;
-        color: var(--mainColor3);
-      }
-      .open-btn {
-        background-color: var(--mainColor3);
-        border-color: var(--mainColor3);
-        margin: 0px auto 30px;
-        font-size: 18px;
-      }
-
-      .close-btn {
-        background-color: var(--mainColor4);
-        border-color: var(--mainColor4);
-        font-size: 18px;
-      }
-
-      .name,
-      .password {
-        margin: 0 auto 10px;
+      .tenantModal-body {
         text-align: center;
-
-        span {
-          display: inline-block;
-
-          &:first-child {
-            margin-right: 5px;
-            color: #07522b;
+        padding: 0 20px 50px;
+        h2 {
+          font-style: normal;
+          margin-bottom: 20px;
+          font-size: 38px;
+          line-height: 65px;
+          color: #2fa94e;
+        }
+        .open-tip {
+          font-size: 18px;
+          @{deep} ul{
+            padding-left: 20px;
+            li{
+            list-style: decimal;
           }
+          }
+          
+        }
+        .open-btn {
+          background-color: var(--mainColor2);
+          border-color: var(--mainColor2);
+          margin: 0px auto 30px;
+          font-size: 18px;
+          border-radius: 20px;
+        }
 
-          &:last-child {
-            color: #4a4a4a;
+        .close-btn {
+          background-color: var(--mainColor4);
+          border-color: var(--mainColor4);
+          font-size: 18px;
+          border-radius: 20px;
+           &:hover{
+            opacity: .8;
           }
         }
-        i {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          margin-left: 110px;
-          font-size: 20px;
-          line-height: 25px;
-        }
-      }
 
-      .copy {
-        color: var(--mainColor2);
-        cursor: pointer;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 18px;
-        padding: 0 10px;
-      }
+        .name,
+        .password {
+          margin: 0 auto 10px;
+          text-align: center;
 
-      button {
-        margin-bottom: 30px;
-      }
-      .account-record {
-        box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
-        border-radius: 6px;
-        padding: 10px 5px;
-        margin: 0 auto 30px;
-        h5 {
-          margin-bottom: 10px;
-        }
-      }
-      ul {
-        text-align: center;
-        padding: 0;
-        margin: 0 auto 0px;
-        width: 90%;
-        li {
-          display: flex;
-          margin-bottom: 5px;
-          align-items: center;
           span {
-            color: #07522b;
+            display: inline-block;
+
+            &:first-child {
+              margin-right: 5px;
+              color: #07522b;
+            }
+
             &:last-child {
               color: #4a4a4a;
+            }
+          }
+          i {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 110px;
+            font-size: 20px;
+            line-height: 25px;
+          }
+        }
+
+        .copy {
+          color: #fff;
+          cursor: pointer;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          border: 1px solid var(--mainColor2);
+          border-radius: 20px;
+          font-size: 18px;
+          padding: 2px 20px;
+          background-color: var(--mainColor2);
+          &:hover{
+            opacity: .8;
+          }
+        }
+
+        button {
+          margin-bottom: 30px;
+        }
+        .account-record {
+          box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
+          border-radius: 6px;
+          padding: 10px 5px;
+          margin: 0 auto 30px;
+          h5 {
+            margin-bottom: 10px;
+          }
+        }
+        ul {
+          text-align: center;
+          padding: 0;
+          margin: 0 auto 0px;
+          width: 90%;
+          li {
+            display: flex;
+            margin-bottom: 5px;
+            align-items: center;
+            span {
+              color: #07522b;
+              &:last-child {
+                color: #4a4a4a;
+              }
             }
           }
         }
@@ -456,7 +480,6 @@ export default {
     }
   }
 }
-
 .close-box {
   width: 500px;
   max-width: 90%;
@@ -480,6 +503,8 @@ export default {
 
   .button {
     @{deep} .el-button {
+      border-radius: 20px;
+      padding: 0px 20px;
       &:last-child {
         background-color: var(--mainColor2);
         border: 1px solid var(--mainColor2);
@@ -515,11 +540,12 @@ export default {
     span {
       border-color: var(--mainColor3);
       background-color: var(--mainColor3);
+      
     }
   }
 
   .el-checkbox__label {
-    color: var(--mainColor3);
+    color: #606266;
   }
 }
 
@@ -576,5 +602,68 @@ export default {
       }
     }
   }
+  .tenantModal {
+  .tenantModal-dialog {
+    max-width: 95%;
+    .tenantModal-content {
+     
+      .tenantModal-header {
+        .el-icon{
+        }
+      }
+      .tenantModal-body {
+        h2 {
+          font-size: 26px;
+        }
+        .open-tip {
+          font-size: 18px;
+        }
+        .open-btn {
+          margin: 0px auto 30px;
+          font-size: 18px;
+        }
+
+        .close-btn {
+          font-size: 18px;
+        }
+
+        .name,
+        .password {
+          i {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-left: 90px;
+            font-size: 20px;
+            top: 0;
+            line-height: 25px;
+          }
+        }
+
+        .account-record {
+          padding: 10px;
+          margin: 0 auto 30px;
+          h5 {
+            margin-bottom: 10px;
+          }
+        }
+        ul {
+          width: 100%;
+          li {
+            margin-bottom: 10px;
+            span {
+              &:first-child {
+                flex: 1;
+              }
+              &:last-child {
+                width: 45%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 }
 </style>

@@ -21,12 +21,15 @@
         :isShowLoginButton="isShowLoginButton"
         :isShowLoginOutButton="isShowLoginOutButton"
         @showOwnerIsZONE="showOwnerIsZONE"
+        @showTenantModal="()=>{
+          isShowTenantModal = true
+        }"
       ></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
       <Login></Login>
       <EditTenantInformation></EditTenantInformation>
-      <TenantAccountManagement></TenantAccountManagement>
+      <TenantAccountManagement v-if="isShowTenantModal" @hideTenantModal="()=>{isShowTenantModal = false}"></TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
@@ -97,6 +100,7 @@ export default {
         id: "",
         content: "",
       },
+      isShowTenantModal:false,//是否显示TenantAccountManagement组件
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -219,12 +223,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          const button = document.createElement("button");
-          button.setAttribute("data-bs-toggle", "modal");
-          button.setAttribute("data-bs-target", "#startUp");
-          document.body.appendChild(button);
-          button.click();
-          document.body.removeChild(button);
+          data.isShowTenantModal = true
         } else if (res.data.status === 501) {
           ElMessage({
             message: res.data.msg,
@@ -279,13 +278,15 @@ export default {
           },
         };
         if (val) {
+        console.log(ownerData)
           if (!ownerData) {
             return false;
           }
           data.newRealTimeInfo.id = newData.owner.id;
           data.newRealTimeInfo.content = newData.owner.content;
-
+          
           if (localStorage.getItem("real-info")) {
+            
             if (
               newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
             ) {
