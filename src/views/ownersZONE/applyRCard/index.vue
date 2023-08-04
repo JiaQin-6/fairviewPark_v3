@@ -463,13 +463,7 @@
                           fairview_park_lang === "en_us" ? "Relation" : "與業主關係："
                         }}</strong>
                         <span>{{
-                          loginInfo && loginInfo.groupId === 0
-                            ? memberRalationList.filter((obj) => {
-                                return obj.value === item.rcrelation;
-                              })[0].label
-                            : residentRalationList.filter((obj) => {
-                                return obj.value === item.rcrelation;
-                              })[0].label
+                          item.rcrelation  
                         }}</span>
                       </div>
                       <div v-if="item.rcrelationOther">
