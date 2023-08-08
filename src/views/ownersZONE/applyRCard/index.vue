@@ -138,7 +138,7 @@
                         class="col-6"
                         @change="
                           () => {
-                            form.remark = '';
+                            form.rcrelationOther = '';
                             form.relationFile.file = null;
                             form.relationFile.url = '';
                           }
@@ -168,13 +168,12 @@
                     >
                     <div v-if="form.relation === 'ROf'||form.relation === 'RTf'">
                       <div class="form-wrap flex-row mb-10">
-                        <span class="yellow col-6 pl-20">{{
-                          fairview_park_lang === "en_us" ? "Specify(Others)" : "註明"
+                        <span class="yellow col-6 pl-20">{{$t('applyRCard.Specify')
                         }}</span>
-                        <el-input v-model="form.remark" class="col-6"></el-input>
+                        <el-input v-model="form.rcrelationOther" class="col-6"></el-input>
                       </div>
                       <i
-                        v-if="!isRequest && !form.remark"
+                        v-if="!isRequest && !form.rcrelationOther"
                         style="display: block; font-size: 14px; text-align: right"
                         class="mt-6 mb-6"
                         >{{
@@ -205,23 +204,16 @@
                         >
                           <template #trigger>
                             <el-button type="primary"
-                              ><span>{{
-                                fairview_park_lang === "en_us"
-                                  ? form["relationFile"].file
-                                    ? "Change file"
-                                    : "Select file"
-                                  : form["relationFile"].file
-                                  ? "更換文件"
-                                  : "上傳文件"
+                              ><span>{{ form["relationFile"].file
+                                    ? $t('applyRCard.Change_file')
+                                    : $t('applyRCard.Select_file')
                               }}</span
                               ><el-icon class="el-icon--upload"><upload-filled /></el-icon
                             ></el-button>
                           </template>
                         </el-upload>
                         <i class="yellow pl-20" style="flex: 1; margin-top: 10px">{{
-                          fairview_park_lang === "en_us"
-                            ? "*Please upload file size below 2MB and file format must be(.jpg | .jpeg | .png | .pdf)."
-                            : "*請上傳檔案大小為 2MB 以下及檔案格式為(.jpg | .jpeg | .png | .pdf)"
+                          $t('applyRCard.Please_upload_file_size')
                         }}</i>
                       </div>
                       <i
@@ -289,9 +281,7 @@
                       }}</i
                     >
                     <i class="yellow">{{
-                      fairview_park_lang === "en_us"
-                        ? "*Please fill in the complete 8- or 9-digit Octopus Number and the number in the bracket (if applicable)."
-                        : "*請填上八達通卡的8-9位之完整編號，當附有括號號碼時也須一併填寫。"
+                      $t('applyRCard.Please_fill_in_the_complete')
                     }}</i>
                   </li>
                   <li>
@@ -316,14 +306,10 @@
                       >
                         <template #trigger>
                           <el-button type="primary"
-                            ><span>{{
-                              fairview_park_lang === "en_us"
-                                ? form["photoFile"].file
-                                  ? "Change file"
-                                  : "Select file"
-                                : form["photoFile"].file
-                                ? "更換文件"
-                                : "上傳文件"
+                            ><span>{{ form["photoFile"].file
+                                  ? $t('applyRCard.Change_file')
+                                  : $t('applyRCard.Select_file')
+                               
                             }}</span
                             ><el-icon class="el-icon--upload"><upload-filled /></el-icon
                           ></el-button>
@@ -341,9 +327,7 @@
                       }}</i
                     >
                     <i class="yellow" style="margin-top: 10px; display: block">{{
-                      fairview_park_lang === "en_us"
-                        ? "*Please upload file size below 5MB and file format must be (.jpg | .jpeg | .png | .pdf)"
-                        : "*請上傳檔案大小為 5MB 以下及檔案格式為(.jpg | .jpeg| .png | .pdf)"
+                      $t('applyRCard.Please_upload_file_size_below_5MB')
                     }}</i>
                   </li>
                 </ul>
@@ -352,9 +336,7 @@
               <div class="item">
                 <h5>
                   {{
-                    fairview_park_lang === "en_us"
-                      ? "Undertakings - Terms and Conditions"
-                      : "丙. 承諾書 - 條款及條件"
+                    $t('applyRCard.Undertakings')
                   }}
                 </h5>
                 <p
@@ -373,15 +355,13 @@
                   <el-checkbox
                     v-model="form.checked"
                     :label="
-                      fairview_park_lang === 'en_us'
-                        ? 'I Accept and Understand the Terms and Agreement'
-                        : '本人同意上述條款'
+                      $t('applyRCard.I_Accept_and_Understand_the_Terms_and_Agreement')
                     "
                     size="large"
                     style="display: block"
                   />
                   <el-button @click="applyRCard">{{
-                    fairview_park_lang === "en_us" ? "Confirm" : "提交申請"
+                    $t('applyRCard.Confirm')
                   }}</el-button>
                 </div>
               </div>
@@ -390,7 +370,7 @@
           <!-- 智能卡列表 -->
           <div class="cardList" v-if="nav_index === 1">
             <p style="font-size: 36px; font-weight: bold; color: #9cc212">
-              {{ fairview_park_lang === "en_us" ? "Apply Status" : "申請狀況" }}
+              {{ $t('applyRCard.Apply_Status') }}
             </p>
             <ul>
               <li
@@ -411,9 +391,7 @@
                       "
                     >
                       {{
-                        fairview_park_lang === "en_us"
-                          ? "Waiting for approve"
-                          : "資料待審核"
+                        $t('applyRCard.Waiting_for_approve')
                       }}
                     </h3>
                     <h3
@@ -425,13 +403,11 @@
                         margin-bottom: 20px;
                       "
                     >
-                      {{ fairview_park_lang === "en_us" ? "Approved" : "已成功申請" }}
+                      {{ $t('applyRCard.Approved') }}
                     </h3>
                     <p style="font-size: 18px; font-weight: bold">
                       {{
-                        fairview_park_lang === "en_us"
-                          ? "Date of receipt"
-                          : "預計取證日期："
+                        $t('applyRCard.Date_of_receipt')
                       }}
                     </p>
                     <p style="font-size: 18px">
@@ -452,15 +428,13 @@
                           style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
                         >
                           {{
-                            fairview_park_lang === "en_us"
-                              ? "Name of Card User: "
-                              : "持卡人姓名："
+                            $t('applyRCard.Name_of_Card_User_2')
                           }}{{ item.rcname }}
                         </h3>
                       </div>
                       <div>
                         <strong style="margin-right: 5px">{{
-                          fairview_park_lang === "en_us" ? "Relation" : "與業主關係："
+                          $t('applyRCard.Relation_2')
                         }}</strong>
                         <span>{{
                           item.rcrelation  
@@ -468,9 +442,7 @@
                       </div>
                       <div v-if="item.rcrelationOther">
                         <strong style="margin-right: 5px">{{
-                          fairview_park_lang === "en_us"
-                            ? "Specify(Others)"
-                            : "證明(其他)："
+                         $t('applyRCard.Specify_Others')
                         }}</strong>
                         <span>{{ item.rcrelationOther }}</span>
                       </div>
@@ -484,8 +456,8 @@
                       </div>
                       <div>
                         <strong style="margin-right: 5px"
-                          >{{ $t("applyRCard.Octopus_Card_Number")
-                          }}{{ fairview_park_lang === "en_us" ? ":" : "：" }}</strong
+                          >{{ $t("applyRCard.Octopus_Card_Number_2")
+                          }}</strong
                         >
                         <span>{{ item.rcOcto }}({{ item.rcOctoBk }})</span>
                       </div>
@@ -568,7 +540,7 @@ export default {
       form: {
         name: "",
         relation: "",
-        remark: "",
+        rcrelationOther: "",
         relationFile: {
           file: null,
           url: "",
@@ -726,19 +698,9 @@ export default {
         data.form["photoFile"].file = files.raw;
       }
     };
-    //查看所有 业主手册及地图 列表
+    //申請
     const applyRCard = async () => {
-      if (!data.form.checked) {
-        ElMessage.error({
-          showClose: true,
-          message:
-            data.fairview_park_lang === "en_us"
-              ? "Please tick the consent clause first!"
-              : "請先勾選同意條款!",
-          type: "error",
-        });
-        return false;
-      } else if (
+      if (
         !data.form.name ||
         !data.form.relation ||
         !data.form.cardNumber1 ||
@@ -759,11 +721,27 @@ export default {
         return false;
       } else if (
         data.form.relation === "ROf" &&
-        (!data.form.remark || !data.form.relationFile.file)
+        (!data.form.rcrelationOther || !data.form.relationFile.file)
       ) {
         data.isRequest = false;
         return false;
-      }
+      }else if (
+        data.form.relation === "RTf" &&
+        (!data.form.rcrelationOther || !data.form.relationFile.file)
+      ) {
+        data.isRequest = false;
+        return false;
+      } else if (!data.form.checked) {
+        ElMessage.error({
+          showClose: true,
+          message:
+            data.fairview_park_lang === "en_us"
+              ? "Please tick the consent clause first!"
+              : "請先勾選同意條款!",
+          type: "error",
+        });
+        return false;
+      }  
       data.v_loading = true;
       if (data.form.relationFile.file) {
         data.form.relationFile.url = await uploadRcard(data.form.relationFile.file, "rd");
@@ -779,17 +757,18 @@ export default {
           unitCode: JSON.parse(localStorage.getItem("login-info")).topic3,
           rcname: data.form.name,
           rcrelation: data.form.relation,
-          rcrelationOther: data.form.relation,
+          rcrelationOther: data.form.rcrelationOther,
           rcrelationDoc: data.form.relationFile.url || "",
           rcOcto: data.form.cardNumber1,
           rcPhoto: data.form.photoFile.url || "",
           rcOctoBk: data.form.cardNumber2,
         });
         if (res.data.status === 200) {
+          data.isRequest = true;
           data.v_loading = false;
           data.form.name = "";
           data.form.relation = "";
-          data.form.remark = "";
+          data.form.rcrelationOther = "";
           data.form.relationFile.file = null;
           data.form.relationFile.url = "";
           data.form.cardNumber1 = "";
