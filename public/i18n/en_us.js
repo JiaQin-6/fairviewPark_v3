@@ -300,6 +300,7 @@ window.i18n_en_us = {
     'Willing_to_authorize_the_management_office':'Willing to authorize the estate management to manage the tenant account?',
     'Willing_to_receive_physical_mail_information':'Willing to receive physical mail information?',
     'Last_updated_data_time':'Last updated data time',
+    'Tenant_Account_Instruction':'Tenant Account Instruction',
   },
   //忘記密碼
   forget_password: {
@@ -310,7 +311,7 @@ window.i18n_en_us = {
     'This_field_is_required': 'This field is required.',
     'Please_enter_your_registration_contact_email': 'Please enter your registered e-mail',
     'Submit': 'Submit',
-    'If_you_forgot_your_Login_Name_and_Contact_Email': 'If you forgot your Login Name and Contact Email, please',
+    'If_you_forgot_your_Login_Name_and_Contact_Email': 'If you forgot your Login Name and Contact Email, please ',
     'contact_us': 'contact us.',
   },
   //修改用戶資料
@@ -413,7 +414,7 @@ window.i18n_en_us = {
     'Other_please_specify':'Other (please specify)',
     'Tenant_Co-Tenant':'Tenant/Co-Tenant',
     'Tenant_Spouse':'Tenant Spouse',
-    'TenantChild':'TenantChild',
+    'TenantChild':'Tenant Child',
     'Tenant_Domestic_Helper':'Tenant Domestic Helper',
     'Tenant_Parents':'Tenant Parents',
     'Specify':'Specify(Others)',
@@ -1974,9 +1975,9 @@ window.i18n_en_us = {
     Owner:'Owner',
     Fairview_Park_Management_Office:'Fairview Park Management Office',
     The_time_of_the_last_activation_of_the_tenant_account:'Activation Time:',
-    The_time_of_the_copy_of_the_tenant_account_information:'Invitation Time:',
+    The_time_of_the_copy_of_the_tenant_account_information:'First Invitation:',
     The_time_of_the_last_login_of_the_tenant_account:'Last Login:',
-    Turn_off_tenant_management:'Disable Tenant Account',
+    Tenant_Account_Cancellation:'Tenant Account Cancellation',
     Close_account:'Disable Tenant Account',
     Once_the_account_is_closed:'Arrangement: After disable the tenant account, the account will no longer be available. After re-enable it, the password will be reset.',
     I_understand_and_agree_to_the_above_arrangement:'I understand and agree the above mentioned Arrangement of Disable Tenant Account',
@@ -1990,7 +1991,11 @@ window.i18n_en_us = {
     tenant_Login_Name:'Login Name',
     Login_password:'Login password',
     Invitation_time:'Invitation time',
-    I_We_being_the_registered_house_owner:'I/We, being the registered owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to enable the Corresponding Premises’ Tenant Account (”the Tenant Account”) of  Fairview Park Property Management Limited (”the Estate Management”). I/We declare that the persons who is going to use the Tenant Account is  living on the Corresponding Premises. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/><br/>1. I/We no longer be the registered owner of the Corresponding Premises, the Tenant Account will be disabled.<br/>2. The New Owner(s) must inform the Estate Management whether the Tenant will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, the Estate Management shall have the right to disable the Tenant Account without advance notice.<br/>3.  The Tenant Account is the property of the Estate Management, it will be disabled when the status is no longer valid.<br/>4. The Estate Management reserves the absolute right to reject the application or disable the Tenant Account under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.<br/>5.  If the Tenant Account is abnormal, the Owner shall either disable the Tenant Account or notify the Estate Management immediately so as to enable the Estate Management to disable the Tenant Account.<br/>6.  The Owner can edit the member information, or authorize the Estate Management to manage the Tenant Account.<br/>7.  The Owner can copy the invitation detail by himself/herself, and shares the credential information properly.<br/>8. Once the Tenant Account is shared, the Owner agrees that the Tenant Account user is able to log in to the Fairview Park Property Management Limited Mobile App, and apply for related services.<br/>9.  The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.',
+    I_We_being_the_registered_house_owner:'I/We, being the registered owner(s) (“the Owner”) of the captioned premises (“the Corresponding Premises”) wish to enable the Corresponding Premises’ Tenant Account (”the Tenant Account”) of  Fairview Park Property Management Limited (”the Estate Management”). I/We declare that the persons who is going to use the Tenant Account is  living on the Corresponding Premises. I/We fully understand and agree to accept and be bound by all the following terms and conditions:<br/><br/><ul><li>I/We no longer be the registered owner of the Corresponding Premises, the Tenant Account will be disabled.</li><li>The New Owner(s) must inform the Estate Management whether the Tenant will remain the same when there is a change of ownership of the Corresponding Premises. Otherwise, the Estate Management shall have the right to disable the Tenant Account without advance notice.</li><li>The Tenant Account is the property of the Estate Management, it will be disabled when the status is no longer valid.</li><li>The Estate Management reserves the absolute right to reject the application or disable the Tenant Account under the Corresponding Premises if the Owner is in arrear of any fees including management fee payable to the Estate Management or in breach of the Deed of Mutual Covenant or Estate Rules.</li><li>If the Tenant Account is abnormal, the Owner shall either disable the Tenant Account or notify the Estate Management immediately so as to enable the Estate Management to disable the Tenant Account.</li><li>The Owner can edit the member information, or authorize the Estate Management to manage the Tenant Account.</li><li>The Owner can copy the invitation detail by himself/herself, and shares the credential information properly.</li><li>Once the Tenant Account is shared, the Owner agrees that the Tenant Account user is able to log in to the Fairview Park Property Management Limited Mobile App, and apply for related services.</li><li>The Estate Management reserves the right to revise any terms and conditions herein at any time without further notice.</li>',
     I_Accept_and_Understand_the_Terms_and_Agreement:'I Accept and Understand the Terms and Agreement',
+    Cancel:'Cancel',
+    Copy_Tenant_Account_Credentials:'Copy Tenant Account Credentials',
+    Please_click_Copy_Invitation:'Please click <i style=\'color:#BA9859\'>Copy Invitation</i> and paste the credentials information to your Tenant via social media eg. WhatsApp, Email.',
+    Copied_and_Shared:'Copied and Shared',
   }
 };

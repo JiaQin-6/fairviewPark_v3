@@ -164,13 +164,13 @@
                   >
                 </li>
                 <li>
-                  <p style="text-align: left">
+                  <p style="text-align: left;color:#fc0d1b">
                     {{
                       $t("Edit_member_information.If_the_Tenant_forgets_the_passwords")
                     }}
                   </p>
                 </li>
-                <li>
+                <!-- <li>
                   <p class="title">
                     {{
                       $t(
@@ -197,7 +197,7 @@
                     "
                     >{{ $t("Edit_member_information.This_field_is_required") }}</i
                   >
-                </li>
+                </li> -->
               </ul>
             </div>
             <div class="button">
@@ -270,12 +270,18 @@ export default {
     };
     //修改用戶信息
     const editMemberInfo = async () => {
+      data.edit_member_info_error_tip.is_verify_password_null = false;
       data.edit_member_info_error_tip.is_null = false;
       data.edit_member_info_error_tip.is_password_null = false;
       data.edit_member_info_error_tip.is_show = false;
       data.edit_member_info_error_tip.is_confirm_password_error_null = false;
       data.edit_member_info_error_tip.text = "";
-      if (
+      
+      if(!data.editTenantInfoForm.password&&!data.editTenantInfoForm.confirmPassword){
+        //如果沒填寫新密碼及確認新密碼就跳出
+        closeModel()
+        return;
+      }else if (
         (data.editTenantInfoForm.password && !data.editTenantInfoForm.confirmPassword) ||
         (data.editTenantInfoForm.confirmPassword && !data.editTenantInfoForm.password)
       ) {

@@ -300,6 +300,7 @@ window.i18n_zh_tw = {
     'Willing_to_authorize_the_management_office':'願意授權管理公司管理住客賬號？',
     'Willing_to_receive_physical_mail_information':'願意接收實體信件信息？',
     'Last_updated_data_time':'上次更新資料時間',
+    'Tenant_Account_Instruction':'住客賬號指引',
 
   },
   //忘記密碼
@@ -433,7 +434,7 @@ window.i18n_zh_tw = {
     'Name_of_Card_User_2':'持卡人姓名：',
     'Relation_2':'與業主關係：',
     'Octopus_Card_Number_2':'八達通編號：',
-    'Specify_Others':'證明(其他)：',
+    'Specify_Others':'註明(其他)：',
   },
   //管理諮詢委員會專欄
   MACColumn_Rules_Regulations: {
@@ -1796,9 +1797,9 @@ window.i18n_zh_tw = {
     Owner:'業主',
     Fairview_Park_Management_Office:'管理處',
     The_time_of_the_last_activation_of_the_tenant_account:'啓動時間:',
-    The_time_of_the_copy_of_the_tenant_account_information:'邀請時間:',
+    The_time_of_the_copy_of_the_tenant_account_information:'首次邀請:',
     The_time_of_the_last_login_of_the_tenant_account:'登入時間:',
-    Turn_off_tenant_management:'關閉住客管理',
+    Tenant_Account_Cancellation:'取消住客賬號',
     Close_account:'關閉住客賬號',
     Once_the_account_is_closed:'安排：關閉住客賬號後，其賬號將不能使用。重新開啓後，密碼將會重置。',
     I_understand_and_agree_to_the_above_arrangement:'我明白及同意上述關閉住客賬號安排',
@@ -1812,7 +1813,11 @@ window.i18n_zh_tw = {
     tenant_Login_Name:'住戶登入名稱',
     Login_password:'住戶登入密碼',
     Invitation_time:'邀請時間',
-    I_We_being_the_registered_house_owner:'我/我們為相關物業之業主(以下簡稱「業主」)，現向錦綉花園物業管理有限公司(以下簡稱「管理公司」) 啓動相關物業的住客帳號(以下簡稱「住客賬號」)。我們謹此聲明此等人士使用住客賬號時皆居住於相關物業，我們完全明白並同意接受及受約束於下列條款及條件：<br/><br/>1.  我/我們不再是相關物業的業主，住客賬號將被關閉。<br/>2. 當相關物業業權出現變動時，新業主必須通知管理公司住客是否仍舊相同，否則管理公司將有權在沒有事前通知的情況下，關閉已開啓的住客賬號。<br/>3.  住客賬號乃屬管理公司所有，如住客身份已不符合使用此賬號，管理公司將關閉已開啓的住客賬號。<br/>4. 管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋苑守則 之業主之申請或關閉已開啓的住客賬號。<br/>5.  住客賬號如有異常，業主可自行關閉賬號，或通知管理公司，以便取消該住客賬號。<br/>6. 業主可編輯賬號，或按需要授權管理公司協助管理住客賬號。<br/>7.  業主可自行複製邀請住客賬號，並會妥善分享住客賬號登入訊息。<br/>8.  住客賬號一經分享，代表業主同意用家登入錦綉花園物業管理有限公司流動裝置程式及申請相關服務。<br/>9.  管理公司保留絕對權利隨時修訂是次功能之任何條款及條件而不作另行通告。',
+    I_We_being_the_registered_house_owner:'我/我們為相關物業之業主(以下簡稱「業主」)，現向錦綉花園物業管理有限公司(以下簡稱「管理公司」) 啓動相關物業的住客帳號(以下簡稱「住客賬號」)。我們謹此聲明此等人士使用住客賬號時皆居住於相關物業，我們完全明白並同意接受及受約束於下列條款及條件：<br/><br/><ul><li>我/我們不再是相關物業的業主，住客賬號將被關閉。</li><li>當相關物業業權出現變動時，新業主必須通知管理公司住客是否仍舊相同，否則管理公司將有權在沒有事前通知的情況下，關閉已開啓的住客賬號。</li><li>住客賬號乃屬管理公司所有，如住客身份已不符合使用此賬號，管理公司將關閉已開啓的住客賬號。</li><li>管理公司保留絕對權利拒絕拖欠其任何款項包括管理費、或違反公契或屋苑守則 之業主之申請或關閉已開啓的住客賬號。</li><li>住客賬號如有異常，業主可自行關閉賬號，或通知管理公司，以便取消該住客賬號。</li><li>業主可編輯賬號，或按需要授權管理公司協助管理住客賬號。</li><li>業主可自行複製邀請住客賬號，並會妥善分享住客賬號登入訊息。</li><li>住客賬號一經分享，代表業主同意用家登入錦綉花園物業管理有限公司流動裝置程式及申請相關服務。</li><li>管理公司保留絕對權利隨時修訂是次功能之任何條款及條件而不作另行通告。</li>',
     I_Accept_and_Understand_the_Terms_and_Agreement:'本人同意上述條款',
+    Cancel:'取消',
+    Copy_Tenant_Account_Credentials:'複製住客賬號訊息',
+    Please_click_Copy_Invitation:'請點擊<i style=\'color:#BA9859\'>複製邀請</i>，並於WhatsApp、電郵等社交媒介貼上以下住客賬號訊息分享給你的住客。',
+    Copied_and_Shared:'已複製並分享',
   }
 };

@@ -214,6 +214,10 @@ http.clickTenantLaunch = (arr) => {
 http.editTenantMemberInfo = (arr) => {
     return http.post(`/houseweb/member/editTenantMemberInfo`, arr);
 };
+//获取 app 到 web 需要携带的数据
+http.getUrlData = (arr) => {
+    return http.post(`/houseweb/url/getUrlData`, arr);
+};
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
 /* 在发送给服务器的时候带token给服务器 */

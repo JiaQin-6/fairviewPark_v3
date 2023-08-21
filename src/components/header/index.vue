@@ -9,41 +9,30 @@
         </a>
         <!-- 手機端顯示的按鈕 -->
         <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
-          <span
-            class="lang"
-            v-if="isShowLoginButton && isShowLoginOutButton"
+          <span class="lang" v-if="isShowLoginButton && isShowLoginOutButton"
             @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
-            style="cursor: pointer; color: #fff; vertical-align: middle"
-          >
+            style="cursor: pointer; color: #fff; vertical-align: middle">
             {{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}
           </span>
-          <div
-            v-if="!is_login && isShowLoginButton"
-            class="login-btn1"
-            style="position: relative; display: inline-block; flex: 1; text-align: right"
-          >
+          <div v-if="!is_login && isShowLoginButton" class="login-btn1"
+            style="position: relative; display: inline-block; flex: 1; text-align: right">
             <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
               {{ $t("headed.Owner_login") }}
             </button>
           </div>
-          <div
-            v-if="is_login"
-            class="login-btn2"
+          <div v-if="is_login" class="login-btn2"
             style="position: relative; display: inline-block; flex: 1; text-align: right"
-            :class="{ 'show-owner-zone-list': showOwnerZONEList }"
-          >
+            :class="{ 'show-owner-zone-list': showOwnerZONEList }">
             <button class="login-btn-2" @click="showOwnerIsZONE">
               {{
                 loginInfo && loginInfo.groupId === 0
-                  ? $t("headed.OWNERS_s_ZONE")
-                  : $t("headed.TENANT_s_ZONE")
+                ? $t("headed.OWNERS_s_ZONE")
+                : $t("headed.TENANT_s_ZONE")
               }}
             </button>
             <i v-if="showOwnerZONEList"></i>
           </div>
-          <div
-            v-if="is_login"
-            style="
+          <div v-if="is_login" style="
               text-decoration: none;
               position: relative;
               display: inline-block;
@@ -51,13 +40,10 @@
               margin-left: 5px;
               margin-right: 5px;
               vertical-align: middle;
-            "
-            @click="toInformationPush"
-          >
+            " @click="toInformationPush">
             <i class="iconfont icon-lingdang white" style="font-size: 22px"></i>
             <!-- v-if="pmLogHave === 'Y'" -->
-            <span
-              style="
+            <span style="
                 position: absolute;
                 top: 2px;
                 right: 0px;
@@ -66,200 +52,128 @@
                 display: inline-block;
                 background-color: #f0ce5f;
                 border-radius: 50%;
-              "
-            ></span>
+              "></span>
           </div>
         </div>
-        <button
-          id="navbar-button"
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          @click="hideOwnerIsZONE"
-        >
+        <button id="navbar-button" class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation" @click="hideOwnerIsZONE">
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div
-            style="display: flex; flex-direction: column; align-items: center; flex: 1"
-          >
+          <div style="display: flex; flex-direction: column; align-items: center; flex: 1">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li
-                class="nav-item"
-                :class="{
-                  dropdown: item.type === 'select',
-                  active: route_url === item.href,
-                }"
-                v-for="(item, index) in [
-                  {
-                    type: 'default',
-                    text: $t('headed.Home'),
-                    href: '#/home?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.About_us'),
-                    href: '#/about-us?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.Prospective_Buyer'),
-                    href: '#/prospective-buyer?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.Estate_Facilities'),
-                    href: '#/estate-facilities?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.Coach_Service'),
-                    href: '#/coach-service?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.Shops_Directory'),
-                    href: '#/shopping-information?lang=' + fairview_park_lang,
-                  },
-                  {
-                    type: 'default',
-                    text: $t('headed.Useful_Telephone_Nos'),
-                    href: '#/useful-link?lang=' + fairview_park_lang,
-                  },
-                ]"
-                :key="index"
-                @click="changeRouter(item.href)"
-              >
-                <a
-                  v-if="item.type === 'default'"
-                  class="nav-link"
-                  aria-current="page"
-                  :href="item.href"
-                  ><span>{{ item.text }}</span></a
-                >
-                <a
-                  v-if="item.type === 'select'"
-                  class="nav-link dropdown-toggle"
-                  :id="'navbarDropdown' + index"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+              <li class="nav-item" :class="{
+                dropdown: item.type === 'select',
+                active: route_url === item.href,
+              }" v-for="(item, index) in [
+  {
+    type: 'default',
+    text: $t('headed.Home'),
+    href: '#/home?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.About_us'),
+    href: '#/about-us?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.Prospective_Buyer'),
+    href: '#/prospective-buyer?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.Estate_Facilities'),
+    href: '#/estate-facilities?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.Coach_Service'),
+    href: '#/coach-service?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.Shops_Directory'),
+    href: '#/shopping-information?lang=' + fairview_park_lang,
+  },
+  {
+    type: 'default',
+    text: $t('headed.Useful_Telephone_Nos'),
+    href: '#/useful-link?lang=' + fairview_park_lang,
+  },
+]" :key="index" @click="changeRouter(item.href)">
+                <a v-if="item.type === 'default'" class="nav-link" aria-current="page" :href="item.href"><span>{{
+                  item.text }}</span></a>
+                <a v-if="item.type === 'select'" class="nav-link dropdown-toggle" :id="'navbarDropdown' + index"
+                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   <span>{{ item.text }}</span>
                 </a>
-                <ul
-                  v-if="item.type === 'select'"
-                  class="dropdown-menu"
-                  style="padding: 0; margin: 10px 0 0 -15px"
-                  :aria-labelledby="'navbarDropdown' + index"
-                >
+                <ul v-if="item.type === 'select'" class="dropdown-menu" style="padding: 0; margin: 10px 0 0 -15px"
+                  :aria-labelledby="'navbarDropdown' + index">
                   <li v-for="(item2, index2) in item.children" :key="index2">
-                    <a
-                      class="dropdown-item"
-                      style="padding: 8px 15px"
-                      :href="item2.href"
-                      >{{ item2.text }}</a
-                    >
+                    <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{ item2.text }}</a>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
 
-          <ul
-            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
-          >
+          <ul class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
             <div class="lang">
-              <span
-                v-if="isShowLoginButton && isShowLoginOutButton"
-                style="cursor: pointer"
-                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
-                >{{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}</span
-              >
+              <span v-if="isShowLoginButton && isShowLoginOutButton" style="cursor: pointer"
+                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')">{{ fairview_park_lang == "zh_tw" ?
+                  "EN" : "中" }}</span>
             </div>
-            <button
-              v-if="!is_login && isShowLoginButton"
-              class="login"
-              data-bs-toggle="modal"
-              data-bs-target="#login"
-            >
+            <button v-if="!is_login && isShowLoginButton" class="login" data-bs-toggle="modal" data-bs-target="#login">
               {{ $t("headed.Owner_login") }}
             </button>
             <div>
-              <el-dropdown
-                class="is-show-dropdown"
-                v-if="is_login"
-                @command="selectOwnersZone"
-              >
+              <el-dropdown class="is-show-dropdown" v-if="is_login" @command="selectOwnersZone">
                 <el-button type="primary">
                   {{
                     loginInfo && loginInfo.groupId === 0
-                      ? $t("headed.OWNERS_s_ZONE")
-                      : $t("headed.TENANT_s_ZONE")
+                    ? $t("headed.OWNERS_s_ZONE")
+                    : $t("headed.TENANT_s_ZONE")
                   }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </el-button>
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item
-                      class="yellow"
-                      command="/edit-member-information"
-                      ><el-icon> <EditPen /> </el-icon
-                      >{{
+                    <el-dropdown-item class="yellow" command="/edit-member-information"><el-icon>
+                        <EditPen />
+                      </el-icon>{{
                         loginInfo && loginInfo.groupId === 0
-                          ? $t("headed.Edit_member_information")
-                          : $t("headed.Tenant_account_management")
-                      }}</el-dropdown-item
-                    >
-                    <el-dropdown-item
-                      v-if="loginInfo && loginInfo.groupId === 0"
-                      command="/start-up"
-                    >
+                        ? $t("headed.Edit_member_information")
+                        : $t("headed.Tenant_account_management")
+                      }}</el-dropdown-item>
+                    <el-dropdown-item v-if="loginInfo && loginInfo.groupId === 0" command="/start-up">
                       <!-- <el-icon><EditPen /></el-icon> -->
-                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
-                    >
-                    <el-dropdown-item
-                      v-for="(item, index) in loginInfo && loginInfo.menuList"
-                      :key="index"
-                      :command="'/' + item.route"
-                      >{{
+                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item>
+                    <el-dropdown-item v-for="(item, index) in loginInfo && loginInfo.menuList" :key="index"
+                      :command="'/' + item.route">{{
                         fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw
-                      }}</el-dropdown-item
-                    >
+                      }}</el-dropdown-item>
 
-                    <el-dropdown-item
-                      class="yellow"
-                      command="/loginOut"
-                      v-if="isShowLoginOutButton"
-                    >
+                    <el-dropdown-item class="yellow" command="/loginOut" v-if="isShowLoginOutButton">
                       <el-icon>
                         <UserFilled />
                       </el-icon>
-                      {{ $t("headed.Login_out") }}</el-dropdown-item
-                    >
+                      {{ $t("headed.Login_out") }}</el-dropdown-item>
                   </el-dropdown-menu>
                 </template>
               </el-dropdown>
             </div>
 
-            <div
-              v-if="is_login"
-              style="
+            <div v-if="is_login" style="
                 text-decoration: none;
                 position: relative;
                 cursor: pointer;
                 margin-left: 20px;
-              "
-              @click="toInformationPush"
-            >
+              " @click="toInformationPush">
               <i class="iconfont icon-lingdang white"></i>
               <!-- v-if="pmLogHave === 'Y'" -->
-              <span
-                style="
+              <span style="
                   position: absolute;
                   top: 2px;
                   right: 0px;
@@ -268,27 +182,21 @@
                   display: inline-block;
                   background-color: #f0ce5f;
                   border-radius: 50%;
-                "
-              ></span>
+                "></span>
             </div>
           </ul>
         </div>
       </div>
     </nav>
     <!-- loading -->
-    <div
-      class="loading"
-      v-loading="v_loading"
-      style="
+    <div class="loading" v-loading="v_loading" style="
         width: 100vw;
         height: 100vh;
         top: 0;
         left: 0;
         position: fixed;
         z-index: 10000;
-      "
-      :style="{ display: v_loading ? '' : 'none' }"
-    ></div>
+      " :style="{ display: v_loading ? '' : 'none' }"></div>
   </div>
 </template>
 
@@ -324,7 +232,7 @@ export default {
       logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
-  setup(props, ctx) {
+   async setup(props, ctx) {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
@@ -340,52 +248,8 @@ export default {
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
-    //獲取&設置語言
-    if (!sessionStorage.getItem("fairview_park_lang")) {
-      sessionStorage.setItem("fairview_park_lang", "zh_tw");
-      data.fairview_park_lang = "zh_tw";
-    } else {
-      data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-    }
-    //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
-    if (route.query.session) {
-      //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
-      // token变量传需要解析的jwt值
-      let strings = route.query.session.split("."); //截取token，获取载体
-      var userinfo = JSON.parse(
-        decodeURIComponent(
-          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
-        )
-      );
-      userinfo.jwt = route.query.session;
-      localStorage.setItem("login-info", JSON.stringify(userinfo));
-      store.commit("setLoginStatus", true);
-    }
-    //判断url是否带有语言参数
-    if (
-      route.query.lang &&
-      (route.query.lang === "en_us" || route.query.lang === "zh_tw")
-    ) {
-      sessionStorage.setItem("fairview_park_lang", route.query.lang);
-      data.fairview_park_lang = route.query.lang;
-      proxy.$i18n.locale = route.query.lang;
-    }
-    //如果有登陸信息就顯示登陸
-    if (localStorage.getItem("login-info")) {
-      data.is_login = true;
-      data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
-    }
-    onMounted(() => {
-      if (document.getElementsByClassName("el-popper")[0]) {
-        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
-          "fixed";
-        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
-        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
-          "2000";
-      }
-    });
-    //切換語言
-    const changeLang = (lang) => {
+     //切換語言
+     const changeLang = (lang) => {
       data.v_loading = true;
       if (
         document.getElementById("navbar-button") &&
@@ -424,7 +288,7 @@ export default {
       data.is_login = false;
       store.commit("setLoginStatus", false);
     };
-    //
+    //点击业主专区
     const selectOwnersZone = (val) => {
       if (val === "/loginOut") {
         loginOut();
@@ -457,7 +321,7 @@ export default {
         });
       }
     };
-    //
+    //点击业主专区
     const showOwnerIsZONE = (val) => {
       if (!data.showOwnerZONEList) {
         data.showOwnerZONEList = true;
@@ -486,14 +350,6 @@ export default {
     };
     //跳轉到信息頁
     const toInformationPush = () => {
-      // if (
-      //   document.getElementById("navbar-button") &&
-      //   window
-      //     .getComputedStyle(document.getElementById("navbar-button"))
-      //     .getPropertyValue("display") !== "none"
-      // ) {
-      //   document.getElementById("navbar-button").click();
-      // }
       router.push({
         path: "/information-push",
         query: {
@@ -501,24 +357,6 @@ export default {
         },
       });
     };
-    //監聽滾動條的位置
-    // const scrollPosition = () => {
-    //   document.addEventListener("scroll", () => {
-    //     var scrollTop =
-    //       window.pageYOffset ||
-    //       document.documentElement.scrollTop ||
-    //       document.body.scrollTop;
-    //     if (scrollTop >= 100) {
-    //       if (!data.showLogin_m) {
-    //         data.showLogin_m = true;
-    //       }
-    //     } else {
-    //       if (data.showLogin_m) {
-    //         data.showLogin_m = false;
-    //       }
-    //     }
-    //   });
-    // };
     //業主查看住客情況
     const selectTenantStatus = async () => {
       data.loading = true;
@@ -528,7 +366,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          ctx.emit('showTenantModal',true)
+          ctx.emit('showTenantModal', true)
         } else if (res.data.status === 501) {
           ElMessage({
             message: res.data.msg,
@@ -545,6 +383,87 @@ export default {
         data.loading = false;
       }
     };
+    //获取 app 到 web 需要携带的数据
+     const getUrlData = async (dataCode) => {
+      data.loading = true;
+      try {
+        const res = await proxy.$http.getUrlData({
+          dataCode: dataCode,
+        });
+        if (res.data.status === 200) {
+          data.loading = false;
+          return res.data.data.menu
+        } else {
+          data.loading = false;
+          ElMessage({
+            message: res.data.msg,
+            type: "warning",
+          });
+          return false
+        }
+        
+      } catch (error) {
+        console.log(error)
+        data.loading = false;
+        return false
+      }
+    };
+    //獲取&設置語言
+    if (!sessionStorage.getItem("fairview_park_lang")) {
+      sessionStorage.setItem("fairview_park_lang", "zh_tw");
+      data.fairview_park_lang = "zh_tw";
+    } else {
+      data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
+    }
+    //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
+    if (route.query.session) {
+      //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
+      // token变量传需要解析的jwt值
+      let strings = route.query.session.split("."); //截取token，获取载体
+      var userinfo = JSON.parse(
+        decodeURIComponent(
+          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+        )
+      );
+      userinfo.jwt = route.query.session;
+      if (route.query.dataCode) {
+        const result = await getUrlData(route.query.dataCode)
+        if(result){
+          userinfo.menu = result
+        }
+      }
+      localStorage.setItem("login-info", JSON.stringify(userinfo));
+      store.commit("setLoginStatus", true);
+    } else if (route.query.logout && route.query.logout === 'true') {
+      //是否app已登出
+      localStorage.removeItem("login-info");
+      data.is_login = false;
+      store.commit("setLoginStatus", false);
+    }
+    //判断url是否带有语言参数
+    if (
+      route.query.lang &&
+      (route.query.lang === "en_us" || route.query.lang === "zh_tw")
+    ) {
+      sessionStorage.setItem("fairview_park_lang", route.query.lang);
+      data.fairview_park_lang = route.query.lang;
+      proxy.$i18n.locale = route.query.lang;
+    }
+    //如果有登陸信息就顯示登陸
+    if (localStorage.getItem("login-info")) {
+      data.is_login = true;
+      data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
+    }
+    onMounted(() => {
+      if (document.getElementsByClassName("el-popper")[0]) {
+        document.getElementsByClassName("el-popper")[0].parentNode.style.position =
+          "fixed";
+        document.getElementsByClassName("el-popper")[0].parentNode.style.top = "0";
+        document.getElementsByClassName("el-popper")[0].parentNode.style["z-index"] =
+          "2000";
+      }
+    });
+   
     //监听器
     watch(
       () => route,
@@ -581,7 +500,6 @@ export default {
     watch(
       () => store.state.loginStatus,
       (val) => {
-        console.log(val)
         data.is_login = val;
         if (data.is_login) {
           if (localStorage.getItem("login-info")) {
@@ -609,6 +527,7 @@ export default {
       findPmLogHave,
       toInformationPush,
       selectTenantStatus,
+      getUrlData,
     };
   },
 };
@@ -778,7 +697,7 @@ export default {
       }
     }
 
-    > .show {
+    >.show {
       background-color: #fff;
       margin-top: -33px;
       padding: 20px;

@@ -407,7 +407,7 @@
             </div>
             <p>
               {{ $t("forget_password.If_you_forgot_your_Login_Name_and_Contact_Email")
-              }}<span @click="toAboutsUs" style="cursor: pointer">{{
+              }}<span @click="toAboutsUs" style="cursor: pointer;color:#BA9859">{{
                 $t("forget_password.contact_us")
               }}</span>
             </p>

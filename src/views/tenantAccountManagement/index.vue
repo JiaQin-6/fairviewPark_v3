@@ -10,13 +10,37 @@
   <div>
     <div class="tenantModal">
       <div class="tenantModal-dialog">
-        <div class="tenantModal-content  animate__animated animate__fadeIn">
+        <div class="tenantModal-content animate__animated animate__fadeIn">
           <div class="tenantModal-header">
             <el-icon @click="closeModel"><Close /></el-icon>
           </div>
           <div class="tenantModal-body">
-            <!-- 如果沒有住客信息 -->
+            
             <h2>{{ $t("headed.Tenant_account_management") }}</h2>
+            <button
+              style="
+                background-color: #b59962;
+                color: #fff;
+                padding: 5px 30px;
+                cursor: pointer;
+                vertical-align: middle;
+                border: none;
+                border-radius: 50px;
+              "
+            >
+              <a
+                :href="
+                  fairview_park_lang === 'en_us'
+                    ? 'https://fairviewpark.hk/file/TenantAccountEN.html'
+                    : 'https://fairviewpark.hk/file/TenantAccountTC.html'
+                "
+                target="_blank"
+                style="text-decoration: none; color: #fff"
+              >
+                {{ $t("sign_up.Tenant_Account_Instruction") }}</a
+              >
+            </button>
+            <!-- 如果沒有住客信息 -->
             <div v-if="tenantInfo && !tenantInfo.status">
               <p
                 class="open-tip mb-20"
@@ -112,7 +136,7 @@
               </div>
 
               <el-button class="close-btn" @click="closeTenantManagement" type="danger">{{
-                $t("tenant_account_management.Turn_off_tenant_management")
+                $t("tenant_account_management.Tenant_Account_Cancellation")
               }}</el-button>
             </div>
           </div>
@@ -158,6 +182,12 @@
         >
       </div>
     </div>
+    <!--  -->
+    <CopyTenantInfo
+      v-if="showCopyTenantInfo"
+      @hideTenantModal="showCopyTenantInfo = false"
+      :copy_tenant_info="copy_tenant_info"
+    ></CopyTenantInfo>
   </div>
 </template>
 
@@ -174,10 +204,12 @@ import {
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import { ElMessageBox, ElMessage } from "element-plus";
-// 导入插件
-import useClipboard from "vue-clipboard3";
+import CopyTenantInfo from "./copyTenantInfo.vue";
 export default {
-  setup(props,ctx) {
+  components: {
+    CopyTenantInfo,
+  },
+  setup(props, ctx) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, refs } = getCurrentInstance();
     let data = reactive({
@@ -190,11 +222,12 @@ export default {
       isAgreeOpen: false, //是否同意開啟
       isShowCloseBox: false,
       showPassword: false, //是否顯示密碼
+      showCopyTenantInfo: false, //是否顯示CopyTenantInfo組件
+      copy_tenant_info: null, //待複製賬號密碼
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     const store = useStore();
     const router = useRouter();
-
     //
     const closeModel = () => {
       ctx.emit("hideTenantModal", false);
@@ -266,52 +299,35 @@ export default {
     };
     // 使用插件
     const copyTenantInfo = async () => {
-      const { toClipboard } = useClipboard();
-      try {
-        let node = document.createElement("textarea");
-        node.innerHTML = `${proxy.$t(
-          "tenant_account_management.You_are_now_being_invite_to_log_in"
-        )}\n${proxy.$t(
-          "tenant_account_management.Website"
-        )}: http://www.fairviewpark.hk\n${proxy.$t(
-          "tenant_account_management.tenant_Login_Name"
-        )}: ${data.tenantInfo.memberLogin}\n${proxy.$t(
-          "tenant_account_management.Login_password"
-        )}: ${data.tenantInfo.password}\n${proxy.$t(
-          "tenant_account_management.Invitation_time"
-        )}: ${new Date().getFullYear()}${
-          data.fairview_park_lang === "en_us" ? "-" : "年"
-        }${
-          new Date().getMonth() + 1 > 9
-            ? new Date().getMonth() + 1
-            : "0" + (new Date().getMonth() + 1)
-        }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
-          new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
-        }${data.fairview_park_lang === "en_us" ? "" : "日"} ${
-          new Date().getHours() > 9 ? new Date().getHours() : "0" + new Date().getHours()
-        }:${
-          new Date().getMinutes() > 9
-            ? new Date().getMinutes()
-            : "0" + new Date().getMinutes()
-        }:${
-          new Date().getSeconds() > 9
-            ? new Date().getSeconds()
-            : "0" + new Date().getSeconds()
-        }`;
-        document.body.appendChild(node);
-        // 复制
-        await toClipboard(node.innerHTML);
-        document.body.removeChild(node);
-        // 复制成功
-        ElMessage({
-          message: proxy.$t("tenant_account_management.Copy_Successful"),
-          type: "success",
-        });
-      } catch (e) {
-        // 复制失败
-      }
+      data.showCopyTenantInfo = true;
+      data.copy_tenant_info = `${proxy.$t(
+        "tenant_account_management.You_are_now_being_invite_to_log_in"
+      )}\n${proxy.$t(
+        "tenant_account_management.Website"
+      )}: http://www.fairviewpark.hk\n${proxy.$t(
+        "tenant_account_management.tenant_Login_Name"
+      )}: ${data.tenantInfo.memberLogin}\n${proxy.$t(
+        "tenant_account_management.Login_password"
+      )}: ${data.tenantInfo.password}\n${proxy.$t(
+        "tenant_account_management.Invitation_time"
+      )}: ${new Date().getFullYear()}${data.fairview_park_lang === "en_us" ? "-" : "年"}${
+        new Date().getMonth() + 1 > 9
+          ? new Date().getMonth() + 1
+          : "0" + (new Date().getMonth() + 1)
+      }${data.fairview_park_lang === "en_us" ? "-" : "月"}${
+        new Date().getDate() > 9 ? new Date().getDate() : "0" + new Date().getDate()
+      }${data.fairview_park_lang === "en_us" ? "" : "日"} ${
+        new Date().getHours() > 9 ? new Date().getHours() : "0" + new Date().getHours()
+      }:${
+        new Date().getMinutes() > 9
+          ? new Date().getMinutes()
+          : "0" + new Date().getMinutes()
+      }:${
+        new Date().getSeconds() > 9
+          ? new Date().getSeconds()
+          : "0" + new Date().getSeconds()
+      }`;
     };
-    // const startUp = ref();
     onMounted(() => {
       selectTenantStatus();
     });
@@ -361,8 +377,8 @@ export default {
       .tenantModal-header {
         text-align: right;
         padding: 20px 20px 0;
-        .el-icon{
-          font-size:30px;
+        .el-icon {
+          font-size: 30px;
           font-weight: bold;
           cursor: pointer;
         }
@@ -372,20 +388,19 @@ export default {
         padding: 0 20px 50px;
         h2 {
           font-style: normal;
-          margin-bottom: 20px;
+          margin-bottom: 5px;
           font-size: 38px;
           line-height: 65px;
           color: #2fa94e;
         }
         .open-tip {
           font-size: 18px;
-          @{deep} ul{
+          @{deep} ul {
             padding-left: 20px;
-            li{
-            list-style: decimal;
+            li {
+              list-style: decimal;
+            }
           }
-          }
-          
         }
         .open-btn {
           background-color: var(--mainColor2);
@@ -400,8 +415,8 @@ export default {
           border-color: var(--mainColor4);
           font-size: 18px;
           border-radius: 20px;
-           &:hover{
-            opacity: .8;
+          &:hover {
+            opacity: 0.8;
           }
         }
 
@@ -423,10 +438,7 @@ export default {
             }
           }
           i {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-left: 110px;
+            margin-left: 10px;
             font-size: 20px;
             line-height: 25px;
           }
@@ -442,8 +454,8 @@ export default {
           font-size: 18px;
           padding: 2px 20px;
           background-color: var(--mainColor2);
-          &:hover{
-            opacity: .8;
+          &:hover {
+            opacity: 0.8;
           }
         }
 
@@ -458,15 +470,14 @@ export default {
           h5 {
             margin-bottom: 10px;
           }
-        }
-        ul {
+          ul {
           text-align: center;
           padding: 0;
           margin: 0 auto 0px;
           width: 90%;
           li {
             display: flex;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             align-items: center;
             span {
               color: #07522b;
@@ -476,6 +487,8 @@ export default {
             }
           }
         }
+        }
+        
       }
     }
   }
@@ -540,7 +553,6 @@ export default {
     span {
       border-color: var(--mainColor3);
       background-color: var(--mainColor3);
-      
     }
   }
 
@@ -550,120 +562,70 @@ export default {
 }
 
 @media (max-width: 991px) {
-  .modal {
-    .modal-dialog {
-      .modal-body {
-        h2 {
-          font-size: 26px;
-        }
-        .open-tip {
-          font-size: 18px;
-        }
-        .open-btn {
-          margin: 0px auto 30px;
-          font-size: 18px;
-        }
-
-        .close-btn {
-          font-size: 18px;
-        }
-        .password {
-          i {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-left: 90px;
-            font-size: 20px;
-            top: 0;
-            line-height: 20px;
-          }
-        }
-        .account-record {
-          padding: 10px;
-          margin: 0 auto 30px;
-          h5 {
-            margin-bottom: 10px;
-          }
-        }
-        ul {
-          width: 100%;
-          li {
-            margin-bottom: 10px;
-            span {
-              &:first-child {
-                flex: 1;
-              }
-              &:last-child {
-                width: 30%;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  
   .tenantModal {
-  .tenantModal-dialog {
-    max-width: 95%;
-    .tenantModal-content {
-     
-      .tenantModal-header {
-        .el-icon{
-        }
-      }
-      .tenantModal-body {
-        h2 {
-          font-size: 26px;
-        }
-        .open-tip {
-          font-size: 18px;
-        }
-        .open-btn {
-          margin: 0px auto 30px;
-          font-size: 18px;
-        }
-
-        .close-btn {
-          font-size: 18px;
-        }
-
-        .name,
-        .password {
-          i {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-left: 90px;
-            font-size: 20px;
-            top: 0;
-            line-height: 25px;
+    .tenantModal-dialog {
+      max-width: 95%;
+      .tenantModal-content {
+        .tenantModal-header {
+          .el-icon {
           }
         }
-
-        .account-record {
-          padding: 10px;
-          margin: 0 auto 30px;
-          h5 {
-            margin-bottom: 10px;
+        .tenantModal-body {
+          h2 {
+            font-size: 26px;
           }
-        }
-        ul {
-          width: 100%;
-          li {
-            margin-bottom: 10px;
-            span {
-              &:first-child {
-                flex: 1;
-              }
-              &:last-child {
-                width: 45%;
+          .open-tip {
+            font-size: 18px;
+          }
+          .open-btn {
+            margin: 0px auto 30px;
+            font-size: 18px;
+          }
+
+          .close-btn {
+            font-size: 18px;
+          }
+
+          .name,
+          .password {
+            i {
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              margin-left: 90px;
+              font-size: 20px;
+              top: 0;
+              line-height: 25px;
+            }
+          }
+
+          .account-record {
+            padding: 10px;
+            margin: 0 auto 30px;
+            h5 {
+              margin-bottom: 10px;
+            }
+            ul {
+            width: 100%;
+            li {
+              margin-bottom: 3px;
+             
+              span {
+                &:first-child {
+                  flex: 1;
+                }
+                &:last-child {
+                  width: 45%;
+                }
               }
             }
           }
+          }
+          
         }
       }
     }
   }
-}
 }
 </style>
