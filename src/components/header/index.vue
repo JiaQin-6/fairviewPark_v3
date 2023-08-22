@@ -232,7 +232,7 @@ export default {
       logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
-   async setup(props, ctx) {
+    setup(props, ctx) {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
@@ -426,12 +426,12 @@ export default {
         )
       );
       userinfo.jwt = route.query.session;
-      if (route.query.dataCode) {
-        const result = await getUrlData(route.query.dataCode)
-        if(result){
-          userinfo.menu = result
-        }
-      }
+      // if (route.query.dataCode) {
+      //   const result = await getUrlData(route.query.dataCode)
+      //   if(result){
+      //     userinfo.menu = result
+      //   }
+      // }
       localStorage.setItem("login-info", JSON.stringify(userinfo));
       store.commit("setLoginStatus", true);
     } else if (route.query.logout && route.query.logout === 'true') {
