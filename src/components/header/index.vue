@@ -221,7 +221,6 @@ export default {
     ArrowDown,
   },
   props: {
-    loginStatus: Boolean,
     isShow: Boolean,
     isShowLoginButton: Boolean,
     isShowLoginOutButton: Boolean,
@@ -232,7 +231,7 @@ export default {
       logo_m: new URL("../../assets/image/home/logo_m.png", import.meta.url).href,
     };
   },
-    setup(props, ctx) {
+  setup(props, ctx) {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
@@ -248,8 +247,8 @@ export default {
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
-     //切換語言
-     const changeLang = (lang) => {
+    //切換語言
+    const changeLang = (lang) => {
       data.v_loading = true;
       if (
         document.getElementById("navbar-button") &&
@@ -272,21 +271,13 @@ export default {
     };
     //切換路由
     const changeRouter = (href, children) => {
-      if (location.hash === "#/home") {
-        if (!localStorage.getItem("login-info")) {
-          data.is_login = false;
-          store.commit("setLoginStatus", false);
-        }
         data.route_url = href;
-      } else {
-        data.route_url = href;
-      }
     };
     //登出
     const loginOut = () => {
       localStorage.removeItem("login-info");
-      data.is_login = false;
       store.commit("setLoginStatus", false);
+      ctx.emit("showPopupBox");//是否顯示popup彈框
     };
     //点击业主专区
     const selectOwnersZone = (val) => {
@@ -384,7 +375,7 @@ export default {
       }
     };
     //获取 app 到 web 需要携带的数据
-     const getUrlData = async (dataCode) => {
+    const getUrlData = async (dataCode) => {
       data.loading = true;
       try {
         const res = await proxy.$http.getUrlData({
@@ -401,7 +392,7 @@ export default {
           });
           return false
         }
-        
+
       } catch (error) {
         console.log(error)
         data.loading = false;
@@ -415,31 +406,6 @@ export default {
     } else {
       data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     }
-    //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
-    if (route.query.session) {
-      //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
-      // token变量传需要解析的jwt值
-      let strings = route.query.session.split("."); //截取token，获取载体
-      var userinfo = JSON.parse(
-        decodeURIComponent(
-          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
-        )
-      );
-      userinfo.jwt = route.query.session;
-      // if (route.query.dataCode) {
-      //   const result = await getUrlData(route.query.dataCode)
-      //   if(result){
-      //     userinfo.menu = result
-      //   }
-      // }
-      localStorage.setItem("login-info", JSON.stringify(userinfo));
-      store.commit("setLoginStatus", true);
-    } else if (route.query.logout && route.query.logout === 'true') {
-      //是否app已登出
-      localStorage.removeItem("login-info");
-      data.is_login = false;
-      store.commit("setLoginStatus", false);
-    }
     //判断url是否带有语言参数
     if (
       route.query.lang &&
@@ -449,12 +415,42 @@ export default {
       data.fairview_park_lang = route.query.lang;
       proxy.$i18n.locale = route.query.lang;
     }
-    //如果有登陸信息就顯示登陸
-    if (localStorage.getItem("login-info")) {
-      data.is_login = true;
-      data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
-    }
-    onMounted(() => {
+  
+    onMounted(async () => {
+      //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
+      if (route.query.session) {
+        //如果已經登錄有token就替換，沒有登錄就直接拿token登錄
+        // token变量传需要解析的jwt值
+        let strings = route.query.session.split("."); //截取token，获取载体
+        var userinfo = JSON.parse(
+          decodeURIComponent(
+            escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+          )
+        );
+        userinfo.jwt = route.query.session;
+        if (route.query.dataCode) {
+          const result = await getUrlData(route.query.dataCode)
+          if(result){
+            userinfo.menu = result
+          }
+        }
+        localStorage.setItem("login-info", JSON.stringify(userinfo));
+        store.commit("setLoginStatus", true);
+      } else if (route.query.logout && route.query.logout === 'true') {
+        //是否app已登出
+        localStorage.removeItem("login-info");
+        store.commit("setLoginStatus", false);
+      }
+      //如果有登陸信息就顯示登陸
+      if (localStorage.getItem("login-info")) {
+        data.is_login = true;
+        data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
+      }
+      //首次加載是否顯示popup彈框(只在首頁才顯示彈框)
+      if(location.hash.indexOf("#/home")!==-1){
+        ctx.emit("showPopupBox");
+      }
+      //
       if (document.getElementsByClassName("el-popper")[0]) {
         document.getElementsByClassName("el-popper")[0].parentNode.style.position =
           "fixed";
@@ -463,7 +459,7 @@ export default {
           "2000";
       }
     });
-   
+
     //监听器
     watch(
       () => route,
@@ -472,10 +468,13 @@ export default {
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
         data.showOwnerZONEList = false;
-        if (location.hash === "#/home") {
-          if (!localStorage.getItem("login-info")) {
+        if (location.hash.indexOf("#/home")!==-1) {
+          //如果token失效會返回首頁，判斷is_login如果是true就登出并重新調用顯示popup彈框
+          if (!localStorage.getItem("login-info")&&data.is_login === true) {
             data.is_login = false;
             store.commit("setLoginStatus", false);
+            //是否顯示popup彈框
+             ctx.emit("showPopupBox");
           }
           data.route_url = location.hash;
         } else {
@@ -501,7 +500,7 @@ export default {
       () => store.state.loginStatus,
       (val) => {
         data.is_login = val;
-        if (data.is_login) {
+        if (val) {
           if (localStorage.getItem("login-info")) {
             data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
           }

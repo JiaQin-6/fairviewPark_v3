@@ -136,7 +136,7 @@
               </div>
 
               <el-button class="close-btn" @click="closeTenantManagement" type="danger">{{
-                $t("tenant_account_management.Tenant_Account_Cancellation")
+                $t("tenant_account_management.Confirmation_to_close_the_Tenant_Account")
               }}</el-button>
             </div>
           </div>

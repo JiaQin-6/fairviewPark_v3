@@ -753,9 +753,9 @@ export default {
   data() {
     return {};
   },
-  setup(props, { emit }) {
+  setup(props, ctx) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
-    const { proxy, ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     let data = reactive({
       loading: false,
       verifyPasswordLoading: false,
@@ -846,6 +846,7 @@ export default {
           document.getElementById("close-login").click();
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
           store.commit("setLoginStatus", true);
+          ctx.emit("showPopupBox");//是否顯示popup彈框
           //如果是住客＆第一次登陸彈出編輯框
           let loginInfo = JSON.parse(localStorage.getItem("login-info"));
           let strings = loginInfo.jwt.split("."); //截取token，获取载体
@@ -930,6 +931,7 @@ export default {
               document.getElementById("close-signUp").click();
               localStorage.setItem("login-info", JSON.stringify(res.data.data));
               store.commit("setLoginStatus", true);
+              ctx.emit("showPopupBox");//是否顯示popup彈框
             } else {
               data.login_error_tip.is_show = true;
               data.login_error_tip.text = res.data.msg;
@@ -1085,6 +1087,7 @@ export default {
           data.edit_member_info_error_tip.text = "";
           localStorage.removeItem("login-info");
           store.commit("setLoginStatus", false);
+          ctx.emit("showPopupBox");
           router.push({
             path: "/",
             query: {
