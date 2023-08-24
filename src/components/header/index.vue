@@ -383,7 +383,7 @@ export default {
         });
         if (res.data.status === 200) {
           data.loading = false;
-          return res.data.data.menu
+          return res.data.data.menus
         } else {
           data.loading = false;
           ElMessage({
@@ -431,7 +431,7 @@ export default {
         if (route.query.dataCode) {
           const result = await getUrlData(route.query.dataCode)
           if(result){
-            userinfo.menu = result
+            userinfo.menuList = result
           }
         }
         localStorage.setItem("login-info", JSON.stringify(userinfo));

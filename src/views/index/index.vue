@@ -106,7 +106,7 @@ export default {
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
 
-    //判斷當從app進來的時候用戶是否登錄
+    //如果是从app進入‘登陆按钮’和‘登出按钮’还有‘footer’都不应该显示
     if (
       route.query.source &&
       route.query.source === "app" &&
@@ -115,22 +115,17 @@ export default {
       if (route.query.session) {
         //在app已登錄
         sessionStorage.setItem("app-login-status", "1");
-        data.is_show_footer = false;
-        data.isShowLoginOutButton = false;
       } else {
         //在app未登錄
         sessionStorage.setItem("app-login-status", "2");
-        data.is_show_footer = false;
-        data.isShowLoginButton = false;
       }
+      data.isShowLoginOutButton = false;
+      data.is_show_footer = false;
+      data.isShowLoginButton = false;
     } else if (sessionStorage.getItem("app-login-status")) {
-      if (sessionStorage.getItem("app-login-status") === "1") {
-        data.is_show_footer = false;
-        data.isShowLoginOutButton = false;
-      } else if (sessionStorage.getItem("app-login-status") === "2") {
-        data.is_show_footer = false;
-        data.isShowLoginButton = false;
-      }
+      data.isShowLoginOutButton = false;
+      data.is_show_footer = false;
+      data.isShowLoginButton = false;
     }
     //
     const showOwnerIsZONE = (val) => {
