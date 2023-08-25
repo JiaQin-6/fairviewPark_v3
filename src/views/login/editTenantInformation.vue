@@ -324,6 +324,7 @@ export default {
           data.edit_member_info_error_tip.text = "";
           localStorage.removeItem("login-info");
           store.commit("setLoginStatus", false);
+          ctx.emit("showPopupBox");//是否顯示popup彈框
           router.push({
             path: "/",
             query: {

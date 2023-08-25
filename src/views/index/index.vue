@@ -24,11 +24,12 @@
         @showTenantModal="()=>{
           isShowTenantModal = true
         }"
+        @showPopupBox="()=>{showPopupBox()}"
       ></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
-      <Login></Login>
-      <EditTenantInformation></EditTenantInformation>
+      <Login @showPopupBox="()=>{showPopupBox()}"></Login>
+      <EditTenantInformation @showPopupBox="()=>{showPopupBox()}"></EditTenantInformation>
       <TenantAccountManagement v-if="isShowTenantModal" @hideTenantModal="()=>{isShowTenantModal = false}"></TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
@@ -105,7 +106,7 @@ export default {
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
 
-    //判斷當從app進來的時候用戶是否登錄
+    //如果是从app進入‘登陆按钮’和‘登出按钮’还有‘footer’都不应该显示
     if (
       route.query.source &&
       route.query.source === "app" &&
@@ -114,22 +115,17 @@ export default {
       if (route.query.session) {
         //在app已登錄
         sessionStorage.setItem("app-login-status", "1");
-        data.is_show_footer = false;
-        data.isShowLoginOutButton = false;
       } else {
         //在app未登錄
         sessionStorage.setItem("app-login-status", "2");
-        data.is_show_footer = false;
-        data.isShowLoginButton = false;
       }
+      data.isShowLoginOutButton = false;
+      data.is_show_footer = false;
+      data.isShowLoginButton = false;
     } else if (sessionStorage.getItem("app-login-status")) {
-      if (sessionStorage.getItem("app-login-status") === "1") {
-        data.is_show_footer = false;
-        data.isShowLoginOutButton = false;
-      } else if (sessionStorage.getItem("app-login-status") === "2") {
-        data.is_show_footer = false;
-        data.isShowLoginButton = false;
-      }
+      data.isShowLoginOutButton = false;
+      data.is_show_footer = false;
+      data.isShowLoginButton = false;
     }
     //
     const showOwnerIsZONE = (val) => {
@@ -151,6 +147,7 @@ export default {
     const loginOut = () => {
       localStorage.removeItem("login-info");
       store.commit("setLoginStatus", false);
+      showPopupBox()//是否顯示popup彈框
     };
     //查询最新一条弹窗信息
     const findOneNewPopupBox = async (memberType) => {
@@ -240,29 +237,12 @@ export default {
         data.loading = false;
       }
     };
-    watch(
-      () => route,
-      (value) => {
-        data.is_show = false;
-        if (document.getElementById("close-login")) {
-          document.getElementById("close-login").click();
-        }
-        if (document.getElementById("close-signUp")) {
-          document.getElementById("close-signUp").click();
-        }
-        if (document.getElementById("close-forgetPasswor")) {
-          document.getElementById("close-forgetPasswor").click();
-        }
-        if (document.getElementById("close-edit-member")) {
-          document.getElementById("close-edit-member").click();
-        }
-      },
-      { deep: true, immediate: true }
-    );
-    watch(
-      () => store.state.loginStatus,
-      async (val) => {
-        //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
+    //每次刷新頁面和登陸登出都調用api查詢popup box是否彈出
+    const showPopupBox = async () => {
+      // if (location.hash.indexOf("#/home")!==-1) {
+
+      // }
+      //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
         //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
         const ownerData = await findOneNewPopupBox(0); //业主
         const nonMemberData = await findOneNewPopupBox(2); //游客
@@ -277,8 +257,7 @@ export default {
             content: ownerData && ownerData.htmlEnUs,
           },
         };
-        if (val) {
-        console.log(ownerData)
+        if (localStorage.getItem("login-info")) {
           if (!ownerData) {
             return false;
           }
@@ -286,7 +265,6 @@ export default {
           data.newRealTimeInfo.content = newData.owner.content;
           
           if (localStorage.getItem("real-info")) {
-            
             if (
               newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
             ) {
@@ -304,7 +282,6 @@ export default {
                 })
               );
             }
-
             if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
               data.showRealTimeInfo = true;
             }
@@ -342,6 +319,23 @@ export default {
           } else {
             data.showRealTimeInfo = true;
           }
+        }
+    };
+    watch(
+      () => route,
+      (value) => {
+        data.is_show = false;
+        if (document.getElementById("close-login")) {
+          document.getElementById("close-login").click();
+        }
+        if (document.getElementById("close-signUp")) {
+          document.getElementById("close-signUp").click();
+        }
+        if (document.getElementById("close-forgetPasswor")) {
+          document.getElementById("close-forgetPasswor").click();
+        }
+        if (document.getElementById("close-edit-member")) {
+          document.getElementById("close-edit-member").click();
         }
       },
       { deep: true, immediate: true }
@@ -408,6 +402,7 @@ export default {
       findOneNewPopupBox,
       loginPower,
       selectTenantStatus,
+      showPopupBox,
     };
   },
 };
