@@ -83,7 +83,7 @@
                   class="iconfont icon-yanjing_xianshi_o fs-20 pointer"
                 ></i>
               </p>
-              <button class="copy" @click.prevent="copyTenantInfo">
+              <button class="copy" @click="copyTenantInfo">
                 <i class="iconfont icon-fuzhi"></i>
                 {{ $t("tenant_account_management.Copy_account_information") }}
               </button>
