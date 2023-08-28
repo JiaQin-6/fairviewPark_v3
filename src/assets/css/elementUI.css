@@ -74,6 +74,11 @@
   position: relative !important;
   z-index: inherit !important;
 }
+.el-button {
+  height: auto!important;
+  min-height: 32px!important;
+  white-space: normal!important;
+}
 @media (max-width: 576px) {
   .el-message {
     width: 90%;

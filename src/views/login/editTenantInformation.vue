@@ -170,7 +170,7 @@
                     }}
                   </p>
                 </li>
-                <!-- <li>
+                <!-- <li v-if="editTenantInfoForm.isAgreeReceiveLetter">
                   <p class="title">
                     {{
                       $t(
@@ -300,12 +300,12 @@ export default {
         const res = await proxy.$http.editTenantMemberInfo({
           password: data.editTenantInfoForm.confirmPassword,
           verifyCode: data.editTenantInfoForm.verifyCode,
-          typeList: [
+          typeList: data.editTenantInfoForm.isAgreeReceiveLetter?[
             {
               typeCode: "accept_email", //接受实体邮件固定传值（默认N）
               typeValue: data.editTenantInfoForm.isAgreeReceiveLetter, //Y是；N否
             },
-          ],
+          ]:[],
         });
         if (res.data.status === 200) {
           // localStorage.setItem("login-info", JSON.stringify(res.data.data));
