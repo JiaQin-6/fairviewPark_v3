@@ -356,7 +356,7 @@ export default {
         });
         if (res.data.status === 200) {
           data.loading = false;
-          data.editTenantInfoForm.verifyCode = res.data.data;
+          data.editTenantInfoForm.verifyCode = res.data.data.randomNumber;
           return true;
         } else {
           data.loading = false;

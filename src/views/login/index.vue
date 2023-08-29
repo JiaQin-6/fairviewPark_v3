@@ -1130,7 +1130,21 @@ export default {
         });
         if (res.data.status === 200) {
           data.verifyPasswordLoading = false;
-          data.editMemberInfoForm.verifyCode = res.data.data;
+          data.editMemberInfoForm.verifyCode = res.data.data.randomNumber;
+          data.editMemberInfoForm.isAgreeAuthorization = res.data.data.authList&& res.data.data.authList.filter((item) => {
+              return item.typeCode == "auth_start";
+            }).length!==0
+          ? res.data.data.authList.filter((item) => {
+              return item.typeCode == "auth_start";
+            })[0].typeValue
+          : null;
+        data.editMemberInfoForm.isAgreeReceiveLetter = res.data.data.authList&&res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            }).length!==0
+          ? res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            })[0].typeValue
+          : null;
           return true;
         } else {
           data.verifyPasswordLoading = false;
@@ -1142,7 +1156,6 @@ export default {
       }
     };
     onMounted(() => {
-      
       var editMemberInformationModal = document.getElementById("editMemberInformation");
       editMemberInformationModal.addEventListener("show.bs.modal", function (event) {
         let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
@@ -1157,20 +1170,6 @@ export default {
         data.editMemberInfoForm.cnickname = userinfo.cname || "";
         data.editMemberInfoForm.email = userinfo.email || "";
         data.editMemberInfoForm.contactNo = userinfo.contactNo || "";
-        data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList&& userinfo.authList.filter((item) => {
-              return item.typeCode == "auth_start";
-            }).length!==0
-          ? userinfo.authList.filter((item) => {
-              return item.typeCode == "auth_start";
-            })[0].typeValue
-          : null;
-        data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList&&userinfo.authList.filter((item) => {
-              return item.typeCode == "accept_email";
-            }).length!==0
-          ? userinfo.authList.filter((item) => {
-              return item.typeCode == "accept_email";
-            })[0].typeValue
-          : null;
         data.editMemberInfoForm.updateTime = userinfo.editInfoTime || "";
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框
