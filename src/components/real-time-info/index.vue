@@ -83,26 +83,58 @@ export default {
             id:'',
             show:'',
         }
-        residents（住客）{
+        tenant（住客）{
             id:'',
             show:'',
         }
       **/
       //判断身份，和localStorage中的状态，修改对应状态
       let obj;
-      if (localStorage.getItem("login-info")) {
+      let real_info = localStorage.getItem("real-info")
+      if (localStorage.getItem("login-info") && JSON.parse(localStorage.getItem("login-info")).groupId === 0) {
         obj = {
           nonMember: {
-            id: localStorage.getItem("real-info")
-              ? JSON.parse(localStorage.getItem("real-info")).nonMember.id
+            id: real_info && JSON.parse(real_info).nonMember
+              ? JSON.parse(real_info).nonMember.id
               : "",
-            show: localStorage.getItem("real-info")
-              ? JSON.parse(localStorage.getItem("real-info")).nonMember.show
+            show: real_info && JSON.parse(real_info).nonMember
+              ? JSON.parse(real_info).nonMember.show
+              : true,
+          },
+          tenant: {
+            id: real_info && JSON.parse(real_info).tenant
+              ? JSON.parse(real_info).tenant.id
+              : "",
+            show: real_info && JSON.parse(real_info).tenant
+              ? JSON.parse(real_info).tenant.show
               : true,
           },
           owner: {
             id: props.newRealTimeInfo.id,
             show: data.iKnow ? false : true,
+          },
+        };
+      } else if (localStorage.getItem("login-info") && JSON.parse(localStorage.getItem("login-info")).groupId === 1) {
+        obj = {
+          nonMember: {
+            id: real_info && JSON.parse(real_info).nonMember
+              ? JSON.parse(real_info).nonMember.id
+              : "",
+            show: real_info && JSON.parse(real_info).nonMember
+              ? JSON.parse(real_info).nonMember.show
+              : true,
+          },
+          tenant: {
+            id: props.newRealTimeInfo.id,
+            show: data.iKnow ? false : true,
+          },
+          owner: {
+            id: real_info && JSON.parse(real_info).owner
+              ? JSON.parse(real_info).owner.id
+              : "",
+            show: real_info && JSON.parse(real_info).owner
+              ? JSON.parse(real_info).owner.show
+              : true,
           },
         };
       } else {
@@ -111,12 +143,20 @@ export default {
             id: props.newRealTimeInfo.id,
             show: data.iKnow ? false : true,
           },
-          owner: {
-            id: localStorage.getItem("real-info")
-              ? JSON.parse(localStorage.getItem("real-info")).owner.id
+          tenant: {
+            id: real_info && JSON.parse(real_info).tenant
+              ? JSON.parse(real_info).tenant.id
               : "",
-            show: localStorage.getItem("real-info")
-              ? JSON.parse(localStorage.getItem("real-info")).owner.show
+            show: real_info && JSON.parse(real_info).tenant
+              ? JSON.parse(real_info).tenant.show
+              : true,
+          },
+          owner: {
+            id: real_info && JSON.parse(real_info).owner
+              ? JSON.parse(real_info).owner.id
+              : "",
+            show: real_info && JSON.parse(real_info).owner
+              ? JSON.parse(real_info).owner.show
               : true,
           },
         };

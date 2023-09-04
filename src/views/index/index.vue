@@ -4,11 +4,7 @@
       <div class="ownerIsZONE" v-if="is_show">
         <div class="ownerIsZONE-content">
           <ul>
-            <li
-              v-for="(item, index) in loginPower"
-              :key="index"
-              @click="selectOwnersZone(item.router)"
-            >
+            <li v-for="(item, index) in loginPower" :key="index" @click="selectOwnersZone(item.router)">
               {{ item.text }}
             </li>
           </ul>
@@ -16,21 +12,16 @@
       </div>
     </transition>
     <div class="main-content">
-      <Header
-        :isShow="is_show"
-        :isShowLoginButton="isShowLoginButton"
-        :isShowLoginOutButton="isShowLoginOutButton"
-        @showOwnerIsZONE="showOwnerIsZONE"
-        @showTenantModal="()=>{
+      <Header :isShow="is_show" :isShowLoginButton="isShowLoginButton" :isShowLoginOutButton="isShowLoginOutButton"
+        @showOwnerIsZONE="showOwnerIsZONE" @showTenantModal="() => {
           isShowTenantModal = true
-        }"
-        @showPopupBox="()=>{showPopupBox()}"
-      ></Header>
+        }" @showPopupBox="() => { showPopupBox() }"></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
-      <Login @showPopupBox="()=>{showPopupBox()}"></Login>
-      <EditTenantInformation @showPopupBox="()=>{showPopupBox()}"></EditTenantInformation>
-      <TenantAccountManagement v-if="isShowTenantModal" @hideTenantModal="()=>{isShowTenantModal = false}"></TenantAccountManagement>
+      <Login @showPopupBox="() => { showPopupBox() }"></Login>
+      <EditTenantInformation @showPopupBox="() => { showPopupBox() }"></EditTenantInformation>
+      <TenantAccountManagement v-if="isShowTenantModal" @hideTenantModal="() => { isShowTenantModal = false }">
+      </TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
@@ -38,15 +29,10 @@
       <img style="width: 100%" :src="arrowUpCircle" alt="" />
     </el-backtop>
     <!-- 非會員和正式會員信息彈框 -->
-    <RealTimeInfo
-      :showRealTimeInfo="showRealTimeInfo"
-      :newRealTimeInfo="newRealTimeInfo"
-      @close="
-        () => {
-          showRealTimeInfo = false;
-        }
-      "
-    ></RealTimeInfo>
+    <RealTimeInfo :showRealTimeInfo="showRealTimeInfo" :newRealTimeInfo="newRealTimeInfo" @close="() => {
+        showRealTimeInfo = false;
+      }
+      "></RealTimeInfo>
   </div>
 </template>
 
@@ -101,7 +87,7 @@ export default {
         id: "",
         content: "",
       },
-      isShowTenantModal:false,//是否显示TenantAccountManagement组件
+      isShowTenantModal: false,//是否显示TenantAccountManagement组件
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -239,87 +225,119 @@ export default {
     };
     //每次刷新頁面和登陸登出都調用api查詢popup box是否彈出
     const showPopupBox = async () => {
-      // if (location.hash.indexOf("#/home")!==-1) {
-
-      // }
       //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
-        //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
+      //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
+      if (localStorage.getItem("login-info") && JSON.parse(localStorage.getItem("login-info")).groupId === 0) {
+        //業主登陸
         const ownerData = await findOneNewPopupBox(0); //业主
-        const nonMemberData = await findOneNewPopupBox(2); //游客
-        //根据localStorage中的状态来决定显示隐藏
-        let newData = {
-          nonMember: {
-            id: nonMemberData && nonMemberData.id,
-            content: nonMemberData && nonMemberData.htmlEnUs,
-          },
-          owner: {
-            id: ownerData && ownerData.id,
-            content: ownerData && ownerData.htmlEnUs,
-          },
-        };
-        if (localStorage.getItem("login-info")) {
-          if (!ownerData) {
-            return false;
+        if (!ownerData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = ownerData.id;
+        data.newRealTimeInfo.content = ownerData.htmlEnUs;
+        if (localStorage.getItem("real-info") && JSON.parse(localStorage.getItem("real-info")).owner) {
+          if (
+            ownerData.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
+          ) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: JSON.parse(localStorage.getItem("real-info")).nonMember ? JSON.parse(localStorage.getItem("real-info")).nonMember.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).nonMember ? JSON.parse(localStorage.getItem("real-info")).nonMember.show : tru,
+                },
+                tenant: {
+                  id: JSON.parse(localStorage.getItem("real-info")).tenant ? JSON.parse(localStorage.getItem("real-info")).tenant.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).tenant ? JSON.parse(localStorage.getItem("real-info")).tenant.show : true,
+                },
+                owner: {
+                  id: ownerData.id,
+                  show: true,
+                },
+              })
+            );
           }
-          data.newRealTimeInfo.id = newData.owner.id;
-          data.newRealTimeInfo.content = newData.owner.content;
-          
-          if (localStorage.getItem("real-info")) {
-            if (
-              newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
-            ) {
-              localStorage.setItem(
-                "real-info",
-                JSON.stringify({
-                  nonMember: {
-                    id: JSON.parse(localStorage.getItem("real-info")).nonMember.id,
-                    show: JSON.parse(localStorage.getItem("real-info")).nonMember.show,
-                  },
-                  owner: {
-                    id: newData.owner.id,
-                    show: true,
-                  },
-                })
-              );
-            }
-            if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
-              data.showRealTimeInfo = true;
-            }
-          } else {
+          if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
             data.showRealTimeInfo = true;
           }
         } else {
-          if (!nonMemberData) {
-            return false;
+          data.showRealTimeInfo = true;
+        }
+      } else if (localStorage.getItem("login-info") && JSON.parse(localStorage.getItem("login-info")).groupId === 1) {
+        //住客登陸
+        const tenantData = await findOneNewPopupBox(1); //住客
+        if (!tenantData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = tenantData.id;
+        data.newRealTimeInfo.content = tenantData.htmlEnUs;
+
+        if (localStorage.getItem("real-info") && JSON.parse(localStorage.getItem("real-info")).tenant) {
+          if (
+            tenantData.id !== JSON.parse(localStorage.getItem("real-info")).tenant.id
+          ) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: JSON.parse(localStorage.getItem("real-info")).nonMember ? JSON.parse(localStorage.getItem("real-info")).nonMember.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).nonMember ? JSON.parse(localStorage.getItem("real-info")).nonMember.show : true,
+                },
+                tenant: {
+                  id: tenantData.id,
+                  show: true,
+                },
+                owner: {
+                  id: JSON.parse(localStorage.getItem("real-info")).owner ? JSON.parse(localStorage.getItem("real-info")).owner.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).owner ? JSON.parse(localStorage.getItem("real-info")).owner.show : true,
+                },
+              })
+            );
           }
-          data.newRealTimeInfo.id = newData.nonMember.id;
-          data.newRealTimeInfo.content = newData.nonMember.content;
-          if (localStorage.getItem("real-info")) {
-            if (
-              newData.nonMember.id !==
-              JSON.parse(localStorage.getItem("real-info")).nonMember.id
-            ) {
-              localStorage.setItem(
-                "real-info",
-                JSON.stringify({
-                  nonMember: {
-                    id: newData.nonMember.id,
-                    show: true,
-                  },
-                  owner: {
-                    id: JSON.parse(localStorage.getItem("real-info")).owner.id,
-                    show: JSON.parse(localStorage.getItem("real-info")).owner.show,
-                  },
-                })
-              );
-            }
-            if (JSON.parse(localStorage.getItem("real-info")).nonMember.show) {
-              data.showRealTimeInfo = true;
-            }
-          } else {
+          if (JSON.parse(localStorage.getItem("real-info")).tenant.show) {
             data.showRealTimeInfo = true;
           }
+        } else {
+          data.showRealTimeInfo = true;
         }
+      } else {
+        const nonMemberData = await findOneNewPopupBox(2); //游客
+        //遊客
+        if (!nonMemberData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = nonMemberData.id;
+        data.newRealTimeInfo.content = nonMemberData.htmlEnUs;
+        if (localStorage.getItem("real-info") && JSON.parse(localStorage.getItem("real-info")).nonMember) {
+          if (
+            nonMemberData.id !==
+            JSON.parse(localStorage.getItem("real-info")).nonMember.id
+          ) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: nonMemberData.id,
+                  show: true,
+                },
+                tenant: {
+                  id: JSON.parse(localStorage.getItem("real-info")).tenant ? JSON.parse(localStorage.getItem("real-info")).tenant.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).tenant ? JSON.parse(localStorage.getItem("real-info")).tenant.show : true,
+                },
+                owner: {
+                  id: JSON.parse(localStorage.getItem("real-info")).owner ? JSON.parse(localStorage.getItem("real-info")).owner.id : '',
+                  show: JSON.parse(localStorage.getItem("real-info")).owner ? JSON.parse(localStorage.getItem("real-info")).owner.show : true,
+                },
+              })
+            );
+          }
+          if (JSON.parse(localStorage.getItem("real-info")).nonMember.show) {
+            data.showRealTimeInfo = true;
+          }
+        } else {
+          data.showRealTimeInfo = true;
+        }
+      }
     };
     watch(
       () => route,
