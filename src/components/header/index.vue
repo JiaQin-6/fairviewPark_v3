@@ -39,7 +39,6 @@
                   : $t("headed.TENANT_s_ZONE")
               }}
             </button>
-            <i v-if="showOwnerZONEList"></i>
           </div>
           <div
             v-if="is_login"
@@ -206,8 +205,7 @@
                 <template #dropdown>
                   <el-dropdown-menu>
                     <el-dropdown-item class="yellow" command="/edit-member-information"
-                      ><el-icon>
-                        <EditPen /> </el-icon
+                      ><el-icon> <EditPen /> </el-icon
                       >{{
                         loginInfo && loginInfo.groupId === 0
                           ? $t("headed.Edit_member_information")
@@ -275,6 +273,7 @@
       </div>
       <transition name="el-zoom-in-top">
         <div class="ownerIsZONE" v-if="showOwnerZONEList">
+          <i></i>
           <ul>
             <li
               v-for="(item, index) in loginPower"
@@ -946,25 +945,7 @@ export default {
     }
 
     .ownerIsZONE {
-      width: 100%;
-      height: calc(100vh - 60px);
-      box-sizing: border-box;
-      overflow: auto;
-      margin-top: 10px;
       display: none;
-      ul {
-        padding: 0;
-        background-color: var(--mainColor2);
-
-        li {
-          border-bottom: 1px solid rgba(206, 204, 204, 0.3);
-          padding: 12px 10px;
-          font-size: 26px;
-          text-align: center;
-          color: #fff;
-          cursor: pointer;
-        }
-      }
     }
   }
 }
@@ -1078,9 +1059,29 @@ export default {
         display: none !important;
       }
       .ownerIsZONE {
-      display: block;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+        margin-top: -17px;
+        i {
+          display: block;
+          height: 14px;
+          width: 14px;
+          margin: 0px auto 0;
+          border-width: 14px;
+          border-color: transparent transparent var(--mainColor2) transparent;
+          border-style: solid;
+        }
         ul {
+          padding: 0;
+          background-color: var(--mainColor2);
+        overflow: auto;
+        height: calc(100vh - 60px);
           li {
+            border-bottom: 1px solid rgba(206, 204, 204, 0.3);
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
             font-size: 20px;
             padding: 10px 10px;
           }
