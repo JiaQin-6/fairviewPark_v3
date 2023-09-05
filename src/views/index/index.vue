@@ -78,7 +78,7 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
-      is_show: false,
+      is_show: false,//是否顯示menu列表
       is_show_footer: true,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
       isShowLoginButton: true, //是否顯示登錄按鈕（app進來web判斷）
@@ -358,41 +358,43 @@ export default {
       },
       { deep: true, immediate: true }
     );
+    //獲取移動端的menu列表
     const loginPower = computed(() => {
       let o_array = [];
-      JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
-        o_array.push({
-          router: item.route,
-          text:
-            sessionStorage.getItem("fairview_park_lang") === "en_us"
-              ? item.nameEnUs
-              : item.nameZhTw,
+        JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
+          o_array.push({
+            router: item.route,
+            text:
+              sessionStorage.getItem("fairview_park_lang") === "en_us"
+                ? item.nameEnUs
+                : item.nameZhTw,
+          });
         });
-      });
-      if (data.isShowLoginOutButton) {
-        o_array.push({
-          router: "/loginOut",
-          text: proxy.$t("headed.Login_out"),
-        });
-      }
-      if (
-        localStorage.getItem("login-info") &&
-        JSON.parse(localStorage.getItem("login-info")).groupId === 0
-      ) {
-        o_array.unshift({
-          router: "/start-up",
-          text: proxy.$t("headed.Tenant_account_management"),
-        });
-        o_array.unshift({
-          router: "/edit-member-information",
-          text: proxy.$t("headed.Edit_member_information"),
-        });
-      } else {
-        o_array.unshift({
-          router: "/start-up-tenant",
-          text: proxy.$t("headed.Tenant_account_management"),
-        });
-      }
+        if (data.isShowLoginOutButton) {
+          o_array.push({
+            router: "/loginOut",
+            text: proxy.$t("headed.Login_out"),
+          });
+        }
+        if (
+          localStorage.getItem("login-info") &&
+          JSON.parse(localStorage.getItem("login-info")).groupId === 0
+        ) {
+          o_array.unshift({
+            router: "/start-up",
+            text: proxy.$t("headed.Tenant_account_management"),
+          });
+          o_array.unshift({
+            router: "/edit-member-information",
+            text: proxy.$t("headed.Edit_member_information"),
+          });
+        } else {
+          o_array.unshift({
+            router: "/start-up-tenant",
+            text: proxy.$t("headed.Tenant_account_management"),
+          });
+        }
+      
       return o_array;
     });
     onMounted(async () => {
@@ -429,18 +431,20 @@ export default {
 <style lang="less" scoped>
 .ownerIsZONE {
   position: fixed;
-  top: 60px;
+  top: 0px;
   left: 0;
-  height: calc(100vh - 60px);
+  height:100vh;
   width: 100vw;
   z-index: 10;
 
   .ownerIsZONE-content {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px);
     box-sizing: border-box;
     overflow: auto;
-    position: relative;
+    position: absolute;
+    top: 60px;
+    left: 0;
 
     ul {
       padding: 0;

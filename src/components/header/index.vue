@@ -189,14 +189,14 @@
       </div>
     </nav>
     <!-- loading -->
-    <div class="loading" v-loading="v_loading" style="
+    <div class="loading" v-loading="loading" style="
         width: 100vw;
         height: 100vh;
         top: 0;
         left: 0;
         position: fixed;
         z-index: 10000;
-      " :style="{ display: v_loading ? '' : 'none' }"></div>
+      " :style="{ display: loading ? '' : 'none' }"></div>
   </div>
 </template>
 
@@ -235,10 +235,10 @@ export default {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
-      v_loading: false,
+      loading: false,
       route_url: "",
       fairview_park_lang: "",
-      is_login: false,
+      is_login: false,//判斷是否是登陸狀態
       pmLogHave: null,
       showLogin_m: false,
       showOwnerZONEList: false,
@@ -249,7 +249,7 @@ export default {
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
     //切換語言
     const changeLang = (lang) => {
-      data.v_loading = true;
+      data.loading = true;
       if (
         document.getElementById("navbar-button") &&
         window

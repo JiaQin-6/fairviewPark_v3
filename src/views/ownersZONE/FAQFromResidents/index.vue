@@ -16,7 +16,7 @@
         :style="{ 'background-image': 'url(' + banner + ')' }"
       ></div>
       <p>
-        {{ $t('headed.FAQ_from_Residents')}}
+        {{ $t("headed.FAQ_from_Residents") }}
       </p>
     </div>
     <!-- navs -->
@@ -41,7 +41,7 @@
             </li>
           </ul>
           <el-select
-            v-if="FAQ_from_residents_list.length>0"
+            v-if="FAQ_from_residents_list.length > 0"
             size="large"
             v-model="nav_index"
             class="menu-select"
@@ -64,7 +64,19 @@
               <h5 v-if="FAQ_from_residents_list.length !== 0">
                 {{ FAQ_from_residents_list[nav_index].titleEnUs }}
               </h5>
-              <el-collapse accordion v-model="activeNames" @change="handleChange">
+              <el-collapse
+                accordion
+                v-model="activeNames"
+                @change="handleChange"
+                v-if="
+                  FAQ_from_residents_sub_content &&
+                  FAQ_from_residents_sub_list &&
+                  FAQ_from_residents_sub_content.length!==0&&
+                  FAQ_from_residents_sub_list.length!==0&&
+                  (FAQ_from_residents_sub_content.length ===
+                    FAQ_from_residents_sub_list.length)
+                "
+              >
                 <el-collapse-item
                   v-for="(item, index) in FAQ_from_residents_sub_list"
                   :key="index"
@@ -72,8 +84,8 @@
                   :name="index + 1"
                 >
                   <template #title>
-                    <span class="title">{{ index + 1 }}.</span>
-                    <span class="item">{{ item.titleEnUs }}</span>
+                    <span class="FAQ-from-residents-title">{{ index + 1 }}.</span>
+                    <span class="FAQ-from-residents-item">{{ item.titleEnUs }}</span>
                   </template>
                   <div>
                     <p
@@ -85,6 +97,7 @@
                       "
                       v-html="
                         FAQ_from_residents_sub_content.length !== 0 &&
+                        FAQ_from_residents_sub_content[index]&&
                         FAQ_from_residents_sub_content[index].htmlEnUs
                       "
                     ></p>
@@ -96,8 +109,8 @@
         </div>
       </div>
     </div>
-     <!-- loading -->
-     <div
+    <!-- loading -->
+    <div
       class="loading"
       v-loading="v_loading"
       style="
@@ -108,7 +121,7 @@
         position: fixed;
         z-index: 10000;
       "
-      :style="{'display':v_loading?'':'none'}"
+      :style="{ display: v_loading ? '' : 'none' }"
     ></div>
   </div>
 </template>
@@ -136,7 +149,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
-      v_loading:false,
+      v_loading: false,
       nav_index: 0,
       FAQ_from_residents_list: [],
       FAQ_from_residents_sub_list: [],
@@ -157,11 +170,8 @@ export default {
           if (id) {
             data.FAQ_from_residents_sub_list = res.data.data.records;
             data.FAQ_from_residents_sub_content = [];
-            data.FAQ_from_residents_sub_list.map((item,index) => {
-              findOneFaqFromResidents(id, item.id,index);
-            });
-            nextTick(() => {
-              getHeight();
+            data.FAQ_from_residents_sub_list.map((item, index) => {
+              findOneFaqFromResidents(id, item.id, index);
             });
           } else {
             data.v_loading = false;
@@ -177,7 +187,7 @@ export default {
       }
     };
     //查看一條數據
-    const findOneFaqFromResidents = async (parentId, id,index) => {
+    const findOneFaqFromResidents = async (parentId, id, index) => {
       try {
         const res = await proxy.$http.findOneFaqFromResidents({
           lang: data.fairview_park_lang,
@@ -186,7 +196,10 @@ export default {
         });
         if (res.data.status === 200) {
           data.v_loading = false;
-          data.FAQ_from_residents_sub_content[index] = res.data.data
+          data.FAQ_from_residents_sub_content[index] = res.data.data;
+          nextTick(() => {
+              getHeight();
+            });
         }
       } catch (error) {
         data.v_loading = false;
@@ -195,7 +208,7 @@ export default {
     };
     //
     const changeMenu = async (val) => {
-      data.v_loading = true
+      data.v_loading = true;
       data.nav_index = val;
       for (let i = 0; i < data.FAQ_from_residents_list.length; i++) {
         if (data.FAQ_from_residents_list[i].index === val) {
@@ -204,13 +217,21 @@ export default {
       }
     };
     const getHeight = () => {
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height =
-          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
-          "px";
-        document.getElementsByClassName("title")[i].style["line-height"] =
-          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
-          "px";
+      for (
+        let i = 0;
+        i < document.getElementsByClassName("FAQ-from-residents-title").length;
+        i++
+      ) {
+        document.getElementsByClassName("FAQ-from-residents-title")[i].style.height =
+          document
+            .getElementsByClassName("FAQ-from-residents-item")
+            [i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("FAQ-from-residents-title")[i].style[
+          "line-height"
+        ] =
+          document
+            .getElementsByClassName("FAQ-from-residents-item")
+            [i].getBoundingClientRect().height + "px";
       }
     };
     onMounted(async () => {
@@ -451,7 +472,7 @@ export default {
     img {
       width: auto;
     }
-    p{
+    p {
       font-size: 36px;
     }
   }
@@ -507,11 +528,11 @@ export default {
       }
       .nav-content {
         padding: 0;
-        h5{
-          font-size: 28px!important;
+        h5 {
+          font-size: 28px !important;
         }
-        .item{
-          font-size: 15px!important;
+        .item {
+          font-size: 15px !important;
         }
       }
     }
