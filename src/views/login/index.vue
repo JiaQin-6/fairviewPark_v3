@@ -698,7 +698,7 @@
                     >{{ $t("Edit_member_information.This_field_is_required") }}</i
                   >
                 </li>
-                <li>
+                <li v-if="editMemberInfoForm.isAgreeReceiveLetter">
                   <p class="title">
                     {{ $t("sign_up.Willing_to_receive_physical_mail_information") }}
                   </p>
@@ -1021,8 +1021,7 @@ export default {
         !data.editMemberInfoForm.oname ||
         !data.editMemberInfoForm.loginName ||
         !data.editMemberInfoForm.email ||
-        !data.editMemberInfoForm.isAgreeAuthorization ||
-        !data.editMemberInfoForm.isAgreeReceiveLetter
+        !data.editMemberInfoForm.isAgreeAuthorization 
       ) {
         data.edit_member_info_error_tip.is_null = true;
         return;
@@ -1058,7 +1057,7 @@ export default {
           email: data.editMemberInfoForm.email,
           contactNo: data.editMemberInfoForm.contactNo,
           lang: data.fairview_park_lang,
-          typeList: [
+          typeList: data.editMemberInfoForm.isAgreeReceiveLetter?[
             {
               typeCode: "auth_start", //授权处理固定传值（默认Y）
               typeValue: data.editMemberInfoForm.isAgreeAuthorization, //Y是；N否
@@ -1066,6 +1065,11 @@ export default {
             {
               typeCode: "accept_email", //接受实体邮件固定传值（默认N）
               typeValue: data.editMemberInfoForm.isAgreeReceiveLetter, //Y是；N否
+            },
+          ]:[
+            {
+              typeCode: "auth_start", //授权处理固定传值（默认Y）
+              typeValue: data.editMemberInfoForm.isAgreeAuthorization, //Y是；N否
             },
           ],
           verifyCode: data.editMemberInfoForm.verifyCode,
@@ -1126,7 +1130,21 @@ export default {
         });
         if (res.data.status === 200) {
           data.verifyPasswordLoading = false;
-          data.editMemberInfoForm.verifyCode = res.data.data;
+          data.editMemberInfoForm.verifyCode = res.data.data.randomNumber;
+          data.editMemberInfoForm.isAgreeAuthorization = res.data.data.authList&& res.data.data.authList.filter((item) => {
+              return item.typeCode == "auth_start";
+            }).length!==0
+          ? res.data.data.authList.filter((item) => {
+              return item.typeCode == "auth_start";
+            })[0].typeValue
+          : null;
+        data.editMemberInfoForm.isAgreeReceiveLetter = res.data.data.authList&&res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            }).length!==0
+          ? res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            })[0].typeValue
+          : null;
           return true;
         } else {
           data.verifyPasswordLoading = false;
@@ -1152,16 +1170,6 @@ export default {
         data.editMemberInfoForm.cnickname = userinfo.cname || "";
         data.editMemberInfoForm.email = userinfo.email || "";
         data.editMemberInfoForm.contactNo = userinfo.contactNo || "";
-        data.editMemberInfoForm.isAgreeAuthorization = userinfo.authList
-          ? userinfo.authList.filter((item) => {
-              return item.typeCode == "auth_start";
-            })[0].typeValue
-          : null;
-        data.editMemberInfoForm.isAgreeReceiveLetter = userinfo.authList
-          ? userinfo.authList.filter((item) => {
-              return item.typeCode == "accept_email";
-            })[0].typeValue
-          : null;
         data.editMemberInfoForm.updateTime = userinfo.editInfoTime || "";
       });
       //当隐藏编辑资料框的时候，清除输入数据,下次打开还是要先显示输入密码框

@@ -10,6 +10,7 @@ import { ElMessage } from '../main.js';
 //导入axios
 import axios from "axios";
 import router from '../router';
+import store from '../store/index';
 //创建多个基地址
 //创建一个axios实例
 let baseUrl = "";
@@ -243,6 +244,7 @@ http.interceptors.response.use(function (response) {
             });
         }
         localStorage.removeItem('login-info');
+        store.commit("setLoginStatus", false);
         router.push('/home');
         return;
     }

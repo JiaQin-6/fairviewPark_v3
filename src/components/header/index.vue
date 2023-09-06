@@ -9,30 +9,40 @@
         </a>
         <!-- 手機端顯示的按鈕 -->
         <div style="margin-top: 15px; flex: 1; text-align: right" class="mobile-btn">
-          <span class="lang" v-if="isShowLoginButton && isShowLoginOutButton"
+          <span
+            class="lang"
+            v-if="isShowLoginButton && isShowLoginOutButton"
             @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
-            style="cursor: pointer; color: #fff; vertical-align: middle">
+            style="cursor: pointer; color: #fff; vertical-align: middle"
+          >
             {{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}
           </span>
-          <div v-if="!is_login && isShowLoginButton" class="login-btn1"
-            style="position: relative; display: inline-block; flex: 1; text-align: right">
+          <div
+            v-if="!is_login && isShowLoginButton"
+            class="login-btn1"
+            style="position: relative; display: inline-block; flex: 1; text-align: right"
+          >
             <button class="login-btn-1" data-bs-toggle="modal" data-bs-target="#login">
               {{ $t("headed.Owner_login") }}
             </button>
           </div>
-          <div v-if="is_login" class="login-btn2"
+          <div
+            v-if="is_login"
+            class="login-btn2"
             style="position: relative; display: inline-block; flex: 1; text-align: right"
-            :class="{ 'show-owner-zone-list': showOwnerZONEList }">
+            :class="{ 'show-owner-zone-list': showOwnerZONEList }"
+          >
             <button class="login-btn-2" @click="showOwnerIsZONE">
               {{
                 loginInfo && loginInfo.groupId === 0
-                ? $t("headed.OWNERS_s_ZONE")
-                : $t("headed.TENANT_s_ZONE")
+                  ? $t("headed.OWNERS_s_ZONE")
+                  : $t("headed.TENANT_s_ZONE")
               }}
             </button>
-            <i v-if="showOwnerZONEList"></i>
           </div>
-          <div v-if="is_login" style="
+          <div
+            v-if="is_login"
+            style="
               text-decoration: none;
               position: relative;
               display: inline-block;
@@ -40,10 +50,13 @@
               margin-left: 5px;
               margin-right: 5px;
               vertical-align: middle;
-            " @click="toInformationPush">
+            "
+            @click="toInformationPush"
+          >
             <i class="iconfont icon-lingdang white" style="font-size: 22px"></i>
             <!-- v-if="pmLogHave === 'Y'" -->
-            <span style="
+            <span
+              style="
                 position: absolute;
                 top: 2px;
                 right: 0px;
@@ -52,128 +65,198 @@
                 display: inline-block;
                 background-color: #f0ce5f;
                 border-radius: 50%;
-              "></span>
+              "
+            ></span>
           </div>
         </div>
-        <button id="navbar-button" class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation" @click="hideOwnerIsZONE">
+        <button
+          id="navbar-button"
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          @click="hideOwnerIsZONE"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <!-- PC端顯示的按鈕 -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <div style="display: flex; flex-direction: column; align-items: center; flex: 1">
+          <div
+            style="display: flex; flex-direction: column; align-items: center; flex: 1"
+          >
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item" :class="{
-                dropdown: item.type === 'select',
-                active: route_url === item.href,
-              }" v-for="(item, index) in [
-  {
-    type: 'default',
-    text: $t('headed.Home'),
-    href: '#/home?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.About_us'),
-    href: '#/about-us?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.Prospective_Buyer'),
-    href: '#/prospective-buyer?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.Estate_Facilities'),
-    href: '#/estate-facilities?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.Coach_Service'),
-    href: '#/coach-service?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.Shops_Directory'),
-    href: '#/shopping-information?lang=' + fairview_park_lang,
-  },
-  {
-    type: 'default',
-    text: $t('headed.Useful_Telephone_Nos'),
-    href: '#/useful-link?lang=' + fairview_park_lang,
-  },
-]" :key="index" @click="changeRouter(item.href)">
-                <a v-if="item.type === 'default'" class="nav-link" aria-current="page" :href="item.href"><span>{{
-                  item.text }}</span></a>
-                <a v-if="item.type === 'select'" class="nav-link dropdown-toggle" :id="'navbarDropdown' + index"
-                  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li
+                class="nav-item"
+                :class="{
+                  dropdown: item.type === 'select',
+                  active: route_url === item.href,
+                }"
+                v-for="(item, index) in [
+                  {
+                    type: 'default',
+                    text: $t('headed.Home'),
+                    href: '#/home?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.About_us'),
+                    href: '#/about-us?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.Prospective_Buyer'),
+                    href: '#/prospective-buyer?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.Estate_Facilities'),
+                    href: '#/estate-facilities?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.Coach_Service'),
+                    href: '#/coach-service?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.Shops_Directory'),
+                    href: '#/shopping-information?lang=' + fairview_park_lang,
+                  },
+                  {
+                    type: 'default',
+                    text: $t('headed.Useful_Telephone_Nos'),
+                    href: '#/useful-link?lang=' + fairview_park_lang,
+                  },
+                ]"
+                :key="index"
+                @click="changeRouter(item.href)"
+              >
+                <a
+                  v-if="item.type === 'default'"
+                  class="nav-link"
+                  aria-current="page"
+                  :href="item.href"
+                  ><span>{{ item.text }}</span></a
+                >
+                <a
+                  v-if="item.type === 'select'"
+                  class="nav-link dropdown-toggle"
+                  :id="'navbarDropdown' + index"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   <span>{{ item.text }}</span>
                 </a>
-                <ul v-if="item.type === 'select'" class="dropdown-menu" style="padding: 0; margin: 10px 0 0 -15px"
-                  :aria-labelledby="'navbarDropdown' + index">
+                <ul
+                  v-if="item.type === 'select'"
+                  class="dropdown-menu"
+                  style="padding: 0; margin: 10px 0 0 -15px"
+                  :aria-labelledby="'navbarDropdown' + index"
+                >
                   <li v-for="(item2, index2) in item.children" :key="index2">
-                    <a class="dropdown-item" style="padding: 8px 15px" :href="item2.href">{{ item2.text }}</a>
+                    <a
+                      class="dropdown-item"
+                      style="padding: 8px 15px"
+                      :href="item2.href"
+                      >{{ item2.text }}</a
+                    >
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
 
-          <ul class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center">
+          <ul
+            class="lang-infomation navbar-nav me-auto mb-4 mb-lg-0 flex-row align-center"
+          >
             <div class="lang">
-              <span v-if="isShowLoginButton && isShowLoginOutButton" style="cursor: pointer"
-                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')">{{ fairview_park_lang == "zh_tw" ?
-                  "EN" : "中" }}</span>
+              <span
+                v-if="isShowLoginButton && isShowLoginOutButton"
+                style="cursor: pointer"
+                @click="changeLang(fairview_park_lang == 'zh_tw' ? 'en_us' : 'zh_tw')"
+                >{{ fairview_park_lang == "zh_tw" ? "EN" : "中" }}</span
+              >
             </div>
-            <button v-if="!is_login && isShowLoginButton" class="login" data-bs-toggle="modal" data-bs-target="#login">
+            <button
+              v-if="!is_login && isShowLoginButton"
+              class="login"
+              data-bs-toggle="modal"
+              data-bs-target="#login"
+            >
               {{ $t("headed.Owner_login") }}
             </button>
             <div>
-              <el-dropdown class="is-show-dropdown" v-if="is_login" @command="selectOwnersZone">
+              <el-dropdown
+                class="is-show-dropdown"
+                v-if="is_login"
+                @command="selectOwnersZone"
+              >
                 <el-button type="primary">
                   {{
                     loginInfo && loginInfo.groupId === 0
-                    ? $t("headed.OWNERS_s_ZONE")
-                    : $t("headed.TENANT_s_ZONE")
+                      ? $t("headed.OWNERS_s_ZONE")
+                      : $t("headed.TENANT_s_ZONE")
                   }}<el-icon class="el-icon--right"><arrow-down /></el-icon>
                 </el-button>
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item class="yellow" command="/edit-member-information"><el-icon>
-                        <EditPen />
-                      </el-icon>{{
+                    <el-dropdown-item class="yellow" command="/edit-member-information"
+                      ><el-icon> <EditPen /> </el-icon
+                      >{{
                         loginInfo && loginInfo.groupId === 0
-                        ? $t("headed.Edit_member_information")
-                        : $t("headed.Tenant_account_management")
-                      }}</el-dropdown-item>
-                    <el-dropdown-item v-if="loginInfo && loginInfo.groupId === 0" command="/start-up">
+                          ? $t("headed.Edit_member_information")
+                          : $t("headed.Tenant_account_management")
+                      }}</el-dropdown-item
+                    >
+                    <el-dropdown-item
+                      v-if="loginInfo && loginInfo.groupId === 0"
+                      command="/start-up"
+                    >
                       <!-- <el-icon><EditPen /></el-icon> -->
-                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item>
-                    <el-dropdown-item v-for="(item, index) in loginInfo && loginInfo.menuList" :key="index"
-                      :command="'/' + item.route">{{
+                      {{ $t("headed.Tenant_account_management") }}</el-dropdown-item
+                    >
+                    <el-dropdown-item
+                      v-for="(item, index) in loginInfo && loginInfo.menuList"
+                      :key="index"
+                      :command="'/' + item.route"
+                      >{{
                         fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw
-                      }}</el-dropdown-item>
+                      }}</el-dropdown-item
+                    >
 
-                    <el-dropdown-item class="yellow" command="/loginOut" v-if="isShowLoginOutButton">
+                    <el-dropdown-item
+                      class="yellow"
+                      command="/loginOut"
+                      v-if="isShowLoginOutButton"
+                    >
                       <el-icon>
                         <UserFilled />
                       </el-icon>
-                      {{ $t("headed.Login_out") }}</el-dropdown-item>
+                      {{ $t("headed.Login_out") }}</el-dropdown-item
+                    >
                   </el-dropdown-menu>
                 </template>
               </el-dropdown>
             </div>
 
-            <div v-if="is_login" style="
+            <div
+              v-if="is_login"
+              style="
                 text-decoration: none;
                 position: relative;
                 cursor: pointer;
                 margin-left: 20px;
-              " @click="toInformationPush">
+              "
+              @click="toInformationPush"
+            >
               <i class="iconfont icon-lingdang white"></i>
               <!-- v-if="pmLogHave === 'Y'" -->
-              <span style="
+              <span
+                style="
                   position: absolute;
                   top: 2px;
                   right: 0px;
@@ -182,21 +265,41 @@
                   display: inline-block;
                   background-color: #f0ce5f;
                   border-radius: 50%;
-                "></span>
+                "
+              ></span>
             </div>
           </ul>
         </div>
       </div>
+      <transition name="el-zoom-in-top">
+        <div class="ownerIsZONE" v-if="showOwnerZONEList">
+          <i></i>
+          <ul>
+            <li
+              v-for="(item, index) in loginPower"
+              :key="index"
+              @click="selectOwnersZone(item.router)"
+            >
+              {{ item.text }}
+            </li>
+          </ul>
+        </div>
+      </transition>
     </nav>
     <!-- loading -->
-    <div class="loading" v-loading="v_loading" style="
+    <div
+      class="loading"
+      v-loading="loading"
+      style="
         width: 100vw;
         height: 100vh;
         top: 0;
         left: 0;
         position: fixed;
         z-index: 10000;
-      " :style="{ display: v_loading ? '' : 'none' }"></div>
+      "
+      :style="{ display: loading ? '' : 'none' }"
+    ></div>
   </div>
 </template>
 
@@ -224,6 +327,7 @@ export default {
     isShow: Boolean,
     isShowLoginButton: Boolean,
     isShowLoginOutButton: Boolean,
+    loginPower: Array,
   },
   data() {
     return {
@@ -235,10 +339,10 @@ export default {
     const { proxy } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
-      v_loading: false,
+      loading: false,
       route_url: "",
       fairview_park_lang: "",
-      is_login: false,
+      is_login: false, //判斷是否是登陸狀態
       pmLogHave: null,
       showLogin_m: false,
       showOwnerZONEList: false,
@@ -249,7 +353,7 @@ export default {
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
     //切換語言
     const changeLang = (lang) => {
-      data.v_loading = true;
+      data.loading = true;
       if (
         document.getElementById("navbar-button") &&
         window
@@ -271,13 +375,13 @@ export default {
     };
     //切換路由
     const changeRouter = (href, children) => {
-        data.route_url = href;
+      data.route_url = href;
     };
     //登出
     const loginOut = () => {
       localStorage.removeItem("login-info");
       store.commit("setLoginStatus", false);
-      ctx.emit("showPopupBox");//是否顯示popup彈框
+      ctx.emit("showPopupBox"); //是否顯示popup彈框
     };
     //点击业主专区
     const selectOwnersZone = (val) => {
@@ -357,7 +461,7 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
-          ctx.emit('showTenantModal', true)
+          ctx.emit("showTenantModal", true);
         } else if (res.data.status === 501) {
           ElMessage({
             message: res.data.msg,
@@ -383,20 +487,19 @@ export default {
         });
         if (res.data.status === 200) {
           data.loading = false;
-          return res.data.data.menus
+          return res.data.data.menus;
         } else {
           data.loading = false;
           ElMessage({
             message: res.data.msg,
             type: "warning",
           });
-          return false
+          return false;
         }
-
       } catch (error) {
-        console.log(error)
+        console.log(error);
         data.loading = false;
-        return false
+        return false;
       }
     };
     //獲取&設置語言
@@ -415,7 +518,7 @@ export default {
       data.fairview_park_lang = route.query.lang;
       proxy.$i18n.locale = route.query.lang;
     }
-  
+
     onMounted(async () => {
       //判断url是否带有token参数,有session獲取用戶信息（相當於登陸）
       if (route.query.session) {
@@ -429,14 +532,14 @@ export default {
         );
         userinfo.jwt = route.query.session;
         if (route.query.dataCode) {
-          const result = await getUrlData(route.query.dataCode)
-          if(result){
-            userinfo.menuList = result
+          const result = await getUrlData(route.query.dataCode);
+          if (result) {
+            userinfo.menuList = result;
           }
         }
         localStorage.setItem("login-info", JSON.stringify(userinfo));
         store.commit("setLoginStatus", true);
-      } else if (route.query.logout && route.query.logout === 'true') {
+      } else if (route.query.logout && route.query.logout === "true") {
         //是否app已登出
         localStorage.removeItem("login-info");
         store.commit("setLoginStatus", false);
@@ -447,7 +550,7 @@ export default {
         data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
       }
       //首次加載是否顯示popup彈框(只在首頁才顯示彈框)
-      if(location.hash.indexOf("#/home")!==-1){
+      if (location.hash.indexOf("#/home") !== -1) {
         ctx.emit("showPopupBox");
       }
       //
@@ -468,13 +571,13 @@ export default {
         document.documentElement.scrollTop = 0;
         window.pageYOffset = 0;
         data.showOwnerZONEList = false;
-        if (location.hash.indexOf("#/home")!==-1) {
+        if (location.hash.indexOf("#/home") !== -1) {
           //如果token失效會返回首頁，判斷is_login如果是true就登出并重新調用顯示popup彈框
-          if (!localStorage.getItem("login-info")&&data.is_login === true) {
+          if (!localStorage.getItem("login-info") && data.is_login === true) {
             data.is_login = false;
             store.commit("setLoginStatus", false);
             //是否顯示popup彈框
-             ctx.emit("showPopupBox");
+            ctx.emit("showPopupBox");
           }
           data.route_url = location.hash;
         } else {
@@ -696,7 +799,7 @@ export default {
       }
     }
 
-    >.show {
+    > .show {
       background-color: #fff;
       margin-top: -33px;
       padding: 20px;
@@ -840,6 +943,10 @@ export default {
         }
       }
     }
+
+    .ownerIsZONE {
+      display: none;
+    }
   }
 }
 
@@ -950,6 +1057,35 @@ export default {
 
       .navbar-brand-logo {
         display: none !important;
+      }
+      .ownerIsZONE {
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
+        margin-top: -17px;
+        i {
+          display: block;
+          height: 14px;
+          width: 14px;
+          margin: 0px auto 0;
+          border-width: 14px;
+          border-color: transparent transparent var(--mainColor2) transparent;
+          border-style: solid;
+        }
+        ul {
+          padding: 0;
+          background-color: var(--mainColor2);
+        overflow: auto;
+        height: calc(100vh - 60px);
+          li {
+            border-bottom: 1px solid rgba(206, 204, 204, 0.3);
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 10px 10px;
+          }
+        }
       }
     }
   }

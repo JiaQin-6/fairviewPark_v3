@@ -22,7 +22,10 @@
               style="text-align: left"
               v-html="$t('tenant_account_management.Please_click_Copy_Invitation')"
             ></p>
-            <textarea class="content" id="tenant-info" v-html="copy_tenant_info"></textarea>
+            <div class="" style="border-radius: 6px;box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);padding:10px; margin: 20px auto;">
+               <textarea class="content" id="tenant-info" v-html="copy_tenant_info"></textarea>
+            </div>
+           
             <div style="text-align: right">
               <el-button class="copy" @click="copyInfo">
                 <i class="iconfont icon-fuzhi"></i>
@@ -57,7 +60,7 @@ import useClipboard from "vue-clipboard3";
 export default {
     props:{
         copy_tenant_info:{
-            type:Object,
+            type:String,
         }
     },
   setup(props, ctx) {
@@ -171,16 +174,14 @@ export default {
         text-align: center;
         padding: 0 20px 50px;
         .content {
-          box-shadow: inset 0 0 2px 2px rgba(119, 118, 118, 0.5);
-          border-radius: 6px;
-          padding: 10px;
-          margin: 20px auto;
           width: 100%;
           border:0;
           color:#606266;
           height:250px;
-          overflow: auto;
           font-size: 18px;
+          border-color: #fff;
+          outline: none;
+          overflow: auto;
         }
         .cannel {
           font-size: 18px;

@@ -1,36 +1,59 @@
 <template>
   <div :class="{ 'flex-row': is_show }">
-    <transition name="el-zoom-in-top">
+    <!-- <transition name="el-zoom-in-top">
       <div class="ownerIsZONE" v-if="is_show">
         <div class="ownerIsZONE-content">
           <ul>
-            <li
-              v-for="(item, index) in loginPower"
-              :key="index"
-              @click="selectOwnersZone(item.router)"
-            >
+            <li v-for="(item, index) in loginPower" :key="index" @click="selectOwnersZone(item.router)">
               {{ item.text }}
             </li>
           </ul>
         </div>
       </div>
-    </transition>
+    </transition> -->
     <div class="main-content">
       <Header
         :isShow="is_show"
+        :loginPower="is_show && loginPower"
         :isShowLoginButton="isShowLoginButton"
         :isShowLoginOutButton="isShowLoginOutButton"
         @showOwnerIsZONE="showOwnerIsZONE"
-        @showTenantModal="()=>{
-          isShowTenantModal = true
-        }"
-        @showPopupBox="()=>{showPopupBox()}"
+        @showTenantModal="
+          () => {
+            isShowTenantModal = true;
+          }
+        "
+        @showPopupBox="
+          () => {
+            showPopupBox();
+          }
+        "
       ></Header>
       <router-view />
       <Footer v-if="is_show_footer"></Footer>
-      <Login @showPopupBox="()=>{showPopupBox()}"></Login>
-      <EditTenantInformation @showPopupBox="()=>{showPopupBox()}"></EditTenantInformation>
-      <TenantAccountManagement v-if="isShowTenantModal" @hideTenantModal="()=>{isShowTenantModal = false}"></TenantAccountManagement>
+      <Login
+        @showPopupBox="
+          () => {
+            showPopupBox();
+          }
+        "
+      ></Login>
+      <EditTenantInformation
+        @showPopupBox="
+          () => {
+            showPopupBox();
+          }
+        "
+      ></EditTenantInformation>
+      <TenantAccountManagement
+        v-if="isShowTenantModal"
+        @hideTenantModal="
+          () => {
+            isShowTenantModal = false;
+          }
+        "
+      >
+      </TenantAccountManagement>
       <div class="mask" @click="is_show = false"></div>
     </div>
     <!-- 回到頂部按鈕 -->
@@ -92,7 +115,7 @@ export default {
     const { proxy, ctx } = getCurrentInstance();
     const store = useStore();
     const data = reactive({
-      is_show: false,
+      is_show: false, //是否顯示menu列表
       is_show_footer: true,
       isShowLoginOutButton: true, //是否顯示登出按鈕（app進來web判斷）
       isShowLoginButton: true, //是否顯示登錄按鈕（app進來web判斷）
@@ -101,7 +124,7 @@ export default {
         id: "",
         content: "",
       },
-      isShowTenantModal:false,//是否显示TenantAccountManagement组件
+      isShowTenantModal: false, //是否显示TenantAccountManagement组件
     });
     const router = useRouter(); // 必须在setup的根作用域调用，在函数中调返回undefined 如需在其他页面使用  import router from "./router"; router = useRouter();
     const route = useRoute(); // 必须在setup的根作用域调用，在函数中调返回undefined
@@ -147,7 +170,7 @@ export default {
     const loginOut = () => {
       localStorage.removeItem("login-info");
       store.commit("setLoginStatus", false);
-      showPopupBox()//是否顯示popup彈框
+      showPopupBox(); //是否顯示popup彈框
     };
     //查询最新一条弹窗信息
     const findOneNewPopupBox = async (memberType) => {
@@ -164,162 +187,228 @@ export default {
       }
     };
     //
-    const selectOwnersZone = (val) => {
-      if (
-        document.getElementById("navbar-button") &&
-        window
-          .getComputedStyle(document.getElementById("navbar-button"))
-          .getPropertyValue("display") !== "none" &&
-        document.getElementsByClassName("collapse")[0] &&
-        window
-          .getComputedStyle(document.getElementsByClassName("collapse")[0])
-          .getPropertyValue("display") !== "none"
-      ) {
-        document.getElementById("navbar-button").click();
-      }
-      data.is_show = false;
-      if (val === "/loginOut") {
-        loginOut();
-        router.push({
-          path: "/home",
-          query: {
-            lang: sessionStorage.getItem("fairview_park_lang"),
-          },
-        });
-      } else if (val === "/edit-member-information") {
-        const button = document.createElement("button");
-        button.setAttribute("data-bs-toggle", "modal");
-        button.setAttribute("data-bs-target", "#editMemberInformation");
-        document.body.appendChild(button);
-        button.click();
-        document.body.removeChild(button);
-      } else if (val === "/start-up-tenant") {
-        const button = document.createElement("button");
-        button.setAttribute("data-bs-toggle", "modal");
-        button.setAttribute("data-bs-target", "#editTenantInformation");
-        document.body.appendChild(button);
-        button.click();
-        document.body.removeChild(button);
-      } else if (val === "/start-up") {
-        selectTenantStatus();
-      } else {
-        router.push({
-          path: val,
-          query: {
-            lang: sessionStorage.getItem("fairview_park_lang"),
-          },
-        });
-      }
-    };
+    // const selectOwnersZone = (val) => {
+    //   if (
+    //     document.getElementById("navbar-button") &&
+    //     window
+    //       .getComputedStyle(document.getElementById("navbar-button"))
+    //       .getPropertyValue("display") !== "none" &&
+    //     document.getElementsByClassName("collapse")[0] &&
+    //     window
+    //       .getComputedStyle(document.getElementsByClassName("collapse")[0])
+    //       .getPropertyValue("display") !== "none"
+    //   ) {
+    //     document.getElementById("navbar-button").click();
+    //   }
+    //   data.is_show = false;
+    //   if (val === "/loginOut") {
+    //     loginOut();
+    //     router.push({
+    //       path: "/home",
+    //       query: {
+    //         lang: sessionStorage.getItem("fairview_park_lang"),
+    //       },
+    //     });
+    //   } else if (val === "/edit-member-information") {
+    //     const button = document.createElement("button");
+    //     button.setAttribute("data-bs-toggle", "modal");
+    //     button.setAttribute(
+    //       "data-bs-target",
+    //       localStorage.getItem("login-info") &&
+    //         JSON.parse(localStorage.getItem("login-info")).groupId === 0
+    //         ? "#editMemberInformation"
+    //         : "#editTenantInformation"
+    //     );
+    //     document.body.appendChild(button);
+    //     button.click();
+    //     document.body.removeChild(button);
+    //   } else if (val === "/start-up") {
+    //     selectTenantStatus();
+    //   } else {
+    //     router.push({
+    //       path: val,
+    //       query: {
+    //         lang: sessionStorage.getItem("fairview_park_lang"),
+    //       },
+    //     });
+    //   }
+    // };
     //業主查看住客情況
-    const selectTenantStatus = async () => {
-      data.loading = true;
-      try {
-        const res = await proxy.$http.selectTenantStatus({
-          id: JSON.parse(localStorage.getItem("login-info")).id,
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.isShowTenantModal = true
-        } else if (res.data.status === 501) {
-          ElMessage({
-            message: res.data.msg,
-            type: "warning",
-          });
-        } else {
-          ElMessage({
-            message: res.data.msg,
-            type: "warning",
-          });
-        }
-        data.loading = false;
-      } catch (error) {
-        data.loading = false;
-      }
-    };
+    // const selectTenantStatus = async () => {
+    //   data.loading = true;
+    //   try {
+    //     const res = await proxy.$http.selectTenantStatus({
+    //       id: JSON.parse(localStorage.getItem("login-info")).id,
+    //       lang: data.fairview_park_lang,
+    //     });
+    //     if (res.data.status === 200) {
+    //       data.isShowTenantModal = true;
+    //     } else if (res.data.status === 501) {
+    //       ElMessage({
+    //         message: res.data.msg,
+    //         type: "warning",
+    //       });
+    //     } else {
+    //       ElMessage({
+    //         message: res.data.msg,
+    //         type: "warning",
+    //       });
+    //     }
+    //     data.loading = false;
+    //   } catch (error) {
+    //     data.loading = false;
+    //   }
+    // };
     //每次刷新頁面和登陸登出都調用api查詢popup box是否彈出
     const showPopupBox = async () => {
-      // if (location.hash.indexOf("#/home")!==-1) {
-
-      // }
       //通过身份和localStorage中的状态，决定实时信息提示框是否要显示
-        //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
+      //这里先调用api，拿到非会员和会员要提示的信息id，和localStorage里面的id对比
+      if (
+        localStorage.getItem("login-info") &&
+        JSON.parse(localStorage.getItem("login-info")).groupId === 0
+      ) {
+        //業主登陸
         const ownerData = await findOneNewPopupBox(0); //业主
-        const nonMemberData = await findOneNewPopupBox(2); //游客
-        //根据localStorage中的状态来决定显示隐藏
-        let newData = {
-          nonMember: {
-            id: nonMemberData && nonMemberData.id,
-            content: nonMemberData && nonMemberData.htmlEnUs,
-          },
-          owner: {
-            id: ownerData && ownerData.id,
-            content: ownerData && ownerData.htmlEnUs,
-          },
-        };
-        if (localStorage.getItem("login-info")) {
-          if (!ownerData) {
-            return false;
+        if (!ownerData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = ownerData.id;
+        data.newRealTimeInfo.content = ownerData.htmlEnUs;
+        if (
+          localStorage.getItem("real-info") &&
+          JSON.parse(localStorage.getItem("real-info")).owner
+        ) {
+          if (ownerData.id !== JSON.parse(localStorage.getItem("real-info")).owner.id) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: JSON.parse(localStorage.getItem("real-info")).nonMember
+                    ? JSON.parse(localStorage.getItem("real-info")).nonMember.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).nonMember
+                    ? JSON.parse(localStorage.getItem("real-info")).nonMember.show
+                    : tru,
+                },
+                tenant: {
+                  id: JSON.parse(localStorage.getItem("real-info")).tenant
+                    ? JSON.parse(localStorage.getItem("real-info")).tenant.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).tenant
+                    ? JSON.parse(localStorage.getItem("real-info")).tenant.show
+                    : true,
+                },
+                owner: {
+                  id: ownerData.id,
+                  show: true,
+                },
+              })
+            );
           }
-          data.newRealTimeInfo.id = newData.owner.id;
-          data.newRealTimeInfo.content = newData.owner.content;
-          
-          if (localStorage.getItem("real-info")) {
-            if (
-              newData.owner.id !== JSON.parse(localStorage.getItem("real-info")).owner.id
-            ) {
-              localStorage.setItem(
-                "real-info",
-                JSON.stringify({
-                  nonMember: {
-                    id: JSON.parse(localStorage.getItem("real-info")).nonMember.id,
-                    show: JSON.parse(localStorage.getItem("real-info")).nonMember.show,
-                  },
-                  owner: {
-                    id: newData.owner.id,
-                    show: true,
-                  },
-                })
-              );
-            }
-            if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
-              data.showRealTimeInfo = true;
-            }
-          } else {
+          if (JSON.parse(localStorage.getItem("real-info")).owner.show) {
             data.showRealTimeInfo = true;
           }
         } else {
-          if (!nonMemberData) {
-            return false;
+          data.showRealTimeInfo = true;
+        }
+      } else if (
+        localStorage.getItem("login-info") &&
+        JSON.parse(localStorage.getItem("login-info")).groupId === 1
+      ) {
+        //住客登陸
+        const tenantData = await findOneNewPopupBox(1); //住客
+        if (!tenantData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = tenantData.id;
+        data.newRealTimeInfo.content = tenantData.htmlEnUs;
+
+        if (
+          localStorage.getItem("real-info") &&
+          JSON.parse(localStorage.getItem("real-info")).tenant
+        ) {
+          if (tenantData.id !== JSON.parse(localStorage.getItem("real-info")).tenant.id) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: JSON.parse(localStorage.getItem("real-info")).nonMember
+                    ? JSON.parse(localStorage.getItem("real-info")).nonMember.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).nonMember
+                    ? JSON.parse(localStorage.getItem("real-info")).nonMember.show
+                    : true,
+                },
+                tenant: {
+                  id: tenantData.id,
+                  show: true,
+                },
+                owner: {
+                  id: JSON.parse(localStorage.getItem("real-info")).owner
+                    ? JSON.parse(localStorage.getItem("real-info")).owner.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).owner
+                    ? JSON.parse(localStorage.getItem("real-info")).owner.show
+                    : true,
+                },
+              })
+            );
           }
-          data.newRealTimeInfo.id = newData.nonMember.id;
-          data.newRealTimeInfo.content = newData.nonMember.content;
-          if (localStorage.getItem("real-info")) {
-            if (
-              newData.nonMember.id !==
-              JSON.parse(localStorage.getItem("real-info")).nonMember.id
-            ) {
-              localStorage.setItem(
-                "real-info",
-                JSON.stringify({
-                  nonMember: {
-                    id: newData.nonMember.id,
-                    show: true,
-                  },
-                  owner: {
-                    id: JSON.parse(localStorage.getItem("real-info")).owner.id,
-                    show: JSON.parse(localStorage.getItem("real-info")).owner.show,
-                  },
-                })
-              );
-            }
-            if (JSON.parse(localStorage.getItem("real-info")).nonMember.show) {
-              data.showRealTimeInfo = true;
-            }
-          } else {
+          if (JSON.parse(localStorage.getItem("real-info")).tenant.show) {
             data.showRealTimeInfo = true;
           }
+        } else {
+          data.showRealTimeInfo = true;
         }
+      } else {
+        const nonMemberData = await findOneNewPopupBox(2); //游客
+        //遊客
+        if (!nonMemberData) {
+          return false;
+        }
+        data.newRealTimeInfo.id = nonMemberData.id;
+        data.newRealTimeInfo.content = nonMemberData.htmlEnUs;
+        if (
+          localStorage.getItem("real-info") &&
+          JSON.parse(localStorage.getItem("real-info")).nonMember
+        ) {
+          if (
+            nonMemberData.id !==
+            JSON.parse(localStorage.getItem("real-info")).nonMember.id
+          ) {
+            localStorage.setItem(
+              "real-info",
+              JSON.stringify({
+                nonMember: {
+                  id: nonMemberData.id,
+                  show: true,
+                },
+                tenant: {
+                  id: JSON.parse(localStorage.getItem("real-info")).tenant
+                    ? JSON.parse(localStorage.getItem("real-info")).tenant.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).tenant
+                    ? JSON.parse(localStorage.getItem("real-info")).tenant.show
+                    : true,
+                },
+                owner: {
+                  id: JSON.parse(localStorage.getItem("real-info")).owner
+                    ? JSON.parse(localStorage.getItem("real-info")).owner.id
+                    : "",
+                  show: JSON.parse(localStorage.getItem("real-info")).owner
+                    ? JSON.parse(localStorage.getItem("real-info")).owner.show
+                    : true,
+                },
+              })
+            );
+          }
+          if (JSON.parse(localStorage.getItem("real-info")).nonMember.show) {
+            data.showRealTimeInfo = true;
+          }
+        } else {
+          data.showRealTimeInfo = true;
+        }
+      }
     };
     watch(
       () => route,
@@ -340,6 +429,7 @@ export default {
       },
       { deep: true, immediate: true }
     );
+    //獲取移動端的menu列表
     const loginPower = computed(() => {
       let o_array = [];
       JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
@@ -371,10 +461,11 @@ export default {
         });
       } else {
         o_array.unshift({
-          router: "/start-up-tenant",
+          router: "/edit-member-information",
           text: proxy.$t("headed.Tenant_account_management"),
         });
       }
+
       return o_array;
     });
     onMounted(async () => {
@@ -397,11 +488,11 @@ export default {
     return {
       ...toRefs(data),
       loginOut,
-      selectOwnersZone,
+      // selectOwnersZone,
       showOwnerIsZONE,
       findOneNewPopupBox,
       loginPower,
-      selectTenantStatus,
+      // selectTenantStatus,
       showPopupBox,
     };
   },
@@ -411,18 +502,20 @@ export default {
 <style lang="less" scoped>
 .ownerIsZONE {
   position: fixed;
-  top: 60px;
+  top: 0px;
   left: 0;
-  height: calc(100vh - 60px);
+  height: 100vh;
   width: 100vw;
   z-index: 10;
 
   .ownerIsZONE-content {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 60px);
     box-sizing: border-box;
     overflow: auto;
-    position: relative;
+    position: absolute;
+    top: 60px;
+    left: 0;
 
     ul {
       padding: 0;

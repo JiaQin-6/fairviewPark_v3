@@ -10,7 +10,7 @@ import { createStore } from 'vuex';
 import createPersistedState from "vuex-persistedstate"; //引入vuex状态持久化（页面刷新状态依然保存）
 export default createStore({
     state: {
-        loginStatus: null,
+        loginStatus: null, //保存app的登陸狀態
     },
     getters: {},
     mutations: {
