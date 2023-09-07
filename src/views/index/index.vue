@@ -14,7 +14,7 @@
     <div class="main-content">
       <Header
         :isShow="is_show"
-        :loginPower="is_show && loginPower"
+        :loginPower="is_show?loginPower:[]"
         :isShowLoginButton="isShowLoginButton"
         :isShowLoginOutButton="isShowLoginOutButton"
         @showOwnerIsZONE="showOwnerIsZONE"

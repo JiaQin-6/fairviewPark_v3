@@ -123,8 +123,8 @@
                           :name="index + 1"
                         >
                           <template #title>
-                            <span class="title">{{ index + 1 }}.</span>
-                            <span class="item">{{ item.title }}</span>
+                            <span class="prospectice-buy-title">{{ index + 1 }}.</span>
+                            <span class="prospectice-buy-item">{{ item.title }}</span>
                           </template>
                           <div>
                             <p style="font-size: 18px; padding: 5px 27px">
@@ -165,18 +165,18 @@ export default {
         ? window.i18n_en_us.ProspectiveBuyer_Prospective_buyer.content_2
         : window.i18n_zh_tw.ProspectiveBuyer_Prospective_buyer.content_2;
     const getHeight = () => {
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height = 
+      for (let i = 0; i < document.getElementsByClassName("prospectice-buy-title").length; i++) {
+        document.getElementsByClassName("prospectice-buy-title")[i].style.height = 
           document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
-        document.getElementsByClassName("title")[i].style["line-height"] =
+            .getElementsByClassName("prospectice-buy-item")[i].getBoundingClientRect().height + "px";
+        document.getElementsByClassName("prospectice-buy-title")[i].style["line-height"] =
           document
-            .getElementsByClassName("item")[i].getBoundingClientRect().height + "px";
+            .getElementsByClassName("prospectice-buy-item")[i].getBoundingClientRect().height + "px";
       }
     };
     onMounted(async () => {
       window.addEventListener("resize", getHeight);
-      // for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+      // for (let i = 0; i < document.getElementsByClassName("prospectice-buy-title").length; i++) {
         getHeight();
       // }
     });

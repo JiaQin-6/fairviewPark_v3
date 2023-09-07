@@ -273,7 +273,9 @@
       </div>
       <transition name="el-zoom-in-top">
         <div class="ownerIsZONE" v-if="showOwnerZONEList">
-          <i></i>
+          <!-- <div class="icon">
+            <i></i>
+          </div> -->
           <ul>
             <li
               v-for="(item, index) in loginPower"
@@ -408,6 +410,7 @@ export default {
         button.click();
         document.body.removeChild(button);
       } else {
+        data.showOwnerZONEList = false
         router.push({
           path: val,
           query: {
@@ -1000,6 +1003,7 @@ export default {
         justify-content: space-between;
         width: 100%;
         padding: 0 20px;
+        min-height: 62px;
 
         .navbar-collapse {
           margin-left: auto;
@@ -1062,8 +1066,21 @@ export default {
         width: 100%;
         box-sizing: border-box;
         display: block;
-        margin-top: -17px;
-        i {
+        // &::before{
+        //   content:'';
+        //   display: block;
+        //   height: 14px;
+        //   width: 14px;
+        //   margin: 0px auto 0;
+        //   border-width: 14px;
+        //   border-color: transparent transparent var(--mainColor2) transparent;
+        //   border-style: solid;
+        // }
+        .icon{
+          height: 14px;
+          width: 14px;
+          
+          i {
           display: block;
           height: 14px;
           width: 14px;
@@ -1072,6 +1089,8 @@ export default {
           border-color: transparent transparent var(--mainColor2) transparent;
           border-style: solid;
         }
+        }
+        
         ul {
           padding: 0;
           background-color: var(--mainColor2);

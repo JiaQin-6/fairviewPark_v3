@@ -27,8 +27,8 @@
           :name="index2 + 1"
         >
           <template #title>
-            <span class="title">{{ index2 + 1 }}.</span>
-            <span class="item">{{ item2.title }}</span>
+            <span class="faq-title">{{ index2 + 1 }}.</span>
+            <span class="faq-item">{{ item2.title }}</span>
           </template>
           <div>
             <p
@@ -65,18 +65,18 @@ export default {
         ? window.i18n_en_us.TheOverhaulProject_FAQ.content_1
         : window.i18n_zh_tw.TheOverhaulProject_FAQ.content_1;
     const getHeight = () => {
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
-        document.getElementsByClassName("title")[i].style.height =
-          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+      for (let i = 0; i < document.getElementsByClassName("faq-title").length; i++) {
+        document.getElementsByClassName("faq-title")[i].style.height =
+          document.getElementsByClassName("faq-item")[i].getBoundingClientRect().height +
           "px";
-        document.getElementsByClassName("title")[i].style["line-height"] =
-          document.getElementsByClassName("item")[i].getBoundingClientRect().height +
+        document.getElementsByClassName("faq-title")[i].style["line-height"] =
+          document.getElementsByClassName("faq-item")[i].getBoundingClientRect().height +
           "px";
       }
     };
     onMounted(async () => {
       window.addEventListener("resize", getHeight);
-      for (let i = 0; i < document.getElementsByClassName("title").length; i++) {
+      for (let i = 0; i < document.getElementsByClassName("faq-title").length; i++) {
         getHeight();
       }
     });
