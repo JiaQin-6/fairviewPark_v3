@@ -387,6 +387,7 @@ export default {
     };
     //点击业主专区
     const selectOwnersZone = (val) => {
+      data.showOwnerZONEList = false
       if (val === "/loginOut") {
         loginOut();
         router.push({
@@ -410,7 +411,6 @@ export default {
         button.click();
         document.body.removeChild(button);
       } else {
-        data.showOwnerZONEList = false
         router.push({
           path: val,
           query: {
