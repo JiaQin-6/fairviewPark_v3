@@ -67,7 +67,6 @@
               <el-collapse
                 accordion
                 v-model="activeNames"
-                @change="handleChange"
                 v-if="
                   FAQ_from_residents_sub_content &&
                   FAQ_from_residents_sub_list &&
@@ -151,6 +150,7 @@ export default {
     const data = reactive({
       v_loading: false,
       nav_index: 0,
+      activeNames:'',
       FAQ_from_residents_list: [],
       FAQ_from_residents_sub_list: [],
       FAQ_from_residents_sub_content: [],

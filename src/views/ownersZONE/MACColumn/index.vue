@@ -27,7 +27,7 @@
           <el-menu
             :default-active="activeIndex"
             class="el-menu-demo"
-            :mode="isPC ? '' : 'horizontal'"
+            :mode="isPC ? 'vertical' : 'horizontal'"
             background-color="#ebe9e9"
             text-color="#000"
             active-text-color="#fff"
