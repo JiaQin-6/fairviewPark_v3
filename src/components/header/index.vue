@@ -467,11 +467,13 @@ export default {
           ctx.emit("showTenantModal", true);
         } else if (res.data.status === 501) {
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
         } else {
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
@@ -494,6 +496,7 @@ export default {
         } else {
           data.loading = false;
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
@@ -546,6 +549,12 @@ export default {
         //是否app已登出
         localStorage.removeItem("login-info");
         store.commit("setLoginStatus", false);
+        router.push({
+          path: "/",
+          query: {
+            lang: data.fairview_park_lang,
+          },
+        });
       }
       //如果有登陸信息就顯示登陸
       if (localStorage.getItem("login-info")) {
@@ -576,7 +585,7 @@ export default {
         data.showOwnerZONEList = false;
         if (location.hash.indexOf("#/home") !== -1) {
           //如果token失效會返回首頁，判斷is_login如果是true就登出并重新調用顯示popup彈框
-          if (!localStorage.getItem("login-info") && data.is_login === true) {
+          if (!localStorage.getItem("login-info")) {
             data.is_login = false;
             store.commit("setLoginStatus", false);
             //是否顯示popup彈框
@@ -609,6 +618,23 @@ export default {
         if (val) {
           if (localStorage.getItem("login-info")) {
             data.loginInfo = JSON.parse(localStorage.getItem("login-info"));
+            //如果是住客＆第一次登陸彈出編輯框
+            let strings = data.loginInfo.jwt.split("."); //截取token，获取载体
+            var userinfo = JSON.parse(
+              decodeURIComponent(
+                escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+              )
+            );
+            console.log(userinfo);
+            data.loading = false;
+            if (data.loginInfo.groupId === 1 && userinfo.verifyCode) {
+              const button = document.createElement("button");
+              button.setAttribute("data-bs-toggle", "modal");
+              button.setAttribute("data-bs-target", "#editTenantInformation");
+              document.body.appendChild(button);
+              button.click();
+              document.body.removeChild(button);
+            }
           }
           findPmLogHave();
         }

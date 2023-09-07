@@ -832,16 +832,18 @@ export default {
       }
     };
     onMounted(() => {
-      let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
-      var userinfo = JSON.parse(
-        decodeURIComponent(
-          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
-        )
-      );
-      data.address_t =
-        data.fairview_park_lang === "en_us"
-          ? `Fairview Park Session ${userinfo.section}, Street/Road ${userinfo.street}, No ${userinfo.number}`
-          : `錦綉花園${userinfo.section}段${userinfo.street}街/路${userinfo.number}號`;
+        let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
+        var userinfo = JSON.parse(
+          decodeURIComponent(
+            escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+          )
+        );
+        data.address_t =
+          data.fairview_park_lang === "en_us"
+            ? `Fairview Park Session ${userinfo.section}, Street/Road ${userinfo.street}, No ${userinfo.number}`
+            : `錦綉花園${userinfo.section}段${userinfo.street}街/路${userinfo.number}號`;
+      
+      
       findRcardList();
     });
     return {
