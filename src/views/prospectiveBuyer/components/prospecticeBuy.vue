@@ -91,10 +91,10 @@
                                                       <p style="margin-bottom: 25px">
                                                         {{ item.des }}
                                                         <br />
-                                                        <font
+                                                        <span
                                                           v-if="item.tip"
-                                                          color="#3399FF"
-                                                          >{{ item.tip }}</font
+                                                          style="color:#3399FF"
+                                                          >{{ item.tip }}</span
                                                         >
                                                       </p>
                                                       <p></p>
@@ -129,7 +129,7 @@
                           <div>
                             <p style="font-size: 18px; padding: 5px 27px">
                               {{ item.des }}<br />
-                              <font v-if="item.tip" color="#3399ff">{{ item.tip }}</font>
+                              <span v-if="item.tip" style="color:#3399ff">{{ item.tip }}</span>
                             </p>
                           </div>
                         </el-collapse-item>
@@ -152,6 +152,7 @@ export default {
   setup() {
     let data = reactive({
       fairview_park_lang: "",
+      activeNames:"",
       content_1:null,
       content_2:null,
     });

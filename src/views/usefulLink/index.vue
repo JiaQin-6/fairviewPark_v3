@@ -356,6 +356,9 @@ export default {
     img {
       width: auto;
     }
+    p {
+      font-size: 36px;
+    }
   }
   .nav-wrap {
     .row {
