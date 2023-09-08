@@ -992,7 +992,6 @@ export default {
       fairview_park_lang: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
-
     return {
       ...toRefs(data),
     };

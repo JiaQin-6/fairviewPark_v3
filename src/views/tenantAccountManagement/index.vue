@@ -7,10 +7,10 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <div>
-    <div class="tenantModal">
+  <div >
+    <div class="tenantModal" >
       <div class="tenantModal-dialog">
-        <div class="tenantModal-content animate__animated animate__fadeIn">
+        <div v-loading="loading" class="tenantModal-content animate__animated animate__fadeIn">
           <div class="tenantModal-header">
             <el-icon @click="closeModel"><Close /></el-icon>
           </div>
@@ -156,6 +156,7 @@
         background-color: #fff;
         box-shadow: 0 0 3px 3px rgba(101, 99, 99, 0.5);
       "
+      v-loading="loading"
     >
       <div style="text-align: right">
         <el-icon @click="isShowCloseBox = false">
@@ -254,11 +255,13 @@ export default {
         } else if (res.data.status === 501) {
           closeModel();
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
         } else {
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
@@ -289,6 +292,7 @@ export default {
         } else {
           data.loading = false;
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
@@ -540,7 +544,7 @@ export default {
 
   .el-checkbox__label {
     font-size: 18px;
-    white-space: wrap;
+    white-space: initial;
     text-align: left;
   }
 }

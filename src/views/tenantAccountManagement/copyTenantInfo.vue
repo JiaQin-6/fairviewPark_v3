@@ -92,6 +92,7 @@ export default {
         } else {
           data.loading = false;
           ElMessage({
+            showClose: true,
             message: res.data.msg,
             type: "warning",
           });
@@ -110,6 +111,7 @@ export default {
         await toClipboard(tenantInfo.innerHTML);
         // 复制成功
         ElMessage({
+          showClose: true,
           message: proxy.$t("tenant_account_management.Copy_Successful"),
           type: "success",
         });

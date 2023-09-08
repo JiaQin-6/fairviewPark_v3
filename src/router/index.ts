@@ -59,72 +59,108 @@ const routes = [
         path: '/estate-notice',
         name: 'estate-notice',
         component: () => import('../views/estateNotice/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //居民常見問題﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/FAQ-from-residents',
         name: 'FAQ-from-residents',
         component: () => import('../views/ownersZONE/FAQFromResidents/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //錦綉專訓﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/fairview-part-news',
         name: 'fairview-part-news',
         component: () => import('../views/ownersZONE/fairviewPartNews/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //人口統計及意見調查﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/demographic-opinion-survey',
         name: 'demographic-opinion-survey',
         component: () => import('../views/ownersZONE/demographicOpinionSurvey/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //屋邨活動﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/estate-activities',
         name: 'estate-activities',
         component: () => import('../views/ownersZONE/estateActivities/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //最新消息﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/news-update',
         name: 'news-update',
         component: () => import('../views/ownersZONE/newsUpdate/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //業主手冊及屋邨地圖﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/residents-handbook-map',
         name: 'residents-handbook-map',
         component: () => import('../views/ownersZONE/residentsHandbookMap/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //常用表格﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/frequently-used-forms',
         name: 'frequently-used-forms',
         component: () => import('../views/ownersZONE/frequentlyUsedForms/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //管理諮詢委員會專欄﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/MAC-column',
         name: 'MAC-column',
         component: () => import('../views/ownersZONE/MACColumn/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //收費表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/payment-list',
         name: 'payment-list',
         component: () => import('../views/ownersZONE/paymentList/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //抽簽鎖車機制﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/lottery-system-for-impound',
         name: 'lottery-system-for-impound',
         component: () => import('../views/ownersZONE/lotterySystemForImpound/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //更換地下喉管及行車道路翻新工程（大維修）﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/the-overhaul-project',
         name: 'the-overhaul-project',
         component: () => import('../views/ownersZONE/theOverhaulProject/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
@@ -132,17 +168,23 @@ const routes = [
         name: 'coach-service',
         component: () => import('../views/coachService/index.vue'),
       },
-      //专巴时间表﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
+      //申请住户智能卡﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/apply-resident-smartcard',
         name: 'apply-resident-smartcard',
         component: () => import('../views/ownersZONE/applyRCard/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
       //30天信息推送﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣﹣
       {
         path: '/information-push',
         name: 'information-push',
         component: () => import('../views/informationPush/index.vue'),
+        meta: {
+          isAuth: true,
+        },
       },
     ]
   }
@@ -160,16 +202,21 @@ router.beforeEach((to, from, next) => {
     let newUrl = location.href.replace('www.', '')
     location.href = newUrl
   }
-  //判斷token是否過期，如果過期刪除localStorage登陸數據
-  checkToken()
+  //
+  //判断如果是在登录访问页面是否有登录信息
+  if(to.meta.isAuth&&!localStorage.getItem('login-info')){
+    next("/");
+  }
   // 检查版本更新
   // 监听页面打开显示
   if (!(window as any).isHasVisibilitychange) {
     (window as any).isHasVisibilitychange = true;
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) {
-        //判斷token是否過期，如果過期刪除localStorage登陸數據
-        checkToken()
+        //判断如果是在登录访问页面是否有登录信息
+        if(to.meta.isAuth&&!localStorage.getItem('login-info')){
+          next("/");
+        }
         //检查服务端是否已经更新，如果更新刷新页面
         if (location.hostname !== "localhost") {
           checkAppNewVersion();
@@ -198,23 +245,5 @@ async function checkAppNewVersion() {
     window.location.reload()
   }
   sessionStorage.setItem('fairview-park-version', version)
-}
-//
-function checkToken(){
-  //判斷token是否過期，如果過期刪除localStorage登陸數據
-  if (localStorage.getItem('login-info')) {
-    var userinfo = JSON.parse(
-      decodeURIComponent(
-        escape(window.atob(JSON.parse((window as any).localStorage.getItem('login-info')).jwt.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")))
-      )
-    );
-    // console.log(userinfo)
-    // console.log(new Date().getTime())
-    // console.log(userinfo.jwtExpiresDate)
-    if(!userinfo.jwtExpiresDate||(new Date().getTime()>(userinfo.jwtExpiresDate-5000))){
-      localStorage.removeItem('login-info')
-      store.commit('setLoginStatus', false);
-    }
-  }
 }
 export default router

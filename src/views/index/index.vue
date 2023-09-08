@@ -167,11 +167,11 @@ export default {
       data.is_show = val;
     };
     //登出
-    const loginOut = () => {
-      localStorage.removeItem("login-info");
-      store.commit("setLoginStatus", false);
-      showPopupBox(); //是否顯示popup彈框
-    };
+    // const loginOut = () => {
+    //   localStorage.removeItem("login-info");
+    //   store.commit("setLoginStatus", false);
+    //   showPopupBox(); //是否顯示popup彈框
+    // };
     //查询最新一条弹窗信息
     const findOneNewPopupBox = async (memberType) => {
       try {
@@ -360,7 +360,7 @@ export default {
         } else {
           data.showRealTimeInfo = true;
         }
-      } else {
+      } else if(!route.query.session){
         const nonMemberData = await findOneNewPopupBox(2); //游客
         //遊客
         if (!nonMemberData) {
@@ -487,7 +487,7 @@ export default {
 
     return {
       ...toRefs(data),
-      loginOut,
+      // loginOut,
       // selectOwnersZone,
       showOwnerIsZONE,
       findOneNewPopupBox,
