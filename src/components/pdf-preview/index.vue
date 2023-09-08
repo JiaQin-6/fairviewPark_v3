@@ -43,7 +43,7 @@ export default {
     },
     pageNumber: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   setup(props) {

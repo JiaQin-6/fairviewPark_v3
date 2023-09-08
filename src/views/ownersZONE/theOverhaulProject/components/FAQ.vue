@@ -58,6 +58,7 @@ export default {
     const data = reactive({
       fairview_park_lang: "",
       content_1:null,
+      activeNames:'',
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     data.content_1 =
