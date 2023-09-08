@@ -102,7 +102,7 @@
             >
           </li>
           <!-- 分頁 -->
-          <div style="display: flex; align-items: center" v-if="total !== 0">
+          <div style="display: flex; align-items: center" v-if="total1 !== 0">
             <el-pagination
               style="flex-wrap: wrap; margin: 0 auto; font-size: 18px; width: 100%"
               v-model:current-page="currentPage1"
@@ -145,7 +145,7 @@
           </ul>
         </div>
         <!-- 分頁 -->
-        <div style="display: flex; align-items: center" v-if="total !== 0">
+        <div style="display: flex; align-items: center" v-if="total2 !== 0">
           <el-pagination
             style="flex-wrap: wrap; margin: 0 auto; font-size: 18px"
             v-model:current-page="currentPage2"

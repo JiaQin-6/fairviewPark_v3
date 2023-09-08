@@ -23,6 +23,20 @@
         </li>
       </ul>
     </div>
+     <!-- loading -->
+     <div
+      class="loading"
+      v-loading="loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -36,21 +50,25 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     let data = reactive({
+      loading:false,
       fairview_park_lang: "",
       pmLogList: null,
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
     const findPmLogList = async () => {
+      data.loading = true
       try {
         const res = await proxy.$http.findPmLogList({
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           data.pmLogList = res.data.data.records;
+          data.loading = false
         }
       } catch (error) {
         console.log(error);
+        data.loading = false
       }
     };
     onMounted(async () => {

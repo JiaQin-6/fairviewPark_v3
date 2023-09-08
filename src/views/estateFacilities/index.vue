@@ -138,6 +138,7 @@ export default {
     };
     //根据 id 和 语言获取一条屋苑资料数据
     const findOneEstateFacilities = async (id) => {
+        data.v_loading = true;
       try {
         const res = await proxy.$http.findOneEstateFacilities({
           id: id,

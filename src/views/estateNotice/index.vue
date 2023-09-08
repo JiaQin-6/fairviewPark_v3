@@ -159,6 +159,7 @@ export default {
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
     //查看所有 屋苑资料 列表
     const findEstateNoticeList = async (id) => {
+          data.v_loading = true;
       try {
         const res = await proxy.$http.findEstateNoticeList({
           lang: data.fairview_park_lang,

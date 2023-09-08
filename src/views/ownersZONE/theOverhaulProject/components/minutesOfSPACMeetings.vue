@@ -7,7 +7,7 @@
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
 <template>
-  <el-config-provider :locale="local">
+  <el-config-provider :locale="local" >
     <div>
       <p style="font-size: 36px; color: #9cc212; font-weight: bold">
         {{ $t('TheOverhaulProject_Minutes_of_SPAC_Meetings.Minutes_of_SPAC_Meetings') }}
@@ -43,6 +43,20 @@
         </div>
       </div>
     </div>
+    <!-- loading -->
+    <div
+      class="loading"
+      v-loading="laoding"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':laoding?'':'none'}"
+    ></div>
   </el-config-provider>
 </template>
 
@@ -59,6 +73,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      laoding:false,
       fairview_park_lang: "",
       minutes_of_mac_meetings_list: [],
       minutes_of_mac_meetings_show_list: [],
@@ -71,6 +86,7 @@ export default {
     data.local = data.fairview_park_lang === "en_us" ? en : zhTw;
     //查看所有列表
     const findTheOverhaulProjectList = async () => {
+      data.laoding =true
       try {
         const res = await proxy.$http.findTheOverhaulProjectList({
           lang: data.fairview_park_lang,
@@ -79,8 +95,10 @@ export default {
           data.minutes_of_mac_meetings_list = res.data.data.records;
           data.total = data.minutes_of_mac_meetings_list.length;
           handleCurrentChange(1);
+          data.laoding =false
         }
       } catch (error) {
+        data.laoding =false
         console.log(error);
       }
     };

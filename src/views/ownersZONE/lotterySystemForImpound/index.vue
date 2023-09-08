@@ -34,6 +34,20 @@
         </div>
       </div>
     </div>
+     <!-- loading -->
+     <div
+      class="loading"
+      v-loading="loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -52,21 +66,25 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      loading:false,
       lottery_system_for_mpound_content: [],
       fairview_park_lang: "",
     });
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
     const findLotterySystemForImpound = async () => {
+      data.loading = true
       try {
         const res = await proxy.$http.findLotterySystemForImpound({
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           data.lottery_system_for_mpound_content = res.data.data;
+          data.loading = false
         }
       } catch (error) {
         console.log(error);
+        data.loading = false
       }
     };
     onMounted(async () => {
@@ -113,6 +131,7 @@ export default {
 }
 .nav-wrap {
   padding: 20px;
+  min-height:200px;
   .row {
     @{deep} .nav-content {
       background-color: #fff;

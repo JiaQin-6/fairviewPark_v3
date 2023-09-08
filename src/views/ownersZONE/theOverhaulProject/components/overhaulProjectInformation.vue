@@ -46,6 +46,20 @@
       </div>
     
     </div>
+     <!-- loading -->
+     <div
+      class="loading"
+      v-loading="loading"
+      style="
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        position: fixed;
+        z-index: 10000;
+      "
+      :style="{'display':loading?'':'none'}"
+    ></div>
   </div>
 </template>
 
@@ -60,6 +74,7 @@ export default {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
     const data = reactive({
+      loading:false,
       fairview_park_lang: "",
       tohpByFpnList: [],
       tohpByFpnIndex: 0,
@@ -72,15 +87,18 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有 业主手册及地图 列表
     const findTohpByFpn2 = async () => {
+      data.loading= true
       try {
         const res = await proxy.$http.findTohpByFpn2({
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
           data.tohpByFpnList = res.data.data;
+          data.loading= false
         }
       } catch (error) {
         console.log(error);
+        data.loading= false
       }
     };
     const changeTohpByFpn = () => {

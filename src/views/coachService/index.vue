@@ -682,7 +682,16 @@
 </template>
 
 <script>
-import { ref, reactive, getCurrentInstance, toRefs, onMounted, nextTick,watch } from "vue";
+import {
+  ref,
+  reactive,
+  getCurrentInstance,
+  toRefs,
+  onMounted,
+  nextTick,
+  watch,
+} from "vue";
+import { formItemValidateStates } from "element-plus";
 export default {
   data() {
     return {
@@ -728,63 +737,71 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看 價格表 列表
     const findLineMoneyList = async (id) => {
-      try {
-        const res = await proxy.$http.findLineMoneyList({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.v_loading = false;
-          data.coach_service_content.lineMoneyList = res.data.data.records;
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await proxy.$http.findLineMoneyList({
+            lang: data.fairview_park_lang,
+          });
+          if (res.data.status === 200) {
+            data.coach_service_content.lineMoneyList = res.data.data.records;
+            resolve(res);
+          }
+        } catch (error) {
+          reject(error);
         }
-      } catch (error) {
-        data.v_loading = false;
-        console.log(error);
-      }
+      });
     };
     //查看专车 pdf 链接
     const findOneCoachServiceFile = async (id) => {
-      try {
-        const res = await proxy.$http.findOneCoachServiceFile({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.coach_service_content.coachServiceFile = res.data.data.pdfUrlEnUs;
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await proxy.$http.findOneCoachServiceFile({
+            lang: data.fairview_park_lang,
+          });
+          if (res.data.status === 200) {
+            data.coach_service_content.coachServiceFile = res.data.data.pdfUrlEnUs;
+            resolve(res);
+          }
+        } catch (error) {
+          reject(error);
         }
-      } catch (error) {
-        console.log(error);
-      }
+      });
     };
     //查看 時間表
     const findCoachServiceList = async (id) => {
-      try {
-        const res = await proxy.$http.findCoachServiceList({
-          lang: data.fairview_park_lang,
-        });
-        if (res.data.status === 200) {
-          data.v_loading = false;
-          res.data.data.pageResult.records.map((item, index) => {
-            item.index = index;
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await proxy.$http.findCoachServiceList({
+            lang: data.fairview_park_lang,
           });
-          data.coach_service_content.coachServiceList = res.data.data.pageResult.records.concat(
-            [
-              {
-                titleEnUs:
-                  data.fairview_park_lang === "en_us" ? "Coach Fare Table" : "專巴收費表",
-                index: res.data.data.pageResult.records.length,
-              },
-              {
-                titleEnUs:
-                  data.fairview_park_lang === "en_us"
-                    ? "Free Shuttle Bus"
-                    : "邨内免費穿梭巴士",
-                index: res.data.data.pageResult.records.length + 1,
-              },
-            ]
-          );
+          if (res.data.status === 200) {
+            res.data.data.pageResult.records.map((item, index) => {
+              item.index = index;
+            });
+            data.coach_service_content.coachServiceList = res.data.data.pageResult.records.concat(
+              [
+                {
+                  titleEnUs:
+                    data.fairview_park_lang === "en_us"
+                      ? "Coach Fare Table"
+                      : "專巴收費表",
+                  index: res.data.data.pageResult.records.length,
+                },
+                {
+                  titleEnUs:
+                    data.fairview_park_lang === "en_us"
+                      ? "Free Shuttle Bus"
+                      : "邨内免費穿梭巴士",
+                  index: res.data.data.pageResult.records.length + 1,
+                },
+              ]
+            );
+            resolve(res);
+          }
+        } catch (error) {
+          reject(error);
         }
-      } catch (error) {
-        data.v_loading = false;
-      }
+      });
     };
     //獲取table中最長的col的數據
     const getColMaxLength = (item) => {
@@ -798,8 +815,8 @@ export default {
     };
     //选择nav
     const selectNav = (index) => {
-      if(index==='coachServiceFile'){
-        return false
+      if (index === "coachServiceFile") {
+        return false;
       }
       if (index === data.coach_service_content.coachServiceList.length - 2) {
         nextTick(async () => {
@@ -824,17 +841,20 @@ export default {
     };
     watch(
       () => data.nav_index,
-      (val,oldDate) => {
-        if(val==='coachServiceFile'){
-          data.nav_index = oldDate
+      (val, oldDate) => {
+        if (val === "coachServiceFile") {
+          data.nav_index = oldDate;
         }
       }
     );
     onMounted(async () => {
       data.v_loading = true;
-      findLineMoneyList();
-      findOneCoachServiceFile();
-      findCoachServiceList();
+
+      Promise
+        .all([findLineMoneyList(), findOneCoachServiceFile(), findCoachServiceList()])
+        .then(() => {
+          data.v_loading = false;
+        });
     });
     return {
       ...toRefs(data),
@@ -918,7 +938,8 @@ export default {
             color: #000;
           }
 
-          span,a {
+          span,
+          a {
             font-size: 18px;
             color: #000;
           }
@@ -927,7 +948,9 @@ export default {
             background-color: var(--mainColor2);
             color: #fff;
 
-            i,span,a {
+            i,
+            span,
+            a {
               color: #fff;
             }
           }
@@ -1112,8 +1135,8 @@ export default {
                       span {
                         margin: 0;
                       }
-                      a{
-                        color:#fff;
+                      a {
+                        color: #fff;
                       }
                     }
                   }

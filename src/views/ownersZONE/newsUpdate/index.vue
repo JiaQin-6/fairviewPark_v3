@@ -129,6 +129,7 @@ export default {
     };
     //查看一條數據
     const findOneNewUpdateById = async (id) => {
+          data.v_loading = true;
       try {
         const res = await proxy.$http.findOneNewUpdateById({
           lang: data.fairview_park_lang,

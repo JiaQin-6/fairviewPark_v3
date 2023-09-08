@@ -161,6 +161,7 @@ export default {
     data.fairview_park_lang = sessionStorage.getItem("fairview_park_lang");
     //查看所有列表
     const findFaqFromResidentsList = async (id) => {
+          data.v_loading = true;
       try {
         const res = await proxy.$http.findFaqFromResidentsList({
           lang: data.fairview_park_lang,
@@ -189,6 +190,7 @@ export default {
     };
     //查看一條數據
     const findOneFaqFromResidents = async (parentId, id, index) => {
+          data.v_loading = true;
       try {
         const res = await proxy.$http.findOneFaqFromResidents({
           lang: data.fairview_park_lang,
