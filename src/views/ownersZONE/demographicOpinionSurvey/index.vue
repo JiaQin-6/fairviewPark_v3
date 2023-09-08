@@ -32,6 +32,7 @@
               size="large"
               @change="changeDemographicOpinion"
               :teleported="false"
+              :placeholder="' '"
             >
               <el-option
                 v-for="(item, index) in demographic_opinion_survey_list"

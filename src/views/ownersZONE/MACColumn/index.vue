@@ -60,6 +60,7 @@
             size="large"
             v-model="activeIndex"
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in [

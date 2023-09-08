@@ -61,6 +61,7 @@
               }
             "
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in coach_service_content.coachServiceList"

@@ -47,6 +47,7 @@
             class="menu-select"
             @change="changeMenu"
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in estate_activites_list"

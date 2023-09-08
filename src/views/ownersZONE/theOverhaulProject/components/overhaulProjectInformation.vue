@@ -19,7 +19,7 @@
         v-if="tohpByFpnList.length > 0"
         v-model="tohpByFpnIndex"
         style="margin: 20px 0; width: 100%"
-        placeholder="Select"
+        :placeholder="' '"
         size="large"
         @change="changeTohpByFpn"
         :teleported="false"

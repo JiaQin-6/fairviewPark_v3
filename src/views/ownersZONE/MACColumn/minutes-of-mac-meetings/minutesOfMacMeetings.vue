@@ -14,6 +14,7 @@
       style="margin-bottom: 20px"
       size="large"
       @click="menuActive = item2.value"
+      :placeholder="' '"
     >
       <el-option
         v-for="(item, index) in [
@@ -46,6 +47,7 @@
       style="margin-bottom: 20px"
       size="large"
       @change="selectSubMacMeeting"
+      :placeholder="' '"
     >
       <el-option
         v-for="(item, index) in minutes_of_sub_mac_meetings_list"

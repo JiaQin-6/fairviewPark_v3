@@ -32,6 +32,7 @@
               @change="changeFairviewPartNews"
               placement="bottom"
               :teleported="false"
+              :placeholder="' '"
             >
               <el-option
                 v-for="(item, index) in fairview_part_news_list"

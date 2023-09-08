@@ -44,6 +44,7 @@
                 findOneNewUpdateById(new_update_index);
               }
             "
+            :placeholder="' '"
             :teleported="false"
           >
             <el-option

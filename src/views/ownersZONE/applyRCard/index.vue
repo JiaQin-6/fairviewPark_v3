@@ -52,6 +52,7 @@
             v-model="nav_index"
             class="m-2 menu-select"
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in [
@@ -144,7 +145,7 @@
                           }
                         "
                         :teleported="false"
-                        placeholder=" "
+                        :placeholder="' '"
                       >
                         <el-option
                           v-for="item in loginInfo && loginInfo.groupId === 0

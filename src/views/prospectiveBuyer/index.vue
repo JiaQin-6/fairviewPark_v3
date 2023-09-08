@@ -66,6 +66,7 @@
             v-model="nav_index"
             class="menu-select"
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in [

@@ -49,6 +49,7 @@
               }
             "
             :teleported="false"
+            :placeholder="' '"
           >
             <el-option
               v-for="(item, index) in [

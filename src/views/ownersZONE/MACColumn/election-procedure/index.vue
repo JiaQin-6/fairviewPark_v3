@@ -14,6 +14,7 @@
       style="margin-bottom: 20px"
       size="large"
       @click="menuActive = item2.value"
+      :placeholder="' '"
     >
       <el-option
         v-for="(item, index) in [

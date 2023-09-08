@@ -45,6 +45,7 @@
                 jumpLink(index);
               }
             "
+            :placeholder="' '"
             :teleported="false"
           >
             <el-option
