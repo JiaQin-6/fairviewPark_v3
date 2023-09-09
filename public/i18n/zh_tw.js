@@ -325,6 +325,7 @@ window.i18n_zh_tw = {
     'If_the_Tenant_forgets_the_passwords':'如住戶忘記密碼，請通知業主或管理公司重置戶口。',
     'Willing_to_receive_physical_mail_information':'願意接收實體屋苑通告？',
     'Login_Name_tenant':'登入名稱',
+    'Edit_Successful':'編輯成功，請立即登出，有關資料會於下次登入系統時生效。',
   },
   //商場資訊
   shopping_Information: {

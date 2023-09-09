@@ -311,13 +311,19 @@ export default {
           // localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message:
-              data.fairview_park_lang === "en_us"
-                ? "Edit Successful, Please login again!"
-                : "編輯成功,請從新登陸！",
+            message:proxy.$t('Edit_member_information.Edit_Successful'),
             type: "success",
+            duration:10000,
           });
-
+          // 下面的"flutterInAppWebViewPlatformReady"为固定写法
+          // "myHandlerName"与flutter中注册的JS处理方法名称一致
+          window.addEventListener("flutterInAppWebViewPlatformReady", function () {
+              window.flutter_inappwebview
+                  .callHandler("logoutAction", {"logout":true})
+                  .then(function (res) {
+                      console.log("flutter给html的数据", res);
+                  })
+          })
           document.getElementById("close-edit-tenant-model").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
@@ -329,6 +335,7 @@ export default {
             path: "/",
             query: {
               lang: data.fairview_park_lang,
+              logout:true,
             },
           });
         } else {

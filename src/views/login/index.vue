@@ -843,11 +843,12 @@ export default {
           lang: data.fairview_park_lang,
         });
         if (res.data.status === 200) {
+          data.loading = false;
           document.getElementById("close-login").click();
           localStorage.setItem("login-info", JSON.stringify(res.data.data));
           store.commit("setLoginStatus", true);
           ctx.emit("showPopupBox");//是否顯示popup彈框
-         
+          
         } else {
           data.loading = false;
           data.login_error_tip.is_show = true;
@@ -1061,13 +1062,19 @@ export default {
           // localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message:
-              data.fairview_park_lang === "en_us"
-                ? "Edit Successful, Please login again!"
-                : "編輯成功,請從新登陸！",
+            message:proxy.$t('Edit_member_information.Edit_Successful'),
             type: "success",
+            duration:10000,
           });
-
+          // 下面的"flutterInAppWebViewPlatformReady"为固定写法
+          // "myHandlerName"与flutter中注册的JS处理方法名称一致
+          window.addEventListener("flutterInAppWebViewPlatformReady", function () {
+              window.flutter_inappwebview
+                  .callHandler("logoutAction", {"logout":true})
+                  .then(function (res) {
+                      console.log("flutter给html的数据", res);
+                  })
+          })
           document.getElementById("close-edit-member").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
@@ -1075,6 +1082,7 @@ export default {
           localStorage.removeItem("login-info");
           store.commit("setLoginStatus", false);
           ctx.emit("showPopupBox");
+         
           router.push({
             path: "/",
             query: {

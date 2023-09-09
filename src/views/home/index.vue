@@ -89,6 +89,7 @@
         </div>
       </div>
     </div>
+    <button @click="flutterInAppWebViewPlatformReady">Test flutterInAppWebViewPlatformReady</button>
     <!-- 主要內容 -->
     <div class="container_wrap">
       <!-- 歡迎瀏覽錦綉花園 -->
@@ -298,6 +299,16 @@ export default {
         console.log(error);
       }
     };
+    const flutterInAppWebViewPlatformReady = () =>{
+      alert('觸發按鈕')
+      window.addEventListener("flutterInAppWebViewPlatformReady", function () {
+              window.flutter_inappwebview
+                  .callHandler("logoutAction", {"logout":true})
+                  .then(function (res) {
+                      console.log("flutter给html的数据", res);
+                  })
+          })
+    };
     findWebsiteBannerList();
     onMounted(async () => {
       await findNewNoticeList();
@@ -335,6 +346,7 @@ export default {
     return {
       ...toRefs(data),
       findWebsiteBannerList,
+      flutterInAppWebViewPlatformReady,
     };
   },
 };

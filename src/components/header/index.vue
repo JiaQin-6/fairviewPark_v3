@@ -39,6 +39,7 @@
                   : $t("headed.TENANT_s_ZONE")
               }}
             </button>
+            <i v-if="showOwnerZONEList"></i>
           </div>
           <div
             v-if="is_login"
@@ -273,9 +274,6 @@
       </div>
       <transition name="el-zoom-in-top">
         <div class="ownerIsZONE" v-if="showOwnerZONEList">
-          <!-- <div class="icon">
-            <i></i>
-          </div> -->
           <ul>
             <li
               v-for="(item, index) in loginPower"
@@ -1092,30 +1090,7 @@ export default {
         width: 100%;
         box-sizing: border-box;
         display: block;
-        // &::before{
-        //   content:'';
-        //   display: block;
-        //   height: 14px;
-        //   width: 14px;
-        //   margin: 0px auto 0;
-        //   border-width: 14px;
-        //   border-color: transparent transparent var(--mainColor2) transparent;
-        //   border-style: solid;
-        // }
-        .icon{
-          height: 14px;
-          width: 14px;
-          
-          i {
-          display: block;
-          height: 14px;
-          width: 14px;
-          margin: 0px auto 0;
-          border-width: 14px;
-          border-color: transparent transparent var(--mainColor2) transparent;
-          border-style: solid;
-        }
-        }
+        position: relative;
         
         ul {
           padding: 0;

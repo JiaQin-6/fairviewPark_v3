@@ -332,6 +332,7 @@ window.i18n_en_us = {
     'If_the_Tenant_forgets_the_passwords':'If the Tenant forgets the passwords, please contact either your Owner or Estate Management for reset your account.',
     'Willing_to_receive_physical_mail_information':'Willing to receive physical Estate Notice?',
     'Login_Name_tenant':'Login Name',
+    'Edit_Successful':'Update successful. Please log out immediately and it will take effective the next time you log in to the system.',
   },
   //商場資訊
   shopping_Information: {
