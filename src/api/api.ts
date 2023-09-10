@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: \hospitald:\软件2\vue\后台项目\manager\src\api\api.js
  */
-import {ElMessage} from '../main.js'
+import { ElMessage } from '../main.js'
 //导入axios
 import axios from "axios";
 import router from '../router';
@@ -16,16 +16,16 @@ import store from '../store/index'
 let baseUrl = "";
 switch (import.meta.env.MODE) {
   case "development": // 注意这里的名字要和步骤二中设置的环境名字对应起来
-      baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
-      break;
-  case "pre": 
-      baseUrl = "https://app.fairviewpark.hk/pre"; //这里是預生產环境中的url
-      break;
+    baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
+    break;
+  case "pre":
+    baseUrl = "https://app.fairviewpark.hk/pre"; //这里是預生產环境中的url
+    break;
   case "production":
-      baseUrl = "https://app.fairviewpark.hk"; //生产环境url
-      break;
+    baseUrl = "https://app.fairviewpark.hk"; //生产环境url
+    break;
   default:
-      baseUrl = "http://43.154.184.138:8084"; //这里是本地的请求url
+    baseUrl = "http://43.154.184.138:8084"; //这里是本地的请求url
 }
 export const http: any = axios.create({
   baseURL: baseUrl,
@@ -39,185 +39,185 @@ export const http: any = axios.create({
   // },
 });
 //登录
-http.login = (arr:any) => {
-  return http.post(`/houseweb/member/login`,arr);
+http.login = (arr: any) => {
+  return http.post(`/houseweb/member/login`, arr);
 };
 //註冊
-http.register = (arr:any) => {
-  return http.post(`/houseweb/member/register`,arr);
+http.register = (arr: any) => {
+  return http.post(`/houseweb/member/register`, arr);
 };
 //忘记密码
-http.forgetPassword = (arr:any) => {
-  return http.post(`/houseweb/member/forgetPassword`,arr);
+http.forgetPassword = (arr: any) => {
+  return http.post(`/houseweb/member/forgetPassword`, arr);
 };
 //更新用户信息
-http.editMemberInfo = (arr:any) => {
-  return http.post(`/houseweb/member/editMemberInfo`,arr);
+http.editMemberInfo = (arr: any) => {
+  return http.post(`/houseweb/member/editMemberInfo`, arr);
 };
 //编辑用户信息前验证密码
-http.checkPassword = (arr:any) => {
-  return http.post(`/houseweb/member/checkPassword`,arr);
+http.checkPassword = (arr: any) => {
+  return http.post(`/houseweb/member/checkPassword`, arr);
 };
 //申请智能卡
-http.applyRCard = (arr:any) => {
-  return http.post(`/houseweb/rcard/applyRCard`,arr);
+http.applyRCard = (arr: any) => {
+  return http.post(`/houseweb/rcard/applyRCard`, arr);
 };
 //查看所有 最新消息
-http.findNewNoticeList = (arr:any) => {
-  return http.post(`/houseweb/newNotice/findNewNoticeList`,arr);
+http.findNewNoticeList = (arr: any) => {
+  return http.post(`/houseweb/newNotice/findNewNoticeList`, arr);
 };
 //获取 屋邨资料 列表
-http.findEstateFacilitiesList = (arr:any) => {
-  return http.post(`/houseweb/estateFacilities/findEstateFacilitiesList`,arr);
+http.findEstateFacilitiesList = (arr: any) => {
+  return http.post(`/houseweb/estateFacilities/findEstateFacilitiesList`, arr);
 };
 //根据 id 和 语言获取一条数据
-http.findOneEstateFacilities = (arr:any) => {
+http.findOneEstateFacilities = (arr: any) => {
   return http.post(`/houseweb/estateFacilities/findOneEstateFacilities`, arr);
 };
 //查询 屋邨通告 列表
-http.findEstateNoticeList = (arr:any) => {
-  return http.post(`/houseweb/estateNotice/findEstateNoticeList`,arr);
+http.findEstateNoticeList = (arr: any) => {
+  return http.post(`/houseweb/estateNotice/findEstateNoticeList`, arr);
 };
 //查询 商场资讯 列表
-http.findShopsDirectoryList = (arr:any) => {
-  return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList`,arr);
+http.findShopsDirectoryList = (arr: any) => {
+  return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList`, arr);
 };
 //查询 商场资讯 列表
-http.findShopsDirectoryList2 = (arr:any) => {
-  return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList2`,arr);
+http.findShopsDirectoryList2 = (arr: any) => {
+  return http.post(`/houseweb/shopsDirectory/findShopsDirectoryList2`, arr);
 };
 //查询 用户电话 列表
-http.findUsefulTelephoneNosList = (arr:any) => {
-  return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList`,arr);
+http.findUsefulTelephoneNosList = (arr: any) => {
+  return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList`, arr);
 };
 //查询 用户电话 列表
-http.findUsefulTelephoneNosList2 = (arr:any) => {
-  return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList2`,arr);
+http.findUsefulTelephoneNosList2 = (arr: any) => {
+  return http.post(`/houseweb/usefulTelephoneNos/findUsefulTelephoneNosList2`, arr);
 };
 //查询所有 banner 列表
-http.findWebsiteBannerList = (arr:any) => {
-  return http.post(`/houseweb/websiteBanner/findWebsiteBannerList`,arr);
+http.findWebsiteBannerList = (arr: any) => {
+  return http.post(`/houseweb/websiteBanner/findWebsiteBannerList`, arr);
 };
 //查询 FaqFromResidents 列表
-http.findFaqFromResidentsList = (arr:any) => {
-  return http.post(`/houseweb/faqFromResidents/findFaqFromResidentsList`,arr);
+http.findFaqFromResidentsList = (arr: any) => {
+  return http.post(`/houseweb/faqFromResidents/findFaqFromResidentsList`, arr);
 };
 //查询 FaqFromResidents 一条数据
-http.findOneFaqFromResidents = (arr:any) => {
-  return http.post(`/houseweb/faqFromResidents/findOneFaqFromResidents`,arr);
+http.findOneFaqFromResidents = (arr: any) => {
+  return http.post(`/houseweb/faqFromResidents/findOneFaqFromResidents`, arr);
 };
 //查询 錦綉專訓 列表
-http.findFairviewParkNewsList = (arr:any) => {
-  return http.post(`/houseweb/fairviewParkNews/findFairviewParkNewsList`,arr);
+http.findFairviewParkNewsList = (arr: any) => {
+  return http.post(`/houseweb/fairviewParkNews/findFairviewParkNewsList`, arr);
 };
 //查询 人口统计 列表
-http.findDemographicOpinionSurveyList = (arr:any) => {
-  return http.post(`/houseweb/demographicOpinionSurvey/findDemographicOpinionSurveyList`,arr);
+http.findDemographicOpinionSurveyList = (arr: any) => {
+  return http.post(`/houseweb/demographicOpinionSurvey/findDemographicOpinionSurveyList`, arr);
 };
 //查询 最新消息 列表
-http.findNewUpdateList = (arr:any) => {
-  return http.post(`/houseweb/newUpdate/findNewUpdateList`,arr);
+http.findNewUpdateList = (arr: any) => {
+  return http.post(`/houseweb/newUpdate/findNewUpdateList`, arr);
 };
 //查询 最新消息 單獨一条信息
-http.findOneNewUpdateById = (arr:any) => {
-  return http.post(`/houseweb/newUpdate/findOneNewUpdateById`,arr);
+http.findOneNewUpdateById = (arr: any) => {
+  return http.post(`/houseweb/newUpdate/findOneNewUpdateById`, arr);
 };
 //查询 常用表格 列表
-http.findFrequentlyUsedFormsList = (arr:any) => {
-  return http.post(`/houseweb/frequentlyUsedForms/findFrequentlyUsedFormsList`,arr);
+http.findFrequentlyUsedFormsList = (arr: any) => {
+  return http.post(`/houseweb/frequentlyUsedForms/findFrequentlyUsedFormsList`, arr);
 };
 //查询 抽籤鎖車機制 列表
-http.findLotterySystemForImpound = (arr:any) => {
-  return http.post(`/houseweb/lotterySystemForImpound/findLotterySystemForImpound`,arr);
+http.findLotterySystemForImpound = (arr: any) => {
+  return http.post(`/houseweb/lotterySystemForImpound/findLotterySystemForImpound`, arr);
 };
 //查询 屋邨活动 列表
-http.findEstateActivitesList = (arr:any) => {
-  return http.post(`/houseweb/estateActivites/findEstateActivitesList`,arr);
+http.findEstateActivitesList = (arr: any) => {
+  return http.post(`/houseweb/estateActivites/findEstateActivitesList`, arr);
 };
 //查询 屋邨活动 單獨一条信息
-http.findOneEstateActivitesById = (arr:any) => {
-  return http.post(`/houseweb/estateActivites/findOneEstateActivitesById`,arr);
+http.findOneEstateActivitesById = (arr: any) => {
+  return http.post(`/houseweb/estateActivites/findOneEstateActivitesById`, arr);
 };
 //查询 业主手册及地图 
-http.findResidentsHandbookMap = (arr:any) => {
-  return http.post(`/houseweb/residentsHandbookMap/findResidentsHandbookMap`,arr);
+http.findResidentsHandbookMap = (arr: any) => {
+  return http.post(`/houseweb/residentsHandbookMap/findResidentsHandbookMap`, arr);
 };
 //查询 時間表
-http.findCoachServiceList = (arr:any) => {
-  return http.post(`/houseweb/coachService/findCoachServiceList`,arr);
+http.findCoachServiceList = (arr: any) => {
+  return http.post(`/houseweb/coachService/findCoachServiceList`, arr);
 };
 //查询 時間表 單獨一条信息
-http.findOneCoachService = (arr:any) => {
-  return http.post(`/houseweb/coachService/findOneCoachService`,arr);
+http.findOneCoachService = (arr: any) => {
+  return http.post(`/houseweb/coachService/findOneCoachService`, arr);
 };
 //查询 價格表 
-http.findLineMoneyList = (arr:any) => {
-  return http.post(`/houseweb/coachServiceMoney/findLineMoneyList`,arr);
+http.findLineMoneyList = (arr: any) => {
+  return http.post(`/houseweb/coachServiceMoney/findLineMoneyList`, arr);
 };
 //查看专车 pdf 链接
-http.findOneCoachServiceFile = (arr:any) => {
-  return http.post(`/houseweb/coachService/findOneCoachServiceFile`,arr);
+http.findOneCoachServiceFile = (arr: any) => {
+  return http.post(`/houseweb/coachService/findOneCoachServiceFile`, arr);
 };
 //查看 大會議
-http.findMinutesOfMacMeetingsList = (arr:any) => {
-  return http.post(`/houseweb/minutesOfMacMeetings/findMinutesOfMacMeetingsList`,arr);
+http.findMinutesOfMacMeetingsList = (arr: any) => {
+  return http.post(`/houseweb/minutesOfMacMeetings/findMinutesOfMacMeetingsList`, arr);
 };
 //查看 小會議
-http.findMinutesOfSubComMeetingsList = (arr:any) => {
-  return http.post(`/houseweb/minutesOfSubComMeetings/findMinutesOfSubComMeetingsList`,arr);
+http.findMinutesOfSubComMeetingsList = (arr: any) => {
+  return http.post(`/houseweb/minutesOfSubComMeetings/findMinutesOfSubComMeetingsList`, arr);
 };
 //查看 周邊發展項目
-http.findNearbyProposedDevelopmentsList = (arr:any) => {
-  return http.post(`/houseweb/nearbyProposedDevelopments/findNearbyProposedDevelopmentsList`,arr);
+http.findNearbyProposedDevelopmentsList = (arr: any) => {
+  return http.post(`/houseweb/nearbyProposedDevelopments/findNearbyProposedDevelopmentsList`, arr);
 };
 //查看 會議回顧 pdf
-http.findOneMacColumnFile = (arr:any) => {
-  return http.post(`/houseweb/coachService/findOneMacColumnFile`,arr);
+http.findOneMacColumnFile = (arr: any) => {
+  return http.post(`/houseweb/coachService/findOneMacColumnFile`, arr);
 };
 //查看 大维修会议记录 列表
-http.findTheOverhaulProjectList = (arr:any) => {
-  return http.post(`/houseweb/theOverhaulProject/findTheOverhaulProjectList`,arr);
+http.findTheOverhaulProjectList = (arr: any) => {
+  return http.post(`/houseweb/theOverhaulProject/findTheOverhaulProjectList`, arr);
 };
 //查看 锦绣花园 pdf
-http.findTohpByFpn2 = (arr:any) => {
-  return http.post(`/houseweb/theOverhaulProject/findTohpByFpn2`,arr);
+http.findTohpByFpn2 = (arr: any) => {
+  return http.post(`/houseweb/theOverhaulProject/findTohpByFpn2`, arr);
 };
 //查看当前登录用户是否已读
-http.findPmLogHave = (arr:any) => {
-  return http.post(`/houseweb/pmLogHave/findPmLogHave`,arr);
+http.findPmLogHave = (arr: any) => {
+  return http.post(`/houseweb/pmLogHave/findPmLogHave`, arr);
 };
 //查看推送消息
-http.findPmLogList = (arr:any) => {
-  return http.post(`/houseweb/pmLog/findPmLogList`,arr);
+http.findPmLogList = (arr: any) => {
+  return http.post(`/houseweb/pmLog/findPmLogList`, arr);
 };
 //申请智能卡专用 文件上传接口
-http.uploadRcard = (arr:any) => {
-  return http.post(`/houseweb/file/uploadRcard`,arr);
+http.uploadRcard = (arr: any) => {
+  return http.post(`/houseweb/file/uploadRcard`, arr);
 };
 //查看申请的所有智能卡
-http.findRcardList = (arr:any) => {
-  return http.post(`/houseweb/rcard/findRcardList`,arr);
+http.findRcardList = (arr: any) => {
+  return http.post(`/houseweb/rcard/findRcardList`, arr);
 };
 /* version2 **/
 //查询最新一条弹窗信息
-http.findOneNewPopupBox = (arr:any) => {
-  return http.post(`/houseweb/popupBox/findOneNewPopupBox`,arr);
+http.findOneNewPopupBox = (arr: any) => {
+  return http.post(`/houseweb/popupBox/findOneNewPopupBox`, arr);
 };
 //业主查看住客情况
-http.selectTenantStatus = (arr:any) => {
-  return http.post(`/houseweb/tenant/selectTenantStatus`,arr);
+http.selectTenantStatus = (arr: any) => {
+  return http.post(`/houseweb/tenant/selectTenantStatus`, arr);
 };
 //官网里业主启动关闭住客账号操作
-http.clickTenantLaunch = (arr:any) => {
-  return http.post(`/houseweb/tenant/clickTenantLaunch`,arr);
+http.clickTenantLaunch = (arr: any) => {
+  return http.post(`/houseweb/tenant/clickTenantLaunch`, arr);
 };
 //住客修改密码
-http.editTenantMemberInfo = (arr:any) => {
-  return http.post(`/houseweb/member/editTenantMemberInfo`,arr);
+http.editTenantMemberInfo = (arr: any) => {
+  return http.post(`/houseweb/member/editTenantMemberInfo`, arr);
 };
 //获取 app 到 web 需要携带的数据
-http.getUrlData = (arr:any) => {
-  return http.post(`/houseweb/url/getUrlData`,arr);
+http.getUrlData = (arr: any) => {
+  return http.post(`/houseweb/url/getUrlData`, arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */
@@ -225,10 +225,10 @@ http.getUrlData = (arr:any) => {
 http.interceptors.request.use(
   (config: any) => {
     //在发送之前做点什么
-    if(window.localStorage.getItem('login-info')){
-      config.headers.Authorization = JSON.parse(window.localStorage.getItem('login-info')||'').jwt;
+    if (window.localStorage.getItem('login-info')) {
+      config.headers.Authorization = JSON.parse(window.localStorage.getItem('login-info') || '').jwt;
     }
-    
+
     return config;
   },
   function (error: any) {
@@ -242,17 +242,26 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   function (response: any) {
     if (response.data.status === 104) {
-      if(localStorage.getItem('login-info')){
+      if (localStorage.getItem('login-info')) {
         ElMessage({
           showClose: true,
-          message: sessionStorage.getItem('fairview_park_lang')==='en_us'?'Login timeout Please login again':'登錄逾時，請重新登入! ',
+          message: sessionStorage.getItem('fairview_park_lang') === 'en_us' ? 'Login timeout Please login again' : '登錄逾時，請重新登入! ',
           type: 'warning',
         })
       }
       localStorage.removeItem('login-info')
       store.commit("setLoginStatus", false);
-      router.push('/home')
-      return
+      //通知app退出登錄
+      if ((window as any).flutter_inappwebview && (window as any).flutter_inappwebview.callHandler) {
+        setTimeout(() => {
+          (window as any).flutter_inappwebview.callHandler("logoutAction", { logout: true });
+          router.push('/home')
+          return
+        }, 3000);
+      } else {
+        router.push('/home')
+        return
+      }
     }
     return response;
   },

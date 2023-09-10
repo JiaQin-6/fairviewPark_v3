@@ -10,27 +10,58 @@
   <div>
     <!-- 轮播图 -->
     <div>
-      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-interval="3000" data-bs-ride="carousel">
+      <div
+        id="carouselExampleFade"
+        class="carousel slide carousel-fade"
+        data-bs-interval="3000"
+        data-bs-ride="carousel"
+      >
         <div class="carousel-indicators">
-          <button v-for="(item, index) in web_banner_list" :key="index" type="button"
-            data-bs-target="#carouselExampleFade" :data-bs-slide-to="index" :class="{ active: carouselValue === index }"
-            aria-current="true" :aria-label="'Slide' + (index + 1)"></button>
+          <button
+            v-for="(item, index) in web_banner_list"
+            :key="index"
+            type="button"
+            data-bs-target="#carouselExampleFade"
+            :data-bs-slide-to="index"
+            :class="{ active: carouselValue === index }"
+            aria-current="true"
+            :aria-label="'Slide' + (index + 1)"
+          ></button>
         </div>
         <div style="height: 100%" class="carousel-inner">
           <!-- web_banner_list -->
-          <div style="height: 100%" class="carousel-item" :class="{ active: carouselValue === index }"
-            v-for="(item, index) in web_banner_list" :key="index">
-            <a style="position: absolute; height: 100%; width: 100%" :href="item.webUrlEnUs" target="_blank"
-              :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }">
+          <div
+            style="height: 100%"
+            class="carousel-item"
+            :class="{ active: carouselValue === index }"
+            v-for="(item, index) in web_banner_list"
+            :key="index"
+          >
+            <a
+              style="position: absolute; height: 100%; width: 100%"
+              :href="item.webUrlEnUs"
+              target="_blank"
+              :style="{ 'background-image': 'url(' + item.bannerEnUs + ')' }"
+            >
             </a>
           </div>
         </div>
-        <button id="carousel-control-prev" class="carousel-control-prev" type="button"
-          data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        <button
+          id="carousel-control-prev"
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="prev"
+        >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleFade"
+          data-bs-slide="next"
+        >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -40,44 +71,76 @@
     <div class="marquee">
       <div class="marquee-container">
         <img :src="icon_news" class="icon-laba" alt="" />
-        <el-carousel v-if="new_notice_list.length !== 0" indicator-position="none" height="45px" direction="vertical"
-          :autoplay="true" class="pc">
-          <el-carousel-item style="display: flex; align-items: center" v-for="(item, index) in new_notice_list"
-            :key="index">
-            <a v-show="item.websiteUrl" :href="item.websiteUrl" target="_blank" style="
-                  font-size: 18px;
-                  margin-right: 40px;
-                  color: #fff;
-                  text-decoration: underline;
-                " class="line_clamp_2">{{ item.contentEnUs }}
+        <el-carousel
+          v-if="new_notice_list.length !== 0"
+          indicator-position="none"
+          height="45px"
+          direction="vertical"
+          :autoplay="true"
+          class="pc"
+        >
+          <el-carousel-item
+            style="display: flex; align-items: center"
+            v-for="(item, index) in new_notice_list"
+            :key="index"
+          >
+            <a
+              v-show="item.websiteUrl"
+              :href="item.websiteUrl"
+              target="_blank"
+              style="
+                font-size: 18px;
+                margin-right: 40px;
+                color: #fff;
+                text-decoration: underline;
+              "
+              class="line_clamp_2"
+              >{{ item.contentEnUs }}
             </a>
-            <span v-show="!item.websiteUrl" style="
+            <span
+              v-show="!item.websiteUrl"
+              style="
                 font-size: 18px;
                 margin-right: 40px;
                 color: #fff;
                 text-decoration: none;
-                ">{{ item.contentEnUs }}</span>
-        </el-carousel-item>
-      </el-carousel>
-        <div id="scroll_div" class="mobile" style="
-              height: 45px;
-              line-height: 45px;
-              overflow: hidden;
-              overflow: hidden;
-              white-space: nowrap;
-              flex: 1;
-              margin-left: 10px;
-            ">
+              "
+              >{{ item.contentEnUs }}</span
+            >
+          </el-carousel-item>
+        </el-carousel>
+        <div
+          id="scroll_div"
+          class="mobile"
+          style="
+            height: 45px;
+            line-height: 45px;
+            overflow: hidden;
+            overflow: hidden;
+            white-space: nowrap;
+            flex: 1;
+            margin-left: 10px;
+          "
+        >
           <div id="scroll_front" style="display: inline-block"></div>
           <div id="scroll_begin" style="display: inline-block">
-            <div style="display: inline" v-for="(item, index) in new_notice_list" :key="index">
-              <a v-if="item.websiteUrl" :href="item.websiteUrl" target="_blank" style="
-                    text-decoration: underline;
-                    font-family: 'Nunito';
-                    font-size: 18px;
-                    margin-right: 40px;
-                    color: #fff;
-                  ">{{ item.contentEnUs }}
+            <div
+              style="display: inline"
+              v-for="(item, index) in new_notice_list"
+              :key="index"
+            >
+              <a
+                v-if="item.websiteUrl"
+                :href="item.websiteUrl"
+                target="_blank"
+                style="
+                  text-decoration: underline;
+                  font-family: 'Nunito';
+                  font-size: 18px;
+                  margin-right: 40px;
+                  color: #fff;
+                "
+                >{{ item.contentEnUs }}
               </a>
               <span style="margin-right: 20px; color: #fff" v-if="!item.websiteUrl">{{
                 item.contentEnUs
@@ -89,7 +152,6 @@
         </div>
       </div>
     </div>
-    <button @click="flutterInAppWebViewPlatformReady">Test flutterInAppWebViewPlatformReady</button>
     <!-- 主要內容 -->
     <div class="container_wrap">
       <!-- 歡迎瀏覽錦綉花園 -->
@@ -99,37 +161,9 @@
         </h1>
         <div class="container">
           <div class="row flex-center">
-            <div class="col col-12 col-md-4 col-lg-4 col-sm-12" v-for="(item, index) in [
-              {
-                text: $t('home.Shops_Directory'),
-                img_url: shop_information,
-                route: '/shopping-information',
-              },
-              {
-                text: $t('home.Resident_information'),
-                img_url: resident_information,
-                route: '/prospective-buyer',
-              },
-
-              {
-                text: $t('home.Coach_Service'),
-                img_url: bus_time_table,
-                route: '/coach-service',
-              },
-            ]" :key="index">
-              <div class="bg h100">
-                <img style="width: 100%" :src="item.img_url" alt="" />
-                <button>
-                  <router-link style="height:100%;width:100%;display:inline-block;
-                  padding: 8px 0;" :to="{
-                    path: item.route,
-                    query: { lang: fairview_park_lang },
-                  }">{{ item.text }}</router-link>
-                </button>
-              </div>
-            </div>
-            <el-carousel indicator-position="outside">
-              <el-carousel-item v-for="(item, index) in [
+            <div
+              class="col col-12 col-md-4 col-lg-4 col-sm-12"
+              v-for="(item, index) in [
                 {
                   text: $t('home.Shops_Directory'),
                   img_url: shop_information,
@@ -146,14 +180,68 @@
                   img_url: bus_time_table,
                   route: '/coach-service',
                 },
-              ]" :key="index">
-                <div class="bg h100" :style="{ 'background-image': 'url(' + item.img_url + ')' }">
-                  <button>
-                    <router-link style="height:100%;width:100%;display:inline-block;
-                  padding: 8px 0;" :to="{
+              ]"
+              :key="index"
+            >
+              <div class="bg h100">
+                <img style="width: 100%" :src="item.img_url" alt="" />
+                <button>
+                  <router-link
+                    style="
+                      height: 100%;
+                      width: 100%;
+                      display: inline-block;
+                      padding: 8px 0;
+                    "
+                    :to="{
                       path: item.route,
                       query: { lang: fairview_park_lang },
-                    }">{{ item.text }}</router-link>
+                    }"
+                    >{{ item.text }}</router-link
+                  >
+                </button>
+              </div>
+            </div>
+            <el-carousel indicator-position="outside">
+              <el-carousel-item
+                v-for="(item, index) in [
+                  {
+                    text: $t('home.Shops_Directory'),
+                    img_url: shop_information,
+                    route: '/shopping-information',
+                  },
+                  {
+                    text: $t('home.Resident_information'),
+                    img_url: resident_information,
+                    route: '/prospective-buyer',
+                  },
+
+                  {
+                    text: $t('home.Coach_Service'),
+                    img_url: bus_time_table,
+                    route: '/coach-service',
+                  },
+                ]"
+                :key="index"
+              >
+                <div
+                  class="bg h100"
+                  :style="{ 'background-image': 'url(' + item.img_url + ')' }"
+                >
+                  <button>
+                    <router-link
+                      style="
+                        height: 100%;
+                        width: 100%;
+                        display: inline-block;
+                        padding: 8px 0;
+                      "
+                      :to="{
+                        path: item.route,
+                        query: { lang: fairview_park_lang },
+                      }"
+                      >{{ item.text }}</router-link
+                    >
                   </button>
                 </div>
               </el-carousel-item>
@@ -180,12 +268,15 @@
                     {{ item }}
                   </li>
                 </ul>
-                <router-link :to="{
-                  path: '/about-us',
-                  query: {
-                    lang: fairview_park_lang,
-                  },
-                }" style="text-decoration: none">
+                <router-link
+                  :to="{
+                    path: '/about-us',
+                    query: {
+                      lang: fairview_park_lang,
+                    },
+                  }"
+                  style="text-decoration: none"
+                >
                   <button class="fs-16">
                     {{ fairview_park_lang === "en_us" ? "More" : "了解更多" }}
                   </button>
@@ -194,14 +285,26 @@
             </div>
             <div class="col col-12 col-lg-6 col-sm-12">
               <div class="img">
-                <iframe v-if="fairview_park_lang === 'zh_tw'"
+                <iframe
+                  v-if="fairview_park_lang === 'zh_tw'"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.7091679275286!2d114.04272728986919!3d22.47756085206866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2z6Yym57aJ6Iqx5ZyS!5e0!3m2!1szh-TW!2shk!4v1669042722648!5m2!1szh-TW!2shk"
-                  width="100%" height="450" style="border-radius: 10px" allowfullscreen="" loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <iframe v-if="fairview_park_lang === 'en_us'"
+                  width="100%"
+                  height="450"
+                  style="border-radius: 10px"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <iframe
+                  v-if="fairview_park_lang === 'en_us'"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1082.7590476129535!2d114.04501169813709!3d22.477493702608907!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403f0d4ef5ea8af%3A0x5f9ed764a5a55703!2sFairview%20Park%20-%20Town%20Centre!5e0!3m2!1sen!2shk!4v1668099153161!5m2!1sen!2shk"
-                  width="100%" height="450" style="border-radius: 10px" allowfullscreen="" loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  width="100%"
+                  height="450"
+                  style="border-radius: 10px"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
@@ -269,8 +372,8 @@ export default {
             function Marquee() {
               if (
                 scroll_end.offsetWidth +
-                scroll_div.getBoundingClientRect().width -
-                scroll_div.scrollLeft <=
+                  scroll_div.getBoundingClientRect().width -
+                  scroll_div.scrollLeft <=
                 0
               ) {
                 scroll_div.scrollLeft -= scroll_begin.offsetWidth;
@@ -298,16 +401,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    };
-    const flutterInAppWebViewPlatformReady = () =>{
-      alert('觸發按鈕')
-      window.addEventListener("flutterInAppWebViewPlatformReady", function () {
-              window.flutter_inappwebview
-                  .callHandler("logoutAction", {"logout":true})
-                  .then(function (res) {
-                      console.log("flutter给html的数据", res);
-                  })
-          })
     };
     findWebsiteBannerList();
     onMounted(async () => {
@@ -346,7 +439,6 @@ export default {
     return {
       ...toRefs(data),
       findWebsiteBannerList,
-      flutterInAppWebViewPlatformReady,
     };
   },
 };
@@ -423,7 +515,8 @@ export default {
       width: 100%;
 
       .el-carousel__container {
-        .el-carousel__item {}
+        .el-carousel__item {
+        }
       }
     }
 
@@ -656,7 +749,6 @@ export default {
 }
 
 @media (min-width: 576px) {
-
   .container_wrap,
   .marquee-container {
     width: 540px;
@@ -672,7 +764,6 @@ export default {
 }
 
 @media (min-width: 768px) {
-
   .container_wrap,
   .marquee-container {
     width: 720px;
@@ -688,7 +779,6 @@ export default {
 }
 
 @media (min-width: 992px) {
-
   .container_wrap,
   .marquee-container {
     width: 960px;
@@ -704,7 +794,6 @@ export default {
 }
 
 @media (min-width: 1200px) {
-
   .container_wrap,
   .marquee-container {
     width: 1100px;
@@ -720,7 +809,6 @@ export default {
 }
 
 @media (min-width: 1400px) {
-
   .container_wrap,
   .marquee-container {
     width: 1280px;
@@ -741,7 +829,6 @@ export default {
   }
 
   .marquee {
-
     a,
     span {
       font-size: 15px !important;

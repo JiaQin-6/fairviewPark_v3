@@ -57,7 +57,7 @@
           </div>
         </div>
         <!-- 编辑资料 -->
-        <div class="modal-content" v-show="showEditTenantModel"  v-loading="loading">
+        <div class="modal-content" v-show="showEditTenantModel" v-loading="loading">
           <div class="modal-header">
             <button
               id="close-edit-tenant-model"
@@ -164,7 +164,7 @@
                   >
                 </li>
                 <li>
-                  <p style="text-align: left;color:#fc0d1b">
+                  <p style="text-align: left; color: #fc0d1b">
                     {{
                       $t("Edit_member_information.If_the_Tenant_forgets_the_passwords")
                     }}
@@ -224,9 +224,9 @@ export default {
   data() {
     return {};
   },
-  setup(props, { emit }) {
+  setup(props, ctx) {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
-    const { proxy, ctx } = getCurrentInstance();
+    const { proxy } = getCurrentInstance();
     let data = reactive({
       loading: false,
       fairview_park_lang: "",
@@ -276,12 +276,12 @@ export default {
       data.edit_member_info_error_tip.is_show = false;
       data.edit_member_info_error_tip.is_confirm_password_error_null = false;
       data.edit_member_info_error_tip.text = "";
-      
-      if(!data.editTenantInfoForm.password&&!data.editTenantInfoForm.confirmPassword){
+
+      if (!data.editTenantInfoForm.password && !data.editTenantInfoForm.confirmPassword) {
         //如果沒填寫新密碼及確認新密碼就跳出
-        closeModel()
+        closeModel();
         return;
-      }else if (
+      } else if (
         (data.editTenantInfoForm.password && !data.editTenantInfoForm.confirmPassword) ||
         (data.editTenantInfoForm.confirmPassword && !data.editTenantInfoForm.password)
       ) {
@@ -300,44 +300,51 @@ export default {
         const res = await proxy.$http.editTenantMemberInfo({
           password: data.editTenantInfoForm.confirmPassword,
           verifyCode: data.editTenantInfoForm.verifyCode,
-          typeList: data.editTenantInfoForm.isAgreeReceiveLetter?[
-            {
-              typeCode: "accept_email", //接受实体邮件固定传值（默认N）
-              typeValue: data.editTenantInfoForm.isAgreeReceiveLetter, //Y是；N否
-            },
-          ]:[],
+          typeList: data.editTenantInfoForm.isAgreeReceiveLetter
+            ? [
+                {
+                  typeCode: "accept_email", //接受实体邮件固定传值（默认N）
+                  typeValue: data.editTenantInfoForm.isAgreeReceiveLetter, //Y是；N否
+                },
+              ]
+            : [],
         });
         if (res.data.status === 200) {
           // localStorage.setItem("login-info", JSON.stringify(res.data.data));
           ElMessage({
             showClose: true,
-            message:proxy.$t('Edit_member_information.Edit_Successful'),
+            message: proxy.$t("Edit_member_information.Edit_Successful"),
             type: "success",
-            duration:10000,
+            duration: 10000,
           });
-          // 下面的"flutterInAppWebViewPlatformReady"为固定写法
-          // "myHandlerName"与flutter中注册的JS处理方法名称一致
-          window.addEventListener("flutterInAppWebViewPlatformReady", function () {
-              window.flutter_inappwebview
-                  .callHandler("logoutAction", {"logout":true})
-                  .then(function (res) {
-                      console.log("flutter给html的数据", res);
-                  })
-          })
           document.getElementById("close-edit-tenant-model").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
           data.edit_member_info_error_tip.text = "";
           localStorage.removeItem("login-info");
           store.commit("setLoginStatus", false);
-          ctx.emit("showPopupBox");//是否顯示popup彈框
-          router.push({
-            path: "/",
-            query: {
-              lang: data.fairview_park_lang,
-              logout:true,
-            },
-          });
+          ctx.emit("showPopupBox"); //是否顯示popup彈框
+          //通知app退出登錄
+          if (window.flutter_inappwebview&&window.flutter_inappwebview.callHandler) {
+            setTimeout(() => {
+              window.flutter_inappwebview.callHandler("logoutAction", { logout: true });
+              router.push({
+                path: "/",
+                query: {
+                  lang: data.fairview_park_lang,
+                  logout: true,
+                },
+              });
+            }, 3000);
+          } else {
+            router.push({
+              path: "/",
+              query: {
+                lang: data.fairview_park_lang,
+                logout: true,
+              },
+            });
+          }
         } else {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = true;
@@ -356,7 +363,7 @@ export default {
     };
     //编辑之前检查密码是否正确
     const checkPassword = async () => {
-          data.loading = true;
+      data.loading = true;
       try {
         const res = await proxy.$http.checkPassword({
           password: data.editTenantInfoForm.verifyPassword,

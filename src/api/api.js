@@ -245,8 +245,18 @@ http.interceptors.response.use(function (response) {
         }
         localStorage.removeItem('login-info');
         store.commit("setLoginStatus", false);
-        router.push('/home');
-        return;
+        //通知app退出登錄
+        if (window.flutter_inappwebview && window.flutter_inappwebview.callHandler) {
+            setTimeout(() => {
+                window.flutter_inappwebview.callHandler("logoutAction", { logout: true });
+                router.push('/home');
+                return;
+            }, 3000);
+        }
+        else {
+            router.push('/home');
+            return;
+        }
     }
     return response;
 }, function (error) {

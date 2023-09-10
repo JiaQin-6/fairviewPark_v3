@@ -1066,15 +1066,6 @@ export default {
             type: "success",
             duration:10000,
           });
-          // 下面的"flutterInAppWebViewPlatformReady"为固定写法
-          // "myHandlerName"与flutter中注册的JS处理方法名称一致
-          window.addEventListener("flutterInAppWebViewPlatformReady", function () {
-              window.flutter_inappwebview
-                  .callHandler("logoutAction", {"logout":true})
-                  .then(function (res) {
-                      console.log("flutter给html的数据", res);
-                  })
-          })
           document.getElementById("close-edit-member").click();
           data.loading = false;
           data.edit_member_info_error_tip.is_show = false;
@@ -1082,13 +1073,27 @@ export default {
           localStorage.removeItem("login-info");
           store.commit("setLoginStatus", false);
           ctx.emit("showPopupBox");
-         
-          router.push({
-            path: "/",
-            query: {
-              lang: data.fairview_park_lang,
-            },
-          });
+          //通知app退出登錄
+          if (window.flutter_inappwebview&&window.flutter_inappwebview.callHandler) {
+            setTimeout(() => {
+              window.flutter_inappwebview.callHandler("logoutAction", { logout: true });
+              router.push({
+                path: "/",
+                query: {
+                  lang: data.fairview_park_lang,
+                  logout: true,
+                },
+              });
+            }, 3000);
+          }else{
+            router.push({
+              path: "/",
+              query: {
+                lang: data.fairview_park_lang,
+                logout:true,
+              },
+            });
+          }
         } else {
           data.loading = false;
           data.edit_member_info_error_tip.is_show = true;
