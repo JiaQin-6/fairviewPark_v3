@@ -170,7 +170,7 @@
                     }}
                   </p>
                 </li>
-                <!-- <li v-if="editTenantInfoForm.isAgreeReceiveLetter">
+                <li v-if="editTenantInfoForm.isAgreeReceiveLetter">
                   <p class="title">
                     {{
                       $t(
@@ -197,7 +197,7 @@
                     "
                     >{{ $t("Edit_member_information.This_field_is_required") }}</i
                   >
-                </li> -->
+                </li> 
               </ul>
             </div>
             <div class="button">
@@ -371,6 +371,13 @@ export default {
         if (res.data.status === 200) {
           data.loading = false;
           data.editTenantInfoForm.verifyCode = res.data.data.randomNumber;
+          data.editTenantInfoForm.isAgreeReceiveLetter = res.data.data.authList&&res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            }).length!==0
+          ? res.data.data.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            })[0].typeValue
+          : null;
           return true;
         } else {
           data.loading = false;
