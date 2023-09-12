@@ -1039,7 +1039,7 @@ export default {
         width: 100%;
         padding: 0 20px;
         min-height: 62px;
-
+        border-radius: 0 0 5px 5px;
         .navbar-collapse {
           margin-left: auto;
           justify-content: space-between;
@@ -1102,12 +1102,15 @@ export default {
         box-sizing: border-box;
         display: block;
         position: relative;
-        
+        height:100vh;
         ul {
           padding: 0;
           background-color: var(--mainColor2);
-        overflow: auto;
-        height: calc(100vh - 60px);
+          overflow: auto;
+          height: calc(100vh - 170px);
+          padding: 0 20px;
+          border-radius: 0 0 5px 5px;
+          box-sizing: border-box;
           li {
             border-bottom: 1px solid rgba(206, 204, 204, 0.3);
             text-align: center;
