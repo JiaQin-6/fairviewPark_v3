@@ -644,6 +644,17 @@ export default {
         data.showOwnerZONEList = val;
       }
     );
+    watch(
+      () => data.showOwnerZONEList,
+      (val) => {
+        console.log(val)
+        if(val){
+          document.body.style.overflow = 'hidden'
+        }else{
+          document.body.style.overflow = 'inherit'
+        }
+      }
+    );
 
     return {
       ...toRefs(data),
@@ -728,10 +739,10 @@ export default {
 
       i {
         position: absolute;
-        top: 20px;
+        top: 33px;
         left: 50%;
         transform: translateX(-50%);
-        border-width: 14px;
+        border-width: 0 14px 14px;
         border-color: transparent transparent var(--mainColor2) transparent;
         border-style: solid;
       }
