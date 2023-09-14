@@ -53,6 +53,13 @@
             class="m-2 menu-select"
             :teleported="false"
             :placeholder="' '"
+            @change="
+              (val) => {
+                if (val === 1) {
+                  findRcardList();
+                }
+              }
+            "
           >
             <el-option
               v-for="(item, index) in [
@@ -80,8 +87,13 @@
               <button style="border-radius: 50px; border: 0">
                 <a
                   target="_blank"
-                  style="text-decoration: none; color: #fff;width:100%;display:inline-block;
-            padding: 5px 30px;"
+                  style="
+                    text-decoration: none;
+                    color: #fff;
+                    width: 100%;
+                    display: inline-block;
+                    padding: 5px 30px;
+                  "
                   :href="
                     fairview_park_lang === 'en_us'
                       ? 'https://fairviewpark.hk/file/ResidentCard_InstructionEN.html'
@@ -167,9 +179,10 @@
                           : "該欄位為必填欄位"
                       }}</i
                     >
-                    <div v-if="form.relation === 'ROf'||form.relation === 'RTf'">
+                    <div v-if="form.relation === 'ROf' || form.relation === 'RTf'">
                       <div class="form-wrap flex-row mb-10">
-                        <span class="yellow col-6 pl-20">{{$t('applyRCard.Specify')
+                        <span class="yellow col-6 pl-20">{{
+                          $t("applyRCard.Specify")
                         }}</span>
                         <el-input v-model="form.rcrelationOther" class="col-6"></el-input>
                       </div>
@@ -205,16 +218,17 @@
                         >
                           <template #trigger>
                             <el-button type="primary"
-                              ><span>{{ form["relationFile"].file
-                                    ? $t('applyRCard.Change_file')
-                                    : $t('applyRCard.Select_file')
+                              ><span>{{
+                                form["relationFile"].file
+                                  ? $t("applyRCard.Change_file")
+                                  : $t("applyRCard.Select_file")
                               }}</span
                               ><el-icon class="el-icon--upload"><upload-filled /></el-icon
                             ></el-button>
                           </template>
                         </el-upload>
                         <i class="yellow pl-20" style="flex: 1; margin-top: 10px">{{
-                          $t('applyRCard.Please_upload_file_size')
+                          $t("applyRCard.Please_upload_file_size")
                         }}</i>
                       </div>
                       <i
@@ -282,7 +296,7 @@
                       }}</i
                     >
                     <i class="yellow">{{
-                      $t('applyRCard.Please_fill_in_the_complete')
+                      $t("applyRCard.Please_fill_in_the_complete")
                     }}</i>
                   </li>
                   <li>
@@ -307,10 +321,10 @@
                       >
                         <template #trigger>
                           <el-button type="primary"
-                            ><span>{{ form["photoFile"].file
-                                  ? $t('applyRCard.Change_file')
-                                  : $t('applyRCard.Select_file')
-                               
+                            ><span>{{
+                              form["photoFile"].file
+                                ? $t("applyRCard.Change_file")
+                                : $t("applyRCard.Select_file")
                             }}</span
                             ><el-icon class="el-icon--upload"><upload-filled /></el-icon
                           ></el-button>
@@ -328,7 +342,7 @@
                       }}</i
                     >
                     <i class="yellow" style="margin-top: 10px; display: block">{{
-                      $t('applyRCard.Please_upload_file_size_below_5MB')
+                      $t("applyRCard.Please_upload_file_size_below_5MB")
                     }}</i>
                   </li>
                 </ul>
@@ -336,9 +350,7 @@
               <!-- 條款雞條件 -->
               <div class="item">
                 <h5>
-                  {{
-                    $t('applyRCard.Undertakings')
-                  }}
+                  {{ $t("applyRCard.Undertakings") }}
                 </h5>
                 <p
                   v-if="loginInfo && loginInfo.groupId === 0"
@@ -348,9 +360,7 @@
                 <p
                   v-else
                   style="margin-bottom: 30px"
-                  v-html="
-                    $t('applyRCard.We_being_the_registered_house_tenant')
-                  "
+                  v-html="$t('applyRCard.We_being_the_registered_house_tenant')"
                 ></p>
                 <div style="text-align: center">
                   <el-checkbox
@@ -362,7 +372,7 @@
                     style="display: block"
                   />
                   <el-button @click="applyRCard">{{
-                    $t('applyRCard.Confirm')
+                    $t("applyRCard.Confirm")
                   }}</el-button>
                 </div>
               </div>
@@ -371,7 +381,7 @@
           <!-- 智能卡列表 -->
           <div class="cardList" v-if="nav_index === 1">
             <p style="font-size: 36px; font-weight: bold; color: #9cc212">
-              {{ $t('applyRCard.Apply_Status') }}
+              {{ $t("applyRCard.Apply_Status") }}
             </p>
             <ul>
               <li
@@ -391,9 +401,7 @@
                         margin-bottom: 20px;
                       "
                     >
-                      {{
-                        $t('applyRCard.Waiting_for_approve')
-                      }}
+                      {{ $t("applyRCard.Waiting_for_approve") }}
                     </h3>
                     <h3
                       v-if="item.rcAppStatus === 2"
@@ -404,12 +412,10 @@
                         margin-bottom: 20px;
                       "
                     >
-                      {{ $t('applyRCard.Approved') }}
+                      {{ $t("applyRCard.Approved") }}
                     </h3>
                     <p style="font-size: 18px; font-weight: bold">
-                      {{
-                        $t('applyRCard.Date_of_receipt')
-                      }}
+                      {{ $t("applyRCard.Date_of_receipt") }}
                     </p>
                     <p style="font-size: 18px">
                       {{ item.lastUpdate.slice(0, 10) }}
@@ -428,22 +434,18 @@
                         <h3
                           style="font-size: 24px; font-weight: bold; margin-bottom: 20px"
                         >
-                          {{
-                            $t('applyRCard.Name_of_Card_User_2')
-                          }}{{ item.rcname }}
+                          {{ $t("applyRCard.Name_of_Card_User_2") }}{{ item.rcname }}
                         </h3>
                       </div>
                       <div>
                         <strong style="margin-right: 5px">{{
-                          $t('applyRCard.Relation_2')
+                          $t("applyRCard.Relation_2")
                         }}</strong>
-                        <span>{{
-                          item.rcrelation  
-                        }}</span>
+                        <span>{{ item.rcrelation }}</span>
                       </div>
                       <div v-if="item.rcrelationOther">
                         <strong style="margin-right: 5px">{{
-                         $t('applyRCard.Specify_Others')
+                          $t("applyRCard.Specify_Others")
                         }}</strong>
                         <span>{{ item.rcrelationOther }}</span>
                       </div>
@@ -456,10 +458,9 @@
                         }}</span>
                       </div>
                       <div>
-                        <strong style="margin-right: 5px"
-                          >{{ $t("applyRCard.Octopus_Card_Number_2")
-                          }}</strong
-                        >
+                        <strong style="margin-right: 5px">{{
+                          $t("applyRCard.Octopus_Card_Number_2")
+                        }}</strong>
                         <span>{{ item.rcOcto }}({{ item.rcOctoBk }})</span>
                       </div>
                     </div>
@@ -533,7 +534,6 @@ export default {
   setup() {
     //获取当前组件的实例、上下文来操作router和vuex等。相当于this
     const { proxy, ctx } = getCurrentInstance();
-    console.log(getCurrentInstance());
     let data = reactive({
       nav_index: 0,
       fairview_park_lang: "",
@@ -619,10 +619,12 @@ export default {
     }
     //
     const handleRelationFileExceed = (files) => {
-      ctx.$refs.relationFile.clearFiles();
+      console.log(proxy.$refs)
+      console.log(proxy.$refs.relationFile)
+      proxy.$refs.relationFile.clearFiles();
       const file = files[0];
       files.uid = genFileId();
-      ctx.$refs.relationFile.handleStart(file);
+      proxy.$refs.relationFile.handleStart(file);
     };
     const handleRelationFileChange = (files) => {
       if (
@@ -631,7 +633,7 @@ export default {
         files.raw.type !== "image/png" &&
         files.raw.type !== "application/pdf"
       ) {
-        ctx.$refs.relationFile.clearFiles();
+        proxy.$refs.relationFile.clearFiles();
         data.form["relationFile"].file = null;
         ElMessage.error({
           showClose: true,
@@ -643,7 +645,7 @@ export default {
         });
         return false;
       } else if (files.raw.size / 1024 / 1024 > 2) {
-        ctx.$refs.relationFile.clearFiles();
+        proxy.$refs.relationFile.clearFiles();
         data.form["relationFile"].file = null;
         ElMessage.error({
           showClose: true,
@@ -660,10 +662,10 @@ export default {
     };
 
     const handlePhotoFileExceed = (files) => {
-      ctx.$refs.photoFile.clearFiles();
+      proxy.$refs.photoFile.clearFiles();
       const file = files[0];
       files.uid = genFileId();
-      ctx.$refs.photoFile.handleStart(file);
+      proxy.$refs.photoFile.handleStart(file);
     };
     const handlePhotoFileChange = (files) => {
       if (
@@ -672,7 +674,7 @@ export default {
         files.raw.type !== "image/png" &&
         files.raw.type !== "application/pdf"
       ) {
-        ctx.$refs.photoFile.clearFiles();
+        proxy.$refs.photoFile.clearFiles();
         data.form["photoFile"].file = null;
         ElMessage.error({
           showClose: true,
@@ -684,7 +686,7 @@ export default {
         });
         return false;
       } else if (files.raw.size / 1024 / 1024 > 5) {
-        ctx.$refs.photoFile.clearFiles();
+        proxy.$refs.photoFile.clearFiles();
         data.form["photoFile"].file = null;
         ElMessage.error({
           showClose: true,
@@ -726,7 +728,7 @@ export default {
       ) {
         data.isRequest = false;
         return false;
-      }else if (
+      } else if (
         data.form.relation === "RTf" &&
         (!data.form.rcrelationOther || !data.form.relationFile.file)
       ) {
@@ -742,7 +744,7 @@ export default {
           type: "error",
         });
         return false;
-      }  
+      }
       data.v_loading = true;
       if (data.form.relationFile.file) {
         data.form.relationFile.url = await uploadRcard(data.form.relationFile.file, "rd");
@@ -783,6 +785,12 @@ export default {
               data.fairview_park_lang === "en_us" ? "Submit Successful" : "提交成功",
             type: "success",
           });
+          // if(location.href.indexOf('/?t=')!==-1){
+          //   window.location.href = `${location.href.split('#/')[0].split('=')[0]}=${new Date().getTime()}#/${location.href.split('#/')[1]}`
+          // }else{
+          //   window.location.href = location.href.replace(/\/#\//,`/?t=${new Date().getTime()}#/`);
+          // }
+          
         } else {
           data.v_loading = false;
           ElMessage({
@@ -833,18 +841,17 @@ export default {
       }
     };
     onMounted(() => {
-        let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
-        var userinfo = JSON.parse(
-          decodeURIComponent(
-            escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
-          )
-        );
-        data.address_t =
-          data.fairview_park_lang === "en_us"
-            ? `Fairview Park Session ${userinfo.section}, Street/Road ${userinfo.street}, No ${userinfo.number}`
-            : `錦綉花園${userinfo.section}段${userinfo.street}街/路${userinfo.number}號`;
-      
-      
+      let strings = JSON.parse(localStorage.getItem("login-info")).jwt.split("."); //截取token，获取载体
+      var userinfo = JSON.parse(
+        decodeURIComponent(
+          escape(window.atob(strings[1].replace(/-/g, "+").replace(/_/g, "/")))
+        )
+      );
+      data.address_t =
+        data.fairview_park_lang === "en_us"
+          ? `Fairview Park Session ${userinfo.section}, Street/Road ${userinfo.street}, No ${userinfo.number}`
+          : `錦綉花園${userinfo.section}段${userinfo.street}街/路${userinfo.number}號`;
+
       findRcardList();
     });
     return {
@@ -1062,6 +1069,13 @@ export default {
                           color: #fff;
                           font-size: 18px;
                         }
+                      }
+                    }
+                  }
+                  @{deep} .el-upload-list {
+                    .el-upload-list__item {
+                      .el-icon--close {
+                        display: inline-block !important;
                       }
                     }
                   }
