@@ -26,9 +26,18 @@
 /* 0 */,
 /* 1 */
 /***/ ((__unused_webpack_module, exports) => {
-
-
-
+  var equipment;
+  var userAgentInfo = navigator.userAgent;
+  var Agents = ["Android", "iPhone",
+     "SymbianOS", "Windows Phone",
+     "iPad", "iPod"];
+  equipment = 'pc';
+  for (var v = 0; v < Agents.length; v++) {
+     if (userAgentInfo.indexOf(Agents[v]) > 0) {
+      equipment = 'mb';
+        break;
+     }
+  }
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
@@ -61,7 +70,8 @@ function _classApplyDescriptorGet(receiver, descriptor) { if (descriptor.get) { 
 function _classPrivateFieldSet(receiver, privateMap, value) { var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "set"); _classApplyDescriptorSet(receiver, descriptor, value); return value; }
 function _classExtractFieldDescriptor(receiver, privateMap, action) { if (!privateMap.has(receiver)) { throw new TypeError("attempted to " + action + " private field on non-instance"); } return privateMap.get(receiver); }
 function _classApplyDescriptorSet(receiver, descriptor, value) { if (descriptor.set) { descriptor.set.call(receiver, value); } else { if (!descriptor.writable) { throw new TypeError("attempted to set read only private field"); } descriptor.value = value; } }
-const DEFAULT_SCALE_VALUE = "1";
+const DEFAULT_SCALE_VALUE = equipment==='pc'?"1":"auto";
+console.log(DEFAULT_SCALE_VALUE)
 exports.DEFAULT_SCALE_VALUE = DEFAULT_SCALE_VALUE;
 const DEFAULT_SCALE = 1.0;
 exports.DEFAULT_SCALE = DEFAULT_SCALE;

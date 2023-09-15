@@ -237,7 +237,7 @@ export default {
         loginName: null,
         password: null,
         confirmPassword: null,
-        isAgreeReceiveLetter: "N",
+        isAgreeReceiveLetter: null,
       },
       edit_member_info_error_tip: {
         is_verify_password_null: false,
@@ -400,6 +400,16 @@ export default {
         );
         console.log(userinfo);
         if (userinfo.verifyCode) {
+          //判斷jwt裡面authList是否有值
+          if(userinfo.authList&&userinfo.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            }).length!==0){
+              data.editTenantInfoForm.isAgreeReceiveLetter = userinfo.authList.filter((item) => {
+              return item.typeCode == "accept_email";
+            })[0].typeValue
+          }else{
+            data.editTenantInfoForm.isAgreeReceiveLetter = null
+          }
           data.editTenantInfoForm.verifyCode = userinfo.verifyCode;
           data.editTenantInfoForm.verifyPassword = "";
           data.showEditTenantModel = true;
