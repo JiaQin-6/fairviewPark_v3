@@ -1015,8 +1015,8 @@ export default {
       ) {
         data.edit_member_info_error_tip.is_password_null = true;
         return;
-      } else if (
-        data.editMemberInfoForm.password !== data.editMemberInfoForm.confirmPassword
+      } else if (data.editMemberInfoForm.password&&data.editMemberInfoForm.confirmPassword&&
+        (data.editMemberInfoForm.password !== data.editMemberInfoForm.confirmPassword)
       ) {
         data.edit_member_info_error_tip.is_confirm_password_error_null = true;
         return;

@@ -12,9 +12,9 @@
       </div>
     </transition> -->
     <div class="main-content">
+      <!-- :loginPower="is_show?loginPower:[]" -->
       <Header
         :isShow="is_show"
-        :loginPower="is_show?loginPower:[]"
         :isShowLoginButton="isShowLoginButton"
         :isShowLoginOutButton="isShowLoginOutButton"
         @showOwnerIsZONE="showOwnerIsZONE"
@@ -430,44 +430,44 @@ export default {
       { deep: true, immediate: true }
     );
     //獲取移動端的menu列表
-    const loginPower = computed(() => {
-      let o_array = [];
-      JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
-        o_array.push({
-          router: item.route,
-          text:
-            sessionStorage.getItem("fairview_park_lang") === "en_us"
-              ? item.nameEnUs
-              : item.nameZhTw,
-        });
-      });
-      if (data.isShowLoginOutButton) {
-        o_array.push({
-          router: "/loginOut",
-          text: proxy.$t("headed.Login_out"),
-        });
-      }
-      if (
-        localStorage.getItem("login-info") &&
-        JSON.parse(localStorage.getItem("login-info")).groupId === 0
-      ) {
-        o_array.unshift({
-          router: "/start-up",
-          text: proxy.$t("headed.Tenant_account_management"),
-        });
-        o_array.unshift({
-          router: "/edit-member-information",
-          text: proxy.$t("headed.Edit_member_information"),
-        });
-      } else {
-        o_array.unshift({
-          router: "/edit-member-information",
-          text: proxy.$t("headed.Tenant_account_management"),
-        });
-      }
+    // const loginPower = computed(() => {
+    //   let o_array = [];
+    //   JSON.parse(localStorage.getItem("login-info")).menuList.map((item) => {
+    //     o_array.push({
+    //       router: item.route,
+    //       text:
+    //         sessionStorage.getItem("fairview_park_lang") === "en_us"
+    //           ? item.nameEnUs
+    //           : item.nameZhTw,
+    //     });
+    //   });
+    //   if (data.isShowLoginOutButton) {
+    //     o_array.push({
+    //       router: "/loginOut",
+    //       text: proxy.$t("headed.Login_out"),
+    //     });
+    //   }
+    //   if (
+    //     localStorage.getItem("login-info") &&
+    //     JSON.parse(localStorage.getItem("login-info")).groupId === 0
+    //   ) {
+    //     o_array.unshift({
+    //       router: "/start-up",
+    //       text: proxy.$t("headed.Tenant_account_management"),
+    //     });
+    //     o_array.unshift({
+    //       router: "/edit-member-information",
+    //       text: proxy.$t("headed.Edit_member_information"),
+    //     });
+    //   } else {
+    //     o_array.unshift({
+    //       router: "/edit-member-information",
+    //       text: proxy.$t("headed.Tenant_account_management"),
+    //     });
+    //   }
 
-      return o_array;
-    });
+    //   return o_array;
+    // });
     onMounted(async () => {
       //如果滚动隐藏下拉框
       document.onscroll = () => {
@@ -491,7 +491,7 @@ export default {
       // selectOwnersZone,
       showOwnerIsZONE,
       findOneNewPopupBox,
-      loginPower,
+      // loginPower,
       // selectTenantStatus,
       showPopupBox,
     };

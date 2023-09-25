@@ -275,12 +275,28 @@
       <transition name="el-zoom-in-top">
         <div class="ownerIsZONE" v-if="showOwnerZONEList">
           <ul>
+            <li @click="selectOwnersZone('/edit-member-information')">
+              {{
+                loginInfo && loginInfo.groupId === 0
+                  ? $t("headed.Edit_member_information")
+                  : $t("headed.Tenant_account_management")
+              }}
+            </li>
             <li
-              v-for="(item, index) in loginPower"
-              :key="index"
-              @click="selectOwnersZone(item.router)"
+              v-if="loginInfo && loginInfo.groupId === 0"
+              @click="selectOwnersZone('/start-up')"
             >
-              {{ item.text }}
+              {{ $t("headed.Tenant_account_management") }}
+            </li>
+            <li
+              v-for="(item, index) in loginInfo && loginInfo.menuList"
+              :key="index"
+              @click="selectOwnersZone('/' + item.route)"
+            >
+              {{ fairview_park_lang === "en_us" ? item.nameEnUs : item.nameZhTw }}
+            </li>
+            <li v-if="isShowLoginOutButton" @click="selectOwnersZone('/loginOut')">
+              {{ $t("headed.Login_out") }}
             </li>
           </ul>
         </div>
@@ -323,11 +339,11 @@ export default {
   components: {
     ArrowDown,
   },
+  //loginPower: Array,
   props: {
     isShow: Boolean,
     isShowLoginButton: Boolean,
     isShowLoginOutButton: Boolean,
-    loginPower: Array,
   },
   data() {
     return {
@@ -385,7 +401,7 @@ export default {
     };
     //点击业主专区
     const selectOwnersZone = (val) => {
-      data.showOwnerZONEList = false
+      data.showOwnerZONEList = false;
       if (val === "/loginOut") {
         loginOut();
         router.push({
@@ -647,11 +663,10 @@ export default {
     watch(
       () => data.showOwnerZONEList,
       (val) => {
-        console.log(val)
-        if(val){
-          document.body.style.overflow = 'hidden'
-        }else{
-          document.body.style.overflow = 'inherit'
+        if (val) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "inherit";
         }
       }
     );
@@ -1102,7 +1117,7 @@ export default {
         box-sizing: border-box;
         display: block;
         position: relative;
-        height:100vh;
+        height: 100vh;
         ul {
           padding: 0;
           background-color: var(--mainColor2);
