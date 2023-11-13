@@ -19,7 +19,7 @@
       <h5 style="font-size: 24px; padding: 5px; font-weight: bold">
         {{ item.title }}
       </h5>
-      <el-collapse accordion v-model="activeNames">
+      <el-collapse accordion>
         <el-collapse-item
           v-for="(item2, index2) in item.children"
           :key="index2"
